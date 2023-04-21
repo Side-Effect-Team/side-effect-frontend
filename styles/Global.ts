@@ -1,13 +1,20 @@
 import { createGlobalStyle } from "styled-components";
 import { normalize } from "styled-normalize";
+import fontsCss from "./fonts.module.css";
 
 const global = createGlobalStyle`
   ${normalize}
-  // 프리텐다드 글꼴 기본 설정
+  ${fontsCss}
 
-  
-  * {
+  *,
+  *::before,
+  *::after {
     box-sizing: border-box;
+  }
+  
+  html,
+  body {
+    overflow: hidden;
   }
 
   body {
