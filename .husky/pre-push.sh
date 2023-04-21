@@ -16,7 +16,7 @@ if read local_ref local_sha remote_ref remote_sha
 then
     if [ "$remote_ref" == "$FORBIDDEN_REF" ]
     then
-        echo "DO NOT PUSH it master"
+        echo "DO NOT PUSH it main"
         exit 1 # 금지된 ref 로 push 를 실행하면 에러
     fi
 fi
