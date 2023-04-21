@@ -1,5 +1,6 @@
 import styled, { ThemeProvider } from "styled-components";
-import GlobalStyles, { theme } from "../styles/global-styles";
+import GlobalStyles from "../styles/Global";
+import { theme } from "../styles/Theme";
 
 interface PropType {
   children: React.ReactNode;
@@ -19,7 +20,7 @@ const Container = ({ children }: PropType) => {
 };
 
 const StyledContainer = styled.div`
-  max-width: 1200px;
+  max-width: 1360px;
   padding: 0 20px;
   margin: 0 auto;
   margin-top: 80px;
