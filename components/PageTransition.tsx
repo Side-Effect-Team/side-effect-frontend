@@ -11,13 +11,21 @@ function PageTransition({ children }: PageTransitionProps) {
   const router = useRouter();
   const dispatch = useAppDispatch();
   useEffect(() => {
-    const routeChange = (url: string) => {
+    const handleRouteChangeStart = (url: string) => {
       console.log("url", url);
       dispatch(pageDirectionHandler({ pathname: url }));
     };
-    router.events.on("routeChangeComplete", routeChange);
+
+    const handleRouteChangeComplete = () => {
+      console.log("completed");
+    };
+
+    router.events.on("routeChangeStart", handleRouteChangeStart);
+    router.events.on("routeChangeComplete", handleRouteChangeComplete);
+
     return () => {
-      router.events.off("routeChangeComplete", routeChange);
+      router.events.off("routeChangeStart", handleRouteChangeStart);
+      router.events.off("routeChangeComplete", handleRouteChangeComplete);
     };
   }, []);
 
@@ -26,6 +34,7 @@ function PageTransition({ children }: PageTransitionProps) {
   const inTheCenter = { x: 0 };
   const onTheLeft = { x: "-100%" };
   const transition = { duration: 0.4, ease: "easeInOut" };
+  console.log("pageDirection", pageDirection);
   return (
     <PageTransitionDiv
       initial={pageDirection === "right" ? onTheRight : onTheLeft}
@@ -41,8 +50,8 @@ function PageTransition({ children }: PageTransitionProps) {
 export default PageTransition;
 
 const PageTransitionDiv = styled(motion.div)`
-  position: fixed;
+  /* position: fixed;
   width: 100%;
   height: 100%;
-  top: 18%;
+  top: 18%; */
 `;

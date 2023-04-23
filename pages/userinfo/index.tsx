@@ -38,6 +38,10 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: flex-start;
   padding: 40px;
+  background-color: wheat;
+`;
+const TextDiv = styled(PageTransition)`
+  background-color: red;
 `;
 const Label = styled.label`
   text-align: start;
