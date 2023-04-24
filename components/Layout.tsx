@@ -32,9 +32,5 @@ const Container = ({ children }: PropType) => {
 };
 
 const StyledContainer = styled.div`
-  max-width: 1360px;
-  padding: 0 20px;
-  margin: 0 auto;
-  margin-top: 80px;
-  height: 100%;
+  margin-top: 75px;
 `;

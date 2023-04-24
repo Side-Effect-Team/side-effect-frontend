@@ -11,16 +11,17 @@ const global = createGlobalStyle`
   *::after {
     box-sizing: border-box;
   }
-  
-  html,
-  body {
-    overflow: hidden;
-    
-  }
 
   body {
     margin: 0;
     padding: 0;
+  }
+  a {
+    text-decoration: none;
+    color: #000;
+  }
+  li {
+    list-style-type: none;
   }
 `;
 

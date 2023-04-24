@@ -23,6 +23,6 @@ export const theme = {
   },
   viewport: {
     medium: "768px",
-    large: "1200px",
+    large: "1360px",
   },
 };
