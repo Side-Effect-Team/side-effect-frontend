@@ -1,16 +1,16 @@
 ---
 name: SideEffectTeam - 이슈 템플릿
-about: 'Describe this issue tem제목은 BE: 하고 있는 일 / FE: 하고 있는 일 형식으로 작성해 주세요.plate''s
-  purpose here.'
-title: ''
+about: commit 컨벤션과 동일하게 구성합니다
+title: 'feat:'
 labels: ''
 assignees: ''
 
 ---
 
-#Description
+# 개요
+ESLint rule이 다소 무겁고, Next 플러그인이 깔려있지 않아서 추가하여 수정이 필요합니다
 
-# To-do
-- [ ]
+# 상세
+- @next/eslint-plugin-next 패키지 설치
 
 # ETC
