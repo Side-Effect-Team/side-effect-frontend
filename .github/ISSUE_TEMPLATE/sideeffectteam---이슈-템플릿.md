@@ -1,7 +1,7 @@
 ---
 name: SideEffectTeam - 이슈 템플릿
-about: commit 컨벤션과 동일하게 구성합니다
-title: 'feat:'
+about: 작업 분류는 라벨로 분류
+title: 'FE: 로그인 페이지를 구현합니다'
 labels: ''
 assignees: ''
 
