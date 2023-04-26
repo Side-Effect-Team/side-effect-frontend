@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import Carousel from "../components/Carousel";
 import { Wrapper, MainStyled } from "./index.styled";
 

@@ -36,7 +36,7 @@ export default function Layout({ children }: PropType) {
 
       return () => window.removeEventListener("resize", detectViewportWidth);
     }
-  }, [window.innerWidth]);
+  });
 
   /** userinfo 페이지에선 헤더가 안보이기위한 코드 */
   if (currentPage.startsWith("/userinfo")) {
