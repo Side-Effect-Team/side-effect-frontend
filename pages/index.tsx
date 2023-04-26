@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import Header from "../components/Header";
-import Carousel from "../components/Carousel";
+import Index from "../components/Carousel";
 import Footer from "../components/Footer";
 
 export default function Home() {
   return (
     <div>
       <Header />
-      <Carousel />
+      <Index />
       <Section>
         <h2>메인 컨텐츠</h2>
         <h2>메인 컨텐츠</h2>
@@ -41,7 +41,7 @@ export default function Home() {
   );
 }
 
+// 메인 콘텐츠 컴포넌트 개발시 이동
 const Section = styled.section`
   margin: 0 auto;
-  max-width: ${(props) => props.theme.viewport.large};
 `;

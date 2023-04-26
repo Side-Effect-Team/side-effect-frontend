@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styled from "styled-components";
+import { StyledFooter, StyledTitle } from "./styled";
 
 const Footer = () => {
   return (
@@ -17,21 +17,5 @@ const Footer = () => {
     </StyledFooter>
   );
 };
-
-const StyledFooter = styled.footer`
-  margin: 0 auto;
-  position: relative;
-  left: 0;
-  right: 0;
-  background-color: lightgrey;
-  height: 150px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-`;
-
-const StyledTitle = styled.h3`
-  text-align: center;
-`;
 
 export default Footer;

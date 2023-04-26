@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Carousel = () => {
+const Index = () => {
   return (
     <Container>
       <h2>여기는 캐러셀!</h2>
@@ -14,4 +14,4 @@ const Container = styled.div`
   background-color: tan;
 `;
 
-export default Carousel;
+export default Index;

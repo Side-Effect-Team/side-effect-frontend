@@ -1,7 +1,9 @@
-import styled, { ThemeProvider } from "styled-components";
-import GlobalStyles from "../styles/Global";
-import { theme } from "../styles/Theme";
+import { ThemeProvider } from "styled-components";
+import { StyledContainer } from "./styled";
+import GlobalStyles from "../../styles/Global";
+import { theme } from "../../styles/Theme";
 import { useRouter } from "next/router";
+
 interface PropType {
   children: React.ReactNode;
 }
@@ -30,7 +32,3 @@ export default function Layout({ children }: PropType) {
 const Container = ({ children }: PropType) => {
   return <StyledContainer>{children}</StyledContainer>;
 };
-
-const StyledContainer = styled.div`
-  margin-top: 75px;
-`;
