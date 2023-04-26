@@ -1,16 +1,13 @@
 ---
 name: SideEffectTeam - 이슈 템플릿
-about: 'Describe this issue tem제목은 BE: 하고 있는 일 / FE: 하고 있는 일 형식으로 작성해 주세요.plate''s
-  purpose here.'
-title: ''
-labels: ''
-assignees: ''
+about: commit 컨벤션과 동일하게 구성합니다
+title: 'feat: 로그인 페이지 구현'
+labels: chore, design, docs, feat, fix, refactor, test, update
+assignees: taejinii, jong-k
 
 ---
 
-#Description
-
-# To-do
-- [ ]
+# 상세
+- ./pages/404.tsx 작성
 
 # ETC
