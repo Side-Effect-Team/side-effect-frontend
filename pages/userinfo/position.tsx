@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 import PageTransition from "../../components/PageTransition";
 
-export default function position() {
+export default function Position() {
   const router = useRouter();
   return (
     <PageTransition>

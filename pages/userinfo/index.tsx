@@ -1,9 +1,8 @@
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import PageTransition from "../../components/PageTransition";
-export default function index() {
+export default function Index() {
   const router = useRouter();
-
   return (
     <PageTransition>
       <Wrapper>
@@ -17,7 +16,6 @@ export default function index() {
         </InputSection>
         <Button
           onClick={() => {
-            // eslint-disable-next-line @typescript-eslint/no-floating-promises
             router.push("/userinfo/position");
           }}
         >

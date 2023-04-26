@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import PageTransition from "../../components/PageTransition";
 
-export default function image() {
+export default function Image() {
   const router = useRouter();
   return (
     <PageTransition>
