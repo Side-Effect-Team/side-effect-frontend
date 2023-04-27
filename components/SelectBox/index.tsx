@@ -5,7 +5,7 @@ import {
   SelectOptionWrapper,
   SelectValue,
 } from "./styled";
-
+import useOutsideClick from "../../hooks/useOutsideClick";
 interface SelectBoxProps {
   data: {
     title: string;
@@ -18,6 +18,9 @@ export default function SelectBox({ data }: SelectBoxProps) {
   const [selectValue, setSelectValue] = useState(title);
   const selectRef = useRef<HTMLDivElement>(null);
 
+  useOutsideClick(selectRef, () => {
+    setIsVisible(false);
+  });
   const handleSelectVisible = () => {
     setIsVisible(!isVisible);
   };
@@ -25,23 +28,6 @@ export default function SelectBox({ data }: SelectBoxProps) {
     const { innerText } = e.target as HTMLLIElement;
     setSelectValue(innerText);
   };
-
-  /**외부 클릭시 닫는 함수 커스텀훅으로 만들면 좋을거같음 */
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        selectRef.current &&
-        !selectRef.current.contains(event.target as Node)
-      ) {
-        setIsVisible(false);
-      }
-    };
-    document.addEventListener("click", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
 
   return (
     <SelectWrapper onClick={handleSelectVisible} ref={selectRef}>

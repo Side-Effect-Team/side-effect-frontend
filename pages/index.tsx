@@ -1,20 +1,13 @@
+import Carousel from "../components/Carousel";
 import styled from "styled-components";
-import Header from "../components/Header";
-import Index from "../components/Carousel";
-import Footer from "../components/Footer";
 import SelectBox from "../components/SelectBox";
-const Dummydata = {
-  title: "포지션",
-  options: ["프론트엔드", "백엔드", "디자이너", "기획자"],
-};
-
+const Dummy = { title: "awd", options: ["v", "a", "d"] };
 export default function Home() {
   return (
-    <div>
-      <Header />
-      <Index />
-      <Section>
-        <SelectBox data={Dummydata} />
+    <Wrapper>
+      <Carousel />
+      <MainStyled>
+        <SelectBox data={Dummy} />
         <h2>메인 컨텐츠</h2>
         <h2>메인 컨텐츠</h2>
         <h2>메인 컨텐츠</h2>
@@ -41,13 +34,18 @@ export default function Home() {
         <h2>메인 컨텐츠</h2>
         <h2>메인 컨텐츠</h2>
         <h2>메인 컨텐츠</h2>
-      </Section>
-      <Footer />
-    </div>
+      </MainStyled>
+    </Wrapper>
   );
 }
 
-// 메인 콘텐츠 컴포넌트 개발시 이동
-const Section = styled.section`
+const Wrapper = styled.div`
+  background: ${(p) => p.theme.colors.background};
+`;
+
+const MainStyled = styled.section`
   margin: 0 auto;
+  padding: 1rem;
+  width: 100%;
+  max-width: ${(p) => p.theme.sizes.desktop};
 `;

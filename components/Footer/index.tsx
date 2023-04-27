@@ -1,21 +1,14 @@
 import Link from "next/link";
-import { StyledFooter, StyledTitle } from "./styled";
+import { Wrapper, FooterStyled } from "./styled";
 
-const Footer = () => {
+export default function Footer() {
   return (
-    <StyledFooter>
-      <div>
-        <Link href="/">
-          사이드
-          <br />
-          이펙트
-        </Link>
-      </div>
-      <div>
-        <StyledTitle>Built with Next.js</StyledTitle>
-      </div>
-    </StyledFooter>
+    <Wrapper>
+      <FooterStyled>
+        <span>
+          Copyright &copy; <Link href="/">사이드 이펙트</Link>
+        </span>
+      </FooterStyled>
+    </Wrapper>
   );
-};
-
-export default Footer;
+}
