@@ -18,4 +18,13 @@ export const theme = {
   height: {
     header: "75px",
   },
+  // 추후 브랜드 컬러 추가 시 (아래는 임시 컬러)
+  brandColor: {
+    primary: "#155EEF",
+    coral: "#FF6D60",
+    skyBlue: "#CDDEFF",
+    lightGray: "#F5F5F5",
+  },
 };
+
+export type BrandColorTypes = keyof typeof theme.brandColor;

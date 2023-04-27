@@ -1,13 +1,10 @@
 import Carousel from "../components/Carousel";
 import styled from "styled-components";
-import SelectBox from "../components/SelectBox";
-const Dummy = { title: "awd", options: ["v", "a", "d"] };
 export default function Home() {
   return (
     <Wrapper>
       <Carousel />
       <MainStyled>
-        <SelectBox data={Dummy} />
         <h2>메인 컨텐츠</h2>
         <h2>메인 컨텐츠</h2>
         <h2>메인 컨텐츠</h2>

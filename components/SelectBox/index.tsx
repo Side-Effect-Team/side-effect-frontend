@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import {
   SelectWrapper,
   SelectOption,
@@ -28,7 +28,7 @@ export default function SelectBox({ data }: SelectBoxProps) {
     const { innerText } = e.target as HTMLLIElement;
     setSelectValue(innerText);
   };
-
+  console.log(selectValue);
   return (
     <SelectWrapper onClick={handleSelectVisible} ref={selectRef}>
       <SelectValue>{selectValue}</SelectValue>
