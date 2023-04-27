@@ -2,6 +2,11 @@ import styled from "styled-components";
 import Header from "../components/Header";
 import Index from "../components/Carousel";
 import Footer from "../components/Footer";
+import SelectBox from "../components/SelectBox";
+const Dummydata = {
+  title: "포지션",
+  options: ["프론트엔드", "백엔드", "디자이너", "기획자"],
+};
 
 export default function Home() {
   return (
@@ -9,6 +14,7 @@ export default function Home() {
       <Header />
       <Index />
       <Section>
+        <SelectBox data={Dummydata} />
         <h2>메인 컨텐츠</h2>
         <h2>메인 컨텐츠</h2>
         <h2>메인 컨텐츠</h2>
