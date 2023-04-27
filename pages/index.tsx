@@ -1,3 +1,4 @@
+import Button from "../components/Button";
 import Carousel from "../components/Carousel";
 import styled from "styled-components";
 
