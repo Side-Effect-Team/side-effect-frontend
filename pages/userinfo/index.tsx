@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import PageTransition from "../../components/PageTransition";
-export default function Index() {
+export default function UserInfoPage() {
   const router = useRouter();
   return (
     <PageTransition>
