@@ -1,4 +1,4 @@
-const breakPoints = {
+export const breakPoints = {
   mobile: 768,
   desktop: 1280,
 };

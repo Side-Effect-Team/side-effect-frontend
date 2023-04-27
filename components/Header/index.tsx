@@ -1,17 +1,38 @@
 import Link from "next/link";
-import { StyledHeader, StyledNav, StyledBox } from "./styled";
+import { IoNotificationsOutline, IoNotificationsSharp } from "react-icons/io5";
+import { Wrapper, HeaderStyled, Logo, NavStyled, BoxStyled } from "./styled";
+import MobileMenuButton from "../MobileMenuButton";
+import { BOARD_LIST } from "../../enum";
 
-const Header = () => {
+// IoNotificationsSharp : 라이트모드
+// IoNotificationsOutline : 다크모드
+
+interface HeaderProps {
+  handleMobileMenu: (e: React.MouseEvent<HTMLDivElement>) => void;
+}
+
+export default function Header({ handleMobileMenu }: HeaderProps) {
   return (
-    <StyledHeader>
-      <Link href="/">사이드이펙트</Link>
-      <StyledNav></StyledNav>
-      <StyledBox>
-        <Link href="/">로그인</Link>
-        <Link href="/">마이페이지</Link>
-      </StyledBox>
-    </StyledHeader>
+    <Wrapper>
+      <HeaderStyled>
+        <Logo>
+          <Link href="/">사이드이펙트</Link>
+        </Logo>
+        <NavStyled>
+          {BOARD_LIST.map((board) => (
+            <Link key={board} href="/">
+              {board}
+            </Link>
+          ))}
+        </NavStyled>
+        <BoxStyled>
+          <Link href="/">
+            <IoNotificationsSharp />
+          </Link>
+          <Link href="/">로그인</Link>
+        </BoxStyled>
+        <MobileMenuButton onClick={handleMobileMenu} />
+      </HeaderStyled>
+    </Wrapper>
   );
-};
-
-export default Header;
+}
