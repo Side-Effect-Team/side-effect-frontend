@@ -26,7 +26,7 @@ export const Header = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: url("/img/cardDefaultBackground.png");
+  background-image: url("/img/BoardDefaultBackground.png");
 `;
 export const HeaderTitle = styled.div`
   width: 80%;
