@@ -1,5 +1,5 @@
 import Carousel from "../components/Carousel";
-import { Wrapper, MainStyled } from "./index.styled";
+import styled from "styled-components";
 
 export default function Home() {
   return (
@@ -36,3 +36,14 @@ export default function Home() {
     </Wrapper>
   );
 }
+
+const Wrapper = styled.div`
+  background: ${(p) => p.theme.colors.background};
+`;
+
+const MainStyled = styled.section`
+  margin: 0 auto;
+  padding: 1rem;
+  width: 100%;
+  max-width: ${(p) => p.theme.sizes.desktop};
+`;
