@@ -1,5 +1,5 @@
-import { HeartFilled, HeartOutlined } from "@ant-design/icons";
-import styled from "styled-components";
+import { HeartFilled, HeartOutlined, MessageFilled } from "@ant-design/icons";
+import styled, { css } from "styled-components";
 import { theme } from "../../styles/Theme";
 
 export const Container = styled.div`
@@ -19,14 +19,17 @@ export const Container = styled.div`
     filter: drop-shadow(1px 1px 5px rgba(21, 94, 239, 0.25));
   }
 `;
-export const Header = styled.div`
+interface HeaderProps {
+  src?: string;
+}
+export const Header = styled.div<HeaderProps>`
   width: 100%;
   height: 150px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: url("/img/BoardDefaultBackground.png");
+  background-image: url(${(p) => p.src || "/img/BoardDefaultBackground.png"});
 `;
 export const HeaderTitle = styled.div`
   width: 80%;
@@ -101,9 +104,16 @@ export const CreateAt = styled.div`
   font-size: 16px;
   color: #454545;
 `;
-export const HeartButton = styled.button`
+export const ButtonsWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+`;
+export const ButtonDiv = styled.button`
   background: none;
   border: none;
+  margin: 0 5px;
   cursor: pointer;
 `;
 export const HeartNotFillIcon = styled(HeartOutlined)`
@@ -113,4 +123,12 @@ export const HeartNotFillIcon = styled(HeartOutlined)`
 export const HeartFillIcon = styled(HeartFilled)`
   color: ${theme.brandColor.coral};
   font-size: 20px;
+`;
+export const CommentIcon = styled(MessageFilled)`
+  color: ${theme.brandColor.coral};
+  font-size: 20px;
+`;
+export const FeedbackNum = styled.div`
+  font-size: 16px;
+  color: #454545;
 `;
