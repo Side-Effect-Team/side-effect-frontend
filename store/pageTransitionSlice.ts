@@ -16,18 +16,14 @@ const pageTransitionSlice = createSlice({
   reducers: {
     pageDirectionHandler: (state, action) => {
       const { pathname } = action.payload;
-      const prev = pageOrder.indexOf(state.currentPage);
-      const current = pageOrder.indexOf(pathname);
-      console.log("prev", prev);
-      console.log("current", current);
-
-      if (pageOrder.indexOf(state.currentPage) > pageOrder.indexOf(pathname)) {
+      const prevPage = pageOrder.indexOf(state.currentPage);
+      const nextPage = pageOrder.indexOf(pathname);
+      if (prevPage > nextPage) {
         state.pageDirection = "left";
       } else {
         state.pageDirection = "right";
       }
       state.currentPage = pathname;
-      console.log(state.currentPage);
     },
   },
 });
