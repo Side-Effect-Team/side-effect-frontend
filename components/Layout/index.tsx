@@ -22,7 +22,7 @@ export default function Layout({ children }: PropType) {
   const currentPage = router.route;
 
   const handleMobileMenu = (e: React.MouseEvent<HTMLDivElement>) => {
-    setMobileMenuOpen((s) => !s);
+    setMobileMenuOpen((prev) => !prev);
   };
 
   // 뷰포트 width가 모바일 width 보다 커지면 모바일 메뉴 닫음
@@ -42,8 +42,10 @@ export default function Layout({ children }: PropType) {
   if (currentPage.startsWith("/userinfo")) {
     return (
       <>
-        <GlobalStyles />
-        {children}
+        <ThemeProvider theme={theme}>
+          <GlobalStyles />
+          {children}
+        </ThemeProvider>
       </>
     );
   }
@@ -53,7 +55,7 @@ export default function Layout({ children }: PropType) {
       <GlobalStyles />
       <Header handleMobileMenu={handleMobileMenu} />
       {mobileMenuOpen && <MobileMenu />}
-      <Wrapper>{children}</Wrapper>
+      <Wrapper mobileMenuOpen={mobileMenuOpen}>{children}</Wrapper>
       <Footer />
     </ThemeProvider>
   );

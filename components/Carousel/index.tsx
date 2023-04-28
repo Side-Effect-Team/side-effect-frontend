@@ -1,17 +1,104 @@
-import styled from "styled-components";
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import { IoChevronBack, IoChevronForward } from "react-icons/io5";
+import { CarouselWrapper, SlideContentsWrapper, ButtonStyled } from "./styled";
+import { CAROUSEL_CONTENTS_LIST } from "../../enum";
 
-const Carousel = () => {
+interface CarouselProps {
+  data: typeof CAROUSEL_CONTENTS_LIST;
+  intervalSeconds?: number;
+}
+
+interface SlideContentsProps {
+  id: number;
+  title: string;
+  subTitle: string;
+  bgColor?: string;
+  imageSrc: string;
+  slidePos: string;
+}
+
+interface TextContentsProps {
+  title: string;
+  subTitle: string;
+}
+
+export default function Carousel({ data, intervalSeconds = 3 }: CarouselProps) {
+  const [slideIdx, setSlideIdx] = useState(0);
+
+  const prevSlide = () => {
+    setSlideIdx((prev) => (prev - 1 + data.length) % data.length);
+  };
+  const nextSlide = () => {
+    setSlideIdx((prev) => (prev + 1) % data.length);
+  };
+
+  useEffect(() => {
+    let slider = setInterval(() => nextSlide(), intervalSeconds * 1000);
+    return () => {
+      clearInterval(slider);
+    };
+  }, [slideIdx]);
+
   return (
-    <Container>
-      <h2>여기는 캐러셀!</h2>
-    </Container>
+    <CarouselWrapper>
+      <ButtonStyled direction="left" onClick={prevSlide}>
+        <IoChevronBack />
+      </ButtonStyled>
+      {data.map(({ ID, TITLE, SUB_TITLE, IMAGE, BACKGROUND_COLOR }) => {
+        let slidePos = "nextSlide";
+        if (slideIdx === ID) slidePos = "currentSlide";
+        if (slideIdx - 1 === ID || (slideIdx === 0 && ID === data.length - 1)) {
+          slidePos = "prevSlide";
+        }
+
+        return (
+          <SlideContents
+            key={ID}
+            id={ID}
+            title={TITLE}
+            subTitle={SUB_TITLE}
+            imageSrc={IMAGE}
+            bgColor={BACKGROUND_COLOR}
+            slidePos={slidePos}
+          />
+        );
+      })}
+      <ButtonStyled direction="right" onClick={nextSlide}>
+        <IoChevronForward />
+      </ButtonStyled>
+    </CarouselWrapper>
   );
-};
+}
 
-const Container = styled.div`
-  height: 500px;
-  padding: 25px;
-  background-color: tan;
-`;
+function SlideContents({
+  id,
+  title,
+  subTitle,
+  bgColor = "#eee",
+  imageSrc,
+  slidePos,
+}: SlideContentsProps) {
+  return (
+    <SlideContentsWrapper bgColor={bgColor} slidePos={slidePos}>
+      {id % 2 === 0 && <TextContents title={title} subTitle={subTitle} />}
+      <Image
+        src={imageSrc}
+        width={300}
+        height={300}
+        alt="캐러셀 이미지"
+        priority
+      />
+      {id % 2 !== 0 && <TextContents title={title} subTitle={subTitle} />}
+    </SlideContentsWrapper>
+  );
+}
 
-export default Carousel;
+function TextContents({ title, subTitle }: TextContentsProps) {
+  return (
+    <div>
+      <h2>{title}</h2>
+      <h3>{subTitle}</h3>
+    </div>
+  );
+}

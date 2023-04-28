@@ -1,12 +1,20 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { mediaQuery } from "../../styles/Media";
 
-export const Wrapper = styled.div`
-  ${mediaQuery("mobile")`
-    margin-top: 0;
-  `};
+interface WrapperProps {
+  mobileMenuOpen: boolean;
+}
 
+export const Wrapper = styled.div<WrapperProps>`
   margin-top: ${(p) => p.theme.height.header};
+
+  ${(p) =>
+    p.mobileMenuOpen &&
+    css`
+      ${mediaQuery("mobile")`
+        margin-top: 0;
+      `};
+    `}
 `;
 
 export const MobileNavBar = styled.nav`
