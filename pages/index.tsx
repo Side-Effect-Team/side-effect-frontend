@@ -1,10 +1,11 @@
 import Carousel from "../components/Carousel";
 import styled from "styled-components";
+import { CAROUSEL_CONTENTS_LIST } from "../enum";
 
 export default function Home() {
   return (
     <Wrapper>
-      <Carousel />
+      <Carousel data={CAROUSEL_CONTENTS_LIST} />
       <MainStyled>
         <h2>메인 컨텐츠</h2>
         <h2>메인 컨텐츠</h2>

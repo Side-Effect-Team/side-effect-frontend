@@ -53,7 +53,7 @@ export default function Layout({ children }: PropType) {
       <GlobalStyles />
       <Header handleMobileMenu={handleMobileMenu} />
       {mobileMenuOpen && <MobileMenu />}
-      <Wrapper>{children}</Wrapper>
+      <Wrapper mobileMenuOpen={mobileMenuOpen}>{children}</Wrapper>
       <Footer />
     </ThemeProvider>
   );
