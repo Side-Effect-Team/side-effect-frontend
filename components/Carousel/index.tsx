@@ -27,10 +27,10 @@ export default function Carousel({ data, intervalSeconds = 3 }: CarouselProps) {
   const [slideIdx, setSlideIdx] = useState(0);
 
   const prevSlide = () => {
-    setSlideIdx((s) => (s - 1 + data.length) % data.length);
+    setSlideIdx((prev) => (prev - 1 + data.length) % data.length);
   };
   const nextSlide = () => {
-    setSlideIdx((s) => (s + 1) % data.length);
+    setSlideIdx((prev) => (prev + 1) % data.length);
   };
 
   useEffect(() => {
