@@ -12,10 +12,8 @@ interface SelectBoxProps {
     options: string[];
   };
 }
-export default function SelectBox({ data }: SelectBoxProps) {
-  const { options, title } = data;
+export default function SelectBox({ options, setValue, value, title }: any) {
   const [isVisible, setIsVisible] = useState(false);
-  const [selectValue, setSelectValue] = useState(title);
   const selectRef = useRef<HTMLDivElement>(null);
 
   useOutsideClick(selectRef, () => {
@@ -26,12 +24,11 @@ export default function SelectBox({ data }: SelectBoxProps) {
   };
   const handleOnChangeSelectValue = (e: React.MouseEvent<HTMLLIElement>) => {
     const { innerText } = e.target as HTMLLIElement;
-    setSelectValue(innerText);
+    setValue(innerText);
   };
-  console.log(selectValue);
   return (
     <SelectWrapper onClick={handleSelectVisible} ref={selectRef}>
-      <SelectValue>{selectValue}</SelectValue>
+      <SelectValue>{value ? value : title}</SelectValue>
       <SelectOptionWrapper visible={isVisible}>
         {options &&
           options.map((option: string) => {

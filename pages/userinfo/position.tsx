@@ -1,24 +1,36 @@
 import { useRouter } from "next/router";
+import { useState } from "react";
 import styled from "styled-components";
 import PageTransition from "../../components/pages/UserInfoPage/PageTransition";
 import SelectBox from "../../components/SelectBox";
 
-const SELECT_OPTIONS = {
-  title: "포지션",
-  options: ["프론트엔드", "백엔드", "디자이너", "Devops", "기획자", "마케터"],
-};
-
+const SELECT_OPTIONS = [
+  "프론트엔드",
+  "백엔드",
+  "디자이너",
+  "Devops",
+  "기획자",
+  "마케터",
+];
 export default function Position() {
+  const [value, setValue] = useState("");
   const router = useRouter();
+  console.log("value", value);
   return (
     <PageTransition>
       <Wrapper>
         <h1>포지션을 선택해주세요.</h1>
-        <SelectBox data={SELECT_OPTIONS} />
+        <SelectBox
+          options={SELECT_OPTIONS}
+          setValue={setValue}
+          value={value}
+          title="포지션"
+        />
         <h2>알림을 받을 이메일을 입력해주세요.</h2>
+        <span>dd</span>
         <Input />
         <Button onClick={() => router.push("/userinfo/image")}>Next</Button>
-        <Button onClick={() => router.push("/userinfo")}>Back</Button>
+        <Button onClick={() => router.back()}>Back</Button>
       </Wrapper>
     </PageTransition>
   );

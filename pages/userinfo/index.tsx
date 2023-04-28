@@ -1,18 +1,14 @@
 import { useRouter } from "next/router";
+import { useForm, SubmitHandler } from "react-hook-form";
 import styled from "styled-components";
 import PageTransition from "../../components/pages/UserInfoPage/PageTransition";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { motion, Variant } from "framer-motion";
+import ErrorMessage from "../../components/pages/UserInfoPage/ErrorMessage";
+
 interface FormInput {
   nickname: string;
   email: string;
 }
-const ErrorMessageAnimation = {
-  initial: { opacity: 0, y: -20 },
-  animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: 20 },
-  transition: { duration: 0.3 },
-};
+
 export default function UserInfoPage() {
   const router = useRouter();
   const {
@@ -50,9 +46,7 @@ export default function UserInfoPage() {
               })}
             />
             {errors.nickname && (
-              <ErrorMessage variants={ErrorMessageAnimation}>
-                {errors.nickname.message}
-              </ErrorMessage>
+              <ErrorMessage>{errors.nickname.message}</ErrorMessage>
             )}
             <Label htmlFor="email">이메일</Label>
             <Input
@@ -66,14 +60,7 @@ export default function UserInfoPage() {
               })}
             />
             {errors.email && (
-              <ErrorMessage
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
-                transition={{ duration: 0.3 }}
-              >
-                {errors.email.message}
-              </ErrorMessage>
+              <ErrorMessage>{errors.email.message}</ErrorMessage>
             )}
           </InputSection>
           <Button>Next</Button>
@@ -123,8 +110,4 @@ const Button = styled.button`
   width: 100%;
   margin-top: 25px;
   cursor: pointer;
-`;
-
-const ErrorMessage = styled(motion.div)`
-  color: ${(p) => p.theme.colors.danger};
 `;
