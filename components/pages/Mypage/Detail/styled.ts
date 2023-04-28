@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { theme } from "../../../styles/Theme";
+import { theme } from "../../../../styles/Theme";
 
 export const Wrapper = styled.div`
-  height: 100vh;
+  min-height: 100vh;
   margin: 0 auto;
   padding: 1rem;
   width: 100%;
@@ -15,43 +15,35 @@ export const Wrapper = styled.div`
 export const ProfileWrapper = styled.div`
   width: 100%;
   height: auto;
-  min-height: 30%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  margin: 20px 0;
 `;
 export const ProfileImage = styled.img`
   width: 140px;
   height: 140px;
   border-radius: 50%;
   object-fit: cover;
-  margin-right: 30px;
-`;
-export const UserInfoWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-`;
-export const ProfileContentsWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
+  margin-bottom: 30px;
 `;
 
 export const NickName = styled.div`
   font-size: 24px;
   font-weight: 600;
-  margin-right: 30px;
+  margin-bottom: 15px;
 `;
-export const ContentsNumWrapper = styled.div`
+export const Text = styled.p`
+  color: #667085;
+  margin: 0;
+  margin-bottom: 15px;
+`;
+export const ContentsList = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-right: auto;
+  margin-bottom: 30px;
 `;
 export const ContentLink = styled.div`
   display: flex;
@@ -65,14 +57,14 @@ export const ContentNum = styled.p`
   font-weight: 600;
   margin: 0;
   margin-bottom: 10px;
+  color: #667085;
 `;
 export const ContentTitle = styled.p`
   font-weight: 600;
   margin: 0;
-`;
-export const UserIntroduction = styled.p`
   color: #667085;
 `;
+
 export const SectionWrapper = styled.div`
   display: flex;
   flex-direction: column;
