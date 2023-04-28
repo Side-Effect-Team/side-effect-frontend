@@ -6,8 +6,9 @@ import {
   SelectValue,
 } from "./styled";
 import useOutsideClick from "../../hooks/useOutsideClick";
+
 interface SelectBoxProps {
-  options: string[] | number[];
+  options: Array<string | number>;
   setValue: React.Dispatch<React.SetStateAction<string | number>>;
   value: string | number;
   title: string | number;
@@ -21,7 +22,6 @@ export default function SelectBox({
 }: SelectBoxProps) {
   const [isVisible, setIsVisible] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
-
   useOutsideClick(selectRef, () => {
     setIsVisible(false);
   });
@@ -30,7 +30,13 @@ export default function SelectBox({
   };
   const handleOnChangeSelectValue = (e: React.MouseEvent<HTMLLIElement>) => {
     const { innerText } = e.target as HTMLLIElement;
-    setValue(innerText);
+    for (let i = 0; i < options.length; i++) {
+      if (typeof options[i] === "number") {
+        setValue(Number(innerText));
+      } else {
+        setValue(innerText);
+      }
+    }
   };
   return (
     <SelectWrapper onClick={handleSelectVisible} ref={selectRef}>

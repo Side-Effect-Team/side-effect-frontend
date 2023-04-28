@@ -13,8 +13,9 @@ const SELECT_OPTIONS = [
   "마케터",
 ];
 export default function Position() {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState<string | number>("");
   const router = useRouter();
+  console.log(value);
   return (
     <PageTransition>
       <Wrapper>
