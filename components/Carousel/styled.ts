@@ -18,6 +18,8 @@ export const CarouselWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   background: tan;
+  overflow: hidden;
+  position: relative;
 `;
 
 export const SlideContentsWrapper = styled.main<SlideContentsWrapperProps>`
