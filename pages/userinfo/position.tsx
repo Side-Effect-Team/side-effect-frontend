@@ -1,6 +1,12 @@
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import PageTransition from "../../components/PageTransition";
+import PageTransition from "../../components/pages/UserInfoPage/PageTransition";
+import SelectBox from "../../components/SelectBox";
+
+const SELECT_OPTIONS = {
+  title: "포지션",
+  options: ["프론트엔드", "백엔드", "디자이너", "Devops", "기획자", "마케터"],
+};
 
 export default function Position() {
   const router = useRouter();
@@ -8,16 +14,10 @@ export default function Position() {
     <PageTransition>
       <Wrapper>
         <h1>포지션을 선택해주세요.</h1>
+        <SelectBox data={SELECT_OPTIONS} />
         <h2>알림을 받을 이메일을 입력해주세요.</h2>
-
-        <InputSection>
-          <Label htmlFor="nickname">닉네임 </Label>
-          <Input id="nickname" />
-          <Label htmlFor="email">이메일 </Label>
-          <Input id="email" />
-        </InputSection>
+        <Input />
         <Button onClick={() => router.push("/userinfo/image")}>Next</Button>
-        <Button onClick={() => router.push("/")}>Home</Button>
         <Button onClick={() => router.push("/userinfo")}>Back</Button>
       </Wrapper>
     </PageTransition>
@@ -26,7 +26,6 @@ export default function Position() {
 const Wrapper = styled.div`
   max-width: 600px;
   margin: auto;
-  border: 1px solid black;
   height: 600px;
   display: flex;
   flex-direction: column;

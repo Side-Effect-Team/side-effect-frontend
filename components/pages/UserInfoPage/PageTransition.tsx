@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { motion, HTMLMotionProps } from "framer-motion";
 import { useRouter } from "next/router";
-import { useAppSelector, useAppDispatch } from "../store/hooks";
-import { pageDirectionHandler } from "../store/pageTransitionSlice";
+import { useAppSelector, useAppDispatch } from "../../../store/hooks";
+import { pageDirectionHandler } from "../../../store/pageTransitionSlice";
 
 type PageTransitionProps = HTMLMotionProps<"div">;
 
@@ -25,7 +25,6 @@ function PageTransition({ children }: PageTransitionProps) {
   const inTheCenter = { x: 0 };
   const onTheLeft = { x: "-100%" };
   const transition = { duration: 0.4, ease: "easeInOut" };
-  console.log("pageDirection", pageDirection);
   return (
     <PageTransitionDiv
       initial={pageDirection === "right" ? onTheRight : onTheLeft}

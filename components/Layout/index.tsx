@@ -42,8 +42,10 @@ export default function Layout({ children }: PropType) {
   if (currentPage.startsWith("/userinfo")) {
     return (
       <>
-        <GlobalStyles />
-        {children}
+        <ThemeProvider theme={theme}>
+          <GlobalStyles />
+          {children}
+        </ThemeProvider>
       </>
     );
   }
