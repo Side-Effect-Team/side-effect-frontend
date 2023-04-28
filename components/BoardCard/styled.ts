@@ -1,6 +1,6 @@
-import { HeartFilled, HeartOutlined, MessageFilled } from "@ant-design/icons";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { theme } from "../../styles/Theme";
+import { AiFillHeart, AiOutlineHeart, AiOutlineMessage } from "react-icons/ai";
 
 export const Container = styled.div`
   width: 300px;
@@ -116,15 +116,15 @@ export const ButtonDiv = styled.button`
   margin: 0 5px;
   cursor: pointer;
 `;
-export const HeartNotFillIcon = styled(HeartOutlined)`
+export const HeartNotFillIcon = styled(AiOutlineHeart)`
   color: ${theme.brandColor.coral};
   font-size: 20px;
 `;
-export const HeartFillIcon = styled(HeartFilled)`
+export const HeartFillIcon = styled(AiFillHeart)`
   color: ${theme.brandColor.coral};
   font-size: 20px;
 `;
-export const CommentIcon = styled(MessageFilled)`
+export const CommentIcon = styled(AiOutlineMessage)`
   color: ${theme.brandColor.coral};
   font-size: 20px;
 `;

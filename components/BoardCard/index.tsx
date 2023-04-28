@@ -1,5 +1,22 @@
 import { useState } from "react";
-import * as S from "./styles";
+import {
+  ButtonDiv,
+  ButtonsWrapper,
+  CommentIcon,
+  Container,
+  Content,
+  ContentsWrapper,
+  CreateAt,
+  FeedbackNum,
+  Footer,
+  Header,
+  HeaderTitle,
+  HeartFillIcon,
+  HeartNotFillIcon,
+  Tag,
+  TagWrapper,
+  Title,
+} from "./styled";
 interface BoardCardProps {
   headerImage?: string;
   headerTitle?: string;
@@ -21,38 +38,38 @@ export default function BoardCard(p: BoardCardDataProps) {
     setIsLike((prev) => !prev);
   };
   return (
-    <S.Container>
-      <S.Header src={p.data?.headerImage}>
-        <S.HeaderTitle>{p.data?.headerTitle}</S.HeaderTitle>
-      </S.Header>
-      <S.ContentsWrapper>
-        <S.TagWrapper>
+    <Container>
+      <Header src={p.data?.headerImage}>
+        <HeaderTitle>{p.data?.headerTitle}</HeaderTitle>
+      </Header>
+      <ContentsWrapper>
+        <TagWrapper>
           {/* 넘친다면 +5 이런식으로 태그가 더 있다는 것을 알려줄 수 있는 로직이 필요함 */}
           {p.data?.tag.map((el, index) => (
-            <S.Tag key={index}>{el}</S.Tag>
+            <Tag key={index}>{el}</Tag>
           ))}
-        </S.TagWrapper>
-        <S.Title>{p.data?.title}</S.Title>
-        <S.Content>{p.data?.content}</S.Content>
-        <S.Footer>
-          <S.CreateAt>{p.data?.createdAt}</S.CreateAt>
-          <S.ButtonsWrapper>
-            <S.ButtonDiv onClick={onClickHeart}>
-              {isLike ? <S.HeartFillIcon /> : <S.HeartNotFillIcon />}
-            </S.ButtonDiv>
+        </TagWrapper>
+        <Title>{p.data?.title}</Title>
+        <Content>{p.data?.content}</Content>
+        <Footer>
+          <CreateAt>{p.data?.createdAt}</CreateAt>
+          <ButtonsWrapper>
+            <ButtonDiv onClick={onClickHeart}>
+              {isLike ? <HeartFillIcon /> : <HeartNotFillIcon />}
+            </ButtonDiv>
             {p.data?.likeNum && (
               <>
-                <S.FeedbackNum>{p.data.likeNum}</S.FeedbackNum>
-                <S.ButtonDiv>
-                  <S.CommentIcon />
-                </S.ButtonDiv>
-                <S.FeedbackNum>{p.data.commentNum}</S.FeedbackNum>
+                <FeedbackNum>{p.data.likeNum}</FeedbackNum>
+                <ButtonDiv>
+                  <CommentIcon />
+                </ButtonDiv>
+                <FeedbackNum>{p.data.commentNum}</FeedbackNum>
               </>
             )}
-          </S.ButtonsWrapper>
-        </S.Footer>
-      </S.ContentsWrapper>
-    </S.Container>
+          </ButtonsWrapper>
+        </Footer>
+      </ContentsWrapper>
+    </Container>
   );
 }
 
