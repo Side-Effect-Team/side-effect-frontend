@@ -8,14 +8,13 @@ const SELECT_OPTIONS = [
   "프론트엔드",
   "백엔드",
   "디자이너",
-  "Devops",
+  "데브옵스",
   "기획자",
   "마케터",
 ];
 export default function Position() {
   const [value, setValue] = useState("");
   const router = useRouter();
-  console.log("value", value);
   return (
     <PageTransition>
       <Wrapper>
