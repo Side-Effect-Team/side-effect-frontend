@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { mediaQuery } from "../../styles/Media";
 
 export const Wrapper = styled.div`
+  z-index: 10;
   position: fixed;
   top: 0;
   left: 0;
