@@ -125,3 +125,7 @@ export const InfoTitle = styled.p`
 export const InfoContent = styled.p`
   font-weight: 600;
 `;
+export const InfoContentLink = styled.a`
+  font-weight: 600;
+  cursor: pointer;
+`;

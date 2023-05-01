@@ -13,11 +13,11 @@ export default function MyPage() {
     ],
     skill: ["typescript", "react", "HTML", "Next.js", "React.native"],
     info: [
-      { title: "포지션", content: "프론트엔드" },
-      { title: "경력", content: "취업준비생" },
-      { title: "깃허브", content: "www.abc.com" },
-      { title: "블로그", content: "www.abc.com" },
-      { title: "포트폴리오", content: "www.abc.com" },
+      { title: "포지션", content: "프론트엔드", link: false },
+      { title: "경력", content: "취업준비생", link: false },
+      { title: "깃허브", content: "https://github.com/", link: true },
+      { title: "블로그", content: "https://www.naver.com", link: true },
+      { title: "포트폴리오", content: "https://www.naver.com", link: true },
     ],
   };
   return <MyPageDetail data={data} />;

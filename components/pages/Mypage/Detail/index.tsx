@@ -6,6 +6,7 @@ import {
   ContentTitle,
   ContentsList,
   InfoContent,
+  InfoContentLink,
   InfoTitle,
   InfoWrapper,
   NickName,
@@ -32,6 +33,7 @@ interface DataProps {
   info?: {
     title: string;
     content: string;
+    link: boolean;
   }[];
 }
 interface MyPageDetailProps {
@@ -76,7 +78,13 @@ export default function MyPageDetail(p: MyPageDetailProps) {
           p.data.info.map((el, index) => (
             <InfoWrapper key={index}>
               <InfoTitle>{el.title}</InfoTitle>
-              <InfoContent>{el.content}</InfoContent>
+              {el.link ? (
+                <InfoContentLink href={el.content} target="_blank">
+                  {el.content}
+                </InfoContentLink>
+              ) : (
+                <InfoContent>{el.content}</InfoContent>
+              )}
             </InfoWrapper>
           ))
         ) : (
