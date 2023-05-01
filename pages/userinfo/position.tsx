@@ -33,14 +33,18 @@ const SELECT_CAREER = [
   "4~6",
   "7년 이상 ",
 ];
+interface FormData {
+  github: string;
+  blog: string;
+}
 export default function Position() {
   const [position, setPosition] = useState<string | number>("");
   const [career, setCareer] = useState<string | number>("");
   const router = useRouter();
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm<FormData>();
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: FormData) => {
     if (!career || !position) {
       alert("포지션과 경력은 필수입력 사항입니다.");
     } else {

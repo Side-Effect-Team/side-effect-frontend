@@ -30,7 +30,7 @@ export default function UserInfoPage() {
   return (
     <PageTransition>
       <Wrapper>
-        <Form style={{ width: "100%" }} onSubmit={handleSubmit(onSubmit)}>
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <h1>안녕하세요!</h1>
           <h3>Side-Effect에서 사용할 닉네임을 입력해주세요.</h3>
           <Label htmlFor="nickname">닉네임 </Label>
