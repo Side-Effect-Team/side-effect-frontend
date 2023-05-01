@@ -70,6 +70,7 @@ export const SectionWrapper = styled.div`
   flex-direction: column;
   height: auto;
   min-height: 30%;
+  margin-bottom: 50px;
 `;
 export const SectionHeaderWrapper = styled.div`
   width: 100%;
@@ -128,4 +129,7 @@ export const InfoContent = styled.p`
 export const InfoContentLink = styled.a`
   font-weight: 600;
   cursor: pointer;
+`;
+export const ButtonWrapper = styled.div`
+  margin-left: auto;
 `;

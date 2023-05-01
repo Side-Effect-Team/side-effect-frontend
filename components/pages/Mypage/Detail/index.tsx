@@ -1,3 +1,4 @@
+import { ButtonsWrapper } from "../../../BoardCard/styled";
 import Button from "../../../Button";
 import {
   Border,
@@ -56,7 +57,6 @@ export default function MyPageDetail(p: MyPageDetailProps) {
             </ContentLink>
           ))}
         </ContentsList>
-        <Button>프로필 수정하기</Button>
       </ProfileWrapper>
       <SectionWrapper>
         <SectionHeaderWrapper>
@@ -91,6 +91,9 @@ export default function MyPageDetail(p: MyPageDetailProps) {
           <Text>아직 작성된 정보가 없습니다.</Text>
         )}
       </SectionWrapper>
+      <ButtonsWrapper>
+        <Button>프로필 수정하기</Button>
+      </ButtonsWrapper>
     </Wrapper>
   );
 }
