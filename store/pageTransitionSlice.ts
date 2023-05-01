@@ -7,7 +7,7 @@ const initialState = {
 const pageOrder: string[] = [
   "/userinfo",
   "/userinfo/position",
-  "/userinfo/image",
+  "/userinfo/success",
 ];
 
 const pageTransitionSlice = createSlice({

@@ -21,6 +21,7 @@ function PageTransition({ children }: PageTransitionProps) {
   }, []);
 
   const { pageDirection } = useAppSelector((state) => state.page);
+
   const onTheRight = { x: "100%" };
   const inTheCenter = { x: 0 };
   const onTheLeft = { x: "-100%" };
@@ -43,5 +44,4 @@ const PageTransitionDiv = styled(motion.div)`
   position: fixed;
   width: 100%;
   height: 100%;
-  top: 18%;
 `;

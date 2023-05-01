@@ -1,10 +1,20 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
-import styled from "styled-components";
+import { useForm } from "react-hook-form";
 import PageTransition from "../../components/pages/UserInfoPage/PageTransition";
 import SelectBox from "../../components/SelectBox";
+import {
+  Wrapper,
+  SelectSection,
+  ButtonWrapper,
+  InputSection,
+  Input,
+  Label,
+  Form,
+} from "../../components/pages/UserInfoPage/styled";
+import Button from "../../components/Button";
 
-const SELECT_OPTIONS = [
+const SELECT_POSITIONS = [
   "프론트엔드",
   "백엔드",
   "디자이너",
@@ -12,64 +22,73 @@ const SELECT_OPTIONS = [
   "기획자",
   "마케터",
 ];
+const SELECT_CAREER = [
+  // "취업준비생",
+  // "신입(0년차)",
+  // "주니어(1~3년차)",
+  // "미들(4~6년차)",
+  // "시니어(7년이상)",
+  "0",
+  "1~3",
+  "4~6",
+  "7년 이상 ",
+];
 export default function Position() {
-  const [value, setValue] = useState<string | number>("");
+  const [position, setPosition] = useState<string | number>("");
+  const [career, setCareer] = useState<string | number>("");
   const router = useRouter();
-  console.log(value);
+
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = (data: any) => {
+    if (!career || !position) {
+      alert("포지션과 경력은 필수입력 사항입니다.");
+    } else {
+      const nickname = localStorage.getItem("nickname");
+      // api요청 작성
+      console.log({ nickname, position, career, ...data });
+    }
+  };
   return (
     <PageTransition>
       <Wrapper>
-        <h1>포지션을 선택해주세요.</h1>
-        <SelectBox
-          options={SELECT_OPTIONS}
-          setValue={setValue}
-          value={value}
-          title="포지션"
-        />
-        <h2>알림을 받을 이메일을 입력해주세요.</h2>
-        <span>dd</span>
-        <Input />
-        <Button onClick={() => router.push("/userinfo/image")}>Next</Button>
-        <Button onClick={() => router.back()}>Back</Button>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <h1>포지션,경력을 선택해주세요.</h1>
+          <SelectSection>
+            <SelectBox
+              options={SELECT_POSITIONS}
+              setValue={setPosition}
+              value={position}
+              title="포지션"
+            />
+            <SelectBox
+              options={SELECT_CAREER}
+              setValue={setCareer}
+              value={career}
+              title="경력"
+            />
+          </SelectSection>
+          <InputSection>
+            <h4>
+              깃허브와 블로그 주소는 선택사항입니다.
+              <br /> <br />
+              깃허브나 블로그 주소를 등록하면 팀에 합류할 확률이 더 높아집니다!
+            </h4>
+            <Label htmlFor="Github">Github</Label>
+            <Input id="Github" {...register("github")} />
+            <Label htmlFor="Blog">Blog</Label>
+            <Input id="Blog" {...register("blog")} />
+          </InputSection>
+          <ButtonWrapper>
+            <Button type="submit" size="large">
+              가입완료
+            </Button>
+            <Button type="button" size="large" onClick={() => router.back()}>
+              Back
+            </Button>
+          </ButtonWrapper>
+        </Form>
       </Wrapper>
     </PageTransition>
   );
 }
-const Wrapper = styled.div`
-  max-width: 600px;
-  margin: auto;
-  height: 600px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 40px;
-`;
-const Label = styled.label`
-  text-align: start;
-  font-weight: bold;
-  margin-right: 15px;
-`;
-const InputSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 100%;
-  gap: 10px;
-`;
-const Input = styled.input`
-  outline: none;
-  border: none;
-  width: 100%;
-  border-bottom: 2px solid black;
-`;
-const Button = styled.button`
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  background-color: #5e8aff;
-  border-radius: 10px;
-  width: 100%;
-  margin-top: 25px;
-  cursor: pointer;
-`;
