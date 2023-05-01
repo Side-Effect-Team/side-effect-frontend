@@ -1,4 +1,16 @@
-export const BOARD_LIST = ["프로젝트 자랑 게시판", "팀원 모집 게시판"];
+export const baseUrl = "http://localhost:3000";
+export const BOARD_LIST = [
+  {
+    ID: 0,
+    TITLE: "프로젝트 자랑 게시판",
+    LINK: "/projects",
+  },
+  {
+    ID: 1,
+    TITLE: "팀원 모집 게시판",
+    LINK: "/recruits",
+  },
+];
 export const CAROUSEL_CONTENTS_LIST = [
   {
     ID: 0,
