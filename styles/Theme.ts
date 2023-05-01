@@ -18,6 +18,7 @@ export const theme = {
   height: {
     header: "75px",
     carousel: "500px",
+    banner: "300px",
   },
   // 추후 브랜드 컬러 추가 시 (아래는 임시 컬러)
   brandColor: {
