@@ -7,23 +7,23 @@ interface SelectSize {
   size?: "small" | "medium" | "large" | "full";
 }
 const sizeStyles = css<SelectSize>`
-  ${(props) =>
-    props.size === "small" &&
+  ${(p) =>
+    p.size === "small" &&
     css`
       width: 100px;
     `}
-  ${(props) =>
-    props.size === "medium" &&
+  ${(p) =>
+    p.size === "medium" &&
     css`
       width: 150px;
     `}
-    ${(props) =>
-    props.size === "large" &&
+    ${(p) =>
+    p.size === "large" &&
     css`
       width: 200px;
     `}
-    ${(props) =>
-    props.size === "full" &&
+    ${(p) =>
+    p.size === "full" &&
     css`
       width: 100%;
     `}
@@ -38,11 +38,10 @@ export const SelectWrapper = styled.div`
 `;
 
 export const SelectOptionWrapper = styled.ul<SelectOptionType>`
-  visibility: ${(props) => (props.visible ? "visible" : "hidden")};
-  opacity: ${(props) => (props.visible ? "1" : "0")};
+  visibility: ${(p) => (p.visible ? "visible" : "hidden")};
+  opacity: ${(p) => (p.visible ? "1" : "0")};
   transition: 0.2s ease-in-out;
-  transform: ${(props) =>
-    props.visible ? "translateY(0%)" : "translateY(-25%)"};
+  transform: ${(p) => (p.visible ? "translateY(0%)" : "translateY(-25%)")};
   margin: 0;
   padding: 0;
   position: absolute;
