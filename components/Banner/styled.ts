@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
 `;
 
 export const ImageContainer = styled.div`
-  color: #fff;
+  color: ${(p) => p.theme.colors.white};
   width: 100%;
   height: 100%;
   background: #333 url("/images/recruits-banner-sample.jpg") no-repeat center
@@ -33,7 +33,6 @@ export const Contents = styled.div`
   gap: 1rem;
   align-items: center;
   justify-content: center;
-
   z-index: 5;
 
   h2 {
@@ -42,5 +41,9 @@ export const Contents = styled.div`
 
   h3 {
     margin-bottom: 1rem;
+  }
+
+  button a {
+    color: #eee;
   }
 `;

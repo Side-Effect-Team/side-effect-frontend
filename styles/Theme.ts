@@ -7,6 +7,7 @@ export const theme = {
     danger: "#F04438",
     success: "#16B364",
     background: "#ddd",
+    white: "#fff",
   },
   fonts: {
     pretendard: "Pretendard-Regular",

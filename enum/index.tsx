@@ -1,3 +1,5 @@
+export const BASE_URL = "http://localhost:3000";
+
 export const BOARD_LIST = [
   {
     ID: 0,
@@ -10,6 +12,7 @@ export const BOARD_LIST = [
     LINK: "/recruits",
   },
 ];
+
 export const CAROUSEL_CONTENTS_LIST = [
   {
     ID: 0,
@@ -33,6 +36,7 @@ export const CAROUSEL_CONTENTS_LIST = [
     BACKGROUND_COLOR: "thistle",
   },
 ];
+
 export const BANNER_CONTENTS = {
   TITLE: "열정을 나눌 팀원을 모집하세요",
   SUB_TITLE:

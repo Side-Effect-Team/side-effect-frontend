@@ -1,3 +1,3 @@
 export default function AddRecruitPage() {
-  return <h2>모집 게시글 올리기 페이지</h2>;
+  return <h1>모집 게시글 등록 페이지</h1>;
 }
