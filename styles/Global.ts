@@ -16,12 +16,21 @@ const global = createGlobalStyle`
     margin: 0;
     padding: 0;
   }
+  
   a {
     text-decoration: none;
     color: #000;
   }
+  
   li {
     list-style-type: none;
+  }
+  
+  h1,
+  h2,
+  h3 {
+    padding: 0;
+    margin: 0;
   }
   
 `;

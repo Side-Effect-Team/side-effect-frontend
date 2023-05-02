@@ -14,20 +14,20 @@ export interface ButtonStyle
 }
 
 const sizeStyles = css<ButtonStyle>`
-  ${(props) =>
-    props.size === "small" &&
+  ${(p) =>
+    p.size === "small" &&
     css`
       height: 1.75rem;
       font-size: 0.875rem;
     `}
-  ${(props) =>
-    props.size === "medium" &&
+  ${(p) =>
+    p.size === "medium" &&
     css`
       height: 2.25rem;
       font-size: 1rem;
     `}
-    ${(props) =>
-    props.size === "large" &&
+    ${(p) =>
+    p.size === "large" &&
     css`
       height: 3rem;
       font-size: 1.25rem;
@@ -35,36 +35,34 @@ const sizeStyles = css<ButtonStyle>`
 `;
 
 const fillStyle = css<ButtonStyle>`
-  ${(props) =>
-    props.fill === "false" &&
-    // !props.fill &&
+  ${(p) =>
+    p.fill === "false" &&
+    // !p.fill &&
     css`
-      border: 2px solid ${props.color && theme.brandColor[props.color]};
-      color: ${props.color && theme.brandColor[props.color]};
+      border: 2px solid ${p.color && theme.brandColor[p.color]};
+      color: ${p.color && theme.brandColor[p.color]};
       background-color: white;
       :hover {
-        border: 2px solid
-          ${props.color && lighten(0.1, theme.brandColor[props.color])};
-        color: ${props.color && lighten(0.1, theme.brandColor[props.color])};
+        border: 2px solid ${p.color && lighten(0.1, theme.brandColor[p.color])};
+        color: ${p.color && lighten(0.1, theme.brandColor[p.color])};
         background-color: white;
       }
       :active {
-        border: 2px solid
-          ${props.color && darken(0.1, theme.brandColor[props.color])};
-        color: ${props.color && darken(0.1, theme.brandColor[props.color])};
+        border: 2px solid ${p.color && darken(0.1, theme.brandColor[p.color])};
+        color: ${p.color && darken(0.1, theme.brandColor[p.color])};
       }
     `}
 `;
 const colorStyle = css<ButtonStyle>`
-  ${(props) =>
-    props.color &&
+  ${(p) =>
+    p.color &&
     css`
-      background-color: ${theme.brandColor[props.color]};
+      background-color: ${theme.brandColor[p.color]};
       &:hover {
-        background-color: ${lighten(0.05, theme.brandColor[props.color])};
+        background-color: ${lighten(0.05, theme.brandColor[p.color])};
       }
       &:active {
-        background: ${darken(0.05, theme.brandColor[props.color])};
+        background: ${darken(0.05, theme.brandColor[p.color])};
       }
     `}
 `;

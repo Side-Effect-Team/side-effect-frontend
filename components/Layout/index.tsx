@@ -14,7 +14,14 @@ interface PropType {
   children: React.ReactNode;
 }
 
-const MOBILE_BOARD_LIST = [...BOARD_LIST, "로그인"];
+const MOBILE_BOARD_LIST = [
+  ...BOARD_LIST,
+  {
+    ID: 2,
+    TITLE: "로그인",
+    LINK: "/",
+  },
+];
 
 export default function Layout({ children }: PropType) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
@@ -65,8 +72,8 @@ function MobileMenu() {
   return (
     <MobileNavBar>
       {MOBILE_BOARD_LIST.map((board) => (
-        <MobileMenuItem key={board}>
-          <Link href="/">{board}</Link>
+        <MobileMenuItem key={board.ID}>
+          <Link href={board.LINK}>{board.TITLE}</Link>
         </MobileMenuItem>
       ))}
     </MobileNavBar>

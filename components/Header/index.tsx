@@ -20,8 +20,8 @@ export default function Header({ handleMobileMenu }: HeaderProps) {
         </Logo>
         <NavStyled>
           {BOARD_LIST.map((board) => (
-            <Link key={board} href="/">
-              {board}
+            <Link key={board.ID} href={board.LINK}>
+              {board.TITLE}
             </Link>
           ))}
         </NavStyled>
