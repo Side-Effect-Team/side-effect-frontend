@@ -41,7 +41,7 @@ export default function SelectBox({
     }
   };
   return (
-    <SelectWrapper onClick={handleSelectVisible} ref={selectRef} size={size}>
+    <SelectWrapper onClick={handleSelectVisible} size={size}>
       <SelectValue>{value ? value : title}</SelectValue>
       <SelectOptionWrapper visible={isVisible}>
         {options &&
