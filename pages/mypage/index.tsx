@@ -2,7 +2,7 @@ import MyPageDetail from "../../components/pages/Mypage/Detail";
 
 export default function MyPage() {
   const data = {
-    avatarSrc: "/img/ProjectDefaultBackground.png",
+    avatarSrc: "/images/ProjectDefaultBackground.png",
     nickname: "자라는개발자",
     introduction:
       "프론트엔드 개발자를 꿈꾸는 취준생입니다. 프로젝트 경험하고 싶어요",
