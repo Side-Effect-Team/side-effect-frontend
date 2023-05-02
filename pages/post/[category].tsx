@@ -3,7 +3,6 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import styled, { css } from "styled-components";
 import { breakPoints } from "../../styles/Media";
 import Button from "../../components/Button";
-import { recursiveCopy } from "next/dist/lib/recursive-copy";
 
 interface PostHeaderProps {
   category: string;
@@ -55,6 +54,7 @@ export default function PostPage() {
     recruits = recruits && JSON.parse(recruits);
     const newRecruit = {
       id: recruits ? recruits.length + 1 : 1,
+      headerImage: form.image,
       headerTitle: form.projectName,
       tag: form.tags,
       title: form.title,
