@@ -8,7 +8,6 @@ export default function ErrorMessage({ children }: Props) {
     <ErrorMessageWrapper
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 20 }}
       transition={{ duration: 0.3 }}
     >
       {children}
@@ -17,4 +16,5 @@ export default function ErrorMessage({ children }: Props) {
 }
 const ErrorMessageWrapper = styled(motion.div)`
   color: ${(p) => p.theme.colors.danger};
+  margin-top: 15px;
 `;

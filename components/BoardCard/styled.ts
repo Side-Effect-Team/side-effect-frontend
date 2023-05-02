@@ -29,7 +29,8 @@ export const Header = styled.div<HeaderProps>`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: url(${(p) => p.src || "/img/BoardDefaultBackground.png"});
+  background-image: url(${(p) =>
+    p.src || "/images/BoardDefaultBackground.png"});
 `;
 export const HeaderTitle = styled.div`
   width: 80%;

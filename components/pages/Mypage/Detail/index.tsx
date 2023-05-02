@@ -49,7 +49,7 @@ export default function MyPageDetail(p: MyPageDetailProps) {
     <Wrapper>
       <ProfileWrapper>
         <ProfileImage
-          src={p.data?.avatarSrc || "/img/BoardDefaultBackground.png"}
+          src={p.data?.avatarSrc || "/images/ProDefaultBackground.png"}
         />
         <NickName>{p.data?.nickname || ""}</NickName>
         <Text>{p.data?.introduction || "아직 소개가 없습니다."}</Text>

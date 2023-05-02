@@ -4,23 +4,28 @@ interface SelectOptionType {
   visible: boolean;
 }
 interface SelectSize {
-  size?: "small" | "medium" | "large";
+  size?: "small" | "medium" | "large" | "full";
 }
 const sizeStyles = css<SelectSize>`
-  ${(props) =>
-    props.size === "small" &&
+  ${(p) =>
+    p.size === "small" &&
     css`
       width: 100px;
     `}
-  ${(props) =>
-    props.size === "medium" &&
+  ${(p) =>
+    p.size === "medium" &&
     css`
       width: 150px;
     `}
-    ${(props) =>
-    props.size === "large" &&
+    ${(p) =>
+    p.size === "large" &&
     css`
       width: 200px;
+    `}
+    ${(p) =>
+    p.size === "full" &&
+    css`
+      width: 100%;
     `}
 `;
 
@@ -33,9 +38,10 @@ export const SelectWrapper = styled.div`
 `;
 
 export const SelectOptionWrapper = styled.ul<SelectOptionType>`
-  display: ${(props) => (props.visible ? "flex" : "none")};
-  flex-direction: column;
-  gap: 5px;
+  visibility: ${(p) => (p.visible ? "visible" : "hidden")};
+  opacity: ${(p) => (p.visible ? "1" : "0")};
+  transition: 0.2s ease-in-out;
+  transform: ${(p) => (p.visible ? "translateY(0%)" : "translateY(-25%)")};
   margin: 0;
   padding: 0;
   position: absolute;
@@ -44,6 +50,7 @@ export const SelectOptionWrapper = styled.ul<SelectOptionType>`
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
   border-radius: 5px;
   width: 100%;
+  z-index: 10;
 `;
 export const SelectOption = styled.li`
   border-radius: 5px;
@@ -63,5 +70,5 @@ export const SelectValue = styled.div`
   padding: 10px;
 `;
 SelectWrapper.defaultProps = {
-  size: "medium",
+  size: "full",
 };
