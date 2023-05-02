@@ -23,7 +23,7 @@ import {
   Wrapper,
 } from "./styled";
 
-interface DataProps {
+export interface DataProps {
   avatarSrc?: string;
   nickname: string;
   introduction?: string;

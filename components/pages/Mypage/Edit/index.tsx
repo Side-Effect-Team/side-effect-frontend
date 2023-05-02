@@ -1,3 +1,4 @@
+import { DataProps } from "..";
 import Button from "../../../Button";
 import Info from "../../../MypageEdit/Info";
 import Introduction from "../../../MypageEdit/Introduction";
@@ -13,22 +14,7 @@ import {
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-export interface DataProps {
-  avatarSrc?: string;
-  nickname: string;
-  introduction?: string;
-  boards: number;
-  follower: number;
-  following: number;
-  skill?: string[];
-  position: string;
-  career: string;
-  github?: string;
-  blog?: string;
-  portfolio?: string;
-}
-
-interface MyPageDetailProps {
+interface MyPageEditProps {
   data?: DataProps;
 }
 interface FormData {
@@ -37,7 +23,7 @@ interface FormData {
   portfolio: string;
 }
 
-export default function MyPageEditPage(p: MyPageDetailProps) {
+export default function MyPageEditPage(p: MyPageEditProps) {
   const [introduction, setIntroduction] = useState(p.data?.introduction);
   const [imageUrl, setImageUrl] = useState(p.data?.avatarSrc);
   const [skillTags, setSkillTags] = useState<string[]>(p.data?.skill || []);

@@ -11,14 +11,14 @@ import {
   TextArea,
 } from "./styled";
 
-interface MyPageDetailProps {
+interface IntroductionProps {
   nickname: string | undefined;
   introduction: string | undefined;
   setIntroduction: Dispatch<SetStateAction<string | undefined>>;
   imageUrl: string | undefined;
   setImageUrl: Dispatch<SetStateAction<string | undefined>>;
 }
-export default function Introduction(p: MyPageDetailProps) {
+export default function Introduction(p: IntroductionProps) {
   // 자기소개
   const onChangeIntroduction = (e: ChangeEvent<HTMLTextAreaElement>) => {
     p.setIntroduction(e.target.value);

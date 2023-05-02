@@ -3,14 +3,14 @@ import SelectBox from "../../SelectBox";
 import { InfoTitle, InfoWrapper } from "../../pages/Mypage/styled";
 import { Input } from "./styled";
 import { UseFormRegister } from "react-hook-form";
-import { DataProps } from "../../pages/Mypage/Edit";
+import { DataProps } from "../../pages/Mypage";
 
 interface FormData {
   github: string;
   blog: string;
   portfolio: string;
 }
-interface MyPageDetailProps {
+interface InfoProps {
   data?: Pick<DataProps, "github" | "blog" | "portfolio">;
   career: string | number;
   setCareer: Dispatch<SetStateAction<string | number>>;
@@ -18,7 +18,7 @@ interface MyPageDetailProps {
   setPosition: Dispatch<SetStateAction<string | number>>;
   resister: UseFormRegister<FormData>;
 }
-export default function Info(p: MyPageDetailProps) {
+export default function Info(p: InfoProps) {
   const SELECT_CAREER = ["0", "1~3", "4~6", "7년 이상 "];
   const SELECT_POSITIONS = [
     "프론트엔드",
