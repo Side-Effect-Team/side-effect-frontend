@@ -51,6 +51,7 @@ export const SelectOptionWrapper = styled.ul<SelectOptionType>`
   border-radius: 5px;
   width: 100%;
   z-index: 10;
+  margin-top: 0.5rem;
 `;
 export const SelectOption = styled.li`
   border-radius: 5px;
@@ -66,7 +67,6 @@ export const SelectValue = styled.div`
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
   text-align: center;
   border-radius: 5px;
-  margin-bottom: 0.5rem;
   padding: 10px;
   background-color: white;
 `;

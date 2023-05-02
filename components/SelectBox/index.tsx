@@ -9,9 +9,9 @@ import useOutsideClick from "../../hooks/useOutsideClick";
 
 interface SelectBoxProps {
   options: Array<string | number>;
-  setValue: React.Dispatch<React.SetStateAction<string | number>>;
+  setValue: React.Dispatch<React.SetStateAction<any>>;
   value: string | number;
-  title: string | number;
+  title?: string | number;
   size?: "small" | "medium" | "large";
 }
 
@@ -41,7 +41,7 @@ export default function SelectBox({
     }
   };
   return (
-    <SelectWrapper onClick={handleSelectVisible} size={size}>
+    <SelectWrapper onClick={handleSelectVisible} ref={selectRef} size={size}>
       <SelectValue>{value ? value : title}</SelectValue>
       <SelectOptionWrapper visible={isVisible}>
         {options &&
