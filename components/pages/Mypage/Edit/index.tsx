@@ -29,18 +29,18 @@ interface DataProps {
   avatarSrc?: string;
   nickname: string;
   introduction?: string;
-  followInfo: {
-    title: string;
-    num: number;
-  }[];
+  boards: number;
+  follower: number;
+  following: number;
   skill?: string[];
-  info?: {
-    title: string;
-    content: string;
-    link: boolean;
-    dataTitle: string;
-  }[];
+  position: string;
+  career: string;
+  github: string;
+  blog: string;
+  portfolio: string;
+  [key: string]: any;
 }
+
 interface MyPageDetailProps {
   data?: DataProps;
 }
@@ -52,6 +52,7 @@ interface FormData {
   blog: string;
   portfolio: string;
 }
+
 export default function MyPageEditPage(p: MyPageDetailProps) {
   const onClickChangeImage = () => {
     if (fileRef.current) {
@@ -60,9 +61,11 @@ export default function MyPageEditPage(p: MyPageDetailProps) {
   };
   const fileRef = useRef<HTMLInputElement>(null);
   const { register, handleSubmit } = useForm<FormData>();
+
   const onClickEdit = (data: FormData) => {
     console.log(data);
   };
+
   return (
     <Wrapper>
       <form onSubmit={handleSubmit(onClickEdit)}>
@@ -111,17 +114,46 @@ export default function MyPageEditPage(p: MyPageDetailProps) {
             <SectionTitle>Info</SectionTitle>
             <Border></Border>
           </SectionHeaderWrapper>
-          {p.data?.info &&
-            p.data.info.map((el, index) => (
-              <InfoWrapper key={index}>
-                <InfoTitle>{el.title}</InfoTitle>
-                <InputTemp
-                  defaultValue={el.content || ""}
-                  placeholder="정보를 등록해주세요"
-                  {...register(el.dataTitle as keyof FormData)}
-                />
-              </InfoWrapper>
-            ))}
+          <InfoWrapper>
+            <InfoTitle>*포지션</InfoTitle>
+            <InputTemp
+              defaultValue={p.data?.position || ""}
+              placeholder="정보를 등록해주세요"
+              {...register("position")}
+            />
+          </InfoWrapper>
+          <InfoWrapper>
+            <InfoTitle>*경력</InfoTitle>
+            <InputTemp
+              defaultValue={p.data?.career || ""}
+              placeholder="정보를 등록해주세요"
+              {...register("career")}
+            />
+          </InfoWrapper>
+          <InfoWrapper>
+            <InfoTitle>깃허브</InfoTitle>
+            <InputTemp
+              defaultValue={p.data?.github || ""}
+              placeholder="정보를 등록해주세요"
+              {...register("github")}
+            />
+          </InfoWrapper>
+          <InfoWrapper>
+            <InfoTitle>블로그</InfoTitle>
+            <InputTemp
+              defaultValue={p.data?.blog || ""}
+              placeholder="정보를 등록해주세요"
+              {...register("blog")}
+            />
+          </InfoWrapper>
+          <InfoWrapper>
+            <InfoTitle>포트폴리오</InfoTitle>
+            <InputTemp
+              defaultValue={p.data?.portfolio || ""}
+              placeholder="정보를 등록해주세요"
+              {...register("portfolio")}
+            />
+          </InfoWrapper>
         </SectionWrapper>
         <ButtonsWrapper>
           <Button>프로필 수정하기</Button>

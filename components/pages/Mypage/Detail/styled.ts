@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { theme } from "../../../../styles/Theme";
+import { mediaQuery } from "../../../../styles/Media";
 
 export const Wrapper = styled.div`
   min-height: 100vh;
@@ -119,7 +120,7 @@ export const InfoWrapper = styled.div`
   border-bottom: 1px solid ${theme.brandColor.lightGray};
 `;
 export const InfoTitle = styled.p`
-  width: 20%;
+  width: 30%;
   color: #667085;
   font-weight: 600;
 `;
@@ -131,5 +132,10 @@ export const InfoContentLink = styled.a`
   cursor: pointer;
 `;
 export const ButtonWrapper = styled.div`
-  margin-left: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  ${mediaQuery("mobile")`
+  justify-content: center;
+   `};
 `;
