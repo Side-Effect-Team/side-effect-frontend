@@ -1,4 +1,4 @@
-import MyPageDetail from "../../components/pages/Mypage/Detail";
+import MyPageDetail from "../../components/pages/Mypage";
 
 export default function MyPage() {
   const data = {
