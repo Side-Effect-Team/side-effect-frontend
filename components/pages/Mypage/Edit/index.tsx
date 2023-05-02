@@ -8,8 +8,6 @@ import {
   SectionHeaderWrapper,
   SectionTitle,
   SectionWrapper,
-  Tag,
-  TagWrapper,
   Text,
   Wrapper,
   ButtonWrapper,
@@ -22,8 +20,12 @@ import {
   ProfileImageWrapper,
   ProfileWrapper,
   TextArea,
+  TagWrapper,
+  DeleteTag,
+  TagInput,
+  Tag,
 } from "./styled";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, KeyboardEvent, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 
 interface DataProps {
@@ -39,7 +41,6 @@ interface DataProps {
   github: string;
   blog: string;
   portfolio: string;
-  [key: string]: any;
 }
 
 interface MyPageDetailProps {
@@ -55,33 +56,74 @@ interface FormData {
 }
 
 export default function MyPageEditPage(p: MyPageDetailProps) {
+  const [imageUrl, srtImageUrl] = useState(p.data?.avatarSrc);
   const onClickChangeImage = () => {
     if (fileRef.current) {
       fileRef.current.click();
     }
+  };
+  const onChangeImage = (e: ChangeEvent<HTMLInputElement>) => {
+    // 임시 사진 변경 로직
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+    fileReader.onload = (e) => {
+      if (typeof e.target?.result === "string") {
+        srtImageUrl(e.target?.result);
+      }
+    };
   };
   const fileRef = useRef<HTMLInputElement>(null);
   const { register, handleSubmit } = useForm<FormData>();
 
   const onClickEdit = (data: FormData) => {
     console.log(data);
+    console.log(tagArr);
+    console.log(introduction);
   };
   const [introduction, setIntroduction] = useState(p.data?.introduction);
   const onChangeIntroduction = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setIntroduction(e.target.value);
+  };
+  // 태그만드는 로직
+  const [tag, setTag] = useState("");
+  const [tagArr, setTagArr] = useState<string[]>(p.data?.skill || []);
+  const onChangeTag = (e: ChangeEvent<HTMLInputElement>) => {
+    setTag(e.target.value);
+  };
+  const onKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.currentTarget.value.length !== 0 && e.key === "Enter") {
+      e.preventDefault();
+      submitTagItem();
+    }
+  };
+  const submitTagItem = () => {
+    let updatedTagList = [...tagArr];
+    updatedTagList.push(tag);
+    setTagArr(updatedTagList);
+    setTag("");
+  };
+  const onClickDeleteTag = (el: string) => {
+    const deleteTag = el;
+    const filteredTag = tagArr.filter((tag) => tag !== deleteTag);
+    setTagArr(filteredTag);
   };
   return (
     <Wrapper>
       <form onSubmit={handleSubmit(onClickEdit)}>
         <ProfileWrapper>
           <ProfileImageWrapper>
-            <ProfileImage
-              src={p.data?.avatarSrc || "/img/BoardDefaultBackground.png"}
-            />
+            <ProfileImage src={imageUrl || "/img/BoardDefaultBackground.png"} />
             <Button type="button" onClick={onClickChangeImage}>
               사진변경
             </Button>
-            <input ref={fileRef} type="file" style={{ display: "none" }} />
+            <input
+              ref={fileRef}
+              type="file"
+              style={{ display: "none" }}
+              onChange={onChangeImage}
+            />
           </ProfileImageWrapper>
           <ProfileContentsWrapper>
             <NickName>{p.data?.nickname || ""}</NickName>
@@ -106,9 +148,22 @@ export default function MyPageEditPage(p: MyPageDetailProps) {
             <Border></Border>
           </SectionHeaderWrapper>
           <TagWrapper>
-            {p.data?.skill?.map((el, index) => <Tag key={index}>{el}</Tag>) || (
-              <Text>아직 작성된 정보가 없습니다.</Text>
-            )}
+            {(tagArr &&
+              tagArr.map((el, index) => (
+                <Tag key={index}>
+                  {el}{" "}
+                  <DeleteTag type="button" onClick={() => onClickDeleteTag(el)}>
+                    X
+                  </DeleteTag>
+                </Tag>
+              ))) || <Text>아직 작성된 정보가 없습니다.</Text>}
+            <TagInput
+              type="text"
+              placeholder="태그를 입력해주세요"
+              onChange={onChangeTag}
+              onKeyPress={onKeyPress}
+              value={tag}
+            />
           </TagWrapper>
         </SectionWrapper>
         <SectionWrapper>
