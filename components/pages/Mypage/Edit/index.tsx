@@ -1,4 +1,3 @@
-import { ButtonsWrapper } from "../../../BoardCard/styled";
 import Button from "../../../Button";
 import {
   Border,
@@ -13,16 +12,18 @@ import {
   TagWrapper,
   Text,
   Wrapper,
+  ButtonWrapper,
 } from "../Detail/styled";
 import {
   GuideText,
   InputGuideWrapper,
-  InputTemp,
+  Input,
   ProfileContentsWrapper,
   ProfileImageWrapper,
   ProfileWrapper,
+  TextArea,
 } from "./styled";
-import { useRef } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 
 interface DataProps {
@@ -65,7 +66,10 @@ export default function MyPageEditPage(p: MyPageDetailProps) {
   const onClickEdit = (data: FormData) => {
     console.log(data);
   };
-
+  const [introduction, setIntroduction] = useState(p.data?.introduction);
+  const onChangeIntroduction = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setIntroduction(e.target.value);
+  };
   return (
     <Wrapper>
       <form onSubmit={handleSubmit(onClickEdit)}>
@@ -81,20 +85,18 @@ export default function MyPageEditPage(p: MyPageDetailProps) {
           </ProfileImageWrapper>
           <ProfileContentsWrapper>
             <NickName>{p.data?.nickname || ""}</NickName>
-            <InputTemp
-              type="text"
+            <TextArea
               defaultValue={p.data?.introduction || ""}
+              onChange={onChangeIntroduction}
               placeholder={"소개를 적어주세요"}
               maxLength={50}
-              {...register("introduction")}
+              // {...register("introduction")}
             />
             <InputGuideWrapper>
               <GuideText>
                 팀원들에게 본인을 소개할 간단한 인사말을 적어주세요.
               </GuideText>
-              <GuideText>
-                {p.data?.introduction && p.data?.introduction.length}/50
-              </GuideText>
+              <GuideText>{introduction && introduction.length}/50</GuideText>
             </InputGuideWrapper>
           </ProfileContentsWrapper>
         </ProfileWrapper>
@@ -116,7 +118,7 @@ export default function MyPageEditPage(p: MyPageDetailProps) {
           </SectionHeaderWrapper>
           <InfoWrapper>
             <InfoTitle>*포지션</InfoTitle>
-            <InputTemp
+            <Input
               defaultValue={p.data?.position || ""}
               placeholder="정보를 등록해주세요"
               {...register("position")}
@@ -124,7 +126,7 @@ export default function MyPageEditPage(p: MyPageDetailProps) {
           </InfoWrapper>
           <InfoWrapper>
             <InfoTitle>*경력</InfoTitle>
-            <InputTemp
+            <Input
               defaultValue={p.data?.career || ""}
               placeholder="정보를 등록해주세요"
               {...register("career")}
@@ -132,7 +134,7 @@ export default function MyPageEditPage(p: MyPageDetailProps) {
           </InfoWrapper>
           <InfoWrapper>
             <InfoTitle>깃허브</InfoTitle>
-            <InputTemp
+            <Input
               defaultValue={p.data?.github || ""}
               placeholder="정보를 등록해주세요"
               {...register("github")}
@@ -140,7 +142,7 @@ export default function MyPageEditPage(p: MyPageDetailProps) {
           </InfoWrapper>
           <InfoWrapper>
             <InfoTitle>블로그</InfoTitle>
-            <InputTemp
+            <Input
               defaultValue={p.data?.blog || ""}
               placeholder="정보를 등록해주세요"
               {...register("blog")}
@@ -148,16 +150,16 @@ export default function MyPageEditPage(p: MyPageDetailProps) {
           </InfoWrapper>
           <InfoWrapper>
             <InfoTitle>포트폴리오</InfoTitle>
-            <InputTemp
+            <Input
               defaultValue={p.data?.portfolio || ""}
               placeholder="정보를 등록해주세요"
               {...register("portfolio")}
             />
           </InfoWrapper>
         </SectionWrapper>
-        <ButtonsWrapper>
+        <ButtonWrapper>
           <Button>프로필 수정하기</Button>
-        </ButtonsWrapper>
+        </ButtonWrapper>
       </form>
     </Wrapper>
   );
