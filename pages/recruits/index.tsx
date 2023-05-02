@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useQuery } from "@tanstack/react-query";
 import styled from "styled-components";
@@ -18,22 +19,28 @@ interface RecruitType {
 
 export default function RecruitsPage() {
   const router = useRouter();
+  const [recruitsData, setRecruitsData] = useState([]);
 
-  const { data, isError, isLoading } = useQuery({
-    queryKey: ["recruits"],
-    queryFn: async () => {
-      const res = await fetch(BASE_URL + "/api" + router.pathname);
-      return await res.json();
-    },
-  });
+  // const { data, isError, isLoading } = useQuery({
+  //   queryKey: ["recruits"],
+  //   queryFn: async () => {
+  //     const res = await fetch(BASE_URL + "/api" + router.pathname);
+  //     return await res.json();
+  //   },
+  // });
+  //
+  // if (isError) {
+  //   return <h2>일시적으로 페이지를 로드할 수 없습니다</h2>;
+  // }
+  //
+  // if (isLoading) {
+  //   return <h2>Loading...</h2>;
+  // }
 
-  if (isError) {
-    return <h2>일시적으로 페이지를 로드할 수 없습니다</h2>;
-  }
-
-  if (isLoading) {
-    return <h2>Loading...</h2>;
-  }
+  useEffect(() => {
+    const data = localStorage.getItem("recruits");
+    if (data) setRecruitsData(JSON.parse(data));
+  }, []);
 
   return (
     <Wrapper>
@@ -68,9 +75,10 @@ export default function RecruitsPage() {
           </FilterBox>
         </ContentsHeader>
         <ContentsMain>
-          {data.map((item: RecruitType) => (
-            <BoardCard key={item.id} data={item} />
-          ))}
+          {recruitsData &&
+            recruitsData.map((item: RecruitType) => (
+              <BoardCard key={item.id} data={item} />
+            ))}
         </ContentsMain>
       </Contents>
     </Wrapper>
