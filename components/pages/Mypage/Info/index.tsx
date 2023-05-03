@@ -1,4 +1,3 @@
-import { MyPageProps } from "../../../../pages/mypage";
 import {
   InfoContent,
   InfoContentLink,
@@ -7,22 +6,36 @@ import {
   Text,
 } from "./styled";
 
-export default function Info(p: MyPageProps) {
+export interface InfoProps {
+  position: string;
+  career: string;
+  github: string | undefined;
+  blog: string | undefined;
+  portfolio: string | undefined;
+}
+
+export default function Info({
+  position,
+  career,
+  github,
+  blog,
+  portfolio,
+}: InfoProps) {
   return (
     <>
       <InfoWrapper>
         <InfoTitle>포지션</InfoTitle>
-        <InfoContent>{p.data?.position}</InfoContent>
+        <InfoContent>{position}</InfoContent>
       </InfoWrapper>
       <InfoWrapper>
         <InfoTitle>경력</InfoTitle>
-        <InfoContent>{p.data?.career}</InfoContent>
+        <InfoContent>{career}</InfoContent>
       </InfoWrapper>
       <InfoWrapper>
         <InfoTitle>깃허브</InfoTitle>
-        {p.data?.github ? (
-          <InfoContentLink href={p.data?.github} target="_blank">
-            {p.data?.github}
+        {github ? (
+          <InfoContentLink href={github} target="_blank">
+            {github}
           </InfoContentLink>
         ) : (
           <Text>아직 작성된 정보가 없습니다.</Text>
@@ -30,9 +43,9 @@ export default function Info(p: MyPageProps) {
       </InfoWrapper>
       <InfoWrapper>
         <InfoTitle>블로그</InfoTitle>
-        {p.data?.blog ? (
-          <InfoContentLink href={p.data?.blog} target="_blank">
-            {p.data?.blog}
+        {blog ? (
+          <InfoContentLink href={blog} target="_blank">
+            {blog}
           </InfoContentLink>
         ) : (
           <Text>아직 작성된 정보가 없습니다.</Text>
@@ -40,9 +53,9 @@ export default function Info(p: MyPageProps) {
       </InfoWrapper>
       <InfoWrapper>
         <InfoTitle>포트폴리오</InfoTitle>
-        {p.data?.portfolio ? (
-          <InfoContentLink href={p.data?.portfolio} target="_blank">
-            {p.data?.portfolio}
+        {portfolio ? (
+          <InfoContentLink href={portfolio} target="_blank">
+            {portfolio}
           </InfoContentLink>
         ) : (
           <Text>아직 작성된 정보가 없습니다.</Text>

@@ -20,16 +20,24 @@ import { FormData } from "../../../../pages/mypage/edit";
 interface IntroEditProps {
   nickname: string | undefined;
   introduction: string | undefined;
-  setIntroduction: Dispatch<SetStateAction<string>>;
+  setIntroduction: Dispatch<SetStateAction<string | undefined>>;
   imageUrl: string | undefined;
-  setImageUrl: Dispatch<SetStateAction<string>>;
-  IntroRegister: UseFormRegister<Pick<FormData, "nickname">>;
+  setImageUrl: Dispatch<SetStateAction<string | undefined>>;
+  introRegister: UseFormRegister<Pick<FormData, "nickname">>;
   errors: FieldErrors<Pick<FormData, "nickname">>;
 }
-export default function IntroductionEdit(p: IntroEditProps) {
+export default function IntroductionEdit({
+  nickname,
+  introduction,
+  setIntroduction,
+  imageUrl,
+  setImageUrl,
+  introRegister,
+  errors,
+}: IntroEditProps) {
   // 자기소개
   const onChangeIntroduction = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    p.setIntroduction(e.target.value);
+    setIntroduction(e.target.value);
   };
   // 임시 사진 변경 로직
   const fileRef = useRef<HTMLInputElement>(null);
@@ -45,7 +53,7 @@ export default function IntroductionEdit(p: IntroEditProps) {
     fileReader.readAsDataURL(file);
     fileReader.onload = (e) => {
       if (typeof e.target?.result === "string") {
-        p.setImageUrl(e.target?.result);
+        setImageUrl(e.target?.result);
       }
     };
   };
@@ -55,7 +63,7 @@ export default function IntroductionEdit(p: IntroEditProps) {
       <ProfileWrapper>
         <ProfileImageWrapper>
           <ProfileImage
-            src={p.imageUrl || "/images/BoardDefaultBackground.png"}
+            src={imageUrl || "/images/BoardDefaultBackground.png"}
           />
           <Button type="button" onClick={onClickChangeImage}>
             사진변경
@@ -73,13 +81,13 @@ export default function IntroductionEdit(p: IntroEditProps) {
             <FiledWrapper>
               <Input
                 placeholder="닉네임을 적어주세요"
-                defaultValue={p.nickname}
+                defaultValue={nickname}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
                     e.preventDefault();
                   }
                 }}
-                {...p.IntroRegister("nickname", {
+                {...introRegister("nickname", {
                   required: "닉네임을 작성해주세요",
                   minLength: {
                     value: 2,
@@ -91,8 +99,8 @@ export default function IntroductionEdit(p: IntroEditProps) {
                   },
                 })}
               />
-              {p.errors.nickname && (
-                <ErrorMessage>{p.errors.nickname.message}</ErrorMessage>
+              {errors.nickname && (
+                <ErrorMessage>{errors.nickname.message}</ErrorMessage>
               )}
             </FiledWrapper>
           </IntroductionWrapper>
@@ -100,7 +108,7 @@ export default function IntroductionEdit(p: IntroEditProps) {
             <IntroductionTitle>소개:</IntroductionTitle>
             <FiledWrapper>
               <TextArea
-                defaultValue={p.introduction || ""}
+                defaultValue={introduction || ""}
                 onChange={onChangeIntroduction}
                 placeholder={"소개를 적어주세요"}
                 maxLength={50}
@@ -109,9 +117,7 @@ export default function IntroductionEdit(p: IntroEditProps) {
                 <GuideText>
                   팀원들에게 본인을 소개할 간단한 인사말을 적어주세요.
                 </GuideText>
-                <GuideText>
-                  {p.introduction && p.introduction.length}/50
-                </GuideText>
+                <GuideText>{introduction && introduction.length}/50</GuideText>
               </InputGuideWrapper>
             </FiledWrapper>
           </IntroductionWrapper>

@@ -3,18 +3,19 @@ import SelectBox from "../../../SelectBox";
 import { Input } from "./styled";
 import { UseFormRegister } from "react-hook-form";
 import { InfoTitle, InfoWrapper } from "../../Mypage/Info/styled";
-import { DataProps } from "../../../../pages/mypage";
 import { FormData } from "../../../../pages/mypage/edit";
 
 interface InfoEditProps {
-  data?: Pick<DataProps, "github" | "blog" | "portfolio">;
   career: string | number;
   setCareer: Dispatch<SetStateAction<string | number>>;
   position: string | number;
   setPosition: Dispatch<SetStateAction<string | number>>;
-  InfoRegister: UseFormRegister<
+  infoRegister: UseFormRegister<
     Pick<FormData, "github" | "blog" | "portfolio">
   >;
+  github: string | undefined;
+  blog: string | undefined;
+  portfolio: string | undefined;
 }
 const SELECT_CAREER = ["0", "1~3", "4~6", "7년 이상 "];
 const SELECT_POSITIONS = [
@@ -25,15 +26,24 @@ const SELECT_POSITIONS = [
   "기획자",
   "마케터",
 ];
-export default function InfoEdit(p: InfoEditProps) {
+export default function InfoEdit({
+  career,
+  setCareer,
+  position,
+  setPosition,
+  infoRegister,
+  github,
+  blog,
+  portfolio,
+}: InfoEditProps) {
   return (
     <>
       <InfoWrapper>
         <InfoTitle>*포지션</InfoTitle>
         <SelectBox
           options={SELECT_POSITIONS}
-          setValue={p.setPosition}
-          value={p.position}
+          setValue={setPosition}
+          value={position}
           title="포지션"
         />
       </InfoWrapper>
@@ -41,17 +51,17 @@ export default function InfoEdit(p: InfoEditProps) {
         <InfoTitle>*경력</InfoTitle>
         <SelectBox
           options={SELECT_CAREER}
-          setValue={p.setCareer}
-          value={p.career}
+          setValue={setCareer}
+          value={career}
           title="경력"
         />
       </InfoWrapper>
       <InfoWrapper>
         <InfoTitle>깃허브</InfoTitle>
         <Input
-          defaultValue={p.data?.github || ""}
+          defaultValue={github || ""}
           placeholder="정보를 등록해주세요"
-          {...p.InfoRegister("github")}
+          {...infoRegister("github")}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               e.preventDefault();
@@ -62,9 +72,9 @@ export default function InfoEdit(p: InfoEditProps) {
       <InfoWrapper>
         <InfoTitle>블로그</InfoTitle>
         <Input
-          defaultValue={p.data?.blog || ""}
+          defaultValue={blog || ""}
           placeholder="정보를 등록해주세요"
-          {...p.InfoRegister("blog")}
+          {...infoRegister("blog")}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               e.preventDefault();
@@ -75,9 +85,9 @@ export default function InfoEdit(p: InfoEditProps) {
       <InfoWrapper>
         <InfoTitle>포트폴리오</InfoTitle>
         <Input
-          defaultValue={p.data?.portfolio || ""}
+          defaultValue={portfolio || ""}
           placeholder="정보를 등록해주세요"
-          {...p.InfoRegister("portfolio")}
+          {...infoRegister("portfolio")}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               e.preventDefault();
