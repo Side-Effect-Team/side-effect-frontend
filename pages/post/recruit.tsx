@@ -1,10 +1,11 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import styled, { css } from "styled-components";
 import { breakPoints } from "@/styles/Media";
 import Button from "../../components/Button";
 import { useInputImage } from "@/hooks/useInputImage";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 interface PostHeaderProps {
   category: string;
@@ -31,6 +32,7 @@ export default function PostPage() {
   const { imgSrc, handleImgChange } = useInputImage(
     "/images/default-input-image.png",
   );
+  const { getter, setter } = useLocalStorage();
   const [form, setForm] = useState<FormTypes>({
     projectName: "",
     title: "",
@@ -55,8 +57,7 @@ export default function PostPage() {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    let recruits = localStorage.getItem("recruits");
-    recruits = recruits && JSON.parse(recruits);
+    const recruits = getter("recruits");
     const newRecruit = {
       id: recruits ? recruits.length + 1 : 1,
       headerImage: imgSrc,
@@ -68,11 +69,15 @@ export default function PostPage() {
       like: !!Math.round(Math.random()),
     };
 
-    const newRecruits = recruits ? [...recruits, newRecruit] : [newRecruit];
-    localStorage.setItem("recruits", JSON.stringify(newRecruits));
+    setter("recruits", [...recruits, newRecruit]);
     if (window.confirm("등록이 완료되었습니다")) router.push("/recruits");
     else router.push("/recruits");
   };
+
+  useEffect(() => {
+    const result = getter("recruits");
+    if (!result) setter("recruits", []);
+  }, [getter, setter]);
 
   return (
     <Wrapper>

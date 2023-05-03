@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import { breakPoints } from "@/styles/Media";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 interface RecruitType {
   id: number;
@@ -20,13 +21,13 @@ interface RecruitProps {
 export default function RecruitPage() {
   const [recruitsData, setRecruitsData] = useState([]);
   const router = useRouter();
+  const { getter } = useLocalStorage();
 
-  // 초기 렌더리 시 로컬스토리지에서 recruits data 받아옴
+  // 초기 렌더링 시 로컬스토리지에서 recruits data 받아옴
   useEffect(() => {
-    let data = localStorage.getItem("recruits"); // null or ""
-    if (!data) return;
-    setRecruitsData(JSON.parse(data));
-  }, []);
+    const recruits = getter("recruits") ?? [];
+    setRecruitsData(recruits);
+  }, [getter]);
 
   return (
     <Wrapper>

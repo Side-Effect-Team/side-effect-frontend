@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import { useQuery } from "@tanstack/react-query";
+// import { useRouter } from "next/router";
+// import { useQuery } from "@tanstack/react-query";
 import styled from "styled-components";
 import { breakPoints } from "@/styles/Media";
 import Banner from "@/components/Banner";
 import BoardCard from "@/components/BoardCard";
-import { BASE_URL, BANNER_CONTENTS } from "../../enum";
+import { BANNER_CONTENTS } from "../../enum";
 
 interface RecruitType {
   id: number;
@@ -18,7 +18,7 @@ interface RecruitType {
 }
 
 export default function RecruitsPage() {
-  const router = useRouter();
+  // const router = useRouter();
   const [recruitsData, setRecruitsData] = useState([]);
 
   // const { data, isError, isLoading } = useQuery({
