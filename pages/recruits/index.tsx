@@ -47,7 +47,7 @@ export default function RecruitsPage() {
       <Banner
         title={BANNER_CONTENTS.TITLE}
         subTitle={BANNER_CONTENTS.SUB_TITLE}
-        btnLink="/recruits/add"
+        btnLink="/post/recruit"
       />
       <Contents>
         <ContentsHeader>
@@ -120,8 +120,10 @@ const FilterBox = styled.div`
 `;
 
 const ContentsMain = styled.main`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
+  width: 100%;
+  display: grid;
+  justify-items: center;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  row-gap: 1rem;
+  column-gap: 1rem;
 `;
