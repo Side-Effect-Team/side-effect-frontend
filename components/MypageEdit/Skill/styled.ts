@@ -5,7 +5,6 @@ export const TagWrapper = styled.div`
   width: 100%;
   overflow: hidden;
   display: flex;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;

@@ -4,30 +4,28 @@ import { InfoTitle, InfoWrapper } from "../../pages/Mypage/styled";
 import { Input } from "./styled";
 import { UseFormRegister } from "react-hook-form";
 import { DataProps } from "../../pages/Mypage";
+import { FormData } from "../../pages/Mypage/Edit";
 
-interface FormData {
-  github: string;
-  blog: string;
-  portfolio: string;
-}
 interface InfoProps {
   data?: Pick<DataProps, "github" | "blog" | "portfolio">;
   career: string | number;
   setCareer: Dispatch<SetStateAction<string | number>>;
   position: string | number;
   setPosition: Dispatch<SetStateAction<string | number>>;
-  resister: UseFormRegister<FormData>;
+  InfoRegister: UseFormRegister<
+    Pick<FormData, "github" | "blog" | "portfolio">
+  >;
 }
+const SELECT_CAREER = ["0", "1~3", "4~6", "7년 이상 "];
+const SELECT_POSITIONS = [
+  "프론트엔드",
+  "백엔드",
+  "디자이너",
+  "데브옵스",
+  "기획자",
+  "마케터",
+];
 export default function Info(p: InfoProps) {
-  const SELECT_CAREER = ["0", "1~3", "4~6", "7년 이상 "];
-  const SELECT_POSITIONS = [
-    "프론트엔드",
-    "백엔드",
-    "디자이너",
-    "데브옵스",
-    "기획자",
-    "마케터",
-  ];
   return (
     <>
       <InfoWrapper>
@@ -53,7 +51,7 @@ export default function Info(p: InfoProps) {
         <Input
           defaultValue={p.data?.github || ""}
           placeholder="정보를 등록해주세요"
-          {...p.resister("github")}
+          {...p.InfoRegister("github")}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               e.preventDefault();
@@ -66,7 +64,7 @@ export default function Info(p: InfoProps) {
         <Input
           defaultValue={p.data?.blog || ""}
           placeholder="정보를 등록해주세요"
-          {...p.resister("blog")}
+          {...p.InfoRegister("blog")}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               e.preventDefault();
@@ -79,7 +77,7 @@ export default function Info(p: InfoProps) {
         <Input
           defaultValue={p.data?.portfolio || ""}
           placeholder="정보를 등록해주세요"
-          {...p.resister("portfolio")}
+          {...p.InfoRegister("portfolio")}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               e.preventDefault();

@@ -17,10 +17,11 @@ import { useForm } from "react-hook-form";
 interface MyPageEditProps {
   data?: DataProps;
 }
-interface FormData {
-  github: string;
-  blog: string;
-  portfolio: string;
+export interface FormData {
+  github?: string;
+  blog?: string;
+  portfolio?: string;
+  nickname?: string;
 }
 
 export default function MyPageEditPage(p: MyPageEditProps) {
@@ -31,7 +32,11 @@ export default function MyPageEditPage(p: MyPageEditProps) {
   const [position, setPosition] = useState<string | number>(
     p.data?.position || "",
   );
-  const { register, handleSubmit } = useForm<FormData>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>();
 
   const onClickEdit = (data: FormData) => {
     console.log({
@@ -53,6 +58,8 @@ export default function MyPageEditPage(p: MyPageEditProps) {
           setIntroduction={setIntroduction}
           imageUrl={imageUrl}
           setImageUrl={setImageUrl}
+          IntroRegister={register}
+          errors={errors}
         />
         <SectionWrapper>
           <SectionHeaderWrapper>
@@ -72,7 +79,7 @@ export default function MyPageEditPage(p: MyPageEditProps) {
             setCareer={setCareer}
             position={position}
             setPosition={setPosition}
-            resister={register}
+            InfoRegister={register}
           />
         </SectionWrapper>
         <ButtonWrapper>
