@@ -4,8 +4,8 @@ import { AnimatePresence } from "framer-motion";
 import { Provider } from "react-redux";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { store } from "../store/store";
-import Layout from "../components/Layout";
+import { store } from "@/store/store";
+import Layout from "@/components/Layout";
 
 const queryClient = new QueryClient();
 

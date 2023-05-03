@@ -31,6 +31,10 @@ export const Header = styled.div<HeaderProps>`
   justify-content: center;
   background-image: url(${(p) =>
     p.src || "/images/BoardDefaultBackground.png"});
+  // headerImage의 width에 맞추기 위해 아래 코드 추가했습니다
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 `;
 export const HeaderTitle = styled.div`
   width: 80%;
