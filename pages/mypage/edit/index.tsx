@@ -3,6 +3,7 @@ import Button from "../../../components/Button";
 import InfoEdit from "../../../components/pages/MypageEdit/Info";
 import IntroductionEdit from "../../../components/pages/MypageEdit/Introduction";
 import SkillEdit from "../../../components/pages/MypageEdit/Skill";
+import { useForm } from "react-hook-form";
 import {
   Border,
   ButtonWrapper,
@@ -10,8 +11,7 @@ import {
   SectionTitle,
   SectionWrapper,
   Wrapper,
-} from "../styled";
-import { useForm } from "react-hook-form";
+} from "../../../components/pages/Mypage/styled";
 
 export interface FormData {
   github?: string;
