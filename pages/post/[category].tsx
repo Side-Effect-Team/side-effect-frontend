@@ -1,8 +1,10 @@
-import { useRouter } from "next/router";
 import { ChangeEvent, FormEvent, useState } from "react";
+import { useRouter } from "next/router";
+import Image from "next/image";
 import styled, { css } from "styled-components";
 import { breakPoints } from "../../styles/Media";
 import Button from "../../components/Button";
+import { useInputImage } from "../../hooks/useInputImage";
 
 interface PostHeaderProps {
   category: string;
@@ -26,6 +28,9 @@ interface FormTypes {
 
 export default function PostPage() {
   const router = useRouter();
+  const { imgSrc, handleImgChange } = useInputImage(
+    "/images/default-input-image.png",
+  );
   const [form, setForm] = useState<FormTypes>({
     projectName: "",
     title: "",
@@ -54,7 +59,7 @@ export default function PostPage() {
     recruits = recruits && JSON.parse(recruits);
     const newRecruit = {
       id: recruits ? recruits.length + 1 : 1,
-      headerImage: form.image,
+      headerImage: imgSrc,
       headerTitle: form.projectName,
       tag: form.tags,
       title: form.title,
@@ -113,14 +118,16 @@ export default function PostPage() {
           </InputBox>
           <InputBox>
             <h2>대표 이미지</h2>
-            <p>이미지의 웹 주소를 입력해주세요</p>
             <input
               name="image"
-              type="text"
-              value={form.image}
-              onChange={handleChange}
+              type="file"
+              accept="image/*"
+              onChange={handleImgChange}
               required
             />
+            <div>
+              <Image src={imgSrc} alt="" width={200} height={150}></Image>
+            </div>
           </InputBox>
           <InputBox>
             <h2>내용</h2>
