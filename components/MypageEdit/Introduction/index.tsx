@@ -1,15 +1,21 @@
 import Button from "../../Button";
 import { ChangeEvent, Dispatch, SetStateAction, useRef, useState } from "react";
 import {
+  ErrorMessage,
+  FiledWrapper,
   GuideText,
   InputGuideWrapper,
-  NickName,
+  IntroductionTitle,
+  IntroductionWrapper,
   ProfileContentsWrapper,
   ProfileImage,
   ProfileImageWrapper,
   ProfileWrapper,
   TextArea,
 } from "./styled";
+import { Input } from "../Info/styled";
+import { FieldErrors, UseFormRegister } from "react-hook-form";
+import { FormData } from "../../pages/Mypage/Edit";
 
 interface IntroductionProps {
   nickname: string | undefined;
@@ -17,6 +23,8 @@ interface IntroductionProps {
   setIntroduction: Dispatch<SetStateAction<string | undefined>>;
   imageUrl: string | undefined;
   setImageUrl: Dispatch<SetStateAction<string | undefined>>;
+  IntroRegister: UseFormRegister<Pick<FormData, "nickname">>;
+  errors: FieldErrors<Pick<FormData, "nickname">>;
 }
 export default function Introduction(p: IntroductionProps) {
   // 자기소개
@@ -41,6 +49,7 @@ export default function Introduction(p: IntroductionProps) {
       }
     };
   };
+
   return (
     <>
       <ProfileWrapper>
@@ -59,19 +68,53 @@ export default function Introduction(p: IntroductionProps) {
           />
         </ProfileImageWrapper>
         <ProfileContentsWrapper>
-          <NickName>{p.nickname || ""}</NickName>
-          <TextArea
-            defaultValue={p.introduction || ""}
-            onChange={onChangeIntroduction}
-            placeholder={"소개를 적어주세요"}
-            maxLength={50}
-          />
-          <InputGuideWrapper>
-            <GuideText>
-              팀원들에게 본인을 소개할 간단한 인사말을 적어주세요.
-            </GuideText>
-            <GuideText>{p.introduction && p.introduction.length}/50</GuideText>
-          </InputGuideWrapper>
+          <IntroductionWrapper>
+            <IntroductionTitle>닉네임:</IntroductionTitle>
+            <FiledWrapper>
+              <Input
+                placeholder="닉네임을 적어주세요"
+                defaultValue={p.nickname}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                  }
+                }}
+                {...p.IntroRegister("nickname", {
+                  required: "닉네임을 작성해주세요",
+                  minLength: {
+                    value: 2,
+                    message: "닉네임은 2글자 이상 입력해주세요",
+                  },
+                  maxLength: {
+                    value: 15,
+                    message: "닉네임은 15글자 이하로 입력해주세요",
+                  },
+                })}
+              />
+              {p.errors.nickname && (
+                <ErrorMessage>{p.errors.nickname.message}</ErrorMessage>
+              )}
+            </FiledWrapper>
+          </IntroductionWrapper>
+          <IntroductionWrapper>
+            <IntroductionTitle>소개:</IntroductionTitle>
+            <FiledWrapper>
+              <TextArea
+                defaultValue={p.introduction || ""}
+                onChange={onChangeIntroduction}
+                placeholder={"소개를 적어주세요"}
+                maxLength={50}
+              />
+              <InputGuideWrapper>
+                <GuideText>
+                  팀원들에게 본인을 소개할 간단한 인사말을 적어주세요.
+                </GuideText>
+                <GuideText>
+                  {p.introduction && p.introduction.length}/50
+                </GuideText>
+              </InputGuideWrapper>
+            </FiledWrapper>
+          </IntroductionWrapper>
         </ProfileContentsWrapper>
       </ProfileWrapper>
     </>

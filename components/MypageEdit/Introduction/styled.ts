@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { mediaQuery } from "../../../styles/Media";
 import { theme } from "../../../styles/Theme";
 
 export const ProfileWrapper = styled.div`
@@ -10,10 +9,6 @@ export const ProfileWrapper = styled.div`
   justify-content: flex-start;
   align-items: center;
   margin: 20px 0;
-  ${mediaQuery("mobile")`
-  flex-direction: column;
-
-   `};
 `;
 export const ProfileImage = styled.img`
   width: 140px;
@@ -22,24 +17,28 @@ export const ProfileImage = styled.img`
   object-fit: cover;
   margin-bottom: 30px;
 `;
-
-export const NickName = styled.div`
-  font-size: 24px;
-  font-weight: 600;
-  margin-bottom: 15px;
+export const IntroductionTitle = styled.div`
+  width: 100px;
 `;
-
+export const IntroductionWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+`;
+export const FiledWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
 export const ProfileImageWrapper = styled.div`
   height: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  margin-right: 50px;
-  ${mediaQuery("mobile")`
-  margin-right: 0;
-  margin-bottom: 20px
-   `};
+  margin-bottom: 20px;
 `;
 export const ProfileContentsWrapper = styled.div`
   width: 100%;
@@ -48,14 +47,10 @@ export const ProfileContentsWrapper = styled.div`
   flex: 1;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
-  ${mediaQuery("mobile")`
   align-items: center;
-   `};
 `;
 export const TextArea = styled.textarea`
   width: 100%;
-  /* height: 3rem; */
   padding: 10px;
   border: 1px solid #d9d9d9;
   :focus {
@@ -66,11 +61,15 @@ export const TextArea = styled.textarea`
 export const InputGuideWrapper = styled.div`
   width: 100%;
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 `;
 export const GuideText = styled.p`
   font-size: 12px;
-  padding-left: 10px;
+  padding: 0 10px;
+`;
+export const ErrorMessage = styled.div`
+  font-size: 12px;
+  padding: 10px;
+  color: ${theme.colors.danger};
 `;
