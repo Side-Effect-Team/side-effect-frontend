@@ -53,6 +53,7 @@ export const TextArea = styled.textarea`
   width: 100%;
   padding: 10px;
   border: 1px solid #d9d9d9;
+  resize: none;
   :focus {
     border: 1px solid ${theme.brandColor.primary};
     outline: none;
