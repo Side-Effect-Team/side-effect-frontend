@@ -15,13 +15,7 @@ interface SelectBoxProps {
   size?: "small" | "medium" | "large";
 }
 
-export default function SelectBox({
-  options,
-  setValue,
-  value,
-  title,
-  size,
-}: SelectBoxProps) {
+function SelectBox({ options, setValue, value, title, size }: SelectBoxProps) {
   const [isVisible, setIsVisible] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
   useOutsideClick(selectRef, () => {
@@ -56,6 +50,9 @@ export default function SelectBox({
     </SelectWrapper>
   );
 }
+export default React.memo(SelectBox);
+
+// export default SelectBox;
 //SelectBox 컴포넌트의 사용법은 부모컴포넌트로부터 4개의 props 를 받아야합니다.
 //options(셀렉트박스안에 들어갈 여러개의 값들의 객체or배열),value(부모컴포넌트의state),setValue(부모컴포넌트의 setState),title(첫 렌더링시 어떤 셀렉트박스인지 구분하기위한 props)
 //이 컴포넌트를 사용하는 페이지에서 useState를 사용하여 값을 관리해주시면 됩니다.

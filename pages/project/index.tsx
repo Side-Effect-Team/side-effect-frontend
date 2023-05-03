@@ -2,7 +2,7 @@ import styled from "styled-components";
 import SelectBox from "../../components/SelectBox";
 import BoardCard from "../../components/BoardCard";
 import { breakPoints } from "../../styles/Media";
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import { useInView } from "react-intersection-observer";
 import { useRouter } from "next/router";
 import { useInfiniteQuery } from "@tanstack/react-query";
@@ -57,7 +57,55 @@ const data = [
     commentNum: 17,
   },
   {
-    id: 5,
+    id: 6,
+    headerImage: "/images/ProjectDefaultBackground.png",
+    tag: ["Figma", "Spring", "React"],
+    title: "Oh My Pet",
+    content:
+      "내 반려동물이 인플루언서? 반려동물 자랑 플랫폼 오 마이 펫 프로젝트 입니다.",
+    createdAt: "2023.05.04",
+    like: true,
+    likeNum: 65,
+    commentNum: 17,
+  },
+  {
+    id: 7,
+    headerImage: "/images/ProjectDefaultBackground.png",
+    tag: ["Figma", "Spring", "React"],
+    title: "Oh My Pet",
+    content:
+      "내 반려동물이 인플루언서? 반려동물 자랑 플랫폼 오 마이 펫 프로젝트 입니다.",
+    createdAt: "2023.05.04",
+    like: true,
+    likeNum: 65,
+    commentNum: 17,
+  },
+  {
+    id: 8,
+    headerImage: "/images/ProjectDefaultBackground.png",
+    tag: ["Figma", "Spring", "React"],
+    title: "Oh My Pet",
+    content:
+      "내 반려동물이 인플루언서? 반려동물 자랑 플랫폼 오 마이 펫 프로젝트 입니다.",
+    createdAt: "2023.05.04",
+    like: true,
+    likeNum: 65,
+    commentNum: 17,
+  },
+  {
+    id: 9,
+    headerImage: "/images/ProjectDefaultBackground.png",
+    tag: ["Figma", "Spring", "React"],
+    title: "Oh My Pet",
+    content:
+      "내 반려동물이 인플루언서? 반려동물 자랑 플랫폼 오 마이 펫 프로젝트 입니다.",
+    createdAt: "2023.05.04",
+    like: true,
+    likeNum: 65,
+    commentNum: 17,
+  },
+  {
+    id: 10,
     headerImage: "/images/ProjectDefaultBackground.png",
     tag: ["Figma", "Spring", "React"],
     title: "Oh My Pet",
@@ -72,23 +120,24 @@ const data = [
 
 export default function ProjectPage() {
   const [filter, setFilter] = useState("조회순");
-  const router = useRouter();
-  const { ref, inView } = useInView();
-
+  const [text, setText] = useState("");
+  //threshold : inview가 보여지는 정도를 0~1까지 조절하여 트리거시점을 조절할수있다 0이면 보이자마자 트리거 1이면 전체가 다보여야 트리거
+  const { ref, inView } = useInView({ threshold: 1 });
   useEffect(() => {
     if (inView && hasNextPage) {
       fetchNextPage();
     }
   }, [inView]);
 
-  const handleCardRoute = (id: number) => {
-    router.push(`/project/${id}`);
-  };
-
   const fetchMockData = async (page: number) => {
     const response = await fetch(`https://koreanjson.com/users`);
     return response.json();
   };
+
+  const handleTextValue = (e: ChangeEvent<HTMLInputElement>) => {
+    setText(e.target.value);
+  };
+
   const {
     data: testData,
     hasNextPage,
@@ -99,15 +148,13 @@ export default function ProjectPage() {
     ["test"],
     ({ pageParam = 1 }) => fetchMockData(pageParam),
     {
-      getNextPageParam: (lastPage, allPages) => {
+      getNextPageParam: (allPages) => {
         const nextPage = allPages.length + 1;
         return nextPage;
       },
     },
   );
-  console.log(testData);
-  console.log(hasNextPage);
-
+  console.log(isFetchingNextPage);
   return (
     <Wrapper>
       <HeaderSection>
@@ -121,7 +168,7 @@ export default function ProjectPage() {
           setValue={setFilter}
           size="large"
         />
-        <input placeholder="검색" />
+        <input placeholder="검색" onChange={(e) => handleTextValue(e)} />
       </FilterSection>
 
       <CardSection>
@@ -135,9 +182,11 @@ export default function ProjectPage() {
             return <div key={item.id}>{item.name}</div>;
           });
         })}
-      <div ref={ref} style={{ backgroundColor: "red", height: "50px" }}>
-        awdawd
-      </div>
+      {isFetchingNextPage ? (
+        <div>...loading</div>
+      ) : (
+        <div ref={ref} style={{ height: "100px" }}></div>
+      )}
     </Wrapper>
   );
 }
@@ -152,30 +201,25 @@ const Wrapper = styled.div`
 const TempCarousel = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: ${breakPoints.desktop}px;
   margin: 0 auto;
   background-color: #eaa6a6;
   width: 100%;
   height: 300px;
   margin-top: 1rem;
 `;
-
 const HeaderSection = styled.header`
   display: flex;
   flex-direction: column;
   margin-top: 1rem;
 `;
-
 const FilterSection = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
-
 const CardSection = styled.main`
   display: grid;
   justify-items: center;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  row-gap: 20px;
-  margin-bottom: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  row-gap: 1rem;
+  column-gap: 1rem;
 `;
