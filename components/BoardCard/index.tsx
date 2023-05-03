@@ -23,7 +23,7 @@ interface BoardCardProps {
   category?: string;
   headerImage?: string;
   headerTitle?: string;
-  tag?: string[];
+  tags?: string[];
   title: string;
   content: string;
   createdAt: string;
@@ -54,8 +54,8 @@ export default function BoardCard(p: BoardCardDataProps) {
       <ContentsWrapper>
         <TagWrapper>
           {/* 넘친다면 +5 이런식으로 태그가 더 있다는 것을 알려줄 수 있는 로직이 필요함 */}
-          {p.data?.tag &&
-            p.data?.tag.map((el, index) => <Tag key={index}>{el}</Tag>)}
+          {p.data?.tags &&
+            p.data?.tags.map((el, index) => <Tag key={index}>{el}</Tag>)}
         </TagWrapper>
         <Title>{p.data?.title}</Title>
         <Content>{p.data?.content}</Content>

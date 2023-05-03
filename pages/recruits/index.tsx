@@ -10,7 +10,7 @@ import { BANNER_CONTENTS } from "../../enum";
 interface RecruitType {
   id: number;
   headerTitle: string;
-  tag: string[];
+  tags: string[];
   title: string;
   content: string;
   createdAt: string;
