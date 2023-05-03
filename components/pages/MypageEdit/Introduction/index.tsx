@@ -1,4 +1,4 @@
-import Button from "../../Button";
+import Button from "../../../Button";
 import { ChangeEvent, Dispatch, SetStateAction, useRef, useState } from "react";
 import {
   ErrorMessage,
@@ -15,18 +15,18 @@ import {
 } from "./styled";
 import { Input } from "../Info/styled";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
-import { FormData } from "../../pages/Mypage/Edit";
+import { FormData } from "../../../../pages/mypage/edit";
 
-interface IntroductionProps {
+interface IntroEditProps {
   nickname: string | undefined;
   introduction: string | undefined;
-  setIntroduction: Dispatch<SetStateAction<string | undefined>>;
+  setIntroduction: Dispatch<SetStateAction<string>>;
   imageUrl: string | undefined;
-  setImageUrl: Dispatch<SetStateAction<string | undefined>>;
+  setImageUrl: Dispatch<SetStateAction<string>>;
   IntroRegister: UseFormRegister<Pick<FormData, "nickname">>;
   errors: FieldErrors<Pick<FormData, "nickname">>;
 }
-export default function Introduction(p: IntroductionProps) {
+export default function IntroductionEdit(p: IntroEditProps) {
   // 자기소개
   const onChangeIntroduction = (e: ChangeEvent<HTMLTextAreaElement>) => {
     p.setIntroduction(e.target.value);

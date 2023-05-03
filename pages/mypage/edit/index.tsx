@@ -1,4 +1,24 @@
-import MyPageEditPage from "../../../components/pages/Mypage/Edit";
+import { useState } from "react";
+import Button from "../../../components/Button";
+import InfoEdit from "../../../components/pages/MypageEdit/Info";
+import IntroductionEdit from "../../../components/pages/MypageEdit/Introduction";
+import SkillEdit from "../../../components/pages/MypageEdit/Skill";
+import {
+  Border,
+  ButtonWrapper,
+  SectionHeaderWrapper,
+  SectionTitle,
+  SectionWrapper,
+  Wrapper,
+} from "../styled";
+import { useForm } from "react-hook-form";
+
+export interface FormData {
+  github?: string;
+  blog?: string;
+  portfolio?: string;
+  nickname?: string;
+}
 
 export default function MyPageEdit() {
   const data = {
@@ -16,5 +36,67 @@ export default function MyPageEdit() {
     blog: "https://www.naver.com",
     portfolio: "https://www.naver.com",
   };
-  return <MyPageEditPage data={data} />;
+
+  const [introduction, setIntroduction] = useState(data?.introduction);
+  const [imageUrl, setImageUrl] = useState(data?.avatarSrc);
+  const [skillTags, setSkillTags] = useState<string[]>(data?.skill || []);
+  const [career, setCareer] = useState<string | number>(data?.career || "");
+  const [position, setPosition] = useState<string | number>(
+    data?.position || "",
+  );
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>();
+
+  const onClickEdit = (data: FormData) => {
+    console.log({
+      career,
+      position,
+      skillTags,
+      introduction,
+      imageUrl,
+      ...data,
+    });
+  };
+  return (
+    <Wrapper>
+      <form onSubmit={handleSubmit(onClickEdit)}>
+        <IntroductionEdit
+          nickname={data.nickname}
+          introduction={introduction}
+          setIntroduction={setIntroduction}
+          imageUrl={imageUrl}
+          setImageUrl={setImageUrl}
+          IntroRegister={register}
+          errors={errors}
+        />
+        <SectionWrapper>
+          <SectionHeaderWrapper>
+            <SectionTitle>Skill</SectionTitle>
+            <Border></Border>
+          </SectionHeaderWrapper>
+          <SkillEdit skillTags={skillTags} setSkillTags={setSkillTags} />
+        </SectionWrapper>
+        <SectionWrapper>
+          <SectionHeaderWrapper>
+            <SectionTitle>Info</SectionTitle>
+            <Border></Border>
+          </SectionHeaderWrapper>
+          <InfoEdit
+            data={data}
+            career={career}
+            setCareer={setCareer}
+            position={position}
+            setPosition={setPosition}
+            InfoRegister={register}
+          />
+        </SectionWrapper>
+        <ButtonWrapper>
+          <Button>프로필 수정하기</Button>
+        </ButtonWrapper>
+      </form>
+    </Wrapper>
+  );
 }

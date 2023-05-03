@@ -7,12 +7,12 @@ import {
 } from "react";
 import { DeleteTag, Tag, TagInput, TagWrapper } from "./styled";
 
-interface SkillProps {
+interface SkillEditProps {
   skillTags: string[];
   setSkillTags: Dispatch<SetStateAction<string[]>>;
 }
 
-export default function Skill(p: SkillProps) {
+export default function SkillEdit(p: SkillEditProps) {
   const [tag, setTag] = useState("");
 
   const onChangeTag = (e: ChangeEvent<HTMLInputElement>) => {

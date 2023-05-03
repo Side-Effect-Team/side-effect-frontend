@@ -1,4 +1,32 @@
-import MyPageDetail from "../../components/pages/Mypage";
+import { useRouter } from "next/router";
+import { Wrapper } from "./styled";
+import { SectionWrapper } from "./styled";
+import { SectionHeaderWrapper } from "./styled";
+import { SectionTitle } from "./styled";
+import { Border } from "./styled";
+import { ButtonWrapper } from "./styled";
+import Button from "../../components/Button";
+import Introduction from "../../components/pages/Mypage/Introduction";
+import Skill from "../../components/pages/Mypage/Skill";
+import Info from "../../components/pages/Mypage/Info";
+
+export interface DataProps {
+  avatarSrc?: string;
+  nickname: string;
+  introduction?: string;
+  boards: number;
+  follower: number;
+  following: number;
+  skill?: string[];
+  position: string;
+  career: string;
+  github: string;
+  blog: string;
+  portfolio: string;
+}
+export interface MyPageProps {
+  data?: DataProps;
+}
 
 export default function MyPage() {
   const data = {
@@ -16,5 +44,32 @@ export default function MyPage() {
     blog: "https://www.naver.com",
     portfolio: "https://www.naver.com",
   };
-  return <MyPageDetail data={data} />;
+
+  const router = useRouter();
+  const onClickGoToEditProfile = () => {
+    router.push("/mypage/edit");
+  };
+
+  return (
+    <Wrapper>
+      <Introduction data={data} />
+      <SectionWrapper>
+        <SectionHeaderWrapper>
+          <SectionTitle>Skill</SectionTitle>
+          <Border></Border>
+        </SectionHeaderWrapper>
+        <Skill data={data} />
+      </SectionWrapper>
+      <SectionWrapper>
+        <SectionHeaderWrapper>
+          <SectionTitle>Info</SectionTitle>
+          <Border></Border>
+        </SectionHeaderWrapper>
+        <Info data={data} />
+      </SectionWrapper>
+      <ButtonWrapper>
+        <Button onClick={onClickGoToEditProfile}>프로필 수정하기</Button>
+      </ButtonWrapper>
+    </Wrapper>
+  );
 }

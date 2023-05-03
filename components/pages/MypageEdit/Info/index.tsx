@@ -1,12 +1,12 @@
 import { Dispatch, SetStateAction } from "react";
-import SelectBox from "../../SelectBox";
-import { InfoTitle, InfoWrapper } from "../../pages/Mypage/styled";
+import SelectBox from "../../../SelectBox";
 import { Input } from "./styled";
 import { UseFormRegister } from "react-hook-form";
-import { DataProps } from "../../pages/Mypage";
-import { FormData } from "../../pages/Mypage/Edit";
+import { InfoTitle, InfoWrapper } from "../../Mypage/Info/styled";
+import { DataProps } from "../../../../pages/mypage";
+import { FormData } from "../../../../pages/mypage/edit";
 
-interface InfoProps {
+interface InfoEditProps {
   data?: Pick<DataProps, "github" | "blog" | "portfolio">;
   career: string | number;
   setCareer: Dispatch<SetStateAction<string | number>>;
@@ -25,7 +25,7 @@ const SELECT_POSITIONS = [
   "기획자",
   "마케터",
 ];
-export default function Info(p: InfoProps) {
+export default function InfoEdit(p: InfoEditProps) {
   return (
     <>
       <InfoWrapper>
