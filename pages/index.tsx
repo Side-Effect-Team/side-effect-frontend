@@ -1,4 +1,4 @@
-import Carousel from "../components/Carousel";
+import Carousel from "@/components/Carousel";
 import styled from "styled-components";
 import { CAROUSEL_CONTENTS_LIST } from "../enum";
 

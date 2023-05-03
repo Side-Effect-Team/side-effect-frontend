@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import { breakPoints } from "../../styles/Media";
-import { BASE_URL } from "../../enum";
+import { breakPoints } from "@/styles/Media";
 
 interface RecruitType {
   id: number;

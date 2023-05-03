@@ -2,9 +2,9 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import styled, { css } from "styled-components";
-import { breakPoints } from "../../styles/Media";
+import { breakPoints } from "@/styles/Media";
 import Button from "../../components/Button";
-import { useInputImage } from "../../hooks/useInputImage";
+import { useInputImage } from "@/hooks/useInputImage";
 
 interface PostHeaderProps {
   category: string;
@@ -55,7 +55,7 @@ export default function PostPage() {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    let recruits = localStorage.getItem("recruits"); // null or ""
+    let recruits = localStorage.getItem("recruits");
     recruits = recruits && JSON.parse(recruits);
     const newRecruit = {
       id: recruits ? recruits.length + 1 : 1,
