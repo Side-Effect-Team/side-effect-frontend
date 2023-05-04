@@ -6,6 +6,9 @@ import { useState, useEffect, ChangeEvent } from "react";
 import { useInView } from "react-intersection-observer";
 import { useRouter } from "next/router";
 import { useInfiniteQuery } from "@tanstack/react-query";
+import { useAppDispatch } from "../../store/hooks";
+import { openModal } from "../../store/modalSlice";
+
 const FILTER_OPTIONS = ["조회순", "추천순", "댓글순"];
 const data = [
   {
@@ -155,8 +158,14 @@ export default function ProjectPage() {
     },
   );
   console.log(isFetchingNextPage);
+  const dispatch = useAppDispatch();
   return (
     <Wrapper>
+      <button
+        onClick={() => dispatch(openModal({ modalType: "RecruitmentModal" }))}
+      >
+        awdawd
+      </button>
       <HeaderSection>
         <h2>이달의 프로젝트</h2>
         <TempCarousel>캐러셀</TempCarousel>

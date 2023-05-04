@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { store } from "../store/store";
+import GlobalModal from "../components/Modals/GlobalModal";
 import Layout from "../components/Layout";
 
 const queryClient = new QueryClient();
@@ -17,6 +18,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <Provider store={store}>
           <AnimatePresence mode="wait">
+            <GlobalModal />
             <Component key={pageKey} {...pageProps} />
           </AnimatePresence>
         </Provider>

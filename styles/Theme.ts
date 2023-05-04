@@ -26,7 +26,7 @@ export const theme = {
     primary: "#155EEF",
     coral: "#FF6D60",
     skyBlue: "#CDDEFF",
-    lightGray: "#F5F5F5",
+    lightGray: "#EAECF0",
   },
 };
 
