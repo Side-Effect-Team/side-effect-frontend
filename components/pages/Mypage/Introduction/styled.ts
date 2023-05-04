@@ -52,3 +52,8 @@ export const ContentTitle = styled.p`
   margin: 0;
   color: #667085;
 `;
+export const ShortBorder = styled.div`
+  width: 30px;
+  border: 2px solid #667085;
+  margin: 15px 0;
+`;

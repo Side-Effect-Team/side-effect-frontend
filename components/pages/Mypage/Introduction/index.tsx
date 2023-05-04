@@ -6,12 +6,14 @@ import {
   NickName,
   ProfileImage,
   ProfileWrapper,
+  ShortBorder,
   Text,
 } from "./styled";
 
 interface IntroductionProps {
   avatarSrc: string | undefined;
   nickname: string;
+  email: string;
   introduction: string | undefined;
   boards: number;
   follower: number;
@@ -21,6 +23,7 @@ interface IntroductionProps {
 export default function Introduction({
   avatarSrc,
   nickname,
+  email,
   introduction,
   boards,
   follower,
@@ -30,6 +33,8 @@ export default function Introduction({
     <ProfileWrapper>
       <ProfileImage src={avatarSrc || "/images/BoardDefaultBackground.png"} />
       <NickName>{nickname || ""}</NickName>
+      <Text>{email}</Text>
+      <ShortBorder></ShortBorder>
       <Text>{introduction || "아직 소개가 없습니다."}</Text>
       <ContentsList>
         <ContentLink>

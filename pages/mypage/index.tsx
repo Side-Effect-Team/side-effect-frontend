@@ -15,6 +15,7 @@ import {
 export interface DataProps {
   avatarSrc?: string;
   nickname: string;
+  email: string;
   introduction?: string;
   boards: number;
   follower: number;
@@ -33,6 +34,7 @@ export interface MyPageProps {
 const data: DataProps = {
   avatarSrc: "/images/ProjectDefaultBackground.png",
   nickname: "자라는개발자",
+  email: "sideeffect@naver.com",
   introduction:
     "프론트엔드 개발자를 꿈꾸는 취준생입니다. 프로젝트 경험하고 싶어요",
   boards: 1,
@@ -56,6 +58,7 @@ export default function MyPage() {
       <Introduction
         avatarSrc={data.avatarSrc}
         nickname={data.nickname}
+        email={data.email}
         introduction={data.introduction}
         boards={data.boards}
         follower={data.follower}
