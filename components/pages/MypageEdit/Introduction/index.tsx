@@ -1,5 +1,5 @@
-import Button from "../../../Button";
-import { ChangeEvent, Dispatch, SetStateAction, useRef, useState } from "react";
+import Button from "@/components//Button";
+import { ChangeEvent, Dispatch, SetStateAction, useRef } from "react";
 import {
   ErrorMessage,
   FiledWrapper,
@@ -15,7 +15,7 @@ import {
 } from "./styled";
 import { Input } from "../Info/styled";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
-import { FormData } from "../../../../pages/mypage/edit";
+import { FormData } from "@/pages/mypage/edit";
 
 interface IntroEditProps {
   nickname: string | undefined;

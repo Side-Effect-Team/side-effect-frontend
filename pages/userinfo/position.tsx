@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import PageTransition from "../../components/pages/userInfoPage/PageTransition";
+import PageTransition from "@/components/pages/userInfoPage/PageTransition";
 import SelectBox from "../../components/SelectBox";
 import {
   Wrapper,
@@ -11,7 +11,7 @@ import {
   Input,
   Label,
   Form,
-} from "../../components/pages/userInfoPage/styled";
+} from "@/components/pages/userInfoPage/styled";
 import Button from "../../components/Button";
 
 const SELECT_POSITIONS = [

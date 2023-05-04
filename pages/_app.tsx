@@ -4,10 +4,9 @@ import { AnimatePresence } from "framer-motion";
 import { Provider } from "react-redux";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { store } from "../store/store";
-import GlobalModal from "../components/Modals/GlobalModal";
-import Layout from "../components/Layout";
-
+import { store } from "@/store/store";
+import Layout from "@/components/Layout";
+import GlobalModal from "@/components/Modals/GlobalModal";
 const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {

@@ -1,5 +1,14 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/components/*": ["components/*"],
+      "@/pageComponents/*": ["components/pages"],
+      "@/styles/*": ["styles/*"],
+      "@/hooks/*": ["hooks/*"],
+      "@/store/*": ["store/*"],
+      "@/pages/*": ["pages/*"]
+    },
     "target": "ESNext",
     "lib": [
       "dom",

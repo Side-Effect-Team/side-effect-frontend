@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { theme } from "../../../styles/Theme";
-import { mediaQuery } from "../../../styles/Media";
+import { theme } from "@/styles/Theme";
+import { mediaQuery } from "@/styles/Media";
 
 export const Wrapper = styled.div`
   min-height: 100vh;

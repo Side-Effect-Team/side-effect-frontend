@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { motion, HTMLMotionProps } from "framer-motion";
 import { useRouter } from "next/router";
-import { useAppSelector, useAppDispatch } from "../../../store/hooks";
-import { pageDirectionHandler } from "../../../store/pageTransitionSlice";
+import { useAppSelector, useAppDispatch } from "@/store/hooks";
+import { pageDirectionHandler } from "@/store/pageTransitionSlice";
 
 type PageTransitionProps = HTMLMotionProps<"div">;
 

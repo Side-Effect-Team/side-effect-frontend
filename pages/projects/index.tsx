@@ -1,10 +1,9 @@
 import styled from "styled-components";
 import SelectBox from "../../components/SelectBox";
 import BoardCard from "../../components/BoardCard";
-import { breakPoints } from "../../styles/Media";
+import { breakPoints } from "@/styles/Media";
 import { useState, useEffect, ChangeEvent } from "react";
 import { useInView } from "react-intersection-observer";
-import { useRouter } from "next/router";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useAppDispatch } from "../../store/hooks";
 import { openModal } from "../../store/modalSlice";
@@ -13,8 +12,9 @@ const FILTER_OPTIONS = ["조회순", "추천순", "댓글순"];
 const data = [
   {
     id: 1,
+    category: "projects",
     headerImage: "/images/ProjectDefaultBackground.png",
-    tag: ["Figma", "Spring", "React"],
+    // tags: ["Figma", "Spring", "React"],
     title: "Oh My Pet",
     content:
       "내 반려동물이 인플루언서? 반려동물 자랑 플랫폼 오 마이 펫 프로젝트 입니다.",
@@ -25,8 +25,9 @@ const data = [
   },
   {
     id: 2,
+    category: "projects",
     headerImage: "/images/ProjectDefaultBackground.png",
-    tag: ["Figma", "Spring", "React"],
+    // tags: ["Figma", "Spring", "React"],
     title: "Oh My Pet",
     content:
       "내 반려동물이 인플루언서? 반려동물 자랑 플랫폼 오 마이 펫 프로젝트 입니다.",
@@ -37,8 +38,9 @@ const data = [
   },
   {
     id: 3,
+    category: "projects",
     headerImage: "/images/ProjectDefaultBackground.png",
-    tag: ["Figma", "Spring", "React"],
+    // tags: ["Figma", "Spring", "React"],
     title: "Oh My Pet",
     content:
       "내 반려동물이 인플루언서? 반려동물 자랑 플랫폼 오 마이 펫 프로젝트 입니다.",
@@ -49,8 +51,9 @@ const data = [
   },
   {
     id: 4,
+    category: "projects",
     headerImage: "/images/ProjectDefaultBackground.png",
-    tag: ["Figma", "Spring", "React"],
+    // tags: ["Figma", "Spring", "React"],
     title: "Oh My Pet",
     content:
       "내 반려동물이 인플루언서? 반려동물 자랑 플랫폼 오 마이 펫 프로젝트 입니다.",
@@ -61,8 +64,9 @@ const data = [
   },
   {
     id: 6,
+    category: "projects",
     headerImage: "/images/ProjectDefaultBackground.png",
-    tag: ["Figma", "Spring", "React"],
+    // tags: ["Figma", "Spring", "React"],
     title: "Oh My Pet",
     content:
       "내 반려동물이 인플루언서? 반려동물 자랑 플랫폼 오 마이 펫 프로젝트 입니다.",
@@ -73,8 +77,9 @@ const data = [
   },
   {
     id: 7,
+    category: "projects",
     headerImage: "/images/ProjectDefaultBackground.png",
-    tag: ["Figma", "Spring", "React"],
+    // tags: ["Figma", "Spring", "React"],
     title: "Oh My Pet",
     content:
       "내 반려동물이 인플루언서? 반려동물 자랑 플랫폼 오 마이 펫 프로젝트 입니다.",
@@ -85,8 +90,9 @@ const data = [
   },
   {
     id: 8,
+    category: "projects",
     headerImage: "/images/ProjectDefaultBackground.png",
-    tag: ["Figma", "Spring", "React"],
+    // tags: ["Figma", "Spring", "React"],
     title: "Oh My Pet",
     content:
       "내 반려동물이 인플루언서? 반려동물 자랑 플랫폼 오 마이 펫 프로젝트 입니다.",
@@ -97,8 +103,9 @@ const data = [
   },
   {
     id: 9,
+    category: "projects",
     headerImage: "/images/ProjectDefaultBackground.png",
-    tag: ["Figma", "Spring", "React"],
+    // tags: ["Figma", "Spring", "React"],
     title: "Oh My Pet",
     content:
       "내 반려동물이 인플루언서? 반려동물 자랑 플랫폼 오 마이 펫 프로젝트 입니다.",
@@ -109,8 +116,9 @@ const data = [
   },
   {
     id: 10,
+    category: "projects",
     headerImage: "/images/ProjectDefaultBackground.png",
-    tag: ["Figma", "Spring", "React"],
+    // tags: ["Figma", "Spring", "React"],
     title: "Oh My Pet",
     content:
       "내 반려동물이 인플루언서? 반려동물 자랑 플랫폼 오 마이 펫 프로젝트 입니다.",

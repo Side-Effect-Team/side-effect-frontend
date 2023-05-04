@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Button from "../../../components/Button";
-import InfoEdit from "../../../components/pages/MypageEdit/Info";
-import IntroductionEdit from "../../../components/pages/MypageEdit/Introduction";
-import SkillEdit from "../../../components/pages/MypageEdit/Skill";
+import InfoEdit from "../../../components/pages/mypageEdit/Info";
+import IntroductionEdit from "../../../components/pages/mypageEdit/Introduction";
+import SkillEdit from "../../../components/pages/mypageEdit/Skill";
 import { useForm } from "react-hook-form";
 import {
   Border,
@@ -11,7 +11,7 @@ import {
   SectionTitle,
   SectionWrapper,
   Wrapper,
-} from "../../../components/pages/Mypage/styled";
+} from "@/components/pages/mypage/styled";
 
 export interface FormData {
   github?: string;
