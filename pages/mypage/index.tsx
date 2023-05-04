@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import Button from "../../components/Button";
-import Introduction from "../../components/pages/Mypage/Introduction";
-import Skill from "../../components/pages/Mypage/Skill";
-import Info from "../../components/pages/Mypage/Info";
+import Introduction from "../../components/pages/mypage/Introduction";
+import Skill from "../../components/pages/mypage/Skill";
+import Info from "../../components/pages/mypage/Info";
 import {
   Border,
   ButtonWrapper,
@@ -10,7 +10,7 @@ import {
   SectionTitle,
   SectionWrapper,
   Wrapper,
-} from "../../components/pages/Mypage/styled";
+} from "@/components/pages/mypage/styled";
 
 export interface DataProps {
   avatarSrc?: string;

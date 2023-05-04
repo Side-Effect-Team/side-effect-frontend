@@ -1,10 +1,9 @@
 import styled from "styled-components";
 import SelectBox from "../../components/SelectBox";
 import BoardCard from "../../components/BoardCard";
-import { breakPoints } from "../../styles/Media";
+import { breakPoints } from "@/styles/Media";
 import { useState, useEffect, ChangeEvent } from "react";
 import { useInView } from "react-intersection-observer";
-import { useRouter } from "next/router";
 import { useInfiniteQuery } from "@tanstack/react-query";
 const FILTER_OPTIONS = ["조회순", "추천순", "댓글순"];
 const data = [

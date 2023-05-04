@@ -1,4 +1,4 @@
-import { MyPageProps } from "../../../../pages/mypage";
+import { MyPageProps } from "@/pages/mypage";
 import {
   InfoContent,
   InfoContentLink,

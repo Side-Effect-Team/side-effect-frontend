@@ -1,10 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import PageTransition from "../../components/pages/UserInfoPage/PageTransition";
-import {
-  Wrapper,
-  ButtonWrapper,
-} from "../../components/pages/UserInfoPage/styled";
+import PageTransition from "@/components/pages/userInfoPage/PageTransition";
+import { Wrapper, ButtonWrapper } from "@/components/pages/userInfoPage/styled";
 import Button from "../../components/Button";
 export default function Success() {
   const router = useRouter();

@@ -1,10 +1,10 @@
 import { Dispatch, SetStateAction } from "react";
-import SelectBox from "../../../SelectBox";
+import SelectBox from "@/components/SelectBox";
 import { Input } from "./styled";
 import { UseFormRegister } from "react-hook-form";
-import { InfoTitle, InfoWrapper } from "../../Mypage/Info/styled";
-import { DataProps } from "../../../../pages/mypage";
-import { FormData } from "../../../../pages/mypage/edit";
+import { InfoTitle, InfoWrapper } from "../../mypage/Info/styled";
+import { DataProps } from "@/pages/mypage";
+import { FormData } from "@/pages/mypage/edit";
 
 interface InfoEditProps {
   data?: Pick<DataProps, "github" | "blog" | "portfolio">;

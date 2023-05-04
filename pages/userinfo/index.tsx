@@ -6,10 +6,10 @@ import {
   Label,
   ButtonWrapper,
   Form,
-} from "../../components/pages/UserInfoPage/styled";
-import PageTransition from "../../components/pages/UserInfoPage/PageTransition";
-import ErrorMessage from "../../components/pages/UserInfoPage/ErrorMessage";
-import Button from "../../components/Button/index";
+} from "@/components/pages/userInfoPage/styled";
+import PageTransition from "@/components/pages/userInfoPage/PageTransition";
+import ErrorMessage from "@/components/pages/userInfoPage/ErrorMessage";
+import Button from "@/components/Button";
 
 interface FormInput {
   nickname: string;

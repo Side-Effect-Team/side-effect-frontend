@@ -1,4 +1,4 @@
-import { MyPageProps } from "../../../../pages/mypage";
+import { MyPageProps } from "@/pages/mypage";
 import { Tag, TagWrapper, Text } from "./styled";
 
 export default function Skill(p: MyPageProps) {

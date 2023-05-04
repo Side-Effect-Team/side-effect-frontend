@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { mediaQuery } from "../../../styles/Media";
+import { mediaQuery } from "@/styles/Media";
 export const Wrapper = styled.div`
   max-width: 600px;
   margin: 0 auto;
@@ -35,7 +35,7 @@ export const InputSection = styled.div`
 export const Input = styled.input`
   outline: none;
   border: none;
-  padding: 10px 0px;
+  padding: 10px 0;
   width: 100%;
   border-bottom: 2px solid black;
 `;
