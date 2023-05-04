@@ -20,7 +20,7 @@ import {
 interface BoardCardProps {
   headerImage?: string;
   headerTitle?: string;
-  tag: string[];
+  tag?: string[];
   title: string;
   content: string;
   createdAt: string;
@@ -32,38 +32,37 @@ interface BoardCardDataProps {
   data?: BoardCardProps;
 }
 
-export default function BoardCard(p: BoardCardDataProps) {
-  const [isLike, setIsLike] = useState(p.data?.like);
+export default function BoardCard({ data }: BoardCardDataProps) {
+  const [isLike, setIsLike] = useState(data?.like);
   const onClickHeart = () => {
     setIsLike((prev) => !prev);
   };
   return (
     <Container>
-      <Header src={p.data?.headerImage}>
-        <HeaderTitle>{p.data?.headerTitle}</HeaderTitle>
+      <Header src={data?.headerImage}>
+        <HeaderTitle>{data?.headerTitle}</HeaderTitle>
       </Header>
       <ContentsWrapper>
         <TagWrapper>
           {/* 넘친다면 +5 이런식으로 태그가 더 있다는 것을 알려줄 수 있는 로직이 필요함 */}
-          {p.data?.tag.map((el, index) => (
-            <Tag key={index}>{el}</Tag>
-          ))}
+          {data?.tag &&
+            data?.tag.map((el, index) => <Tag key={index}>{el}</Tag>)}
         </TagWrapper>
-        <Title>{p.data?.title}</Title>
-        <Content>{p.data?.content}</Content>
+        <Title>{data?.title}</Title>
+        <Content>{data?.content}</Content>
         <Footer>
-          <CreateAt>{p.data?.createdAt}</CreateAt>
+          <CreateAt>{data?.createdAt}</CreateAt>
           <ButtonsWrapper>
             <ButtonDiv onClick={onClickHeart}>
               {isLike ? <HeartFillIcon /> : <HeartNotFillIcon />}
             </ButtonDiv>
-            {p.data?.likeNum && (
+            {data?.likeNum && (
               <>
-                <FeedbackNum>{p.data.likeNum}</FeedbackNum>
+                <FeedbackNum>{data.likeNum}</FeedbackNum>
                 <ButtonDiv>
                   <CommentIcon />
                 </ButtonDiv>
-                <FeedbackNum>{p.data.commentNum}</FeedbackNum>
+                <FeedbackNum>{data.commentNum}</FeedbackNum>
               </>
             )}
           </ButtonsWrapper>
