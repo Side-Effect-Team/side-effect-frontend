@@ -1,15 +1,16 @@
-import { useRouter } from "next/router";
-import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+// import { useRouter } from "next/router";
+// import { useQuery } from "@tanstack/react-query";
 import styled from "styled-components";
-import { breakPoints } from "../../styles/Media";
-import Banner from "../../components/Banner";
-import BoardCard from "../../components/BoardCard";
-import { BASE_URL, BANNER_CONTENTS } from "../../enum";
+import { breakPoints } from "@/styles/Media";
+import Banner from "@/components/Banner";
+import BoardCard from "@/components/BoardCard";
+import { BANNER_CONTENTS } from "../../enum";
 
 interface RecruitType {
   id: number;
   headerTitle: string;
-  tag: string[];
+  tags: string[];
   title: string;
   content: string;
   createdAt: string;
@@ -17,30 +18,36 @@ interface RecruitType {
 }
 
 export default function RecruitsPage() {
-  const router = useRouter();
+  // const router = useRouter();
+  const [recruitsData, setRecruitsData] = useState([]);
 
-  const { data, isError, isLoading } = useQuery({
-    queryKey: ["recruits"],
-    queryFn: async () => {
-      const res = await fetch(BASE_URL + "/api" + router.pathname);
-      return await res.json();
-    },
-  });
+  // const { data, isError, isLoading } = useQuery({
+  //   queryKey: ["recruits"],
+  //   queryFn: async () => {
+  //     const res = await fetch(BASE_URL + "/api" + router.pathname);
+  //     return await res.json();
+  //   },
+  // });
+  //
+  // if (isError) {
+  //   return <h2>일시적으로 페이지를 로드할 수 없습니다</h2>;
+  // }
+  //
+  // if (isLoading) {
+  //   return <h2>Loading...</h2>;
+  // }
 
-  if (isError) {
-    return <h2>일시적으로 페이지를 로드할 수 없습니다</h2>;
-  }
-
-  if (isLoading) {
-    return <h2>Loading...</h2>;
-  }
+  useEffect(() => {
+    const data = localStorage.getItem("recruits");
+    if (data) setRecruitsData(JSON.parse(data));
+  }, []);
 
   return (
     <Wrapper>
       <Banner
         title={BANNER_CONTENTS.TITLE}
         subTitle={BANNER_CONTENTS.SUB_TITLE}
-        btnLink="/recruits/add"
+        btnLink="/post/recruit"
       />
       <Contents>
         <ContentsHeader>
@@ -68,9 +75,10 @@ export default function RecruitsPage() {
           </FilterBox>
         </ContentsHeader>
         <ContentsMain>
-          {data.map((item: RecruitType) => (
-            <BoardCard key={item.id} data={item} />
-          ))}
+          {recruitsData &&
+            recruitsData.map((item: RecruitType) => (
+              <BoardCard key={item.id} data={item} />
+            ))}
         </ContentsMain>
       </Contents>
     </Wrapper>
@@ -112,8 +120,10 @@ const FilterBox = styled.div`
 `;
 
 const ContentsMain = styled.main`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
+  width: 100%;
+  display: grid;
+  justify-items: center;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  row-gap: 1rem;
+  column-gap: 1rem;
 `;

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 import {
   ButtonDiv,
   ButtonsWrapper,
@@ -17,10 +17,13 @@ import {
   TagWrapper,
   Title,
 } from "./styled";
+import { useRouter } from "next/router";
 interface BoardCardProps {
+  id: number | string;
+  category?: string;
   headerImage?: string;
   headerTitle?: string;
-  tag?: string[];
+  tags?: string[];
   title: string;
   content: string;
   createdAt: string;
@@ -34,19 +37,25 @@ interface BoardCardDataProps {
 
 export default function BoardCard({ data }: BoardCardDataProps) {
   const [isLike, setIsLike] = useState(data?.like);
+  const router = useRouter();
   const onClickHeart = () => {
     setIsLike((prev) => !prev);
   };
+  const onClickGoToBoard = (e: MouseEvent<HTMLDivElement>) => {
+    if (data?.category === "projects") {
+      router.push(`/projects/${e.currentTarget.id}`);
+    } else router.push(`/recruits/${e.currentTarget.id}`);
+  };
   return (
-    <Container>
+    <Container onClick={onClickGoToBoard}>
       <Header src={data?.headerImage}>
         <HeaderTitle>{data?.headerTitle}</HeaderTitle>
       </Header>
       <ContentsWrapper>
         <TagWrapper>
           {/* 넘친다면 +5 이런식으로 태그가 더 있다는 것을 알려줄 수 있는 로직이 필요함 */}
-          {data?.tag &&
-            data?.tag.map((el, index) => <Tag key={index}>{el}</Tag>)}
+          {data?.tags &&
+            data?.tags.map((el, index) => <Tag key={index}>{el}</Tag>)}
         </TagWrapper>
         <Title>{data?.title}</Title>
         <Content>{data?.content}</Content>

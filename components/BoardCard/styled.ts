@@ -21,16 +21,22 @@ export const Container = styled.div`
 `;
 interface HeaderProps {
   src?: string;
+  category?: string;
 }
 export const Header = styled.div<HeaderProps>`
   width: 100%;
-  height: 150px;
+  /* height: 150px; */
+  height: ${(p) => (p.category === "projects" ? "250px" : "150px")};
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: url(${(p) =>
-    p.src || "/images/BoardDefaultBackground.png"});
+  background-image: ${(p) =>
+    `url(${p.src || "/images/BoardDefaultBackground.png"})`};
+  // headerImage의 width에 맞추기 위해 아래 코드 추가했습니다
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 `;
 export const HeaderTitle = styled.div`
   width: 80%;
