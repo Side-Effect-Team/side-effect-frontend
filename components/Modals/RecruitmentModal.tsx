@@ -13,7 +13,7 @@ const POSITION_TAB = [
   { name: "디자이너" },
   { name: "마케터" },
 ];
-const slide = keyframes`
+const slideIn = keyframes`
   0%{
     transform: translateX(100%);
   }
@@ -21,7 +21,7 @@ const slide = keyframes`
     transform: translateX(0%);
   }
 `;
-const slide2 = keyframes`
+const slideOut = keyframes`
   0%{
     transform: translateX(0%);
   }
@@ -91,7 +91,7 @@ export default function RecruitmentModal() {
 
 const Wrapper = styled.div<{ isOpen: boolean }>`
   visibility: ${({ isOpen }) => (isOpen ? "visible" : "hidden")};
-  animation: ${({ isOpen }) => (isOpen ? slide : slide2)} 0.3s ease-in-out;
+  animation: ${({ isOpen }) => (isOpen ? slideIn : slideOut)} 0.3s ease-in-out;
   transition: 0.3s;
   display: flex;
   flex-direction: column;
