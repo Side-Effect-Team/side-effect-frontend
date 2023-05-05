@@ -4,31 +4,21 @@ import { useState, useRef } from "react";
 import { mediaQuery } from "../../styles/Media";
 import { closeModal } from "../../store/modalSlice";
 import { theme } from "../../styles/Theme";
+import { AiOutlineClose } from "react-icons/ai";
 import useOutsideClick from "../../hooks/useOutsideClick";
-
+import Applicant from "./Applicant";
+import { media } from "@/styles/mediatest";
+import { useFilterTab } from "@/hooks/useFilterTab";
 const FILTER_TAB = [{ name: "지원현황" }, { name: "팀원관리" }];
 const POSITION_TAB = [
   { name: "프론트엔드" },
   { name: "백엔드" },
   { name: "디자이너" },
+  { name: "데브옵스" },
   { name: "마케터" },
+  { name: "기획자" },
 ];
-const slideIn = keyframes`
-  0%{
-    transform: translateX(100%);
-  }
-  100%{
-    transform: translateX(0%);
-  }
-`;
-const slideOut = keyframes`
-  0%{
-    transform: translateX(0%);
-  }
-  100%{
-    transform: translateX(100%);
-  }
-`;
+
 export default function RecruitmentModal() {
   const [currentTab, setCurrentTab] = useState(0);
   const [filter, setFilter] = useState("지원현황");
@@ -37,7 +27,6 @@ export default function RecruitmentModal() {
   const { isOpen } = useAppSelector((state) => state.modal);
   const modalRef = useRef(null);
   const dispatch = useAppDispatch();
-  console.log(isOpen);
   const handleFilterTab = (index: number, name: string) => {
     setCurrentTab(index);
     setFilter(name);
@@ -49,13 +38,16 @@ export default function RecruitmentModal() {
   const handleModalClose = () => {
     dispatch(closeModal());
   };
-
   useOutsideClick(modalRef, handleModalClose);
   return (
     <Wrapper isOpen={isOpen} ref={modalRef}>
       <Title>
         <h2>Modal</h2>
-        <button onClick={handleModalClose}>x</button>
+        <AiOutlineClose
+          onClick={handleModalClose}
+          size={30}
+          style={{ cursor: "pointer" }}
+        />
       </Title>
       <FilterTab>
         {FILTER_TAB.map((tab, index) => {
@@ -84,7 +76,21 @@ export default function RecruitmentModal() {
           );
         })}
       </PositionFilterTab>
-      {filter === "지원현황" ? <div>지원현황</div> : <div>팀원관리</div>}
+      <ApplicantSection>
+        <ApplicantList>
+          <Applicant filter={filter} />
+          <Applicant filter={filter} />
+          <Applicant filter={filter} />
+          <Applicant filter={filter} />
+          <Applicant filter={filter} />
+          <Applicant filter={filter} />
+          <Applicant filter={filter} />
+          <Applicant filter={filter} />
+          <Applicant filter={filter} />
+          <Applicant filter={filter} />
+          <Applicant filter={filter} />
+        </ApplicantList>
+      </ApplicantSection>
     </Wrapper>
   );
 }
@@ -97,19 +103,28 @@ const Wrapper = styled.div<{ isOpen: boolean }>`
   flex-direction: column;
   position: fixed;
   background-color: white;
-  width: 500px;
-  height: 100%;
-  top: 0;
+  width: 600px;
+  height: 100vh;
   right: 0;
+  bottom: 0;
   z-index: 30;
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
-  ${mediaQuery("mobile")`
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  /* ${mediaQuery("mobile")`
     width:100%;
-  `}
+  `} */
+  ${media.mobile} {
+    height: 90%;
+    width: 100%;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 25px;
+    animation: ${({ isOpen }) => (isOpen ? slideUp : slideDown)} 0.3s
+      ease-in-out;
+  }
 `;
 const Title = styled.header`
   display: flex;
+  align-items: center;
   justify-content: space-between;
   border-bottom: 2px solid black;
   padding: 30px;
@@ -133,17 +148,22 @@ const Filter = styled.li`
 `;
 const PositionFilterTab = styled.ul`
   display: flex;
+  align-items: center;
   gap: 10px;
   margin: 0;
-  padding: 10px 20px;
+  padding: 20px;
+  overflow: auto;
+  overflow-y: hidden;
 `;
 const Position = styled.li`
   display: flex;
   align-items: center;
   gap: 5px;
   padding: 10px;
+  min-width: fit-content;
   cursor: pointer;
   &.focused {
+    font-weight: bold;
     color: ${theme.brandColor.primary};
     border-bottom: 3px solid ${theme.brandColor.primary};
   }
@@ -155,11 +175,45 @@ const NumberOfPosition = styled.div`
   background-color: ${theme.brandColor.lightGray};
 `;
 
-const ApplicantSection = styled.section``;
-
-const ApplicantFilter = styled.nav``;
-
-const ApplicantList = styled.ul`
-  padding: 30px;
+const ApplicantSection = styled.section`
+  overflow: auto;
 `;
-const Applicant = styled.li``;
+const ApplicantList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 20px;
+  gap: 15px;
+`;
+const slideIn = keyframes`
+  0%{
+    transform: translateX(100%);
+  }
+  100%{
+    transform: translateX(0%);
+  }
+`;
+const slideOut = keyframes`
+  0%{
+    transform: translateX(0%);
+  }
+  100%{
+    transform: translateX(100%);
+  }
+`;
+const slideUp = keyframes`
+  0%{
+    transform: translateY(100%);
+  }
+  100%{
+    transform: translateY(0%);
+  }
+`;
+const slideDown = keyframes`
+  0%{
+    transform: translateY(0%);
+  }
+  100%{
+    transform: translateY(100%);
+  }
+`;
