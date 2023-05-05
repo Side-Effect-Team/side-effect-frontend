@@ -7,7 +7,7 @@ interface Props {
   filter: string;
 }
 
-export default function Applicant({ filter }: Props) {
+export default function ManageCard({ filter }: Props) {
   const isApplicantManage = filter === "지원현황";
 
   const handleButton = () => {

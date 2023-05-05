@@ -170,7 +170,7 @@ export default function ProjectPage() {
   return (
     <Wrapper>
       <button
-        onClick={() => dispatch(openModal({ modalType: "RecruitmentModal" }))}
+        onClick={() => dispatch(openModal({ modalType: "ManageTeamModal" }))}
       >
         awdawd
       </button>

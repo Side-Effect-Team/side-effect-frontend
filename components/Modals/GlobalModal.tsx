@@ -1,17 +1,15 @@
 import styled from "styled-components";
 import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { closeModal } from "../../store/modalSlice";
-import RecruitmentModal from "./RecruitmentModal";
+import { useAppSelector } from "../../store/hooks";
+import ManageTeamModal from "./ManageTeamModal";
 
 const MODAL_TYPES = {
-  RecruitmentModal: "RecruitmentModal",
-  TestModal: "TestModal",
+  ManageTeamModal: "ManageTeamModal",
 };
 const MODAL_COMPONENTS = [
   {
-    type: MODAL_TYPES.RecruitmentModal,
-    component: <RecruitmentModal />,
+    type: MODAL_TYPES.ManageTeamModal,
+    component: <ManageTeamModal />,
   },
 ];
 export default function GlobalModal() {

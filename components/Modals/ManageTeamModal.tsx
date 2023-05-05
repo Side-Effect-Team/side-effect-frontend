@@ -6,7 +6,7 @@ import { closeModal } from "../../store/modalSlice";
 import { theme } from "../../styles/Theme";
 import { AiOutlineClose } from "react-icons/ai";
 import useOutsideClick from "../../hooks/useOutsideClick";
-import Applicant from "./Applicant";
+import ManageCard from "./ManageCard";
 import { media } from "@/styles/mediatest";
 import { useFilterTab } from "@/hooks/useFilterTab";
 const FILTER_TAB = [{ name: "지원현황" }, { name: "팀원관리" }];
@@ -72,21 +72,19 @@ export default function RecruitmentModal() {
           );
         })}
       </PositionFilterTab>
-      <ApplicantSection>
-        <ApplicantList>
-          <Applicant filter={filter} />
-          <Applicant filter={filter} />
-          <Applicant filter={filter} />
-          <Applicant filter={filter} />
-          <Applicant filter={filter} />
-          <Applicant filter={filter} />
-          <Applicant filter={filter} />
-          <Applicant filter={filter} />
-          <Applicant filter={filter} />
-          <Applicant filter={filter} />
-          <Applicant filter={filter} />
-        </ApplicantList>
-      </ApplicantSection>
+      <ManageSection>
+        <ManageList>
+          <ManageCard filter={filter} />
+          <ManageCard filter={filter} />
+          <ManageCard filter={filter} />
+          <ManageCard filter={filter} />
+          <ManageCard filter={filter} />
+          <ManageCard filter={filter} />
+          <ManageCard filter={filter} />
+          <ManageCard filter={filter} />
+          <ManageCard filter={filter} />
+        </ManageList>
+      </ManageSection>
     </Wrapper>
   );
 }
@@ -171,10 +169,10 @@ const NumberOfPosition = styled.div`
   background-color: ${theme.brandColor.lightGray};
 `;
 
-const ApplicantSection = styled.section`
+const ManageSection = styled.section`
   overflow: auto;
 `;
-const ApplicantList = styled.ul`
+const ManageList = styled.ul`
   display: flex;
   flex-direction: column;
   margin: 0;
