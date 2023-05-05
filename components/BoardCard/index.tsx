@@ -38,8 +38,9 @@ interface BoardCardDataProps {
 export default function BoardCard({ data }: BoardCardDataProps) {
   const [isLike, setIsLike] = useState(data?.like);
   const router = useRouter();
-  const onClickHeart = () => {
+  const onClickHeart = (e: MouseEvent<HTMLButtonElement>) => {
     setIsLike((prev) => !prev);
+    e.stopPropagation();
   };
   const onClickGoToBoard = (e: MouseEvent<HTMLDivElement>) => {
     if (data?.category === "projects") {
@@ -47,16 +48,18 @@ export default function BoardCard({ data }: BoardCardDataProps) {
     } else router.push(`/recruits/${e.currentTarget.id}`);
   };
   return (
-    <Container onClick={onClickGoToBoard}>
+    <Container id={data?.id.toString()} onClick={onClickGoToBoard}>
       <Header src={data?.headerImage}>
         <HeaderTitle>{data?.headerTitle}</HeaderTitle>
       </Header>
       <ContentsWrapper>
-        <TagWrapper>
-          {/* 넘친다면 +5 이런식으로 태그가 더 있다는 것을 알려줄 수 있는 로직이 필요함 */}
-          {data?.tags &&
-            data?.tags.map((el, index) => <Tag key={index}>{el}</Tag>)}
-        </TagWrapper>
+        {data?.tags && (
+          <TagWrapper>
+            {data?.tags.map((el, index) => (
+              <Tag key={index}>{el}</Tag>
+            ))}
+          </TagWrapper>
+        )}
         <Title>{data?.title}</Title>
         <Content>{data?.content}</Content>
         <Footer>

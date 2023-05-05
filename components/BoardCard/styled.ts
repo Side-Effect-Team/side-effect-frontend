@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { theme } from "../../styles/Theme";
 import { AiFillHeart, AiOutlineHeart, AiOutlineMessage } from "react-icons/ai";
+import { mediaQuery } from "@/styles/Media";
 
 export const Container = styled.div`
   width: 300px;
@@ -18,7 +19,15 @@ export const Container = styled.div`
   :hover {
     filter: drop-shadow(1px 1px 5px rgba(21, 94, 239, 0.25));
   }
+  ${mediaQuery("mobile")`
+  width: 95%;
+  height: 150px;
+  flex-direction: row;
+  margin-left: auto;
+  margin-right: auto; 
+  `}
 `;
+
 interface HeaderProps {
   src?: string;
   category?: string;
@@ -37,6 +46,10 @@ export const Header = styled.div<HeaderProps>`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  ${mediaQuery("mobile")`
+  width: 35%;
+  height: 150px;
+  `}
 `;
 export const HeaderTitle = styled.div`
   width: 80%;
@@ -61,6 +74,12 @@ export const ContentsWrapper = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
   padding: 5%;
+  ${mediaQuery("mobile")`
+  width: 65%;
+  height: 150px;
+  padding: 10px;
+  justify-content: space-between;
+  `}
 `;
 export const TagWrapper = styled.div`
   width: 100%;
@@ -71,7 +90,11 @@ export const TagWrapper = styled.div`
   justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
+  ${mediaQuery("mobile")`
+  flex-wrap: nowrap;
+  margin: 10px 0;
+  `}
 `;
 export const Tag = styled.div`
   font-size: 16px;
@@ -82,11 +105,22 @@ export const Tag = styled.div`
   margin-bottom: 7px;
   padding: 0.3em 1em;
   border-radius: 15px;
+  ${mediaQuery("mobile")`
+  margin-bottom: 0;
+  font-size: 12px;
+  `}
 `;
 export const Title = styled.div`
   font-size: 20px;
   font-weight: 600;
   margin-bottom: 15px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  ${mediaQuery("mobile")`
+  -webkit-line-clamp: 1;
+  `}
 `;
 export const Content = styled.div`
   /* height: 40%; */
@@ -98,6 +132,9 @@ export const Content = styled.div`
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  ${mediaQuery("mobile")`
+  -webkit-line-clamp: 1;
+  `}
 `;
 export const Footer = styled.div`
   width: 100%;
@@ -120,7 +157,7 @@ export const ButtonsWrapper = styled.div`
 export const ButtonDiv = styled.button`
   background: none;
   border: none;
-  margin: 0 5px;
+  margin-right: 5px;
   cursor: pointer;
 `;
 export const HeartNotFillIcon = styled(AiOutlineHeart)`
@@ -137,5 +174,6 @@ export const CommentIcon = styled(AiOutlineMessage)`
 `;
 export const FeedbackNum = styled.div`
   font-size: 16px;
+  margin-right: 5px;
   color: #454545;
 `;
