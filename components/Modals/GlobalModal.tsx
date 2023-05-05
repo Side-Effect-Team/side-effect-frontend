@@ -6,6 +6,7 @@ import RecruitmentModal from "./RecruitmentModal";
 
 const MODAL_TYPES = {
   RecruitmentModal: "RecruitmentModal",
+  TestModal: "TestModal",
 };
 const MODAL_COMPONENTS = [
   {
@@ -14,7 +15,6 @@ const MODAL_COMPONENTS = [
   },
 ];
 export default function GlobalModal() {
-  const dispatch = useAppDispatch();
   const { modalType, isOpen } = useAppSelector((state) => state.modal);
 
   useEffect(() => {
@@ -24,24 +24,21 @@ export default function GlobalModal() {
       document.body.style.overflow = "auto";
     }
   }, [isOpen]);
-
   const findModal = MODAL_COMPONENTS.find((modal) => {
     return modal.type === modalType;
   });
-
   const handleRenderModal = () => {
     return findModal?.component;
   };
-
   return (
     <>
-      {isOpen && <Overlay onClick={() => dispatch(closeModal())} />}
+      {<Overlay isOpen={isOpen} />}
       {handleRenderModal()}
     </>
   );
 }
-
-const Overlay = styled.div`
+const Overlay = styled.div<{ isOpen: boolean }>`
+  visibility: ${({ isOpen }) => (isOpen ? "visible" : "hidden")};
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.3);

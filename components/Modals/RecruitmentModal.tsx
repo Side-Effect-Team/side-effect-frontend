@@ -1,9 +1,10 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { mediaQuery } from "../../styles/Media";
 import { closeModal } from "../../store/modalSlice";
 import { theme } from "../../styles/Theme";
+import useOutsideClick from "../../hooks/useOutsideClick";
 
 const FILTER_TAB = [{ name: "지원현황" }, { name: "팀원관리" }];
 const POSITION_TAB = [
@@ -12,14 +13,31 @@ const POSITION_TAB = [
   { name: "디자이너" },
   { name: "마케터" },
 ];
+const slide = keyframes`
+  0%{
+    transform: translateX(100%);
+  }
+  100%{
+    transform: translateX(0%);
+  }
+`;
+const slide2 = keyframes`
+  0%{
+    transform: translateX(0%);
+  }
+  100%{
+    transform: translateX(100%);
+  }
+`;
 export default function RecruitmentModal() {
   const [currentTab, setCurrentTab] = useState(0);
   const [filter, setFilter] = useState("지원현황");
   const [positionTab, setPositionTab] = useState(0);
   const [positionFilter, setPositionFilter] = useState("프론트엔드");
-  const dispatch = useAppDispatch();
   const { isOpen } = useAppSelector((state) => state.modal);
-
+  const modalRef = useRef(null);
+  const dispatch = useAppDispatch();
+  console.log(isOpen);
   const handleFilterTab = (index: number, name: string) => {
     setCurrentTab(index);
     setFilter(name);
@@ -28,12 +46,16 @@ export default function RecruitmentModal() {
     setPositionTab(index);
     setPositionFilter(name);
   };
+  const handleModalClose = () => {
+    dispatch(closeModal());
+  };
 
+  useOutsideClick(modalRef, handleModalClose);
   return (
-    <Wrapper isOpen={isOpen}>
+    <Wrapper isOpen={isOpen} ref={modalRef}>
       <Title>
         <h2>Modal</h2>
-        <button onClick={() => dispatch(closeModal())}>x</button>
+        <button onClick={handleModalClose}>x</button>
       </Title>
       <FilterTab>
         {FILTER_TAB.map((tab, index) => {
@@ -69,9 +91,8 @@ export default function RecruitmentModal() {
 
 const Wrapper = styled.div<{ isOpen: boolean }>`
   visibility: ${({ isOpen }) => (isOpen ? "visible" : "hidden")};
-  /* opacity: ${({ isOpen }) => (isOpen ? "1" : "0")}; */
-  transform: ${({ isOpen }) => (isOpen ? "translateX(0)" : "translateX(100%)")};
-  transition: 0.5s;
+  animation: ${({ isOpen }) => (isOpen ? slide : slide2)} 0.3s ease-in-out;
+  transition: 0.3s;
   display: flex;
   flex-direction: column;
   position: fixed;

@@ -4,6 +4,10 @@ interface ModalType {
   modalType: string;
 }
 
+interface Type {
+  modalStore: string[];
+  isOpen: boolean;
+}
 const initialState = {
   modalType: "",
   isOpen: false,
