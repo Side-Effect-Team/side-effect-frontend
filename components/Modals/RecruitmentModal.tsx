@@ -20,24 +20,20 @@ const POSITION_TAB = [
 ];
 
 export default function RecruitmentModal() {
-  const [currentTab, setCurrentTab] = useState(0);
-  const [filter, setFilter] = useState("지원현황");
-  const [positionTab, setPositionTab] = useState(0);
-  const [positionFilter, setPositionFilter] = useState("프론트엔드");
   const { isOpen } = useAppSelector((state) => state.modal);
+  const [currentTab, filter, handleFilterTab] = useFilterTab(0, "지원현황");
+  const [positionTab, positionFilter, handlePositionFilterTab] = useFilterTab(
+    0,
+    "프론트엔드",
+  );
+  console.log(positionFilter);
   const modalRef = useRef(null);
   const dispatch = useAppDispatch();
-  const handleFilterTab = (index: number, name: string) => {
-    setCurrentTab(index);
-    setFilter(name);
-  };
-  const handlePositionFilterTab = (index: number, name: string) => {
-    setPositionTab(index);
-    setPositionFilter(name);
-  };
+
   const handleModalClose = () => {
     dispatch(closeModal());
   };
+
   useOutsideClick(modalRef, handleModalClose);
   return (
     <Wrapper isOpen={isOpen} ref={modalRef}>

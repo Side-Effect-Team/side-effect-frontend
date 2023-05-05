@@ -1,14 +1,11 @@
-import { useState, useEffect } from "react";
-interface FilterPropsType {
-  index: number;
-  name: any;
-}
-export const useFilterTab = ({ index, name }: FilterPropsType) => {
-  const [currentTab, setCurrentTab] = useState(0);
-  const [filter, setFilter] = useState();
-  useEffect(() => {
+import { useState } from "react";
+
+export const useFilterTab = (index: number, name: string) => {
+  const [currentTab, setCurrentTab] = useState(index);
+  const [filter, setFilter] = useState(name);
+  const handleFIlterTab: any = (index: number, name: string): void => {
     setCurrentTab(index);
     setFilter(name);
-  }, []);
-  return { currentTab, filter };
+  };
+  return [currentTab, filter, handleFIlterTab];
 };
