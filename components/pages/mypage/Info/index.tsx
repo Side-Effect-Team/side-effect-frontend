@@ -1,11 +1,3 @@
-// import {
-//   InfoContent,
-//   InfoContentLink,
-//   InfoTitle,
-//   InfoWrapper,
-//   Text,
-// } from "./styled";
-
 import {
   InfoContent,
   InfoContentLink,
