@@ -29,7 +29,7 @@ export default function ManageCard({ filter }: Props) {
   };
 
   return (
-    <ApplicantWrapper>
+    <ManageCardWrapper>
       <ProfileSection>
         <ProfileImage>
           <Image
@@ -45,11 +45,11 @@ export default function ManageCard({ filter }: Props) {
         </ProfileInfo>
       </ProfileSection>
       <ButtonSection>{handleButton()}</ButtonSection>
-    </ApplicantWrapper>
+    </ManageCardWrapper>
   );
 }
 
-const ApplicantWrapper = styled.li`
+const ManageCardWrapper = styled.li`
   display: flex;
   padding: 20px 10px;
   border-radius: 15px;
