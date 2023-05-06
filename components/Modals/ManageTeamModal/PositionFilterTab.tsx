@@ -37,7 +37,7 @@ const PositionTabList = styled.ul`
   align-items: center;
   gap: 10px;
   margin: 0;
-  padding: 0px 20px;
+  padding: 20px 20px;
   overflow: auto;
   overflow-y: hidden;
 `;

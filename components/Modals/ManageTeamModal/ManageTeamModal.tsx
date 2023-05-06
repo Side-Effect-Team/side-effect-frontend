@@ -51,6 +51,13 @@ export default function ManageTeamModal() {
       <ManageSection>
         <ManageList>
           <ManageCard filter={value} />
+          <ManageCard filter={value} />
+          <ManageCard filter={value} />
+          <ManageCard filter={value} />
+          <ManageCard filter={value} />
+          <ManageCard filter={value} />
+          <ManageCard filter={value} />
+          <ManageCard filter={value} />
         </ManageList>
       </ManageSection>
     </Wrapper>
