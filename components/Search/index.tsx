@@ -1,4 +1,4 @@
-import { ChangeEvent, InputHTMLAttributes, useState } from "react";
+import { ChangeEvent, InputHTMLAttributes, useEffect, useState } from "react";
 import { SearchBtn, SearchDiv, SearchIcon, StyledInput } from "./styled";
 import { BoardCardProps } from "../BoardCard";
 
@@ -24,13 +24,32 @@ export default function Search({
           tag.toLowerCase().includes(keyword.toLowerCase()),
         ),
     );
+    sessionStorage.setItem("searchKeyword", keyword);
     handleSearch(filteredData);
   };
+
+  const [savedKeyword, setSavedKeyword] = useState("");
+  useEffect(() => {
+    const savedKeyword = window.sessionStorage.getItem("searchKeyword");
+    if (savedKeyword) {
+      const filteredData = defaultData.filter(
+        (data) =>
+          data.title.toLowerCase().includes(savedKeyword.toLowerCase()) ||
+          data.content.toLowerCase().includes(savedKeyword.toLowerCase()) ||
+          data.tags?.some((tag) =>
+            tag.toLowerCase().includes(savedKeyword.toLowerCase()),
+          ),
+      );
+      handleSearch(filteredData);
+      setSavedKeyword(savedKeyword);
+    }
+  }, []);
   return (
     <SearchDiv>
       <StyledInput
         type="text"
         placeholder="검색어를 입력하세요."
+        defaultValue={savedKeyword}
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
           setKeyword(e.currentTarget.value)
         }
