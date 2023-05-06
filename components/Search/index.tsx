@@ -34,6 +34,11 @@ export default function Search({
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
           setKeyword(e.currentTarget.value)
         }
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            onClickSearch();
+          }
+        }}
         {...rest}
       />
       <SearchBtn onClick={onClickSearch}>
