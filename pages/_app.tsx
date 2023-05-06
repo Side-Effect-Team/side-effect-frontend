@@ -16,8 +16,8 @@ export default function App({ Component, pageProps }: AppProps) {
     <Layout>
       <QueryClientProvider client={queryClient}>
         <Provider store={store}>
+          <GlobalModal />
           <AnimatePresence mode="wait">
-            <GlobalModal />
             <Component key={pageKey} {...pageProps} />
           </AnimatePresence>
         </Provider>

@@ -26,17 +26,14 @@ export default function RecruitmentModal() {
     0,
     "프론트엔드",
   );
-  console.log(positionFilter);
   const modalRef = useRef(null);
   const dispatch = useAppDispatch();
-
   const handleModalClose = () => {
     dispatch(closeModal());
   };
-
   useOutsideClick(modalRef, handleModalClose);
   return (
-    <Wrapper isOpen={isOpen} ref={modalRef}>
+    <Wrapper isOpen={isOpen}>
       <Title>
         <h2>Modal</h2>
         <AiOutlineClose

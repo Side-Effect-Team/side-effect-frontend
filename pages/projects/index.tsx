@@ -165,7 +165,6 @@ export default function ProjectPage() {
       },
     },
   );
-  console.log(isFetchingNextPage);
   const dispatch = useAppDispatch();
   return (
     <Wrapper>
