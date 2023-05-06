@@ -7,7 +7,7 @@ interface FilterType {
 interface PropsType {
   positionList: FilterType[];
   positionTab: number;
-  handlePositionFilterTab: any;
+  handlePositionFilterTab: Function;
 }
 
 export default function PositionFilterTab({
