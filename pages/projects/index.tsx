@@ -208,7 +208,7 @@ export default function ProjectPage() {
           setValue={setFilter}
           size="large"
         />
-        <input placeholder="검색" onChange={(e) => handleTextValue(e)} />
+        {/* <input placeholder="검색" onChange={(e) => handleTextValue(e)} /> */}
         <Search defaultData={tempData} handleSearch={handleSearch} />
       </FilterSection>
 

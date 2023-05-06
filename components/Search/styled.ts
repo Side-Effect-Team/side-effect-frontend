@@ -9,12 +9,13 @@ export const SearchDiv = styled.div`
   border: 1px solid ${theme.colors.gray};
   border-radius: 5px;
   padding: 0 10px;
+  margin-left: 10px;
   :focus-within {
     border: 1px solid ${theme.brandColor.primary};
   }
 `;
 export const StyledInput = styled.input`
-  width: 200px;
+  width: 180px;
   border: none;
   outline: none;
   :focus {
