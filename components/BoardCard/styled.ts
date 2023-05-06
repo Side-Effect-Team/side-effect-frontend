@@ -154,10 +154,9 @@ export const ButtonsWrapper = styled.div`
   justify-content: flex-end;
   align-items: center;
 `;
-export const ButtonDiv = styled.button`
+export const IconButton = styled.button`
   background: none;
   border: none;
-  margin-right: 5px;
   cursor: pointer;
 `;
 export const HeartNotFillIcon = styled(AiOutlineHeart)`

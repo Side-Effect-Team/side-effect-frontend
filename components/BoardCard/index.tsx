@@ -1,6 +1,6 @@
 import { MouseEvent, useState } from "react";
 import {
-  ButtonDiv,
+  IconButton,
   ButtonsWrapper,
   CommentIcon,
   Container,
@@ -65,15 +65,15 @@ export default function BoardCard({ data }: BoardCardDataProps) {
         <Footer>
           <CreateAt>{data?.createdAt}</CreateAt>
           <ButtonsWrapper>
-            <ButtonDiv onClick={onClickHeart}>
+            <IconButton onClick={onClickHeart}>
               {isLike ? <HeartFillIcon /> : <HeartNotFillIcon />}
-            </ButtonDiv>
+            </IconButton>
             {data?.likeNum && (
               <>
                 <FeedbackNum>{data.likeNum}</FeedbackNum>
-                <ButtonDiv>
+                <IconButton>
                   <CommentIcon />
-                </ButtonDiv>
+                </IconButton>
                 <FeedbackNum>{data.commentNum}</FeedbackNum>
               </>
             )}
