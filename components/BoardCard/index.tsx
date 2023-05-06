@@ -18,7 +18,7 @@ import {
   Title,
 } from "./styled";
 import { useRouter } from "next/router";
-interface BoardCardProps {
+export interface BoardCardProps {
   id: number | string;
   category?: string;
   headerImage?: string;
