@@ -105,8 +105,9 @@ const Wrapper = styled.div<{ isOpen: boolean }>`
     width:100%;
   `} */
   ${media.mobile} {
-    height: 90%;
+    height: 80%;
     width: 100%;
+    font-size: small;
     border-bottom-left-radius: 0px;
     border-top-right-radius: 25px;
     animation: ${({ isOpen }) => (isOpen ? slideUp : slideDown)} 0.3s
@@ -118,7 +119,7 @@ const Title = styled.header`
   align-items: center;
   justify-content: space-between;
   border-bottom: 2px solid black;
-  padding: 30px;
+  padding: 20px;
 `;
 const FilterTab = styled.ul`
   display: flex;

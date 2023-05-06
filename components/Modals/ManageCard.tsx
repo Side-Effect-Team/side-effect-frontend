@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Image from "next/image";
 import profilePic from "../../public/images/profilePic.png";
 import Button from "../Button";
-import { mediaQuery } from "@/styles/Media";
+import { media } from "@/styles/mediatest";
 interface Props {
   filter: string;
 }
@@ -57,9 +57,9 @@ const ManageCardWrapper = styled.li`
   gap: 5px;
   box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px,
     rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
-  ${mediaQuery("mobile")`
-    flex-direction:column;
-  `}
+  ${media.mobile} {
+    flex-direction: column;
+  }
 `;
 const ProfileSection = styled.div`
   display: flex;
@@ -88,5 +88,8 @@ const ButtonSection = styled.div`
 const Nickname = styled.span`
   font-weight: 500;
   font-size: large;
+  ${media.mobile} {
+    font-size: medium;
+  }
 `;
 const Info = styled.span``;
