@@ -23,5 +23,4 @@ export const InfoContentLink = styled.a`
 export const Text = styled.p`
   color: #667085;
   margin: 0;
-  margin-bottom: 15px;
 `;

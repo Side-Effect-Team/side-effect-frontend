@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import SelectBox from "../../components/SelectBox";
 import BoardCard from "../../components/BoardCard";
-import { breakPoints } from "@/styles/Media";
+import { breakPoints, mediaQuery } from "@/styles/Media";
 import { useState, useEffect, ChangeEvent } from "react";
 import { useInView } from "react-intersection-observer";
 import { useInfiniteQuery } from "@tanstack/react-query";
@@ -238,4 +238,8 @@ const CardSection = styled.main`
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   row-gap: 1rem;
   column-gap: 1rem;
+  ${mediaQuery("mobile")`
+  display: flex;
+  flex-direction: column;
+`}
 `;
