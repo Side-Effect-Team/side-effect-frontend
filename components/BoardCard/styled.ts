@@ -15,9 +15,9 @@ export const Container = styled.div`
   overflow: hidden;
   background-color: white;
   cursor: pointer;
-  filter: drop-shadow(1px 1px 5px rgba(0, 0, 0, 0.25));
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
   :hover {
-    filter: drop-shadow(1px 1px 5px rgba(21, 94, 239, 0.25));
+    box-shadow: 1px 1px 5px rgba(21, 94, 239, 0.25);
   }
   ${mediaQuery("mobile")`
   width: 95%;
