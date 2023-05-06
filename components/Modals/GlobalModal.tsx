@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { useRouter } from "next/router";
 import { closeModal } from "@/store/modalSlice";
-import ManageTeamModal from "./ManageTeamModal";
+import ManageTeamModal from "./ManageTeamModal/ManageTeamModal";
 
 const MODAL_TYPES = {
   ManageTeamModal: "ManageTeamModal",

@@ -2,10 +2,10 @@ import { useState } from "react";
 
 export const useFilterTab = (index: number, name: string) => {
   const [currentTab, setCurrentTab] = useState(index);
-  const [filter, setFilter] = useState(name);
+  const [value, setValue] = useState(name);
   const handleFIlterTab: any = (index: number, name: string): void => {
     setCurrentTab(index);
-    setFilter(name);
+    setValue(name);
   };
-  return [currentTab, filter, handleFIlterTab];
+  return [currentTab, value, handleFIlterTab];
 };
