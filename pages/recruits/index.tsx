@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 // import { useRouter } from "next/router";
 // import { useQuery } from "@tanstack/react-query";
 import styled from "styled-components";
-import { breakPoints } from "@/styles/Media";
+import { breakPoints, mediaQuery } from "@/styles/Media";
 import Banner from "@/components/Banner";
 import BoardCard from "@/components/BoardCard";
 import { BANNER_CONTENTS } from "../../enum";
@@ -126,4 +126,8 @@ const ContentsMain = styled.main`
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   row-gap: 1rem;
   column-gap: 1rem;
+  ${mediaQuery("mobile")`
+  display: flex;
+  flex-direction: column;
+`}
 `;

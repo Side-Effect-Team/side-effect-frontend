@@ -12,6 +12,7 @@ import {
   SectionWrapper,
   Wrapper,
 } from "@/components/pages/mypage/styled";
+import { DataProps } from "..";
 
 export interface FormData {
   github?: string;
@@ -20,23 +21,24 @@ export interface FormData {
   nickname?: string;
 }
 
-export default function MyPageEdit() {
-  const data = {
-    avatarSrc: "/images/ProjectDefaultBackground.png",
-    nickname: "자라는개발자",
-    introduction:
-      "프론트엔드 개발자를 꿈꾸는 취준생입니다. 프로젝트 경험하고 싶어요",
-    boards: 1,
-    follower: 20,
-    following: 30,
-    skill: ["typescript", "react", "HTML", "Next.js", "React.native"],
-    position: "프론트엔드",
-    career: "0",
-    github: "https://github.com",
-    blog: "https://www.naver.com",
-    portfolio: "https://www.naver.com",
-  };
+const data: DataProps = {
+  avatarSrc: "/images/ProjectDefaultBackground.png",
+  nickname: "자라는개발자",
+  email: "sideeffect@naver.com",
+  introduction:
+    "프론트엔드 개발자를 꿈꾸는 취준생입니다. 프로젝트 경험하고 싶어요",
+  boards: 1,
+  follower: 20,
+  following: 30,
+  skill: ["typescript", "react", "HTML", "Next.js", "React.native"],
+  position: "프론트엔드",
+  career: "0",
+  github: "https://github.com",
+  blog: "https://www.naver.com",
+  portfolio: "https://www.naver.com",
+};
 
+export default function MyPageEdit() {
   const [introduction, setIntroduction] = useState(data?.introduction);
   const [imageUrl, setImageUrl] = useState(data?.avatarSrc);
   const [skillTags, setSkillTags] = useState<string[]>(data?.skill || []);
@@ -69,7 +71,7 @@ export default function MyPageEdit() {
           setIntroduction={setIntroduction}
           imageUrl={imageUrl}
           setImageUrl={setImageUrl}
-          IntroRegister={register}
+          introRegister={register}
           errors={errors}
         />
         <SectionWrapper>
@@ -85,12 +87,14 @@ export default function MyPageEdit() {
             <Border></Border>
           </SectionHeaderWrapper>
           <InfoEdit
-            data={data}
+            github={data.github}
+            blog={data.blog}
+            portfolio={data.portfolio}
             career={career}
             setCareer={setCareer}
             position={position}
             setPosition={setPosition}
-            InfoRegister={register}
+            infoRegister={register}
           />
         </SectionWrapper>
         <ButtonWrapper>

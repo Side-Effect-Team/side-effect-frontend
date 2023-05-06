@@ -1,4 +1,3 @@
-import { MyPageProps } from "@/pages/mypage";
 import {
   ContentLink,
   ContentNum,
@@ -7,28 +6,47 @@ import {
   NickName,
   ProfileImage,
   ProfileWrapper,
+  ShortBorder,
   Text,
 } from "./styled";
 
-export default function Introduction(p: MyPageProps) {
+interface IntroductionProps {
+  avatarSrc: string | undefined;
+  nickname: string;
+  email: string;
+  introduction: string | undefined;
+  boards: number;
+  follower: number;
+  following: number;
+}
+
+export default function Introduction({
+  avatarSrc,
+  nickname,
+  email,
+  introduction,
+  boards,
+  follower,
+  following,
+}: IntroductionProps) {
   return (
     <ProfileWrapper>
-      <ProfileImage
-        src={p.data?.avatarSrc || "/images/BoardDefaultBackground.png"}
-      />
-      <NickName>{p.data?.nickname || ""}</NickName>
-      <Text>{p.data?.introduction || "아직 소개가 없습니다."}</Text>
+      <ProfileImage src={avatarSrc || "/images/BoardDefaultBackground.png"} />
+      <NickName>{nickname || ""}</NickName>
+      <Text>{email}</Text>
+      <ShortBorder></ShortBorder>
+      <Text>{introduction || "아직 소개가 없습니다."}</Text>
       <ContentsList>
         <ContentLink>
-          <ContentNum>{p.data?.boards}</ContentNum>
+          <ContentNum>{boards}</ContentNum>
           <ContentTitle>게시물</ContentTitle>
         </ContentLink>
         <ContentLink>
-          <ContentNum>{p.data?.follower}</ContentNum>
+          <ContentNum>{follower}</ContentNum>
           <ContentTitle>팔로워</ContentTitle>
         </ContentLink>
         <ContentLink>
-          <ContentNum>{p.data?.following}</ContentNum>
+          <ContentNum>{following}</ContentNum>
           <ContentTitle>팔로잉</ContentTitle>
         </ContentLink>
       </ContentsList>

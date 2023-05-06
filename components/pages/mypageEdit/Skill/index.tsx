@@ -12,7 +12,7 @@ interface SkillEditProps {
   setSkillTags: Dispatch<SetStateAction<string[]>>;
 }
 
-export default function SkillEdit(p: SkillEditProps) {
+export default function SkillEdit({ skillTags, setSkillTags }: SkillEditProps) {
   const [tag, setTag] = useState("");
 
   const onChangeTag = (e: ChangeEvent<HTMLInputElement>) => {
@@ -25,20 +25,20 @@ export default function SkillEdit(p: SkillEditProps) {
     }
   };
   const submitTagItem = () => {
-    let updatedTagList = [...p.skillTags];
+    let updatedTagList = [...skillTags];
     updatedTagList.push(tag);
-    p.setSkillTags(updatedTagList);
+    setSkillTags(updatedTagList);
     setTag("");
   };
   const onClickDeleteTag = (el: string) => {
     const deleteTag = el;
-    const filteredTag = p.skillTags.filter((tag) => tag !== deleteTag);
-    p.setSkillTags(filteredTag);
+    const filteredTag = skillTags.filter((tag) => tag !== deleteTag);
+    setSkillTags(filteredTag);
   };
   return (
     <TagWrapper>
-      {p.skillTags &&
-        p.skillTags.map((el, index) => (
+      {skillTags &&
+        skillTags.map((el, index) => (
           <Tag key={index}>
             {el}{" "}
             <DeleteTag type="button" onClick={() => onClickDeleteTag(el)}>
