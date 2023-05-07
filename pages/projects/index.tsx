@@ -7,7 +7,8 @@ import { useInView } from "react-intersection-observer";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useAppDispatch } from "../../store/hooks";
 import { openModal } from "../../store/modalSlice";
-
+import { media } from "@/styles/mediatest";
+import axios from "axios";
 const FILTER_OPTIONS = ["조회순", "추천순", "댓글순"];
 const data = [
   {
@@ -141,14 +142,11 @@ export default function ProjectPage() {
   }, [inView]);
 
   const fetchMockData = async (page: number) => {
-    const response = await fetch(`https://koreanjson.com/users`);
+    const response = await fetch(
+      `http://54.64.103.42:8080/api/free-boards/scroll?size=${page}`,
+    );
     return response.json();
   };
-
-  const handleTextValue = (e: ChangeEvent<HTMLInputElement>) => {
-    setText(e.target.value);
-  };
-
   const {
     data: testData,
     hasNextPage,
@@ -157,15 +155,24 @@ export default function ProjectPage() {
     isSuccess,
   } = useInfiniteQuery(
     ["test"],
-    ({ pageParam = 1 }) => fetchMockData(pageParam),
+    ({ pageParam = 4 }) => fetchMockData(pageParam),
     {
       getNextPageParam: (allPages) => {
         const nextPage = allPages.length + 1;
+        console.log("nextPage", nextPage);
         return nextPage;
       },
     },
   );
+
+  console.log(testData);
+  console.log(hasNextPage);
+
   const dispatch = useAppDispatch();
+  const handleTextValue = (e: ChangeEvent<HTMLInputElement>) => {
+    setText(e.target.value);
+  };
+
   return (
     <Wrapper>
       <button
@@ -192,17 +199,7 @@ export default function ProjectPage() {
           return <BoardCard key={data.id} data={data} />;
         })}
       </CardSection>
-      {isSuccess &&
-        testData.pages.map((page) => {
-          return page.map((item: any) => {
-            return <div key={item.id}>{item.name}</div>;
-          });
-        })}
-      {isFetchingNextPage ? (
-        <div>...loading</div>
-      ) : (
-        <div ref={ref} style={{ height: "100px" }}></div>
-      )}
+      <div ref={ref}></div>
     </Wrapper>
   );
 }
@@ -230,6 +227,7 @@ const HeaderSection = styled.header`
 `;
 const FilterSection = styled.div`
   display: flex;
+  gap: 10px;
   justify-content: flex-end;
 `;
 const CardSection = styled.main`

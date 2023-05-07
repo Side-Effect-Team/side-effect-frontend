@@ -33,10 +33,10 @@ export default function Success() {
           <Button size="large" onClick={() => handlePageRoute("/")}>
             HOME
           </Button>
-          <Button size="large" onClick={() => handlePageRoute("/")}>
-            팀 구경하러 가기
+          <Button size="large" onClick={() => handlePageRoute("/recruits")}>
+            팀 구하러 가기
           </Button>
-          <Button size="large" onClick={() => handlePageRoute("/")}>
+          <Button size="large" onClick={() => handlePageRoute("/projects")}>
             프로젝트 구경하러 가기
           </Button>
         </ButtonWrapper>

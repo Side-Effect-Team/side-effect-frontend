@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import PageTransition from "@/components/pages/userInfoPage/PageTransition";
 import SelectBox from "../../components/SelectBox";
 import {
-  Wrapper,
   SelectSection,
   ButtonWrapper,
   InputSection,
@@ -50,49 +49,48 @@ export default function Position() {
     } else {
       const nickname = localStorage.getItem("nickname");
       // api요청 작성
+      router.push("/userinfo/success");
       console.log({ nickname, position, career, ...data });
     }
   };
   return (
     <PageTransition>
-      <Wrapper>
-        <Form onSubmit={handleSubmit(onSubmit)}>
-          <h1>포지션,경력을 선택해주세요.</h1>
-          <SelectSection>
-            <SelectBox
-              options={SELECT_POSITIONS}
-              setValue={setPosition}
-              value={position}
-              title="포지션"
-            />
-            <SelectBox
-              options={SELECT_CAREER}
-              setValue={setCareer}
-              value={career}
-              title="경력"
-            />
-          </SelectSection>
-          <InputSection>
-            <h4>
-              깃허브와 블로그 주소는 선택사항입니다.
-              <br /> <br />
-              깃허브나 블로그 주소를 등록하면 팀에 합류할 확률이 더 높아집니다!
-            </h4>
-            <Label htmlFor="Github">Github</Label>
-            <Input id="Github" {...register("github")} />
-            <Label htmlFor="Blog">Blog</Label>
-            <Input id="Blog" {...register("blog")} />
-          </InputSection>
-          <ButtonWrapper>
-            <Button type="submit" size="large">
-              가입완료
-            </Button>
-            <Button type="button" size="large" onClick={() => router.back()}>
-              Back
-            </Button>
-          </ButtonWrapper>
-        </Form>
-      </Wrapper>
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <h1>포지션,경력을 선택해주세요.</h1>
+        <SelectSection>
+          <SelectBox
+            options={SELECT_POSITIONS}
+            setValue={setPosition}
+            value={position}
+            title="포지션"
+          />
+          <SelectBox
+            options={SELECT_CAREER}
+            setValue={setCareer}
+            value={career}
+            title="경력"
+          />
+        </SelectSection>
+        <InputSection>
+          <h4>
+            깃허브와 블로그 주소는 선택사항입니다.
+            <br /> <br />
+            깃허브나 블로그 주소를 등록하면 팀에 합류할 확률이 더 높아집니다!
+          </h4>
+          <Label htmlFor="Github">Github</Label>
+          <Input id="Github" {...register("github")} />
+          <Label htmlFor="Blog">Blog</Label>
+          <Input id="Blog" {...register("blog")} />
+        </InputSection>
+        <ButtonWrapper>
+          <Button type="submit" size="large">
+            가입완료
+          </Button>
+          <Button type="button" size="large" onClick={() => router.back()}>
+            Back
+          </Button>
+        </ButtonWrapper>
+      </Form>
     </PageTransition>
   );
 }

@@ -41,7 +41,9 @@ function PageTransition({ children }: PageTransitionProps) {
 export default PageTransition;
 
 const PageTransitionDiv = styled(motion.div)`
-  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   width: 100%;
-  height: 100%;
 `;

@@ -42,7 +42,6 @@ export default function GlobalModal() {
   const handleRenderModal = () => {
     return findModal?.component;
   };
-  console.log(isOpen);
   return (
     <>
       {<Overlay isOpen={isOpen} onClick={() => dispatch(closeModal())} />}

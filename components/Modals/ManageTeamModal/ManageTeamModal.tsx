@@ -72,7 +72,7 @@ const Wrapper = styled.div<{ isOpen: boolean }>`
   flex-direction: column;
   position: fixed;
   background-color: white;
-  width: 600px;
+  width: 700px;
   height: 100vh;
   right: 0;
   bottom: 0;
