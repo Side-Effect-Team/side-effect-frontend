@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { store } from "@/store/store";
 import Layout from "@/components/Layout";
-
+import GlobalModal from "@/components/Modals/GlobalModal";
 const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -16,6 +16,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <Layout>
       <QueryClientProvider client={queryClient}>
         <Provider store={store}>
+          <GlobalModal />
           <AnimatePresence mode="wait">
             <Component key={pageKey} {...pageProps} />
           </AnimatePresence>
