@@ -1,10 +1,10 @@
 import styled, { css } from "styled-components";
-
+import { media } from "@/styles/mediatest";
 interface SelectOptionType {
   visible: boolean;
 }
 interface SelectSize {
-  size?: "small" | "medium" | "large" | "full";
+  size?: "small" | "medium" | "large";
 }
 const sizeStyles = css<SelectSize>`
   ${(p) =>
@@ -22,11 +22,6 @@ const sizeStyles = css<SelectSize>`
     css`
       width: 200px;
     `}
-    ${(p) =>
-    p.size === "full" &&
-    css`
-      width: 100%;
-    `}
 `;
 
 export const SelectWrapper = styled.div`
@@ -35,8 +30,10 @@ export const SelectWrapper = styled.div`
   border-radius: 5px;
   position: relative;
   ${sizeStyles}
+  ${media.mobile} {
+    width: 100%;
+  }
 `;
-
 export const SelectOptionWrapper = styled.ul<SelectOptionType>`
   visibility: ${(p) => (p.visible ? "visible" : "hidden")};
   opacity: ${(p) => (p.visible ? "1" : "0")};
@@ -71,5 +68,5 @@ export const SelectValue = styled.div`
   background-color: white;
 `;
 SelectWrapper.defaultProps = {
-  size: "full",
+  size: "large",
 };

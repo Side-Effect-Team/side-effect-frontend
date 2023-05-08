@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Image from "next/image";
-import profilePic from "../../public/images/profilePic.png";
-import Button from "../Button";
+import profilePic from "../../../public/images/profilePic.png";
+import Button from "../../Button";
 import { media } from "@/styles/mediatest";
 interface Props {
   filter: string;
