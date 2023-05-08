@@ -6,8 +6,9 @@ import { useState, useEffect, ChangeEvent } from "react";
 import { useInView } from "react-intersection-observer";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import Search from "@/components/Search";
+import Filter from "@/components/Search/filter";
 const FILTER_OPTIONS = ["조회순", "추천순", "댓글순"];
-const tempData: BoardCardProps[] = [
+const data: BoardCardProps[] = [
   {
     id: 1,
     category: "projects",
@@ -125,30 +126,6 @@ const tempData: BoardCardProps[] = [
     likeNum: 65,
     commentNum: 17,
   },
-  {
-    id: 11,
-    category: "projects",
-    headerImage: "/images/ProjectDefaultBackground.png",
-    // tags: ["Figma", "Spring", "React"],
-    title: "오늘 점심",
-    content: "검색기능 테스트",
-    createdAt: "2023.05.04",
-    like: true,
-    likeNum: 65,
-    commentNum: 17,
-  },
-  {
-    id: 12,
-    category: "projects",
-    headerImage: "/images/ProjectDefaultBackground.png",
-    // tags: ["Figma", "Spring", "React"],
-    title: "오늘 저녁",
-    content: "검색 해본다",
-    createdAt: "2023.05.04",
-    like: true,
-    likeNum: 65,
-    commentNum: 17,
-  },
 ];
 
 export default function ProjectPage() {
@@ -189,12 +166,6 @@ export default function ProjectPage() {
   );
   console.log(isFetchingNextPage);
 
-  // 서치 컴포넌트 사용 시 추가 로직
-  const [data, setData] = useState(tempData);
-  const handleSearch = (filteredData: BoardCardProps[]) => {
-    setData(filteredData);
-  };
-
   return (
     <Wrapper>
       <HeaderSection>
@@ -208,8 +179,7 @@ export default function ProjectPage() {
           setValue={setFilter}
           size="large"
         />
-        {/* <input placeholder="검색" onChange={(e) => handleTextValue(e)} /> */}
-        <Search defaultData={tempData} handleSearch={handleSearch} />
+        <input placeholder="검색" onChange={(e) => handleTextValue(e)} />
       </FilterSection>
 
       <CardSection>
