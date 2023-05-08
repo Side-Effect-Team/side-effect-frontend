@@ -1,68 +1,72 @@
-import { ChangeEvent, InputHTMLAttributes, useEffect, useState } from "react";
-import { SearchBtn, SearchDiv, SearchIcon, StyledInput } from "./styled";
-import { BoardCardProps } from "../BoardCard";
+import {
+  ChangeEvent,
+  Dispatch,
+  InputHTMLAttributes,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
+import { SearchDiv, StyledInput } from "./styled";
+import axios from "axios";
 
 type InputProps = InputHTMLAttributes<HTMLInputElement>;
+
 interface SearchProps extends InputProps {
-  defaultData: BoardCardProps[];
-  handleSearch: (handleSearch: BoardCardProps[]) => void;
+  setData: Dispatch<SetStateAction<any>>;
+  category: string;
 }
 
-export default function Search({
-  defaultData,
-  handleSearch,
-  ...rest
-}: SearchProps) {
+export default function Search({ setData, category, ...rest }: SearchProps) {
   const [keyword, setKeyword] = useState("");
 
-  const onClickSearch = () => {
-    const filteredData = defaultData.filter(
-      (data) =>
-        data.title.toLowerCase().includes(keyword.toLowerCase()) ||
-        data.content.toLowerCase().includes(keyword.toLowerCase()) ||
-        data.tags?.some((tag) =>
-          tag.toLowerCase().includes(keyword.toLowerCase()),
-        ),
-    );
-    sessionStorage.setItem("searchKeyword", keyword);
-    handleSearch(filteredData);
+  const onChangeKeyword = (e: ChangeEvent<HTMLInputElement>) => {
+    setKeyword(e.currentTarget.value);
   };
 
-  const [savedKeyword, setSavedKeyword] = useState("");
-  useEffect(() => {
-    const savedKeyword = window.sessionStorage.getItem("searchKeyword");
-    if (savedKeyword) {
-      const filteredData = defaultData.filter(
-        (data) =>
-          data.title.toLowerCase().includes(savedKeyword.toLowerCase()) ||
-          data.content.toLowerCase().includes(savedKeyword.toLowerCase()) ||
-          data.tags?.some((tag) =>
-            tag.toLowerCase().includes(savedKeyword.toLowerCase()),
-          ),
+  const fetchRecruits = async () => {
+    try {
+      const result = await axios.get(
+        `http://54.64.103.42:8080/api/recruit-board/scroll?&size=10&keyword=${keyword}`,
       );
-      handleSearch(filteredData);
-      setSavedKeyword(savedKeyword);
+      setData(result.data);
+    } catch (error) {
+      setData(null);
+      console.log(error);
     }
-  }, []);
+  };
+  const fetchProjects = async () => {
+    try {
+      const result = await axios.get(
+        `http://http://http://54.64.103.42:8080/api/free-boards/search?&size=10&keyWord=${keyword}`,
+      );
+      setData(result.data);
+    } catch (error) {
+      setData(null);
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (category === "recruits") {
+      fetchRecruits();
+    } else {
+      fetchProjects();
+    }
+  }, [keyword]);
+
   return (
     <SearchDiv>
       <StyledInput
         type="text"
         placeholder="검색어를 입력하세요."
-        defaultValue={savedKeyword}
-        onChange={(e: ChangeEvent<HTMLInputElement>) =>
-          setKeyword(e.currentTarget.value)
-        }
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            onClickSearch();
-          }
-        }}
+        // defaultValue={savedKeyword}
+        onChange={onChangeKeyword}
         {...rest}
       />
-      <SearchBtn onClick={onClickSearch}>
-        <SearchIcon />
-      </SearchBtn>
     </SearchDiv>
   );
 }
+
+// 쓰는 방법
+// 데이터 받아주시고 아래의 양식처럼 props 보내주시면 됩니다.
+// <Search category="recruits" setData={setData} /> or <Search category="projects" setData={setData} />
