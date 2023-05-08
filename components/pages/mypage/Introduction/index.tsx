@@ -15,9 +15,9 @@ interface IntroductionProps {
   nickname: string;
   email: string;
   introduction: string | undefined;
-  boards: number;
-  follower: number;
-  following: number;
+  // boards: number;
+  // follower: number;
+  // following: number;
 }
 
 export default function Introduction({
@@ -25,10 +25,10 @@ export default function Introduction({
   nickname,
   email,
   introduction,
-  boards,
-  follower,
-  following,
-}: IntroductionProps) {
+}: // boards,
+// follower,
+// following,
+IntroductionProps) {
   return (
     <ProfileWrapper>
       <ProfileImage src={avatarSrc || "/images/BoardDefaultBackground.png"} />
@@ -36,7 +36,7 @@ export default function Introduction({
       <Text>{email}</Text>
       <ShortBorder></ShortBorder>
       <Text>{introduction || "아직 소개가 없습니다."}</Text>
-      <ContentsList>
+      {/* <ContentsList>
         <ContentLink>
           <ContentNum>{boards}</ContentNum>
           <ContentTitle>게시물</ContentTitle>
@@ -49,7 +49,7 @@ export default function Introduction({
           <ContentNum>{following}</ContentNum>
           <ContentTitle>팔로잉</ContentTitle>
         </ContentLink>
-      </ContentsList>
+      </ContentsList> */}
     </ProfileWrapper>
   );
 }
