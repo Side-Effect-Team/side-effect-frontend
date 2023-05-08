@@ -1,65 +1,123 @@
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
 import { PostTitleStyled } from "@/postComps/common/Title.styled";
-import TitleBox from "@/postComps/TitleBox";
+import {
+  InputBox,
+  LabelForm,
+  InputForm,
+  TextareaForm,
+  SubmitBtnBox,
+  ErrorMsg,
+} from "@/postComps/common/PostForm.styled";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import Button from "@/components/Button";
+import { useForm } from "@/hooks/useForm";
 
-export default function PostRecruitPage() {
+export const POST_FORM = {
+  projectName: "",
+  title: "",
+  content: "",
+};
+
+export default function PostProjectPage() {
   const router = useRouter();
-  const pageCategory = router.pathname.split("/")[2];
-  const [postForm, setPostForm] = useState({
-    category: pageCategory,
-    projectName: "",
-    postTitle: "",
-    tags: [],
-    image: "",
-    description: "",
-  });
+  const { postForm, errMsgs, touched, handleChange, handleBlur, handleSubmit } =
+    useForm({
+      initialVals: { ...POST_FORM },
+      validate: (postForm: typeof POST_FORM) => {
+        const newErrorMsgs = { ...POST_FORM };
+
+        // 프로젝트명
+        if (
+          postForm.projectName.trim().length < 3 ||
+          postForm.projectName.trim().length > 20
+        )
+          newErrorMsgs.projectName = "프로젝트명은 3~20자 이내로 입력해주세요";
+
+        // 게시글 제목
+        if (postForm.title.trim().length < 5)
+          newErrorMsgs.title = "게시글 제목은 5자 이상 입력해야 합니다";
+
+        // 상세 내용
+        if (postForm.content.trim().length < 20)
+          newErrorMsgs.content = "게시글 내용은 20자 이상 입력해야 합니다";
+
+        return newErrorMsgs;
+      },
+      onSubmit: async () => {
+        const projects = getter("projects");
+        setter("projects", [...projects, postForm]);
+        window.alert("등록이 완료되었습니다");
+        await router.push("/projects"); // FIXME : 생성한 게시글 id 로 이동
+      },
+    });
 
   const { getter, setter } = useLocalStorage();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPostForm({ ...postForm, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = () => {
-    const projects = getter(pageCategory + "s");
-    setter(pageCategory + "s", [...projects, postForm]);
-    window.alert("등록이 완료되었습니다");
-    router.push("/" + pageCategory + "s");
-  };
-
   const handleCancel = () => {
     if (window.confirm("작성중인 내용이 사라집니다. 계속 진행하시겠습니까?"))
-      router.push("/" + pageCategory + "s");
+      router.push("/projects");
   };
 
   useEffect(() => {
-    const projects = getter(pageCategory + "s");
-    if (!projects) setter(pageCategory + "s", []);
+    const projects = getter("projects");
+    if (!projects) setter("projects", []);
   }, [getter, setter]);
-
-  // test
-  useEffect(() => {
-    console.log(postForm);
-  });
 
   return (
     <Wrapper>
       <Contents>
-        <PostTitleStyled>
-          {pageCategory === "project" ? "프로젝트 자랑하기" : "팀원 모집하기"}
-        </PostTitleStyled>
-        <TitleBox
-          label="프로젝트명"
-          inputId="projectName"
-          placeholder="3~20자의 프로젝트명을 입력해주세요"
-          handleChange={handleChange}
-        />
-        <Button onClick={handleSubmit}>등록</Button>
-        <Button onClick={handleCancel}>취소</Button>
+        <PostTitleStyled>프로젝트 자랑하기</PostTitleStyled>
+        <form onSubmit={handleSubmit}>
+          <InputBox>
+            <LabelForm htmlFor="projectName">프로젝트명</LabelForm>
+            <InputForm
+              type="text"
+              id="projectName"
+              name="projectName"
+              value={postForm.projectName}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            {touched.projectName && errMsgs.projectName && (
+              <ErrorMsg>{errMsgs.projectName}</ErrorMsg>
+            )}
+          </InputBox>
+          <InputBox>
+            <LabelForm htmlFor="title">게시글 제목</LabelForm>
+            <InputForm
+              type="text"
+              id="title"
+              name="title"
+              value={postForm.title}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            {touched.title && errMsgs.title && (
+              <ErrorMsg>{errMsgs.title}</ErrorMsg>
+            )}
+          </InputBox>
+          <InputBox>
+            <LabelForm htmlFor="content">상세 내용</LabelForm>
+            <TextareaForm
+              id="content"
+              name="content"
+              value={postForm.content}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            {touched.content && errMsgs.content && (
+              <ErrorMsg>{errMsgs.content}</ErrorMsg>
+            )}
+          </InputBox>
+          <SubmitBtnBox>
+            <Button type="submit">등록</Button>
+            <Button type="button" onClick={handleCancel}>
+              취소
+            </Button>
+          </SubmitBtnBox>
+        </form>
       </Contents>
     </Wrapper>
   );
