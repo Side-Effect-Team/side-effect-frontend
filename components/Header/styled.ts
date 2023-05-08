@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { mediaQuery } from "../../styles/Media";
+import { mediaQuery } from "@/styles/Media";
 
 export const Wrapper = styled.div`
   z-index: 10;
@@ -32,10 +32,11 @@ export const Logo = styled.h2`
 `;
 
 export const NavStyled = styled.nav`
-  width: 30vw;
+  width: 40vw;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  font-weight: 600;
 
   ${mediaQuery("mobile")`
     display: none;
@@ -43,11 +44,17 @@ export const NavStyled = styled.nav`
 `;
 
 export const BoxStyled = styled.div`
-  width: 100px;
+  width: 150px;
   display: flex;
   justify-content: space-between;
 
   ${mediaQuery("mobile")`
     display: none;
   `}
+
+  button {
+    svg {
+      transform: scale(1.2);
+    }
+  }
 `;

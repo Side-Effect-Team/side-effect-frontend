@@ -1,11 +1,9 @@
 import Link from "next/link";
-import { IoNotificationsOutline, IoNotificationsSharp } from "react-icons/io5";
+import { IoNotificationsOutline } from "react-icons/io5";
 import { Wrapper, HeaderStyled, Logo, NavStyled, BoxStyled } from "./styled";
 import MobileMenuButton from "../MobileMenuButton";
 import { BOARD_LIST } from "../../enum";
-
-// IoNotificationsSharp : 라이트모드
-// IoNotificationsOutline : 다크모드
+import Button from "../Button";
 
 interface HeaderProps {
   handleMobileMenu: (e: React.MouseEvent<HTMLDivElement>) => void;
@@ -26,10 +24,10 @@ export default function Header({ handleMobileMenu }: HeaderProps) {
           ))}
         </NavStyled>
         <BoxStyled>
-          <Link href="/">
-            <IoNotificationsSharp />
-          </Link>
-          <Link href="/">로그인</Link>
+          <Button>
+            <IoNotificationsOutline />
+          </Button>
+          <Button>로그인</Button>
         </BoxStyled>
         <MobileMenuButton onClick={handleMobileMenu} />
       </HeaderStyled>
