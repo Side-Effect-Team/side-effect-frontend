@@ -1,25 +1,8 @@
 import styled from "styled-components";
 import { mediaQuery } from "@/styles/Media";
 export const Wrapper = styled.div`
-  max-width: 600px;
-  margin: 0 auto;
-  height: 600px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 15px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  ${mediaQuery("mobile")`
-    position:absolute;
-    width:100%;
-    padding:35px;
-  `}
+  padding: 20px;
 `;
-
 export const Label = styled.label`
   text-align: start;
   font-weight: bold;
@@ -55,5 +38,8 @@ export const SelectSection = styled.div`
 `;
 
 export const Form = styled.form`
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
 `;
