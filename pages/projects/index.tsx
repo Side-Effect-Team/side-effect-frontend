@@ -134,17 +134,19 @@ export default function ProjectPage() {
   const [filter, setFilter] = useState("조회순");
   const [text, setText] = useState("");
   //threshold : inview가 보여지는 정도를 0~1까지 조절하여 트리거시점을 조절할수있다 0이면 보이자마자 트리거 1이면 전체가 다보여야 트리거
-  const { ref, inView } = useInView({ threshold: 1 });
-  useEffect(() => {
-    if (inView && hasNextPage) {
-      fetchNextPage();
-    }
-  }, [inView]);
+  const { ref, inView } = useInView({ threshold: 0 });
 
   const fetchMockData = async (page: number) => {
+    if (page === undefined) {
+      const response = await fetch(
+        `http://54.64.103.42:8080/api/free-boards/scroll?size=2`,
+      );
+      return response.json();
+    }
     const response = await fetch(
-      `http://54.64.103.42:8080/api/free-boards/scroll?size=${page}`,
+      `http://54.64.103.42:8080/api/free-boards/scroll?lastId=${page}&size=4`,
     );
+
     return response.json();
   };
   const {
@@ -154,20 +156,23 @@ export default function ProjectPage() {
     isFetchingNextPage,
     isSuccess,
   } = useInfiniteQuery(
-    ["test"],
-    ({ pageParam = 4 }) => fetchMockData(pageParam),
+    ["projectData"],
+    ({ pageParam }) => fetchMockData(pageParam),
     {
-      getNextPageParam: (allPages) => {
-        const nextPage = allPages.length + 1;
-        console.log("nextPage", nextPage);
-        return nextPage;
+      //**getNextPageParam 에서 return 된값은 pageParam 으로 넘어갑니다. */
+      getNextPageParam: (lastPage) => {
+        console.log(lastPage);
+        return lastPage.lastId === 1 ? undefined : lastPage.lastId;
       },
     },
   );
 
-  console.log(testData);
-  console.log(hasNextPage);
-
+  useEffect(() => {
+    if (inView && hasNextPage === true) {
+      fetchNextPage();
+    }
+  }, [inView, hasNextPage]);
+  console.log(inView);
   const dispatch = useAppDispatch();
   const handleTextValue = (e: ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
@@ -199,7 +204,18 @@ export default function ProjectPage() {
           return <BoardCard key={data.id} data={data} />;
         })}
       </CardSection>
-      <div ref={ref}></div>
+      {isSuccess &&
+        testData?.pages.map((page) => {
+          return page.freeBoards.map((el: any) => {
+            return <div key={el.id}>{el.content}</div>;
+          });
+        })}
+      <div
+        ref={ref}
+        style={{ backgroundColor: "black", height: "100px", color: "white" }}
+      >
+        {isFetchingNextPage && "데이터 불러오는중"}
+      </div>
     </Wrapper>
   );
 }
