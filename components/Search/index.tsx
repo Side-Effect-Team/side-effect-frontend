@@ -59,7 +59,6 @@ export default function Search({ setData, category, ...rest }: SearchProps) {
       <StyledInput
         type="text"
         placeholder="검색어를 입력하세요."
-        // defaultValue={savedKeyword}
         onChange={onChangeKeyword}
         {...rest}
       />
