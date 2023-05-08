@@ -10,7 +10,7 @@ import {
   FeedbackNum,
   Footer,
   Header,
-  HeaderTitle,
+  ProjectName,
   HeartFillIcon,
   HeartNotFillIcon,
   Tag,
@@ -22,7 +22,7 @@ export interface BoardCardProps {
   id: number | string;
   category?: string;
   headerImage?: string;
-  headerTitle?: string;
+  projectName?: string;
   tags?: string[];
   title: string;
   content: string;
@@ -50,7 +50,7 @@ export default function BoardCard({ data }: BoardCardDataProps) {
   return (
     <Container id={data?.id.toString()} onClick={onClickGoToBoard}>
       <Header src={data?.headerImage}>
-        <HeaderTitle>{data?.headerTitle}</HeaderTitle>
+        <ProjectName>{data?.projectName}</ProjectName>
       </Header>
       <ContentsWrapper>
         {data?.tags && (
@@ -89,8 +89,10 @@ export default function BoardCard({ data }: BoardCardDataProps) {
 
 // 1. 프로젝트 모집 공고 데이터를 받아왔다고 가정
 //   const data = {
-//     headerTitle: "사이드 프로젝트 인원모집",
-//     tag: ["Figma", "Spring", "React"],
+//     id: 1234
+//     category: "recruits"
+//     projectName: "사이드 프로젝트 인원모집",
+//     tags: ["Figma", "Spring", "React"],
 //     title: "제목입니다",
 //     content:
 //       "내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.",
@@ -102,8 +104,10 @@ export default function BoardCard({ data }: BoardCardDataProps) {
 
 // 2. 프로젝트 자랑 데이터를 받아왔다고 가정
 //   const data = {
+//     id: 1234
+//     category: "projects"
 //     headerImage: "/img/ProjectDefaultBackground.png",
-//     tag: ["Figma", "Spring", "React"],
+//     tags: ["Figma", "Spring", "React"],
 //     title: "Oh My Pet",
 //     content:
 //       "내 반려동물이 인플루언서? 반려동물 자랑 플랫폼 오 마이 펫 프로젝트 입니다.",

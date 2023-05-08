@@ -51,7 +51,7 @@ export const Header = styled.div<HeaderProps>`
   height: 150px;
   `}
 `;
-export const HeaderTitle = styled.div`
+export const ProjectName = styled.div`
   width: 80%;
   color: white;
   font-size: 24px;
