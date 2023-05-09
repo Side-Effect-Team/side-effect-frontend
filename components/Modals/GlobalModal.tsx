@@ -4,14 +4,19 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { useRouter } from "next/router";
 import { closeModal } from "@/store/modalSlice";
 import ManageTeamModal from "./ManageTeamModal/ManageTeamModal";
-
+import LoginModal from "./LoginModal/LoginModal";
 const MODAL_TYPES = {
   ManageTeamModal: "ManageTeamModal",
+  LoginModal: "LoginModal",
 };
 const MODAL_COMPONENTS = [
   {
     type: MODAL_TYPES.ManageTeamModal,
     component: <ManageTeamModal />,
+  },
+  {
+    type: MODAL_TYPES.LoginModal,
+    component: <LoginModal />,
   },
 ];
 export default function GlobalModal() {
