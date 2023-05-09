@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import SelectBox from "../../components/SelectBox";
-import BoardCard, { BoardCardProps } from "../../components/BoardCard";
+import BoardCard from "../../components/BoardCard";
 import { breakPoints, mediaQuery } from "@/styles/Media";
 import { useState, useEffect, ChangeEvent } from "react";
 import { useInView } from "react-intersection-observer";
@@ -41,6 +41,7 @@ export default function ProjectPage() {
     if (inView && hasNextPage === true) {
       fetchNextPage();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView, hasNextPage]);
   const dispatch = useAppDispatch();
   const handleTextValue = (e: ChangeEvent<HTMLInputElement>) => {
