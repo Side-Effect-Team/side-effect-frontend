@@ -137,12 +137,6 @@ export default function ProjectPage() {
   const { ref, inView } = useInView({ threshold: 0 });
 
   const fetchMockData = async (page: number) => {
-    if (page === undefined) {
-      const response = await fetch(
-        `http://54.64.103.42:8080/api/free-boards/scroll?size=2`,
-      );
-      return response.json();
-    }
     const response = await fetch(
       `http://54.64.103.42:8080/api/free-boards/scroll?lastId=${page}&size=4`,
     );
@@ -157,7 +151,7 @@ export default function ProjectPage() {
     isSuccess,
   } = useInfiniteQuery(
     ["projectData"],
-    ({ pageParam }) => fetchMockData(pageParam),
+    ({ pageParam = -1 }) => fetchMockData(pageParam),
     {
       //**getNextPageParam 에서 return 된값은 pageParam 으로 넘어갑니다. */
       getNextPageParam: (lastPage) => {
@@ -206,7 +200,7 @@ export default function ProjectPage() {
       </CardSection>
       {isSuccess &&
         testData?.pages.map((page) => {
-          return page.freeBoards.map((el: any) => {
+          return page.projects.map((el: any) => {
             return <div key={el.id}>{el.content}</div>;
           });
         })}
