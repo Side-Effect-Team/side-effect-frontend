@@ -15,9 +15,9 @@ export const Container = styled.div`
   overflow: hidden;
   background-color: white;
   cursor: pointer;
-  filter: drop-shadow(1px 1px 5px rgba(0, 0, 0, 0.25));
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
   :hover {
-    filter: drop-shadow(1px 1px 5px rgba(21, 94, 239, 0.25));
+    box-shadow: 1px 1px 5px rgba(21, 94, 239, 0.25);
   }
   ${mediaQuery("mobile")`
   width: 95%;
@@ -51,7 +51,7 @@ export const Header = styled.div<HeaderProps>`
   height: 150px;
   `}
 `;
-export const HeaderTitle = styled.div`
+export const ProjectName = styled.div`
   width: 80%;
   color: white;
   font-size: 24px;
@@ -154,10 +154,9 @@ export const ButtonsWrapper = styled.div`
   justify-content: flex-end;
   align-items: center;
 `;
-export const ButtonDiv = styled.button`
+export const IconButton = styled.button`
   background: none;
   border: none;
-  margin-right: 5px;
   cursor: pointer;
 `;
 export const HeartNotFillIcon = styled(AiOutlineHeart)`
