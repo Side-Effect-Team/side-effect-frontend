@@ -24,7 +24,7 @@ export interface FormData {
 }
 
 const data: DataProps = {
-  avatarSrc: "/images/ProjectDefaultBackground.png",
+  imgUrl: "/images/ProjectDefaultBackground.png",
   nickname: "자라는개발자",
   email: "sideeffect@naver.com",
   introduction:
@@ -32,19 +32,19 @@ const data: DataProps = {
   // boards: 1,
   // follower: 20,
   // following: 30,
-  skill: ["typescript", "react", "HTML", "Next.js", "React.native"],
+  stacks: ["typescript", "react", "HTML", "Next.js", "React.native"],
   position: "프론트엔드",
   career: "1~3",
-  github: "https://github.com",
-  blog: "https://www.naver.com",
-  portfolio: "https://www.naver.com",
+  githubUrl: "https://github.com",
+  blogUrl: "https://www.naver.com",
+  portfolioUrl: "https://www.naver.com",
 };
 
 export default function MyPageEdit() {
   const router = useRouter();
   const [introduction, setIntroduction] = useState(data?.introduction);
-  const [imageUrl, setImageUrl] = useState(data?.avatarSrc);
-  const [skillTags, setSkillTags] = useState<string[]>(data?.skill || []);
+  const [imgUrl, setImgUrl] = useState(data?.imgUrl);
+  const [stackTags, setStackTags] = useState<string[]>(data?.stacks || []);
   const [career, setCareer] = useState<string | number>(data?.career || "");
   const [position, setPosition] = useState<string | number>(
     data?.position || "",
@@ -59,9 +59,9 @@ export default function MyPageEdit() {
     console.log({
       career,
       position,
-      skillTags,
+      stackTags,
       introduction,
-      imageUrl,
+      imgUrl,
       ...data,
     });
   };
@@ -80,8 +80,8 @@ export default function MyPageEdit() {
           nickname={data.nickname}
           introduction={introduction}
           setIntroduction={setIntroduction}
-          imageUrl={imageUrl}
-          setImageUrl={setImageUrl}
+          imgUrl={imgUrl}
+          setImgUrl={setImgUrl}
           introRegister={register}
           errors={errors}
         />
@@ -90,7 +90,7 @@ export default function MyPageEdit() {
             <SectionTitle>Skill</SectionTitle>
             <Border></Border>
           </SectionHeaderWrapper>
-          <SkillEdit skillTags={skillTags} setSkillTags={setSkillTags} />
+          <SkillEdit stackTags={stackTags} setStackTags={setStackTags} />
         </SectionWrapper>
         <SectionWrapper>
           <SectionHeaderWrapper>
@@ -98,9 +98,9 @@ export default function MyPageEdit() {
             <Border></Border>
           </SectionHeaderWrapper>
           <InfoEdit
-            github={data.github}
-            blog={data.blog}
-            portfolio={data.portfolio}
+            githubUrl={data.githubUrl}
+            blogUrl={data.blogUrl}
+            portfolioUrl={data.portfolioUrl}
             career={career}
             setCareer={setCareer}
             position={position}

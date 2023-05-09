@@ -9,17 +9,17 @@ import {
 export interface InfoProps {
   position: string;
   career: string;
-  github: string | undefined;
-  blog: string | undefined;
-  portfolio: string | undefined;
+  githubUrl: string | undefined;
+  blogUrl: string | undefined;
+  portfolioUrl: string | undefined;
 }
 
 export default function Info({
   position,
   career,
-  github,
-  blog,
-  portfolio,
+  githubUrl,
+  blogUrl,
+  portfolioUrl,
 }: InfoProps) {
   return (
     <>
@@ -33,9 +33,9 @@ export default function Info({
       </InfoWrapper>
       <InfoWrapper>
         <InfoTitle>깃허브</InfoTitle>
-        {github ? (
-          <InfoContentLink href={github} target="_blank">
-            {github}
+        {githubUrl ? (
+          <InfoContentLink href={githubUrl} target="_blank">
+            {githubUrl}
           </InfoContentLink>
         ) : (
           <Text>아직 작성된 정보가 없습니다.</Text>
@@ -43,9 +43,9 @@ export default function Info({
       </InfoWrapper>
       <InfoWrapper>
         <InfoTitle>블로그</InfoTitle>
-        {blog ? (
-          <InfoContentLink href={blog} target="_blank">
-            {blog}
+        {blogUrl ? (
+          <InfoContentLink href={blogUrl} target="_blank">
+            {blogUrl}
           </InfoContentLink>
         ) : (
           <Text>아직 작성된 정보가 없습니다.</Text>
@@ -53,9 +53,9 @@ export default function Info({
       </InfoWrapper>
       <InfoWrapper>
         <InfoTitle>포트폴리오</InfoTitle>
-        {portfolio ? (
-          <InfoContentLink href={portfolio} target="_blank">
-            {portfolio}
+        {portfolioUrl ? (
+          <InfoContentLink href={portfolioUrl} target="_blank">
+            {portfolioUrl}
           </InfoContentLink>
         ) : (
           <Text>아직 작성된 정보가 없습니다.</Text>

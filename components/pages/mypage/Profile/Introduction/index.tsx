@@ -11,7 +11,7 @@ import {
 } from "./styled";
 
 interface IntroductionProps {
-  avatarSrc: string | undefined;
+  imgUrl: string | undefined;
   nickname: string;
   email: string;
   introduction: string | undefined;
@@ -21,7 +21,7 @@ interface IntroductionProps {
 }
 
 export default function Introduction({
-  avatarSrc,
+  imgUrl,
   nickname,
   email,
   introduction,
@@ -31,7 +31,7 @@ export default function Introduction({
 IntroductionProps) {
   return (
     <ProfileWrapper>
-      <ProfileImage src={avatarSrc || "/images/BoardDefaultBackground.png"} />
+      <ProfileImage src={imgUrl || "/images/BoardDefaultBackground.png"} />
       <NickName>{nickname || ""}</NickName>
       <Text>{email}</Text>
       <ShortBorder></ShortBorder>

@@ -21,7 +21,7 @@ export default function Profile(data: DataProps) {
   return (
     <Wrapper>
       <Introduction
-        avatarSrc={data.avatarSrc}
+        imgUrl={data.imgUrl}
         nickname={data.nickname}
         email={data.email}
         introduction={data.introduction}
@@ -34,7 +34,7 @@ export default function Profile(data: DataProps) {
           <SectionTitle>Skill</SectionTitle>
           <Border></Border>
         </SectionHeaderWrapper>
-        <Skill skill={data.skill} />
+        <Skill stacks={data.stacks} />
       </SectionWrapper>
       <SectionWrapper>
         <SectionHeaderWrapper>
@@ -44,9 +44,9 @@ export default function Profile(data: DataProps) {
         <Info
           position={data.position}
           career={data.career}
-          github={data.github}
-          blog={data.blog}
-          portfolio={data.portfolio}
+          githubUrl={data.githubUrl}
+          blogUrl={data.blogUrl}
+          portfolioUrl={data.portfolioUrl}
         />
       </SectionWrapper>
       <ButtonWrapper>

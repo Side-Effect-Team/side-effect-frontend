@@ -11,15 +11,14 @@ import UploadBoards from "@/components/pages/mypage/UploadBoards";
 import ApplyBoards from "@/components/pages/mypage/ApplyBoards";
 
 export interface DataProps {
-  avatarSrc?: string;
+  imgUrl?: string;
   nickname: string;
   email: string;
   introduction?: string;
-  // boards: number;
+  boards?: number;
   // follower: number;
   // following: number;
-  skill?: string[];
-  // position: string;
+  stacks?: string[];
   position:
     | "프론트엔드"
     | "백엔드"
@@ -27,18 +26,17 @@ export interface DataProps {
     | "데브옵스"
     | "기획자"
     | "마케터";
-  // career: string;
   career: "0" | "1~3" | "4~6" | "7년 이상";
-  github?: string;
-  blog?: string;
-  portfolio?: string;
+  githubUrl?: string;
+  blogUrl?: string;
+  portfolioUrl?: string;
 }
 export interface MyPageProps {
   data?: DataProps;
 }
 
 const data: DataProps = {
-  avatarSrc: "/images/ProjectDefaultBackground.png",
+  imgUrl: "/images/ProjectDefaultBackground.png",
   nickname: "자라는개발자",
   email: "sideeffect@naver.com",
   introduction:
@@ -46,12 +44,12 @@ const data: DataProps = {
   // boards: 1,
   // follower: 20,
   // following: 30,
-  skill: ["typescript", "react", "HTML", "Next.js", "React.native"],
+  stacks: ["typescript", "react", "HTML", "Next.js", "React.native"],
   position: "프론트엔드",
   career: "1~3",
-  github: "https://github.com",
-  blog: "https://www.naver.com",
-  portfolio: "https://www.naver.com",
+  githubUrl: "https://github.com",
+  blogUrl: "https://www.naver.com",
+  portfolioUrl: "https://www.naver.com",
 };
 export default function MyPage() {
   const [activeTab, setActiveTab] = useState("profile");

@@ -13,9 +13,9 @@ interface InfoEditProps {
   infoRegister: UseFormRegister<
     Pick<FormData, "github" | "blog" | "portfolio">
   >;
-  github: string | undefined;
-  blog: string | undefined;
-  portfolio: string | undefined;
+  githubUrl: string | undefined;
+  blogUrl: string | undefined;
+  portfolioUrl: string | undefined;
 }
 const SELECT_CAREER = ["0", "1~3", "4~6", "7년 이상 "];
 const SELECT_POSITIONS = [
@@ -32,9 +32,9 @@ export default function InfoEdit({
   position,
   setPosition,
   infoRegister,
-  github,
-  blog,
-  portfolio,
+  githubUrl,
+  blogUrl,
+  portfolioUrl,
 }: InfoEditProps) {
   return (
     <>
@@ -59,7 +59,7 @@ export default function InfoEdit({
       <InfoWrapper>
         <InfoTitle>깃허브</InfoTitle>
         <Input
-          defaultValue={github || ""}
+          defaultValue={githubUrl || ""}
           placeholder="정보를 등록해주세요"
           {...infoRegister("github")}
           onKeyDown={(e) => {
@@ -72,7 +72,7 @@ export default function InfoEdit({
       <InfoWrapper>
         <InfoTitle>블로그</InfoTitle>
         <Input
-          defaultValue={blog || ""}
+          defaultValue={blogUrl || ""}
           placeholder="정보를 등록해주세요"
           {...infoRegister("blog")}
           onKeyDown={(e) => {
@@ -85,7 +85,7 @@ export default function InfoEdit({
       <InfoWrapper>
         <InfoTitle>포트폴리오</InfoTitle>
         <Input
-          defaultValue={portfolio || ""}
+          defaultValue={portfolioUrl || ""}
           placeholder="정보를 등록해주세요"
           {...infoRegister("portfolio")}
           onKeyDown={(e) => {
