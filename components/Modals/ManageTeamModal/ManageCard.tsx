@@ -19,14 +19,24 @@ export default function ManageCard({ filter }: Props) {
             onClick={() =>
               addToast({
                 type: "success",
-                title: "test",
-                content: "토스트 테스트",
+                title: "Success!",
+                content: "팀원에게 수락 알림을 보냈습니다!",
               })
             }
           >
             수락
           </Button>
-          <Button>거절</Button>
+          <Button
+            onClick={() =>
+              addToast({
+                type: "error",
+                title: "Somethinh Wrong!",
+                content: "알수없는 에러가 발생하였습니다!",
+              })
+            }
+          >
+            거절
+          </Button>
           <Button>마이페이지</Button>
         </>
       );
