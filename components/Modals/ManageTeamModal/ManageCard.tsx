@@ -30,7 +30,7 @@ export default function ManageCard({ filter }: Props) {
             onClick={() =>
               addToast({
                 type: "error",
-                title: "Somethinh Wrong!",
+                title: "Something Wrong!",
                 content: "알수없는 에러가 발생하였습니다!",
               })
             }
