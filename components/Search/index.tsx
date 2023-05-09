@@ -37,7 +37,7 @@ export default function Search({ setData, category, ...rest }: SearchProps) {
   const fetchProjects = async () => {
     try {
       const result = await axios.get(
-        `http://http://http://54.64.103.42:8080/api/free-boards/search?&size=10&keyWord=${keyword}`,
+        `http://54.64.103.42:8080/api/free-boards/search?&size=10&keyWord=${keyword}`,
       );
       setData(result.data);
     } catch (error) {
@@ -47,11 +47,14 @@ export default function Search({ setData, category, ...rest }: SearchProps) {
   };
 
   useEffect(() => {
-    if (category === "recruits") {
-      fetchRecruits();
-    } else {
-      fetchProjects();
-    }
+    const timer = setTimeout(() => {
+      if (category === "recruits") {
+        fetchRecruits();
+      } else {
+        fetchProjects();
+      }
+    }, 300);
+    return () => clearTimeout(timer);
   }, [keyword]);
 
   return (
