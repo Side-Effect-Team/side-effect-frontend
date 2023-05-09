@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import SelectBox from "../../components/SelectBox";
-import BoardCard from "../../components/BoardCard";
+import BoardCard, { BoardCardProps } from "../../components/BoardCard";
 import { breakPoints, mediaQuery } from "@/styles/Media";
 import { useState, useEffect, ChangeEvent } from "react";
 import { useInView } from "react-intersection-observer";
