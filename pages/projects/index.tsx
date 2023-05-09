@@ -1,19 +1,21 @@
 import styled from "styled-components";
 import SelectBox from "../../components/SelectBox";
 import BoardCard from "../../components/BoardCard";
+import Search from "@/components/Search";
 import { breakPoints, mediaQuery } from "@/styles/Media";
 import { useState, useEffect, ChangeEvent } from "react";
 import { useInView } from "react-intersection-observer";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useAppDispatch } from "../../store/hooks";
 import { openModal } from "../../store/modalSlice";
+
 import { media } from "@/styles/mediatest";
 import axios from "axios";
 const FILTER_OPTIONS = ["조회순", "추천순", "댓글순"];
 
 export default function ProjectPage() {
   const [filter, setFilter] = useState("조회순");
-  const [text, setText] = useState("");
+  const [keyword, setKeyword] = useState("");
   //threshold : inview가 보여지는 정도를 0~1까지 조절하여 트리거시점을 조절할수있다 0이면 보이자마자 트리거 1이면 전체가 다보여야 트리거
   const { ref, inView } = useInView({ threshold: 0 });
 
@@ -44,10 +46,7 @@ export default function ProjectPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView, hasNextPage]);
   const dispatch = useAppDispatch();
-  const handleTextValue = (e: ChangeEvent<HTMLInputElement>) => {
-    setText(e.target.value);
-  };
-
+  console.log(keyword);
   return (
     <Wrapper>
       <button
@@ -66,7 +65,7 @@ export default function ProjectPage() {
           setValue={setFilter}
           size="large"
         />
-        <input placeholder="검색" onChange={(e) => handleTextValue(e)} />
+        <Search setKeyword={setKeyword} />
       </FilterSection>
 
       <CardSection>
