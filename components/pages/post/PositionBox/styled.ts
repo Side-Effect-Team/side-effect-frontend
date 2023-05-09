@@ -14,3 +14,18 @@ export const InputWrapper = styled.div`
   align-items: center;
   gap: 1rem;
 `;
+
+export const SelectStyled = styled.select`
+  border: none;
+  outline: none;
+  padding: 0.25rem;
+  border-radius: 3px;
+`;
+
+export const DirectBox = styled.div`
+  width: 160px;
+`;
+
+export const MemberNeedsBox = styled.div`
+  width: 45px;
+`;

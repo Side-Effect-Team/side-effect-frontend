@@ -1,12 +1,14 @@
 import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
+import { GoTrashcan } from "react-icons/go";
+import { InputForm } from "@/postComps/common/PostForm.styled";
+import { POSITION_LIST } from "../../../../enum";
 import {
-  InputForm,
+  InputWrapper,
+  PositionBoxWapper,
   DirectBox,
   MemberNeedsBox,
   SelectStyled,
-} from "@/postComps/common/PostForm.styled";
-import { POSITION_LIST } from "../../../../enum";
-import { InputWrapper, PositionBoxWapper } from "./styled";
+} from "./styled";
 import Button from "@/components/Button";
 import { POSITIONS } from "@/pages/post/recruit";
 
@@ -79,7 +81,7 @@ export default function PositionBox({
           <DirectBox>
             <InputForm
               type="text"
-              placeholder="모집할 포지션을 입력하세요"
+              placeholder="포지션을 입력하세요"
               id="positionType"
               name="positionType"
               onChange={handleSelect}
@@ -93,15 +95,18 @@ export default function PositionBox({
             name="targetNumber"
             min={0}
             max={10}
-            placeholder="모집 인원"
             value={positionForm.targetNumber}
             onChange={handleNumber}
           />
         </MemberNeedsBox>
       </InputWrapper>
       {id !== 1 && (
-        <Button type="button" onClick={() => onDelete(id)}>
-          삭제
+        <Button
+          style={{ width: "40px", whiteSpace: "nowrap" }}
+          type="button"
+          onClick={() => onDelete(id)}
+        >
+          <GoTrashcan style={{ transform: "scale(1.75)" }} />
         </Button>
       )}
     </PositionBoxWapper>

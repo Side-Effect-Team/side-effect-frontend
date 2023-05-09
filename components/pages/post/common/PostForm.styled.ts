@@ -44,18 +44,3 @@ export const ErrorMsg = styled.span`
   font-size: 0.85rem;
   color: ${(p) => p.theme.colors.danger};
 `;
-
-export const SelectStyled = styled.select`
-  border: none;
-  outline: none;
-  padding: 0.25rem;
-  border-radius: 3px;
-`;
-
-export const DirectBox = styled.div`
-  width: 225px;
-`;
-
-export const MemberNeedsBox = styled.div`
-  width: 95px;
-`;
