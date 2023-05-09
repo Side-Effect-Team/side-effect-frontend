@@ -10,125 +10,6 @@ import { openModal } from "../../store/modalSlice";
 import { media } from "@/styles/mediatest";
 import axios from "axios";
 const FILTER_OPTIONS = ["조회순", "추천순", "댓글순"];
-const data = [
-  {
-    id: 1,
-    category: "projects",
-    headerImage: "/images/ProjectDefaultBackground.png",
-    // tags: ["Figma", "Spring", "React"],
-    title: "Oh My Pet",
-    content:
-      "내 반려동물이 인플루언서? 반려동물 자랑 플랫폼 오 마이 펫 프로젝트 입니다.",
-    createdAt: "2023.05.04",
-    like: true,
-    likeNum: 65,
-    commentNum: 15,
-  },
-  {
-    id: 2,
-    category: "projects",
-    headerImage: "/images/ProjectDefaultBackground.png",
-    // tags: ["Figma", "Spring", "React"],
-    title: "Oh My Pet",
-    content:
-      "내 반려동물이 인플루언서? 반려동물 자랑 플랫폼 오 마이 펫 프로젝트 입니다.",
-    createdAt: "2023.05.04",
-    like: true,
-    likeNum: 65,
-    commentNum: 16,
-  },
-  {
-    id: 3,
-    category: "projects",
-    headerImage: "/images/ProjectDefaultBackground.png",
-    // tags: ["Figma", "Spring", "React"],
-    title: "Oh My Pet",
-    content:
-      "내 반려동물이 인플루언서? 반려동물 자랑 플랫폼 오 마이 펫 프로젝트 입니다.",
-    createdAt: "2023.05.04",
-    like: true,
-    likeNum: 65,
-    commentNum: 17,
-  },
-  {
-    id: 4,
-    category: "projects",
-    headerImage: "/images/ProjectDefaultBackground.png",
-    // tags: ["Figma", "Spring", "React"],
-    title: "Oh My Pet",
-    content:
-      "내 반려동물이 인플루언서? 반려동물 자랑 플랫폼 오 마이 펫 프로젝트 입니다.",
-    createdAt: "2023.05.04",
-    like: true,
-    likeNum: 65,
-    commentNum: 17,
-  },
-  {
-    id: 6,
-    category: "projects",
-    headerImage: "/images/ProjectDefaultBackground.png",
-    // tags: ["Figma", "Spring", "React"],
-    title: "Oh My Pet",
-    content:
-      "내 반려동물이 인플루언서? 반려동물 자랑 플랫폼 오 마이 펫 프로젝트 입니다.",
-    createdAt: "2023.05.04",
-    like: true,
-    likeNum: 65,
-    commentNum: 17,
-  },
-  {
-    id: 7,
-    category: "projects",
-    headerImage: "/images/ProjectDefaultBackground.png",
-    // tags: ["Figma", "Spring", "React"],
-    title: "Oh My Pet",
-    content:
-      "내 반려동물이 인플루언서? 반려동물 자랑 플랫폼 오 마이 펫 프로젝트 입니다.",
-    createdAt: "2023.05.04",
-    like: true,
-    likeNum: 65,
-    commentNum: 17,
-  },
-  {
-    id: 8,
-    category: "projects",
-    headerImage: "/images/ProjectDefaultBackground.png",
-    // tags: ["Figma", "Spring", "React"],
-    title: "Oh My Pet",
-    content:
-      "내 반려동물이 인플루언서? 반려동물 자랑 플랫폼 오 마이 펫 프로젝트 입니다.",
-    createdAt: "2023.05.04",
-    like: true,
-    likeNum: 65,
-    commentNum: 17,
-  },
-  {
-    id: 9,
-    category: "projects",
-    headerImage: "/images/ProjectDefaultBackground.png",
-    // tags: ["Figma", "Spring", "React"],
-    title: "Oh My Pet",
-    content:
-      "내 반려동물이 인플루언서? 반려동물 자랑 플랫폼 오 마이 펫 프로젝트 입니다.",
-    createdAt: "2023.05.04",
-    like: true,
-    likeNum: 65,
-    commentNum: 17,
-  },
-  {
-    id: 10,
-    category: "projects",
-    headerImage: "/images/ProjectDefaultBackground.png",
-    // tags: ["Figma", "Spring", "React"],
-    title: "Oh My Pet",
-    content:
-      "내 반려동물이 인플루언서? 반려동물 자랑 플랫폼 오 마이 펫 프로젝트 입니다.",
-    createdAt: "2023.05.04",
-    like: true,
-    likeNum: 65,
-    commentNum: 17,
-  },
-];
 
 export default function ProjectPage() {
   const [filter, setFilter] = useState("조회순");
@@ -136,37 +17,31 @@ export default function ProjectPage() {
   //threshold : inview가 보여지는 정도를 0~1까지 조절하여 트리거시점을 조절할수있다 0이면 보이자마자 트리거 1이면 전체가 다보여야 트리거
   const { ref, inView } = useInView({ threshold: 0 });
 
-  const fetchMockData = async (page: number) => {
-    const response = await fetch(
+  const getProjectsData = async (page: number) => {
+    const response = await axios.get(
       `http://54.64.103.42:8080/api/free-boards/scroll?lastId=${page}&size=4`,
     );
 
-    return response.json();
+    return response.data;
   };
-  const {
-    data: testData,
-    hasNextPage,
-    fetchNextPage,
-    isFetchingNextPage,
-    isSuccess,
-  } = useInfiniteQuery(
-    ["projectData"],
-    ({ pageParam = -1 }) => fetchMockData(pageParam),
-    {
-      //**getNextPageParam 에서 return 된값은 pageParam 으로 넘어갑니다. */
-      getNextPageParam: (lastPage) => {
-        console.log(lastPage);
-        return lastPage.lastId === 1 ? undefined : lastPage.lastId;
+  const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isSuccess } =
+    useInfiniteQuery(
+      ["projectData"],
+      ({ pageParam = -1 }) => getProjectsData(pageParam),
+      {
+        //**getNextPageParam 에서 return 된값은 pageParam 으로 넘어갑니다. */
+        getNextPageParam: (lastPage) => {
+          console.log(lastPage);
+          return lastPage.lastId === 1 ? undefined : lastPage.lastId;
+        },
       },
-    },
-  );
+    );
 
   useEffect(() => {
     if (inView && hasNextPage === true) {
       fetchNextPage();
     }
   }, [inView, hasNextPage]);
-  console.log(inView);
   const dispatch = useAppDispatch();
   const handleTextValue = (e: ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
@@ -194,16 +69,13 @@ export default function ProjectPage() {
       </FilterSection>
 
       <CardSection>
-        {data.map((data) => {
-          return <BoardCard key={data.id} data={data} />;
-        })}
+        {isSuccess &&
+          data?.pages.map((page) => {
+            return page.projects.map((project: any) => {
+              return <BoardCard key={project.id} data={project} />;
+            });
+          })}
       </CardSection>
-      {isSuccess &&
-        testData?.pages.map((page) => {
-          return page.projects.map((el: any) => {
-            return <div key={el.id}>{el.content}</div>;
-          });
-        })}
       <div
         ref={ref}
         style={{ backgroundColor: "black", height: "100px", color: "white" }}
