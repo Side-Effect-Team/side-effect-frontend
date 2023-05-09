@@ -43,7 +43,7 @@ export const BANNER_CONTENTS = {
     "프로젝트 팀원을 모집하거나 관심있는 프로젝트에 지원할 수 있습니다",
 };
 
-export const ROLE_LIST = [
+export const POSITION_LIST = [
   {
     name: "프론트엔드",
     value: "frontend",

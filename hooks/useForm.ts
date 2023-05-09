@@ -63,6 +63,7 @@ export const useForm = ({ initialVals, validate, onSubmit }: UseFormProps) => {
 
   return {
     postForm,
+    setPostForm,
     errMsgs,
     touched,
     handleChange,
