@@ -2,16 +2,46 @@ import styled from "styled-components";
 import { theme } from "@/styles/Theme";
 import { mediaQuery } from "@/styles/Media";
 
-export const Wrapper = styled.div`
+export const Container = styled.div`
   min-height: 100vh;
-  margin: 0 auto;
-  padding: 1rem;
   width: 100%;
-  max-width: ${(p) => p.theme.sizes.desktop};
+  margin: 0 auto;
+  max-width: ${theme.sizes.desktop};
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+`;
+export const TapWrapper = styled.div`
+  width: 180px;
+  height: auto;
+  margin: 10px 0;
+  padding: 20px;
+  border: 2px solid ${theme.brandColor.lightGray};
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  margin-bottom: 100px;
+  align-items: flex-start;
+  position: fixed;
+`;
+
+export const TapMenu = styled.div<{ isActive: boolean }>`
+  /* color: ${theme.brandColor.primary}; */
+  font-size: 20px;
+  font-weight: 600;
+  margin: 7px 0;
+  cursor: pointer;
+  color: ${(p) => (p.isActive ? theme.brandColor.primary : "#d9d9d9")};
+`;
+
+export const ContentsWrapper = styled.div`
+  padding: 1rem;
+  width: calc(100% - 190px);
+  /* display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: 100px; */
+  margin-left: auto;
 `;
 
 export const SectionWrapper = styled.div`

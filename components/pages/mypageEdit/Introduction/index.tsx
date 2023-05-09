@@ -15,7 +15,7 @@ import {
 } from "./styled";
 import { Input } from "../Info/styled";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
-import { FormData } from "@/pages/mypage/edit";
+import { FormData } from "@/pages/mypage/profileEdit";
 
 interface IntroEditProps {
   nickname: string | undefined;

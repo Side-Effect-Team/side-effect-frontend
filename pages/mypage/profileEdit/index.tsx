@@ -10,9 +10,11 @@ import {
   SectionHeaderWrapper,
   SectionTitle,
   SectionWrapper,
-  Wrapper,
+  // Wrapper,
 } from "@/components/pages/mypage/styled";
 import { DataProps } from "..";
+import { useRouter } from "next/router";
+import { Wrapper } from "@/components/pages/mypageEdit/styled";
 
 export interface FormData {
   github?: string;
@@ -32,13 +34,14 @@ const data: DataProps = {
   // following: 30,
   skill: ["typescript", "react", "HTML", "Next.js", "React.native"],
   position: "프론트엔드",
-  career: "0",
+  career: "1~3",
   github: "https://github.com",
   blog: "https://www.naver.com",
   portfolio: "https://www.naver.com",
 };
 
 export default function MyPageEdit() {
+  const router = useRouter();
   const [introduction, setIntroduction] = useState(data?.introduction);
   const [imageUrl, setImageUrl] = useState(data?.avatarSrc);
   const [skillTags, setSkillTags] = useState<string[]>(data?.skill || []);
@@ -61,6 +64,14 @@ export default function MyPageEdit() {
       imageUrl,
       ...data,
     });
+  };
+  const onCliCkEditDone = () => {
+    alert("변경완료");
+    router.push("/mypage");
+  };
+  const onCliCkEditCancle = () => {
+    alert("변경사항은 저장되지 않습니다.");
+    router.push("/mypage");
   };
   return (
     <Wrapper>
@@ -98,7 +109,10 @@ export default function MyPageEdit() {
           />
         </SectionWrapper>
         <ButtonWrapper>
-          <Button>프로필 수정하기</Button>
+          <Button fill="false" type="button" onClick={onCliCkEditCancle}>
+            수정취소
+          </Button>
+          <Button onClick={onCliCkEditDone}>수정 완료</Button>
         </ButtonWrapper>
       </form>
     </Wrapper>

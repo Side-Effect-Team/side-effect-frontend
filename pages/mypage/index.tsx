@@ -1,16 +1,14 @@
-import { useRouter } from "next/router";
-import Button from "../../components/Button";
-import Introduction from "../../components/pages/mypage/Introduction";
-import Skill from "../../components/pages/mypage/Skill";
-import Info from "../../components/pages/mypage/Info";
 import {
-  Border,
-  ButtonWrapper,
-  SectionHeaderWrapper,
-  SectionTitle,
-  SectionWrapper,
-  Wrapper,
+  Container,
+  ContentsWrapper,
+  TapMenu,
+  TapWrapper,
 } from "@/components/pages/mypage/styled";
+import Profile from "@/components/pages/mypage/Profile";
+import { useState } from "react";
+import LikeBoards from "@/components/pages/mypage/LikeBoards";
+import UploadBoards from "@/components/pages/mypage/UploadBoards";
+import ApplyBoards from "@/components/pages/mypage/ApplyBoards";
 
 export interface DataProps {
   avatarSrc?: string;
@@ -21,8 +19,16 @@ export interface DataProps {
   // follower: number;
   // following: number;
   skill?: string[];
-  position: string;
-  career: string;
+  // position: string;
+  position:
+    | "프론트엔드"
+    | "백엔드"
+    | "디자이너"
+    | "데브옵스"
+    | "기획자"
+    | "마케터";
+  // career: string;
+  career: "0" | "1~3" | "4~6" | "7년 이상";
   github?: string;
   blog?: string;
   portfolio?: string;
@@ -42,51 +48,52 @@ const data: DataProps = {
   // following: 30,
   skill: ["typescript", "react", "HTML", "Next.js", "React.native"],
   position: "프론트엔드",
-  career: "신입",
+  career: "1~3",
   github: "https://github.com",
   blog: "https://www.naver.com",
   portfolio: "https://www.naver.com",
 };
 export default function MyPage() {
-  const router = useRouter();
-  const onClickGoToEditProfile = () => {
-    router.push("/mypage/edit");
+  const [activeTab, setActiveTab] = useState("profile");
+
+  const onClickTab = (tabName: string) => {
+    setActiveTab(tabName);
   };
 
   return (
-    <Wrapper>
-      <Introduction
-        avatarSrc={data.avatarSrc}
-        nickname={data.nickname}
-        email={data.email}
-        introduction={data.introduction}
-        // boards={data.boards}
-        // follower={data.follower}
-        // following={data.following}
-      />
-      <SectionWrapper>
-        <SectionHeaderWrapper>
-          <SectionTitle>Skill</SectionTitle>
-          <Border></Border>
-        </SectionHeaderWrapper>
-        <Skill skill={data.skill} />
-      </SectionWrapper>
-      <SectionWrapper>
-        <SectionHeaderWrapper>
-          <SectionTitle>Info</SectionTitle>
-          <Border></Border>
-        </SectionHeaderWrapper>
-        <Info
-          position={data.position}
-          career={data.career}
-          github={data.github}
-          blog={data.blog}
-          portfolio={data.portfolio}
-        />
-      </SectionWrapper>
-      <ButtonWrapper>
-        <Button onClick={onClickGoToEditProfile}>프로필 수정하기</Button>
-      </ButtonWrapper>
-    </Wrapper>
+    <Container>
+      <TapWrapper>
+        <TapMenu
+          isActive={activeTab === "profile"}
+          onClick={() => onClickTab("profile")}
+        >
+          프로필
+        </TapMenu>
+        <TapMenu
+          isActive={activeTab === "likeBoards"}
+          onClick={() => onClickTab("likeBoards")}
+        >
+          관심 게시물
+        </TapMenu>
+        <TapMenu
+          isActive={activeTab === "uploadBoards"}
+          onClick={() => onClickTab("uploadBoards")}
+        >
+          등록 게시물
+        </TapMenu>
+        <TapMenu
+          isActive={activeTab === "applyBoards"}
+          onClick={() => onClickTab("applyBoards")}
+        >
+          지원목록
+        </TapMenu>
+      </TapWrapper>
+      <ContentsWrapper>
+        {activeTab === "profile" && <Profile {...data} />}
+        {activeTab === "likeBoards" && <LikeBoards />}
+        {activeTab === "uploadBoards" && <UploadBoards />}
+        {activeTab === "applyBoards" && <ApplyBoards />}
+      </ContentsWrapper>
+    </Container>
   );
 }
