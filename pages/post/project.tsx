@@ -55,8 +55,9 @@ export default function PostProjectPage() {
         return newErrorMsgs;
       },
       onSubmit: async () => {
+        const data = { ...postForm, headerImage: imgSrc };
         const projects = getter("projects");
-        setter("projects", [...projects, postForm]);
+        setter("projects", [...projects, data]);
         window.alert("등록이 완료되었습니다");
         await router.push("/projects"); // FIXME: API 연결 후 생성한 게시글 페이지로 이동
       },

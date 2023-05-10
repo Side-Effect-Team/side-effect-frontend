@@ -35,14 +35,13 @@ export const POSITIONS = [
 export const POST_FORM = {
   projectName: "",
   title: "",
-  positions: [],
   content: "",
 };
 
 export default function PostRecruitPage() {
   const router = useRouter();
   const [positions, setPositions] = useState([...POSITIONS]);
-  const { tags } = useTag();
+  const { tags, deleteTag, addTag } = useTag();
   const { getter, setter } = useLocalStorage();
   const { imgSrc, handleImgChange } = useInputImage(DEFAULT_RECRUIT_CARD_IMAGE);
   const { postForm, errMsgs, touched, handleChange, handleBlur, handleSubmit } =
@@ -69,10 +68,17 @@ export default function PostRecruitPage() {
         return newErrorMsgs;
       },
       onSubmit: async () => {
-        const projects = getter("projects");
-        setter("projects", [...projects, postForm]);
+        const data = {
+          id: Math.ceil(Math.random() * 100),
+          ...postForm,
+          headerImage: imgSrc,
+          tags,
+          positions,
+        };
+        const recruits = getter("recruits");
+        setter("recruits", [...recruits, data]);
         window.alert("등록이 완료되었습니다");
-        await router.push("/projects"); // FIXME: API 연결 후 생성한 게시글 페이지로 이동
+        await router.push("/recruits"); // FIXME: API 연결 후 생성한 게시글 페이지로 이동
       },
     });
 
@@ -103,14 +109,13 @@ export default function PostRecruitPage() {
   };
 
   useEffect(() => {
-    const projects = getter("projects");
-    if (!projects) setter("projects", []);
+    const projects = getter("recruits");
+    if (!projects) setter("recruits", []);
   }, [getter, setter]);
 
-  // test
   useEffect(() => {
-    console.log("zz");
-  });
+    console.log({ postForm, positions, imgSrc, tags });
+  }, [postForm, positions, imgSrc, tags]);
 
   return (
     <Wrapper>
@@ -188,7 +193,7 @@ export default function PostRecruitPage() {
               <Image src={imgSrc} alt="" width={250} height={150} priority />
             </ImageBox>
           </InputBox>
-          <TagBox />
+          <TagBox tags={tags} deleteTag={deleteTag} addTag={addTag} />
           <InputBox>
             <LabelForm htmlFor="content">상세 내용</LabelForm>
             <TextareaForm

@@ -1,4 +1,4 @@
-import { KeyboardEvent, MouseEvent, useEffect, useState } from "react";
+import { KeyboardEvent, MouseEvent, useState } from "react";
 
 export const useTag = () => {
   const [tags, setTags] = useState<string[]>([]);

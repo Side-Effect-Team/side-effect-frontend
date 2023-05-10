@@ -1,5 +1,4 @@
 import { TagWrapper, Container, KeywordWrapper, TagsContainer } from "./styled";
-import { useTag } from "@/hooks/useTag";
 
 import {
   GuideWrapper,
@@ -7,16 +6,20 @@ import {
   InputForm,
   LabelForm,
 } from "@/postComps/common/PostForm.styled";
-import { MouseEventHandler } from "react";
+import { KeyboardEvent, MouseEvent } from "react";
+
+interface TagBoxProps {
+  tags: string[];
+  addTag: (e: KeyboardEvent<HTMLInputElement>) => void;
+  deleteTag: (e: MouseEvent) => void;
+}
 
 interface TagProps {
   keyword: string;
-  deleteTag: MouseEventHandler;
+  deleteTag: (e: MouseEvent) => void;
 }
 
-export default function TagBox() {
-  const { tags, deleteTag, addTag } = useTag();
-
+export default function TagBox({ tags, deleteTag, addTag }: TagBoxProps) {
   return (
     <InputBox>
       <GuideWrapper>

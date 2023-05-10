@@ -51,7 +51,7 @@ export const useForm = ({ initialVals, validate, onSubmit }: UseFormProps) => {
     setErrMsgs(newErrMsgs);
     if (Object.values(errMsgs).some((err) => err)) return;
     // 폼 검증 후 실행할 함수
-    onSubmit(postForm);
+    onSubmit();
   };
 
   const runValidator = useCallback(() => validate(postForm), [postForm]);
