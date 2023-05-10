@@ -33,7 +33,7 @@ export const Contents = styled.div`
   gap: 1rem;
   align-items: center;
   justify-content: center;
-  z-index: 5;
+  z-index: 3;
 
   h2 {
     font-size: 2.5rem;
