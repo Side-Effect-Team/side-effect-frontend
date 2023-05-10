@@ -8,11 +8,20 @@ import { useInView } from "react-intersection-observer";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useAppDispatch } from "../../store/hooks";
 import { openModal } from "../../store/modalSlice";
-
 import { media } from "@/styles/mediatest";
 import axios from "axios";
 const FILTER_OPTIONS = ["조회순", "추천순", "댓글순"];
-
+interface ProjectList {
+  id: number;
+  content: string;
+  title: string;
+  createdAt: string;
+}
+interface InfiniteProjectType {
+  hasNext: boolean;
+  lastId: number;
+  projects: ProjectList[];
+}
 export default function ProjectPage() {
   const [filter, setFilter] = useState("조회순");
   const [keyword, setKeyword] = useState("");
@@ -21,19 +30,19 @@ export default function ProjectPage() {
 
   const getProjectsData = async (page: number) => {
     const response = await axios.get(
-      `http://54.64.103.42:8080/api/free-boards/scroll?lastId=${page}&size=4`,
+      `${process.env.NEXT_PUBLIC_API_URL}/free-boards/scroll?lastId=${page}&size=4`,
     );
-
     return response.data;
   };
+
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isSuccess } =
     useInfiniteQuery(
       ["projectData"],
-      ({ pageParam = -1 }) => getProjectsData(pageParam),
+      ({ pageParam = -1 }): Promise<InfiniteProjectType> =>
+        getProjectsData(pageParam),
       {
         //**getNextPageParam 에서 return 된값은 pageParam 으로 넘어갑니다. */
         getNextPageParam: (lastPage) => {
-          console.log(lastPage);
           return lastPage.lastId === 1 ? undefined : lastPage.lastId;
         },
       },
@@ -46,7 +55,7 @@ export default function ProjectPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView, hasNextPage]);
   const dispatch = useAppDispatch();
-  console.log(keyword);
+  console.log(data);
   return (
     <Wrapper>
       <button
@@ -58,6 +67,7 @@ export default function ProjectPage() {
         <h2>이달의 프로젝트</h2>
         <TempCarousel>캐러셀</TempCarousel>
       </HeaderSection>
+
       <FilterSection>
         <SelectBox
           options={FILTER_OPTIONS}
@@ -71,17 +81,13 @@ export default function ProjectPage() {
       <CardSection>
         {isSuccess &&
           data?.pages.map((page) => {
-            return page.projects.map((project: any) => {
+            return page.projects.map((project) => {
               return <BoardCard key={project.id} data={project} />;
             });
           })}
       </CardSection>
-      <div
-        ref={ref}
-        style={{ backgroundColor: "black", height: "100px", color: "white" }}
-      >
-        {isFetchingNextPage && "데이터 불러오는중"}
-      </div>
+
+      <div ref={ref}>{isFetchingNextPage && "데이터 불러오는중"}</div>
     </Wrapper>
   );
 }
