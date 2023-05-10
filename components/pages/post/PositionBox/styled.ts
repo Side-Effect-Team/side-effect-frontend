@@ -5,8 +5,8 @@ export const PositionBoxWapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   height: 3.5rem;
-  justify-content: space-between;
   align-items: center;
+  gap: 1.5rem;
 `;
 
 export const InputWrapper = styled.div`

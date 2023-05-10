@@ -27,6 +27,7 @@ export default function PositionBox({
   const [isDirect, setIsDirect] = useState(false);
   const [positionForm, setPositionForm] = useState({ ...data });
 
+  // 포지션 업데이트
   const handleSelect = (
     e: ChangeEvent<HTMLSelectElement | HTMLInputElement>,
   ) => {
@@ -39,6 +40,7 @@ export default function PositionBox({
     setPositionForm({ ...positionForm, [name]: value });
   };
 
+  // 인원수 업데이트
   const handleNumber = (e: ChangeEvent<HTMLInputElement>) => {
     setPositionForm({ ...positionForm, [e.target.name]: e.target.value });
   };
