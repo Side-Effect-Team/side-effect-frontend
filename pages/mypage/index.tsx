@@ -5,19 +5,16 @@ import {
   TapWrapper,
 } from "@/components/pages/mypage/styled";
 import Profile from "@/components/pages/mypage/Profile";
-import { useState } from "react";
-import LikeBoards from "@/components/pages/mypage/LikeBoards";
-import UploadBoards from "@/components/pages/mypage/UploadBoards";
-import ApplyBoards from "@/components/pages/mypage/ApplyBoards";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { BoardCardProps } from "@/components/BoardCard";
+import TabBoards from "@/components/pages/mypage/TabBoards";
 
 export interface DataProps {
   imgUrl?: string;
   nickname: string;
   email: string;
   introduction?: string;
-  boards?: number;
-  // follower: number;
-  // following: number;
   stacks?: string[];
   position:
     | "프론트엔드"
@@ -30,33 +27,48 @@ export interface DataProps {
   githubUrl?: string;
   blogUrl?: string;
   portfolioUrl?: string;
-}
-export interface MyPageProps {
-  data?: DataProps;
+  likeBoards?: BoardCardProps[];
+  uploadBoards?: BoardCardProps[];
+  applyBoards?: BoardCardProps[];
 }
 
-const data: DataProps = {
-  imgUrl: "/images/ProjectDefaultBackground.png",
-  nickname: "자라는개발자",
-  email: "sideeffect@naver.com",
-  introduction:
-    "프론트엔드 개발자를 꿈꾸는 취준생입니다. 프로젝트 경험하고 싶어요",
-  // boards: 1,
-  // follower: 20,
-  // following: 30,
-  stacks: ["typescript", "react", "HTML", "Next.js", "React.native"],
-  position: "프론트엔드",
-  career: "1~3",
-  githubUrl: "https://github.com",
-  blogUrl: "https://www.naver.com",
-  portfolioUrl: "https://www.naver.com",
-};
 export default function MyPage() {
+  const [data, setData] = useState<DataProps | null>(null);
+  const [boards, setBoards] = useState<BoardCardProps[] | undefined | null>(
+    null,
+  );
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await axios.get(
+          "https://ec09fe3d-37a5-419e-9077-f537f3591137.mock.pstmn.io/mypage",
+        );
+        setData(result.data);
+      } catch (error) {
+        setData(null);
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const [activeTab, setActiveTab] = useState("profile");
 
   const onClickTab = (tabName: string) => {
     setActiveTab(tabName);
   };
+
+  useEffect(() => {
+    if (activeTab === "likeBoards" && data) {
+      setBoards(data.likeBoards);
+    } else if (activeTab === "uploadBoards" && data) {
+      setBoards(data.uploadBoards);
+    } else if (activeTab === "applyBoards" && data) {
+      setBoards(data.applyBoards);
+    }
+  }, [activeTab]);
 
   return (
     <Container>
@@ -87,10 +99,8 @@ export default function MyPage() {
         </TapMenu>
       </TapWrapper>
       <ContentsWrapper>
-        {activeTab === "profile" && <Profile {...data} />}
-        {activeTab === "likeBoards" && <LikeBoards />}
-        {activeTab === "uploadBoards" && <UploadBoards />}
-        {activeTab === "applyBoards" && <ApplyBoards />}
+        {activeTab === "profile" && data && <Profile {...data} />}
+        {data && boards && <TabBoards boards={boards} title={activeTab} />}
       </ContentsWrapper>
     </Container>
   );
