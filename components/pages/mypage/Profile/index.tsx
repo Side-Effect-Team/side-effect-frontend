@@ -1,4 +1,4 @@
-import { DataProps } from "@/pages/mypage";
+import { MypageProps } from "@/pages/mypage";
 import { useRouter } from "next/router";
 import {
   Border,
@@ -13,7 +13,7 @@ import Info from "./Info";
 import Button from "@/components/Button";
 import { Wrapper } from "./styled";
 
-export default function Profile(data: DataProps) {
+export default function Profile(data: MypageProps) {
   const router = useRouter();
   const onClickGoToEditProfile = () => {
     router.push("/mypage/profileEdit");
@@ -25,10 +25,8 @@ export default function Profile(data: DataProps) {
         nickname={data.nickname}
         email={data.email}
         introduction={data.introduction}
-        // boards={data.boards}
-        // follower={data.follower}
-        // following={data.following}
       />
+
       <SectionWrapper>
         <SectionHeaderWrapper>
           <SectionTitle>Skill</SectionTitle>

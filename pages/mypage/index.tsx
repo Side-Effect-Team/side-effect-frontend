@@ -10,7 +10,7 @@ import axios from "axios";
 import { BoardCardProps } from "@/components/BoardCard";
 import TabBoards from "@/components/pages/mypage/TabBoards";
 
-export interface DataProps {
+export interface MypageProps {
   imgUrl?: string;
   nickname: string;
   email: string;
@@ -33,7 +33,7 @@ export interface DataProps {
 }
 
 export default function MyPage() {
-  const [data, setData] = useState<DataProps | null>(null);
+  const [data, setData] = useState<MypageProps | null>(null);
   const [boards, setBoards] = useState<BoardCardProps[] | undefined | null>(
     null,
   );
@@ -99,8 +99,12 @@ export default function MyPage() {
         </TapMenu>
       </TapWrapper>
       <ContentsWrapper>
-        {activeTab === "profile" && data && <Profile {...data} />}
-        {data && boards && <TabBoards boards={boards} title={activeTab} />}
+        {!data && <div>로딩중</div>}
+        {data && activeTab === "profile" ? (
+          <Profile {...data} />
+        ) : (
+          <TabBoards boards={boards} title={activeTab} />
+        )}
       </ContentsWrapper>
     </Container>
   );

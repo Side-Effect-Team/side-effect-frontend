@@ -12,7 +12,7 @@ import {
   SectionWrapper,
   // Wrapper,
 } from "@/components/pages/mypage/styled";
-import { DataProps } from "..";
+import { MypageProps } from "..";
 import { useRouter } from "next/router";
 import { Wrapper } from "@/components/pages/mypageEdit/styled";
 
@@ -23,7 +23,7 @@ export interface FormData {
   nickname?: string;
 }
 
-const data: DataProps = {
+const data: MypageProps = {
   imgUrl: "/images/ProjectDefaultBackground.png",
   nickname: "자라는개발자",
   email: "sideeffect@naver.com",
