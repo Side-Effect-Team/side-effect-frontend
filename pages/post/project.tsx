@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import Image from "next/image";
 import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
 import { PostTitleStyled } from "@/postComps/common/Title.styled";
 import {
@@ -9,10 +10,13 @@ import {
   TextareaForm,
   SubmitBtnBox,
   ErrorMsg,
+  ImageBox,
 } from "@/postComps/common/PostForm.styled";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import Button from "@/components/Button";
 import { useForm } from "@/hooks/useForm";
+import { useInputImage } from "@/hooks/useInputImage";
+import { DEFAULT_PROJECT_CARD_IMAGE } from "../../enum";
 
 export const POST_FORM = {
   projectName: "",
@@ -22,6 +26,8 @@ export const POST_FORM = {
 
 export default function PostProjectPage() {
   const router = useRouter();
+  const { getter, setter } = useLocalStorage();
+  const { imgSrc, handleImgChange } = useInputImage(DEFAULT_PROJECT_CARD_IMAGE);
   const { postForm, errMsgs, touched, handleChange, handleBlur, handleSubmit } =
     useForm({
       initialVals: { ...POST_FORM },
@@ -49,11 +55,9 @@ export default function PostProjectPage() {
         const projects = getter("projects");
         setter("projects", [...projects, postForm]);
         window.alert("등록이 완료되었습니다");
-        await router.push("/projects"); // FIXME : 생성한 게시글 id 로 이동
+        await router.push("/projects"); // FIXME: API 연결 후 생성한 게시글 페이지로 이동
       },
     });
-
-  const { getter, setter } = useLocalStorage();
 
   const handleCancel = () => {
     if (window.confirm("작성중인 내용이 사라집니다. 계속 진행하시겠습니까?"))
@@ -97,6 +101,21 @@ export default function PostProjectPage() {
             {touched.title && errMsgs.title && (
               <ErrorMsg>{errMsgs.title}</ErrorMsg>
             )}
+          </InputBox>
+          <InputBox>
+            <LabelForm htmlFor="image">대표 이미지</LabelForm>
+            <InputForm
+              name="image"
+              type="file"
+              accept="image/*"
+              onChange={handleImgChange}
+            />
+            <ImageBox>
+              {imgSrc === DEFAULT_PROJECT_CARD_IMAGE && (
+                <p>이미지 미설정 시 적용될 기본 이미지입니다</p>
+              )}
+              <Image src={imgSrc} alt="" width={250} height={150} priority />
+            </ImageBox>
           </InputBox>
           <InputBox>
             <LabelForm htmlFor="content">상세 내용</LabelForm>

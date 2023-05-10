@@ -7,6 +7,17 @@ export const InputBox = styled.div`
   flex-direction: column;
 `;
 
+export const GuideWrapper = styled.div`
+  display: flex;
+  align-items: center;
+
+  p {
+    margin-left: 1rem;
+    font-size: 0.85rem;
+    transform: translateY(50%);
+  }
+`;
+
 export const PositionBoxContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -15,6 +26,7 @@ export const PositionBoxContainer = styled.div`
 export const LabelForm = styled.label`
   font-size: 1.25rem;
   font-weight: 600;
+  margin-top: 1.5rem;
   margin-bottom: 1rem;
 `;
 
@@ -43,4 +55,11 @@ export const ErrorMsg = styled.span`
   margin-top: 5px;
   font-size: 0.85rem;
   color: ${(p) => p.theme.colors.danger};
+`;
+
+export const ImageBox = styled.div`
+  p {
+    font-size: 0.75rem;
+    color: rgba(0, 0, 0, 0.75);
+  }
 `;

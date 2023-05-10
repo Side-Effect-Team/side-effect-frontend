@@ -69,3 +69,7 @@ export const POSITION_LIST = [
     value: "pm",
   },
 ];
+
+export const DEFAULT_RECRUIT_CARD_IMAGE = "/images/BoardDefaultBackground.png";
+export const DEFAULT_PROJECT_CARD_IMAGE =
+  "/images/ProjectDefaultBackground.png";
