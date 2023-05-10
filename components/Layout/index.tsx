@@ -24,6 +24,10 @@ const MOBILE_BOARD_LIST = [
   },
 ];
 
+interface MobileMenuProps {
+  hide: boolean;
+}
+
 export default function Layout({ children }: PropType) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const router = useRouter();
@@ -58,21 +62,25 @@ export default function Layout({ children }: PropType) {
     );
   }
 
+  useEffect(() => {
+    console.log(mobileMenuOpen);
+  }, [mobileMenuOpen]);
+
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <Header handleMobileMenu={handleMobileMenu} />
       <Toast />
-      {mobileMenuOpen && <MobileMenu />}
+      <MobileMenu hide={!mobileMenuOpen} />
       <Wrapper mobileMenuOpen={mobileMenuOpen}>{children}</Wrapper>
       <Footer />
     </ThemeProvider>
   );
 }
 
-function MobileMenu() {
+function MobileMenu({ hide }: MobileMenuProps) {
   return (
-    <MobileNavBar>
+    <MobileNavBar hide={hide}>
       {MOBILE_BOARD_LIST.map((board) => (
         <MobileMenuItem key={board.ID}>
           <Link href={board.LINK}>{board.TITLE}</Link>
