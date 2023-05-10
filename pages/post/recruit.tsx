@@ -45,43 +45,36 @@ export default function PostRecruitPage() {
   const { tags } = useTag();
   const { getter, setter } = useLocalStorage();
   const { imgSrc, handleImgChange } = useInputImage(DEFAULT_RECRUIT_CARD_IMAGE);
-  const {
-    postForm,
-    setPostForm,
-    errMsgs,
-    touched,
-    handleChange,
-    handleBlur,
-    handleSubmit,
-  } = useForm({
-    initialVals: { ...POST_FORM },
-    validate: (postForm: typeof POST_FORM) => {
-      const newErrorMsgs = { ...POST_FORM };
+  const { postForm, errMsgs, touched, handleChange, handleBlur, handleSubmit } =
+    useForm({
+      initialVals: { ...POST_FORM },
+      validate: (postForm: typeof POST_FORM) => {
+        const newErrorMsgs = { ...POST_FORM };
 
-      // 프로젝트명
-      if (
-        postForm.projectName.trim().length < 3 ||
-        postForm.projectName.trim().length > 20
-      )
-        newErrorMsgs.projectName = "프로젝트명은 3~20자 이내로 입력해주세요";
+        // 프로젝트명
+        if (
+          postForm.projectName.trim().length < 3 ||
+          postForm.projectName.trim().length > 20
+        )
+          newErrorMsgs.projectName = "프로젝트명은 3~20자 이내로 입력해주세요";
 
-      // 게시글 제목
-      if (postForm.title.trim().length < 5)
-        newErrorMsgs.title = "게시글 제목은 5자 이상 입력해야 합니다";
+        // 게시글 제목
+        if (postForm.title.trim().length < 5)
+          newErrorMsgs.title = "게시글 제목은 5자 이상 입력해야 합니다";
 
-      // 상세 내용
-      if (postForm.content.trim().length < 20)
-        newErrorMsgs.content = "게시글 내용은 20자 이상 입력해야 합니다";
+        // 상세 내용
+        if (postForm.content.trim().length < 20)
+          newErrorMsgs.content = "게시글 내용은 20자 이상 입력해야 합니다";
 
-      return newErrorMsgs;
-    },
-    onSubmit: async () => {
-      const projects = getter("projects");
-      setter("projects", [...projects, postForm]);
-      window.alert("등록이 완료되었습니다");
-      await router.push("/projects"); // FIXME: API 연결 후 생성한 게시글 페이지로 이동
-    },
-  });
+        return newErrorMsgs;
+      },
+      onSubmit: async () => {
+        const projects = getter("projects");
+        setter("projects", [...projects, postForm]);
+        window.alert("등록이 완료되었습니다");
+        await router.push("/projects"); // FIXME: API 연결 후 생성한 게시글 페이지로 이동
+      },
+    });
 
   // 등록 취소 버튼 클릭 핸들러
   const handleCancel = () => {
@@ -114,6 +107,11 @@ export default function PostRecruitPage() {
     if (!projects) setter("projects", []);
   }, [getter, setter]);
 
+  // test
+  useEffect(() => {
+    console.log("zz");
+  });
+
   return (
     <Wrapper>
       <Contents>
@@ -124,7 +122,6 @@ export default function PostRecruitPage() {
               <LabelForm htmlFor="projectName">프로젝트명</LabelForm>
               <p>멋진 프로젝트 이름을 정해보세요</p>
             </GuideWrapper>
-
             <InputForm
               type="text"
               id="projectName"
@@ -143,7 +140,6 @@ export default function PostRecruitPage() {
               <LabelForm htmlFor="title">게시글 제목</LabelForm>
               <p>제목에 핵심 내용을 드러내보세요</p>
             </GuideWrapper>
-
             <InputForm
               type="text"
               id="title"
@@ -206,7 +202,6 @@ export default function PostRecruitPage() {
               <ErrorMsg>{errMsgs.content}</ErrorMsg>
             )}
           </InputBox>
-
           <SubmitBtnBox>
             <Button type="submit">등록</Button>
             <Button type="button" onClick={handleCancel}>

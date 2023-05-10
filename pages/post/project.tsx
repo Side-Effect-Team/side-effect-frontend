@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
 import { PostTitleStyled } from "@/postComps/common/Title.styled";
@@ -11,11 +11,13 @@ import {
   SubmitBtnBox,
   ErrorMsg,
   ImageBox,
+  GuideWrapper,
 } from "@/postComps/common/PostForm.styled";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import Button from "@/components/Button";
 import { useForm } from "@/hooks/useForm";
 import { useInputImage } from "@/hooks/useInputImage";
+import ProjectUrlBox from "@/postComps/ProjectUrlBox";
 import { DEFAULT_PROJECT_CARD_IMAGE } from "../../enum";
 
 export const POST_FORM = {
@@ -28,6 +30,7 @@ export default function PostProjectPage() {
   const router = useRouter();
   const { getter, setter } = useLocalStorage();
   const { imgSrc, handleImgChange } = useInputImage(DEFAULT_PROJECT_CARD_IMAGE);
+  const [projectUrl, setProjectUrl] = useState("");
   const { postForm, errMsgs, touched, handleChange, handleBlur, handleSubmit } =
     useForm({
       initialVals: { ...POST_FORM },
@@ -69,13 +72,21 @@ export default function PostProjectPage() {
     if (!projects) setter("projects", []);
   }, [getter, setter]);
 
+  // test
+  useEffect(() => {
+    console.log(projectUrl);
+  });
+
   return (
     <Wrapper>
       <Contents>
         <PostTitleStyled>프로젝트 자랑하기</PostTitleStyled>
         <form onSubmit={handleSubmit}>
           <InputBox>
-            <LabelForm htmlFor="projectName">프로젝트명</LabelForm>
+            <GuideWrapper>
+              <LabelForm htmlFor="projectName">프로젝트명</LabelForm>
+              <p>멋진 프로젝트 이름을 정해보세요</p>
+            </GuideWrapper>
             <InputForm
               type="text"
               id="projectName"
@@ -83,13 +94,17 @@ export default function PostProjectPage() {
               value={postForm.projectName}
               onChange={handleChange}
               onBlur={handleBlur}
+              placeholder="3~20자 이내로 입력해주세요"
             />
             {touched.projectName && errMsgs.projectName && (
               <ErrorMsg>{errMsgs.projectName}</ErrorMsg>
             )}
           </InputBox>
           <InputBox>
-            <LabelForm htmlFor="title">게시글 제목</LabelForm>
+            <GuideWrapper>
+              <LabelForm htmlFor="title">게시글 제목</LabelForm>
+              <p>제목에 핵심 내용을 드러내보세요</p>
+            </GuideWrapper>
             <InputForm
               type="text"
               id="title"
@@ -102,6 +117,10 @@ export default function PostProjectPage() {
               <ErrorMsg>{errMsgs.title}</ErrorMsg>
             )}
           </InputBox>
+          <ProjectUrlBox
+            projectUrl={projectUrl}
+            setProjectUrl={setProjectUrl}
+          />
           <InputBox>
             <LabelForm htmlFor="image">대표 이미지</LabelForm>
             <InputForm
