@@ -3,19 +3,40 @@ import Image from "next/image";
 import profilePic from "../../../public/images/profilePic.png";
 import Button from "../../Button";
 import { media } from "@/styles/mediatest";
+import useToast from "../../../hooks/useToast";
 interface Props {
   filter: string;
 }
 
 export default function ManageCard({ filter }: Props) {
   const isApplicantManage = filter === "지원현황";
-
+  const { addToast } = useToast();
   const handleButton = () => {
     if (isApplicantManage) {
       return (
         <>
-          <Button>수락</Button>
-          <Button>거절</Button>
+          <Button
+            onClick={() =>
+              addToast({
+                type: "success",
+                title: "Success!",
+                content: "팀원에게 수락 알림을 보냈습니다!",
+              })
+            }
+          >
+            수락
+          </Button>
+          <Button
+            onClick={() =>
+              addToast({
+                type: "error",
+                title: "Something Wrong!",
+                content: "알수없는 에러가 발생하였습니다!",
+              })
+            }
+          >
+            거절
+          </Button>
           <Button>마이페이지</Button>
         </>
       );
@@ -36,6 +57,7 @@ export default function ManageCard({ filter }: Props) {
             src={profilePic}
             alt={"Profile Image"}
             style={{ objectFit: "cover" }}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             fill
           />
         </ProfileImage>

@@ -4,12 +4,15 @@ import { Wrapper, HeaderStyled, Logo, NavStyled, BoxStyled } from "./styled";
 import MobileMenuButton from "../MobileMenuButton";
 import { BOARD_LIST } from "../../enum";
 import Button from "../Button";
+import { useAppDispatch } from "@/store/hooks";
+import { openModal } from "@/store/modalSlice";
 
 interface HeaderProps {
   handleMobileMenu: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 export default function Header({ handleMobileMenu }: HeaderProps) {
+  const dispatch = useAppDispatch();
   return (
     <Wrapper>
       <HeaderStyled>
@@ -27,7 +30,11 @@ export default function Header({ handleMobileMenu }: HeaderProps) {
           <Button>
             <IoNotificationsOutline />
           </Button>
-          <Button>로그인</Button>
+          <Button
+            onClick={() => dispatch(openModal({ modalType: "LoginModal" }))}
+          >
+            로그인
+          </Button>
         </BoxStyled>
         <MobileMenuButton onClick={handleMobileMenu} />
       </HeaderStyled>
