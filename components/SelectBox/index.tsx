@@ -14,7 +14,7 @@ interface OptionsType {
 interface SelectBoxProps {
   options: OptionsType[];
   setValue: React.Dispatch<React.SetStateAction<any>>;
-  title?: string | number;
+  title: string | number;
   size?: "small" | "medium" | "large";
 }
 
