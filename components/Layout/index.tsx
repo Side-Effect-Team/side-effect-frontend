@@ -33,7 +33,7 @@ export default function Layout({ children }: PropType) {
   const router = useRouter();
   const currentPage = router.route;
 
-  const handleMobileMenu = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMobileMenu = () => {
     setMobileMenuOpen((prev) => !prev);
   };
 
@@ -61,10 +61,6 @@ export default function Layout({ children }: PropType) {
       </>
     );
   }
-
-  useEffect(() => {
-    console.log(mobileMenuOpen);
-  }, [mobileMenuOpen]);
 
   return (
     <ThemeProvider theme={theme}>
