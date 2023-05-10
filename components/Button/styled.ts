@@ -97,11 +97,6 @@ export const StyledButton = styled.button`
   ${sizeStyles};
   ${colorStyle}
   ${fillStyle};
-
-  /*기타 */
-  & + & {
-    margin-left: 1rem;
-  }
 `;
 StyledButton.defaultProps = {
   size: "medium",
