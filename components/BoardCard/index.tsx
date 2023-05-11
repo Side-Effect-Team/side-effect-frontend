@@ -20,7 +20,7 @@ import {
 import { useRouter } from "next/router";
 export interface BoardCardProps {
   id: number | string;
-  // category?: string;
+  category?: string;
   headerImage?: string;
   projectName?: string;
   tags?: string[];
@@ -33,10 +33,9 @@ export interface BoardCardProps {
 }
 interface BoardCardDataProps {
   data?: BoardCardProps;
-  category: string;
 }
 
-export default function BoardCard({ data, category }: BoardCardDataProps) {
+export default function BoardCard({ data }: BoardCardDataProps) {
   const [isLike, setIsLike] = useState(data?.like);
   const router = useRouter();
   const onClickHeart = (e: MouseEvent<HTMLButtonElement>) => {
@@ -44,13 +43,13 @@ export default function BoardCard({ data, category }: BoardCardDataProps) {
     e.stopPropagation();
   };
   const onClickGoToBoard = (e: MouseEvent<HTMLDivElement>) => {
-    if (category === "projects") {
+    if (data?.category === "projects") {
       router.push(`/projects/${e.currentTarget.id}`);
     } else router.push(`/recruits/${e.currentTarget.id}`);
   };
   return (
     <Container id={data?.id.toString()} onClick={onClickGoToBoard}>
-      <Header src={data?.headerImage}>
+      <Header category={data?.category} src={data?.headerImage}>
         <ProjectName>{data?.projectName}</ProjectName>
       </Header>
       <ContentsWrapper>
