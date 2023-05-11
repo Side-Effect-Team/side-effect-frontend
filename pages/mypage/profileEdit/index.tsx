@@ -7,14 +7,18 @@ import { useForm } from "react-hook-form";
 import {
   Border,
   ButtonWrapper,
+  Container,
+  ContentsWrapper,
   SectionHeaderWrapper,
   SectionTitle,
   SectionWrapper,
+  TapMenu,
+  TapWrapper,
 } from "@/components/pages/mypage/styled";
 import { MypageProps } from "..";
 import { useRouter } from "next/router";
-import { Wrapper } from "@/components/pages/mypageEdit/styled";
 import axios from "axios";
+import useToast from "@/hooks/useToast";
 
 export interface FormData {
   githubUrl?: string;
@@ -25,6 +29,8 @@ export interface FormData {
 
 export default function MyPageEdit() {
   const [data, setData] = useState<MypageProps | null>(null);
+  const { addToast, deleteToast } = useToast();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -66,7 +72,7 @@ export default function MyPageEdit() {
     formState: { errors },
   } = useForm<FormData>();
 
-  const onClickEdit = (p: FormData) => {
+  const onClickEdit = async (p: FormData) => {
     const formData: any = {};
     if (p.nickname) formData.nickname = p.nickname;
     if (p.githubUrl) formData.githubUrl = p.githubUrl;
@@ -84,6 +90,36 @@ export default function MyPageEdit() {
     if (data) {
       const changes = compareData(data, changedData);
       console.log(changes);
+      const id = localStorage.getItem("id");
+
+      try {
+        const token = localStorage.getItem("accessToken");
+        const config = {
+          headers: { Authorization: `Bearer ${token}` },
+        };
+        const result = await axios.patch(
+          `${process.env.NEXT_PUBLIC_API_URL}/user/${id}`,
+          changes,
+          config,
+        );
+        console.log(result.data);
+        addToast({
+          type: "success",
+          title: "success",
+          content: "프로필 편집에 성공하였습니다.",
+        });
+        deleteToast("unique-id");
+        router.push(`/mypage`);
+      } catch (error) {
+        console.log(error);
+        addToast({
+          type: "error",
+          title: "error",
+          content: "프로필 편집에 실패하였습니다.",
+        });
+
+        deleteToast("unique-id");
+      }
     }
   };
 
@@ -107,50 +143,62 @@ export default function MyPageEdit() {
 
   const onCliCkEditCancel = () => {
     alert("변경사항은 저장되지 않습니다.");
+    addToast({
+      type: "info",
+      title: "info",
+      content: "프로필 편집을 취소하셨습니다.",
+    });
+
+    deleteToast("unique-id");
     router.push("/mypage");
   };
   return (
-    <Wrapper>
-      <form onSubmit={handleSubmit(onClickEdit)}>
-        <IntroductionEdit
-          nickname={data?.nickname}
-          introduction={introduction}
-          setIntroduction={setIntroduction}
-          imgUrl={imgUrl}
-          setImgUrl={setImgUrl}
-          introRegister={register}
-          errors={errors}
-        />
-        <SectionWrapper>
-          <SectionHeaderWrapper>
-            <SectionTitle>Skill</SectionTitle>
-            <Border></Border>
-          </SectionHeaderWrapper>
-          <SkillEdit stacks={stacks} setStacks={setStacks} />
-        </SectionWrapper>
-        <SectionWrapper>
-          <SectionHeaderWrapper>
-            <SectionTitle>Info</SectionTitle>
-            <Border></Border>
-          </SectionHeaderWrapper>
-          <InfoEdit
-            githubUrl={data?.githubUrl}
-            blogUrl={data?.blogUrl}
-            portfolioUrl={data?.portfolioUrl}
-            career={career}
-            setCareer={setCareer}
-            position={position}
-            setPosition={setPosition}
-            infoRegister={register}
+    <Container>
+      <TapWrapper>
+        <TapMenu isActive>프로필 수정</TapMenu>
+      </TapWrapper>
+      <ContentsWrapper>
+        <form onSubmit={handleSubmit(onClickEdit)}>
+          <IntroductionEdit
+            nickname={data?.nickname}
+            introduction={introduction}
+            setIntroduction={setIntroduction}
+            imgUrl={imgUrl}
+            setImgUrl={setImgUrl}
+            introRegister={register}
+            errors={errors}
           />
-        </SectionWrapper>
-        <ButtonWrapper>
-          <Button fill="false" type="button" onClick={onCliCkEditCancel}>
-            수정 취소
-          </Button>
-          <Button>수정 완료</Button>
-        </ButtonWrapper>
-      </form>
-    </Wrapper>
+          <SectionWrapper>
+            <SectionHeaderWrapper>
+              <SectionTitle>Skill</SectionTitle>
+              <Border></Border>
+            </SectionHeaderWrapper>
+            <SkillEdit stacks={stacks} setStacks={setStacks} />
+          </SectionWrapper>
+          <SectionWrapper>
+            <SectionHeaderWrapper>
+              <SectionTitle>Info</SectionTitle>
+              <Border></Border>
+            </SectionHeaderWrapper>
+            <InfoEdit
+              githubUrl={data?.githubUrl}
+              blogUrl={data?.blogUrl}
+              portfolioUrl={data?.portfolioUrl}
+              career={career}
+              setCareer={setCareer}
+              position={position}
+              setPosition={setPosition}
+              infoRegister={register}
+            />
+          </SectionWrapper>
+          <ButtonWrapper>
+            <Button fill="false" type="button" onClick={onCliCkEditCancel}>
+              수정 취소
+            </Button>
+            <Button>수정 완료</Button>
+          </ButtonWrapper>
+        </form>
+      </ContentsWrapper>
+    </Container>
   );
 }

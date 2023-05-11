@@ -11,16 +11,23 @@ export default function TabBoards({ boards, title }: TabBoards) {
   console.log(boards);
   return (
     <>
-      {boards && (
+      {boards ? (
+        <>
+          <SectionHeaderWrapper>
+            <SectionTitle>{title}</SectionTitle>
+            <Border></Border>
+          </SectionHeaderWrapper>
+          <BoardWrapper>
+            {boards &&
+              boards.map((el, index) => <BoardCard key={index} data={el} />)}
+          </BoardWrapper>
+        </>
+      ) : (
         <SectionHeaderWrapper>
           <SectionTitle>{title}</SectionTitle>
           <Border></Border>
         </SectionHeaderWrapper>
       )}
-      <BoardWrapper>
-        {boards &&
-          boards.map((el, index) => <BoardCard key={index} data={el} />)}
-      </BoardWrapper>
     </>
   );
 }
