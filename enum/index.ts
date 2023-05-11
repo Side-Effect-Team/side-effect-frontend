@@ -42,3 +42,34 @@ export const BANNER_CONTENTS = {
   SUB_TITLE:
     "프로젝트 팀원을 모집하거나 관심있는 프로젝트에 지원할 수 있습니다",
 };
+
+export const POSITION_LIST = [
+  {
+    name: "프론트엔드",
+    value: "frontend",
+  },
+  {
+    name: "백엔드",
+    value: "backend",
+  },
+  {
+    name: "디자이너",
+    value: "designer",
+  },
+  {
+    name: "데브옵스",
+    value: "devops",
+  },
+  {
+    name: "마케터",
+    value: "marketer",
+  },
+  {
+    name: "기획자",
+    value: "pm",
+  },
+];
+
+export const DEFAULT_RECRUIT_CARD_IMAGE = "/images/BoardDefaultBackground.png";
+export const DEFAULT_PROJECT_CARD_IMAGE =
+  "/images/ProjectDefaultBackground.png";

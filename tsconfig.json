@@ -3,11 +3,12 @@
     "baseUrl": ".",
     "paths": {
       "@/components/*": ["components/*"],
-      "@/pageComponents/*": ["components/pages"],
+      "@/pageComponents/*": ["components/pages/*"],
       "@/styles/*": ["styles/*"],
       "@/hooks/*": ["hooks/*"],
       "@/store/*": ["store/*"],
-      "@/pages/*": ["pages/*"]
+      "@/pages/*": ["pages/*"],
+      "@/postComps/*": ["components/pages/post/*"]
     },
     "target": "ESNext",
     "lib": [
