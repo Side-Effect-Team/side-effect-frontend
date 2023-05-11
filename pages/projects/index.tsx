@@ -10,6 +10,7 @@ import { useAppDispatch } from "../../store/hooks";
 import { openModal } from "../../store/modalSlice";
 import { media } from "@/styles/mediatest";
 import axios from "axios";
+import PageHead from "@/components/PageHead";
 const FILTER_OPTIONS = [
   { name: "최신순", value: "latest" },
   { name: "조회순", value: "view" },
@@ -64,6 +65,7 @@ export default function ProjectPage() {
   console.log(filter);
   return (
     <Wrapper>
+      <PageHead pageTitle="프로젝트 자랑 | 사이드 이펙트" />
       <button
         onClick={() => dispatch(openModal({ modalType: "ManageTeamModal" }))}
       >

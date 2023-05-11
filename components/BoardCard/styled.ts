@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { theme } from "../../styles/Theme";
+import { theme } from "@/styles/Theme";
 import { AiFillHeart, AiOutlineHeart, AiOutlineMessage } from "react-icons/ai";
 import { mediaQuery } from "@/styles/Media";
 
