@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-// import { useRouter } from "next/router";
 import { useQuery } from "@tanstack/react-query";
 import styled from "styled-components";
 import { breakPoints, mediaQuery } from "@/styles/Media";
@@ -8,24 +6,16 @@ import BoardCard from "@/components/BoardCard";
 import { BANNER_CONTENTS } from "../../enum";
 import PageHead from "@/components/PageHead";
 import axios from "axios";
-
-interface RecruitType {
-  id: number;
-  headerTitle: string;
-  tags: string[];
-  title: string;
-  content: string;
-  createdAt: string;
-  like: boolean;
-}
+import { recruitBoardCardConverter } from "@/utils/converter";
 
 export default function RecruitsPage() {
   const { data, isError, isLoading } = useQuery({
     queryKey: ["recruits"],
     queryFn: async () => {
-      return await axios.get(
+      const res = await axios.get(
         `${process.env.NEXT_PUBLIC_API_URL}/recruit-board/scroll?size=100`,
       );
+      return res.data.recruitBoards;
     },
   });
 
@@ -66,9 +56,10 @@ export default function RecruitsPage() {
           </FilterBox>
         </ContentsHeader>
         <ContentsMain>
-          {data.map((item: RecruitType) => (
-            <BoardCard key={item.id} data={item} />
-          ))}
+          {data.map((item: RecruitType) => {
+            const boardCardData = recruitBoardCardConverter("recruits", item);
+            return <BoardCard key={item.id} data={boardCardData} />;
+          })}
         </ContentsMain>
       </Contents>
     </Wrapper>
