@@ -6,12 +6,12 @@ import { InfoTitle, InfoWrapper } from "../../mypage/Profile/Info/styled";
 import { FormData } from "@/pages/mypage/profileEdit";
 
 interface InfoEditProps {
-  career: string | number;
-  setCareer: Dispatch<SetStateAction<string | number>>;
-  position: string | number;
-  setPosition: Dispatch<SetStateAction<string | number>>;
+  career: string;
+  setCareer: Dispatch<SetStateAction<string>>;
+  position: string;
+  setPosition: Dispatch<SetStateAction<string>>;
   infoRegister: UseFormRegister<
-    Pick<FormData, "github" | "blog" | "portfolio">
+    Pick<FormData, "github" | "blog" | "portfolio" | "nickname">
   >;
   githubUrl: string | undefined;
   blogUrl: string | undefined;
@@ -30,7 +30,7 @@ const SELECT_CAREER = [
   { name: "신입(0년차)", value: "new" },
   { name: "주니어(1~3년차)", value: "junior" },
   { name: "미들(4~6년차)", value: "middle" },
-  { name: "시니어(7년이상)", value: "sinior" },
+  { name: "시니어(7년이상)", value: "senior" },
 ];
 export default function InfoEdit({
   career,

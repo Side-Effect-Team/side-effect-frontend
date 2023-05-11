@@ -10,7 +10,6 @@ import {
   SectionHeaderWrapper,
   SectionTitle,
   SectionWrapper,
-  // Wrapper,
 } from "@/components/pages/mypage/styled";
 import { MypageProps } from "..";
 import { useRouter } from "next/router";
@@ -20,7 +19,7 @@ export interface FormData {
   github?: string;
   blog?: string;
   portfolio?: string;
-  nickname?: string;
+  nickname: string;
 }
 
 const data: MypageProps = {
@@ -29,12 +28,9 @@ const data: MypageProps = {
   email: "sideeffect@naver.com",
   introduction:
     "프론트엔드 개발자를 꿈꾸는 취준생입니다. 프로젝트 경험하고 싶어요",
-  // boards: 1,
-  // follower: 20,
-  // following: 30,
   stacks: ["typescript", "react", "HTML", "Next.js", "React.native"],
-  position: "프론트엔드",
-  career: "1~3",
+  position: "frontend",
+  career: "new",
   githubUrl: "https://github.com",
   blogUrl: "https://www.naver.com",
   portfolioUrl: "https://www.naver.com",
@@ -44,32 +40,29 @@ export default function MyPageEdit() {
   const router = useRouter();
   const [introduction, setIntroduction] = useState(data?.introduction);
   const [imgUrl, setImgUrl] = useState(data?.imgUrl);
-  const [stackTags, setStackTags] = useState<string[]>(data?.stacks || []);
-  const [career, setCareer] = useState<string | number>(data?.career || "");
-  const [position, setPosition] = useState<string | number>(
-    data?.position || "",
-  );
+  const [stacks, setStacks] = useState<string[]>(data?.stacks || []);
+  const [career, setCareer] = useState<string>(data?.career || "");
+  const [position, setPosition] = useState<string>(data?.position || "");
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
 
-  const onClickEdit = (data: FormData) => {
-    console.log({
+  const onClickEdit = (p: FormData) => {
+    const changedData: MypageProps = {
       career,
       position,
-      stackTags,
+      stacks,
       introduction,
       imgUrl,
-      ...data,
-    });
-  };
-  const onCliCkEditDone = () => {
+      ...p,
+    };
     alert("변경완료");
     router.push("/mypage");
   };
-  const onCliCkEditCancle = () => {
+
+  const onCliCkEditCancel = () => {
     alert("변경사항은 저장되지 않습니다.");
     router.push("/mypage");
   };
@@ -90,7 +83,7 @@ export default function MyPageEdit() {
             <SectionTitle>Skill</SectionTitle>
             <Border></Border>
           </SectionHeaderWrapper>
-          <SkillEdit stackTags={stackTags} setStackTags={setStackTags} />
+          <SkillEdit stacks={stacks} setStacks={setStacks} />
         </SectionWrapper>
         <SectionWrapper>
           <SectionHeaderWrapper>
@@ -109,10 +102,10 @@ export default function MyPageEdit() {
           />
         </SectionWrapper>
         <ButtonWrapper>
-          <Button fill="false" type="button" onClick={onCliCkEditCancle}>
+          <Button fill="false" type="button" onClick={onCliCkEditCancel}>
             수정취소
           </Button>
-          <Button onClick={onCliCkEditDone}>수정 완료</Button>
+          <Button>수정 완료</Button>
         </ButtonWrapper>
       </form>
     </Wrapper>

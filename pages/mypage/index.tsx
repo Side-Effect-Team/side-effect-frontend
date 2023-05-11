@@ -13,17 +13,11 @@ import TabBoards from "@/components/pages/mypage/TabBoards";
 export interface MypageProps {
   imgUrl?: string;
   nickname: string;
-  email: string;
+  email?: string;
   introduction?: string;
   stacks?: string[];
-  position:
-    | "프론트엔드"
-    | "백엔드"
-    | "디자이너"
-    | "데브옵스"
-    | "기획자"
-    | "마케터";
-  career: "0" | "1~3" | "4~6" | "7년 이상";
+  position: string;
+  career: string;
   githubUrl?: string;
   blogUrl?: string;
   portfolioUrl?: string;

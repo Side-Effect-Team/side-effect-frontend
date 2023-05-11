@@ -8,11 +8,11 @@ import {
 import { DeleteTag, Tag, TagInput, TagWrapper } from "./styled";
 
 interface SkillEditProps {
-  stackTags: string[];
-  setStackTags: Dispatch<SetStateAction<string[]>>;
+  stacks: string[];
+  setStacks: Dispatch<SetStateAction<string[]>>;
 }
 
-export default function SkillEdit({ stackTags, setStackTags }: SkillEditProps) {
+export default function SkillEdit({ stacks, setStacks }: SkillEditProps) {
   const [tag, setTag] = useState("");
 
   const onChangeTag = (e: ChangeEvent<HTMLInputElement>) => {
@@ -25,20 +25,20 @@ export default function SkillEdit({ stackTags, setStackTags }: SkillEditProps) {
     }
   };
   const submitTagItem = () => {
-    let updatedTagList = [...stackTags];
+    let updatedTagList = [...stacks];
     updatedTagList.push(tag);
-    setStackTags(updatedTagList);
+    setStacks(updatedTagList);
     setTag("");
   };
   const onClickDeleteTag = (el: string) => {
     const deleteTag = el;
-    const filteredTag = stackTags.filter((tag) => tag !== deleteTag);
-    setStackTags(filteredTag);
+    const filteredTag = stacks.filter((tag) => tag !== deleteTag);
+    setStacks(filteredTag);
   };
   return (
     <TagWrapper>
-      {stackTags &&
-        stackTags.map((el, index) => (
+      {stacks &&
+        stacks.map((el, index) => (
           <Tag key={index}>
             {el}{" "}
             <DeleteTag type="button" onClick={() => onClickDeleteTag(el)}>
