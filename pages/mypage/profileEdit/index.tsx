@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../../../components/Button";
 import InfoEdit from "../../../components/pages/mypageEdit/Info";
 import IntroductionEdit from "../../../components/pages/mypageEdit/Introduction";
@@ -14,6 +14,7 @@ import {
 import { MypageProps } from "..";
 import { useRouter } from "next/router";
 import { Wrapper } from "@/components/pages/mypageEdit/styled";
+import axios from "axios";
 
 export interface FormData {
   githubUrl?: string;
@@ -22,21 +23,37 @@ export interface FormData {
   nickname: string;
 }
 
-const data: MypageProps = {
-  imgUrl: "/images/ProjectDefaultBackground.png",
-  nickname: "자라는개발자",
-  email: "sideeffect@naver.com",
-  introduction:
-    "프론트엔드 개발자를 꿈꾸는 취준생입니다. 프로젝트 경험하고 싶어요",
-  stacks: ["typescript", "react", "HTML", "Next.js", "React.native"],
-  position: "frontend",
-  career: "new",
-  githubUrl: "https://github.com",
-  blogUrl: "https://www.naver.com",
-  portfolioUrl: "https://www.naver.com",
-};
-
 export default function MyPageEdit() {
+  const [data, setData] = useState<MypageProps | null>(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem("accessToken");
+        const config = {
+          headers: { Authorization: `Bearer ${token}` },
+        };
+        const result = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/user/editpage`,
+          config,
+        );
+        console.log(result.data);
+        setData(result.data);
+      } catch (error) {
+        router.push("/");
+        setData(null);
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    setStacks(data?.stacks || []);
+    setCareer(data?.career || "");
+    setPosition(data?.position || "");
+    setIntroduction(data?.introduction);
+  }, [data]);
   const router = useRouter();
   const [introduction, setIntroduction] = useState(data?.introduction);
   const [imgUrl, setImgUrl] = useState(data?.imgUrl);
@@ -50,18 +67,24 @@ export default function MyPageEdit() {
   } = useForm<FormData>();
 
   const onClickEdit = (p: FormData) => {
+    const formData: any = {};
+    if (p.nickname) formData.nickname = p.nickname;
+    if (p.githubUrl) formData.githubUrl = p.githubUrl;
+    if (p.blogUrl) formData.blogUrl = p.blogUrl;
+    if (p.portfolioUrl) formData.portfolioUrl = p.portfolioUrl;
     const changedData: MypageProps = {
       career,
       position,
       stacks,
       introduction,
       imgUrl,
-      ...p,
+      // ...p,
+      ...formData,
     };
-    const changes = compareData(data, changedData);
-    console.log(changes);
-    // alert("변경완료");
-    // router.push("/mypage");
+    if (data) {
+      const changes = compareData(data, changedData);
+      console.log(changes);
+    }
   };
 
   // 기존 데이터와 변경된 데이터 비교
@@ -90,7 +113,7 @@ export default function MyPageEdit() {
     <Wrapper>
       <form onSubmit={handleSubmit(onClickEdit)}>
         <IntroductionEdit
-          nickname={data.nickname}
+          nickname={data?.nickname}
           introduction={introduction}
           setIntroduction={setIntroduction}
           imgUrl={imgUrl}
@@ -111,9 +134,9 @@ export default function MyPageEdit() {
             <Border></Border>
           </SectionHeaderWrapper>
           <InfoEdit
-            githubUrl={data.githubUrl}
-            blogUrl={data.blogUrl}
-            portfolioUrl={data.portfolioUrl}
+            githubUrl={data?.githubUrl}
+            blogUrl={data?.blogUrl}
+            portfolioUrl={data?.portfolioUrl}
             career={career}
             setCareer={setCareer}
             position={position}
@@ -123,7 +146,7 @@ export default function MyPageEdit() {
         </SectionWrapper>
         <ButtonWrapper>
           <Button fill="false" type="button" onClick={onCliCkEditCancel}>
-            수정취소
+            수정 취소
           </Button>
           <Button>수정 완료</Button>
         </ButtonWrapper>

@@ -35,16 +35,22 @@ export default function MyPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const id = localStorage.getItem("id");
+        const token = localStorage.getItem("accessToken");
+        const config = {
+          headers: { Authorization: `Bearer ${token}` },
+        };
         const result = await axios.get(
-          "https://ec09fe3d-37a5-419e-9077-f537f3591137.mock.pstmn.io/mypage",
+          `${process.env.NEXT_PUBLIC_API_URL}/user/mypage/${id}`,
+          config,
         );
+        console.log(result.data);
         setData(result.data);
       } catch (error) {
         setData(null);
         console.log(error);
       }
     };
-
     fetchData();
   }, []);
 
@@ -93,7 +99,7 @@ export default function MyPage() {
         </TapMenu>
       </TapWrapper>
       <ContentsWrapper>
-        {!data && <div>로딩중</div>}
+        {!data && <div>데이터를 받아올 수 없습니다</div>}
         {data && activeTab === "profile" ? (
           <Profile {...data} />
         ) : (
