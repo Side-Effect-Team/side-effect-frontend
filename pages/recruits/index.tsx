@@ -6,6 +6,7 @@ import { breakPoints, mediaQuery } from "@/styles/Media";
 import Banner from "@/components/Banner";
 import BoardCard from "@/components/BoardCard";
 import { BANNER_CONTENTS } from "../../enum";
+import PageHead from "@/components/PageHead";
 
 interface RecruitType {
   id: number;
@@ -44,6 +45,7 @@ export default function RecruitsPage() {
 
   return (
     <Wrapper>
+      <PageHead pageTitle="팀원 모집 | 사이드 이펙트" />
       <Banner
         title={BANNER_CONTENTS.TITLE}
         subTitle={BANNER_CONTENTS.SUB_TITLE}
