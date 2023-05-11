@@ -10,7 +10,13 @@ import { useAppDispatch } from "../../store/hooks";
 import { openModal } from "../../store/modalSlice";
 import { media } from "@/styles/mediatest";
 import axios from "axios";
-const FILTER_OPTIONS = ["조회순", "추천순", "댓글순"];
+const FILTER_OPTIONS = [
+  { name: "최신순", value: "latest" },
+  { name: "조회순", value: "view" },
+  { name: "추천순", value: "like" },
+  { name: "댓글순", value: "comment" },
+];
+
 interface ProjectList {
   id: number;
   content: string;
@@ -23,7 +29,7 @@ interface InfiniteProjectType {
   projects: ProjectList[];
 }
 export default function ProjectPage() {
-  const [filter, setFilter] = useState("조회순");
+  const [filter, setFilter] = useState("latest");
   const [keyword, setKeyword] = useState("");
   //threshold : inview가 보여지는 정도를 0~1까지 조절하여 트리거시점을 조절할수있다 0이면 보이자마자 트리거 1이면 전체가 다보여야 트리거
   const { ref, inView } = useInView({ threshold: 0 });
@@ -55,7 +61,7 @@ export default function ProjectPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView, hasNextPage]);
   const dispatch = useAppDispatch();
-  console.log(data);
+  console.log(filter);
   return (
     <Wrapper>
       <button
@@ -71,9 +77,8 @@ export default function ProjectPage() {
       <FilterSection>
         <SelectBox
           options={FILTER_OPTIONS}
-          value={filter}
           setValue={setFilter}
-          size="large"
+          title="최신순"
         />
         <Search setKeyword={setKeyword} />
       </FilterSection>

@@ -37,7 +37,7 @@ export const SelectWrapper = styled.div`
 export const SelectOptionWrapper = styled.ul<SelectOptionType>`
   visibility: ${(p) => (p.visible ? "visible" : "hidden")};
   opacity: ${(p) => (p.visible ? "1" : "0")};
-  transform: ${(p) => (p.visible ? "translateY(0%)" : "translateY(-25%)")};
+  transform: ${(p) => (p.visible ? "translateY(0%)" : "translateY(-20%)")};
   transition: 0.2s ease-in-out;
   margin: 0;
   padding: 0;
@@ -49,15 +49,17 @@ export const SelectOptionWrapper = styled.ul<SelectOptionType>`
   width: 100%;
   z-index: 10;
   margin-top: 0.5rem;
+  max-height: 300px;
+  overflow: auto;
 `;
 export const SelectOption = styled.li`
   border-radius: 5px;
+  text-align: center;
+  padding: 20px 20px;
   &:hover {
     background-color: #eaecf0;
     color: black;
   }
-  text-align: center;
-  padding: 10px 20px;
 `;
 export const SelectValue = styled.div`
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
