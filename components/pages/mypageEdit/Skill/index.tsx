@@ -19,9 +19,11 @@ export default function SkillEdit({ stacks, setStacks }: SkillEditProps) {
     setTag(e.target.value);
   };
   const onKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.currentTarget.value.length !== 0 && e.key === "Enter") {
+    if (e.key === "Enter") {
       e.preventDefault();
-      submitTagItem();
+      if (tag) {
+        submitTagItem();
+      }
     }
   };
   const submitTagItem = () => {
