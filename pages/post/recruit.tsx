@@ -1,202 +1,222 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 import Image from "next/image";
-import styled, { css } from "styled-components";
-import { breakPoints } from "@/styles/Media";
-import Button from "../../components/Button";
-import { useInputImage } from "@/hooks/useInputImage";
+import { GoPlus } from "react-icons/go";
+import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
+import { PostTitleStyled } from "@/postComps/common/Title.styled";
+import {
+  InputBox,
+  PositionBoxContainer,
+  LabelForm,
+  InputForm,
+  TextareaForm,
+  SubmitBtnBox,
+  ErrorMsg,
+  ImageBox,
+  GuideWrapper,
+} from "@/postComps/common/PostForm.styled";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
+import Button from "@/components/Button";
+import TagBox from "@/postComps/TagBox";
+import { useTag } from "@/hooks/useTag";
+import { useForm } from "@/hooks/useForm";
+import PositionBox from "@/postComps/PositionBox";
+import { useInputImage } from "@/hooks/useInputImage";
+import { DEFAULT_RECRUIT_CARD_IMAGE } from "../../enum";
+import PageHead from "@/components/PageHead";
 
-interface PostHeaderProps {
-  category: string;
-}
+export const POSITIONS = [
+  {
+    id: 1,
+    positionType: "frontend",
+    targetNumber: 0,
+  },
+];
 
-/** 모집 인원 */
-interface OpenTypes {
-  part: string;
-  needs: number;
-}
+export const POST_FORM = {
+  projectName: "",
+  title: "",
+  content: "",
+};
 
-/** 전체 폼 */
-interface FormTypes {
-  projectName: string;
-  title: string;
-  opens?: OpenTypes[];
-  tags?: string[];
-  image: string;
-  description: string;
-}
-
-export default function PostPage() {
+export default function PostRecruitPage() {
   const router = useRouter();
-  const { imgSrc, handleImgChange } = useInputImage(
-    "/images/default-input-image.png",
-  );
+  const [positions, setPositions] = useState([...POSITIONS]);
+  const { tags, deleteTag, addTag } = useTag();
   const { getter, setter } = useLocalStorage();
-  const [form, setForm] = useState<FormTypes>({
-    projectName: "",
-    title: "",
-    opens: [
-      {
-        part: "",
-        needs: 0,
-      },
-    ],
-    tags: [],
-    image: "",
-    description: "",
-  });
+  const { imgSrc, handleImgChange } = useInputImage(DEFAULT_RECRUIT_CARD_IMAGE);
+  const { postForm, errMsgs, touched, handleChange, handleBlur, handleSubmit } =
+    useForm({
+      initialVals: { ...POST_FORM },
+      validate: (postForm: typeof POST_FORM) => {
+        const newErrorMsgs = { ...POST_FORM };
 
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-    if (e.target.name === "tags")
-      setForm({ ...form, [e.target.name]: e.target.value.split(",") });
+        // 프로젝트명
+        if (
+          postForm.projectName.trim().length < 3 ||
+          postForm.projectName.trim().length > 20
+        )
+          newErrorMsgs.projectName = "프로젝트명은 3~20자 이내로 입력해주세요";
+
+        // 게시글 제목
+        if (postForm.title.trim().length < 5)
+          newErrorMsgs.title = "게시글 제목은 5자 이상 입력해야 합니다";
+
+        // 상세 내용
+        if (postForm.content.trim().length < 20)
+          newErrorMsgs.content = "게시글 내용은 20자 이상 입력해야 합니다";
+
+        return newErrorMsgs;
+      },
+      onSubmit: async () => {
+        const data = {
+          id: Math.ceil(Math.random() * 100),
+          ...postForm,
+          headerImage: imgSrc,
+          tags,
+          positions,
+        };
+        const recruits = getter("recruits");
+        setter("recruits", [...recruits, data]);
+        window.alert("등록이 완료되었습니다");
+        await router.push("/recruits"); // FIXME: API 연결 후 생성한 게시글 페이지로 이동
+      },
+    });
+
+  // 등록 취소 버튼 클릭 핸들러
+  const handleCancel = () => {
+    if (window.confirm("작성중인 내용이 사라집니다. 계속 진행하시겠습니까?"))
+      router.push("/projects");
   };
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    const recruits = getter("recruits");
-    const newRecruit = {
-      id: recruits ? recruits.length + 1 : 1,
-      headerImage: imgSrc,
-      headerTitle: form.projectName,
-      tag: form.tags,
-      title: form.title,
-      content: form.description,
-      createdAt: "2023-05-01",
-      like: !!Math.round(Math.random()),
-    };
+  // 포지션 업데이트
+  const handlePosition = (id: number, update: (typeof POSITIONS)[0]) => {
+    const newPositions = [...positions];
+    const idx = newPositions.findIndex((position) => position.id === id);
+    newPositions.splice(idx, 1, update);
+    setPositions(newPositions);
+  };
 
-    setter("recruits", [...recruits, newRecruit]);
-    if (window.confirm("등록이 완료되었습니다")) router.push("/recruits");
-    else router.push("/recruits");
+  // 포지션 추가
+  const AddPosition = () => {
+    const lastIdx = positions[positions.length - 1].id;
+    setPositions([...positions, { ...POSITIONS[0], id: lastIdx + 1 }]);
+  };
+
+  // 포지션 제거
+  const deletePosition = (id: number) => {
+    const newPositions = positions.filter((position) => position.id !== id);
+    setPositions([...newPositions]);
   };
 
   useEffect(() => {
-    const result = getter("recruits");
-    if (!result) setter("recruits", []);
+    const projects = getter("recruits");
+    if (!projects) setter("recruits", []);
   }, [getter, setter]);
+
+  useEffect(() => {
+    console.log({ postForm, positions, imgSrc, tags });
+  }, [postForm, positions, imgSrc, tags]);
 
   return (
     <Wrapper>
+      <PageHead pageTitle="팀원 모집 글쓰기 | 사이드 이펙트" />
       <Contents>
-        <PostHeader category={router.query.category + ""}>
-          {router.query.category === "recruit"
-            ? "모집 게시글 등록"
-            : "자랑 게시글 등록"}
-        </PostHeader>
-        <FormStyled action="submit" onSubmit={handleSubmit}>
+        <PostTitleStyled>팀원 모집하기</PostTitleStyled>
+        <form onSubmit={handleSubmit}>
           <InputBox>
-            <h2>프로젝트 이름</h2>
-            <input
+            <GuideWrapper>
+              <LabelForm htmlFor="projectName">프로젝트명</LabelForm>
+              <p>멋진 프로젝트 이름을 정해보세요</p>
+            </GuideWrapper>
+            <InputForm
+              type="text"
+              id="projectName"
               name="projectName"
-              type="text"
-              placeholder="3~20자의 내용을 입력해주세요"
-              value={form.projectName}
+              value={postForm.projectName}
               onChange={handleChange}
-              required
+              onBlur={handleBlur}
+              placeholder="3~20자 이내로 입력해주세요"
             />
+            {touched.projectName && errMsgs.projectName && (
+              <ErrorMsg>{errMsgs.projectName}</ErrorMsg>
+            )}
           </InputBox>
           <InputBox>
-            <h2>게시글 제목</h2>
-            <input
+            <GuideWrapper>
+              <LabelForm htmlFor="title">게시글 제목</LabelForm>
+              <p>제목에 핵심 내용을 드러내보세요</p>
+            </GuideWrapper>
+            <InputForm
+              type="text"
+              id="title"
               name="title"
-              type="text"
-              value={form.title}
+              value={postForm.title}
               onChange={handleChange}
-              required
+              onBlur={handleBlur}
             />
+            {touched.title && errMsgs.title && (
+              <ErrorMsg>{errMsgs.title}</ErrorMsg>
+            )}
           </InputBox>
           <InputBox>
-            <h2>태그</h2>
-            <p>콤마로 구분해주세요</p>
-            <input
-              name="tags"
-              type="text"
-              placeholder="Figma,React,TypeScript"
-              value={form.tags}
-              onChange={handleChange}
-              required
-            />
+            <GuideWrapper>
+              <LabelForm>모집 포지션</LabelForm>
+              <p>모집할 포지션과 인원 수를 설정할 수 있습니다</p>
+            </GuideWrapper>
+            <PositionBoxContainer>
+              {positions.map((position, idx) => (
+                <PositionBox
+                  key={idx}
+                  data={position}
+                  onDelete={deletePosition}
+                  handlePosition={handlePosition}
+                />
+              ))}
+              <div>
+                <Button type="button" onClick={AddPosition}>
+                  <GoPlus style={{ transform: "scale(1.2)" }} />
+                </Button>
+              </div>
+            </PositionBoxContainer>
           </InputBox>
           <InputBox>
-            <h2>대표 이미지</h2>
-            <input
+            <LabelForm htmlFor="image">대표 이미지</LabelForm>
+            <InputForm
               name="image"
               type="file"
               accept="image/*"
               onChange={handleImgChange}
-              required
             />
-            <div>
-              <Image src={imgSrc} alt="" width={200} height={150}></Image>
-            </div>
+            <ImageBox>
+              {imgSrc === DEFAULT_RECRUIT_CARD_IMAGE && (
+                <p>이미지 미설정 시 적용될 기본 이미지입니다</p>
+              )}
+              <Image src={imgSrc} alt="" width={250} height={150} priority />
+            </ImageBox>
           </InputBox>
+          <TagBox tags={tags} deleteTag={deleteTag} addTag={addTag} />
           <InputBox>
-            <h2>내용</h2>
-            <textarea
-              name="description"
-              value={form.description}
+            <LabelForm htmlFor="content">상세 내용</LabelForm>
+            <TextareaForm
+              id="content"
+              name="content"
+              value={postForm.content}
               onChange={handleChange}
-              required
+              onBlur={handleBlur}
             />
+            {touched.content && errMsgs.content && (
+              <ErrorMsg>{errMsgs.content}</ErrorMsg>
+            )}
           </InputBox>
-          <div>
+          <SubmitBtnBox>
             <Button type="submit">등록</Button>
-            <Button onClick={() => router.push("/")}>취소</Button>
-          </div>
-        </FormStyled>
+            <Button type="button" onClick={handleCancel}>
+              취소
+            </Button>
+          </SubmitBtnBox>
+        </form>
       </Contents>
     </Wrapper>
   );
 }
-
-const Wrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  background: ${(p) => p.theme.colors.background};
-`;
-
-const Contents = styled.div`
-  margin: 0 auto;
-  padding: 1.5rem 1rem;
-  max-width: ${breakPoints.desktop}px;
-`;
-
-const PostHeader = styled.span<PostHeaderProps>`
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-
-  ${(p) =>
-    p.category === "recruit" &&
-    css`
-      border-bottom: steelblue 5px solid;
-    `}
-`;
-
-const FormStyled = styled.form`
-  margin: 1.5rem 1rem;
-  display: flex;
-  flex-direction: column;
-
-  h2 {
-    margin-bottom: 1rem;
-  }
-`;
-
-const InputBox = styled.div`
-  padding: 1rem;
-
-  input {
-    width: 250px;
-    padding-left: 0.5rem;
-  }
-
-  textarea {
-    width: 250px;
-    padding-left: 0.5rem;
-  }
-`;

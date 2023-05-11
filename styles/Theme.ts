@@ -21,6 +21,10 @@ export const theme = {
     carousel: "500px",
     banner: "300px",
   },
+  width: {
+    positionInput: "250px",
+    needsInput: "45px",
+  },
   // 추후 브랜드 컬러 추가 시 (아래는 임시 컬러)
   brandColor: {
     primary: "#155EEF",

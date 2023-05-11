@@ -17,14 +17,20 @@ interface InfoEditProps {
   blog: string | undefined;
   portfolio: string | undefined;
 }
-const SELECT_CAREER = ["0", "1~3", "4~6", "7년 이상 "];
 const SELECT_POSITIONS = [
-  "프론트엔드",
-  "백엔드",
-  "디자이너",
-  "데브옵스",
-  "기획자",
-  "마케터",
+  { name: "프론트엔드", value: "frontend" },
+  { name: "백엔드", value: "backend" },
+  { name: "디자이너", value: "designer" },
+  { name: "데브옵스", value: "devops" },
+  { name: "기획자", value: "marketer" },
+  { name: "마케터", value: "pm" },
+];
+const SELECT_CAREER = [
+  { name: "취업준비생", value: "empty" },
+  { name: "신입(0년차)", value: "new" },
+  { name: "주니어(1~3년차)", value: "junior" },
+  { name: "미들(4~6년차)", value: "middle" },
+  { name: "시니어(7년이상)", value: "sinior" },
 ];
 export default function InfoEdit({
   career,
@@ -43,18 +49,12 @@ export default function InfoEdit({
         <SelectBox
           options={SELECT_POSITIONS}
           setValue={setPosition}
-          value={position}
           title="포지션"
         />
       </InfoWrapper>
       <InfoWrapper>
         <InfoTitle>*경력</InfoTitle>
-        <SelectBox
-          options={SELECT_CAREER}
-          setValue={setCareer}
-          value={career}
-          title="경력"
-        />
+        <SelectBox options={SELECT_CAREER} setValue={setCareer} title="경력" />
       </InfoWrapper>
       <InfoWrapper>
         <InfoTitle>깃허브</InfoTitle>

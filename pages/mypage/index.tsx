@@ -11,6 +11,7 @@ import {
   SectionWrapper,
   Wrapper,
 } from "@/components/pages/mypage/styled";
+import PageHead from "@/components/PageHead";
 
 export interface DataProps {
   avatarSrc?: string;
@@ -55,6 +56,7 @@ export default function MyPage() {
 
   return (
     <Wrapper>
+      <PageHead pageTitle="마이페이지 | 사이드 이펙트" />
       <Introduction
         avatarSrc={data.avatarSrc}
         nickname={data.nickname}
