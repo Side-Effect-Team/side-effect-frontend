@@ -18,12 +18,18 @@ interface InfoEditProps {
   portfolioUrl: string | undefined;
 }
 const SELECT_POSITIONS = [
-  { name: "프론트엔드", value: "frontend" },
-  { name: "백엔드", value: "backend" },
-  { name: "디자이너", value: "designer" },
-  { name: "데브옵스", value: "devops" },
-  { name: "기획자", value: "marketer" },
-  { name: "마케터", value: "pm" },
+  // { name: "프론트엔드", value: "frontend" },
+  // { name: "백엔드", value: "backend" },
+  // { name: "디자이너", value: "designer" },
+  // { name: "데브옵스", value: "devops" },
+  // { name: "기획자", value: "marketer" },
+  // { name: "마케터", value: "pm" },
+  { name: "프론트엔드", value: "FRONTENT" },
+  { name: "백엔드", value: "BACKEND" },
+  { name: "디자이너", value: "DESIGNER" },
+  { name: "데브옵스", value: "DEVOPS" },
+  { name: "기획자", value: "MARKETER" },
+  { name: "마케터", value: "PM" },
 ];
 const SELECT_CAREER = [
   { name: "취업준비생", value: "empty" },
@@ -82,7 +88,6 @@ export default function InfoEdit({
         <SelectBox
           options={SELECT_POSITIONS}
           setValue={setPosition}
-          // title="포지션"
           title={positionTitle}
         />
       </InfoWrapper>
@@ -91,7 +96,6 @@ export default function InfoEdit({
         <SelectBox
           options={SELECT_CAREER}
           setValue={setCareer}
-          // title="경력"
           title={careerTitle}
         />
       </InfoWrapper>

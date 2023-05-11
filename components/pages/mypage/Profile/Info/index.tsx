@@ -39,22 +39,38 @@ export default function Info({
       setCareerTitle("경력");
     }
 
-    if (position === "frontend") {
+    // if (position === "frontend") {
+    //   setPositionTitle("프론트엔드");
+    // } else if (career === "backend") {
+    //   setPositionTitle("백엔드");
+    // } else if (career === "designer") {
+    //   setPositionTitle("디자이너");
+    // } else if (career === "devops") {
+    //   setPositionTitle("데브옵스");
+    // } else if (career === "marketer") {
+    //   setPositionTitle("기획자");
+    // } else if (career === "pm") {
+    //   setPositionTitle("마케터");
+    // } else {
+    //   setPositionTitle("포지션");
+    // }
+    if (position === "FRONTENT") {
       setPositionTitle("프론트엔드");
-    } else if (career === "backend") {
+    } else if (career === "BACKEND") {
       setPositionTitle("백엔드");
-    } else if (career === "designer") {
+    } else if (career === "DESIGNER") {
       setPositionTitle("디자이너");
-    } else if (career === "devops") {
+    } else if (career === "DEVOPS") {
       setPositionTitle("데브옵스");
-    } else if (career === "marketer") {
-      setPositionTitle("기획자");
-    } else if (career === "pm") {
+    } else if (career === "MARKETER") {
       setPositionTitle("마케터");
+    } else if (career === "PM") {
+      setPositionTitle("기획자");
     } else {
       setPositionTitle("포지션");
     }
   }, []);
+
   return (
     <>
       <InfoWrapper>
