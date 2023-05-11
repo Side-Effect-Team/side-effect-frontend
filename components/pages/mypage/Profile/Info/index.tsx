@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   InfoContent,
   InfoContentLink,
@@ -21,15 +22,48 @@ export default function Info({
   blogUrl,
   portfolioUrl,
 }: InfoProps) {
+  const [careerTitle, setCareerTitle] = useState("");
+  const [positionTitle, setPositionTitle] = useState("");
+  useEffect(() => {
+    if (career === "empty") {
+      setCareerTitle("취업준비생");
+    } else if (career === "new") {
+      setCareerTitle("신입(0년차)");
+    } else if (career === "junior") {
+      setCareerTitle("주니어(1~3년차)");
+    } else if (career === "middle") {
+      setCareerTitle("미들(4~6년차)");
+    } else if (career === "senior") {
+      setCareerTitle("시니어(7년이상)");
+    } else {
+      setCareerTitle("경력");
+    }
+
+    if (position === "frontend") {
+      setPositionTitle("프론트엔드");
+    } else if (career === "backend") {
+      setPositionTitle("백엔드");
+    } else if (career === "designer") {
+      setPositionTitle("디자이너");
+    } else if (career === "devops") {
+      setPositionTitle("데브옵스");
+    } else if (career === "marketer") {
+      setPositionTitle("기획자");
+    } else if (career === "pm") {
+      setPositionTitle("마케터");
+    } else {
+      setPositionTitle("포지션");
+    }
+  }, []);
   return (
     <>
       <InfoWrapper>
         <InfoTitle>포지션</InfoTitle>
-        <InfoContent>{position}</InfoContent>
+        <InfoContent>{positionTitle}</InfoContent>
       </InfoWrapper>
       <InfoWrapper>
         <InfoTitle>경력</InfoTitle>
-        <InfoContent>{career}</InfoContent>
+        <InfoContent>{careerTitle}</InfoContent>
       </InfoWrapper>
       <InfoWrapper>
         <InfoTitle>깃허브</InfoTitle>
