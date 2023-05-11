@@ -13,13 +13,13 @@ import {
   ImageBox,
   GuideWrapper,
 } from "@/postComps/common/PostForm.styled";
-import { useLocalStorage } from "@/hooks/useLocalStorage";
 import Button from "@/components/Button";
 import { useForm } from "@/hooks/useForm";
 import { useInputImage } from "@/hooks/useInputImage";
 import ProjectUrlBox from "@/postComps/ProjectUrlBox";
 import { DEFAULT_PROJECT_CARD_IMAGE } from "../../enum";
 import PageHead from "@/components/PageHead";
+import axios from "axios";
 
 export const POST_FORM = {
   projectName: "",
@@ -29,7 +29,6 @@ export const POST_FORM = {
 
 export default function PostProjectPage() {
   const router = useRouter();
-  const { getter, setter } = useLocalStorage();
   const { imgSrc, handleImgChange } = useInputImage(DEFAULT_PROJECT_CARD_IMAGE);
   const [projectUrl, setProjectUrl] = useState("");
   const { postForm, errMsgs, touched, handleChange, handleBlur, handleSubmit } =
@@ -56,11 +55,27 @@ export default function PostProjectPage() {
         return newErrorMsgs;
       },
       onSubmit: async () => {
-        const data = { ...postForm, headerImage: imgSrc };
-        const projects = getter("projects");
-        setter("projects", [...projects, data]);
-        window.alert("등록이 완료되었습니다");
-        await router.push("/projects"); // FIXME: API 연결 후 생성한 게시글 페이지로 이동
+        const data = { ...postForm, projectUrl, imgSrc: null };
+
+        // request
+        axios
+          .post(`${process.env.NEXT_PUBLIC_API_URL}/free-boards`, data, {
+            headers: {
+              // 로그인 기능 미구현으로 NEXT_PUBLIC_TOKEN에 발급받은 토큰을 넣고 실행!
+              Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+            },
+          })
+          .then((res) => {
+            console.log(res);
+            if (res.status === 200) {
+              window.alert("게시글 등록이 완료되었습니다");
+              router.push(`/projects/${res.data.id}`);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+            window.alert("게시글 등록에 실패했습니다");
+          });
       },
     });
 
@@ -68,11 +83,6 @@ export default function PostProjectPage() {
     if (window.confirm("작성중인 내용이 사라집니다. 계속 진행하시겠습니까?"))
       router.push("/projects");
   };
-
-  useEffect(() => {
-    const projects = getter("projects");
-    if (!projects) setter("projects", []);
-  }, [getter, setter]);
 
   // test
   useEffect(() => {
