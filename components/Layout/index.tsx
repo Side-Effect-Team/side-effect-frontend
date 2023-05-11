@@ -10,6 +10,7 @@ import Header from "../Header";
 import Footer from "../Footer";
 import Toast from "../Toast";
 import { BOARD_LIST } from "../../enum";
+import ScrollToTop from "../ScrollToTop";
 
 interface PropType {
   children: React.ReactNode;
@@ -62,6 +63,7 @@ export default function Layout({ children }: PropType) {
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <Header handleMobileMenu={handleMobileMenu} />
+      <ScrollToTop />
       <Toast />
       {mobileMenuOpen && <MobileMenu />}
       <Wrapper mobileMenuOpen={mobileMenuOpen}>{children}</Wrapper>
