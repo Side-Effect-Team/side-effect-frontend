@@ -9,7 +9,7 @@ import {
 interface IntroductionProps {
   imgUrl: string | undefined;
   nickname: string;
-  email: string;
+  email: string | undefined;
   introduction: string | undefined;
 }
 
