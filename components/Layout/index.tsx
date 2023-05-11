@@ -11,6 +11,7 @@ import Footer from "../Footer";
 import Toast from "../Toast";
 import { BOARD_LIST } from "../../enum";
 import ScrollToTop from "../ScrollToTop";
+import PageHead from "components/PageHead";
 
 interface PropType {
   children: React.ReactNode;
@@ -25,12 +26,16 @@ const MOBILE_BOARD_LIST = [
   },
 ];
 
+interface MobileMenuProps {
+  hide: boolean;
+}
+
 export default function Layout({ children }: PropType) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const router = useRouter();
   const currentPage = router.route;
 
-  const handleMobileMenu = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMobileMenu = () => {
     setMobileMenuOpen((prev) => !prev);
   };
 
@@ -62,19 +67,20 @@ export default function Layout({ children }: PropType) {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
+      <PageHead pageTitle="사이드 이펙트 | 빠르게 프로젝트를 시작하세요" />
       <Header handleMobileMenu={handleMobileMenu} />
       <ScrollToTop />
       <Toast />
-      {mobileMenuOpen && <MobileMenu />}
+      <MobileMenu hide={!mobileMenuOpen} />
       <Wrapper mobileMenuOpen={mobileMenuOpen}>{children}</Wrapper>
       <Footer />
     </ThemeProvider>
   );
 }
 
-function MobileMenu() {
+function MobileMenu({ hide }: MobileMenuProps) {
   return (
-    <MobileNavBar>
+    <MobileNavBar hide={hide}>
       {MOBILE_BOARD_LIST.map((board) => (
         <MobileMenuItem key={board.ID}>
           <Link href={board.LINK}>{board.TITLE}</Link>

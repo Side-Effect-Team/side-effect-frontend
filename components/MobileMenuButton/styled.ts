@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { mediaQuery } from "../../styles/Media";
+import { mediaQuery } from "@/styles/Media";
 
 export const Wrapper = styled.div`
   ${mediaQuery("mobile")`
