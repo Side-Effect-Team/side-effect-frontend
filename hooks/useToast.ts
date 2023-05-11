@@ -2,7 +2,7 @@ import { addToast as add, removeToast } from "@/store/toastSlice";
 import { v4 as uuidv4 } from "uuid";
 import { useAppDispatch } from "@/store/hooks";
 interface ToastType {
-  type: "success" | "error";
+  type: "success" | "error" | "info";
   title: string;
   content: string;
 }
@@ -20,9 +20,9 @@ export default function useToast() {
       id,
     };
     dispatch(add(toastId));
-    setTimeout(() => {
-      deleteToast(id);
-    }, 3000);
+    // setTimeout(() => {
+    //   deleteToast(id);
+    // }, 3000);
   };
   return { addToast, deleteToast };
 }

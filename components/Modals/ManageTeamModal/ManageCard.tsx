@@ -19,7 +19,7 @@ export default function ManageCard({ filter }: Props) {
             onClick={() =>
               addToast({
                 type: "success",
-                title: "Success!",
+                title: "Succese",
                 content: "팀원에게 수락 알림을 보냈습니다!",
               })
             }
@@ -30,14 +30,25 @@ export default function ManageCard({ filter }: Props) {
             onClick={() =>
               addToast({
                 type: "error",
-                title: "Something Wrong!",
-                content: "알수없는 에러가 발생하였습니다!",
+                title: "Something Wrong",
+                content:
+                  "알 수 없는 에러가 발생하였습니다. 문의 사항은 고객센터로 연락 부탁드립니다.",
               })
             }
           >
             거절
           </Button>
-          <Button>마이페이지</Button>
+          <Button
+            onClick={() =>
+              addToast({
+                type: "info",
+                title: "Info",
+                content: "프로필 편집을 취소하였습니다!",
+              })
+            }
+          >
+            마이페이지
+          </Button>
         </>
       );
     } else {
