@@ -1,7 +1,8 @@
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { GoPlus } from "react-icons/go";
+import axios from "axios";
 import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
 import { PostTitleStyled } from "@/postComps/common/Title.styled";
 import {
@@ -23,7 +24,6 @@ import PositionBox from "@/postComps/PositionBox";
 import { useInputImage } from "@/hooks/useInputImage";
 import { DEFAULT_RECRUIT_CARD_IMAGE } from "../../enum";
 import PageHead from "@/components/PageHead";
-import axios from "axios";
 
 export const POSITIONS = [
   {
@@ -128,10 +128,6 @@ export default function PostRecruitPage() {
     const newPositions = positions.filter((position) => position.id !== id);
     setPositions([...newPositions]);
   };
-
-  useEffect(() => {
-    console.log({ postForm, positions, imgSrc, tags });
-  }, [postForm, positions, imgSrc, tags]);
 
   return (
     <Wrapper>

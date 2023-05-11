@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
+import axios from "axios";
 import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
 import { PostTitleStyled } from "@/postComps/common/Title.styled";
 import {
@@ -19,7 +20,6 @@ import { useInputImage } from "@/hooks/useInputImage";
 import ProjectUrlBox from "@/postComps/ProjectUrlBox";
 import { DEFAULT_PROJECT_CARD_IMAGE } from "../../enum";
 import PageHead from "@/components/PageHead";
-import axios from "axios";
 
 export const POST_FORM = {
   projectName: "",
@@ -83,11 +83,6 @@ export default function PostProjectPage() {
     if (window.confirm("작성중인 내용이 사라집니다. 계속 진행하시겠습니까?"))
       router.push("/projects");
   };
-
-  // test
-  useEffect(() => {
-    console.log(projectUrl);
-  });
 
   return (
     <Wrapper>
