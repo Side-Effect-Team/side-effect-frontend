@@ -23,6 +23,7 @@ import { useForm } from "@/hooks/useForm";
 import PositionBox from "@/postComps/PositionBox";
 import { useInputImage } from "@/hooks/useInputImage";
 import { DEFAULT_RECRUIT_CARD_IMAGE } from "../../enum";
+import PageHead from "@/components/PageHead";
 
 export const POSITIONS = [
   {
@@ -119,6 +120,7 @@ export default function PostRecruitPage() {
 
   return (
     <Wrapper>
+      <PageHead pageTitle="팀원 모집 글쓰기 | 사이드 이펙트" />
       <Contents>
         <PostTitleStyled>팀원 모집하기</PostTitleStyled>
         <form onSubmit={handleSubmit}>

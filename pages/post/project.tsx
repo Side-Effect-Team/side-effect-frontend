@@ -19,6 +19,7 @@ import { useForm } from "@/hooks/useForm";
 import { useInputImage } from "@/hooks/useInputImage";
 import ProjectUrlBox from "@/postComps/ProjectUrlBox";
 import { DEFAULT_PROJECT_CARD_IMAGE } from "../../enum";
+import PageHead from "@/components/PageHead";
 
 export const POST_FORM = {
   projectName: "",
@@ -80,6 +81,7 @@ export default function PostProjectPage() {
 
   return (
     <Wrapper>
+      <PageHead pageTitle="프로젝트 자랑 글쓰기 | 사이드 이펙트" />
       <Contents>
         <PostTitleStyled>프로젝트 자랑하기</PostTitleStyled>
         <form onSubmit={handleSubmit}>
