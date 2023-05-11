@@ -11,7 +11,7 @@ interface InfoEditProps {
   position: string;
   setPosition: Dispatch<SetStateAction<string>>;
   infoRegister: UseFormRegister<
-    Pick<FormData, "github" | "blog" | "portfolio" | "nickname">
+    Pick<FormData, "githubUrl" | "blogUrl" | "portfolioUrl" | "nickname">
   >;
   githubUrl: string | undefined;
   blogUrl: string | undefined;
@@ -61,7 +61,7 @@ export default function InfoEdit({
         <Input
           defaultValue={githubUrl || ""}
           placeholder="정보를 등록해주세요"
-          {...infoRegister("github")}
+          {...infoRegister("githubUrl")}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               e.preventDefault();
@@ -74,7 +74,7 @@ export default function InfoEdit({
         <Input
           defaultValue={blogUrl || ""}
           placeholder="정보를 등록해주세요"
-          {...infoRegister("blog")}
+          {...infoRegister("blogUrl")}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               e.preventDefault();
@@ -87,7 +87,7 @@ export default function InfoEdit({
         <Input
           defaultValue={portfolioUrl || ""}
           placeholder="정보를 등록해주세요"
-          {...infoRegister("portfolio")}
+          {...infoRegister("portfolioUrl")}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               e.preventDefault();

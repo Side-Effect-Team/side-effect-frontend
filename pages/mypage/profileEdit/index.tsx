@@ -16,9 +16,9 @@ import { useRouter } from "next/router";
 import { Wrapper } from "@/components/pages/mypageEdit/styled";
 
 export interface FormData {
-  github?: string;
-  blog?: string;
-  portfolio?: string;
+  githubUrl?: string;
+  blogUrl?: string;
+  portfolioUrl?: string;
   nickname: string;
 }
 
@@ -58,9 +58,29 @@ export default function MyPageEdit() {
       imgUrl,
       ...p,
     };
-    alert("변경완료");
-    router.push("/mypage");
+    const changes = compareData(data, changedData);
+    console.log(changes);
+    // alert("변경완료");
+    // router.push("/mypage");
   };
+
+  // 기존 데이터와 변경된 데이터 비교
+  function compareData(originData: MypageProps, changedData: MypageProps) {
+    const keys = Object.keys(originData);
+    const changes: Partial<MypageProps> & Record<string, any> = {};
+    for (const key of keys) {
+      if (
+        originData[key as keyof MypageProps] !==
+        changedData[key as keyof MypageProps]
+      ) {
+        changes[key] = changedData[key as keyof MypageProps];
+        if (changes[key] === undefined) {
+          delete changes[key];
+        }
+      }
+    }
+    return changes;
+  }
 
   const onCliCkEditCancel = () => {
     alert("변경사항은 저장되지 않습니다.");
