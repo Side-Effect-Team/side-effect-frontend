@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface ToastType {
-  type: "success" | "error";
+  type: "success" | "error" | "info";
   title: string;
   content: string;
   id: string;
