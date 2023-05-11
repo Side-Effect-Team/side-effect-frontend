@@ -1,6 +1,6 @@
 import BoardCard, { BoardCardProps } from "@/components/BoardCard";
 import { Border, SectionHeaderWrapper, SectionTitle } from "../styled";
-import { BoardWrapper, CardSection } from "./styled";
+import { BoardWrapper } from "./styled";
 
 interface TabBoards {
   boards?: BoardCardProps[] | null;
@@ -17,10 +17,10 @@ export default function TabBoards({ boards, title }: TabBoards) {
           <Border></Border>
         </SectionHeaderWrapper>
       )}
-      <CardSection>
+      <BoardWrapper>
         {boards &&
           boards.map((el, index) => <BoardCard key={index} data={el} />)}
-      </CardSection>
+      </BoardWrapper>
     </>
   );
 }
