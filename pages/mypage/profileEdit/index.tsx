@@ -24,7 +24,7 @@ export interface FormData {
   githubUrl?: string;
   blogUrl?: string;
   portfolioUrl?: string;
-  nickname: string;
+  nickname?: string;
 }
 
 export default function MyPageEdit() {
@@ -72,27 +72,41 @@ export default function MyPageEdit() {
     formState: { errors },
   } = useForm<FormData>();
 
+  // interface MypageEditProps {
+  //   imgUrl: string | undefined;
+  //   nickname: string | undefined;
+  //   introduction: string | undefined;
+  //   stacks: string[] | undefined;
+  //   position: string;
+  //   career: string;
+  //   githubUrl?: string | undefined;
+  //   blogUrl?: string | undefined;
+  //   portfolioUrl?: string | undefined;
+  // }
   const onClickEdit = async (p: FormData) => {
-    const formData: any = {};
-    if (p.nickname) formData.nickname = p.nickname;
-    if (p.githubUrl) formData.githubUrl = p.githubUrl;
-    if (p.blogUrl) formData.blogUrl = p.blogUrl;
-    if (p.portfolioUrl) formData.portfolioUrl = p.portfolioUrl;
+    const changedFormData: FormData = {};
+    if (p.nickname) changedFormData.nickname = p.nickname;
+    if (p.githubUrl) changedFormData.githubUrl = p.githubUrl;
+    if (p.blogUrl) changedFormData.blogUrl = p.blogUrl;
+    if (p.portfolioUrl) changedFormData.portfolioUrl = p.portfolioUrl;
     const changedData: MypageProps = {
       career,
       position,
       stacks,
       introduction,
       imgUrl,
-      // ...p,
-      ...formData,
+      ...changedFormData,
     };
     if (data) {
       const changes = compareData(data, changedData);
       console.log(changes);
-      const id = localStorage.getItem("id");
+      if (Object.keys(changes).length === 0) {
+        alert("변경사항이 없습니다.");
+        return;
+      }
 
       try {
+        const id = localStorage.getItem("id");
         const token = localStorage.getItem("accessToken");
         const config = {
           headers: { Authorization: `Bearer ${token}` },
