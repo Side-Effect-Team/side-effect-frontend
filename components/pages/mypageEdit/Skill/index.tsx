@@ -8,37 +8,43 @@ import {
 import { DeleteTag, Tag, TagInput, TagWrapper } from "./styled";
 
 interface SkillEditProps {
-  skillTags: string[];
-  setSkillTags: Dispatch<SetStateAction<string[]>>;
+  stacks?: string[];
+  setStacks: Dispatch<SetStateAction<string[]>>;
 }
 
-export default function SkillEdit({ skillTags, setSkillTags }: SkillEditProps) {
+export default function SkillEdit({ stacks, setStacks }: SkillEditProps) {
   const [tag, setTag] = useState("");
 
   const onChangeTag = (e: ChangeEvent<HTMLInputElement>) => {
     setTag(e.target.value);
   };
   const onKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.currentTarget.value.length !== 0 && e.key === "Enter") {
+    if (e.key === "Enter") {
       e.preventDefault();
-      submitTagItem();
+      if (tag) {
+        submitTagItem();
+      }
     }
   };
   const submitTagItem = () => {
-    let updatedTagList = [...skillTags];
-    updatedTagList.push(tag);
-    setSkillTags(updatedTagList);
-    setTag("");
+    if (stacks) {
+      let updatedTagList = [...stacks];
+      updatedTagList.push(tag);
+      setStacks(updatedTagList);
+      setTag("");
+    }
   };
   const onClickDeleteTag = (el: string) => {
     const deleteTag = el;
-    const filteredTag = skillTags.filter((tag) => tag !== deleteTag);
-    setSkillTags(filteredTag);
+    if (stacks) {
+      const filteredTag = stacks.filter((tag) => tag !== deleteTag);
+      setStacks(filteredTag);
+    }
   };
   return (
     <TagWrapper>
-      {skillTags &&
-        skillTags.map((el, index) => (
+      {stacks &&
+        stacks.map((el, index) => (
           <Tag key={index}>
             {el}{" "}
             <DeleteTag type="button" onClick={() => onClickDeleteTag(el)}>

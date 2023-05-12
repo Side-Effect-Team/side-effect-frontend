@@ -49,7 +49,7 @@ export default function BoardCard({ data }: BoardCardDataProps) {
   };
   return (
     <Container id={data?.id.toString()} onClick={onClickGoToBoard}>
-      <Header src={data?.headerImage}>
+      <Header category={data?.category} src={data?.headerImage}>
         <ProjectName>{data?.projectName}</ProjectName>
       </Header>
       <ContentsWrapper>

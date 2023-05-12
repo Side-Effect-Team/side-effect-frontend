@@ -15,14 +15,14 @@ import {
 } from "./styled";
 import { Input } from "../Info/styled";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
-import { FormData } from "@/pages/mypage/edit";
+import { FormData } from "@/pages/mypage/profileEdit";
 
 interface IntroEditProps {
   nickname: string | undefined;
   introduction: string | undefined;
   setIntroduction: Dispatch<SetStateAction<string | undefined>>;
-  imageUrl: string | undefined;
-  setImageUrl: Dispatch<SetStateAction<string | undefined>>;
+  imgUrl: string | undefined;
+  setImgUrl: Dispatch<SetStateAction<string | undefined>>;
   introRegister: UseFormRegister<Pick<FormData, "nickname">>;
   errors: FieldErrors<Pick<FormData, "nickname">>;
 }
@@ -30,8 +30,8 @@ export default function IntroductionEdit({
   nickname,
   introduction,
   setIntroduction,
-  imageUrl,
-  setImageUrl,
+  imgUrl,
+  setImgUrl,
   introRegister,
   errors,
 }: IntroEditProps) {
@@ -53,7 +53,7 @@ export default function IntroductionEdit({
     fileReader.readAsDataURL(file);
     fileReader.onload = (e) => {
       if (typeof e.target?.result === "string") {
-        setImageUrl(e.target?.result);
+        setImgUrl(e.target?.result);
       }
     };
   };
@@ -62,9 +62,7 @@ export default function IntroductionEdit({
     <>
       <ProfileWrapper>
         <ProfileImageWrapper>
-          <ProfileImage
-            src={imageUrl || "/images/BoardDefaultBackground.png"}
-          />
+          <ProfileImage src={imgUrl || "/images/BoardDefaultBackground.png"} />
           <Button type="button" onClick={onClickChangeImage}>
             사진변경
           </Button>
