@@ -18,18 +18,12 @@ interface InfoEditProps {
   portfolioUrl: string | undefined;
 }
 const SELECT_POSITIONS = [
-  // { name: "프론트엔드", value: "frontend" },
-  // { name: "백엔드", value: "backend" },
-  // { name: "디자이너", value: "designer" },
-  // { name: "데브옵스", value: "devops" },
-  // { name: "기획자", value: "marketer" },
-  // { name: "마케터", value: "pm" },
-  { name: "프론트엔드", value: "FRONTENT" },
+  { name: "프론트엔드", value: "FRONTEND" },
   { name: "백엔드", value: "BACKEND" },
   { name: "디자이너", value: "DESIGNER" },
   { name: "데브옵스", value: "DEVOPS" },
-  { name: "기획자", value: "MARKETER" },
-  { name: "마케터", value: "PM" },
+  { name: "기획자", value: "PM" },
+  { name: "마케터", value: "MARKETER" },
 ];
 const SELECT_CAREER = [
   { name: "취업준비생", value: "empty" },
@@ -65,22 +59,22 @@ export default function InfoEdit({
       setCareerTitle("경력");
     }
 
-    if (position === "frontend") {
+    if (position === "FRONTEND") {
       setPositionTitle("프론트엔드");
-    } else if (career === "backend") {
+    } else if (position === "BACKEND") {
       setPositionTitle("백엔드");
-    } else if (career === "designer") {
+    } else if (position === "DESIGNER") {
       setPositionTitle("디자이너");
-    } else if (career === "devops") {
+    } else if (position === "DEVOPS") {
       setPositionTitle("데브옵스");
-    } else if (career === "marketer") {
-      setPositionTitle("기획자");
-    } else if (career === "pm") {
+    } else if (position === "MARKETER") {
       setPositionTitle("마케터");
+    } else if (position === "PM") {
+      setPositionTitle("기획자");
     } else {
       setPositionTitle("포지션");
     }
-  }, []);
+  }, [career]);
   return (
     <>
       <InfoWrapper>
