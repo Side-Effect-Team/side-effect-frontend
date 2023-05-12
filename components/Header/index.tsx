@@ -69,6 +69,7 @@ export default function Header({ handleMobileMenu }: HeaderProps) {
     };
     alarmCheck();
   }, []);
+
   return (
     <Wrapper>
       <HeaderStyled>
@@ -83,13 +84,16 @@ export default function Header({ handleMobileMenu }: HeaderProps) {
           ))}
         </NavStyled>
         <BoxStyled>
-          <NotificationDiv onClick={onClickNotification}>
-            <NotificationButton />
+          <NotificationDiv>
+            <NotificationButton onClick={onClickNotification} />
             {isAlarm && <GetAlarm />}
+            {isActive && (
+              <Notification
+                notification={notification}
+                setIsActive={setIsActive}
+              />
+            )}
           </NotificationDiv>
-          {isActive && notification && (
-            <Notification notification={notification} />
-          )}
           <Button
             onClick={() => dispatch(openModal({ modalType: "LoginModal" }))}
           >
