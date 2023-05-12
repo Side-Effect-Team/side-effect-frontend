@@ -1,6 +1,8 @@
 import Carousel from "@/components/Carousel";
 import styled from "styled-components";
 import { CAROUSEL_CONTENTS_LIST } from "../enum";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function Home() {
   return (
