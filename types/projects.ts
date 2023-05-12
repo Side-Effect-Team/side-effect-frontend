@@ -1,26 +1,24 @@
-// 게시글 여러개 조회했을 때 반환값(배열)의 원소
-declare interface ProjectType {
-  id: number;
-  headerImage: string;
-  title: string;
+declare interface CommentType {
+  commentId: number;
+  boardId: number;
   content: string;
-  createdAt: string;
-  like: boolean;
-  likeNum: number;
-  commentNum: number;
+  writer: string;
 }
 
-// 게시글 하나 조회했을 때 반환값
-declare interface ProjectPostType {
+// 전체 게시글 조회 API와 게시글 1개 조회 API 반환 값 달라 우선 옵셔널 프로퍼티 부여
+declare interface ProjectType {
   id: number;
-  // headerImage: string; // API에 추가 필요
+  headerImage?: string;
   views: number;
   userId: number;
   title: string;
   content: string;
   projectUrl: string;
-  imgUrl: string;
+  imgUrl?: string;
   projectName: string;
+  like?: boolean;
   likeNum: number;
-  comments: [];
+  comments?: CommentType[];
+  commentNum?: number;
+  createdAt?: string;
 }

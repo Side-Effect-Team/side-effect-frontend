@@ -18,5 +18,5 @@ declare interface RecruitType {
   projectName: string;
   tags: TagType[];
   title: string;
-  view: number;
+  views: number;
 }

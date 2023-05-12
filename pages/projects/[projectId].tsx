@@ -1,15 +1,14 @@
 import { useRouter } from "next/router";
 import axios from "axios";
 import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
-import { GetStaticProps, GetStaticPropsContext } from "next";
+import { GetStaticPropsContext } from "next";
 
 interface ProjectDetailPageProps {
-  project: ProjectPostType;
+  project: ProjectType;
 }
 
 export default function ProjectDetailPage({ project }: ProjectDetailPageProps) {
   const router = useRouter();
-  console.log(project);
 
   return (
     <Wrapper>
@@ -27,9 +26,9 @@ export async function getStaticPaths() {
 
   try {
     const res = await axios.get(url);
-    const { data: projects } = res;
+    const { data: projects } = await res;
 
-    const paths = projects.map((project: ProjectType) => ({
+    const paths = await projects.map((project: ProjectType) => ({
       params: { projectId: project.id + "" },
     }));
 

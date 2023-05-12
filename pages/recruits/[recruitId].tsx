@@ -1,71 +1,66 @@
-import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import styled from "styled-components";
-import { breakPoints } from "@/styles/Media";
+import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
+import axios from "axios";
+import { GetStaticPropsContext } from "next";
 
-interface RecruitType {
-  id: number;
-  headerTitle: string;
-  tag: string[];
-  title: string;
-  content: string;
-  createdAt: string;
-  like: boolean;
-}
-
-interface RecruitProps {
+interface RecruitDetailPageProps {
   recruit: RecruitType;
 }
 
-export default function RecruitPage() {
-  const [recruitsData, setRecruitsData] = useState([]);
+export default function RecruitDetailPage({ recruit }: RecruitDetailPageProps) {
   const router = useRouter();
 
   return (
     <Wrapper>
       <Contents>
-        <h1>모집 상세 페이지</h1>
+        <h1>글 제목</h1>
         <p>모집 게시글 id: {router.query.recruitId}</p>
-        {recruitsData.map((recruit: RecruitType) => {
-          return (
-            recruit.id === +router.query.recruitId! && (
-              <Recruit key={recruit.id} recruit={recruit} />
-            )
-          );
-        })}
       </Contents>
     </Wrapper>
   );
 }
 
-function Recruit({ recruit }: RecruitProps) {
-  const { headerTitle, tag, title, content, createdAt } = recruit;
-  return (
-    <Wrapper>
-      <Contents>
-        <h1>{headerTitle}</h1>
-        <div>
-          {tag &&
-            tag.map((t, idx) => {
-              return <span key={idx}>{t}</span>;
-            })}
-        </div>
-        <h2>{title}</h2>
-        <p>{content}</p>
-        <p>{createdAt}</p>
-      </Contents>
-    </Wrapper>
-  );
+export async function getStaticPaths() {
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/recruit-board/all`;
+
+  try {
+    const res = await axios.get(url);
+    const { data: recruitBoards } = await res;
+
+    const paths = await recruitBoards.map((recruit: RecruitType) => ({
+      params: { recruitId: recruit.id + "" },
+    }));
+
+    return {
+      paths,
+      fallback: false,
+    };
+  } catch (err) {
+    console.log(err);
+
+    return {
+      paths: [],
+      fallback: false,
+    };
+  }
 }
 
-const Wrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  background: ${(p) => p.theme.colors.background};
-`;
+export async function getStaticProps(ctx: GetStaticPropsContext) {
+  const recruitId = ctx.params?.recruitId;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/recruit-board/${recruitId}`;
+  try {
+    const res = await axios.get(url);
+    const recruit = await res.data;
 
-const Contents = styled.div`
-  margin: 0 auto;
-  padding: 1.5rem 1rem;
-  max-width: ${breakPoints.desktop}px;
-`;
+    return {
+      props: {
+        recruit,
+      },
+      revalidate: 1,
+    };
+  } catch (err) {
+    console.log(err);
+    // 404 page로 연결
+    return { notFound: true };
+  }
+}
