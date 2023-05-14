@@ -41,22 +41,23 @@ export default function ManageTeamModal() {
   };
 
   const {
-    data = { applicants: [], positions: [], apllicantNum: {} },
+    data = { applicants: [], positions: [], applicantNum: {} },
     isLoading,
   } = useQuery(["ApplicantData", value], getApplicantData, {
     select: (data) => {
-      const apllicantNum: { [key: string]: number } = {};
+      const applicantNum: { [key: string]: number } = {};
       for (const position in data) {
-        apllicantNum[position] = data[position].size;
+        applicantNum[position] = data[position].size;
       }
       return {
         applicants: data[positionValue].applicants,
-        apllicantNum,
+        applicantNum,
         positions: Object.keys(data).sort(),
       };
     },
   });
-  const { applicants, apllicantNum, positions } = data;
+
+  const { applicants, applicantNum, positions } = data;
 
   const handleModalClose = () => {
     dispatch(closeModal());
@@ -80,7 +81,7 @@ export default function ManageTeamModal() {
         positionList={positions}
         positionTab={positionTab}
         handlePositionFilterTab={handlePositionFilterTab}
-        apllicantNum={apllicantNum}
+        apllicantNum={applicantNum}
       />
       <ManageSection>
         <ManageList>
