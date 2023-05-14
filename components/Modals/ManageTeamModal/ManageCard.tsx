@@ -6,11 +6,14 @@ import { media } from "@/styles/mediatest";
 import useToast from "../../../hooks/useToast";
 interface Props {
   filter: string;
+  email: string;
+  nickName: string;
 }
 
-export default function ManageCard({ filter }: Props) {
+export default function ManageCard({ filter, email, nickName }: Props) {
   const isApplicantManage = filter === "지원현황";
   const { addToast } = useToast();
+
   const handleButton = () => {
     if (isApplicantManage) {
       return (
@@ -73,8 +76,8 @@ export default function ManageCard({ filter }: Props) {
           />
         </ProfileImage>
         <ProfileInfo>
-          <Nickname>닉네임</Nickname>
-          <Info>awpodaw1234p@naver.com</Info>
+          <Nickname>{nickName}</Nickname>
+          <Info>{email}</Info>
         </ProfileInfo>
       </ProfileSection>
       <ButtonSection>{handleButton()}</ButtonSection>

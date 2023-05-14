@@ -1,31 +1,31 @@
 import styled from "styled-components";
 import { theme } from "../../../styles/Theme";
 
-interface FilterType {
-  name: string;
-}
 interface PropsType {
-  positionList: FilterType[];
+  positionList: string[];
   positionTab: number;
   handlePositionFilterTab: Function;
+  apllicantNum: { [key: string]: number };
 }
 
 export default function PositionFilterTab({
   positionList,
   positionTab,
   handlePositionFilterTab,
+  apllicantNum,
 }: PropsType) {
   return (
     <PositionTabList>
       {positionList.map((position, index) => {
+        console.log(position);
         return (
           <PositionItem
             className={index === positionTab ? "focused" : ""}
-            key={position.name}
-            onClick={() => handlePositionFilterTab(index, position.name)}
+            key={position}
+            onClick={() => handlePositionFilterTab(index, position)}
           >
-            {position.name}
-            <NumberOfPosition>1</NumberOfPosition>
+            {position}
+            <NumberOfPosition>{apllicantNum[position]}</NumberOfPosition>
           </PositionItem>
         );
       })}

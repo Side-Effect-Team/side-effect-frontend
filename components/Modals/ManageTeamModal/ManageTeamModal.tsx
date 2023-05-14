@@ -4,27 +4,60 @@ import { closeModal } from "../../../store/modalSlice";
 import { AiOutlineClose } from "react-icons/ai";
 import { media } from "@/styles/mediatest";
 import { useFilterTab } from "@/hooks/useFilterTab";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import ManageCard from "./ManageCard";
 import FilterTab from "./FilterTab";
 import PositionFilterTab from "./PositionFilterTab";
-const FILTER_TAB = [{ name: "지원현황" }, { name: "팀원관리" }];
-const POSITION_TAB = [
-  { name: "프론트엔드" },
-  { name: "백엔드" },
-  { name: "디자이너" },
-  { name: "데브옵스" },
-  { name: "마케터" },
-  { name: "기획자" },
-];
 
+interface ApplicatnsType {
+  userId: number;
+  applicantId: number;
+  nickName: string;
+  email: string;
+  createdAt: string;
+}
+const FILTER_TAB = [
+  { name: "지원현황", value: "pending" },
+  { name: "팀원관리", value: "approved" },
+];
 export default function ManageTeamModal() {
-  const { isOpen } = useAppSelector((state) => state.modal);
-  const [currentTab, value, handleFilterTab] = useFilterTab(0, "지원현황");
+  const [currentTab, value, handleFilterTab] = useFilterTab(0, "pending");
   const [positionTab, positionValue, handlePositionFilterTab] = useFilterTab(
     0,
-    "프론트엔드",
+    "FRONTEND",
   );
+  const { isOpen } = useAppSelector((state) => state.modal);
   const dispatch = useAppDispatch();
+  const token =
+    "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMjIyQG5hdmVyLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2ODQyMTk3NTh9.Y49A_GzdsaSoO9yoPlVim364JaoLK4m51_fPA7K_YEQ";
+
+  const getApplicantData = async () => {
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}/applicant/list/28?status=${value}`,
+      { headers: { Authorization: token } },
+    );
+    return response.data;
+  };
+
+  const {
+    data = { applicants: [], positions: [], apllicantNum: {} },
+    isLoading,
+  } = useQuery(["ApplicantData", value], getApplicantData, {
+    select: (data) => {
+      const apllicantNum: { [key: string]: number } = {};
+      for (const position in data) {
+        apllicantNum[position] = data[position].size;
+      }
+      return {
+        applicants: data[positionValue].applicants,
+        apllicantNum,
+        positions: Object.keys(data).sort(),
+      };
+    },
+  });
+  const { applicants, apllicantNum, positions } = data;
+
   const handleModalClose = () => {
     dispatch(closeModal());
   };
@@ -44,20 +77,24 @@ export default function ManageTeamModal() {
         handleFilterTab={handleFilterTab}
       />
       <PositionFilterTab
-        positionList={POSITION_TAB}
+        positionList={positions}
         positionTab={positionTab}
         handlePositionFilterTab={handlePositionFilterTab}
+        apllicantNum={apllicantNum}
       />
       <ManageSection>
         <ManageList>
-          <ManageCard filter={value} />
-          <ManageCard filter={value} />
-          <ManageCard filter={value} />
-          <ManageCard filter={value} />
-          <ManageCard filter={value} />
-          <ManageCard filter={value} />
-          <ManageCard filter={value} />
-          <ManageCard filter={value} />
+          {!isLoading &&
+            applicants.map((applicant: ApplicatnsType) => {
+              return (
+                <ManageCard
+                  filter={value}
+                  key={applicant.userId}
+                  email={applicant.email}
+                  nickName={applicant.nickName}
+                />
+              );
+            })}
         </ManageList>
       </ManageSection>
     </Wrapper>

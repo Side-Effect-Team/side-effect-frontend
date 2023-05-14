@@ -3,6 +3,7 @@ import { theme } from "../../../styles/Theme";
 
 interface FilterType {
   name: string;
+  value: string;
 }
 interface PropsType {
   filterList: FilterType[];
@@ -22,7 +23,9 @@ export default function FilterTab({
           <FilterItem
             className={index === currentTab ? "focused" : ""}
             key={tab.name}
-            onClick={() => handleFilterTab(index, tab.name)}
+            onClick={() => {
+              handleFilterTab(index, tab.value);
+            }}
           >
             {tab.name}
           </FilterItem>
