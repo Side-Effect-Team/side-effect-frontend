@@ -1,4 +1,6 @@
 import { theme } from "@/styles/Theme";
+import { media } from "@/styles/mediatest";
+import { IoClose } from "react-icons/io5";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -10,14 +12,36 @@ export const Container = styled.div`
   border-radius: 10px;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
   padding: 10px;
-  position: fixed;
-  top: 75px;
-  right: 170px;
+  /* position: fixed; */
+  position: absolute;
+  top: 50px;
+  right: -20px;
   overflow: scroll;
   ::-webkit-scrollbar {
     display: none;
   }
+  ${media.mobile} {
+    width: 100vw;
+    height: 100%;
+  }
 `;
+export const Header = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0 10px 15px;
+`;
+export const HeaderTitle = styled.div`
+  font-size: 18px;
+  font-weight: 700;
+`;
+export const CloseButton = styled(IoClose)`
+  font-size: 28px;
+  color: #d9d9d9;
+  cursor: pointer;
+`;
+
 export const Wrapper = styled.div`
   width: 100%;
   height: 90px;

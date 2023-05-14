@@ -29,17 +29,18 @@ export interface AlarmProps {
 }
 interface Props {
   notification: NotificationProps | null;
-  setIsActive: Dispatch<SetStateAction<boolean>>;
+  setOpenAlarm: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function Notification({ notification, setIsActive }: Props) {
+export default function Notification({ notification, setOpenAlarm }: Props) {
   const router = useRouter();
   const onClickAlarm = (category: string, boardId: string) => () => {
+    // 알람 읽음 API 추가
     router.push(`/${category}/${boardId}`);
-    setIsActive((prev) => !prev);
+    setOpenAlarm((prev) => !prev);
   };
   const onClickCloseAlarm = () => {
-    setIsActive((prev) => !prev);
+    setOpenAlarm((prev) => !prev);
   };
 
   return (

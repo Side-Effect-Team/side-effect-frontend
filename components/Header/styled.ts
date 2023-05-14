@@ -79,3 +79,7 @@ export const GetAlarm = styled.div`
   height: 8px;
   border-radius: 50%;
 `;
+export const EmptyMessage = styled.div`
+  font-size: 16px;
+  color: #d9d9d9;
+`;
