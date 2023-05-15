@@ -5,63 +5,64 @@ import { AiOutlineClose } from "react-icons/ai";
 import { media } from "@/styles/mediatest";
 import { useFilterTab } from "@/hooks/useFilterTab";
 import { useQuery } from "@tanstack/react-query";
+import { useRouter } from "next/router";
 import axios from "axios";
-import ManageCard from "./ManageCard";
 import FilterTab from "./FilterTab";
 import PositionFilterTab from "./PositionFilterTab";
-
-interface ApplicatnsType {
-  userId: number;
-  applicantId: number;
-  nickName: string;
-  email: string;
-  createdAt: string;
-}
+import ManageList from "./ManageList";
+import WaitingImage from "./WaitingImage";
 const FILTER_TAB = [
   { name: "지원현황", value: "pending" },
   { name: "팀원관리", value: "approved" },
 ];
+const POSITION_LIST = [
+  "프론트엔드",
+  "백엔드",
+  "디자이너",
+  "데브옵스",
+  "프로젝트 매니저",
+  "마케터",
+];
+
 export default function ManageTeamModal() {
-  const [currentTab, value, handleFilterTab] = useFilterTab(0, "pending");
-  const [positionTab, positionValue, handlePositionFilterTab] = useFilterTab(
-    0,
-    "FRONTEND",
-  );
+  const [currentTabIndex, value, handleFilterTab] = useFilterTab(0, "pending");
+  const [positionTabIndex, positionValue, handlePositionFilterTab] =
+    useFilterTab(0, "프론트엔드");
   const { isOpen } = useAppSelector((state) => state.modal);
   const dispatch = useAppDispatch();
-  const token =
-    "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMjIyQG5hdmVyLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2ODQyMTk3NTh9.Y49A_GzdsaSoO9yoPlVim364JaoLK4m51_fPA7K_YEQ";
+  const router = useRouter();
+  const token = "";
+  const projectId = router.query.projectId;
+  const handleModalClose = () => {
+    dispatch(closeModal());
+  };
 
   const getApplicantData = async () => {
     const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/applicant/list/28?status=${value}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/applicant/list/${projectId}?status=${value}`,
       { headers: { Authorization: token } },
     );
     return response.data;
   };
-
-  const {
-    data = { applicants: [], positions: [], applicantNum: {} },
-    isLoading,
-  } = useQuery(["ApplicantData", value], getApplicantData, {
-    select: (data) => {
-      const applicantNum: { [key: string]: number } = {};
-      for (const position in data) {
-        applicantNum[position] = data[position].size;
-      }
-      return {
-        applicants: data[positionValue].applicants,
-        applicantNum,
-        positions: Object.keys(data).sort(),
-      };
+  const { data = { applicants: [], applicantNum: {} }, isLoading } = useQuery(
+    ["ApplicantData", value],
+    getApplicantData,
+    {
+      select: (data) => {
+        const applicantNum: { [key: string]: number } = {};
+        for (const position in data) {
+          applicantNum[position] = data[position].size;
+        }
+        return {
+          applicants: data[positionValue].applicants,
+          applicantNum,
+        };
+      },
     },
-  });
+  );
 
-  const { applicants, applicantNum, positions } = data;
+  const { applicants, applicantNum } = data;
 
-  const handleModalClose = () => {
-    dispatch(closeModal());
-  };
   return (
     <Wrapper isOpen={isOpen}>
       <Title>
@@ -74,30 +75,30 @@ export default function ManageTeamModal() {
       </Title>
       <FilterTab
         filterList={FILTER_TAB}
-        currentTab={currentTab}
+        currentTabIndex={currentTabIndex}
         handleFilterTab={handleFilterTab}
       />
       <PositionFilterTab
-        positionList={positions}
-        positionTab={positionTab}
+        positionList={POSITION_LIST}
+        positionTabIndex={positionTabIndex}
         handlePositionFilterTab={handlePositionFilterTab}
         apllicantNum={applicantNum}
       />
-      <ManageSection>
-        <ManageList>
-          {!isLoading &&
-            applicants.map((applicant: ApplicatnsType) => {
-              return (
-                <ManageCard
-                  filter={value}
-                  key={applicant.userId}
-                  email={applicant.email}
-                  nickName={applicant.nickName}
-                />
-              );
-            })}
-        </ManageList>
-      </ManageSection>
+      {!isLoading ? (
+        <ManageSection>
+          {applicants.length !== 0 ? (
+            <ManageList
+              applicants={applicants}
+              filter={value}
+              projectId={projectId}
+            />
+          ) : (
+            <WaitingImage filter={value} />
+          )}
+        </ManageSection>
+      ) : (
+        <div>loading...</div>
+      )}
     </Wrapper>
   );
 }
@@ -110,7 +111,7 @@ const Wrapper = styled.div<{ isOpen: boolean }>`
   flex-direction: column;
   position: fixed;
   background-color: white;
-  width: 700px;
+  width: 775px;
   height: 100vh;
   right: 0;
   bottom: 0;
@@ -126,8 +127,7 @@ const Wrapper = styled.div<{ isOpen: boolean }>`
     font-size: small;
     border-bottom-left-radius: 0px;
     border-top-right-radius: 25px;
-    animation: ${({ isOpen }) => (isOpen ? slideUp : slideDown)} 0.3s
-      ease-in-out;
+    animation: ${({ isOpen }) => (isOpen ? slideUp : slideDown)} 0.3s ease;
   }
 `;
 const Title = styled.header`
@@ -139,14 +139,10 @@ const Title = styled.header`
 `;
 const ManageSection = styled.section`
   overflow: auto;
+  width: 100%;
+  height: 100%;
 `;
-const ManageList = styled.ul`
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  padding: 20px;
-  gap: 15px;
-`;
+
 const slideIn = keyframes`
   0%{
     transform: translateX(100%);

@@ -3,24 +3,23 @@ import { theme } from "../../../styles/Theme";
 
 interface PropsType {
   positionList: string[];
-  positionTab: number;
+  positionTabIndex: number;
   handlePositionFilterTab: Function;
   apllicantNum: { [key: string]: number };
 }
 
 export default function PositionFilterTab({
   positionList,
-  positionTab,
+  positionTabIndex,
   handlePositionFilterTab,
   apllicantNum,
 }: PropsType) {
   return (
     <PositionTabList>
       {positionList.map((position, index) => {
-        console.log(position);
         return (
           <PositionItem
-            className={index === positionTab ? "focused" : ""}
+            className={index === positionTabIndex ? "focused" : ""}
             key={position}
             onClick={() => handlePositionFilterTab(index, position)}
           >
@@ -44,8 +43,8 @@ const PositionTabList = styled.ul`
 const PositionItem = styled.li`
   display: flex;
   align-items: center;
-  gap: 5px;
-  padding: 10px;
+  gap: 12px;
+  padding: 5px;
   min-width: fit-content;
   cursor: pointer;
   &.focused {
