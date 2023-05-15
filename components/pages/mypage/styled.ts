@@ -97,6 +97,7 @@ export const ButtonWrapper = styled.div`
   flex-direction: row;
   justify-content: flex-end;
   gap: 15px;
+  margin-bottom: 100px;
   ${mediaQuery("mobile")`
   justify-content: center;
    `};

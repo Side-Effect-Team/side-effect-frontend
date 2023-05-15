@@ -23,7 +23,7 @@ export interface BoardCardProps {
   category?: string;
   headerImage?: string;
   projectName?: string;
-  tags?: string[];
+  stacks?: string[];
   title: string;
   content: string;
   createdAt: string;
@@ -43,9 +43,9 @@ export default function BoardCard({ data }: BoardCardDataProps) {
     e.stopPropagation();
   };
   const onClickGoToBoard = (e: MouseEvent<HTMLDivElement>) => {
-    if (data?.category === "projects") {
-      router.push(`/projects/${e.currentTarget.id}`);
-    } else router.push(`/recruits/${e.currentTarget.id}`);
+    if (data?.category === "recruits") {
+      router.push(`/recruits/${e.currentTarget.id}`);
+    } else router.push(`/projects/${e.currentTarget.id}`);
   };
   return (
     <Container id={data?.id.toString()} onClick={onClickGoToBoard}>
@@ -53,9 +53,9 @@ export default function BoardCard({ data }: BoardCardDataProps) {
         <ProjectName>{data?.projectName}</ProjectName>
       </Header>
       <ContentsWrapper>
-        {data?.tags && (
+        {data?.stacks && (
           <TagWrapper>
-            {data?.tags.map((el, index) => (
+            {data?.stacks.map((el, index) => (
               <Tag key={index}>{el}</Tag>
             ))}
           </TagWrapper>
@@ -85,43 +85,5 @@ export default function BoardCard({ data }: BoardCardDataProps) {
 }
 
 // 사용하는 법
-// export default function Home(){
 
-// 1. 프로젝트 모집 공고 데이터를 받아왔다고 가정
-//   const data = {
-//     id: 1234
-//     category: "recruits"
-//     projectName: "사이드 프로젝트 인원모집",
-//     tags: ["Figma", "Spring", "React"],
-//     title: "제목입니다",
-//     content:
-//       "내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.",
-//     createdAt: "2023.05.04",
-//     like: true,
-//   };
-
-// or
-
-// 2. 프로젝트 자랑 데이터를 받아왔다고 가정
-//   const data = {
-//     id: 1234
-//     category: "projects"
-//     headerImage: "/img/ProjectDefaultBackground.png",
-//     tags: ["Figma", "Spring", "React"],
-//     title: "Oh My Pet",
-//     content:
-//       "내 반려동물이 인플루언서? 반려동물 자랑 플랫폼 오 마이 펫 프로젝트 입니다.",
-//     createdAt: "2023.05.04",
-//     like: true,
-//     likeNum: 65,
-//     commentNum: 15,
-//   };
-
-// return (
-//     <>
 //     <BoardCard data={data} />
-//     </>
-// )
-// }
-
-// or [{},{},{}...].map((el,index)=>(<BoardCard key={index} data={el} />)

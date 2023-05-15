@@ -86,7 +86,8 @@ export default function IntroductionEdit({
                   }
                 }}
                 {...introRegister("nickname", {
-                  required: "닉네임을 작성해주세요",
+                  // required: "닉네임을 작성해주세요",
+                  required: false,
                   minLength: {
                     value: 2,
                     message: "닉네임은 2글자 이상 입력해주세요",
