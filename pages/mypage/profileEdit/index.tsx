@@ -28,7 +28,18 @@ export interface FormData {
 }
 
 export default function MyPageEdit() {
-  const [data, setData] = useState<MypageProps | null>(null);
+  const [data, setData] = useState<MypageEditProps | null>(null);
+  const router = useRouter();
+  const [introduction, setIntroduction] = useState(data?.introduction);
+  const [imgUrl, setImgUrl] = useState(data?.imgUrl);
+  const [stacks, setStacks] = useState<string[]>(data?.stacks || []);
+  const [career, setCareer] = useState<string>(data?.career || "");
+  const [position, setPosition] = useState<string>(data?.position || "");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>();
   const { addToast, deleteToast } = useToast();
 
   useEffect(() => {
@@ -60,36 +71,26 @@ export default function MyPageEdit() {
     setPosition(data?.position || "");
     setIntroduction(data?.introduction);
   }, [data]);
-  const router = useRouter();
-  const [introduction, setIntroduction] = useState(data?.introduction);
-  const [imgUrl, setImgUrl] = useState(data?.imgUrl);
-  const [stacks, setStacks] = useState<string[]>(data?.stacks || []);
-  const [career, setCareer] = useState<string>(data?.career || "");
-  const [position, setPosition] = useState<string>(data?.position || "");
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>();
 
-  // interface MypageEditProps {
-  //   imgUrl: string | undefined;
-  //   nickname: string | undefined;
-  //   introduction: string | undefined;
-  //   stacks: string[] | undefined;
-  //   position: string;
-  //   career: string;
-  //   githubUrl?: string | undefined;
-  //   blogUrl?: string | undefined;
-  //   portfolioUrl?: string | undefined;
-  // }
+  interface MypageEditProps {
+    imgUrl: string | undefined;
+    nickname?: string;
+    introduction: string | undefined;
+    stacks: string[] | undefined;
+    position: string;
+    career: string;
+    githubUrl?: string | undefined;
+    blogUrl?: string | undefined;
+    portfolioUrl?: string | undefined;
+  }
+
   const onClickEdit = async (p: FormData) => {
     const changedFormData: FormData = {};
     if (p.nickname) changedFormData.nickname = p.nickname;
     if (p.githubUrl) changedFormData.githubUrl = p.githubUrl;
     if (p.blogUrl) changedFormData.blogUrl = p.blogUrl;
     if (p.portfolioUrl) changedFormData.portfolioUrl = p.portfolioUrl;
-    const changedData: MypageProps = {
+    const changedData: MypageEditProps = {
       career,
       position,
       stacks,
@@ -138,7 +139,7 @@ export default function MyPageEdit() {
   };
 
   // 기존 데이터와 변경된 데이터 비교
-  function compareData(originData: MypageProps, changedData: MypageProps) {
+  const compareData = (originData: MypageProps, changedData: MypageProps) => {
     const keys = Object.keys(originData);
     const changes: Partial<MypageProps> & Record<string, any> = {};
     for (const key of keys) {
@@ -153,7 +154,7 @@ export default function MyPageEdit() {
       }
     }
     return changes;
-  }
+  };
 
   const onCliCkEditCancel = () => {
     alert("변경사항은 저장되지 않습니다.");

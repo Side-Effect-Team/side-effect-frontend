@@ -20,7 +20,7 @@ export default function Filter({
       (data) =>
         data.title.toLowerCase().includes(keyword.toLowerCase()) ||
         data.content.toLowerCase().includes(keyword.toLowerCase()) ||
-        data.tags?.some((tag) =>
+        data.stacks?.some((tag) =>
           tag.toLowerCase().includes(keyword.toLowerCase()),
         ),
     );
@@ -36,7 +36,7 @@ export default function Filter({
         (data) =>
           data.title.toLowerCase().includes(savedKeyword.toLowerCase()) ||
           data.content.toLowerCase().includes(savedKeyword.toLowerCase()) ||
-          data.tags?.some((tag) =>
+          data.stacks?.some((tag) =>
             tag.toLowerCase().includes(savedKeyword.toLowerCase()),
           ),
       );
