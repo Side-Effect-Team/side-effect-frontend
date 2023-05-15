@@ -1,7 +1,8 @@
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { GoPlus } from "react-icons/go";
+import axios from "axios";
 import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
 import { PostTitleStyled } from "@/postComps/common/Title.styled";
 import {
@@ -15,7 +16,6 @@ import {
   ImageBox,
   GuideWrapper,
 } from "@/postComps/common/PostForm.styled";
-import { useLocalStorage } from "@/hooks/useLocalStorage";
 import Button from "@/components/Button";
 import TagBox from "@/postComps/TagBox";
 import { useTag } from "@/hooks/useTag";
@@ -43,7 +43,6 @@ export default function PostRecruitPage() {
   const router = useRouter();
   const [positions, setPositions] = useState([...POSITIONS]);
   const { tags, deleteTag, addTag } = useTag();
-  const { getter, setter } = useLocalStorage();
   const { imgSrc, handleImgChange } = useInputImage(DEFAULT_RECRUIT_CARD_IMAGE);
   const { postForm, errMsgs, touched, handleChange, handleBlur, handleSubmit } =
     useForm({
@@ -69,17 +68,38 @@ export default function PostRecruitPage() {
         return newErrorMsgs;
       },
       onSubmit: async () => {
+        const newPositions = positions.map(
+          ({ positionType, targetNumber }) => ({
+            positionType,
+            targetNumber: +targetNumber,
+          }),
+        );
         const data = {
-          id: Math.ceil(Math.random() * 100),
           ...postForm,
-          headerImage: imgSrc,
+          imgSrc: null, // 이미지 사용 불가하여 null 대체
           tags,
-          positions,
+          positions: newPositions,
         };
-        const recruits = getter("recruits");
-        setter("recruits", [...recruits, data]);
-        window.alert("등록이 완료되었습니다");
-        await router.push("/recruits"); // FIXME: API 연결 후 생성한 게시글 페이지로 이동
+
+        // request
+        axios
+          .post(`${process.env.NEXT_PUBLIC_API_URL}/recruit-board`, data, {
+            headers: {
+              // 로그인 기능 미구현으로 NEXT_PUBLIC_TOKEN에 발급받은 토큰을 넣고 실행!
+              Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+            },
+          })
+          .then((res) => {
+            console.log(res);
+            if (res.status === 200) {
+              window.alert("게시글 등록이 완료되었습니다");
+              router.push(`/recruits/${res.data.id}`);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+            window.alert("게시글 등록에 실패했습니다");
+          });
       },
     });
 
@@ -108,15 +128,6 @@ export default function PostRecruitPage() {
     const newPositions = positions.filter((position) => position.id !== id);
     setPositions([...newPositions]);
   };
-
-  useEffect(() => {
-    const projects = getter("recruits");
-    if (!projects) setter("recruits", []);
-  }, [getter, setter]);
-
-  useEffect(() => {
-    console.log({ postForm, positions, imgSrc, tags });
-  }, [postForm, positions, imgSrc, tags]);
 
   return (
     <Wrapper>
