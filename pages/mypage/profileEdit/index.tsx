@@ -24,9 +24,19 @@ export interface FormData {
   githubUrl?: string;
   blogUrl?: string;
   portfolioUrl?: string;
-  nickname?: string;
+  nickname: string;
 }
-
+export interface MypageEditProps {
+  imgUrl: string | undefined;
+  nickname: string;
+  introduction: string | undefined;
+  stacks: string[] | undefined;
+  position: string;
+  career: string;
+  githubUrl?: string | undefined;
+  blogUrl?: string | undefined;
+  portfolioUrl?: string | undefined;
+}
 export default function MyPageEdit() {
   const [data, setData] = useState<MypageEditProps | null>(null);
   const router = useRouter();
@@ -72,21 +82,8 @@ export default function MyPageEdit() {
     setIntroduction(data?.introduction);
   }, [data]);
 
-  interface MypageEditProps {
-    imgUrl: string | undefined;
-    nickname?: string;
-    introduction: string | undefined;
-    stacks: string[] | undefined;
-    position: string;
-    career: string;
-    githubUrl?: string | undefined;
-    blogUrl?: string | undefined;
-    portfolioUrl?: string | undefined;
-  }
-
   const onClickEdit = async (p: FormData) => {
-    const changedFormData: FormData = {};
-    if (p.nickname) changedFormData.nickname = p.nickname;
+    const changedFormData: FormData = { nickname: p.nickname };
     if (p.githubUrl) changedFormData.githubUrl = p.githubUrl;
     if (p.blogUrl) changedFormData.blogUrl = p.blogUrl;
     if (p.portfolioUrl) changedFormData.portfolioUrl = p.portfolioUrl;

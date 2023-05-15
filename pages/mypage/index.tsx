@@ -13,7 +13,7 @@ import TabBoards from "@/components/pages/mypage/TabBoards";
 export interface MypageProps {
   id?: number;
   imgUrl?: string;
-  nickname?: string;
+  nickname: string;
   email?: string;
   introduction?: string;
   stacks?: string[];
