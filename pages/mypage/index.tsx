@@ -11,8 +11,9 @@ import { BoardCardProps } from "@/components/BoardCard";
 import TabBoards from "@/components/pages/mypage/TabBoards";
 
 export interface MypageProps {
+  id: number;
   imgUrl?: string;
-  nickname?: string;
+  nickname: string;
   email?: string;
   introduction?: string;
   stacks?: string[];
@@ -24,6 +25,7 @@ export interface MypageProps {
   likeBoards?: BoardCardProps[];
   uploadBoards?: BoardCardProps[];
   applyBoards?: BoardCardProps[];
+  isOwner?: boolean;
 }
 
 export default function MyPage() {
