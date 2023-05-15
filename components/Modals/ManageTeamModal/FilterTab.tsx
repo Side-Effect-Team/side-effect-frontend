@@ -3,16 +3,17 @@ import { theme } from "../../../styles/Theme";
 
 interface FilterType {
   name: string;
+  value: string;
 }
 interface PropsType {
   filterList: FilterType[];
-  currentTab: number;
+  currentTabIndex: number;
   handleFilterTab: Function;
 }
 
 export default function FilterTab({
   filterList,
-  currentTab,
+  currentTabIndex,
   handleFilterTab,
 }: PropsType) {
   return (
@@ -20,9 +21,11 @@ export default function FilterTab({
       {filterList.map((tab, index) => {
         return (
           <FilterItem
-            className={index === currentTab ? "focused" : ""}
+            className={index === currentTabIndex ? "focused" : ""}
             key={tab.name}
-            onClick={() => handleFilterTab(index, tab.name)}
+            onClick={() => {
+              handleFilterTab(index, tab.value);
+            }}
           >
             {tab.name}
           </FilterItem>
