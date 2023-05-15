@@ -33,34 +33,40 @@ export default function MyPage() {
   const [boards, setBoards] = useState<BoardCardProps[] | undefined | null>(
     null,
   );
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const id = localStorage.getItem("id");
-        const token = localStorage.getItem("accessToken");
-        const config = {
-          headers: { Authorization: `Bearer ${token}` },
-        };
-        const result = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL}/user/mypage/${id}`,
-          config,
-        );
-        console.log(result.data);
-        setData(result.data);
-      } catch (error) {
-        setData(null);
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, []);
-
   const [activeTab, setActiveTab] = useState("profile");
+
+  const filterTap = [
+    { tab: "profile", label: "프로필" },
+    { tab: "likeBoards", label: "관심 게시물" },
+    { tab: "uploadBoards", label: "등록 게시물" },
+    { tab: "applyBoards", label: "지원목록" },
+  ];
 
   const onClickTab = (tabName: string) => {
     setActiveTab(tabName);
   };
+
+  const fetchData = async () => {
+    try {
+      const id = localStorage.getItem("id");
+      const token = localStorage.getItem("accessToken");
+      const config = {
+        headers: { Authorization: `Bearer ${token}` },
+      };
+      const result = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/user/mypage/${id}`,
+        config,
+      );
+      console.log(result.data);
+      setData(result.data);
+    } catch (error) {
+      setData(null);
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   useEffect(() => {
     if (activeTab === "likeBoards" && data) {
@@ -75,30 +81,15 @@ export default function MyPage() {
   return (
     <Container>
       <TapWrapper>
-        <TapMenu
-          isActive={activeTab === "profile"}
-          onClick={() => onClickTab("profile")}
-        >
-          프로필
-        </TapMenu>
-        <TapMenu
-          isActive={activeTab === "likeBoards"}
-          onClick={() => onClickTab("likeBoards")}
-        >
-          관심 게시물
-        </TapMenu>
-        <TapMenu
-          isActive={activeTab === "uploadBoards"}
-          onClick={() => onClickTab("uploadBoards")}
-        >
-          등록 게시물
-        </TapMenu>
-        <TapMenu
-          isActive={activeTab === "applyBoards"}
-          onClick={() => onClickTab("applyBoards")}
-        >
-          지원목록
-        </TapMenu>
+        {filterTap.map((menu) => (
+          <TapMenu
+            key={menu.tab}
+            isActive={activeTab === menu.tab}
+            onClick={() => onClickTab(menu.tab)}
+          >
+            {menu.label}
+          </TapMenu>
+        ))}
       </TapWrapper>
       <ContentsWrapper>
         {!data && <div>데이터를 받아올 수 없습니다</div>}

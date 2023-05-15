@@ -25,6 +25,12 @@ export default function TabBoards({ boards, title }: TabBoards) {
     else setFilterMenu("all");
   };
 
+  const filterMenuTap = [
+    { type: "all", label: "전체" },
+    { type: "projects", label: "자랑게시판" },
+    { type: "recruits", label: "모집게시판" },
+  ];
+
   useEffect(() => {
     if (filterMenu === "projects") setFilterBoards(projectsBoards);
     else if (filterMenu === "recruits") setFilterBoards(recruitsBoards);
@@ -41,24 +47,15 @@ export default function TabBoards({ boards, title }: TabBoards) {
           </SectionHeaderWrapper>
           {title !== "applyBoards" && (
             <FilterWrapper>
-              <FilterMenu
-                onClick={onClickFilterMenu("all")}
-                isActive={filterMenu === "all"}
-              >
-                전체
-              </FilterMenu>
-              <FilterMenu
-                onClick={onClickFilterMenu("projects")}
-                isActive={filterMenu === "projects"}
-              >
-                자랑게시판
-              </FilterMenu>
-              <FilterMenu
-                onClick={onClickFilterMenu("recruits")}
-                isActive={filterMenu === "recruits"}
-              >
-                모집게시판
-              </FilterMenu>
+              {filterMenuTap.map((filter) => (
+                <FilterMenu
+                  key={filter.type}
+                  onClick={onClickFilterMenu(filter.type)}
+                  isActive={filterMenu === filter.type}
+                >
+                  {filter.label}
+                </FilterMenu>
+              ))}
             </FilterWrapper>
           )}
           <BoardWrapper>
