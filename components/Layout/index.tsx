@@ -11,7 +11,7 @@ import Footer from "../Footer";
 import Toast from "../Toast";
 import { BOARD_LIST } from "../../enum";
 import ScrollToTop from "../ScrollToTop";
-import PageHead from "components/PageHead";
+import Head from "next/head";
 
 interface PropType {
   children: React.ReactNode;
@@ -67,7 +67,13 @@ export default function Layout({ children }: PropType) {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <PageHead pageTitle="사이드 이펙트 | 빠르게 프로젝트를 시작하세요" />
+      <Head>
+        <meta
+          name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+        />
+        <title>사이드 이펙트 | 빠르게 프로젝트를 시작하세요</title>
+      </Head>
       <Header handleMobileMenu={handleMobileMenu} />
       <ScrollToTop />
       <Toast />

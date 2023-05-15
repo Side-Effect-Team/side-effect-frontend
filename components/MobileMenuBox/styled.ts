@@ -3,19 +3,16 @@ import { mediaQuery } from "@/styles/Media";
 
 export const Wrapper = styled.div`
   ${mediaQuery("mobile")`
-    width: 30px;
-    height: 30px;
-    border: 2px solid black;
     cursor: pointer;
     display: flex;
     justify-contents: center;
     align-items: center;
-    background: #eee;
+    gap: 1rem;
   `}
 
   display: none;
 
-  > svg {
+  svg {
     transform: scale(1.5);
     margin: auto;
   }

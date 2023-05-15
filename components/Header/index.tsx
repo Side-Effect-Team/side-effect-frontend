@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { Wrapper, HeaderStyled, Logo, NavStyled, BoxStyled } from "./styled";
-import MobileMenuButton from "../MobileMenuButton";
+import MobileMenuBox from "../MobileMenuBox";
 import { BOARD_LIST } from "../../enum";
 import Button from "../Button";
 import { useAppDispatch } from "@/store/hooks";
@@ -36,7 +36,7 @@ export default function Header({ handleMobileMenu }: HeaderProps) {
             로그인
           </Button>
         </BoxStyled>
-        <MobileMenuButton onClick={handleMobileMenu} />
+        <MobileMenuBox onClick={handleMobileMenu} />
       </HeaderStyled>
     </Wrapper>
   );
