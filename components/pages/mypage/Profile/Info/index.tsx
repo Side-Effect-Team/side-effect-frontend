@@ -39,22 +39,23 @@ export default function Info({
       setCareerTitle("경력");
     }
 
-    if (position === "frontend") {
+    if (position === "FRONTEND") {
       setPositionTitle("프론트엔드");
-    } else if (career === "backend") {
+    } else if (position === "BACKEND") {
       setPositionTitle("백엔드");
-    } else if (career === "designer") {
+    } else if (position === "DESIGNER") {
       setPositionTitle("디자이너");
-    } else if (career === "devops") {
+    } else if (position === "DEVOPS") {
       setPositionTitle("데브옵스");
-    } else if (career === "marketer") {
-      setPositionTitle("기획자");
-    } else if (career === "pm") {
+    } else if (position === "MARKETER") {
       setPositionTitle("마케터");
+    } else if (position === "PM") {
+      setPositionTitle("기획자");
     } else {
       setPositionTitle("포지션");
     }
   }, []);
+
   return (
     <>
       <InfoWrapper>
@@ -68,7 +69,12 @@ export default function Info({
       <InfoWrapper>
         <InfoTitle>깃허브</InfoTitle>
         {githubUrl ? (
-          <InfoContentLink href={githubUrl} target="_blank">
+          <InfoContentLink
+            href={`${
+              githubUrl.startsWith("https://") ? "" : "https://"
+            }${githubUrl}`}
+            target="_blank"
+          >
             {githubUrl}
           </InfoContentLink>
         ) : (
@@ -78,7 +84,12 @@ export default function Info({
       <InfoWrapper>
         <InfoTitle>블로그</InfoTitle>
         {blogUrl ? (
-          <InfoContentLink href={blogUrl} target="_blank">
+          <InfoContentLink
+            href={`${
+              blogUrl.startsWith("https://") ? "" : "https://"
+            }${blogUrl}`}
+            target="_blank"
+          >
             {blogUrl}
           </InfoContentLink>
         ) : (
@@ -88,7 +99,12 @@ export default function Info({
       <InfoWrapper>
         <InfoTitle>포트폴리오</InfoTitle>
         {portfolioUrl ? (
-          <InfoContentLink href={portfolioUrl} target="_blank">
+          <InfoContentLink
+            href={`${
+              portfolioUrl.startsWith("https://") ? "" : "https://"
+            }${portfolioUrl}`}
+            target="_blank"
+          >
             {portfolioUrl}
           </InfoContentLink>
         ) : (

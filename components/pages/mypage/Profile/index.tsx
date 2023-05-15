@@ -48,7 +48,9 @@ export default function Profile(data: MypageProps) {
         />
       </SectionWrapper>
       <ButtonWrapper>
-        <Button onClick={onClickGoToEditProfile}>프로필 수정하기</Button>
+        {data.isOwner && (
+          <Button onClick={onClickGoToEditProfile}>프로필 수정하기</Button>
+        )}
       </ButtonWrapper>
     </Wrapper>
   );

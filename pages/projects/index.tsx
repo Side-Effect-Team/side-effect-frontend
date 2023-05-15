@@ -2,12 +2,11 @@ import styled from "styled-components";
 import SelectBox from "../../components/SelectBox";
 import BoardCard from "../../components/BoardCard";
 import Search from "@/components/Search";
-import { breakPoints, mediaQuery } from "@/styles/Media";
-import { useState, useEffect, ChangeEvent } from "react";
+import { breakPoints } from "@/styles/Media";
+import { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useAppDispatch } from "../../store/hooks";
-import { openModal } from "../../store/modalSlice";
 import { media } from "@/styles/mediatest";
 import axios from "axios";
 import PageHead from "@/components/PageHead";
@@ -62,15 +61,9 @@ export default function ProjectPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView, hasNextPage]);
   const dispatch = useAppDispatch();
-  console.log(filter);
   return (
     <Wrapper>
       <PageHead pageTitle="프로젝트 자랑 | 사이드 이펙트" />
-      <button
-        onClick={() => dispatch(openModal({ modalType: "ManageTeamModal" }))}
-      >
-        awdawd
-      </button>
       <HeaderSection>
         <h2>이달의 프로젝트</h2>
         <TempCarousel>캐러셀</TempCarousel>
@@ -131,8 +124,8 @@ const CardSection = styled.main`
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   row-gap: 1rem;
   column-gap: 1rem;
-  ${mediaQuery("mobile")`
-  display: flex;
-  flex-direction: column;
-`}
+  ${media.mobile} {
+    display: flex;
+    flex-direction: column;
+  }
 `;
