@@ -1,94 +1,111 @@
-import { useRouter } from "next/router";
-import Button from "../../components/Button";
-import Introduction from "../../components/pages/mypage/Introduction";
-import Skill from "../../components/pages/mypage/Skill";
-import Info from "../../components/pages/mypage/Info";
 import {
-  Border,
-  ButtonWrapper,
-  SectionHeaderWrapper,
-  SectionTitle,
-  SectionWrapper,
-  Wrapper,
+  Container,
+  ContentsWrapper,
+  TapMenu,
+  TapWrapper,
 } from "@/components/pages/mypage/styled";
-import PageHead from "@/components/PageHead";
+import Profile from "@/components/pages/mypage/Profile";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { BoardCardProps } from "@/components/BoardCard";
+import TabBoards from "@/components/pages/mypage/TabBoards";
 
-export interface DataProps {
-  avatarSrc?: string;
+export interface MypageProps {
+  imgUrl?: string;
   nickname: string;
-  email: string;
+  email?: string;
   introduction?: string;
-  // boards: number;
-  // follower: number;
-  // following: number;
-  skill?: string[];
+  stacks?: string[];
   position: string;
   career: string;
-  github?: string;
-  blog?: string;
-  portfolio?: string;
-}
-export interface MyPageProps {
-  data?: DataProps;
+  githubUrl?: string;
+  blogUrl?: string;
+  portfolioUrl?: string;
+  likeBoards?: BoardCardProps[];
+  uploadBoards?: BoardCardProps[];
+  applyBoards?: BoardCardProps[];
 }
 
-const data: DataProps = {
-  avatarSrc: "/images/ProjectDefaultBackground.png",
-  nickname: "자라는개발자",
-  email: "sideeffect@naver.com",
-  introduction:
-    "프론트엔드 개발자를 꿈꾸는 취준생입니다. 프로젝트 경험하고 싶어요",
-  // boards: 1,
-  // follower: 20,
-  // following: 30,
-  skill: ["typescript", "react", "HTML", "Next.js", "React.native"],
-  position: "프론트엔드",
-  career: "신입",
-  github: "https://github.com",
-  blog: "https://www.naver.com",
-  portfolio: "https://www.naver.com",
-};
 export default function MyPage() {
-  const router = useRouter();
-  const onClickGoToEditProfile = () => {
-    router.push("/mypage/edit");
+  const [data, setData] = useState<MypageProps | null>(null);
+  const [boards, setBoards] = useState<BoardCardProps[] | undefined | null>(
+    null,
+  );
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const id = localStorage.getItem("id");
+        const token = localStorage.getItem("accessToken");
+        const config = {
+          headers: { Authorization: `Bearer ${token}` },
+        };
+        const result = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/user/mypage/${id}`,
+          config,
+        );
+        console.log(result.data);
+        setData(result.data);
+      } catch (error) {
+        setData(null);
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const [activeTab, setActiveTab] = useState("profile");
+
+  const onClickTab = (tabName: string) => {
+    setActiveTab(tabName);
   };
 
+  useEffect(() => {
+    if (activeTab === "likeBoards" && data) {
+      setBoards(data.likeBoards);
+    } else if (activeTab === "uploadBoards" && data) {
+      setBoards(data.uploadBoards);
+    } else if (activeTab === "applyBoards" && data) {
+      setBoards(data.applyBoards);
+    }
+  }, [activeTab]);
+
   return (
-    <Wrapper>
-      <PageHead pageTitle="마이페이지 | 사이드 이펙트" />
-      <Introduction
-        avatarSrc={data.avatarSrc}
-        nickname={data.nickname}
-        email={data.email}
-        introduction={data.introduction}
-        // boards={data.boards}
-        // follower={data.follower}
-        // following={data.following}
-      />
-      <SectionWrapper>
-        <SectionHeaderWrapper>
-          <SectionTitle>Skill</SectionTitle>
-          <Border></Border>
-        </SectionHeaderWrapper>
-        <Skill skill={data.skill} />
-      </SectionWrapper>
-      <SectionWrapper>
-        <SectionHeaderWrapper>
-          <SectionTitle>Info</SectionTitle>
-          <Border></Border>
-        </SectionHeaderWrapper>
-        <Info
-          position={data.position}
-          career={data.career}
-          github={data.github}
-          blog={data.blog}
-          portfolio={data.portfolio}
-        />
-      </SectionWrapper>
-      <ButtonWrapper>
-        <Button onClick={onClickGoToEditProfile}>프로필 수정하기</Button>
-      </ButtonWrapper>
-    </Wrapper>
+    <Container>
+      <TapWrapper>
+        <TapMenu
+          isActive={activeTab === "profile"}
+          onClick={() => onClickTab("profile")}
+        >
+          프로필
+        </TapMenu>
+        <TapMenu
+          isActive={activeTab === "likeBoards"}
+          onClick={() => onClickTab("likeBoards")}
+        >
+          관심 게시물
+        </TapMenu>
+        <TapMenu
+          isActive={activeTab === "uploadBoards"}
+          onClick={() => onClickTab("uploadBoards")}
+        >
+          등록 게시물
+        </TapMenu>
+        <TapMenu
+          isActive={activeTab === "applyBoards"}
+          onClick={() => onClickTab("applyBoards")}
+        >
+          지원목록
+        </TapMenu>
+      </TapWrapper>
+      <ContentsWrapper>
+        {!data && <div>데이터를 받아올 수 없습니다</div>}
+        {data && activeTab === "profile" ? (
+          <Profile {...data} />
+        ) : (
+          <TabBoards boards={boards} title={activeTab} />
+        )}
+      </ContentsWrapper>
+    </Container>
   );
 }

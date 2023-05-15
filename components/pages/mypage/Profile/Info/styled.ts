@@ -9,7 +9,7 @@ export const InfoWrapper = styled.div`
   border-bottom: 1px solid ${theme.brandColor.lightGray};
 `;
 export const InfoTitle = styled.p`
-  min-width: 20%;
+  min-width: 30%;
   color: #667085;
   font-weight: 600;
 `;

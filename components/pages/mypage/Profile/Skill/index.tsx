@@ -1,13 +1,13 @@
 import { Tag, TagWrapper, Text } from "./styled";
 
 interface SkillProps {
-  skill: string[] | undefined;
+  stacks: string[] | undefined;
 }
 
-export default function Skill({ skill }: SkillProps) {
+export default function Skill({ stacks }: SkillProps) {
   return (
     <TagWrapper>
-      {(skill && skill.map((el, index) => <Tag key={index}>{el}</Tag>)) || (
+      {(stacks && stacks.map((el, index) => <Tag key={index}>{el}</Tag>)) || (
         <Text>아직 작성된 정보가 없습니다.</Text>
       )}
     </TagWrapper>
