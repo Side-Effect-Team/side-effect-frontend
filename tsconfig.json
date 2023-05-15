@@ -8,7 +8,8 @@
       "@/hooks/*": ["hooks/*"],
       "@/store/*": ["store/*"],
       "@/pages/*": ["pages/*"],
-      "@/postComps/*": ["components/pages/post/*"]
+      "@/postComps/*": ["components/pages/post/*"],
+      "@/utils/*": ["utils/*"]
     },
     "target": "ESNext",
     "lib": [

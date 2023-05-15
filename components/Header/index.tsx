@@ -10,7 +10,7 @@ import {
   NotificationDiv,
   GetAlarm,
 } from "./styled";
-import MobileMenuButton from "../MobileMenuButton";
+import MobileMenuBox from "../MobileMenuBox";
 import { BOARD_LIST } from "../../enum";
 import Button from "../Button";
 import { useEffect, useState } from "react";
@@ -99,7 +99,7 @@ export default function Header({ handleMobileMenu }: HeaderProps) {
             로그인
           </Button>
         </BoxStyled>
-        <MobileMenuButton onClick={handleMobileMenu} />
+        <MobileMenuBox onClick={handleMobileMenu} />
       </HeaderStyled>
     </Wrapper>
   );

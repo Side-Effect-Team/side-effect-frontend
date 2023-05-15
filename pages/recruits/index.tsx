@@ -1,47 +1,32 @@
-import { useEffect, useState } from "react";
-// import { useRouter } from "next/router";
-// import { useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import styled from "styled-components";
 import { breakPoints, mediaQuery } from "@/styles/Media";
 import Banner from "@/components/Banner";
 import BoardCard from "@/components/BoardCard";
 import { BANNER_CONTENTS } from "../../enum";
 import PageHead from "@/components/PageHead";
-
-interface RecruitType {
-  id: number;
-  headerTitle: string;
-  tags: string[];
-  title: string;
-  content: string;
-  createdAt: string;
-  like: boolean;
-}
+import axios from "axios";
+import { recruitBoardCardConverter } from "@/utils/converter";
 
 export default function RecruitsPage() {
-  // const router = useRouter();
-  const [recruitsData, setRecruitsData] = useState([]);
+  const { data, isError, isLoading } = useQuery({
+    queryKey: ["recruits"],
+    queryFn: async () => {
+      const res = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/recruit-board/scroll?size=100`,
+      );
+      return res.data.recruitBoards;
+    },
+  });
 
-  // const { data, isError, isLoading } = useQuery({
-  //   queryKey: ["recruits"],
-  //   queryFn: async () => {
-  //     const res = await fetch(BASE_URL + "/api" + router.pathname);
-  //     return await res.json();
-  //   },
-  // });
-  //
-  // if (isError) {
-  //   return <h2>일시적으로 페이지를 로드할 수 없습니다</h2>;
-  // }
-  //
-  // if (isLoading) {
-  //   return <h2>Loading...</h2>;
-  // }
+  if (isError) {
+    return <h2>일시적으로 페이지를 로드할 수 없습니다</h2>;
+  }
 
-  useEffect(() => {
-    const data = localStorage.getItem("recruits");
-    if (data) setRecruitsData(JSON.parse(data));
-  }, []);
+  if (isLoading) {
+    return <h2>Loading...</h2>;
+  }
+  console.log(data);
 
   return (
     <Wrapper>
@@ -67,20 +52,14 @@ export default function RecruitsPage() {
               <option value="swift">Swift</option>
               <option value="kotlin">Kotlin</option>
             </select>
-            <select>
-              <option value="">선택하세요</option>
-              <option value="javascript">JavaScript</option>
-              <option value="typescript">TypeScript</option>
-              <option value="react">React</option>
-            </select>
             <input type="search" placeholder="검색할 내용을 입력하세요" />
           </FilterBox>
         </ContentsHeader>
         <ContentsMain>
-          {recruitsData &&
-            recruitsData.map((item: RecruitType) => (
-              <BoardCard key={item.id} data={item} />
-            ))}
+          {data.map((item: RecruitType) => {
+            const boardCardData = recruitBoardCardConverter("recruits", item);
+            return <BoardCard key={item.id} data={boardCardData} />;
+          })}
         </ContentsMain>
       </Contents>
     </Wrapper>
