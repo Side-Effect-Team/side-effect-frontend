@@ -9,6 +9,7 @@ interface ProjectDetailPageProps {
 
 export default function ProjectDetailPage({ project }: ProjectDetailPageProps) {
   const router = useRouter();
+  console.log(project);
 
   return (
     <Wrapper>
