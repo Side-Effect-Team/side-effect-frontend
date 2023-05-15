@@ -1,8 +1,11 @@
 import { useRouter } from "next/router";
-import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
 import axios from "axios";
 import { GetStaticPropsContext } from "next";
+import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
 import PositionDetail from "@/detailComps/PositionDetail";
+import ContentDetail from "@/detailComps/ContentDetail";
+import CommentBox from "@/detailComps/CommentBox";
+import PostData from "@/detailComps/PostData";
 
 interface RecruitDetailPageProps {
   recruit: RecruitType;
@@ -11,15 +14,20 @@ interface RecruitDetailPageProps {
 export default function RecruitDetailPage({ recruit }: RecruitDetailPageProps) {
   const router = useRouter();
   console.log(recruit);
-  const { title, projectName, positions } = recruit;
+  const { title, projectName, positions, imgSrc, views, tags, content } =
+    recruit;
 
   return (
     <Wrapper>
       <Contents>
-        <h1>{title}</h1>
-        <h2>프로젝트명:</h2>
-        <p>{projectName}</p>
+        <PostData title={title} views={views} />
         <PositionDetail positions={positions} />
+        <ContentDetail
+          projectName={projectName}
+          tags={tags}
+          content={content}
+        />
+        <CommentBox />
       </Contents>
     </Wrapper>
   );
