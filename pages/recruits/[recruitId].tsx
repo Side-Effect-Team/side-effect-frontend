@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import axios from "axios";
 import { GetStaticPropsContext } from "next";
 import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
@@ -12,9 +11,9 @@ interface RecruitDetailPageProps {
 }
 
 export default function RecruitDetailPage({ recruit }: RecruitDetailPageProps) {
-  const router = useRouter();
   console.log(recruit);
   const {
+    id,
     title,
     projectName,
     positions,
@@ -28,7 +27,7 @@ export default function RecruitDetailPage({ recruit }: RecruitDetailPageProps) {
   return (
     <Wrapper>
       <Contents>
-        <PostData title={title} createdAt={createdAt} views={views} />
+        <PostData id={id} title={title} createdAt={createdAt} views={views} />
         <PositionDetail positions={positions} />
         <ContentDetail
           projectName={projectName}

@@ -1,4 +1,6 @@
 import { useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/router";
 import Link from "next/link";
 import {
   BiUserCircle,
@@ -20,12 +22,22 @@ import {
 } from "@/detailComps/PostData/styled";
 
 interface PostDataProps {
+  id: number;
   title: string;
   createdAt: string;
   views: number;
 }
 
-export default function PostData({ title, createdAt, views }: PostDataProps) {
+interface OptionModalProps {
+  id: number;
+}
+
+export default function PostData({
+  id,
+  title,
+  createdAt,
+  views,
+}: PostDataProps) {
   const [modalOn, setModalOn] = useState(false);
 
   return (
@@ -56,7 +68,7 @@ export default function PostData({ title, createdAt, views }: PostDataProps) {
         <div>
           <span>조회수 </span>
           <SpanStyled>{views}</SpanStyled>
-          {modalOn && <OptionModal />}
+          {modalOn && <OptionModal id={id} />}
         </div>
         <OptionBox onClick={() => setModalOn((prev) => !prev)}>
           <BiDotsHorizontalRounded size={25} />
@@ -67,7 +79,34 @@ export default function PostData({ title, createdAt, views }: PostDataProps) {
   );
 }
 
-function OptionModal() {
+function OptionModal({ id }: OptionModalProps) {
+  const router = useRouter();
+
+  // 게시글 삭제
+  const deletePost = async (id: number) => {
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/recruit-board/${id}`;
+    try {
+      const res = await axios.delete(url, {
+        headers: {
+          // 로그인 기능 미구현으로 NEXT_PUBLIC_TOKEN에 발급받은 토큰을 넣고 실행!
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+        },
+      });
+      if (res.status === 200)
+        await window.alert("게시물이 성공적으로 삭제되었습니다");
+    } catch (err) {
+      console.log(err);
+      window.alert("게시물 삭제에 실패했습니다");
+    }
+  };
+
+  const handleDelete = async () => {
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      await deletePost(id);
+      await router.push("/recruits");
+    }
+  };
+
   return (
     <OptionModalWrapper>
       <OptionBtn type="button">
@@ -76,7 +115,7 @@ function OptionModal() {
           <p>수정</p>
         </Container>
       </OptionBtn>
-      <OptionBtn type="button">
+      <OptionBtn type="button" onClick={handleDelete}>
         <Container>
           <BiTrash size={20} />
           <p>삭제</p>
