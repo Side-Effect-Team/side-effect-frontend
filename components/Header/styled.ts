@@ -1,7 +1,5 @@
 import styled from "styled-components";
 import { mediaQuery } from "@/styles/Media";
-import { IoNotificationsOutline } from "react-icons/io5";
-import { theme } from "@/styles/Theme";
 
 export const Wrapper = styled.div`
   z-index: 10;
@@ -60,26 +58,4 @@ export const BoxStyled = styled.div`
       transform: scale(1.2);
     }
   }
-`;
-export const NotificationDiv = styled.div`
-  height: 24px;
-  position: relative;
-  cursor: pointer;
-`;
-export const NotificationButton = styled(IoNotificationsOutline)`
-  color: ${theme.brandColor.primary};
-  font-size: 24px;
-`;
-export const GetAlarm = styled.div`
-  position: absolute;
-  top: 1px;
-  left: 2px;
-  background-color: red;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-`;
-export const EmptyMessage = styled.div`
-  font-size: 16px;
-  color: #d9d9d9;
 `;

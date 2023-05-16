@@ -3,15 +3,18 @@ import {
   CloseButton,
   Container,
   Contents,
+  Date,
+  DeleteButton,
+  EmptyMessage,
   Header,
   HeaderTitle,
+  RowWrapper,
   Title,
   Wrapper,
 } from "./styled";
-import { EmptyMessage } from "../Header/styled";
 import { useRouter } from "next/router";
 
-export interface NotificationProps {
+export interface AlarmProps {
   lastId: number;
   alarmNum: number;
   alarms: AlarmProps[];
@@ -27,20 +30,28 @@ export interface AlarmProps {
   category: string;
   boardTitle: string;
 }
-interface Props {
-  notification: NotificationProps | null;
+interface AlarmListProps {
+  alarmList: AlarmProps | null;
   setOpenAlarm: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function Notification({ notification, setOpenAlarm }: Props) {
+export default function AlarmList({ alarmList, setOpenAlarm }: AlarmListProps) {
   const router = useRouter();
+
   const onClickAlarm = (category: string, boardId: string) => () => {
     // 알람 읽음 API 추가
     router.push(`/${category}/${boardId}`);
     setOpenAlarm((prev) => !prev);
   };
+
   const onClickCloseAlarm = () => {
     setOpenAlarm((prev) => !prev);
+  };
+
+  const onClickDeleteAlarm = (id: number) => (e: any) => {
+    e.stopPropagation();
+    // 알람 삭제 API 추가
+    alert(`${id}: 알람삭제`);
   };
 
   return (
@@ -49,11 +60,21 @@ export default function Notification({ notification, setOpenAlarm }: Props) {
         <HeaderTitle>알림</HeaderTitle>
         <CloseButton onClick={onClickCloseAlarm} />
       </Header>
-      {notification ? (
-        notification.alarms.map((el) => (
-          <Wrapper key={el.id} onClick={onClickAlarm(el.category, el.boardId)}>
-            <Title>{el.title}</Title>
-            <Contents>{el.boardTitle}</Contents>
+      {alarmList ? (
+        alarmList.alarms.map((alarm) => (
+          <Wrapper
+            watched={alarm.watched}
+            key={alarm.id}
+            onClick={onClickAlarm(alarm.category, alarm.boardId)}
+          >
+            <RowWrapper>
+              <Title>{alarm.title}</Title>
+              <DeleteButton onClick={onClickDeleteAlarm(alarm.id)} />
+            </RowWrapper>
+            <RowWrapper>
+              <Contents>{alarm.boardTitle}</Contents>
+              <Date>{alarm.createAt}</Date>
+            </RowWrapper>
           </Wrapper>
         ))
       ) : (

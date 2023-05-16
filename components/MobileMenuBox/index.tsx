@@ -1,18 +1,19 @@
 import { Wrapper } from "./styled";
-import { IoNotificationsOutline, IoReorderThree } from "react-icons/io5";
+import { IoReorderThree } from "react-icons/io5";
 import Button from "@/components/Button";
+import Alarm from "../Alarm";
 
 interface MobileMenuBoxProps {
-  onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
+  handleMobileMenu: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-export default function MobileMenuBox({ onClick }: MobileMenuBoxProps) {
+export default function MobileMenuBox({
+  handleMobileMenu,
+}: MobileMenuBoxProps) {
   return (
-    <Wrapper onClick={onClick}>
-      <Button>
-        <IoNotificationsOutline />
-      </Button>
-      <Button>
+    <Wrapper>
+      <Alarm />
+      <Button onClick={handleMobileMenu}>
         <IoReorderThree />
       </Button>
     </Wrapper>
