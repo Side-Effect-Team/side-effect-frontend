@@ -14,6 +14,8 @@ export const useTag = (initialVals: string[]) => {
     if (inputEl.value === "") return;
 
     if (e.key === "Enter") {
+      // 태그 추가 엔터 시 폼이 자동 등록되는 것 막기
+      e.preventDefault();
       setTags([...tags, inputEl.value]);
       inputEl.value = "";
     }
