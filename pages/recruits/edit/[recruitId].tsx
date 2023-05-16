@@ -2,7 +2,6 @@ import axios from "axios";
 import { GetServerSidePropsContext } from "next";
 import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import { useTag } from "@/hooks/useTag";
 import { useInputImage } from "@/hooks/useInputImage";
 import { DEFAULT_RECRUIT_CARD_IMAGE } from "../../../enum";
@@ -16,7 +15,6 @@ import {
   InputBox,
   InputForm,
   LabelForm,
-  PositionBoxContainer,
   SubmitBtnBox,
   TextareaForm,
 } from "@/postComps/common/PostForm.styled";
@@ -36,70 +34,63 @@ export default function EditRecruitPage({ recruit }: EditRecruitPageProps) {
     recruit.tags.map((tag) => tag.stackType),
   );
   const { imgSrc, handleImgChange } = useInputImage(DEFAULT_RECRUIT_CARD_IMAGE);
-  const {
-    postForm,
-    setPostForm,
-    errMsgs,
-    touched,
-    handleChange,
-    handleBlur,
-    handleSubmit,
-  } = useForm({
-    initialVals: {
-      projectName: recruit.projectName,
-      title: recruit.title,
-      content: recruit.content,
-    },
-    validate: (postForm: typeof POST_FORM) => {
-      const newErrorMsgs = { ...POST_FORM };
+  const { postForm, errMsgs, touched, handleChange, handleBlur, handleSubmit } =
+    useForm({
+      initialVals: {
+        projectName: recruit.projectName,
+        title: recruit.title,
+        content: recruit.content,
+      },
+      validate: (postForm: typeof POST_FORM) => {
+        const newErrorMsgs = { ...POST_FORM };
 
-      // 프로젝트명
-      if (
-        postForm.projectName.trim().length < 3 ||
-        postForm.projectName.trim().length > 20
-      )
-        newErrorMsgs.projectName = "프로젝트명은 3~20자 이내로 입력해주세요";
+        // 프로젝트명
+        if (
+          postForm.projectName.trim().length < 3 ||
+          postForm.projectName.trim().length > 20
+        )
+          newErrorMsgs.projectName = "프로젝트명은 3~20자 이내로 입력해주세요";
 
-      // 게시글 제목
-      if (postForm.title.trim().length < 5)
-        newErrorMsgs.title = "게시글 제목은 5자 이상 입력해야 합니다";
+        // 게시글 제목
+        if (postForm.title.trim().length < 5)
+          newErrorMsgs.title = "게시글 제목은 5자 이상 입력해야 합니다";
 
-      // 상세 내용
-      if (postForm.content.trim().length < 20)
-        newErrorMsgs.content = "게시글 내용은 20자 이상 입력해야 합니다";
+        // 상세 내용
+        if (postForm.content.trim().length < 20)
+          newErrorMsgs.content = "게시글 내용은 20자 이상 입력해야 합니다";
 
-      return newErrorMsgs;
-    },
-    onSubmit: async () => {
-      const patchData = {
-        ...recruit,
-        ...postForm,
-        imgSrc: null, // 이미지 사용 불가하여 null 대체
-        tags,
-      };
+        return newErrorMsgs;
+      },
+      onSubmit: async () => {
+        const patchData = {
+          ...recruit,
+          ...postForm,
+          imgSrc: null, // 이미지 사용 불가하여 null 대체
+          tags,
+        };
 
-      // request
-      const url = `${process.env.NEXT_PUBLIC_API_URL}/recruit-board/${recruit.id}`;
-      axios
-        .patch(url, patchData, {
-          headers: {
-            // 로그인 기능 미구현으로 NEXT_PUBLIC_TOKEN에 발급받은 토큰을 넣고 실행!
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
-          },
-        })
-        .then((res) => {
-          console.log(res);
-          if (res.status === 200) {
-            window.alert("게시글 수정이 완료되었습니다");
-            router.push(`/recruits/${recruit.id}`);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-          window.alert("게시글 등록에 실패했습니다");
-        });
-    },
-  });
+        // request
+        const url = `${process.env.NEXT_PUBLIC_API_URL}/recruit-board/${recruit.id}`;
+        axios
+          .patch(url, patchData, {
+            headers: {
+              // 로그인 기능 미구현으로 NEXT_PUBLIC_TOKEN에 발급받은 토큰을 넣고 실행!
+              Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+            },
+          })
+          .then((res) => {
+            console.log(res);
+            if (res.status === 200) {
+              window.alert("게시글 수정이 완료되었습니다");
+              router.push(`/recruits/${recruit.id}`);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+            window.alert("게시글 수정에 실패했습니다");
+          });
+      },
+    });
 
   // 등록 취소 버튼 클릭 핸들러
   const handleCancel = () => {
@@ -184,7 +175,7 @@ export default function EditRecruitPage({ recruit }: EditRecruitPageProps) {
             )}
           </InputBox>
           <SubmitBtnBox>
-            <Button type="submit">등록</Button>
+            <Button type="submit">수정</Button>
             <Button type="button" onClick={handleCancel}>
               취소
             </Button>
