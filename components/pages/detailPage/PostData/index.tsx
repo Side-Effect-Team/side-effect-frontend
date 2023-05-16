@@ -1,6 +1,11 @@
 import { useState } from "react";
 import Link from "next/link";
-import { BiUserCircle, BiDotsHorizontalRounded } from "react-icons/bi";
+import {
+  BiUserCircle,
+  BiDotsHorizontalRounded,
+  BiEditAlt,
+  BiTrash,
+} from "react-icons/bi";
 import {
   PostTitle,
   Row,
@@ -9,7 +14,9 @@ import {
   Column,
   SpanStyled,
   OptionBox,
-  OptionModal,
+  OptionModalWrapper,
+  OptionBtn,
+  Container,
 } from "@/detailComps/PostData/styled";
 
 interface PostDataProps {
@@ -41,13 +48,32 @@ export default function PostData({ title, views }: PostDataProps) {
         <div>
           <span>조회수 </span>
           <SpanStyled>{views}</SpanStyled>
+          {modalOn && <OptionModal />}
         </div>
         <OptionBox onClick={() => setModalOn((prev) => !prev)}>
           <BiDotsHorizontalRounded size={25} />
-          {modalOn && <OptionModal />}
         </OptionBox>
       </Row>
       <hr />
     </div>
+  );
+}
+
+function OptionModal() {
+  return (
+    <OptionModalWrapper>
+      <OptionBtn type="button">
+        <Container>
+          <BiEditAlt size={20} />
+          <p>수정</p>
+        </Container>
+      </OptionBtn>
+      <OptionBtn type="button">
+        <Container>
+          <BiTrash size={20} />
+          <p>삭제</p>
+        </Container>
+      </OptionBtn>
+    </OptionModalWrapper>
   );
 }
