@@ -21,10 +21,11 @@ import {
 
 interface PostDataProps {
   title: string;
+  createdAt: string;
   views: number;
 }
 
-export default function PostData({ title, views }: PostDataProps) {
+export default function PostData({ title, createdAt, views }: PostDataProps) {
   const [modalOn, setModalOn] = useState(false);
 
   return (
@@ -42,7 +43,14 @@ export default function PostData({ title, views }: PostDataProps) {
         <Column />
         <div>
           <span>작성일 </span>
-          <SpanStyled>2023-05-22</SpanStyled>
+          <SpanStyled>
+            {new Date(createdAt).toLocaleString("ko-KR", {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+              weekday: "short",
+            })}
+          </SpanStyled>
         </div>
         <Column />
         <div>
