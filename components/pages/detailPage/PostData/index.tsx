@@ -107,9 +107,13 @@ function OptionModal({ id }: OptionModalProps) {
     }
   };
 
+  const handleEdit = async () => {
+    await router.push(`/recruits/edit/${id}`);
+  };
+
   return (
     <OptionModalWrapper>
-      <OptionBtn type="button">
+      <OptionBtn type="button" onClick={handleEdit}>
         <Container>
           <BiEditAlt size={20} />
           <p>수정</p>
