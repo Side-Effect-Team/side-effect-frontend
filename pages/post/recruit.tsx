@@ -42,7 +42,7 @@ export const POST_FORM = {
 export default function PostRecruitPage() {
   const router = useRouter();
   const [positions, setPositions] = useState([...POSITIONS]);
-  const { tags, deleteTag, addTag } = useTag();
+  const { tags, deleteTag, addTag } = useTag([]);
   const { imgSrc, handleImgChange } = useInputImage(DEFAULT_RECRUIT_CARD_IMAGE);
   const { postForm, errMsgs, touched, handleChange, handleBlur, handleSubmit } =
     useForm({

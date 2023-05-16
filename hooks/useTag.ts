@@ -1,7 +1,7 @@
 import { KeyboardEvent, MouseEvent, useState } from "react";
 
-export const useTag = () => {
-  const [tags, setTags] = useState<string[]>([]);
+export const useTag = (initialVals: string[]) => {
+  const [tags, setTags] = useState<string[]>([...initialVals]);
 
   const deleteTag = (e: MouseEvent) => {
     const spanEl = e.target as HTMLSpanElement;
@@ -19,5 +19,5 @@ export const useTag = () => {
     }
   };
 
-  return { tags, deleteTag, addTag };
+  return { tags, setTags, deleteTag, addTag };
 };
