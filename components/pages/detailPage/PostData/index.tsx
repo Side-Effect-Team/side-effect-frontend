@@ -7,6 +7,7 @@ import {
   BiDotsHorizontalRounded,
   BiEditAlt,
   BiTrash,
+  BiBookmarkHeart,
 } from "react-icons/bi";
 import {
   PostTitle,
@@ -26,6 +27,7 @@ interface PostDataProps {
   title: string;
   createdAt: string;
   views: number;
+  likeNum: number;
 }
 
 interface OptionModalProps {
@@ -37,6 +39,7 @@ export default function PostData({
   title,
   createdAt,
   views,
+  likeNum,
 }: PostDataProps) {
   const [modalOn, setModalOn] = useState(false);
 
@@ -69,6 +72,11 @@ export default function PostData({
           <span>조회수 </span>
           <SpanStyled>{views}</SpanStyled>
           {modalOn && <OptionModal id={id} />}
+        </div>
+        <Column />
+        <div>
+          <BiBookmarkHeart />
+          <SpanStyled>{likeNum}</SpanStyled>
         </div>
         <OptionBox onClick={() => setModalOn((prev) => !prev)}>
           <BiDotsHorizontalRounded size={25} />

@@ -30,3 +30,14 @@ export const Description = styled.div`
     padding: 0.35rem;
   }
 `;
+
+export const ProjectTitle = styled.span`
+  font-weight: 600;
+  letter-spacing: 0.15rem;
+`;
+
+export const ProjectTitleBox = styled.div`
+  display: flex;
+  align-items: center;
+  line-height: normal;
+`;
