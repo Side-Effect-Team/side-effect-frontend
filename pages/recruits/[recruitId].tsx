@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GetStaticPropsContext } from "next";
+import { GetServerSidePropsContext } from "next";
 import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
 import PositionDetail from "@/detailComps/PositionDetail";
 import ContentDetail from "@/detailComps/ContentDetail";
@@ -11,7 +11,6 @@ interface RecruitDetailPageProps {
 }
 
 export default function RecruitDetailPage({ recruit }: RecruitDetailPageProps) {
-  console.log(recruit);
   const { id, title, projectName, positions, createdAt, views, tags, content } =
     recruit;
 
@@ -31,35 +30,9 @@ export default function RecruitDetailPage({ recruit }: RecruitDetailPageProps) {
   );
 }
 
-export async function getStaticPaths() {
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/recruit-board/all`;
-
-  try {
-    const res = await axios.get(url);
-    const recruits = res.data.recruitBoards;
-
-    const paths = await recruits.map((recruit: RecruitType) => ({
-      params: { recruitId: recruit.id + "" },
-    }));
-
-    return {
-      paths,
-      fallback: true,
-    };
-  } catch (err) {
-    console.log(err);
-
-    return {
-      paths: [],
-      fallback: true,
-    };
-  }
-}
-
-export async function getStaticProps(ctx: GetStaticPropsContext) {
+export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   const recruitId = ctx.params?.recruitId;
   const url = `${process.env.NEXT_PUBLIC_API_URL}/recruit-board/${recruitId}`;
-
   try {
     const res = await axios.get(url);
     const recruit = await res.data;
@@ -68,11 +41,9 @@ export async function getStaticProps(ctx: GetStaticPropsContext) {
       props: {
         recruit,
       },
-      revalidate: 1,
     };
   } catch (err) {
     console.log(err);
-    // 404 page로 연결
     return { notFound: true };
   }
 }
