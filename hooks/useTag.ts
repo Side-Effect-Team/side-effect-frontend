@@ -1,7 +1,7 @@
 import { KeyboardEvent, MouseEvent, useState } from "react";
 
-export const useTag = () => {
-  const [tags, setTags] = useState<string[]>([]);
+export const useTag = (initialVals: string[]) => {
+  const [tags, setTags] = useState<string[]>([...initialVals]);
 
   const deleteTag = (e: MouseEvent) => {
     const spanEl = e.target as HTMLSpanElement;
@@ -14,10 +14,12 @@ export const useTag = () => {
     if (inputEl.value === "") return;
 
     if (e.key === "Enter") {
+      // 태그 추가 엔터 시 폼이 자동 등록되는 것 막기
+      e.preventDefault();
       setTags([...tags, inputEl.value]);
       inputEl.value = "";
     }
   };
 
-  return { tags, deleteTag, addTag };
+  return { tags, setTags, deleteTag, addTag };
 };

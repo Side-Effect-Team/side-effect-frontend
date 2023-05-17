@@ -9,7 +9,8 @@
       "@/store/*": ["store/*"],
       "@/pages/*": ["pages/*"],
       "@/postComps/*": ["components/pages/post/*"],
-      "@/utils/*": ["utils/*"]
+      "@/utils/*": ["utils/*"],
+      "@/detailComps/*": ["components/pages/detailPage/*"]
     },
     "target": "ESNext",
     "lib": [
