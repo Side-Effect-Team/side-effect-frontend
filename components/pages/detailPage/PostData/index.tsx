@@ -7,7 +7,6 @@ import {
   BiDotsHorizontalRounded,
   BiEditAlt,
   BiTrash,
-  BiBookmarkHeart,
 } from "react-icons/bi";
 import {
   PostTitle,
