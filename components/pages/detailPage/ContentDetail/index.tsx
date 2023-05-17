@@ -15,7 +15,7 @@ interface ContentDetailProps {
   projectName: string;
   content: string;
   tags?: TagType[];
-  projectUrl: string;
+  projectUrl?: string;
 }
 
 export default function ContentDetail({

@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import axios from "axios";
 import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
@@ -55,7 +55,8 @@ export default function PostProjectPage() {
         return newErrorMsgs;
       },
       onSubmit: async () => {
-        const data = { ...postForm, projectUrl, imgSrc: null };
+        // TODO 이미지 추가 필요
+        const data = { ...postForm, projectUrl };
 
         // request
         axios
@@ -66,7 +67,7 @@ export default function PostProjectPage() {
             },
           })
           .then((res) => {
-            console.log(res);
+            console.log("API 반환값", res);
             if (res.status === 200) {
               window.alert("게시글 등록이 완료되었습니다");
               router.push(`/projects/${res.data.id}`);
@@ -83,6 +84,10 @@ export default function PostProjectPage() {
     if (window.confirm("작성중인 내용이 사라집니다. 계속 진행하시겠습니까?"))
       router.push("/projects");
   };
+
+  useEffect(() => {
+    console.log(postForm);
+  }, [postForm]);
 
   return (
     <Wrapper>
