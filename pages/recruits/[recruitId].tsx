@@ -11,13 +11,31 @@ interface RecruitDetailPageProps {
 }
 
 export default function RecruitDetailPage({ recruit }: RecruitDetailPageProps) {
-  const { id, title, projectName, positions, createdAt, views, tags, content } =
-    recruit;
+  console.log(recruit);
+  const {
+    id,
+    title,
+    projectName,
+    positions,
+    createdAt,
+    views,
+    tags,
+    content,
+    userId,
+    likeNum,
+    imgSrc,
+  } = recruit;
 
   return (
     <Wrapper>
       <Contents>
-        <PostData id={id} title={title} createdAt={createdAt} views={views} />
+        <PostData
+          id={id}
+          title={title}
+          createdAt={createdAt}
+          views={views}
+          likeNum={likeNum}
+        />
         <PositionDetail positions={positions} />
         <ContentDetail
           projectName={projectName}

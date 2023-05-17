@@ -35,7 +35,11 @@ export default function ProjectDetailPage({ project }: ProjectDetailPageProps) {
           views={views}
           likeNum={likeNum}
         />
-        <ContentDetail projectName={projectName} content={content} />
+        <ContentDetail
+          projectName={projectName}
+          content={content}
+          projectUrl={projectUrl}
+        />
         <CommentBox />
       </Contents>
     </Wrapper>

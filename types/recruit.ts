@@ -20,4 +20,6 @@ declare interface RecruitType {
   tags: TagType[];
   title: string;
   views: number;
+  likeNum: number;
+  userId: number;
 }
