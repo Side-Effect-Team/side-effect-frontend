@@ -28,6 +28,7 @@ const MOBILE_BOARD_LIST = [
 
 interface MobileMenuProps {
   hide: boolean;
+  handleClick: () => void;
 }
 
 export default function Layout({ children }: PropType) {
@@ -77,26 +78,26 @@ export default function Layout({ children }: PropType) {
       <Header handleMobileMenu={handleMobileMenu} />
       <ScrollToTop />
       <Toast />
-      <MobileMenu hide={!mobileMenuOpen} />
+      <MobileMenu hide={!mobileMenuOpen} handleClick={handleMobileMenu} />
       <Wrapper mobileMenuOpen={mobileMenuOpen}>{children}</Wrapper>
       <Footer />
     </ThemeProvider>
   );
 }
 
-function MobileMenu({ hide }: MobileMenuProps) {
+function MobileMenu({ hide, handleClick }: MobileMenuProps) {
   return (
     <MobileNavBar hide={hide}>
       {MOBILE_BOARD_LIST.map((board) => {
         if (board.TITLE === "로그인") {
           return (
-            <MobileMenuItem key={board.ID} onClick={() => console.log("클릭")}>
+            <MobileMenuItem key={board.ID} onClick={handleClick}>
               <Link href={board.LINK}>{board.TITLE}</Link>
             </MobileMenuItem>
           );
         }
         return (
-          <MobileMenuItem key={board.ID}>
+          <MobileMenuItem key={board.ID} onClick={handleClick}>
             <Link href={board.LINK}>{board.TITLE}</Link>
           </MobileMenuItem>
         );
