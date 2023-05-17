@@ -69,14 +69,14 @@ export default function PostData({
         </div>
         <Column />
         <div>
-          <span>조회수 </span>
+          <span>조회 수 </span>
           <SpanStyled>{views}</SpanStyled>
-          {modalOn && <OptionModal id={id} />}
         </div>
         <Column />
         <div>
-          <BiBookmarkHeart />
+          <span>좋아요 </span>
           <SpanStyled>{likeNum}</SpanStyled>
+          {modalOn && <OptionModal id={id} />}
         </div>
         <OptionBox onClick={() => setModalOn((prev) => !prev)}>
           <BiDotsHorizontalRounded size={25} />
@@ -89,10 +89,14 @@ export default function PostData({
 
 function OptionModal({ id }: OptionModalProps) {
   const router = useRouter();
+  const postCategory = router.pathname.split("/")[1];
 
   // 게시글 삭제
   const deletePost = async (id: number) => {
-    const url = `${process.env.NEXT_PUBLIC_API_URL}/recruit-board/${id}`;
+    let url = process.env.NEXT_PUBLIC_API_URL as string;
+    if (postCategory === "recruits") url += "/recruit-board/" + id;
+    if (postCategory === "projects") url += "/free-boards/" + id;
+
     try {
       const res = await axios.delete(url, {
         headers: {
@@ -111,12 +115,12 @@ function OptionModal({ id }: OptionModalProps) {
   const handleDelete = async () => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
       await deletePost(id);
-      await router.push("/recruits");
+      await router.push(`/${postCategory}`);
     }
   };
 
   const handleEdit = async () => {
-    await router.push(`/recruits/edit/${id}`);
+    await router.push(`/${postCategory}/edit/${id}`);
   };
 
   return (

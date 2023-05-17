@@ -9,17 +9,20 @@ import {
   ProjectTitleBox,
 } from "@/detailComps/ContentDetail/styled";
 import { TagWrapper } from "@/postComps/TagBox/styled";
+import Link from "next/link";
 
 interface ContentDetailProps {
   projectName: string;
   content: string;
   tags?: TagType[];
+  projectUrl: string;
 }
 
 export default function ContentDetail({
   projectName,
   content,
   tags,
+  projectUrl,
 }: ContentDetailProps) {
   return (
     <Wrapper>
@@ -42,7 +45,13 @@ export default function ContentDetail({
         </div>
         <Column />
         <div>
-          <ProjectTitle>{projectName}</ProjectTitle>
+          {projectUrl ? (
+            <Link href={projectUrl} target="_blank">
+              <ProjectTitle>{projectName}</ProjectTitle>
+            </Link>
+          ) : (
+            <ProjectTitle>{projectName}</ProjectTitle>
+          )}
         </div>
       </ProjectTitleBox>
       <h4>상세 내용</h4>
