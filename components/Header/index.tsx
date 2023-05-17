@@ -1,18 +1,19 @@
 import Link from "next/link";
-import { IoNotificationsOutline } from "react-icons/io5";
 import { Wrapper, HeaderStyled, Logo, NavStyled, BoxStyled } from "./styled";
 import MobileMenuBox from "../MobileMenuBox";
 import { BOARD_LIST } from "../../enum";
 import Button from "../Button";
 import { useAppDispatch } from "@/store/hooks";
 import { openModal } from "@/store/modalSlice";
+import Alarm from "../Alarm";
 
 interface HeaderProps {
-  handleMobileMenu: (e: React.MouseEvent<HTMLDivElement>) => void;
+  handleMobileMenu: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export default function Header({ handleMobileMenu }: HeaderProps) {
   const dispatch = useAppDispatch();
+
   return (
     <Wrapper>
       <HeaderStyled>
@@ -27,16 +28,14 @@ export default function Header({ handleMobileMenu }: HeaderProps) {
           ))}
         </NavStyled>
         <BoxStyled>
-          <Button>
-            <IoNotificationsOutline />
-          </Button>
+          <Alarm />
           <Button
             onClick={() => dispatch(openModal({ modalType: "LoginModal" }))}
           >
             로그인
           </Button>
         </BoxStyled>
-        <MobileMenuBox onClick={handleMobileMenu} />
+        <MobileMenuBox handleMobileMenu={handleMobileMenu} />
       </HeaderStyled>
     </Wrapper>
   );

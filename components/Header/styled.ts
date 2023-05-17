@@ -47,6 +47,7 @@ export const BoxStyled = styled.div`
   width: 150px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   ${mediaQuery("mobile")`
     display: none;
