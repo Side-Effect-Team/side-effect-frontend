@@ -1,4 +1,4 @@
-import { MouseEvent, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import {
   IconButton,
   ButtonsWrapper,
@@ -18,6 +18,7 @@ import {
   Title,
 } from "./styled";
 import { useRouter } from "next/router";
+import axios from "axios";
 export interface BoardCardProps {
   id: number | string;
   category?: string;
@@ -33,23 +34,53 @@ export interface BoardCardProps {
 }
 interface BoardCardDataProps {
   data?: BoardCardProps;
+  category: string | undefined;
 }
 
-export default function BoardCard({ data }: BoardCardDataProps) {
+export default function BoardCard({ data, category }: BoardCardDataProps) {
   const [isLike, setIsLike] = useState(data?.like);
   const router = useRouter();
-  const onClickHeart = (e: MouseEvent<HTMLButtonElement>) => {
-    setIsLike((prev) => !prev);
+
+  // console.log(data);
+  console.log(data);
+  const onClickHeart = async (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
+    // setIsLike((prev) => !prev);
+
+    // 좋아요 API 추가
+    const id = e.currentTarget.id;
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      try {
+        const config = {
+          headers: { Authorization: `Bearer ${token}` },
+        };
+
+        let url;
+        if (category === "projects") {
+          url = `${process.env.NEXT_PUBLIC_API_URL}/like/${id}`;
+        } else {
+          url = `${process.env.NEXT_PUBLIC_API_URL}/recruit-board/likes/${id}`;
+        }
+
+        const result = await axios.post(url, null, config);
+
+        console.log(result.data);
+      } catch (error) {
+        console.log(error);
+      }
+    } else alert("로그인 후 이용가능합니다.");
   };
+
   const onClickGoToBoard = (e: MouseEvent<HTMLDivElement>) => {
-    if (data?.category === "recruits") {
+    if (category === "recruits") {
       router.push(`/recruits/${e.currentTarget.id}`);
     } else router.push(`/projects/${e.currentTarget.id}`);
   };
+
   return (
     <Container id={data?.id.toString()} onClick={onClickGoToBoard}>
-      <Header category={data?.category} src={data?.headerImage}>
+      <Header category={category} src={data?.headerImage}>
         <ProjectName>{data?.projectName}</ProjectName>
       </Header>
       <ContentsWrapper>
@@ -65,18 +96,14 @@ export default function BoardCard({ data }: BoardCardDataProps) {
         <Footer>
           <CreateAt>{data?.createdAt}</CreateAt>
           <ButtonsWrapper>
-            <IconButton onClick={onClickHeart}>
+            <IconButton id={data?.id.toString()} onClick={onClickHeart}>
               {isLike ? <HeartFillIcon /> : <HeartNotFillIcon />}
             </IconButton>
-            {data?.likeNum && (
-              <>
-                <FeedbackNum>{data.likeNum}</FeedbackNum>
-                <IconButton>
-                  <CommentIcon />
-                </IconButton>
-                <FeedbackNum>{data.commentNum}</FeedbackNum>
-              </>
-            )}
+            <FeedbackNum>{data?.likeNum}</FeedbackNum>
+            <IconButton>
+              <CommentIcon />
+            </IconButton>
+            <FeedbackNum>{data?.commentNum}</FeedbackNum>
           </ButtonsWrapper>
         </Footer>
       </ContentsWrapper>
