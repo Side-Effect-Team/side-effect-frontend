@@ -1,14 +1,10 @@
 import styled from "styled-components";
 
-interface CommentNumberProps {
-  color: string;
-}
-
 export const StyledHeader = styled.h2`
   margin-bottom: 0.75rem;
 `;
 
-export const CommentNumber = styled.span<CommentNumberProps>`
+export const CommentNumber = styled.span<{ color: string }>`
   color: ${(p) => p.color};
 `;
 
