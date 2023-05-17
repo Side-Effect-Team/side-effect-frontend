@@ -4,10 +4,28 @@ import { IoClose, IoNotificationsOutline } from "react-icons/io5";
 import styled from "styled-components";
 
 // 알람 아이콘
-export const AlarmDiv = styled.div`
+export const AlarmDiv = styled.div<{ openAlarm: boolean }>`
+  width: 24px;
   height: 24px;
   position: relative;
   cursor: pointer;
+  ${media.mobile} {
+    ${(p) =>
+      p.openAlarm &&
+      `
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+  `}
+  }
+`;
+export const AlarmIconDiv = styled.div<{ openAlarm: boolean }>`
+  position: relative;
+  ${media.mobile} {
+    visibility: ${(p) => p.openAlarm && "hidden"};
+  }
 `;
 export const AlarmButton = styled(IoNotificationsOutline)`
   color: ${theme.brandColor.primary};
@@ -16,7 +34,7 @@ export const AlarmButton = styled(IoNotificationsOutline)`
 export const GetAlarm = styled.div`
   position: absolute;
   top: 1px;
-  right: 15px;
+  left: 15px;
   background-color: red;
   padding: 2px 4px;
   border-radius: 10px;
@@ -36,19 +54,19 @@ export const Container = styled.div`
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
   padding: 10px;
   position: absolute;
-  top: 75px;
-  right: 100px;
+  top: 47px;
+  right: -10px;
   overflow: auto;
   ::-webkit-scrollbar {
     display: none;
   }
   ${media.mobile} {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     max-height: 100vh;
     top: 0px;
     right: 0px;
-    left: 0;
+    left: 0px;
     animation: slide 0.5s ease-in-out;
   }
   @keyframes slide {
@@ -138,4 +156,5 @@ export const Date = styled.div`
 export const EmptyMessage = styled.div`
   font-size: 16px;
   color: #d9d9d9;
+  margin-left: 15px;
 `;

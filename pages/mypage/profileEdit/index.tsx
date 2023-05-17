@@ -83,19 +83,21 @@ export default function MyPageEdit() {
   }, [data]);
 
   const onClickEdit = async (p: FormData) => {
-    const changedFormData: FormData = { nickname: p.nickname };
-    if (p.githubUrl) changedFormData.githubUrl = p.githubUrl;
-    if (p.blogUrl) changedFormData.blogUrl = p.blogUrl;
-    if (p.portfolioUrl) changedFormData.portfolioUrl = p.portfolioUrl;
-    const changedData: MypageEditProps = {
-      career,
-      position,
-      stacks,
-      introduction,
-      imgUrl,
-      ...changedFormData,
-    };
     if (data) {
+      const changedFormData: FormData = { nickname: data.nickname };
+      if (p.nickname) changedFormData.nickname = p.nickname;
+      if (p.githubUrl) changedFormData.githubUrl = p.githubUrl;
+      if (p.blogUrl) changedFormData.blogUrl = p.blogUrl;
+      if (p.portfolioUrl) changedFormData.portfolioUrl = p.portfolioUrl;
+
+      const changedData: MypageEditProps = {
+        career,
+        position,
+        stacks,
+        introduction,
+        imgUrl,
+        ...changedFormData,
+      };
       const changes = compareData(data, changedData);
       console.log(changes);
       if (Object.keys(changes).length === 0) {

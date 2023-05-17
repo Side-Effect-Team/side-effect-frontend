@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, MouseEvent, SetStateAction, useRef } from "react";
 import {
   CloseButton,
   Container,
@@ -38,20 +38,24 @@ interface AlarmListProps {
 export default function AlarmList({ alarmList, setOpenAlarm }: AlarmListProps) {
   const router = useRouter();
 
-  const onClickAlarm = (category: string, boardId: string) => () => {
-    // 알람 읽음 API 추가
-    router.push(`/${category}/${boardId}`);
-    setOpenAlarm((prev) => !prev);
+  const onClickAlarm =
+    (category: string, boardId: string) => (e: MouseEvent<HTMLDivElement>) => {
+      // 알람 읽음 API 추가
+      e.stopPropagation();
+      router.push(`/${category}/${boardId}`);
+      setOpenAlarm(false);
+    };
+
+  const onClickCloseAlarm = (e: MouseEvent<SVGAElement>) => {
+    e.stopPropagation();
+    setOpenAlarm(false);
   };
 
-  const onClickCloseAlarm = () => {
-    setOpenAlarm((prev) => !prev);
-  };
-
-  const onClickDeleteAlarm = (id: number) => (e: any) => {
+  const onClickDeleteAlarm = (id: number) => (e: MouseEvent<SVGAElement>) => {
     e.stopPropagation();
     // 알람 삭제 API 추가
     alert(`${id}: 알람삭제`);
+    setOpenAlarm(false);
   };
 
   return (
