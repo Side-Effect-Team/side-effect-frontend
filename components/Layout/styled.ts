@@ -16,7 +16,7 @@ export const Wrapper = styled.div<WrapperProps>`
 export const MobileNavBar = styled.nav<MobileNavBarProps>`
   position: fixed;
   z-index: 5;
-  transition: all ease-out 0.75s;
+  transition: all ease-out 0.5s;
   ${(p) =>
     p.hide
       ? css`

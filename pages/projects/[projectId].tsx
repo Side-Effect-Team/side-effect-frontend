@@ -1,30 +1,29 @@
 import axios from "axios";
 import { GetServerSidePropsContext } from "next";
 import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
-import PositionDetail from "@/detailComps/PositionDetail";
 import ContentDetail from "@/detailComps/ContentDetail";
 import CommentBox from "@/detailComps/CommentBox";
 import PostData from "@/detailComps/PostData";
 
-interface RecruitDetailPageProps {
-  recruit: RecruitType;
+interface ProjectDetailPageProps {
+  project: ProjectType;
 }
 
-export default function RecruitDetailPage({ recruit }: RecruitDetailPageProps) {
-  console.log(recruit);
+export default function ProjectDetailPage({ project }: ProjectDetailPageProps) {
+  console.log(project);
   const {
-    id,
-    title,
-    projectName,
-    positions,
-    createdAt,
-    views,
-    tags,
+    comments,
     content,
-    userId,
+    createdAt,
+    id,
+    imgUrl,
     likeNum,
-    imgSrc,
-  } = recruit;
+    projectName,
+    projectUrl,
+    title,
+    userId,
+    views,
+  } = project;
 
   return (
     <Wrapper>
@@ -36,11 +35,10 @@ export default function RecruitDetailPage({ recruit }: RecruitDetailPageProps) {
           views={views}
           likeNum={likeNum}
         />
-        <PositionDetail positions={positions} />
         <ContentDetail
           projectName={projectName}
-          tags={tags}
           content={content}
+          projectUrl={projectUrl}
         />
         <CommentBox />
       </Contents>
@@ -49,16 +47,15 @@ export default function RecruitDetailPage({ recruit }: RecruitDetailPageProps) {
 }
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
-  const recruitId = ctx.params?.recruitId;
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/recruit-board/${recruitId}`;
-
+  const projectId = ctx.params?.projectId;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/free-boards/${projectId}`;
   try {
     const res = await axios.get(url);
-    const recruit = await res.data;
+    const project = await res.data;
 
     return {
       props: {
-        recruit,
+        project,
       },
     };
   } catch (err) {
