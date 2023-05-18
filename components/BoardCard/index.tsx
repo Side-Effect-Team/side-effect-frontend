@@ -19,8 +19,10 @@ import {
 } from "./styled";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import useToast from "@/hooks/useToast";
 export interface BoardCardProps {
-  id: number | string;
+  id: number;
   category?: string;
   headerImage?: string;
   projectName?: string;
@@ -34,18 +36,39 @@ export interface BoardCardProps {
 }
 interface BoardCardDataProps {
   data?: BoardCardProps;
-  category: string | undefined;
+  category: string;
 }
+export const LIKE_PROJECT = async (id: number) => {
+  const token = localStorage.getItem("accessToken");
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  return axios.post(
+    `${process.env.NEXT_PUBLIC_API_URL}/like/${id}`,
+    null,
+    config,
+  );
+};
+export const LIKE_RECRUIT = async (id: number) => {
+  const token = localStorage.getItem("accessToken");
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  return axios.post(
+    `${process.env.NEXT_PUBLIC_API_URL}/recruit-board/likes/${id}`,
+    null,
+    config,
+  );
+};
 
 export default function BoardCard({ data, category }: BoardCardDataProps) {
   const [isLike, setIsLike] = useState(data?.like);
+  const [likeNum, setLikeNum] = useState(data?.likeNum || 0);
   const router = useRouter();
+  const { addToast, deleteToast } = useToast();
 
-  // console.log(data);
-  console.log(data);
   const onClickHeart = async (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    // setIsLike((prev) => !prev);
 
     // 좋아요 API 추가
     const id = e.currentTarget.id;
@@ -62,10 +85,20 @@ export default function BoardCard({ data, category }: BoardCardDataProps) {
         } else {
           url = `${process.env.NEXT_PUBLIC_API_URL}/recruit-board/likes/${id}`;
         }
-
-        const result = await axios.post(url, null, config);
-
-        console.log(result.data);
+        const response = await axios.post(url, null, config);
+        setIsLike((prev) => !prev);
+        if (isLike && likeNum) {
+          setLikeNum(likeNum - 1);
+        }
+        if (!isLike && likeNum >= 0) {
+          setLikeNum(likeNum + 1);
+          addToast({
+            type: "success",
+            title: "success",
+            content: "관심 게시물에 추가되었습니다.",
+          });
+          deleteToast("unique-id");
+        }
       } catch (error) {
         console.log(error);
       }
@@ -99,7 +132,7 @@ export default function BoardCard({ data, category }: BoardCardDataProps) {
             <IconButton id={data?.id.toString()} onClick={onClickHeart}>
               {isLike ? <HeartFillIcon /> : <HeartNotFillIcon />}
             </IconButton>
-            <FeedbackNum>{data?.likeNum}</FeedbackNum>
+            <FeedbackNum>{likeNum}</FeedbackNum>
             <IconButton>
               <CommentIcon />
             </IconButton>
