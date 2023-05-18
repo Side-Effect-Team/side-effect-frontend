@@ -1,52 +1,46 @@
-import { useRouter } from "next/router";
-import { useState } from "react";
-import Image from "next/image";
-import { GoPlus } from "react-icons/go";
 import axios from "axios";
+import { GetServerSidePropsContext } from "next";
 import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
+import { useRouter } from "next/router";
+import { useTag } from "@/hooks/useTag";
+import { useInputImage } from "@/hooks/useInputImage";
+import { DEFAULT_RECRUIT_CARD_IMAGE } from "../../../enum";
+import { useForm } from "@/hooks/useForm";
+import PageHead from "@/components/PageHead";
 import { PostTitleStyled } from "@/postComps/common/Title.styled";
 import {
-  InputBox,
-  PositionBoxContainer,
-  LabelForm,
-  InputForm,
-  TextareaForm,
-  SubmitBtnBox,
   ErrorMsg,
-  ImageBox,
   GuideWrapper,
+  ImageBox,
+  InputBox,
+  InputForm,
+  LabelForm,
+  SubmitBtnBox,
+  TextareaForm,
 } from "@/postComps/common/PostForm.styled";
 import Button from "@/components/Button";
+import Image from "next/image";
 import TagBox from "@/postComps/TagBox";
-import { useTag } from "@/hooks/useTag";
-import { useForm } from "@/hooks/useForm";
-import PositionBox from "@/postComps/PositionBox";
-import { useInputImage } from "@/hooks/useInputImage";
-import { DEFAULT_RECRUIT_CARD_IMAGE } from "../../enum";
-import PageHead from "@/components/PageHead";
+import { POST_FORM } from "@/pages/post/recruit";
 
-export const POSITIONS = [
-  {
-    id: 1,
-    positionType: "frontend",
-    targetNumber: 0,
-  },
-];
+interface EditRecruitPageProps {
+  recruit: RecruitType;
+}
 
-export const POST_FORM = {
-  projectName: "",
-  title: "",
-  content: "",
-};
-
-export default function PostRecruitPage() {
+export default function EditRecruitPage({ recruit }: EditRecruitPageProps) {
+  console.log(recruit);
   const router = useRouter();
-  const [positions, setPositions] = useState([...POSITIONS]);
-  const { tags, deleteTag, addTag } = useTag([]);
+  const { tags, deleteTag, addTag } = useTag(
+    recruit.tags.map((tag) => tag.stackType),
+  );
   const { imgSrc, handleImgChange } = useInputImage(DEFAULT_RECRUIT_CARD_IMAGE);
   const { postForm, errMsgs, touched, handleChange, handleBlur, handleSubmit } =
     useForm({
-      initialVals: { ...POST_FORM },
+      initialVals: {
+        projectName: recruit.projectName,
+        title: recruit.title,
+        content: recruit.content,
+      },
       validate: (postForm: typeof POST_FORM) => {
         const newErrorMsgs = { ...POST_FORM };
 
@@ -68,22 +62,17 @@ export default function PostRecruitPage() {
         return newErrorMsgs;
       },
       onSubmit: async () => {
-        const newPositions = positions.map(
-          ({ positionType, targetNumber }) => ({
-            positionType,
-            targetNumber: +targetNumber,
-          }),
-        );
-        const data = {
+        const patchData = {
+          ...recruit,
           ...postForm,
           imgSrc: null, // 이미지 사용 불가하여 null 대체
           tags,
-          positions: newPositions,
         };
 
         // request
+        const url = `${process.env.NEXT_PUBLIC_API_URL}/recruit-board/${recruit.id}`;
         axios
-          .post(`${process.env.NEXT_PUBLIC_API_URL}/recruit-board`, data, {
+          .patch(url, patchData, {
             headers: {
               // 로그인 기능 미구현으로 NEXT_PUBLIC_TOKEN에 발급받은 토큰을 넣고 실행!
               Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
@@ -92,13 +81,13 @@ export default function PostRecruitPage() {
           .then((res) => {
             console.log(res);
             if (res.status === 200) {
-              window.alert("게시글 등록이 완료되었습니다");
-              router.push(`/recruits/${res.data.id}`);
+              window.alert("게시글 수정이 완료되었습니다");
+              router.push(`/recruits/${recruit.id}`);
             }
           })
           .catch((err) => {
             console.log(err);
-            window.alert("게시글 등록에 실패했습니다");
+            window.alert("게시글 수정에 실패했습니다");
           });
       },
     });
@@ -106,34 +95,14 @@ export default function PostRecruitPage() {
   // 등록 취소 버튼 클릭 핸들러
   const handleCancel = () => {
     if (window.confirm("작성중인 내용이 사라집니다. 계속 진행하시겠습니까?"))
-      router.push("/projects");
-  };
-
-  // 포지션 업데이트
-  const handlePosition = (id: number, update: (typeof POSITIONS)[0]) => {
-    const newPositions = [...positions];
-    const idx = newPositions.findIndex((position) => position.id === id);
-    newPositions.splice(idx, 1, update);
-    setPositions(newPositions);
-  };
-
-  // 포지션 추가
-  const AddPosition = () => {
-    const lastIdx = positions[positions.length - 1].id;
-    setPositions([...positions, { ...POSITIONS[0], id: lastIdx + 1 }]);
-  };
-
-  // 포지션 제거
-  const deletePosition = (id: number) => {
-    const newPositions = positions.filter((position) => position.id !== id);
-    setPositions([...newPositions]);
+      router.push(`/recruits/${recruit.id}`);
   };
 
   return (
     <Wrapper>
-      <PageHead pageTitle="팀원 모집 글쓰기 | 사이드 이펙트" />
+      <PageHead pageTitle="모집 게시글 수정 | 사이드 이펙트" />
       <Contents>
-        <PostTitleStyled>팀원 모집하기</PostTitleStyled>
+        <PostTitleStyled>모집 게시글 수정</PostTitleStyled>
         <form onSubmit={handleSubmit}>
           <InputBox>
             <GuideWrapper>
@@ -173,23 +142,8 @@ export default function PostRecruitPage() {
           <InputBox>
             <GuideWrapper>
               <LabelForm>모집 포지션</LabelForm>
-              <p>모집할 포지션과 인원 수를 설정할 수 있습니다</p>
+              <p>포지션 수정은 현재 지원되지 않습니다</p>
             </GuideWrapper>
-            <PositionBoxContainer>
-              {positions.map((position, idx) => (
-                <PositionBox
-                  key={idx}
-                  data={position}
-                  onDelete={deletePosition}
-                  handlePosition={handlePosition}
-                />
-              ))}
-              <div>
-                <Button type="button" onClick={AddPosition}>
-                  <GoPlus style={{ transform: "scale(1.2)" }} />
-                </Button>
-              </div>
-            </PositionBoxContainer>
           </InputBox>
           <InputBox>
             <LabelForm htmlFor="image">대표 이미지</LabelForm>
@@ -221,7 +175,7 @@ export default function PostRecruitPage() {
             )}
           </InputBox>
           <SubmitBtnBox>
-            <Button type="submit">등록</Button>
+            <Button type="submit">수정</Button>
             <Button type="button" onClick={handleCancel}>
               취소
             </Button>
@@ -230,4 +184,23 @@ export default function PostRecruitPage() {
       </Contents>
     </Wrapper>
   );
+}
+
+export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+  const recruitId = ctx.params?.recruitId;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/recruit-board/${recruitId}`;
+
+  try {
+    const res = await axios.get(url);
+    const recruit = await res.data;
+
+    return {
+      props: {
+        recruit,
+      },
+    };
+  } catch (err) {
+    console.log(err);
+    return { notFound: true };
+  }
 }

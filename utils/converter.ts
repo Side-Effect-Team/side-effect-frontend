@@ -5,7 +5,7 @@ export const recruitBoardCardConverter = (
   category: string,
   fetchedData: RecruitType,
 ) => {
-  const { id, content, tags, title, projectName, view, imgSrc, positions } =
+  const { id, content, tags, title, projectName, imgSrc, positions } =
     fetchedData;
   const newTags = tags.map((tag) => tag.stackType);
   return {

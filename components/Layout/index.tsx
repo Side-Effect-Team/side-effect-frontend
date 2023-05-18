@@ -87,11 +87,20 @@ export default function Layout({ children }: PropType) {
 function MobileMenu({ hide }: MobileMenuProps) {
   return (
     <MobileNavBar hide={hide}>
-      {MOBILE_BOARD_LIST.map((board) => (
-        <MobileMenuItem key={board.ID}>
-          <Link href={board.LINK}>{board.TITLE}</Link>
-        </MobileMenuItem>
-      ))}
+      {MOBILE_BOARD_LIST.map((board) => {
+        if (board.TITLE === "로그인") {
+          return (
+            <MobileMenuItem key={board.ID} onClick={() => console.log("클릭")}>
+              <Link href={board.LINK}>{board.TITLE}</Link>
+            </MobileMenuItem>
+          );
+        }
+        return (
+          <MobileMenuItem key={board.ID}>
+            <Link href={board.LINK}>{board.TITLE}</Link>
+          </MobileMenuItem>
+        );
+      })}
     </MobileNavBar>
   );
 }
