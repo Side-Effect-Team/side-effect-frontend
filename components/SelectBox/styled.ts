@@ -29,10 +29,7 @@ export const SelectWrapper = styled.div`
   font-weight: 500;
   border-radius: 5px;
   position: relative;
-  ${sizeStyles}
-  ${media.mobile} {
-    width: 100%;
-  }
+  width: 100%;
 `;
 export const SelectOptionWrapper = styled.ul<SelectOptionType>`
   visibility: ${(p) => (p.visible ? "visible" : "hidden")};
@@ -69,6 +66,3 @@ export const SelectValue = styled.div`
   padding: 10px;
   background-color: white;
 `;
-SelectWrapper.defaultProps = {
-  size: "large",
-};

@@ -1,23 +1,34 @@
 import styled, { keyframes } from "styled-components";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { useRouter } from "next/router";
 import { media } from "@/styles/mediatest";
 import { closeModal } from "@/store/modalSlice";
-import { useSession } from "next-auth/react";
 import { AiOutlineClose } from "react-icons/ai";
-import GoogleImg from "../../../public/images/Google.png";
-import GithubImg from "../../../public/images/Github.png";
-import KakaoImg from "../../../public/images/Kakao.png";
-import OAuthLoginButton from "./OAuthLoginButton";
-import LoginTitle from "./LoginTitle";
+import RegisterNickname from "./RegisterNickname";
+import RegisterUserInfo from "./RegisterUserInfo";
+import Login from "./Login";
+import { nextView, prevView } from "@/store/loginViewTransitionSlice";
+import RegisterSuccess from "./RegisterSuccess";
+
 export default function LoginModal() {
-  const router = useRouter();
   const dispatch = useAppDispatch();
   const { isOpen } = useAppSelector((state) => state.modal);
-  const { data: session }: any = useSession();
+  const { pageDirection, viewNumber } = useAppSelector(
+    (state) => state.loginView,
+  );
   const handleModalClose = () => {
     dispatch(closeModal());
   };
+  const viewComponents: any = {
+    0: <Login />,
+    1: <RegisterNickname viewNumber={viewNumber} />,
+    2: <RegisterUserInfo viewNumber={viewNumber} />,
+    3: <RegisterSuccess />,
+  };
+  const handleViewRender = () => {
+    return viewComponents[viewNumber];
+  };
+  // console.log(pageDirection);
+  console.log(viewNumber);
   return (
     <Wrapper isOpen={isOpen}>
       <Header>
@@ -27,20 +38,9 @@ export default function LoginModal() {
           style={{ cursor: "pointer" }}
         />
       </Header>
-      <LoginTitle />
-      <ButtonWrapper>
-        <OAuthLoginButton
-          imageSrc={GoogleImg}
-          imageAlt={"google"}
-          site="google"
-        />
-        <OAuthLoginButton
-          imageSrc={GithubImg}
-          imageAlt={"github"}
-          site="github"
-        />
-        <OAuthLoginButton imageSrc={KakaoImg} imageAlt={"kakao"} site="kakao" />
-      </ButtonWrapper>
+      {handleViewRender()}
+      {/* <button onClick={() => dispatch(nextView({ viewNumber }))}>앞으로</button>
+      <button onClick={() => dispatch(prevView({ viewNumber }))}>뒤로</button> */}
     </Wrapper>
   );
 }
@@ -50,14 +50,14 @@ const Wrapper = styled.div<{ isOpen: boolean }>`
   animation: ${({ isOpen }) => isOpen && zoomIn} 0.3s ease;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: center;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   margin: auto;
-  height: 500px;
+  height: 550px;
   width: 550px;
   background-color: white;
   z-index: 30;
@@ -66,6 +66,7 @@ const Wrapper = styled.div<{ isOpen: boolean }>`
     width: 100%;
     height: 100%;
     border-radius: 0;
+    align-items: center;
   }
 `;
 const Header = styled.div`
@@ -73,18 +74,10 @@ const Header = styled.div`
   display: flex;
   justify-content: flex-end;
   padding: 1rem;
+  position: absolute;
+  top: 0;
 `;
-const ButtonWrapper = styled.div`
-  display: flex;
-  gap: 30px;
-  padding: 30px;
-  ${media.mobile} {
-    flex-direction: column;
-    margin-top: auto;
-    width: 80%;
-    gap: 0;
-  }
-`;
+
 const zoomIn = keyframes`
   0%{
     transform: scale(0);

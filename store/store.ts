@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import pageTransitionSlice from "./pageTransitionSlice";
+import loginViewTransitionSlice from "./loginViewTransitionSlice";
 import modalSlice from "./modalSlice";
 import toastSlice from "./toastSlice";
+import userInfoStoreSlice from "./userInfoStoreSlice";
 export const store = configureStore({
   reducer: {
-    page: pageTransitionSlice,
+    userInfo: userInfoStoreSlice,
+    loginView: loginViewTransitionSlice,
     modal: modalSlice,
     toast: toastSlice,
   },

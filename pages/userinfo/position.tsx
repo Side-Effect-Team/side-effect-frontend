@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 import PageTransition from "@/components/pages/userInfoPage/PageTransition";
 import SelectBox from "../../components/SelectBox";
 import {
@@ -39,14 +40,21 @@ export default function Position() {
 
   const { register, handleSubmit } = useForm<FormData>();
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = async (data: FormData) => {
     if (!career || !position) {
       alert("포지션과 경력은 필수입력 사항입니다.");
     } else {
       const nickname = localStorage.getItem("nickname");
       // api요청 작성
-      router.push("/userinfo/success");
-      console.log({ nickname, position, career, ...data });
+      const email = localStorage.getItem("email");
+      const userInfo = { email, nickname, position, career, ...data };
+      console.log(userInfo);
+      await axios
+        .post(`${process.env.NEXT_PUBLIC_API_URL}/user/join`, userInfo)
+        .then((res) => {
+          console.log(res);
+          router.push("/userinfo/success");
+        });
     }
   };
   return (

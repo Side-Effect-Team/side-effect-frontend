@@ -32,14 +32,14 @@ export const ButtonWrapper = styled.div`
 
 export const SelectSection = styled.div`
   display: flex;
-  align-items: flex-start;
+  justify-content: center;
   width: 100%;
-  gap: 30px;
+  gap: 10px;
 `;
 
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 20px;
+  padding: 0px 20px;
 `;
