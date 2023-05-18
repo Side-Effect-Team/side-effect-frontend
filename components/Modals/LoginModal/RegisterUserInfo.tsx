@@ -31,8 +31,8 @@ const SELECT_CAREER = [
   { name: "시니어(7년이상)", value: "sinior" },
 ];
 interface FormData {
-  github: string;
-  blog: string;
+  githubUrl: string;
+  blogUrl: string;
 }
 
 export default function RegisterUserInfo({ viewNumber }: any) {
@@ -60,8 +60,18 @@ export default function RegisterUserInfo({ viewNumber }: any) {
       //     console.log(res);
       //     router.push("/userinfo/success");
       //   })
-      const mergedUserInfo = { ...userInfo, ...data, position, career };
+      const mergedUserInfo = {
+        ...userInfo,
+        ...data,
+        position,
+        career,
+        password: "",
+      };
       console.log(mergedUserInfo);
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/user/join`,
+        mergedUserInfo,
+      );
       dispatch(nextView({ viewNumber }));
     }
   };
@@ -83,9 +93,9 @@ export default function RegisterUserInfo({ viewNumber }: any) {
           깃허브나 블로그 주소를 등록하면 팀에 합류할 확률이 더 높아집니다!
         </h4>
         <Label htmlFor="Github">Github</Label>
-        <Input id="Github" {...register("github")} />
+        <Input id="Github" {...register("githubUrl")} />
         <Label htmlFor="Blog">Blog</Label>
-        <Input id="Blog" {...register("blog")} />
+        <Input id="Blog" {...register("blogUrl")} />
       </InputSection>
       <ButtonWrapper>
         <Button type="submit">가입완료</Button>

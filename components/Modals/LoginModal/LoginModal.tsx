@@ -6,7 +6,6 @@ import { AiOutlineClose } from "react-icons/ai";
 import RegisterNickname from "./RegisterNickname";
 import RegisterUserInfo from "./RegisterUserInfo";
 import Login from "./Login";
-import { nextView, prevView } from "@/store/loginViewTransitionSlice";
 import RegisterSuccess from "./RegisterSuccess";
 
 export default function LoginModal() {
@@ -39,8 +38,6 @@ export default function LoginModal() {
         />
       </Header>
       {handleViewRender()}
-      {/* <button onClick={() => dispatch(nextView({ viewNumber }))}>앞으로</button>
-      <button onClick={() => dispatch(prevView({ viewNumber }))}>뒤로</button> */}
     </Wrapper>
   );
 }
