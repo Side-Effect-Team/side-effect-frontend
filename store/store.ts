@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import authSlice from "./authSlice";
 import loginViewTransitionSlice from "./loginViewTransitionSlice";
 import modalSlice from "./modalSlice";
 import toastSlice from "./toastSlice";
@@ -9,6 +10,7 @@ export const store = configureStore({
     loginView: loginViewTransitionSlice,
     modal: modalSlice,
     toast: toastSlice,
+    auth: authSlice,
   },
 });
 

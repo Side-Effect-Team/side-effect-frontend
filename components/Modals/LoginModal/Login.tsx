@@ -10,7 +10,9 @@ export default function Login() {
     <>
       <LoginTitle />
       <ButtonWrapper>
-        <GoogleOAuthProvider clientId="809879623134-htj6fbjv3djno0dpjv75ukpjmtnt289a.apps.googleusercontent.com">
+        <GoogleOAuthProvider
+          clientId={`${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}`}
+        >
           <GoogleLoginButton />
         </GoogleOAuthProvider>
         <KakaoLoginButton />
