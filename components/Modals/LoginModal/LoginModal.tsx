@@ -37,8 +37,6 @@ export default function LoginModal() {
         />
       </Header>
       {handleViewRender()}
-      <button onClick={() => dispatch(nextView({ viewNumber }))}>앞으로</button>
-      <button onClick={() => dispatch(prevView({ viewNumber }))}>뒤로</button>
     </Wrapper>
   );
 }

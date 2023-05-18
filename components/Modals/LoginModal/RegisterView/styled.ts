@@ -27,26 +27,21 @@ export const ButtonWrapper = styled.div`
   flex-direction: column;
   width: 100%;
 `;
-
 export const SelectSection = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
   gap: 10px;
 `;
-
 export const Form = styled.form`
-  /* display: flex;
+  width: 100%;
+  display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 0px 20px; */
 `;
 export const ViewWrapper = styled(motion.div)`
   display: flex;
-  justify-content: center;
-  align-content: center;
   flex-direction: column;
-  gap: 10px;
+  align-items: center;
   padding: 20px;
-  width: 100%;
 `;
