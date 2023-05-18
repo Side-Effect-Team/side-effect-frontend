@@ -3,7 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { nextView, prevView } from "@/store/loginViewTransitionSlice";
 import { addNickname } from "@/store/userInfoStoreSlice";
 import { Input, Label, ButtonWrapper, Form, ViewWrapper } from "./styled";
-import ErrorMessage from "@/components/pages/userInfoPage/ErrorMessage";
+import ErrorMessage from "./ErrorMessage";
 import Button from "@/components/Button";
 interface FormInput {
   nickname: string;
