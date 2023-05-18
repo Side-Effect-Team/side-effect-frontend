@@ -3,7 +3,7 @@ import KakaoImg from "../../../../public/images/Kakao.png";
 import Image from "next/image";
 export default function KakaoLoginButton() {
   const handleKakaoLogin = () => {
-    window.open(
+    window.location.replace(
       `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=http://localhost:3000/`,
     );
   };

@@ -13,7 +13,8 @@ import {
   Input,
   Label,
   Form,
-} from "@/components/pages/userInfoPage/styled";
+  ViewWrapper,
+} from "./styled";
 import Button from "@/components/Button";
 const SELECT_POSITIONS = [
   { name: "프론트엔드", value: "frontend" },
@@ -49,17 +50,6 @@ export default function RegisterUserInfo({ viewNumber }: any) {
     if (!career || !position) {
       alert("포지션과 경력은 필수입력 사항입니다.");
     } else {
-      // const nickname = localStorage.getItem("nickname");
-      // // api요청 작성
-      // const email = localStorage.getItem("email");
-      // const userInfo = { email, nickname, position, career, ...data };
-      // console.log(userInfo);
-      // await axios
-      //   .post(`${process.env.NEXT_PUBLIC_API_URL}/user/join`, userInfo)
-      //   .then((res) => {
-      //     console.log(res);
-      //     router.push("/userinfo/success");
-      //   })
       const mergedUserInfo = {
         ...userInfo,
         ...data,
@@ -76,36 +66,50 @@ export default function RegisterUserInfo({ viewNumber }: any) {
     }
   };
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
-      <h1>포지션,경력을 선택해주세요.</h1>
-      <SelectSection>
-        <SelectBox
-          options={SELECT_POSITIONS}
-          setValue={setPosition}
-          title="포지션"
-        />
-        <SelectBox options={SELECT_CAREER} setValue={setCareer} title="경력" />
-      </SelectSection>
-      <InputSection>
-        <h4>
-          깃허브와 블로그 주소는 선택사항입니다.
-          <br /> <br />
-          깃허브나 블로그 주소를 등록하면 팀에 합류할 확률이 더 높아집니다!
-        </h4>
-        <Label htmlFor="Github">Github</Label>
-        <Input id="Github" {...register("githubUrl")} />
-        <Label htmlFor="Blog">Blog</Label>
-        <Input id="Blog" {...register("blogUrl")} />
-      </InputSection>
-      <ButtonWrapper>
-        <Button type="submit">가입완료</Button>
-        <Button
-          type="button"
-          onClick={() => dispatch(prevView({ viewNumber }))}
-        >
-          뒤로가기
-        </Button>
-      </ButtonWrapper>
-    </Form>
+    <ViewWrapper
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <h1>포지션,경력을 선택해주세요.</h1>
+        <SelectSection>
+          <SelectBox
+            options={SELECT_POSITIONS}
+            setValue={setPosition}
+            title="포지션"
+          />
+          <SelectBox
+            options={SELECT_CAREER}
+            setValue={setCareer}
+            title="경력"
+          />
+        </SelectSection>
+        <InputSection>
+          <h4>
+            깃허브와 블로그 주소는 선택사항입니다.
+            <br /> <br />
+            깃허브나 블로그 주소를 등록하면 팀에 합류할 확률이 더 높아집니다!
+          </h4>
+          <Label htmlFor="Github">Github</Label>
+          <Input id="Github" {...register("githubUrl")} />
+          <Label htmlFor="Blog">Blog</Label>
+          <Input id="Blog" {...register("blogUrl")} />
+        </InputSection>
+        <ButtonWrapper>
+          <Button type="submit" size="large">
+            가입완료
+          </Button>
+          <Button
+            type="button"
+            size="large"
+            onClick={() => dispatch(prevView({ viewNumber }))}
+          >
+            뒤로가기
+          </Button>
+        </ButtonWrapper>
+      </Form>
+    </ViewWrapper>
   );
 }

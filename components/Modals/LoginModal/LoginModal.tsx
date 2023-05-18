@@ -3,11 +3,11 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { media } from "@/styles/mediatest";
 import { closeModal } from "@/store/modalSlice";
 import { AiOutlineClose } from "react-icons/ai";
-import RegisterNickname from "./RegisterNickname";
-import RegisterUserInfo from "./RegisterUserInfo";
+import RegisterNickname from "./RegisterView/RegisterNickname";
+import RegisterUserInfo from "./RegisterView/RegisterUserInfo";
 import Login from "./Login";
-import RegisterSuccess from "./RegisterSuccess";
-
+import RegisterSuccess from "./RegisterView/RegisterSuccess";
+import { nextView, prevView } from "@/store/loginViewTransitionSlice";
 export default function LoginModal() {
   const dispatch = useAppDispatch();
   const { isOpen } = useAppSelector((state) => state.modal);
@@ -17,7 +17,7 @@ export default function LoginModal() {
   const handleModalClose = () => {
     dispatch(closeModal());
   };
-  const viewComponents: any = {
+  const viewComponents: { [key: number]: JSX.Element } = {
     0: <Login />,
     1: <RegisterNickname viewNumber={viewNumber} />,
     2: <RegisterUserInfo viewNumber={viewNumber} />,
@@ -26,8 +26,7 @@ export default function LoginModal() {
   const handleViewRender = () => {
     return viewComponents[viewNumber];
   };
-  // console.log(pageDirection);
-  console.log(viewNumber);
+
   return (
     <Wrapper isOpen={isOpen}>
       <Header>
@@ -38,10 +37,11 @@ export default function LoginModal() {
         />
       </Header>
       {handleViewRender()}
+      <button onClick={() => dispatch(nextView({ viewNumber }))}>앞으로</button>
+      <button onClick={() => dispatch(prevView({ viewNumber }))}>뒤로</button>
     </Wrapper>
   );
 }
-
 const Wrapper = styled.div<{ isOpen: boolean }>`
   visibility: ${({ isOpen }) => (isOpen ? "visible" : "hidden")};
   animation: ${({ isOpen }) => isOpen && zoomIn} 0.3s ease;
