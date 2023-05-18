@@ -1,39 +1,46 @@
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import Image from "next/image";
 import axios from "axios";
+import { GetServerSidePropsContext } from "next";
 import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
+import { useRouter } from "next/router";
+import { useTag } from "@/hooks/useTag";
+import { useInputImage } from "@/hooks/useInputImage";
+import { DEFAULT_RECRUIT_CARD_IMAGE } from "../../../enum";
+import { useForm } from "@/hooks/useForm";
+import PageHead from "@/components/PageHead";
 import { PostTitleStyled } from "@/postComps/common/Title.styled";
 import {
-  InputBox,
-  LabelForm,
-  InputForm,
-  TextareaForm,
-  SubmitBtnBox,
   ErrorMsg,
-  ImageBox,
   GuideWrapper,
+  ImageBox,
+  InputBox,
+  InputForm,
+  LabelForm,
+  SubmitBtnBox,
+  TextareaForm,
 } from "@/postComps/common/PostForm.styled";
 import Button from "@/components/Button";
-import { useForm } from "@/hooks/useForm";
-import { useInputImage } from "@/hooks/useInputImage";
-import ProjectUrlBox from "@/postComps/ProjectUrlBox";
-import { DEFAULT_PROJECT_CARD_IMAGE } from "../../enum";
-import PageHead from "@/components/PageHead";
+import Image from "next/image";
+import TagBox from "@/postComps/TagBox";
+import { POST_FORM } from "@/pages/post/recruit";
 
-export const POST_FORM = {
-  projectName: "",
-  title: "",
-  content: "",
-};
+interface EditRecruitPageProps {
+  recruit: RecruitType;
+}
 
-export default function PostProjectPage() {
+export default function EditRecruitPage({ recruit }: EditRecruitPageProps) {
+  console.log(recruit);
   const router = useRouter();
-  const { imgSrc, handleImgChange } = useInputImage(DEFAULT_PROJECT_CARD_IMAGE);
-  const [projectUrl, setProjectUrl] = useState("");
+  const { tags, deleteTag, addTag } = useTag(
+    recruit.tags.map((tag) => tag.stackType),
+  );
+  const { imgSrc, handleImgChange } = useInputImage(DEFAULT_RECRUIT_CARD_IMAGE);
   const { postForm, errMsgs, touched, handleChange, handleBlur, handleSubmit } =
     useForm({
-      initialVals: { ...POST_FORM },
+      initialVals: {
+        projectName: recruit.projectName,
+        title: recruit.title,
+        content: recruit.content,
+      },
       validate: (postForm: typeof POST_FORM) => {
         const newErrorMsgs = { ...POST_FORM };
 
@@ -55,45 +62,47 @@ export default function PostProjectPage() {
         return newErrorMsgs;
       },
       onSubmit: async () => {
-        // TODO 이미지 추가 필요
-        const data = { ...postForm, projectUrl };
+        const patchData = {
+          ...recruit,
+          ...postForm,
+          imgSrc: null, // 이미지 사용 불가하여 null 대체
+          tags,
+        };
 
         // request
+        const url = `${process.env.NEXT_PUBLIC_API_URL}/recruit-board/${recruit.id}`;
         axios
-          .post(`${process.env.NEXT_PUBLIC_API_URL}/free-boards`, data, {
+          .patch(url, patchData, {
             headers: {
               // 로그인 기능 미구현으로 NEXT_PUBLIC_TOKEN에 발급받은 토큰을 넣고 실행!
               Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
             },
           })
           .then((res) => {
-            console.log("API 반환값", res);
+            console.log(res);
             if (res.status === 200) {
-              window.alert("게시글 등록이 완료되었습니다");
-              router.push(`/projects/${res.data.id}`);
+              window.alert("게시글 수정이 완료되었습니다");
+              router.push(`/recruits/${recruit.id}`);
             }
           })
           .catch((err) => {
             console.log(err);
-            window.alert("게시글 등록에 실패했습니다");
+            window.alert("게시글 수정에 실패했습니다");
           });
       },
     });
 
+  // 등록 취소 버튼 클릭 핸들러
   const handleCancel = () => {
     if (window.confirm("작성중인 내용이 사라집니다. 계속 진행하시겠습니까?"))
-      router.push("/projects");
+      router.push(`/recruits/${recruit.id}`);
   };
-
-  useEffect(() => {
-    console.log(postForm);
-  }, [postForm]);
 
   return (
     <Wrapper>
-      <PageHead pageTitle="프로젝트 자랑 글쓰기 | 사이드 이펙트" />
+      <PageHead pageTitle="모집 게시글 수정 | 사이드 이펙트" />
       <Contents>
-        <PostTitleStyled>프로젝트 자랑하기</PostTitleStyled>
+        <PostTitleStyled>모집 게시글 수정</PostTitleStyled>
         <form onSubmit={handleSubmit}>
           <InputBox>
             <GuideWrapper>
@@ -130,10 +139,12 @@ export default function PostProjectPage() {
               <ErrorMsg>{errMsgs.title}</ErrorMsg>
             )}
           </InputBox>
-          <ProjectUrlBox
-            projectUrl={projectUrl}
-            setProjectUrl={setProjectUrl}
-          />
+          <InputBox>
+            <GuideWrapper>
+              <LabelForm>모집 포지션</LabelForm>
+              <p>포지션 수정은 현재 지원되지 않습니다</p>
+            </GuideWrapper>
+          </InputBox>
           <InputBox>
             <LabelForm htmlFor="image">대표 이미지</LabelForm>
             <InputForm
@@ -143,12 +154,13 @@ export default function PostProjectPage() {
               onChange={handleImgChange}
             />
             <ImageBox>
-              {imgSrc === DEFAULT_PROJECT_CARD_IMAGE && (
+              {imgSrc === DEFAULT_RECRUIT_CARD_IMAGE && (
                 <p>이미지 미설정 시 적용될 기본 이미지입니다</p>
               )}
               <Image src={imgSrc} alt="" width={250} height={150} priority />
             </ImageBox>
           </InputBox>
+          <TagBox tags={tags} deleteTag={deleteTag} addTag={addTag} />
           <InputBox>
             <LabelForm htmlFor="content">상세 내용</LabelForm>
             <TextareaForm
@@ -163,7 +175,7 @@ export default function PostProjectPage() {
             )}
           </InputBox>
           <SubmitBtnBox>
-            <Button type="submit">등록</Button>
+            <Button type="submit">수정</Button>
             <Button type="button" onClick={handleCancel}>
               취소
             </Button>
@@ -172,4 +184,23 @@ export default function PostProjectPage() {
       </Contents>
     </Wrapper>
   );
+}
+
+export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+  const recruitId = ctx.params?.recruitId;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/recruit-board/${recruitId}`;
+
+  try {
+    const res = await axios.get(url);
+    const recruit = await res.data;
+
+    return {
+      props: {
+        recruit,
+      },
+    };
+  } catch (err) {
+    console.log(err);
+    return { notFound: true };
+  }
 }

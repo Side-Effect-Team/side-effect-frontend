@@ -12,12 +12,12 @@ export const Wrapper = styled.div`
 
   display: none;
 
-  svg {
+  /* svg {
     transform: scale(1.5);
     margin: auto;
-  }
+  } */
 
-  &:hover {
+  /* &:hover {
     opacity: 0.6;
-  }
+  } */
 `;

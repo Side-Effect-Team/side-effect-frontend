@@ -49,6 +49,7 @@ export const TextareaForm = styled.textarea`
 export const SubmitBtnBox = styled.div`
   display: flex;
   justify-content: flex-end;
+  gap: 1rem;
 `;
 
 export const ErrorMsg = styled.span`

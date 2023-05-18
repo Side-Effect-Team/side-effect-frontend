@@ -13,10 +13,13 @@ declare interface TagType {
 declare interface RecruitType {
   content: string;
   id: number;
+  createdAt: string;
   imgSrc: string;
   positions: PositionType[];
   projectName: string;
   tags: TagType[];
   title: string;
-  view: number;
+  views: number;
+  likeNum: number;
+  userId: number;
 }
