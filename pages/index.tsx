@@ -14,31 +14,12 @@ export default function HomePage() {
           maxCards={8}
           queryKey="topLikedProjects"
         />
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
+        <BatchCarousel
+          title="최근 올라온 팀원 모집글"
+          category="recruits"
+          maxCards={8}
+          queryKey="newRecruits"
+        />
       </MainStyled>
     </Wrapper>
   );

@@ -6,7 +6,7 @@ export const theme = {
     gray: "#98A2B3",
     danger: "#F04438",
     success: "#16B364",
-    background: "#ddd",
+    background: "#f9f9f9",
     white: "#fff",
   },
   fonts: {

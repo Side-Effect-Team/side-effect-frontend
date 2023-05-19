@@ -10,6 +10,7 @@ import { useAppDispatch } from "../../store/hooks";
 import { media } from "@/styles/mediatest";
 import axios from "axios";
 import PageHead from "@/components/PageHead";
+import BatchCarousel from "@/components/Carousel/BatchCarousel";
 const FILTER_OPTIONS = [
   { name: "최신순", value: "latest" },
   { name: "조회순", value: "view" },
@@ -72,10 +73,12 @@ export default function ProjectPage() {
   return (
     <Wrapper>
       <PageHead pageTitle="프로젝트 자랑 | 사이드 이펙트" />
-      <HeaderSection>
-        <h2>이달의 프로젝트</h2>
-        <TempCarousel>캐러셀</TempCarousel>
-      </HeaderSection>
+      <BatchCarousel
+        title="이달의 베스트 프로젝트"
+        category="projects"
+        maxCards={8}
+        queryKey="topLikedProjects"
+      />
 
       <FilterSection>
         <SelectBox

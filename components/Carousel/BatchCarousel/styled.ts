@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { mediaQuery } from "@/styles/Media";
 
 export const Wrapper = styled.div`
+  margin: 1.5rem 0;
   padding: 1rem 5px;
   width: 100%;
   height: ${(p) => p.theme.height.batchCarousel};
