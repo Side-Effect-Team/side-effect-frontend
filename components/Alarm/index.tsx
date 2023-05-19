@@ -13,7 +13,17 @@ interface FromHeaderProps {
 export default function Alarm({ openAlarm, setOpenAlarm }: FromHeaderProps) {
   const { addToast, deleteToast } = useToast();
 
-  const { data: alarmList, isError } = useQuery(["notice"], ALARM_CHECK);
+  const { data: alarmList } = useQuery(["notice"], ALARM_CHECK, {
+    onError: () => {
+      addToast({
+        type: "error",
+        title: "error",
+        content: "알람을 가져오지 못했습니다.",
+      });
+      deleteToast("unique-id");
+    },
+    retry: false,
+  });
   // 읽지 않은 알람 갯수 세기
   const countAlarm = () => {
     if (alarmList) {
@@ -22,15 +32,6 @@ export default function Alarm({ openAlarm, setOpenAlarm }: FromHeaderProps) {
     }
   };
   const count = countAlarm();
-
-  if (isError) {
-    addToast({
-      type: "error",
-      title: "error",
-      content: "알람을 가져오지 못했습니다.",
-    });
-    deleteToast("unique-id");
-  }
 
   const onClickOpenAlarm = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();

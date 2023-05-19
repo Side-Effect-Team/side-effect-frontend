@@ -39,12 +39,10 @@ interface AlarmListProps {
 export default function AlarmList({ alarmList, setOpenAlarm }: AlarmListProps) {
   const router = useRouter();
   const queryClient = useQueryClient();
-
   const onClickCloseAlarm = (e: MouseEvent<SVGAElement>) => {
     e.stopPropagation();
     setOpenAlarm(false);
   };
-
   // 알람 읽기
   const { mutate: readMutate } = useMutation({
     mutationFn: READ_ALARM,
@@ -80,7 +78,7 @@ export default function AlarmList({ alarmList, setOpenAlarm }: AlarmListProps) {
         <HeaderTitle>알림</HeaderTitle>
         <CloseButton onClick={onClickCloseAlarm} />
       </Header>
-      {alarmList ? (
+      {alarmList && alarmList.length !== 0 ? (
         alarmList.map((alarm) => (
           <Wrapper
             watched={alarm.watched}
