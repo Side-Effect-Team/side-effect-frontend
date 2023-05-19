@@ -61,7 +61,7 @@ export default function TabBoards({ boards, title }: TabBoards) {
           <BoardWrapper>
             {filterBoards &&
               filterBoards.map((el, index) => (
-                <BoardCard key={index} data={el} category={el.category} />
+                <BoardCard key={index} data={el} category={el.category || ""} />
               ))}
           </BoardWrapper>
         </>
