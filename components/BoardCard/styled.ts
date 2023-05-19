@@ -4,7 +4,7 @@ import { AiFillHeart, AiOutlineHeart, AiOutlineMessage } from "react-icons/ai";
 import { mediaQuery } from "@/styles/Media";
 
 export const Container = styled.div`
-  width: 300px;
+  min-width: 300px;
   height: 400px;
   display: flex;
   flex-direction: column;
