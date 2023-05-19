@@ -35,8 +35,17 @@ export default function ProjectPage() {
   const { ref, inView } = useInView({ threshold: 0 });
 
   const getProjectsData = async (page: number) => {
+    // 로그인 되어있는 유저의 좋아요 반영을 위한 토큰 추가
+    const token = localStorage.getItem("accessToken");
+    const config = token
+      ? {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      : { headers: {} };
+    //
     const response = await axios.get(
       `${process.env.NEXT_PUBLIC_API_URL}/free-boards/scroll?lastId=${page}&size=4`,
+      config,
     );
     return response.data;
   };
@@ -53,7 +62,6 @@ export default function ProjectPage() {
         },
       },
     );
-
   useEffect(() => {
     if (inView && hasNextPage === true) {
       fetchNextPage();
@@ -82,7 +90,13 @@ export default function ProjectPage() {
         {isSuccess &&
           data?.pages.map((page) => {
             return page.projects.map((project) => {
-              return <BoardCard key={project.id} data={project} />;
+              return (
+                <BoardCard
+                  key={project.id}
+                  data={project}
+                  category="projects"
+                />
+              );
             });
           })}
       </CardSection>
