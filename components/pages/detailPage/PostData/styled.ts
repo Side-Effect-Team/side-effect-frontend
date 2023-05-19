@@ -48,7 +48,7 @@ export const OptionBox = styled.button`
   }
 `;
 
-export const OptionModalWrapper = styled.div`
+export const OptionPopupWrapper = styled.div`
   padding: 0.15rem;
   width: 75px;
   height: 75px;
