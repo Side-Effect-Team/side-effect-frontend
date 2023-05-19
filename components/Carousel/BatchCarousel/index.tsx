@@ -5,13 +5,20 @@ import axios from "axios";
 
 interface BatchCarouselProps {
   title: string;
+  category: "recruits" | "projects";
   maxCards: number;
+  queryKey: string;
 }
 
-export default function BatchCarousel({ title, maxCards }: BatchCarouselProps) {
+export default function BatchCarousel({
+  title,
+  category,
+  maxCards,
+  queryKey,
+}: BatchCarouselProps) {
   const { data, isError, isLoading } = useQuery({
-    queryKey: ["newRecruits"],
-    queryFn: () => fetchNewRecruits(maxCards),
+    queryKey: [queryKey],
+    queryFn: () => fetchData(maxCards, queryKey),
   });
 
   return (
@@ -23,7 +30,7 @@ export default function BatchCarousel({ title, maxCards }: BatchCarouselProps) {
         {data &&
           data.map((recruit: RecruitType) => {
             return (
-              <BoardCard key={recruit.id} category="projects" data={recruit} />
+              <BoardCard key={recruit.id} category={category} data={recruit} />
             );
           })}
       </CardContainer>
@@ -31,8 +38,22 @@ export default function BatchCarousel({ title, maxCards }: BatchCarouselProps) {
   );
 }
 
-const fetchNewRecruits = async (size: number) => {
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/recruit-board/scroll?size=${size}`;
+const fetchData = async (size: number, queryKey: string) => {
+  let url = process.env.NEXT_PUBLIC_API_URL!;
+  let selector = "";
+
+  // 최신 모집글
+  if (queryKey === "newRecruits") {
+    url += `/recruit-board/scroll?size=${size}`;
+    selector = "recruitBoards";
+  }
+
+  // 좋아요 많은 순, 최신순 프로젝트 자랑글
+  if (queryKey === "topLikedProjects") {
+    url += `/free-boards/scroll?filter=like&size=${size}`;
+    selector = "projects";
+  }
+
   const res = await axios.get(url);
-  return res.data.recruitBoards;
+  return res.data[selector];
 };
