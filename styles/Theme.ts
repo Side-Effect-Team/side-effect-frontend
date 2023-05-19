@@ -18,8 +18,9 @@ export const theme = {
   },
   height: {
     header: "75px",
-    carousel: "500px",
+    mainCarousel: "500px",
     banner: "300px",
+    batchCarousel: "550px",
   },
   width: {
     positionInput: "250px",

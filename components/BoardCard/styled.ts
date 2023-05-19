@@ -21,7 +21,7 @@ export const Container = styled.div`
   }
   ${mediaQuery("mobile")`
   width: 95%;
-  height: 150px;
+  min-height: 150px;
   flex-direction: row;
   margin-left: auto;
   margin-right: auto; 

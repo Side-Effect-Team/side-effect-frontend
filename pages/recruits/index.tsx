@@ -13,7 +13,7 @@ export default function RecruitsPage() {
     queryKey: ["recruits"],
     queryFn: async () => {
       const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/recruit-board/scroll?size=100`,
+        `${process.env.NEXT_PUBLIC_API_URL}/recruit-board/all`,
       );
       return res.data.recruitBoards;
     },
@@ -113,6 +113,7 @@ const ContentsMain = styled.main`
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   row-gap: 1rem;
   column-gap: 1rem;
+
   ${mediaQuery("mobile")`
   display: flex;
   flex-direction: column;
