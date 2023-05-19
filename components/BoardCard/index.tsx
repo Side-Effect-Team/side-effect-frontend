@@ -101,6 +101,11 @@ export default function BoardCard({ data, category }: BoardCardDataProps) {
         }
       } catch (error) {
         console.log(error);
+        addToast({
+          type: "error",
+          title: "error",
+          content: "error.",
+        });
       }
     } else alert("로그인 후 이용가능합니다.");
   };
