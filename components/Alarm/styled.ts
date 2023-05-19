@@ -31,7 +31,7 @@ export const AlarmButton = styled(IoNotificationsOutline)`
   color: ${theme.brandColor.primary};
   font-size: 24px;
 `;
-export const GetAlarm = styled.div`
+export const AlarmCount = styled.div`
   position: absolute;
   top: 1px;
   left: 15px;

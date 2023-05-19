@@ -1,4 +1,4 @@
-import { Dispatch, MouseEvent, SetStateAction, useRef } from "react";
+import { Dispatch, MouseEvent, SetStateAction } from "react";
 import {
   CloseButton,
   Container,
@@ -13,50 +13,66 @@ import {
   Wrapper,
 } from "./styled";
 import { useRouter } from "next/router";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { DELETE_ALARM, READ_ALARM } from "./AlarmQurey";
 
-export interface AlarmProps {
-  lastId: number;
-  alarmNum: number;
-  alarms: AlarmProps[];
-}
+// export interface AlarmProps {
+//   lastId: number;
+//   alarmNum: number;
+//   alarms: AlarmProps[];
+// }
 
 export interface AlarmProps {
   id: number;
-  type: string;
   watched: boolean;
   title: string;
+  contents: string;
   createAt: string;
-  boardId: string;
-  category: string;
-  boardTitle: string;
+  link: string;
 }
 interface AlarmListProps {
-  alarmList: AlarmProps | null;
+  alarmList: AlarmProps[];
   setOpenAlarm: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function AlarmList({ alarmList, setOpenAlarm }: AlarmListProps) {
   const router = useRouter();
-
-  const onClickAlarm =
-    (category: string, boardId: string) => (e: MouseEvent<HTMLDivElement>) => {
-      // 알람 읽음 API 추가
-      e.stopPropagation();
-      router.push(`/${category}/${boardId}`);
-      setOpenAlarm(false);
-    };
+  const queryClient = useQueryClient();
 
   const onClickCloseAlarm = (e: MouseEvent<SVGAElement>) => {
     e.stopPropagation();
     setOpenAlarm(false);
   };
 
-  const onClickDeleteAlarm = (id: number) => (e: MouseEvent<SVGAElement>) => {
-    e.stopPropagation();
-    // 알람 삭제 API 추가
-    alert(`${id}: 알람삭제`);
-    setOpenAlarm(false);
-  };
+  // 알람 읽기
+  const { mutate: readMutate } = useMutation({
+    mutationFn: READ_ALARM,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["notice"] });
+    },
+  });
+
+  const onClickReadAlarm =
+    (link: string, id: number) => async (e: MouseEvent<HTMLDivElement>) => {
+      e.stopPropagation();
+      router.push(`${link}`);
+      setOpenAlarm(false);
+      readMutate(id);
+    };
+
+  // 알람 삭제
+  const { mutate: deleteMutate } = useMutation({
+    mutationFn: DELETE_ALARM,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["notice"] });
+    },
+  });
+
+  const onClickDeleteAlarm =
+    (id: number) => async (e: MouseEvent<SVGAElement>) => {
+      e.stopPropagation();
+      deleteMutate(id);
+    };
 
   return (
     <Container>
@@ -65,18 +81,18 @@ export default function AlarmList({ alarmList, setOpenAlarm }: AlarmListProps) {
         <CloseButton onClick={onClickCloseAlarm} />
       </Header>
       {alarmList ? (
-        alarmList.alarms.map((alarm) => (
+        alarmList.map((alarm) => (
           <Wrapper
             watched={alarm.watched}
             key={alarm.id}
-            onClick={onClickAlarm(alarm.category, alarm.boardId)}
+            onClick={onClickReadAlarm(alarm.link, alarm.id)}
           >
             <RowWrapper>
-              <Title>{alarm.title}</Title>
+              <Title>{alarm.contents}</Title>
               <DeleteButton onClick={onClickDeleteAlarm(alarm.id)} />
             </RowWrapper>
             <RowWrapper>
-              <Contents>{alarm.boardTitle}</Contents>
+              <Contents>{alarm.title}</Contents>
               <Date>{alarm.createAt}</Date>
             </RowWrapper>
           </Wrapper>
