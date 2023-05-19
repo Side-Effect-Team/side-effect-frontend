@@ -1,6 +1,6 @@
 import { useAppDispatch } from "@/store/hooks";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { nextView, prevView } from "@/store/loginViewTransitionSlice";
+import { handleModalView } from "@/store/loginViewTransitionSlice";
 import { addNickname } from "@/store/userInfoStoreSlice";
 import { Input, Label, ButtonWrapper, Form, ViewWrapper } from "./styled";
 import ErrorMessage from "./ErrorMessage";
@@ -8,7 +8,7 @@ import Button from "@/components/Button";
 interface FormInput {
   nickname: string;
 }
-export default function RegisterNickname({ viewNumber }: any) {
+export default function RegisterNickname() {
   const dispatch = useAppDispatch();
   const {
     register,
@@ -17,9 +17,10 @@ export default function RegisterNickname({ viewNumber }: any) {
   } = useForm<FormInput>();
   const onSubmit: SubmitHandler<FormInput> = (data: FormInput) => {
     dispatch(addNickname(data.nickname));
-    dispatch(nextView({ viewNumber }));
+    dispatch(handleModalView({ modalView: "registerUserInfo" }));
+    console.log(errors);
   };
-  console.log(errors);
+
   return (
     <ViewWrapper
       initial={{ opacity: 0 }}
@@ -55,7 +56,9 @@ export default function RegisterNickname({ viewNumber }: any) {
           <Button
             type="button"
             size="large"
-            onClick={() => dispatch(prevView({ viewNumber }))}
+            onClick={() =>
+              dispatch(handleModalView({ modalView: "startLogin" }))
+            }
           >
             Back
           </Button>

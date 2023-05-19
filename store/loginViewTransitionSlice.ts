@@ -1,25 +1,24 @@
-import { createSlice } from "@reduxjs/toolkit";
-
-const initialState = {
-  pageDirection: "",
-  viewNumber: 0,
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+interface PayloadType {
+  modalView:
+    | "startLogin"
+    | "registerNickname"
+    | "registerUserInfo"
+    | "registerSuccess";
+}
+const initialState: PayloadType = {
+  modalView: "startLogin",
 };
 
 const loginViewTransitionSlice = createSlice({
   name: "pageTransition",
   initialState,
   reducers: {
-    nextView: (state, action) => {
-      const { viewNumber } = action.payload;
-      state.viewNumber = 1 + viewNumber;
-      state.pageDirection = "right";
-    },
-    prevView: (state, action) => {
-      const { viewNumber } = action.payload;
-      state.viewNumber = viewNumber - 1;
-      state.pageDirection = "left";
+    handleModalView: (state, action: PayloadAction<PayloadType>) => {
+      const { modalView } = action.payload;
+      state.modalView = modalView;
     },
   },
 });
-export const { nextView, prevView } = loginViewTransitionSlice.actions;
+export const { handleModalView } = loginViewTransitionSlice.actions;
 export default loginViewTransitionSlice.reducer;

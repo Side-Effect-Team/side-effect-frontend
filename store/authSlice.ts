@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-
 const initialState = {
   token: "",
   authenticated: false,
@@ -11,12 +10,10 @@ const authSlice = createSlice({
   reducers: {
     createAuthentication: (state, action) => {
       state.authenticated = true;
-      localStorage.setItem("authenticated", "yes");
       state.token = action.payload;
     },
     removeAuthentication: (state) => {
       state.authenticated = false;
-      localStorage.removeItem("authenticated");
       state.token = "";
     },
   },

@@ -1,11 +1,15 @@
 import { OAuthLogin, OAuthLoginWrapper, ButtonTitle } from "./styled";
 import KakaoImg from "../../../../public/images/Kakao.png";
 import Image from "next/image";
+
 export default function KakaoLoginButton() {
+  const { Kakao } = window;
   const handleKakaoLogin = () => {
-    window.location.replace(
-      `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=http://localhost:3000/`,
-    );
+    Kakao.Auth.login({
+      success: (res: any) => {
+        console.log(res);
+      },
+    });
   };
   return (
     <OAuthLoginWrapper>

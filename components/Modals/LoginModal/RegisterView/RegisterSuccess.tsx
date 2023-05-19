@@ -1,5 +1,4 @@
 import Button from "@/components/Button";
-import { motion } from "framer-motion";
 import { ViewWrapper, ButtonWrapper } from "./styled";
 export default function RegisterSuccess() {
   return (

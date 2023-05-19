@@ -1,7 +1,6 @@
-import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { nextView, prevView } from "@/store/loginViewTransitionSlice";
+import { handleModalView } from "@/store/loginViewTransitionSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
 import axios from "axios";
@@ -39,12 +38,9 @@ interface FormData {
 export default function RegisterUserInfo({ viewNumber }: any) {
   const [position, setPosition] = useState<string | number>("");
   const [career, setCareer] = useState<string | number>("");
-  const dispatch = useAppDispatch();
   const { userInfo } = useAppSelector((state) => state.userInfo);
-  console.log(userInfo);
-  const router = useRouter();
-
   const { register, handleSubmit } = useForm<FormData>();
+  const dispatch = useAppDispatch();
 
   const onSubmit = async (data: FormData) => {
     if (!career || !position) {
@@ -62,7 +58,7 @@ export default function RegisterUserInfo({ viewNumber }: any) {
         `${process.env.NEXT_PUBLIC_API_URL}/user/join`,
         mergedUserInfo,
       );
-      dispatch(nextView({ viewNumber }));
+      dispatch(handleModalView({ modalView: "registerSuccess" }));
     }
   };
   return (
@@ -104,7 +100,9 @@ export default function RegisterUserInfo({ viewNumber }: any) {
           <Button
             type="button"
             size="large"
-            onClick={() => dispatch(prevView({ viewNumber }))}
+            onClick={() =>
+              dispatch(handleModalView({ modalView: "registerNickname" }))
+            }
           >
             뒤로가기
           </Button>

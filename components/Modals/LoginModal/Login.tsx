@@ -4,7 +4,7 @@ import LoginTitle from "./LoginTitle";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import GoogleLoginButton from "./OAuthLoginButton/GoogleLoginButton";
 import KakaoLoginButton from "./OAuthLoginButton/KakaoLoginButton";
-import GithubLoginButton from "./OAuthLoginButton/GithubLoginButton";
+import NaverLoginButton from "./OAuthLoginButton/NaverLoginButton";
 export default function Login() {
   return (
     <>
@@ -16,7 +16,7 @@ export default function Login() {
           <GoogleLoginButton />
         </GoogleOAuthProvider>
         <KakaoLoginButton />
-        <GithubLoginButton />
+        {/* <NaverLoginButton /> */}
       </ButtonWrapper>
     </>
   );

@@ -7,24 +7,22 @@ import RegisterNickname from "./RegisterView/RegisterNickname";
 import RegisterUserInfo from "./RegisterView/RegisterUserInfo";
 import Login from "./Login";
 import RegisterSuccess from "./RegisterView/RegisterSuccess";
-import { nextView, prevView } from "@/store/loginViewTransitionSlice";
 export default function LoginModal() {
   const dispatch = useAppDispatch();
   const { isOpen } = useAppSelector((state) => state.modal);
-  const { pageDirection, viewNumber } = useAppSelector(
-    (state) => state.loginView,
-  );
+  const { modalView } = useAppSelector((state) => state.loginView);
   const handleModalClose = () => {
     dispatch(closeModal());
   };
-  const viewComponents: { [key: number]: JSX.Element } = {
-    0: <Login />,
-    1: <RegisterNickname viewNumber={viewNumber} />,
-    2: <RegisterUserInfo viewNumber={viewNumber} />,
-    3: <RegisterSuccess />,
+
+  const viewComponentsTest: { [key: string]: JSX.Element } = {
+    startLogin: <Login />,
+    registerNickname: <RegisterNickname />,
+    registerUserInfo: <RegisterUserInfo />,
+    registerSuccess: <RegisterSuccess />,
   };
   const handleViewRender = () => {
-    return viewComponents[viewNumber];
+    return viewComponentsTest[modalView];
   };
 
   return (
