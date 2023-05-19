@@ -1,24 +1,19 @@
-import { MouseEvent, useEffect, useRef, useState } from "react";
+import { Dispatch, MouseEvent, SetStateAction } from "react";
 import { AlarmButton, AlarmDiv, AlarmIconDiv, AlarmCount } from "./styled";
-import axios from "axios";
 import AlarmList, { AlarmProps } from "./AlarmList";
-import useOutsideClick from "@/hooks/useOutsideClick";
 import { useQuery } from "@tanstack/react-query";
 import { ALARM_CHECK } from "./AlarmQurey";
 import useToast from "@/hooks/useToast";
+import useOutsideClick from "@/hooks/useOutsideClick";
 
-export default function Alarm() {
-  const [openAlarm, setOpenAlarm] = useState<boolean>(false);
-  const AlarmListRef = useRef(null);
-  useOutsideClick(AlarmListRef, () => setOpenAlarm(false));
+interface FromHeaderProps {
+  openAlarm: boolean;
+  setOpenAlarm: Dispatch<SetStateAction<boolean>>;
+}
+export default function Alarm({ openAlarm, setOpenAlarm }: FromHeaderProps) {
   const { addToast, deleteToast } = useToast();
 
-  const onClickOpenAlarm = () => {
-    setOpenAlarm((prev) => !prev);
-  };
-
   const { data: alarmList, isError } = useQuery(["notice"], ALARM_CHECK);
-
   // 읽지 않은 알람 갯수 세기
   const countAlarm = () => {
     if (alarmList) {
@@ -37,14 +32,15 @@ export default function Alarm() {
     deleteToast("unique-id");
   }
 
+  const onClickOpenAlarm = (e: MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    setOpenAlarm((prev) => !prev);
+  };
+
   return (
     <>
-      <AlarmDiv
-        onClick={onClickOpenAlarm}
-        openAlarm={openAlarm}
-        ref={AlarmListRef}
-      >
-        <AlarmIconDiv openAlarm={openAlarm}>
+      <AlarmDiv openAlarm={openAlarm}>
+        <AlarmIconDiv openAlarm={openAlarm} onClick={onClickOpenAlarm}>
           <AlarmButton />
           {count !== 0 && <AlarmCount>{count}</AlarmCount>}
         </AlarmIconDiv>

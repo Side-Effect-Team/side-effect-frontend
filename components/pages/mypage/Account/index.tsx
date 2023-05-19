@@ -33,14 +33,19 @@ export default function Account({ email }: AccountProps) {
         content: "계정이 삭제되었습니다.",
       });
       deleteToast("unique-id");
+      localStorage.removeItem("id");
+      localStorage.removeItem("accessToken");
       router.push("/");
+    },
+    onError: () => {
+      alert("에러");
     },
   });
 
   const onClickDeleteAccount = async () => {
     const response = confirm("사이드 이펙트 계정을 삭제하시겠습니까?");
     if (!response) return;
-    deleteAccountMutate;
+    deleteAccountMutate();
   };
   return (
     <Wrapper>

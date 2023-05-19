@@ -1,4 +1,4 @@
-import { Dispatch, MouseEvent, SetStateAction } from "react";
+import { Dispatch, MouseEvent, SetStateAction, useRef } from "react";
 import {
   CloseButton,
   Container,
@@ -15,6 +15,7 @@ import {
 import { useRouter } from "next/router";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { DELETE_ALARM, READ_ALARM } from "./AlarmQurey";
+import useOutsideClick from "@/hooks/useOutsideClick";
 
 // export interface AlarmProps {
 //   lastId: number;
@@ -73,7 +74,6 @@ export default function AlarmList({ alarmList, setOpenAlarm }: AlarmListProps) {
       e.stopPropagation();
       deleteMutate(id);
     };
-
   return (
     <Container>
       <Header>
