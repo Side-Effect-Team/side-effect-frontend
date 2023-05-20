@@ -2,7 +2,7 @@ import { Dispatch, MouseEvent, SetStateAction } from "react";
 import { AlarmButton, AlarmDiv, AlarmIconDiv, AlarmCount } from "./styled";
 import AlarmList, { AlarmProps } from "./AlarmList";
 import { useQuery } from "@tanstack/react-query";
-import { ALARM_CHECK } from "./AlarmQurey";
+import { getAlarmList } from "./AlarmQurey";
 import useToast from "@/hooks/useToast";
 import useOutsideClick from "@/hooks/useOutsideClick";
 
@@ -13,7 +13,7 @@ interface FromHeaderProps {
 export default function Alarm({ openAlarm, setOpenAlarm }: FromHeaderProps) {
   const { addToast, deleteToast } = useToast();
 
-  const { data: alarmList } = useQuery(["notice"], ALARM_CHECK, {
+  const { data: alarmList } = useQuery(["notice"], getAlarmList, {
     onError: () => {
       addToast({
         type: "error",

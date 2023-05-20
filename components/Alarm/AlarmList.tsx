@@ -14,7 +14,7 @@ import {
 } from "./styled";
 import { useRouter } from "next/router";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { DELETE_ALARM, READ_ALARM } from "./AlarmQurey";
+import { deleteAlarm, readAlarm } from "./AlarmQurey";
 import useOutsideClick from "@/hooks/useOutsideClick";
 
 // export interface AlarmProps {
@@ -45,7 +45,7 @@ export default function AlarmList({ alarmList, setOpenAlarm }: AlarmListProps) {
   };
   // 알람 읽기
   const { mutate: readMutate } = useMutation({
-    mutationFn: READ_ALARM,
+    mutationFn: readAlarm,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["notice"] });
     },
@@ -61,7 +61,7 @@ export default function AlarmList({ alarmList, setOpenAlarm }: AlarmListProps) {
 
   // 알람 삭제
   const { mutate: deleteMutate } = useMutation({
-    mutationFn: DELETE_ALARM,
+    mutationFn: deleteAlarm,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["notice"] });
     },
