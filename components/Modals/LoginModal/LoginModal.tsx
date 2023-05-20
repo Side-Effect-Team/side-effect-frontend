@@ -7,6 +7,12 @@ import RegisterNickname from "./RegisterView/RegisterNickname";
 import RegisterUserInfo from "./RegisterView/RegisterUserInfo";
 import Login from "./Login";
 import RegisterSuccess from "./RegisterView/RegisterSuccess";
+const VIEW_COMPONENTS = {
+  startLogin: <Login />,
+  registerNickname: <RegisterNickname />,
+  registerUserInfo: <RegisterUserInfo />,
+  registerSuccess: <RegisterSuccess />,
+};
 export default function LoginModal() {
   const dispatch = useAppDispatch();
   const { isOpen } = useAppSelector((state) => state.modal);
@@ -14,15 +20,8 @@ export default function LoginModal() {
   const handleModalClose = () => {
     dispatch(closeModal());
   };
-
-  const viewComponentsTest = {
-    startLogin: <Login />,
-    registerNickname: <RegisterNickname />,
-    registerUserInfo: <RegisterUserInfo />,
-    registerSuccess: <RegisterSuccess />,
-  };
   const handleViewRender = () => {
-    return viewComponentsTest[modalView];
+    return VIEW_COMPONENTS[modalView];
   };
 
   return (
