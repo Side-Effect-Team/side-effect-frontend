@@ -4,14 +4,15 @@ import { addEmail, addProviderType } from "@/store/userInfoStoreSlice";
 import { useGoogleLogin } from "@react-oauth/google";
 import { OAuthLogin, OAuthLoginWrapper, ButtonTitle } from "./styled";
 import { createAuthentication } from "@/store/authSlice";
+import { closeModal } from "@/store/modalSlice";
 import axios from "axios";
 import Image from "next/image";
 import GoogleImg from "../../../../public/images/Google.png";
-import { closeModal } from "@/store/modalSlice";
+import useToast from "@/hooks/useToast";
 
 export default function GoogleLoginButton() {
   const dispatch = useAppDispatch();
-
+  const { addToast } = useToast();
   const login = useGoogleLogin({
     onSuccess: async (res) => {
       await axios
@@ -26,15 +27,19 @@ export default function GoogleLoginButton() {
           dispatch(createAuthentication(res.headers.authorization));
           dispatch(closeModal());
         })
-        .catch((err) => {
-          console.log(err);
-          dispatch(addProviderType("GOOGLE"));
-          dispatch(addEmail(err.response.data.email));
-          dispatch(
-            handleModalView({
-              modalView: "registerNickname",
-            }),
-          );
+        .catch((error) => {
+          if (error.response.status === 400) {
+            dispatch(addProviderType("GOOGLE"));
+            dispatch(addEmail(error.response.data.email));
+            dispatch(handleModalView({ modalView: "registerNickname" }));
+          } else {
+            addToast({
+              type: "error",
+              title: "로그인 실패",
+              content:
+                "서버가 원활하지 않습니다. 고객센터로 문의 부탁드립니다.",
+            });
+          }
         });
     },
   });
