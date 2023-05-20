@@ -28,7 +28,7 @@ export default function Header({ handleMobileMenu }: HeaderProps) {
           ))}
         </NavStyled>
         <BoxStyled>
-          <Alarm />
+          {/* <Alarm /> */}
           <Button
             onClick={() => dispatch(openModal({ modalType: "LoginModal" }))}
           >

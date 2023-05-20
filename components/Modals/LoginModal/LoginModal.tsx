@@ -15,7 +15,7 @@ export default function LoginModal() {
     dispatch(closeModal());
   };
 
-  const viewComponentsTest: { [key: string]: JSX.Element } = {
+  const viewComponentsTest = {
     startLogin: <Login />,
     registerNickname: <RegisterNickname />,
     registerUserInfo: <RegisterUserInfo />,

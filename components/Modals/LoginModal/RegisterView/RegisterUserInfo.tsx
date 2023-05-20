@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { handleModalView } from "@/store/loginViewTransitionSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-
+import useToast from "@/hooks/useToast";
 import axios from "axios";
 import SelectBox from "@/components/SelectBox";
 import {
@@ -35,11 +35,12 @@ interface FormData {
   blogUrl: string;
 }
 
-export default function RegisterUserInfo({ viewNumber }: any) {
+export default function RegisterUserInfo() {
   const [position, setPosition] = useState<string | number>("");
   const [career, setCareer] = useState<string | number>("");
   const { userInfo } = useAppSelector((state) => state.userInfo);
   const { register, handleSubmit } = useForm<FormData>();
+  const { addToast } = useToast();
   const dispatch = useAppDispatch();
 
   const onSubmit = async (data: FormData) => {
@@ -54,11 +55,19 @@ export default function RegisterUserInfo({ viewNumber }: any) {
         password: "",
       };
       console.log(mergedUserInfo);
-      await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/user/join`,
-        mergedUserInfo,
-      );
-      dispatch(handleModalView({ modalView: "registerSuccess" }));
+      await axios
+        .post(`${process.env.NEXT_PUBLIC_API_URL}/user/join`, mergedUserInfo)
+        .then(() => {
+          dispatch(handleModalView({ modalView: "registerSuccess" }));
+        })
+        .catch((error) => {
+          console.log(error);
+          addToast({
+            type: "error",
+            title: "회원가입 실패",
+            content: "서버가 원활하지않습니다. 고객센터로 문의부탁드립니다.",
+          });
+        });
     }
   };
   return (

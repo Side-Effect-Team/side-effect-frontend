@@ -1,6 +1,6 @@
 import { useAppDispatch } from "@/store/hooks";
 import { handleModalView } from "@/store/loginViewTransitionSlice";
-import { addEmail } from "@/store/userInfoStoreSlice";
+import { addEmail, addProviderType } from "@/store/userInfoStoreSlice";
 import { useGoogleLogin } from "@react-oauth/google";
 import { OAuthLogin, OAuthLoginWrapper, ButtonTitle } from "./styled";
 import { createAuthentication } from "@/store/authSlice";
@@ -15,15 +15,20 @@ export default function GoogleLoginButton() {
   const login = useGoogleLogin({
     onSuccess: async (res) => {
       await axios
-        .post(`${process.env.NEXT_PUBLIC_API_URL}/user/login`, null, {
+        .post(`${process.env.NEXT_PUBLIC_API_URL}/social/login`, null, {
           headers: { token: res.access_token, ProviderType: "google" },
         })
         .then((res) => {
+          console.log(res);
+          localStorage.setItem("accessToken", res.headers.authorization);
+          localStorage.setItem("id", res.data);
+
           dispatch(createAuthentication(res.headers.authorization));
           dispatch(closeModal());
         })
         .catch((err) => {
           console.log(err);
+          dispatch(addProviderType("GOOGLE"));
           dispatch(addEmail(err.response.data.email));
           dispatch(
             handleModalView({
