@@ -44,6 +44,8 @@ export default function MyPage() {
     { tab: "account", label: "계정" },
   ];
 
+  const title = filterTap.find((filter) => filter.tab === activeTab)?.label;
+
   const onClickTab = (tabName: string) => {
     setActiveTab(tabName);
   };
@@ -69,6 +71,7 @@ export default function MyPage() {
   useEffect(() => {
     fetchData();
   }, []);
+  console.log(data);
 
   useEffect(() => {
     if (activeTab === "likeBoards" && data) {
@@ -98,9 +101,9 @@ export default function MyPage() {
         {data && activeTab === "profile" ? (
           <Profile {...data} />
         ) : activeTab === "account" ? (
-          <Account email={data?.email || ""} />
+          <Account email={data?.email || ""} nickname={data?.nickname || ""} />
         ) : (
-          <TabBoards boards={boards} title={activeTab} />
+          <TabBoards boards={boards} title={title || ""} />
         )}
       </ContentsWrapper>
     </Container>
