@@ -11,14 +11,13 @@ import {
   Footer,
   Header,
   ProjectName,
-  HeartFillIcon,
   HeartNotFillIcon,
   Tag,
   TagWrapper,
   Title,
   ViewIcon,
-  TestHeartFillIcon,
-  TestHeartNotFillIcon,
+  HeartWrapper,
+  HeartFillIcon,
 } from "./styled";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -45,12 +44,14 @@ interface BoardCardDataProps {
 }
 
 export default function BoardCard({ data, category }: BoardCardDataProps) {
-  const [isLike, setIsLike] = useState(data?.like);
+  const [isLike, setIsLike] = useState(data?.like || false);
   const [likeNum, setLikeNum] = useState(data?.likeNum || 0);
+  const [heartLike, setHeartLike] = useState(data?.like || false);
   const router = useRouter();
   const { addToast, deleteToast } = useToast();
 
-  const onClickHeart = async (e: MouseEvent<HTMLButtonElement>) => {
+  // console.log(data);
+  const onClickHeart = async (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
 
     // 좋아요 API 추가
@@ -72,9 +73,12 @@ export default function BoardCard({ data, category }: BoardCardDataProps) {
         setIsLike((prev) => !prev);
         if (isLike && likeNum) {
           setLikeNum(likeNum - 1);
+          setHeartLike(false);
         }
         if (!isLike && likeNum >= 0) {
           setLikeNum(likeNum + 1);
+          setHeartLike(true);
+
           addToast({
             type: "success",
             title: "success",
@@ -98,14 +102,20 @@ export default function BoardCard({ data, category }: BoardCardDataProps) {
       router.push(`/recruits/${e.currentTarget.id}`);
     } else router.push(`/projects/${e.currentTarget.id}`);
   };
-  console.log(data);
-
+  console.log(heartLike);
+  useEffect(() => {
+    setHeartLike(false);
+  }, []);
   return (
     <Container id={data?.id.toString()} onClick={onClickGoToBoard}>
       <Header category={category} src={data?.headerImage}>
-        <IconButton id={data?.id.toString()} onClick={onClickHeart}>
-          {isLike ? <TestHeartFillIcon /> : <TestHeartNotFillIcon />}
-        </IconButton>
+        <HeartWrapper
+          isLike={isLike}
+          id={data?.id.toString()}
+          onClick={onClickHeart}
+        >
+          <HeartFillIcon isLike={isLike} heartLike={heartLike} />
+        </HeartWrapper>
         <ProjectName>{data?.projectName}</ProjectName>
       </Header>
       <ContentsWrapper>
@@ -121,16 +131,10 @@ export default function BoardCard({ data, category }: BoardCardDataProps) {
         <Footer>
           <CreateAt>{data?.createdAt}</CreateAt>
           <ButtonsWrapper>
-            {/* <IconButton id={data?.id.toString()} onClick={onClickHeart}>
-              {isLike ? <HeartFillIcon /> : <HeartNotFillIcon />}
-            </IconButton>
-            <FeedbackNum>{likeNum}</FeedbackNum> */}
-            {/* ///////////////////////////////////////////////////  view 추가 로직 */}
             <IconButton>
               <ViewIcon />
             </IconButton>
             <FeedbackNum>{data?.views || 0}</FeedbackNum>
-            {/*  */}
             {data?.commentNum !== undefined && (
               <>
                 <IconButton>
@@ -139,6 +143,10 @@ export default function BoardCard({ data, category }: BoardCardDataProps) {
                 <FeedbackNum>{data?.commentNum}</FeedbackNum>
               </>
             )}
+            <IconButton>
+              <HeartNotFillIcon />
+            </IconButton>
+            <FeedbackNum>{likeNum}</FeedbackNum>
           </ButtonsWrapper>
         </Footer>
       </ContentsWrapper>

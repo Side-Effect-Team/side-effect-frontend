@@ -1,14 +1,7 @@
 import styled from "styled-components";
 import { theme } from "@/styles/Theme";
-import {
-  AiFillHeart,
-  AiOutlineEye,
-  AiOutlineHeart,
-  AiOutlineMessage,
-} from "react-icons/ai";
-import { GrView } from "react-icons/gr";
+import { AiFillHeart, AiOutlineHeart, AiOutlineMessage } from "react-icons/ai";
 import { BsEye } from "react-icons/bs";
-import { mediaQuery } from "@/styles/Media";
 import { media } from "@/styles/mediatest";
 
 export const Container = styled.div`
@@ -29,21 +22,44 @@ export const Container = styled.div`
   :hover {
     box-shadow: 1px 1px 5px rgba(21, 94, 239, 0.25);
   }
-  ${mediaQuery("mobile")`
-  width: 95%;
-  height: 150px;
-  flex-direction: row;
-  margin-left: auto;
-  margin-right: auto; 
-  `}
+  ${media.mobile} {
+    width: 95%;
+    height: 150px;
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: auto;
+  }
 `;
-export const TestHeartFillIcon = styled(AiFillHeart)`
-  color: ${theme.brandColor.coral};
-  font-size: 25px;
-  font-weight: 600;
+export const HeartWrapper = styled.div<{ isLike: boolean }>`
+  background-color: ${(p) => (p.isLike ? "white" : "#d9d9d9")};
+  border-radius: 50%;
+  padding: 5px;
   position: absolute;
   top: 10px;
   right: 10px;
+  display: flex;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.25);
+`;
+interface HeartProps {
+  isLike: boolean;
+  heartLike: boolean;
+}
+export const HeartFillIcon = styled(AiFillHeart)<HeartProps>`
+  color: ${(p) => (p.isLike ? theme.brandColor.coral : "white")};
+  font-size: 25px;
+  font-weight: 600;
+  animation: ${(p) => (p.heartLike ? "heart 0.7s ease-in-out" : "none")};
+  @keyframes heart {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
 `;
 export const TestHeartNotFillIcon = styled(AiOutlineHeart)`
   color: ${theme.brandColor.coral};
@@ -59,7 +75,6 @@ interface HeaderProps {
 }
 export const Header = styled.div<HeaderProps>`
   width: 100%;
-  /* height: 150px; */
   height: ${(p) => (p.category === "projects" ? "250px" : "150px")};
   display: flex;
   flex-direction: column;
@@ -67,14 +82,13 @@ export const Header = styled.div<HeaderProps>`
   justify-content: center;
   background-image: ${(p) =>
     `url(${p.src || "/images/BoardDefaultBackground.png"})`};
-  // headerImage의 width에 맞추기 위해 아래 코드 추가했습니다
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  ${mediaQuery("mobile")`
-  width: 35%;
-  height: 150px;
-  `};
+  ${media.mobile} {
+    width: 35%;
+    height: 150px;
+  }
 `;
 
 export const ProjectName = styled.div`
@@ -106,8 +120,6 @@ export const ContentsWrapper = styled.div`
     padding: 10px;
     justify-content: space-between;
   }
-  ${mediaQuery("mobile")`
-  `}
 `;
 export const TagWrapper = styled.div`
   width: 100%;
@@ -119,10 +131,10 @@ export const TagWrapper = styled.div`
   align-items: center;
   flex-wrap: wrap;
   margin-bottom: 10px;
-  ${mediaQuery("mobile")`
-  flex-wrap: nowrap;
-  margin: 10px 0;
-  `}
+  ${media.mobile} {
+    flex-wrap: nowrap;
+    margin: 10px 0;
+  }
 `;
 export const Tag = styled.div`
   font-size: 16px;
@@ -133,10 +145,10 @@ export const Tag = styled.div`
   margin-bottom: 7px;
   padding: 0.3em 1em;
   border-radius: 15px;
-  ${mediaQuery("mobile")`
-  margin-bottom: 0;
-  font-size: 12px;
-  `}
+  ${media.mobile} {
+    margin-bottom: 0;
+    font-size: 12px;
+  }
 `;
 export const Title = styled.div`
   font-size: 20px;
@@ -146,12 +158,11 @@ export const Title = styled.div`
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  ${mediaQuery("mobile")`
-  -webkit-line-clamp: 1;
-  `}
+  ${media.mobile} {
+    -webkit-line-clamp: 1;
+  }
 `;
 export const Content = styled.div`
-  /* height: 40%; */
   font-size: 16px;
   font-weight: 400;
   color: #454545;
@@ -160,9 +171,9 @@ export const Content = styled.div`
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  ${mediaQuery("mobile")`
-  -webkit-line-clamp: 1;
-  `}
+  ${media.mobile} {
+    -webkit-line-clamp: 1;
+  }
 `;
 export const Footer = styled.div`
   width: 100%;
@@ -188,15 +199,10 @@ export const IconButton = styled.button`
   cursor: pointer;
 `;
 export const HeartNotFillIcon = styled(AiOutlineHeart)`
-  color: ${theme.brandColor.coral};
-  font-size: 20px;
-`;
-export const HeartFillIcon = styled(AiFillHeart)`
-  color: ${theme.brandColor.coral};
-  font-size: 20px;
+  color: ${theme.colors.gray};
+  font-size: 16px;
 `;
 export const CommentIcon = styled(AiOutlineMessage)`
-  /* color: ${theme.brandColor.coral}; */
   color: ${theme.colors.gray};
   font-size: 16px;
 `;
@@ -207,7 +213,6 @@ export const FeedbackNum = styled.div`
   color: ${theme.colors.gray};
 `;
 export const ViewIcon = styled(BsEye)`
-  /* color: ${theme.brandColor.coral}; */
   color: ${theme.colors.gray};
   font-size: 16px;
 `;
