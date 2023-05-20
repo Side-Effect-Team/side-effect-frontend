@@ -5,7 +5,7 @@ import { BsEye } from "react-icons/bs";
 import { media } from "@/styles/mediatest";
 
 export const Container = styled.div`
-  width: 300px;
+  min-width: 300px;
   height: 400px;
   display: flex;
   flex-direction: column;
@@ -24,7 +24,7 @@ export const Container = styled.div`
   }
   ${media.mobile} {
     width: 95%;
-    height: 150px;
+    min-height: 150px;
     flex-direction: row;
     margin-left: auto;
     margin-right: auto;

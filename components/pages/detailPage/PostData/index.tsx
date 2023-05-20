@@ -16,7 +16,7 @@ import {
   Column,
   SpanStyled,
   OptionBox,
-  OptionModalWrapper,
+  OptionPopupWrapper,
   OptionBtn,
   Container,
 } from "@/detailComps/PostData/styled";
@@ -29,7 +29,7 @@ interface PostDataProps {
   likeNum: number;
 }
 
-interface OptionModalProps {
+interface OptionPopupProps {
   id: number;
 }
 
@@ -40,7 +40,7 @@ export default function PostData({
   views,
   likeNum,
 }: PostDataProps) {
-  const [modalOn, setModalOn] = useState(false);
+  const [popupOn, setPopupOn] = useState(false);
 
   return (
     <div>
@@ -75,9 +75,9 @@ export default function PostData({
         <div>
           <span>좋아요 </span>
           <SpanStyled>{likeNum}</SpanStyled>
-          {modalOn && <OptionModal id={id} />}
+          {popupOn && <OptionPopup id={id} />}
         </div>
-        <OptionBox onClick={() => setModalOn((prev) => !prev)}>
+        <OptionBox onClick={() => setPopupOn((prev) => !prev)}>
           <BiDotsHorizontalRounded size={25} />
         </OptionBox>
       </Row>
@@ -86,7 +86,7 @@ export default function PostData({
   );
 }
 
-function OptionModal({ id }: OptionModalProps) {
+function OptionPopup({ id }: OptionPopupProps) {
   const router = useRouter();
   const postCategory = router.pathname.split("/")[1];
 
@@ -123,7 +123,7 @@ function OptionModal({ id }: OptionModalProps) {
   };
 
   return (
-    <OptionModalWrapper>
+    <OptionPopupWrapper>
       <OptionBtn type="button" onClick={handleEdit}>
         <Container>
           <BiEditAlt size={20} />
@@ -136,6 +136,6 @@ function OptionModal({ id }: OptionModalProps) {
           <p>삭제</p>
         </Container>
       </OptionBtn>
-    </OptionModalWrapper>
+    </OptionPopupWrapper>
   );
 }

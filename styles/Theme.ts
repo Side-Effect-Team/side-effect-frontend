@@ -6,7 +6,7 @@ export const theme = {
     gray: "#98A2B3",
     danger: "#F04438",
     success: "#16B364",
-    background: "#ddd",
+    background: "#fff",
     white: "#fff",
   },
   fonts: {
@@ -18,8 +18,9 @@ export const theme = {
   },
   height: {
     header: "75px",
-    carousel: "500px",
+    mainCarousel: "500px",
     banner: "300px",
+    batchCarousel: "550px",
   },
   width: {
     positionInput: "250px",

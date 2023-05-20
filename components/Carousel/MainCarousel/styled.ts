@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { mediaQuery } from "../../styles/Media";
+import { mediaQuery } from "@/styles/Media";
 
 interface SlideContentsWrapperProps {
   bgColor: string;
@@ -13,7 +13,7 @@ interface ButtonStyledProps {
 }
 
 export const CarouselWrapper = styled.div`
-  height: ${(p) => p.theme.height.carousel};
+  height: ${(p) => p.theme.height.mainCarousel};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -24,10 +24,9 @@ export const CarouselWrapper = styled.div`
 
 export const SlideContentsWrapper = styled.main<SlideContentsWrapperProps>`
   position: absolute;
-  height: ${(p) => p.theme.height.header};
   left: 0;
   width: 100%;
-  height: ${(p) => p.theme.height.carousel};
+  height: ${(p) => p.theme.height.mainCarousel};
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;

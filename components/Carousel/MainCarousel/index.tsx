@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 import { CarouselWrapper, SlideContentsWrapper, ButtonStyled } from "./styled";
-import { CAROUSEL_CONTENTS_LIST } from "../../enum";
+import { CAROUSEL_CONTENTS_LIST } from "../../../enum";
 
-interface CarouselProps {
+interface MainCarouselProps {
   data: typeof CAROUSEL_CONTENTS_LIST;
   intervalSeconds?: number;
 }
@@ -23,7 +23,10 @@ interface TextContentsProps {
   subTitle: string;
 }
 
-export default function Carousel({ data, intervalSeconds = 3 }: CarouselProps) {
+export default function MainCarousel({
+  data,
+  intervalSeconds = 3,
+}: MainCarouselProps) {
   const [slideIdx, setSlideIdx] = useState(0);
 
   const prevSlide = () => {
