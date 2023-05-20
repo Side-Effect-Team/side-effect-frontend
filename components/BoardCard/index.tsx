@@ -16,11 +16,15 @@ import {
   Tag,
   TagWrapper,
   Title,
+  ViewIcon,
+  TestHeartFillIcon,
+  TestHeartNotFillIcon,
 } from "./styled";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useToast from "@/hooks/useToast";
+import { color } from "framer-motion";
 export interface BoardCardProps {
   id: number;
   category?: string;
@@ -33,33 +37,12 @@ export interface BoardCardProps {
   like?: boolean;
   likeNum?: number;
   commentNum?: number;
+  views?: number;
 }
 interface BoardCardDataProps {
   data?: BoardCardProps;
   category: string;
 }
-export const LIKE_PROJECT = async (id: number) => {
-  const token = localStorage.getItem("accessToken");
-  const config = {
-    headers: { Authorization: `Bearer ${token}` },
-  };
-  return axios.post(
-    `${process.env.NEXT_PUBLIC_API_URL}/like/${id}`,
-    null,
-    config,
-  );
-};
-export const LIKE_RECRUIT = async (id: number) => {
-  const token = localStorage.getItem("accessToken");
-  const config = {
-    headers: { Authorization: `Bearer ${token}` },
-  };
-  return axios.post(
-    `${process.env.NEXT_PUBLIC_API_URL}/recruit-board/likes/${id}`,
-    null,
-    config,
-  );
-};
 
 export default function BoardCard({ data, category }: BoardCardDataProps) {
   const [isLike, setIsLike] = useState(data?.like);
@@ -101,6 +84,11 @@ export default function BoardCard({ data, category }: BoardCardDataProps) {
         }
       } catch (error) {
         console.log(error);
+        addToast({
+          type: "error",
+          title: "error",
+          content: "error.",
+        });
       }
     } else alert("로그인 후 이용가능합니다.");
   };
@@ -110,10 +98,14 @@ export default function BoardCard({ data, category }: BoardCardDataProps) {
       router.push(`/recruits/${e.currentTarget.id}`);
     } else router.push(`/projects/${e.currentTarget.id}`);
   };
+  console.log(data);
 
   return (
     <Container id={data?.id.toString()} onClick={onClickGoToBoard}>
       <Header category={category} src={data?.headerImage}>
+        <IconButton id={data?.id.toString()} onClick={onClickHeart}>
+          {isLike ? <TestHeartFillIcon /> : <TestHeartNotFillIcon />}
+        </IconButton>
         <ProjectName>{data?.projectName}</ProjectName>
       </Header>
       <ContentsWrapper>
@@ -129,14 +121,24 @@ export default function BoardCard({ data, category }: BoardCardDataProps) {
         <Footer>
           <CreateAt>{data?.createdAt}</CreateAt>
           <ButtonsWrapper>
-            <IconButton id={data?.id.toString()} onClick={onClickHeart}>
+            {/* <IconButton id={data?.id.toString()} onClick={onClickHeart}>
               {isLike ? <HeartFillIcon /> : <HeartNotFillIcon />}
             </IconButton>
-            <FeedbackNum>{likeNum}</FeedbackNum>
+            <FeedbackNum>{likeNum}</FeedbackNum> */}
+            {/* ///////////////////////////////////////////////////  view 추가 로직 */}
             <IconButton>
-              <CommentIcon />
+              <ViewIcon />
             </IconButton>
-            <FeedbackNum>{data?.commentNum}</FeedbackNum>
+            <FeedbackNum>{data?.views || 0}</FeedbackNum>
+            {/*  */}
+            {data?.commentNum !== undefined && (
+              <>
+                <IconButton>
+                  <CommentIcon />
+                </IconButton>
+                <FeedbackNum>{data?.commentNum}</FeedbackNum>
+              </>
+            )}
           </ButtonsWrapper>
         </Footer>
       </ContentsWrapper>
@@ -146,4 +148,4 @@ export default function BoardCard({ data, category }: BoardCardDataProps) {
 
 // 사용하는 법
 
-//     <BoardCard data={data} />
+//     <BoardCard data={data} category={string}/>

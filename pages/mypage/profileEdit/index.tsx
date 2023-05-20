@@ -138,15 +138,18 @@ export default function MyPageEdit() {
   };
 
   // 기존 데이터와 변경된 데이터 비교
-  const compareData = (originData: MypageProps, changedData: MypageProps) => {
+  const compareData = (
+    originData: MypageEditProps,
+    changedData: MypageEditProps,
+  ) => {
     const keys = Object.keys(originData);
-    const changes: Partial<MypageProps> & Record<string, any> = {};
+    const changes: Partial<MypageEditProps> & Record<string, any> = {};
     for (const key of keys) {
       if (
-        originData[key as keyof MypageProps] !==
-        changedData[key as keyof MypageProps]
+        originData[key as keyof MypageEditProps] !==
+        changedData[key as keyof MypageEditProps]
       ) {
-        changes[key] = changedData[key as keyof MypageProps];
+        changes[key] = changedData[key as keyof MypageEditProps];
         if (changes[key] === undefined) {
           delete changes[key];
         }
@@ -155,8 +158,9 @@ export default function MyPageEdit() {
     return changes;
   };
 
-  const onCliCkEditCancel = () => {
-    alert("변경사항은 저장되지 않습니다.");
+  const onClickEditCancel = () => {
+    const response = confirm("변경사항은 저장되지 않습니다.");
+    if (!response) return;
     addToast({
       type: "info",
       title: "info",
@@ -206,7 +210,7 @@ export default function MyPageEdit() {
             />
           </SectionWrapper>
           <ButtonWrapper>
-            <Button fill="false" type="button" onClick={onCliCkEditCancel}>
+            <Button fill="false" type="button" onClick={onClickEditCancel}>
               수정 취소
             </Button>
             <Button>수정 완료</Button>

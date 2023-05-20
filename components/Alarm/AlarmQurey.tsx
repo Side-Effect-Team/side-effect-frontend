@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const ALARM_CHECK = async () => {
+export const getAlarmList = async () => {
   const token = localStorage.getItem("accessToken");
   const config = {
     headers: { Authorization: `Bearer ${token}` },
@@ -8,7 +8,7 @@ export const ALARM_CHECK = async () => {
   return axios.get(`${process.env.NEXT_PUBLIC_API_URL}/notice`, config);
 };
 
-export const READ_ALARM = async (id: number) => {
+export const readAlarm = async (id: number) => {
   const token = localStorage.getItem("accessToken");
   const config = {
     headers: { Authorization: `Bearer ${token}` },
@@ -21,7 +21,7 @@ export const READ_ALARM = async (id: number) => {
   return response;
 };
 
-export const DELETE_ALARM = async (id: number) => {
+export const deleteAlarm = async (id: number) => {
   const token = localStorage.getItem("accessToken");
   const config = {
     headers: { Authorization: `Bearer ${token}` },
