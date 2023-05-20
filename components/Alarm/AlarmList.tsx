@@ -1,4 +1,4 @@
-import { Dispatch, MouseEvent, SetStateAction } from "react";
+import { Dispatch, MouseEvent, SetStateAction, useRef } from "react";
 import {
   CloseButton,
   Container,
@@ -14,7 +14,8 @@ import {
 } from "./styled";
 import { useRouter } from "next/router";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { DELETE_ALARM, READ_ALARM } from "./AlarmQurey";
+import { deleteAlarm, readAlarm } from "./AlarmQurey";
+import useOutsideClick from "@/hooks/useOutsideClick";
 
 // export interface AlarmProps {
 //   lastId: number;
@@ -38,15 +39,13 @@ interface AlarmListProps {
 export default function AlarmList({ alarmList, setOpenAlarm }: AlarmListProps) {
   const router = useRouter();
   const queryClient = useQueryClient();
-
   const onClickCloseAlarm = (e: MouseEvent<SVGAElement>) => {
     e.stopPropagation();
     setOpenAlarm(false);
   };
-
   // 알람 읽기
   const { mutate: readMutate } = useMutation({
-    mutationFn: READ_ALARM,
+    mutationFn: readAlarm,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["notice"] });
     },
@@ -62,7 +61,7 @@ export default function AlarmList({ alarmList, setOpenAlarm }: AlarmListProps) {
 
   // 알람 삭제
   const { mutate: deleteMutate } = useMutation({
-    mutationFn: DELETE_ALARM,
+    mutationFn: deleteAlarm,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["notice"] });
     },
@@ -73,14 +72,13 @@ export default function AlarmList({ alarmList, setOpenAlarm }: AlarmListProps) {
       e.stopPropagation();
       deleteMutate(id);
     };
-
   return (
     <Container>
       <Header>
         <HeaderTitle>알림</HeaderTitle>
         <CloseButton onClick={onClickCloseAlarm} />
       </Header>
-      {alarmList ? (
+      {alarmList && alarmList.length !== 0 ? (
         alarmList.map((alarm) => (
           <Wrapper
             watched={alarm.watched}

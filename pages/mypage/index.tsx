@@ -9,12 +9,13 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { BoardCardProps } from "@/components/BoardCard";
 import TabBoards from "@/components/pages/mypage/TabBoards";
+import Account from "@/components/pages/mypage/Account";
 
 export interface MypageProps {
-  id?: number;
+  id: number;
   imgUrl?: string;
   nickname: string;
-  email?: string;
+  email: string;
   introduction?: string;
   stacks?: string[];
   position: string;
@@ -40,7 +41,10 @@ export default function MyPage() {
     { tab: "likeBoards", label: "관심 게시물" },
     { tab: "uploadBoards", label: "등록 게시물" },
     { tab: "applyBoards", label: "지원목록" },
+    { tab: "account", label: "계정" },
   ];
+
+  const title = filterTap.find((filter) => filter.tab === activeTab)?.label;
 
   const onClickTab = (tabName: string) => {
     setActiveTab(tabName);
@@ -67,6 +71,7 @@ export default function MyPage() {
   useEffect(() => {
     fetchData();
   }, []);
+  console.log(data);
 
   useEffect(() => {
     if (activeTab === "likeBoards" && data) {
@@ -95,8 +100,10 @@ export default function MyPage() {
         {!data && <div>데이터를 받아올 수 없습니다</div>}
         {data && activeTab === "profile" ? (
           <Profile {...data} />
+        ) : activeTab === "account" ? (
+          <Account email={data?.email || ""} nickname={data?.nickname || ""} />
         ) : (
-          <TabBoards boards={boards} title={activeTab} />
+          <TabBoards boards={boards} title={title || ""} />
         )}
       </ContentsWrapper>
     </Container>

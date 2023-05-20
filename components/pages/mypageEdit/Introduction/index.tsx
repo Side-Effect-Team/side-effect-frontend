@@ -1,5 +1,11 @@
 import Button from "@/components//Button";
-import { ChangeEvent, Dispatch, SetStateAction, useRef } from "react";
+import {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useRef,
+} from "react";
 import {
   ErrorMessage,
   FiledWrapper,
@@ -57,7 +63,13 @@ export default function IntroductionEdit({
       }
     };
   };
-
+  // 닉네임 값이 빈값으로 반환되는 문제 해결
+  useEffect(() => {
+    const inputElement = document.querySelector<HTMLInputElement>("#nickname");
+    if (inputElement) {
+      inputElement.focus();
+    }
+  }, []);
   return (
     <>
       <ProfileWrapper>
@@ -78,6 +90,7 @@ export default function IntroductionEdit({
             <IntroductionTitle>닉네임:</IntroductionTitle>
             <FiledWrapper>
               <Input
+                id="nickname"
                 placeholder="닉네임을 적어주세요"
                 defaultValue={nickname}
                 onKeyDown={(e) => {
@@ -86,8 +99,7 @@ export default function IntroductionEdit({
                   }
                 }}
                 {...introRegister("nickname", {
-                  // required: "닉네임을 작성해주세요",
-                  required: false,
+                  required: "닉네임을 작성해주세요",
                   minLength: {
                     value: 2,
                     message: "닉네임은 2글자 이상 입력해주세요",
@@ -95,6 +107,12 @@ export default function IntroductionEdit({
                   maxLength: {
                     value: 15,
                     message: "닉네임은 15글자 이하로 입력해주세요",
+                  },
+                  validate: (value) => {
+                    if (value.trim().length === 0) {
+                      return "닉네임을 작성해주세요";
+                    }
+                    return true;
                   },
                 })}
               />

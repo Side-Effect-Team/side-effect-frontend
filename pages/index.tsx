@@ -1,40 +1,25 @@
-// import Carousel from "@/components/Carousel";
 import styled from "styled-components";
 import { CAROUSEL_CONTENTS_LIST } from "../enum";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import MainCarousel from "@/components/Carousel/MainCarousel";
+import BatchCarousel from "@/components/Carousel/BatchCarousel";
 
-export default function Home() {
+export default function HomePage() {
   return (
     <Wrapper>
-      {/* <Carousel data={CAROUSEL_CONTENTS_LIST} /> */}
+      <MainCarousel data={CAROUSEL_CONTENTS_LIST} />
       <MainStyled>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
-        <h2>메인 컨텐츠</h2>
+        <BatchCarousel
+          title="이달의 베스트 프로젝트"
+          category="projects"
+          maxCards={8}
+          queryKey="topLikedProjects"
+        />
+        <BatchCarousel
+          title="최근 올라온 팀원 모집글"
+          category="recruits"
+          maxCards={8}
+          queryKey="newRecruits"
+        />
       </MainStyled>
     </Wrapper>
   );

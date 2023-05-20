@@ -1,7 +1,15 @@
 import styled from "styled-components";
 import { theme } from "@/styles/Theme";
-import { AiFillHeart, AiOutlineHeart, AiOutlineMessage } from "react-icons/ai";
+import {
+  AiFillHeart,
+  AiOutlineEye,
+  AiOutlineHeart,
+  AiOutlineMessage,
+} from "react-icons/ai";
+import { GrView } from "react-icons/gr";
+import { BsEye } from "react-icons/bs";
 import { mediaQuery } from "@/styles/Media";
+import { media } from "@/styles/mediatest";
 
 export const Container = styled.div`
   min-width: 300px;
@@ -14,6 +22,8 @@ export const Container = styled.div`
   border-radius: 15px;
   overflow: hidden;
   background-color: white;
+  position: relative;
+
   cursor: pointer;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
   :hover {
@@ -21,13 +31,28 @@ export const Container = styled.div`
   }
   ${mediaQuery("mobile")`
   width: 95%;
-  height: 150px;
+  min-height: 150px;
   flex-direction: row;
   margin-left: auto;
   margin-right: auto; 
   `}
 `;
-
+export const TestHeartFillIcon = styled(AiFillHeart)`
+  color: ${theme.brandColor.coral};
+  font-size: 25px;
+  font-weight: 600;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+`;
+export const TestHeartNotFillIcon = styled(AiOutlineHeart)`
+  color: ${theme.brandColor.coral};
+  font-size: 25px;
+  font-weight: 600;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+`;
 interface HeaderProps {
   src?: string;
   category?: string;
@@ -49,8 +74,9 @@ export const Header = styled.div<HeaderProps>`
   ${mediaQuery("mobile")`
   width: 35%;
   height: 150px;
-  `}
+  `};
 `;
+
 export const ProjectName = styled.div`
   width: 80%;
   color: white;
@@ -74,11 +100,13 @@ export const ContentsWrapper = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
   padding: 5%;
+  ${media.mobile} {
+    width: 65%;
+    height: 150px;
+    padding: 10px;
+    justify-content: space-between;
+  }
   ${mediaQuery("mobile")`
-  width: 65%;
-  height: 150px;
-  padding: 10px;
-  justify-content: space-between;
   `}
 `;
 export const TagWrapper = styled.div`
@@ -168,11 +196,18 @@ export const HeartFillIcon = styled(AiFillHeart)`
   font-size: 20px;
 `;
 export const CommentIcon = styled(AiOutlineMessage)`
-  color: ${theme.brandColor.coral};
-  font-size: 20px;
+  /* color: ${theme.brandColor.coral}; */
+  color: ${theme.colors.gray};
+  font-size: 16px;
 `;
 export const FeedbackNum = styled.div`
   font-size: 16px;
   margin-right: 5px;
   color: #454545;
+  color: ${theme.colors.gray};
+`;
+export const ViewIcon = styled(BsEye)`
+  /* color: ${theme.brandColor.coral}; */
+  color: ${theme.colors.gray};
+  font-size: 16px;
 `;

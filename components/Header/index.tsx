@@ -6,6 +6,8 @@ import Button from "../Button";
 import { useAppDispatch } from "@/store/hooks";
 import { openModal } from "@/store/modalSlice";
 import Alarm from "../Alarm";
+import { useRef, useState } from "react";
+import useOutsideClick from "@/hooks/useOutsideClick";
 
 interface HeaderProps {
   handleMobileMenu: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -13,9 +15,11 @@ interface HeaderProps {
 
 export default function Header({ handleMobileMenu }: HeaderProps) {
   const dispatch = useAppDispatch();
-
+  const [openAlarm, setOpenAlarm] = useState(false);
+  const AlarmListRef = useRef(null);
+  useOutsideClick(AlarmListRef, () => setOpenAlarm(false));
   return (
-    <Wrapper>
+    <Wrapper ref={AlarmListRef}>
       <HeaderStyled>
         <Logo>
           <Link href="/">사이드이펙트</Link>
@@ -28,14 +32,18 @@ export default function Header({ handleMobileMenu }: HeaderProps) {
           ))}
         </NavStyled>
         <BoxStyled>
-          {/* <Alarm /> */}
+          <Alarm openAlarm={openAlarm} setOpenAlarm={setOpenAlarm} />
           <Button
             onClick={() => dispatch(openModal({ modalType: "LoginModal" }))}
           >
             로그인
           </Button>
         </BoxStyled>
-        <MobileMenuBox handleMobileMenu={handleMobileMenu} />
+        <MobileMenuBox
+          handleMobileMenu={handleMobileMenu}
+          openAlarm={openAlarm}
+          setOpenAlarm={setOpenAlarm}
+        />
       </HeaderStyled>
     </Wrapper>
   );
