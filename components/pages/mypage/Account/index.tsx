@@ -1,11 +1,12 @@
 import Button from "@/components/Button";
-import { UserId, Wrapper } from "./style";
+import { Email, Nickname, Wrapper } from "./style";
 import axios from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useToast from "@/hooks/useToast";
 import { useRouter } from "next/router";
 interface AccountProps {
   email: string;
+  nickname: string;
 }
 
 export const DELETE_ACCOUNT = async () => {
@@ -20,7 +21,7 @@ export const DELETE_ACCOUNT = async () => {
   );
   return response;
 };
-export default function Account({ email }: AccountProps) {
+export default function Account({ email, nickname }: AccountProps) {
   const { addToast, deleteToast } = useToast();
   const router = useRouter();
 
@@ -49,7 +50,8 @@ export default function Account({ email }: AccountProps) {
   };
   return (
     <Wrapper>
-      <UserId>아이디 : {email}</UserId>
+      <Nickname>{nickname}님</Nickname>
+      <Email>email : {email}</Email>
       <Button onClick={onClickDeleteAccount}>계정 탈퇴</Button>
     </Wrapper>
   );

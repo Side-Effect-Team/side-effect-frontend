@@ -6,10 +6,15 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 100px 0;
+  margin: 50px 0;
 `;
-
-export const UserId = styled.div`
+export const Nickname = styled.div`
+  font-weight: 700;
+  font-size: 25px;
+  color: #d9d9d9;
+  margin-bottom: 15px;
+`;
+export const Email = styled.div`
   font-weight: 700;
   margin-bottom: 50px;
 `;
