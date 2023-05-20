@@ -17,7 +17,7 @@ export default function MobileMenuBox({
 }: MobileMenuBoxProps) {
   return (
     <Wrapper>
-      <Alarm openAlarm={openAlarm} setOpenAlarm={setOpenAlarm} />
+      {/* <Alarm openAlarm={openAlarm} setOpenAlarm={setOpenAlarm} /> */}
       <Button onClick={handleMobileMenu}>
         <IoReorderThree />
       </Button>

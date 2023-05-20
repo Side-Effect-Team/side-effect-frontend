@@ -32,7 +32,7 @@ export default function Header({ handleMobileMenu }: HeaderProps) {
           ))}
         </NavStyled>
         <BoxStyled>
-          <Alarm openAlarm={openAlarm} setOpenAlarm={setOpenAlarm} />
+          {/* <Alarm openAlarm={openAlarm} setOpenAlarm={setOpenAlarm} /> */}
           <Button
             onClick={() => dispatch(openModal({ modalType: "LoginModal" }))}
           >
