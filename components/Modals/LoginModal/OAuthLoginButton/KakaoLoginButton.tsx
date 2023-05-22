@@ -2,7 +2,7 @@ import { OAuthLogin, OAuthLoginWrapper, ButtonTitle } from "./styled";
 import { useAppDispatch } from "@/store/hooks";
 import { handleModalView } from "@/store/loginViewTransitionSlice";
 import { addEmail, addProviderType } from "@/store/userInfoStoreSlice";
-import useToast from "@/hooks/useToast";
+import useToast from "@/hooks/common/useToast";
 import axios from "axios";
 import KakaoImg from "../../../../public/images/Kakao.png";
 import Image from "next/image";
