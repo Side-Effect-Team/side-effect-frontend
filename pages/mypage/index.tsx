@@ -19,7 +19,7 @@ export interface MypageProps {
   nickname: string;
   email: string;
   introduction?: string;
-  stacks?: string[];
+  tags?: string[];
   position: string;
   career: string;
   githubUrl?: string;
