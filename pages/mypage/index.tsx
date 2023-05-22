@@ -5,11 +5,13 @@ import {
   TapWrapper,
 } from "@/components/pages/mypage/styled";
 import Profile from "@/components/pages/mypage/Profile";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { BoardCardProps } from "@/components/BoardCard";
 import TabBoards from "@/components/pages/mypage/TabBoards";
 import Account from "@/components/pages/mypage/Account";
+import { useQuery } from "@tanstack/react-query";
+import useToast from "@/hooks/useToast";
 
 export interface MypageProps {
   id: number;
@@ -29,8 +31,21 @@ export interface MypageProps {
   isOwner?: boolean;
 }
 
+export const fetchMypage = async () => {
+  const token = localStorage.getItem("accessToken");
+  const id = localStorage.getItem("id");
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  const response = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_URL}/user/mypage/${id}`,
+    config,
+  );
+  return response;
+};
 export default function MyPage() {
-  const [data, setData] = useState<MypageProps | null>(null);
+  const { addToast, deleteToast } = useToast();
+
   const [boards, setBoards] = useState<BoardCardProps[] | undefined | null>(
     null,
   );
@@ -50,38 +65,26 @@ export default function MyPage() {
     setActiveTab(tabName);
   };
 
-  const fetchData = async () => {
-    try {
-      const id = localStorage.getItem("id");
-      const token = localStorage.getItem("accessToken");
-      const config = {
-        headers: { Authorization: `Bearer ${token}` },
-      };
-      const result = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/user/mypage/${id}`,
-        config,
-      );
-      console.log(result.data);
-      setData(result.data);
-    } catch (error) {
-      setData(null);
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    fetchData();
-  }, []);
-  console.log(data);
-
+  const { data } = useQuery(["mypageData"], fetchMypage, {
+    onError: () => {
+      addToast({
+        type: "error",
+        title: "error",
+        content: "정보를 가져오지 못했습니다.",
+      });
+      deleteToast("unique-id");
+    },
+    retry: false,
+  });
   useEffect(() => {
     if (activeTab === "likeBoards" && data) {
-      setBoards(data.likeBoards);
+      setBoards(data.data.likeBoards);
     } else if (activeTab === "uploadBoards" && data) {
-      setBoards(data.uploadBoards);
+      setBoards(data.data.uploadBoards);
     } else if (activeTab === "applyBoards" && data) {
-      setBoards(data.applyBoards);
+      setBoards(data.data.applyBoards);
     }
-  }, [activeTab]);
+  }, [activeTab, data]);
 
   return (
     <Container>
@@ -99,9 +102,12 @@ export default function MyPage() {
       <ContentsWrapper>
         {!data && <div>데이터를 받아올 수 없습니다</div>}
         {data && activeTab === "profile" ? (
-          <Profile {...data} />
+          <Profile {...data.data} />
         ) : activeTab === "account" ? (
-          <Account email={data?.email || ""} nickname={data?.nickname || ""} />
+          <Account
+            email={data?.data.email || ""}
+            nickname={data?.data.nickname || ""}
+          />
         ) : (
           <TabBoards boards={boards} title={title || ""} />
         )}

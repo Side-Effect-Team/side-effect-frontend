@@ -29,7 +29,7 @@ export interface BoardCardProps {
   category?: string;
   headerImage?: string;
   projectName?: string;
-  stacks?: string[];
+  tags?: string[];
   title: string;
   content: string;
   createdAt: string;
@@ -42,57 +42,76 @@ interface BoardCardDataProps {
   data?: BoardCardProps;
   category: string;
 }
-
+const fetchProject = async (id: number) => {
+  const token = localStorage.getItem("accessToken");
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  const response = await axios.post(
+    `${process.env.NEXT_PUBLIC_API_URL}/like/${id}`,
+    null,
+    config,
+  );
+  return response;
+};
+const fetchRecruit = async (id: number) => {
+  const token = localStorage.getItem("accessToken");
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  const response = await axios.post(
+    `${process.env.NEXT_PUBLIC_API_URL}/recruit-board/likes/${id}`,
+    null,
+    config,
+  );
+  return response;
+};
 export default function BoardCard({ data, category }: BoardCardDataProps) {
-  const [isLike, setIsLike] = useState(data?.like || false);
-  const [likeNum, setLikeNum] = useState(data?.likeNum || 0);
-  const [heartLike, setHeartLike] = useState(data?.like || false);
+  const queryClient = useQueryClient();
+  const { mutate: projectMutate } = useMutation({
+    mutationFn: fetchProject,
+    onSuccess: (res) => {
+      if (res.data.message.includes("추천했습니다")) {
+        addToast({
+          type: "success",
+          title: "success",
+          content: "관심게시물로 등록되었습니다",
+        });
+        setHeartLike(true);
+      } else setHeartLike(false);
+      queryClient.invalidateQueries({ queryKey: ["projectData"] });
+      queryClient.invalidateQueries({ queryKey: ["mypageData"] });
+    },
+  });
+  const { mutate: recruitMutate } = useMutation({
+    mutationFn: fetchRecruit,
+    onSuccess: (res) => {
+      if (res.data.message.includes("추천했습니다")) {
+        addToast({
+          type: "success",
+          title: "success",
+          content: "관심게시물로 등록되었습니다",
+        });
+        setHeartLike(true);
+      }
+      setHeartLike(false);
+      queryClient.invalidateQueries({ queryKey: ["recruits"] });
+      queryClient.invalidateQueries({ queryKey: ["mypageData"] });
+    },
+  });
   const router = useRouter();
-  const { addToast, deleteToast } = useToast();
-
-  // console.log(data);
+  const { addToast } = useToast();
   const onClickHeart = async (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
-
     // 좋아요 API 추가
-    const id = e.currentTarget.id;
+    const id = Number(e.currentTarget.id);
     const token = localStorage.getItem("accessToken");
     if (token) {
-      try {
-        const config = {
-          headers: { Authorization: `Bearer ${token}` },
-        };
-
-        let url;
-        if (category === "projects") {
-          url = `${process.env.NEXT_PUBLIC_API_URL}/like/${id}`;
-        } else {
-          url = `${process.env.NEXT_PUBLIC_API_URL}/recruit-board/likes/${id}`;
-        }
-        const response = await axios.post(url, null, config);
-        setIsLike((prev) => !prev);
-        if (isLike && likeNum) {
-          setLikeNum(likeNum - 1);
-          setHeartLike(false);
-        }
-        if (!isLike && likeNum >= 0) {
-          setLikeNum(likeNum + 1);
-          setHeartLike(true);
-
-          addToast({
-            type: "success",
-            title: "success",
-            content: "관심 게시물에 추가되었습니다.",
-          });
-          deleteToast("unique-id");
-        }
-      } catch (error) {
-        console.log(error);
-        addToast({
-          type: "error",
-          title: "error",
-          content: "error.",
-        });
+      if (category === "projects") {
+        projectMutate(id);
+      } else {
+        recruitMutate(id);
+        console.log(data);
       }
     } else alert("로그인 후 이용가능합니다.");
   };
@@ -102,7 +121,8 @@ export default function BoardCard({ data, category }: BoardCardDataProps) {
       router.push(`/recruits/${e.currentTarget.id}`);
     } else router.push(`/projects/${e.currentTarget.id}`);
   };
-  console.log(heartLike);
+  const [heartLike, setHeartLike] = useState(data?.like || false);
+
   useEffect(() => {
     setHeartLike(false);
   }, []);
@@ -110,31 +130,34 @@ export default function BoardCard({ data, category }: BoardCardDataProps) {
     <Container id={data?.id.toString()} onClick={onClickGoToBoard}>
       <Header category={category} src={data?.headerImage}>
         <HeartWrapper
-          isLike={isLike}
+          isLike={data?.like || false}
           id={data?.id.toString()}
           onClick={onClickHeart}
         >
-          <HeartFillIcon isLike={isLike} heartLike={heartLike} />
+          <HeartFillIcon
+            islike={data?.like ? data?.like.toString() : "false"}
+            heartlike={heartLike.toString()}
+          />
         </HeartWrapper>
         <ProjectName>{data?.projectName}</ProjectName>
       </Header>
       <ContentsWrapper>
-        {data?.stacks && (
+        <Title>{data?.title}</Title>
+        <Content>{data?.content}</Content>
+        {data?.tags && (
           <TagWrapper>
-            {data?.stacks.map((el, index) => (
+            {data?.tags.map((el, index) => (
               <Tag key={index}>{el}</Tag>
             ))}
           </TagWrapper>
         )}
-        <Title>{data?.title}</Title>
-        <Content>{data?.content}</Content>
         <Footer>
           <CreateAt>{data?.createdAt}</CreateAt>
           <ButtonsWrapper>
             <IconButton>
               <ViewIcon />
             </IconButton>
-            <FeedbackNum>{data?.views || 0}</FeedbackNum>
+            <FeedbackNum>{data?.views}</FeedbackNum>
             {data?.commentNum !== undefined && (
               <>
                 <IconButton>
@@ -146,7 +169,7 @@ export default function BoardCard({ data, category }: BoardCardDataProps) {
             <IconButton>
               <HeartNotFillIcon />
             </IconButton>
-            <FeedbackNum>{likeNum}</FeedbackNum>
+            <FeedbackNum>{data?.likeNum}</FeedbackNum>
           </ButtonsWrapper>
         </Footer>
       </ContentsWrapper>
