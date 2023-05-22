@@ -1,15 +1,14 @@
 import { breakPoints } from "@/styles/Media";
 import { useState } from "react";
-import { media } from "@/styles/mediatest";
 import { useGetProjectData } from "../../hooks/queries/useGetProjectData";
 import styled from "styled-components";
 import SelectBox from "../../components/SelectBox";
-import BoardCard from "../../components/BoardCard";
 import Search from "@/components/Search";
 import NoData from "@/components/Nodata";
 import Loading from "@/components/Loading";
 import PageHead from "@/components/PageHead";
 import BatchCarousel from "@/components/Carousel/BatchCarousel";
+import ProjectList from "@/components/pages/project/ProjectLIst";
 const FILTER_OPTIONS = [
   { name: "최신순", value: "latest" },
   { name: "조회순", value: "views" },
@@ -28,7 +27,7 @@ export default function ProjectPage() {
   const [filter, setFilter] = useState("latest");
   const [keyword, setKeyword] = useState("");
   const { data, isLoading, Observer } = useGetProjectData(filter, keyword);
-  const noData = data?.pages[0].projects.length === 0;
+  const isDataEmpty = data?.pages[0].projects.length === 0;
   return (
     <Wrapper>
       <PageHead pageTitle="프로젝트 자랑 | 사이드 이펙트" />
@@ -48,24 +47,12 @@ export default function ProjectPage() {
         <Search setKeyword={setKeyword} />
       </FilterSection>
 
-      {noData ? (
+      {isDataEmpty ? (
         <NoData />
       ) : isLoading ? (
         <Loading width={10} height={150} />
       ) : (
-        <CardSection>
-          {data?.pages.map((page) => {
-            return page.projects.map((project: ProjectList) => {
-              return (
-                <BoardCard
-                  key={project.id}
-                  data={project}
-                  category="projects"
-                />
-              );
-            });
-          })}
-        </CardSection>
+        <ProjectList data={data} />
       )}
       {Observer()}
     </Wrapper>
@@ -83,15 +70,4 @@ const FilterSection = styled.div`
   display: flex;
   gap: 10px;
   justify-content: flex-end;
-`;
-const CardSection = styled.main`
-  display: grid;
-  justify-items: center;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  row-gap: 1rem;
-  column-gap: 1rem;
-  ${media.mobile} {
-    display: flex;
-    flex-direction: column;
-  }
 `;
