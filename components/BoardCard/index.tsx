@@ -27,10 +27,9 @@ import useToast from "@/hooks/useToast";
 import { color } from "framer-motion";
 export interface BoardCardProps {
   id: number;
-  category?: string;
   headerImage?: string;
   projectName?: string;
-  stacks?: string[];
+  tags?: string[];
   title: string;
   content: string;
   createdAt: string;
@@ -109,9 +108,9 @@ export default function BoardCard({ data, category }: BoardCardDataProps) {
         <ProjectName>{data?.projectName}</ProjectName>
       </Header>
       <ContentsWrapper>
-        {data?.stacks && (
+        {data?.tags && (
           <TagWrapper>
-            {data?.stacks.map((el, index) => (
+            {data?.tags.map((el, index) => (
               <Tag key={index}>{el}</Tag>
             ))}
           </TagWrapper>
