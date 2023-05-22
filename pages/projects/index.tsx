@@ -3,13 +3,14 @@ import SelectBox from "../../components/SelectBox";
 import BoardCard from "../../components/BoardCard";
 import Search from "@/components/Search";
 import { breakPoints } from "@/styles/Media";
-import { useState, useEffect } from "react";
-import { useInView } from "react-intersection-observer";
+import { useState } from "react";
 import { media } from "@/styles/mediatest";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import PageHead from "@/components/PageHead";
 import BatchCarousel from "@/components/Carousel/BatchCarousel";
 import { useGetProjectData } from "../../hooks/queries/useGetProjectData";
+import Image from "next/image";
+import NodataImg from "../../public/images/Nodata.png";
 const FILTER_OPTIONS = [
   { name: "최신순", value: "latest" },
   { name: "조회순", value: "views" },
@@ -28,22 +29,8 @@ export default function ProjectPage() {
   const [filter, setFilter] = useState("latest");
   const [keyword, setKeyword] = useState("");
   //threshold : inview가 보여지는 정도를 0~1까지 조절하여 트리거시점을 조절할수있다 0이면 보이자마자 트리거 1이면 전체가 다보여야 트리거
-  const { ref, inView } = useInView({ threshold: 1 });
-  const {
-    data,
-    hasNextPage,
-    fetchNextPage,
-    isLoading,
-    isSuccess,
-    isFetchingNextPage,
-  } = useGetProjectData(filter, keyword);
-
-  useEffect(() => {
-    if (inView && hasNextPage === true) {
-      fetchNextPage();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inView, hasNextPage]);
+  const { data, isLoading, Observer } = useGetProjectData(filter, keyword);
+  const noData = data?.pages[0].projects.length === 0;
   return (
     <Wrapper>
       <PageHead pageTitle="프로젝트 자랑 | 사이드 이펙트" />
@@ -63,40 +50,48 @@ export default function ProjectPage() {
         <Search setKeyword={setKeyword} />
       </FilterSection>
 
-      {isLoading ? (
+      {noData ? (
         <TestDiv>
-          <ScaleLoader />
+          <Image
+            src={NodataImg}
+            alt="검색된 결과가 없습니다"
+            width={500}
+            height={500}
+          />
+          <p>검색된 결과가 없습니다!</p>
+        </TestDiv>
+      ) : isLoading ? (
+        <TestDiv>
+          <ScaleLoader height={150} width={15} />
         </TestDiv>
       ) : (
         <CardSection>
-          {data?.pages[0].projects.length !== 0 && isSuccess ? (
-            data?.pages.map((page) => {
-              return page.projects.map((project: ProjectList) => {
-                console.log(project);
-                return (
-                  <BoardCard
-                    key={project.id}
-                    data={project}
-                    category="projects"
-                  />
-                );
-              });
-            })
-          ) : (
-            <TestDiv>검색된 프로젝트가 없습니다.</TestDiv>
-          )}
+          {data?.pages.map((page) => {
+            return page.projects.map((project: ProjectList) => {
+              return (
+                <BoardCard
+                  key={project.id}
+                  data={project}
+                  category="projects"
+                />
+              );
+            });
+          })}
         </CardSection>
       )}
-
-      <div ref={ref} style={{ height: "100px", backgroundColor: "black" }}>
-        {isFetchingNextPage && "데이터 불러오는중"}
-      </div>
+      {Observer()}
     </Wrapper>
   );
 }
 const TestDiv = styled.div`
   min-height: 600px;
-  margin: 0 auto;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
 `;
 const Wrapper = styled.div`
   display: flex;

@@ -1,16 +1,8 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { getProjectData } from "apis/ProjectAPI";
-interface ProjectList {
-  id: number;
-  content: string;
-  title: string;
-  createdAt: string;
-}
-interface InfiniteProjectType {
-  hasNext: boolean;
-  lastId: number;
-  projects: ProjectList[];
-}
+import { useEffect } from "react";
+import { useInView } from "react-intersection-observer";
+
 export const useGetProjectData = (
   filter: string = "",
   keyword: string = "",
@@ -31,6 +23,20 @@ export const useGetProjectData = (
       },
     },
   );
+  const Observer = () => {
+    const [ref, inView] = useInView({ threshold: 1 });
+    useEffect(() => {
+      if (!data) return;
+      if (hasNextPage && inView) fetchNextPage();
+    }, [inView]);
+    return hasNextPage ? (
+      <div
+        ref={ref}
+        style={{ height: "100px", margin: "auto", marginTop: "50px" }}
+      />
+    ) : null;
+  };
+
   return {
     data,
     hasNextPage,
@@ -38,5 +44,6 @@ export const useGetProjectData = (
     isLoading,
     isSuccess,
     isFetchingNextPage,
+    Observer,
   };
 };
