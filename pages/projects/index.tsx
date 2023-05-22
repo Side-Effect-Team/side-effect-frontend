@@ -1,15 +1,15 @@
+import { breakPoints } from "@/styles/Media";
+import { useState } from "react";
+import { media } from "@/styles/mediatest";
+import { useGetProjectData } from "../../hooks/queries/useGetProjectData";
 import styled from "styled-components";
 import SelectBox from "../../components/SelectBox";
 import BoardCard from "../../components/BoardCard";
 import Search from "@/components/Search";
-import { breakPoints } from "@/styles/Media";
-import { useState } from "react";
-import { media } from "@/styles/mediatest";
-import ScaleLoader from "react-spinners/ScaleLoader";
+import NoData from "@/components/Nodata";
+import Loading from "@/components/Loading";
 import PageHead from "@/components/PageHead";
 import BatchCarousel from "@/components/Carousel/BatchCarousel";
-import { useGetProjectData } from "../../hooks/queries/useGetProjectData";
-import NoData from "@/components/Nodata";
 const FILTER_OPTIONS = [
   { name: "최신순", value: "latest" },
   { name: "조회순", value: "views" },
@@ -27,7 +27,6 @@ interface ProjectList {
 export default function ProjectPage() {
   const [filter, setFilter] = useState("latest");
   const [keyword, setKeyword] = useState("");
-  //threshold : inview가 보여지는 정도를 0~1까지 조절하여 트리거시점을 조절할수있다 0이면 보이자마자 트리거 1이면 전체가 다보여야 트리거
   const { data, isLoading, Observer } = useGetProjectData(filter, keyword);
   const noData = data?.pages[0].projects.length === 0;
   return (
@@ -52,9 +51,7 @@ export default function ProjectPage() {
       {noData ? (
         <NoData />
       ) : isLoading ? (
-        <TestDiv>
-          <ScaleLoader height={150} width={15} />
-        </TestDiv>
+        <Loading width={10} height={150} />
       ) : (
         <CardSection>
           {data?.pages.map((page) => {
@@ -74,16 +71,7 @@ export default function ProjectPage() {
     </Wrapper>
   );
 }
-const TestDiv = styled.div`
-  min-height: 600px;
-  height: fit-content;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-  height: auto;
-`;
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;

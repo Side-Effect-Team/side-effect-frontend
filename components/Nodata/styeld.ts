@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { media } from "@/styles/mediatest";
 export const NoDataWrapper = styled.div`
-  min-height: 600px;
-  height: fit-content;
+  min-height: 500px;
   display: flex;
   justify-content: center;
   align-items: center;
