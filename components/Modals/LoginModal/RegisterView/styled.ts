@@ -1,8 +1,6 @@
 import styled from "styled-components";
-import { mediaQuery } from "@/styles/Media";
-export const Wrapper = styled.div`
-  padding: 20px;
-`;
+import { motion } from "framer-motion";
+
 export const Label = styled.label`
   text-align: start;
   font-weight: bold;
@@ -29,17 +27,21 @@ export const ButtonWrapper = styled.div`
   flex-direction: column;
   width: 100%;
 `;
-
 export const SelectSection = styled.div`
   display: flex;
-  align-items: flex-start;
+  justify-content: center;
   width: 100%;
-  gap: 30px;
+  gap: 10px;
 `;
-
 export const Form = styled.form`
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 10px;
+`;
+export const ViewWrapper = styled(motion.div)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 20px;
 `;

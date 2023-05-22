@@ -1,39 +1,80 @@
 import styled, { keyframes } from "styled-components";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { useRouter } from "next/router";
 import { media } from "@/styles/mediatest";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { closeModal } from "@/store/modalSlice";
+import { AiOutlineClose } from "react-icons/ai";
+import RegisterNickname from "./RegisterView/RegisterNickname";
+import RegisterUserInfo from "./RegisterView/RegisterUserInfo";
+import Login from "./Login";
+import RegisterSuccess from "./RegisterView/RegisterSuccess";
+const VIEW_COMPONENTS = {
+  startLogin: <Login />,
+  registerNickname: <RegisterNickname />,
+  registerUserInfo: <RegisterUserInfo />,
+  registerSuccess: <RegisterSuccess />,
+};
 export default function LoginModal() {
-  const router = useRouter();
+  const dispatch = useAppDispatch();
   const { isOpen } = useAppSelector((state) => state.modal);
-  const { data: session }: any = useSession();
-  console.log(session);
+  const { modalView } = useAppSelector((state) => state.loginView);
+  const handleModalClose = () => {
+    dispatch(closeModal());
+  };
+  const handleViewRender = () => {
+    return VIEW_COMPONENTS[modalView];
+  };
+
   return (
     <Wrapper isOpen={isOpen}>
-      <button onClick={() => signIn("github")}>깃허브</button>
-      <button onClick={() => signIn("kakao")}>카카오</button>
-      <button onClick={() => signIn("google")}>구글</button>
-
-      <button onClick={() => signOut()}>로그아웃</button>
+      <Header>
+        <AiOutlineClose
+          onClick={handleModalClose}
+          size={30}
+          style={{ cursor: "pointer" }}
+        />
+      </Header>
+      {handleViewRender()}
     </Wrapper>
   );
 }
 const Wrapper = styled.div<{ isOpen: boolean }>`
   visibility: ${({ isOpen }) => (isOpen ? "visible" : "hidden")};
+  animation: ${({ isOpen }) => isOpen && zoomIn} 0.3s ease;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  height: 50%;
-  width: 40%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  height: 550px;
+  width: 550px;
   background-color: white;
   z-index: 30;
   border-radius: 15px;
   ${media.mobile} {
-    width: 80%;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    align-items: center;
+  }
+`;
+const Header = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+  position: absolute;
+  top: 0;
+`;
+
+const zoomIn = keyframes`
+  0%{
+    transform: scale(0);
+  }
+  100%{
+    transform: scale(1);
   }
 `;

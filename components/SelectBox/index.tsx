@@ -15,10 +15,9 @@ interface SelectBoxProps {
   options: OptionsType[];
   setValue: React.Dispatch<React.SetStateAction<any>>;
   title: string | number;
-  size?: "small" | "medium" | "large";
 }
 
-function SelectBox({ options, setValue, title, size }: SelectBoxProps) {
+function SelectBox({ options, setValue, title }: SelectBoxProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [name, setName] = useState(title);
   const selectRef = useRef<HTMLDivElement>(null);
@@ -37,7 +36,7 @@ function SelectBox({ options, setValue, title, size }: SelectBoxProps) {
   };
 
   return (
-    <SelectWrapper onClick={handleSelectVisible} ref={selectRef} size={size}>
+    <SelectWrapper onClick={handleSelectVisible} ref={selectRef}>
       <SelectValue>{name ? name : title}</SelectValue>
       <SelectOptionWrapper visible={isVisible}>
         {options &&
