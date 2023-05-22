@@ -2,7 +2,7 @@ import Button from "@/components/Button";
 import { Email, Nickname, Wrapper } from "./style";
 import axios from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import useToast from "@/hooks/useToast";
+import useToast from "@/hooks/common/useToast";
 import { useRouter } from "next/router";
 interface AccountProps {
   email: string;
