@@ -16,13 +16,6 @@ const FILTER_OPTIONS = [
   { name: "댓글순", value: "comment" },
 ];
 
-interface ProjectList {
-  id: number;
-  content: string;
-  title: string;
-  createdAt: string;
-}
-
 export default function ProjectPage() {
   const [filter, setFilter] = useState("latest");
   const [keyword, setKeyword] = useState("");
