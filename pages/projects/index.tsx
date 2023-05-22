@@ -9,8 +9,7 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 import PageHead from "@/components/PageHead";
 import BatchCarousel from "@/components/Carousel/BatchCarousel";
 import { useGetProjectData } from "../../hooks/queries/useGetProjectData";
-import Image from "next/image";
-import NodataImg from "../../public/images/Nodata.png";
+import NoData from "@/components/Nodata";
 const FILTER_OPTIONS = [
   { name: "최신순", value: "latest" },
   { name: "조회순", value: "views" },
@@ -51,15 +50,7 @@ export default function ProjectPage() {
       </FilterSection>
 
       {noData ? (
-        <TestDiv>
-          <Image
-            src={NodataImg}
-            alt="검색된 결과가 없습니다"
-            width={500}
-            height={500}
-          />
-          <p>검색된 결과가 없습니다!</p>
-        </TestDiv>
+        <NoData />
       ) : isLoading ? (
         <TestDiv>
           <ScaleLoader height={150} width={15} />

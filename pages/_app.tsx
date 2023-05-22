@@ -31,7 +31,7 @@ export default function App({
       <Provider store={store}>
         <Layout>
           <GlobalModal />
-          <AnimatePresence mode="wait">
+          <AnimatePresence>
             <Component key={pageKey} {...pageProps} />
             <Script
               src="https://developers.kakao.com/sdk/js/kakao.js"
