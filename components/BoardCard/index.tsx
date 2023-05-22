@@ -98,7 +98,7 @@ export default function BoardCard({ data, category }: BoardCardDataProps) {
       router.push(`/recruits/${e.currentTarget.id}`);
     } else router.push(`/projects/${e.currentTarget.id}`);
   };
-  console.log(data);
+  // console.log(data);
 
   return (
     <Container id={data?.id.toString()} onClick={onClickGoToBoard}>

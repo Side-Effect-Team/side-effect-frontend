@@ -5,9 +5,12 @@ import { Provider } from "react-redux";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { store } from "@/store/store";
+import axios from "axios";
 import Script from "next/script";
 import Layout from "@/components/Layout";
 import GlobalModal from "@/components/Modals/GlobalModal";
+axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
+
 const queryClient = new QueryClient();
 declare global {
   interface Window {
