@@ -12,7 +12,7 @@ import Toast from "../Toast";
 import { BOARD_LIST } from "../../enum";
 import ScrollToTop from "../ScrollToTop";
 import Head from "next/head";
-
+import { useAppSelector } from "@/store/hooks";
 interface PropType {
   children: React.ReactNode;
 }
@@ -33,6 +33,10 @@ interface MobileMenuProps {
 
 export default function Layout({ children }: PropType) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+  const { authenticated, token } = useAppSelector((state) => state.auth);
+  console.log("authenticated", authenticated);
+  console.log("token", token);
+
   const router = useRouter();
   const currentPage = router.route;
 

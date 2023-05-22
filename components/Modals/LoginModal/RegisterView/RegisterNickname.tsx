@@ -1,33 +1,33 @@
-import { useRouter } from "next/router";
+import { useAppDispatch } from "@/store/hooks";
 import { useForm, SubmitHandler } from "react-hook-form";
-import {
-  Input,
-  Label,
-  ButtonWrapper,
-  Form,
-} from "@/components/pages/userInfoPage/styled";
-import PageTransition from "@/components/pages/userInfoPage/PageTransition";
-import ErrorMessage from "@/components/pages/userInfoPage/ErrorMessage";
+import { handleModalView } from "@/store/loginViewTransitionSlice";
+import { addNickname } from "@/store/userInfoStoreSlice";
+import { Input, Label, ButtonWrapper, Form, ViewWrapper } from "./styled";
+import ErrorMessage from "./ErrorMessage";
 import Button from "@/components/Button";
-
 interface FormInput {
   nickname: string;
 }
-
-export default function UserInfoPage() {
-  const router = useRouter();
+export default function RegisterNickname() {
+  const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormInput>();
   const onSubmit: SubmitHandler<FormInput> = (data: FormInput) => {
-    localStorage.setItem("nickname", data.nickname);
-    router.push("/userinfo/position");
+    dispatch(addNickname(data.nickname));
+    dispatch(handleModalView({ modalView: "registerUserInfo" }));
+    console.log(errors);
   };
-  console.log(errors);
+
   return (
-    <PageTransition>
+    <ViewWrapper
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <Form onSubmit={handleSubmit(onSubmit)}>
         <h1>안녕하세요!</h1>
         <h3>Side-Effect에서 사용할 닉네임을 입력해주세요.</h3>
@@ -53,11 +53,17 @@ export default function UserInfoPage() {
           <Button type="submit" size="large">
             Next
           </Button>
-          <Button type="button" size="large" onClick={() => router.push("/")}>
-            Home
+          <Button
+            type="button"
+            size="large"
+            onClick={() =>
+              dispatch(handleModalView({ modalView: "startLogin" }))
+            }
+          >
+            Back
           </Button>
         </ButtonWrapper>
       </Form>
-    </PageTransition>
+    </ViewWrapper>
   );
 }
