@@ -5,6 +5,7 @@ import { BsEye } from "react-icons/bs";
 import { media } from "@/styles/mediatest";
 
 export const Container = styled.div`
+  width: 300px;
   min-width: 300px;
   height: 400px;
   display: flex;
@@ -24,6 +25,7 @@ export const Container = styled.div`
   }
   ${media.mobile} {
     width: 95%;
+    height: 150px;
     min-height: 150px;
     flex-direction: row;
     margin-left: auto;
@@ -31,7 +33,7 @@ export const Container = styled.div`
   }
 `;
 export const HeartWrapper = styled.div<{ isLike: boolean }>`
-  background-color: ${(p) => (p.isLike ? "white" : "#d9d9d9")};
+  background-color: ${({ isLike }) => (isLike ? "white" : "#d9d9d9")};
   border-radius: 50%;
   padding: 5px;
   position: absolute;
@@ -41,14 +43,16 @@ export const HeartWrapper = styled.div<{ isLike: boolean }>`
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.25);
 `;
 interface HeartProps {
-  isLike: boolean;
-  heartLike: boolean;
+  islike: string;
+  heartlike: string;
 }
 export const HeartFillIcon = styled(AiFillHeart)<HeartProps>`
-  color: ${(p) => (p.isLike ? theme.brandColor.coral : "white")};
+  color: ${(p) => (p.islike === "true" ? theme.brandColor.coral : "white")};
   font-size: 25px;
   font-weight: 600;
-  animation: ${(p) => (p.heartLike ? "heart 0.7s ease-in-out" : "none")};
+  animation: ${(p) =>
+    p.heartlike === "true" ? "heart 0.7s ease-in-out" : "none"};
+
   @keyframes heart {
     0% {
       transform: scale(1);
@@ -61,14 +65,7 @@ export const HeartFillIcon = styled(AiFillHeart)<HeartProps>`
     }
   }
 `;
-export const TestHeartNotFillIcon = styled(AiOutlineHeart)`
-  color: ${theme.brandColor.coral};
-  font-size: 25px;
-  font-weight: 600;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-`;
+
 interface HeaderProps {
   src?: string;
   category?: string;
@@ -121,23 +118,56 @@ export const ContentsWrapper = styled.div`
     justify-content: space-between;
   }
 `;
+
+export const Title = styled.div`
+  height: 25%;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  ${media.mobile} {
+    -webkit-line-clamp: 1;
+    margin-top: 7px;
+    height: auto;
+    width: 80%;
+    font-size: 16px;
+  }
+`;
+export const Content = styled.div`
+  height: 20%;
+  font-size: 16px;
+  font-weight: 400;
+  color: #454545;
+  margin-bottom: 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  ${media.mobile} {
+    -webkit-line-clamp: 1;
+    height: auto;
+  }
+`;
 export const TagWrapper = styled.div`
   width: 100%;
-  max-height: 30%;
+  height: 30%;
   overflow: hidden;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   flex-wrap: wrap;
   margin-bottom: 10px;
   ${media.mobile} {
     flex-wrap: nowrap;
-    margin: 10px 0;
+    margin-top: 5px;
   }
 `;
 export const Tag = styled.div`
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   color: white;
   background-color: black;
@@ -148,31 +178,6 @@ export const Tag = styled.div`
   ${media.mobile} {
     margin-bottom: 0;
     font-size: 12px;
-  }
-`;
-export const Title = styled.div`
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 15px;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  ${media.mobile} {
-    -webkit-line-clamp: 1;
-  }
-`;
-export const Content = styled.div`
-  font-size: 16px;
-  font-weight: 400;
-  color: #454545;
-  margin-bottom: 15px;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  ${media.mobile} {
-    -webkit-line-clamp: 1;
   }
 `;
 export const Footer = styled.div`

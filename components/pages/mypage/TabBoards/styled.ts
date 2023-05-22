@@ -11,6 +11,9 @@ export const BoardWrapper = styled.div`
   ${media.mobile} {
     display: flex;
     flex-direction: column;
+    ${media.mobile} {
+      margin-top: 4rem;
+    }
   }
 `;
 export const NullMessage = styled.div`
@@ -24,6 +27,12 @@ export const FilterWrapper = styled.div`
   justify-content: flex-start;
   gap: 15px;
   margin-bottom: 15px;
+  ${media.mobile} {
+    position: fixed;
+    background-color: white;
+    z-index: 10;
+    padding: 1rem 0;
+  }
 `;
 export const FilterMenu = styled.div<{ isActive: boolean }>`
   font-size: 16px;
