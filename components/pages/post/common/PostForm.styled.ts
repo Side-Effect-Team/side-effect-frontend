@@ -36,6 +36,7 @@ export const InputForm = styled.input`
   border: none;
   padding: 0.25rem;
   border-radius: 3px;
+  background: ${(p) => p.theme.colors.lightGray};
 `;
 
 export const TextareaForm = styled.textarea`
@@ -44,6 +45,7 @@ export const TextareaForm = styled.textarea`
   border: none;
   resize: none;
   border-radius: 3px;
+  background: ${(p) => p.theme.colors.lightGray};
 `;
 
 export const SubmitBtnBox = styled.div`

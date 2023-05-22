@@ -9,11 +9,13 @@ import Script from "next/script";
 import Layout from "@/components/Layout";
 import GlobalModal from "@/components/Modals/GlobalModal";
 const queryClient = new QueryClient();
+
 declare global {
   interface Window {
     Kakao: any;
   }
 }
+
 export default function App({
   Component,
   pageProps: { ...pageProps },
