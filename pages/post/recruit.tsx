@@ -18,10 +18,10 @@ import {
 } from "@/postComps/common/PostForm.styled";
 import Button from "@/components/Button";
 import TagBox from "@/postComps/TagBox";
-import { useTag } from "@/hooks/useTag";
-import { useForm } from "@/hooks/useForm";
-import PositionBox from "@/postComps/PositionBox";
-import { useInputImage } from "@/hooks/useInputImage";
+import { useTag } from "@/hooks/common/useTag";
+import { useForm } from "@/hooks/common/useForm";
+import PositionBox from "@/components/pages/post/PositionBox";
+import { useInputImage } from "@/hooks/common/useInputImage";
 import { DEFAULT_RECRUIT_CARD_IMAGE } from "../../enum";
 import PageHead from "@/components/PageHead";
 
