@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const fetchProject = async (id: number) => {
+export const addLikeProject = async (id: number) => {
   const token = localStorage.getItem("accessToken");
   const config = {
     headers: { Authorization: `Bearer ${token}` },
@@ -8,7 +8,7 @@ export const fetchProject = async (id: number) => {
   const response = await axios.post(`/like/${id}`, null, config);
   return response;
 };
-export const fetchRecruit = async (id: number) => {
+export const addLikeRecruit = async (id: number) => {
   const token = localStorage.getItem("accessToken");
   const config = {
     headers: { Authorization: `Bearer ${token}` },

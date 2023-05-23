@@ -1,12 +1,12 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { fetchRecruit } from "apis/LikeBoardApi";
+import { addLikeRecruit } from "apis/LikeBoardApi";
 import useToast from "../common/useToast";
 
 export const useLikeRecruit = () => {
   const queryClient = useQueryClient();
   const { addToast } = useToast();
   const { mutate } = useMutation({
-    mutationFn: fetchRecruit,
+    mutationFn: addLikeRecruit,
     onSuccess: (res) => {
       if (res.data.message.includes("추천했습니다")) {
         addToast({
