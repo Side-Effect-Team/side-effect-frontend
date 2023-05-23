@@ -41,6 +41,7 @@ export default function RecruitDetailPage({ recruit }: RecruitDetailPageProps) {
           projectName={projectName}
           tags={tags}
           content={content}
+          imgSrc={imgSrc}
         />
         <CommentBox />
       </Contents>

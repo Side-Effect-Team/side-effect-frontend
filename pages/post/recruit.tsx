@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { GoPlus } from "react-icons/go";
 import axios from "axios";
@@ -43,7 +43,9 @@ export default function PostRecruitPage() {
   const router = useRouter();
   const [positions, setPositions] = useState([...POSITIONS]);
   const { tags, deleteTag, addTag } = useTag([]);
-  const { imgSrc, handleImgChange } = useInputImage(DEFAULT_RECRUIT_CARD_IMAGE);
+  const { imgSrc, handleImgChange, uploadImg } = useInputImage(
+    DEFAULT_RECRUIT_CARD_IMAGE,
+  );
   const { postForm, errMsgs, touched, handleChange, handleBlur, handleSubmit } =
     useForm({
       initialVals: { ...POST_FORM },
@@ -76,30 +78,32 @@ export default function PostRecruitPage() {
         );
         const data = {
           ...postForm,
-          imgSrc: null, // 이미지 사용 불가하여 null 대체
           tags,
           positions: newPositions,
         };
 
         // request
-        axios
-          .post(`${process.env.NEXT_PUBLIC_API_URL}/recruit-board`, data, {
+        const url = `${process.env.NEXT_PUBLIC_API_URL}/recruit-board`;
+        try {
+          const res = await axios.post(url, data, {
             headers: {
               // 로그인 기능 미구현으로 NEXT_PUBLIC_TOKEN에 발급받은 토큰을 넣고 실행!
               Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
             },
-          })
-          .then((res) => {
-            console.log(res);
-            if (res.status === 200) {
-              window.alert("게시글 등록이 완료되었습니다");
-              router.push(`/recruits/${res.data.id}`);
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-            window.alert("게시글 등록에 실패했습니다");
           });
+          const recruitId = await res.data.id;
+          const imgUrl = url + "/image/" + recruitId;
+
+          // image upload
+          if (res.status === 200) {
+            await uploadImg(imgUrl);
+            await window.alert("게시글 등록이 완료되었습니다");
+            await router.push(`/recruits/${recruitId}`);
+          }
+        } catch (err) {
+          console.log(err);
+          window.alert("게시글 등록에 실패했습니다");
+        }
       },
     });
 

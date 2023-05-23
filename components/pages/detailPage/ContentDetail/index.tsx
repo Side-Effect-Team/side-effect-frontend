@@ -1,3 +1,6 @@
+import Link from "next/link";
+import Image from "next/image";
+import { useQuery } from "@tanstack/react-query";
 import { Column } from "../PostData/styled";
 import {
   Wrapper,
@@ -9,13 +12,13 @@ import {
   ProjectTitleBox,
 } from "@/detailComps/ContentDetail/styled";
 import { TagWrapper } from "@/postComps/TagBox/styled";
-import Link from "next/link";
 
 interface ContentDetailProps {
   projectName: string;
   content: string;
   tags?: TagType[];
   projectUrl?: string;
+  imgSrc: string;
 }
 
 export default function ContentDetail({
@@ -23,7 +26,13 @@ export default function ContentDetail({
   content,
   tags,
   projectUrl,
+  imgSrc,
 }: ContentDetailProps) {
+  // const { data, isError, isLoading } = useQuery({
+  //   queryKey: ["recruitImg"],
+  //   queryFn: () => fetchData(maxCards, queryKey),
+  // });
+
   return (
     <Wrapper>
       {tags && <StyledHeader>사용 기술</StyledHeader>}
@@ -53,6 +62,14 @@ export default function ContentDetail({
             <ProjectTitle>{projectName}</ProjectTitle>
           )}
         </div>
+        <div>
+          <Image
+            src={`http://54.64.103.42:8080/api/recruit-board/image/${imgSrc}`}
+            alt="프로젝트 사진"
+            width={100}
+            height={100}
+          />
+        </div>
       </ProjectTitleBox>
       <h4>상세 내용</h4>
       <Description>
@@ -62,3 +79,7 @@ export default function ContentDetail({
     </Wrapper>
   );
 }
+
+const fetchImg = async (id: number) => {
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/recruit-board/image/${id}`;
+};
