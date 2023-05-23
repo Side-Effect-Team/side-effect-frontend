@@ -12,8 +12,10 @@ import {
   AiFillCheckCircle,
   AiFillCloseCircle,
 } from "react-icons/ai";
-import useToast from "@/hooks/useToast";
+import useToast from "../../hooks/common/useToast";
+
 type IconType = "success" | "error" | "info";
+
 export default function Toast() {
   const { toasts } = useAppSelector((state) => state.toast);
   const { deleteToast } = useToast();

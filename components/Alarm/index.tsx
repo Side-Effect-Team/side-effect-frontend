@@ -3,8 +3,8 @@ import { AlarmButton, AlarmDiv, AlarmIconDiv, AlarmCount } from "./styled";
 import AlarmList, { AlarmProps } from "./AlarmList";
 import { useQuery } from "@tanstack/react-query";
 import { getAlarmList } from "./AlarmQurey";
-import useToast from "@/hooks/useToast";
-import useOutsideClick from "@/hooks/useOutsideClick";
+import useToast from "@/hooks/common/useToast";
+import useOutsideClick from "../../hooks/common/useOutsideClick";
 
 interface FromHeaderProps {
   openAlarm: boolean;

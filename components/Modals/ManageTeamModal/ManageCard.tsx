@@ -6,7 +6,7 @@ import { media } from "@/styles/mediatest";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import axios from "axios";
-import useToast from "../../../hooks/useToast";
+import useToast from "@/hooks/common/useToast";
 interface ApplicatnsType {
   filter: string;
   email: string;
