@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getProfileData } from "apis/MypageApi";
+import { getProfileData } from "apis/UserAPI";
 import useToast from "../common/useToast";
 
 export const useGetProfileData = () => {

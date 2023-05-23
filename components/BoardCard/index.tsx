@@ -20,7 +20,8 @@ import {
   HeartFillIcon,
 } from "./styled";
 import { useRouter } from "next/router";
-import { useLikeProject } from "@/hooks/mutations/useLikeProject";
+import { useAddLikeProject } from "@/hooks/mutations/useAddLikeProject";
+import { useAddLikeRecruit } from "@/hooks/mutations/useAddLikeRecuit";
 export interface BoardCardProps {
   id: number;
   headerImage?: string;
@@ -41,8 +42,8 @@ interface BoardCardDataProps {
 }
 
 export default function BoardCard({ data, category }: BoardCardDataProps) {
-  const projectMutate = useLikeProject();
-  const recruitMutate = useLikeProject();
+  const projectMutate = useAddLikeProject();
+  const recruitMutate = useAddLikeRecruit();
   const router = useRouter();
   const onClickHeart = async (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();

@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { editProfile } from "apis/MypageApi";
+import { editProfile } from "apis/UserAPI";
 import useToast from "../common/useToast";
 import { useRouter } from "next/router";
 

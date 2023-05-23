@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAlarmList } from "apis/AlarmApi";
+import { getAlarmList } from "apis/NotificationAPI";
 import useToast from "@/hooks/common/useToast";
 
 export const useGetAlarmList = () => {

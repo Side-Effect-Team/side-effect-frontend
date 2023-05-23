@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { readAlarm } from "apis/AlarmApi";
+import { readAlarm } from "apis/NotificationAPI";
 
 export const useReadAlarm = () => {
   const queryClient = useQueryClient();

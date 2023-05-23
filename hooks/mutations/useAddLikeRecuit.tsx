@@ -1,12 +1,12 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { addLikeProject } from "apis/LikeBoardApi";
 import useToast from "../common/useToast";
+import { addLikeRecruit } from "apis/RecruitBoardAPI";
 
-export const useLikeProject = () => {
+export const useAddLikeRecruit = () => {
   const queryClient = useQueryClient();
   const { addToast } = useToast();
   const { mutate } = useMutation({
-    mutationFn: addLikeProject,
+    mutationFn: addLikeRecruit,
     onSuccess: (res) => {
       if (res.data.message.includes("추천했습니다")) {
         addToast({
@@ -15,7 +15,7 @@ export const useLikeProject = () => {
           content: "관심게시물로 등록되었습니다",
         });
       }
-      queryClient.invalidateQueries({ queryKey: ["projectData"] });
+      queryClient.invalidateQueries({ queryKey: ["recruits"] });
       queryClient.invalidateQueries({ queryKey: ["mypageData"] });
     },
   });
