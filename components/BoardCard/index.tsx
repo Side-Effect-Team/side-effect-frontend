@@ -20,10 +20,7 @@ import {
   HeartFillIcon,
 } from "./styled";
 import { useRouter } from "next/router";
-import axios from "axios";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import useToast from "@/hooks/common/useToast";
-import { color } from "framer-motion";
+import { useLikeProject } from "@/hooks/mutations/useLikeProject";
 export interface BoardCardProps {
   id: number;
   category?: string;
@@ -42,67 +39,32 @@ interface BoardCardDataProps {
   data?: BoardCardProps;
   category: string;
 }
-const fetchProject = async (id: number) => {
-  const token = localStorage.getItem("accessToken");
-  const config = {
-    headers: { Authorization: `Bearer ${token}` },
-  };
-  const response = await axios.post(`/like/${id}`, null, config);
-  return response;
-};
-const fetchRecruit = async (id: number) => {
-  const token = localStorage.getItem("accessToken");
-  const config = {
-    headers: { Authorization: `Bearer ${token}` },
-  };
-  const response = await axios.post(`/recruit-board/likes/${id}`, null, config);
-  return response;
-};
+
 export default function BoardCard({ data, category }: BoardCardDataProps) {
-  const queryClient = useQueryClient();
-  const { mutate: projectMutate } = useMutation({
-    mutationFn: fetchProject,
-    onSuccess: (res) => {
-      if (res.data.message.includes("추천했습니다")) {
-        addToast({
-          type: "success",
-          title: "success",
-          content: "관심게시물로 등록되었습니다",
-        });
-        setHeartLike(true);
-      } else setHeartLike(false);
-      queryClient.invalidateQueries({ queryKey: ["projectData"] });
-      queryClient.invalidateQueries({ queryKey: ["mypageData"] });
-    },
-  });
-  const { mutate: recruitMutate } = useMutation({
-    mutationFn: fetchRecruit,
-    onSuccess: (res) => {
-      if (res.data.message.includes("추천했습니다")) {
-        addToast({
-          type: "success",
-          title: "success",
-          content: "관심게시물로 등록되었습니다",
-        });
-        setHeartLike(true);
-      }
-      setHeartLike(false);
-      queryClient.invalidateQueries({ queryKey: ["recruits"] });
-      queryClient.invalidateQueries({ queryKey: ["mypageData"] });
-    },
-  });
+  const projectMutate = useLikeProject();
+  const recruitMutate = useLikeProject();
   const router = useRouter();
-  const { addToast } = useToast();
   const onClickHeart = async (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
-    // 좋아요 API 추가
     const id = Number(e.currentTarget.id);
     const token = localStorage.getItem("accessToken");
     if (token) {
       if (category === "projects") {
-        projectMutate(id);
+        projectMutate(id, {
+          onSuccess: (res) => {
+            if (res.data.message.includes("추천했습니다")) {
+              setHeartLike(true);
+            } else setHeartLike(false);
+          },
+        });
       } else {
-        recruitMutate(id);
+        recruitMutate(id, {
+          onSuccess: (res) => {
+            if (res.data.message.includes("추천했습니다")) {
+              setHeartLike(true);
+            } else setHeartLike(false);
+          },
+        });
         console.log(data);
       }
     } else alert("로그인 후 이용가능합니다.");
@@ -170,5 +132,4 @@ export default function BoardCard({ data, category }: BoardCardDataProps) {
 }
 
 // 사용하는 법
-
 //     <BoardCard data={data} category={string}/>

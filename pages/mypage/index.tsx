@@ -5,13 +5,11 @@ import {
   TapWrapper,
 } from "@/components/pages/mypage/styled";
 import Profile from "@/components/pages/mypage/Profile";
-import { useEffect, useRef, useState } from "react";
-import axios from "axios";
+import { useEffect, useState } from "react";
 import { BoardCardProps } from "@/components/BoardCard";
 import TabBoards from "@/components/pages/mypage/TabBoards";
 import Account from "@/components/pages/mypage/Account";
-import { useQuery } from "@tanstack/react-query";
-import useToast from "@/hooks/useToast";
+import { useGetMypageData } from "@/hooks/queries/useGetMypageData";
 
 export interface MypageProps {
   id: number;
@@ -31,18 +29,7 @@ export interface MypageProps {
   isOwner?: boolean;
 }
 
-export const fetchMypage = async () => {
-  const token = localStorage.getItem("accessToken");
-  const id = localStorage.getItem("id");
-  const config = {
-    headers: { Authorization: `Bearer ${token}` },
-  };
-  const response = await axios.get(`/user/mypage/${id}`, config);
-  return response;
-};
 export default function MyPage() {
-  const { addToast, deleteToast } = useToast();
-
   const [boards, setBoards] = useState<BoardCardProps[] | undefined | null>(
     null,
   );
@@ -62,24 +49,15 @@ export default function MyPage() {
     setActiveTab(tabName);
   };
 
-  const { data } = useQuery(["mypageData"], fetchMypage, {
-    onError: () => {
-      addToast({
-        type: "error",
-        title: "error",
-        content: "정보를 가져오지 못했습니다.",
-      });
-      deleteToast("unique-id");
-    },
-    retry: false,
-  });
+  const data = useGetMypageData();
+  console.log(data);
   useEffect(() => {
     if (activeTab === "likeBoards" && data) {
-      setBoards(data.data.likeBoards);
+      setBoards(data.likeBoards);
     } else if (activeTab === "uploadBoards" && data) {
-      setBoards(data.data.uploadBoards);
+      setBoards(data.uploadBoards);
     } else if (activeTab === "applyBoards" && data) {
-      setBoards(data.data.applyBoards);
+      setBoards(data.applyBoards);
     }
   }, [activeTab, data]);
 
@@ -99,12 +77,9 @@ export default function MyPage() {
       <ContentsWrapper>
         {!data && <div>데이터를 받아올 수 없습니다</div>}
         {data && activeTab === "profile" ? (
-          <Profile {...data.data} />
+          <Profile {...data} />
         ) : activeTab === "account" ? (
-          <Account
-            email={data?.data.email || ""}
-            nickname={data?.data.nickname || ""}
-          />
+          <Account email={data?.email || ""} nickname={data?.nickname || ""} />
         ) : (
           <TabBoards boards={boards} title={title || ""} />
         )}
