@@ -37,6 +37,7 @@ export interface BoardCardProps {
   likeNum?: number;
   commentNum?: number;
   views?: number;
+  category?: string; // type error로 추가
 }
 interface BoardCardDataProps {
   data?: BoardCardProps;
