@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { closeModal } from "../../../store/modalSlice";
 import { AiOutlineClose } from "react-icons/ai";
 import { media } from "@/styles/mediatest";
-import { useFilterTab } from "@/hooks/useFilterTab";
+import { useFilterTab } from "@/hooks/common/useFilterTab";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import axios from "axios";

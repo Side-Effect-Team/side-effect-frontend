@@ -5,7 +5,7 @@ import {
   SelectOptionWrapper,
   SelectValue,
 } from "./styled";
-import useOutsideClick from "../../hooks/useOutsideClick";
+import useOutsideClick from "../../hooks/common/useOutsideClick";
 
 interface OptionsType {
   name: string;

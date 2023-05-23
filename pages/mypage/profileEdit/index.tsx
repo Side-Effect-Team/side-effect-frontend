@@ -18,8 +18,7 @@ import {
 import { MypageProps } from "..";
 import { useRouter } from "next/router";
 import axios from "axios";
-import useToast from "@/hooks/useToast";
-
+import useToast from "@/hooks/common/useToast";
 export interface FormData {
   githubUrl?: string;
   blogUrl?: string;

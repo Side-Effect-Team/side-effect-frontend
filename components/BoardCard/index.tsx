@@ -22,7 +22,7 @@ import {
 import { useRouter } from "next/router";
 import axios from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import useToast from "@/hooks/useToast";
+import useToast from "@/hooks/common/useToast";
 import { color } from "framer-motion";
 export interface BoardCardProps {
   id: number;

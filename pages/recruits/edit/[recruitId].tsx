@@ -2,10 +2,10 @@ import axios from "axios";
 import { GetServerSidePropsContext } from "next";
 import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
 import { useRouter } from "next/router";
-import { useTag } from "@/hooks/useTag";
-import { useInputImage } from "@/hooks/useInputImage";
+import { useTag } from "@/hooks/common/useTag";
+import { useInputImage } from "@/hooks/common/useInputImage";
 import { DEFAULT_RECRUIT_CARD_IMAGE } from "../../../enum";
-import { useForm } from "@/hooks/useForm";
+import { useForm } from "@/hooks/common/useForm";
 import PageHead from "@/components/PageHead";
 import { PostTitleStyled } from "@/postComps/common/Title.styled";
 import {

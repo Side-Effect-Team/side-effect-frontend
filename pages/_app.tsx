@@ -5,11 +5,12 @@ import { Provider } from "react-redux";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { store } from "@/store/store";
+import axios from "axios";
 import Script from "next/script";
 import Layout from "@/components/Layout";
 import GlobalModal from "@/components/Modals/GlobalModal";
-import axios from "axios";
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
+
 const queryClient = new QueryClient();
 declare global {
   interface Window {
@@ -30,7 +31,7 @@ export default function App({
       <Provider store={store}>
         <Layout>
           <GlobalModal />
-          <AnimatePresence mode="wait">
+          <AnimatePresence>
             <Component key={pageKey} {...pageProps} />
             <Script
               src="https://developers.kakao.com/sdk/js/kakao.js"
