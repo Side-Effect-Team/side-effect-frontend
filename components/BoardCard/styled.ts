@@ -68,12 +68,14 @@ export const Header = styled.div<HeaderProps>`
   background-image: ${(p) =>
     p.category === "projects"
       ? `url(${
-          process.env.NEXT_PUBLIC_API_URL! + "/free-board/image/" + p.src ||
-          "/images/BoardDefaultBackground.png"
+          p.src
+            ? process.env.NEXT_PUBLIC_API_URL! + "/free-boards/image/" + p.src
+            : "/images/ProjectDefaultBackground.png"
         })`
       : `url(${
-          process.env.NEXT_PUBLIC_API_URL! + "/recruit-board/image/" + p.src ||
-          "/images/BoardDefaultBackground.png"
+          p.src
+            ? process.env.NEXT_PUBLIC_API_URL! + "/recruit-board/image/" + p.src
+            : "/images/BoardDefaultBackground.png"
         })`};
   // headerImage의 width에 맞추기 위해 아래 코드 추가했습니다
   background-size: cover;

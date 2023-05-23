@@ -61,7 +61,11 @@ export default function ContentDetail({
       <div>
         {tags ? (
           <Image
-            src={`http://54.64.103.42:8080/api/recruit-board/image/${imgSrc}`}
+            src={
+              imgSrc
+                ? `${process.env.NEXT_PUBLIC_API_URL}/recruit-board/image/${imgSrc}`
+                : "/images/BoardDefaultBackground.png"
+            }
             alt="프로젝트 사진"
             width={400}
             height={300}
@@ -69,7 +73,11 @@ export default function ContentDetail({
           />
         ) : (
           <Image
-            src={`http://54.64.103.42:8080/api/free-boards/image/${imgSrc}`}
+            src={
+              imgSrc
+                ? `${process.env.NEXT_PUBLIC_API_URL}/free-boards/image/${imgSrc}`
+                : "/images/ProjectDefaultBackground.png"
+            }
             alt="프로젝트 사진"
             width={400}
             height={300}
