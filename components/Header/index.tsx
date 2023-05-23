@@ -7,7 +7,7 @@ import { useAppDispatch } from "@/store/hooks";
 import { openModal } from "@/store/modalSlice";
 import Alarm from "../Alarm";
 import { useRef, useState } from "react";
-import useOutsideClick from "@/hooks/useOutsideClick";
+import useOutsideClick from "../../hooks/common/useOutsideClick";
 
 interface HeaderProps {
   handleMobileMenu: (e: React.MouseEvent<HTMLButtonElement>) => void;

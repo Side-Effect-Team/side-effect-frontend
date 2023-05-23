@@ -15,8 +15,8 @@ import {
   GuideWrapper,
 } from "@/postComps/common/PostForm.styled";
 import Button from "@/components/Button";
-import { useForm } from "@/hooks/useForm";
-import { useInputImage } from "@/hooks/useInputImage";
+import { useForm } from "@/hooks/common/useForm";
+import { useInputImage } from "@/hooks/common/useInputImage";
 import ProjectUrlBox from "@/postComps/ProjectUrlBox";
 import { DEFAULT_PROJECT_CARD_IMAGE } from "../../enum";
 import PageHead from "@/components/PageHead";

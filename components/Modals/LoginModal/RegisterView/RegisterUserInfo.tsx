@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { handleModalView } from "@/store/loginViewTransitionSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import useToast from "@/hooks/useToast";
+import useToast from "@/hooks/common/useToast";
 import axios from "axios";
 import SelectBox from "@/components/SelectBox";
 import {

@@ -8,7 +8,7 @@ import { closeModal } from "@/store/modalSlice";
 import axios from "axios";
 import Image from "next/image";
 import GoogleImg from "../../../../public/images/Google.png";
-import useToast from "@/hooks/useToast";
+import useToast from "@/hooks/common/useToast";
 
 export default function GoogleLoginButton() {
   const dispatch = useAppDispatch();

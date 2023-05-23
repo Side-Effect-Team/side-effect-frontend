@@ -15,8 +15,7 @@ import {
 import { useRouter } from "next/router";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteAlarm, readAlarm } from "./AlarmQurey";
-import useOutsideClick from "@/hooks/useOutsideClick";
-
+import useOutsideClick from "@/hooks/common/useOutsideClick";
 // export interface AlarmProps {
 //   lastId: number;
 //   alarmNum: number;

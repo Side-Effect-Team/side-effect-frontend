@@ -23,7 +23,7 @@ import {
 import { useRouter } from "next/router";
 import axios from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import useToast from "@/hooks/useToast";
+import useToast from "@/hooks/common/useToast";
 import { color } from "framer-motion";
 export interface BoardCardProps {
   id: number;
@@ -97,7 +97,7 @@ export default function BoardCard({ data, category }: BoardCardDataProps) {
       router.push(`/recruits/${e.currentTarget.id}`);
     } else router.push(`/projects/${e.currentTarget.id}`);
   };
-  console.log(data);
+  // console.log(data);
 
   return (
     <Container id={data?.id.toString()} onClick={onClickGoToBoard}>
