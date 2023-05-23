@@ -66,7 +66,17 @@ export const Header = styled.div<HeaderProps>`
   align-items: center;
   justify-content: center;
   background-image: ${(p) =>
-    `url(${p.src || "/images/BoardDefaultBackground.png"})`};
+    p.category === "projects"
+      ? `url(${
+          p.src
+            ? process.env.NEXT_PUBLIC_API_URL! + "/free-boards/image/" + p.src
+            : "/images/ProjectDefaultBackground.png"
+        })`
+      : `url(${
+          p.src
+            ? process.env.NEXT_PUBLIC_API_URL! + "/recruit-board/image/" + p.src
+            : "/images/BoardDefaultBackground.png"
+        })`};
   // headerImage의 width에 맞추기 위해 아래 코드 추가했습니다
   background-size: cover;
   background-position: center;

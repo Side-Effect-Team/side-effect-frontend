@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import axios from "axios";
 import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
@@ -29,7 +29,9 @@ export const POST_FORM = {
 
 export default function PostProjectPage() {
   const router = useRouter();
-  const { imgSrc, handleImgChange } = useInputImage(DEFAULT_PROJECT_CARD_IMAGE);
+  const { imgSrc, handleImgChange, uploadImg } = useInputImage(
+    DEFAULT_PROJECT_CARD_IMAGE,
+  );
   const [projectUrl, setProjectUrl] = useState("");
   const { postForm, errMsgs, touched, handleChange, handleBlur, handleSubmit } =
     useForm({
@@ -55,28 +57,30 @@ export default function PostProjectPage() {
         return newErrorMsgs;
       },
       onSubmit: async () => {
-        // TODO 이미지 추가 필요
         const data = { ...postForm, projectUrl };
 
         // request
-        axios
-          .post(`${process.env.NEXT_PUBLIC_API_URL}/free-boards`, data, {
+        const url = `${process.env.NEXT_PUBLIC_API_URL}/free-boards`;
+        try {
+          const res = await axios.post(url, data, {
             headers: {
               // 로그인 기능 미구현으로 NEXT_PUBLIC_TOKEN에 발급받은 토큰을 넣고 실행!
               Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
             },
-          })
-          .then((res) => {
-            console.log("API 반환값", res);
-            if (res.status === 200) {
-              window.alert("게시글 등록이 완료되었습니다");
-              router.push(`/projects/${res.data.id}`);
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-            window.alert("게시글 등록에 실패했습니다");
           });
+          const projectId = await res.data.id;
+          const imgUrl = url + "/image/" + projectId;
+
+          // image upload
+          if (res.status === 200) {
+            await uploadImg(imgUrl);
+            await window.alert("게시글 등록이 완료되었습니다");
+            await router.push(`/projects/${projectId}`);
+          }
+        } catch (err) {
+          console.log(err);
+          window.alert("게시글 등록에 실패했습니다");
+        }
       },
     });
 
@@ -84,10 +88,6 @@ export default function PostProjectPage() {
     if (window.confirm("작성중인 내용이 사라집니다. 계속 진행하시겠습니까?"))
       router.push("/projects");
   };
-
-  useEffect(() => {
-    console.log(postForm);
-  }, [postForm]);
 
   return (
     <Wrapper>
@@ -139,7 +139,7 @@ export default function PostProjectPage() {
             <InputForm
               name="image"
               type="file"
-              accept="image/*"
+              accept="image/png, image/jpeg, image/jpg, image/gif"
               onChange={handleImgChange}
             />
             <ImageBox>

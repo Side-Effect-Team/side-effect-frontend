@@ -26,8 +26,12 @@ export const Description = styled.div`
   border-radius: 5px;
   margin-bottom: 1rem;
 
-  p {
+  textarea {
     padding: 0.35rem;
+    resize: none;
+    outline: none;
+    width: 100%;
+    border: none;
   }
 `;
 

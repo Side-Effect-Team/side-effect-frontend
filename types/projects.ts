@@ -14,7 +14,7 @@ declare interface ProjectType {
   title: string;
   content: string;
   projectUrl: string;
-  imgUrl?: string;
+  imgUrl: string;
   projectName: string;
   like?: boolean;
   likeNum: number;

@@ -1,3 +1,5 @@
+import Link from "next/link";
+import Image from "next/image";
 import { Column } from "../PostData/styled";
 import {
   Wrapper,
@@ -9,13 +11,13 @@ import {
   ProjectTitleBox,
 } from "@/detailComps/ContentDetail/styled";
 import { TagWrapper } from "@/postComps/TagBox/styled";
-import Link from "next/link";
 
 interface ContentDetailProps {
   projectName: string;
   content: string;
   tags?: TagType[];
   projectUrl?: string;
+  imgSrc: string;
 }
 
 export default function ContentDetail({
@@ -23,6 +25,7 @@ export default function ContentDetail({
   content,
   tags,
   projectUrl,
+  imgSrc,
 }: ContentDetailProps) {
   return (
     <Wrapper>
@@ -45,18 +48,45 @@ export default function ContentDetail({
         </div>
         <Column />
         <div>
-          {projectUrl ? (
-            <Link href={projectUrl} target="_blank">
+          {tags ? (
+            <ProjectTitle>{projectName}</ProjectTitle>
+          ) : (
+            <Link href={projectUrl!} target="_blank">
               <ProjectTitle>{projectName}</ProjectTitle>
             </Link>
-          ) : (
-            <ProjectTitle>{projectName}</ProjectTitle>
           )}
         </div>
       </ProjectTitleBox>
       <h4>상세 내용</h4>
+      <div>
+        {tags ? (
+          <Image
+            src={
+              imgSrc
+                ? `${process.env.NEXT_PUBLIC_API_URL}/recruit-board/image/${imgSrc}`
+                : "/images/BoardDefaultBackground.png"
+            }
+            alt="프로젝트 사진"
+            width={400}
+            height={300}
+            priority
+          />
+        ) : (
+          <Image
+            src={
+              imgSrc
+                ? `${process.env.NEXT_PUBLIC_API_URL}/free-boards/image/${imgSrc}`
+                : "/images/ProjectDefaultBackground.png"
+            }
+            alt="프로젝트 사진"
+            width={400}
+            height={300}
+            priority
+          />
+        )}
+      </div>
       <Description>
-        <p>{content}</p>
+        <textarea readOnly>{content}</textarea>
       </Description>
       <hr />
     </Wrapper>

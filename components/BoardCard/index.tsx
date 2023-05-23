@@ -27,10 +27,9 @@ import useToast from "@/hooks/common/useToast";
 import { color } from "framer-motion";
 export interface BoardCardProps {
   id: number;
-  category?: string;
   headerImage?: string;
   projectName?: string;
-  stacks?: string[];
+  tags?: string[];
   title: string;
   content: string;
   createdAt: string;
@@ -38,6 +37,7 @@ export interface BoardCardProps {
   likeNum?: number;
   commentNum?: number;
   views?: number;
+  category?: string; // type error로 추가
 }
 interface BoardCardDataProps {
   data?: BoardCardProps;
@@ -49,6 +49,7 @@ export default function BoardCard({ data, category }: BoardCardDataProps) {
   const [likeNum, setLikeNum] = useState(data?.likeNum || 0);
   const router = useRouter();
   const { addToast, deleteToast } = useToast();
+  console.log(data);
 
   const onClickHeart = async (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
@@ -109,9 +110,9 @@ export default function BoardCard({ data, category }: BoardCardDataProps) {
         <ProjectName>{data?.projectName}</ProjectName>
       </Header>
       <ContentsWrapper>
-        {data?.stacks && (
+        {data?.tags && (
           <TagWrapper>
-            {data?.stacks.map((el, index) => (
+            {data?.tags.map((el, index) => (
               <Tag key={index}>{el}</Tag>
             ))}
           </TagWrapper>
