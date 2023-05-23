@@ -20,6 +20,9 @@ export const NullMessage = styled.div`
   font-size: 20px;
   font-weight: 600;
   color: #d9d9d9;
+  ${media.mobile} {
+    margin-top: 2rem;
+  }
 `;
 export const FilterWrapper = styled.div`
   width: 100%;
@@ -30,7 +33,7 @@ export const FilterWrapper = styled.div`
   ${media.mobile} {
     position: fixed;
     background-color: white;
-    z-index: 10;
+    z-index: 4;
     padding: 1rem 0;
   }
 `;

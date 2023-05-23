@@ -39,7 +39,7 @@ export default function TabBoards({ boards, title }: TabBoards) {
 
   return (
     <>
-      {boards ? (
+      {boards?.length !== 0 ? (
         <>
           <SectionHeaderWrapper>
             <SectionTitle>{title}</SectionTitle>

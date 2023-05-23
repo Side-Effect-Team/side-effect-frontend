@@ -34,7 +34,7 @@ export const TapWrapper = styled.div`
     border-radius: 0;
     border-bottom: 2px solid ${theme.brandColor.lightGray};
     background-color: white;
-    z-index: 10;
+    z-index: 4;
   }
 `;
 
