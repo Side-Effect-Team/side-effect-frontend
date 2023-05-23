@@ -48,6 +48,7 @@ export default function BoardCard({ data, category }: BoardCardDataProps) {
   const [likeNum, setLikeNum] = useState(data?.likeNum || 0);
   const router = useRouter();
   const { addToast, deleteToast } = useToast();
+  console.log(data);
 
   const onClickHeart = async (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
