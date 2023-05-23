@@ -37,10 +37,7 @@ export const fetchMypage = async () => {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
-  const response = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_URL}/user/mypage/${id}`,
-    config,
-  );
+  const response = await axios.get(`/user/mypage/${id}`, config);
   return response;
 };
 export default function MyPage() {

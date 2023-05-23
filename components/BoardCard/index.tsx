@@ -47,11 +47,7 @@ const fetchProject = async (id: number) => {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
-  const response = await axios.post(
-    `${process.env.NEXT_PUBLIC_API_URL}/like/${id}`,
-    null,
-    config,
-  );
+  const response = await axios.post(`/like/${id}`, null, config);
   return response;
 };
 const fetchRecruit = async (id: number) => {
@@ -59,11 +55,7 @@ const fetchRecruit = async (id: number) => {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
-  const response = await axios.post(
-    `${process.env.NEXT_PUBLIC_API_URL}/recruit-board/likes/${id}`,
-    null,
-    config,
-  );
+  const response = await axios.post(`/recruit-board/likes/${id}`, null, config);
   return response;
 };
 export default function BoardCard({ data, category }: BoardCardDataProps) {

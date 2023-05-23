@@ -8,6 +8,8 @@ import { store } from "@/store/store";
 import Script from "next/script";
 import Layout from "@/components/Layout";
 import GlobalModal from "@/components/Modals/GlobalModal";
+import axios from "axios";
+axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
 const queryClient = new QueryClient();
 declare global {
   interface Window {
