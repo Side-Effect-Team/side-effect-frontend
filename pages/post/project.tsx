@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import axios from "axios";
 import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
@@ -139,7 +139,7 @@ export default function PostProjectPage() {
             <InputForm
               name="image"
               type="file"
-              accept="image/*"
+              accept="image/png, image/jpeg, image/jpg, image/gif"
               onChange={handleImgChange}
             />
             <ImageBox>
