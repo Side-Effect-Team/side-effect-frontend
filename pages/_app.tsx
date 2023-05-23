@@ -12,11 +12,13 @@ import GlobalModal from "@/components/Modals/GlobalModal";
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
 
 const queryClient = new QueryClient();
+
 declare global {
   interface Window {
     Kakao: any;
   }
 }
+
 export default function App({
   Component,
   pageProps: { ...pageProps },

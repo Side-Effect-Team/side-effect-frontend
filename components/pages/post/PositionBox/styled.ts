@@ -20,6 +20,7 @@ export const SelectStyled = styled.select`
   outline: none;
   padding: 0.25rem;
   border-radius: 3px;
+  background: ${(p) => p.theme.colors.lightGray};
 `;
 
 export const DirectBox = styled.div`

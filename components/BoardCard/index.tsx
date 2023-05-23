@@ -23,7 +23,6 @@ import { useRouter } from "next/router";
 import { useLikeProject } from "@/hooks/mutations/useLikeProject";
 export interface BoardCardProps {
   id: number;
-  category?: string;
   headerImage?: string;
   projectName?: string;
   tags?: string[];
@@ -34,6 +33,7 @@ export interface BoardCardProps {
   likeNum?: number;
   commentNum?: number;
   views?: number;
+  category?: string; // type error로 추가
 }
 interface BoardCardDataProps {
   data?: BoardCardProps;

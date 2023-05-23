@@ -39,6 +39,7 @@ export default function ProjectDetailPage({ project }: ProjectDetailPageProps) {
           projectName={projectName}
           content={content}
           projectUrl={projectUrl}
+          imgSrc={imgUrl}
         />
         <CommentBox />
       </Contents>
