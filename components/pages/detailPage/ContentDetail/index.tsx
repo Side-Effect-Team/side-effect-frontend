@@ -48,35 +48,37 @@ export default function ContentDetail({
         </div>
         <Column />
         <div>
-          {projectUrl ? (
-            <Link href={projectUrl} target="_blank">
+          {tags ? (
+            <ProjectTitle>{projectName}</ProjectTitle>
+          ) : (
+            <Link href={projectUrl!} target="_blank">
               <ProjectTitle>{projectName}</ProjectTitle>
             </Link>
-          ) : (
-            <ProjectTitle>{projectName}</ProjectTitle>
-          )}
-        </div>
-        <div>
-          {projectUrl ? (
-            <Image
-              src={`http://54.64.103.42:8080/api/free-boards/image/${imgSrc}`}
-              alt="프로젝트 사진"
-              width={100}
-              height={100}
-            />
-          ) : (
-            <Image
-              src={`http://54.64.103.42:8080/api/recruit-board/image/${imgSrc}`}
-              alt="프로젝트 사진"
-              width={100}
-              height={100}
-            />
           )}
         </div>
       </ProjectTitleBox>
       <h4>상세 내용</h4>
+      <div>
+        {tags ? (
+          <Image
+            src={`http://54.64.103.42:8080/api/recruit-board/image/${imgSrc}`}
+            alt="프로젝트 사진"
+            width={400}
+            height={300}
+            priority
+          />
+        ) : (
+          <Image
+            src={`http://54.64.103.42:8080/api/free-boards/image/${imgSrc}`}
+            alt="프로젝트 사진"
+            width={400}
+            height={300}
+            priority
+          />
+        )}
+      </div>
       <Description>
-        <p>{content}</p>
+        <textarea readOnly>{content}</textarea>
       </Description>
       <hr />
     </Wrapper>
