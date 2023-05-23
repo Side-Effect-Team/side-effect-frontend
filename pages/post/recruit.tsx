@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { GoPlus } from "react-icons/go";
 import axios from "axios";
