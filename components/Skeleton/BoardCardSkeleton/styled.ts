@@ -1,6 +1,6 @@
 import styled, { keyframes } from "styled-components";
 import { media } from "@/styles/mediatest";
-import { theme } from "../../styles/Theme";
+import { theme } from "../../../styles/Theme";
 
 const loading = keyframes`
  0% {
