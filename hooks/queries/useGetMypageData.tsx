@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getMypageData } from "apis/UserAPI";
 import useToast from "../common/useToast";
 export const useGetMypageData = () => {

@@ -17,6 +17,7 @@ export const useAddLikeProject = () => {
       }
       queryClient.invalidateQueries({ queryKey: ["projectData"] });
       queryClient.invalidateQueries({ queryKey: ["mypageData"] });
+      queryClient.invalidateQueries({ queryKey: ["topLikedProjects"] });
     },
   });
   return mutate;

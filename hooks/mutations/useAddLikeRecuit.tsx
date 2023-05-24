@@ -17,6 +17,7 @@ export const useAddLikeRecruit = () => {
       }
       queryClient.invalidateQueries({ queryKey: ["recruits"] });
       queryClient.invalidateQueries({ queryKey: ["mypageData"] });
+      queryClient.invalidateQueries({ queryKey: ["newRecruits"] });
     },
   });
   return mutate;

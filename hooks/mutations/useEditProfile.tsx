@@ -11,7 +11,6 @@ export const useEditProfile = () => {
   const { mutate } = useMutation({
     mutationFn: editProfile,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["editProfile"] });
       addToast({
         type: "success",
         title: "success",
@@ -19,6 +18,7 @@ export const useEditProfile = () => {
       });
       deleteToast("unique-id");
       router.push("/mypage");
+      queryClient.invalidateQueries({ queryKey: ["editProfile"] });
     },
     onError: () => {
       addToast({
