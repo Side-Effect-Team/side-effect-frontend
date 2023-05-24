@@ -6,6 +6,7 @@ export const ProjectListWrapper = styled.main`
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   row-gap: 1rem;
   column-gap: 1rem;
+  margin-bottom: 1rem;
   ${media.mobile} {
     display: flex;
     flex-direction: column;
