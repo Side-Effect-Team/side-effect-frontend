@@ -1,17 +1,11 @@
 import styled from "styled-components";
 import { theme } from "@/styles/Theme";
-import {
-  AiFillHeart,
-  AiOutlineEye,
-  AiOutlineHeart,
-  AiOutlineMessage,
-} from "react-icons/ai";
-import { GrView } from "react-icons/gr";
+import { AiFillHeart, AiOutlineHeart, AiOutlineMessage } from "react-icons/ai";
 import { BsEye } from "react-icons/bs";
-import { mediaQuery } from "@/styles/Media";
 import { media } from "@/styles/mediatest";
 
 export const Container = styled.div`
+  width: 300px;
   min-width: 300px;
   height: 400px;
   display: flex;
@@ -29,37 +23,55 @@ export const Container = styled.div`
   :hover {
     box-shadow: 1px 1px 5px rgba(21, 94, 239, 0.25);
   }
-  ${mediaQuery("mobile")`
-  width: 95%;
-  min-height: 150px;
-  flex-direction: row;
-  margin-left: auto;
-  margin-right: auto; 
-  `}
+  ${media.mobile} {
+    width: 95%;
+    height: 150px;
+    min-height: 150px;
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: auto;
+  }
 `;
-export const TestHeartFillIcon = styled(AiFillHeart)`
-  color: ${theme.brandColor.coral};
-  font-size: 25px;
-  font-weight: 600;
+export const HeartWrapper = styled.div<{ isLike: boolean }>`
+  background-color: ${({ isLike }) => (isLike ? "white" : "#d9d9d9")};
+  border-radius: 50%;
+  padding: 5px;
   position: absolute;
   top: 10px;
   right: 10px;
+  display: flex;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.25);
 `;
-export const TestHeartNotFillIcon = styled(AiOutlineHeart)`
-  color: ${theme.brandColor.coral};
+interface HeartProps {
+  islike: string;
+  heartlike: string;
+}
+export const HeartFillIcon = styled(AiFillHeart)<HeartProps>`
+  color: ${(p) => (p.islike === "true" ? theme.brandColor.coral : "white")};
   font-size: 25px;
   font-weight: 600;
-  position: absolute;
-  top: 10px;
-  right: 10px;
+  animation: ${(p) =>
+    p.heartlike === "true" ? "heart 0.7s ease-in-out" : "none"};
+
+  @keyframes heart {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
 `;
+
 interface HeaderProps {
   src?: string;
   category?: string;
 }
 export const Header = styled.div<HeaderProps>`
   width: 100%;
-  /* height: 150px; */
   height: ${(p) => (p.category === "projects" ? "250px" : "150px")};
   display: flex;
   flex-direction: column;
@@ -81,10 +93,10 @@ export const Header = styled.div<HeaderProps>`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  ${mediaQuery("mobile")`
-  width: 35%;
-  height: 150px;
-  `};
+  ${media.mobile} {
+    width: 35%;
+    height: 150px;
+  }
 `;
 
 export const ProjectName = styled.div`
@@ -116,39 +128,10 @@ export const ContentsWrapper = styled.div`
     padding: 10px;
     justify-content: space-between;
   }
-  ${mediaQuery("mobile")`
-  `}
 `;
-export const TagWrapper = styled.div`
-  width: 100%;
-  max-height: 30%;
-  overflow: hidden;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-bottom: 10px;
-  ${mediaQuery("mobile")`
-  flex-wrap: nowrap;
-  margin: 10px 0;
-  `}
-`;
-export const Tag = styled.div`
-  font-size: 16px;
-  font-weight: 600;
-  color: white;
-  background-color: black;
-  margin-right: 10px;
-  margin-bottom: 7px;
-  padding: 0.3em 1em;
-  border-radius: 15px;
-  ${mediaQuery("mobile")`
-  margin-bottom: 0;
-  font-size: 12px;
-  `}
-`;
+
 export const Title = styled.div`
+  height: 25%;
   font-size: 20px;
   font-weight: 600;
   margin-bottom: 15px;
@@ -156,23 +139,57 @@ export const Title = styled.div`
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  ${mediaQuery("mobile")`
-  -webkit-line-clamp: 1;
-  `}
+  ${media.mobile} {
+    -webkit-line-clamp: 1;
+    margin-top: 7px;
+    height: auto;
+    width: 80%;
+    font-size: 16px;
+  }
 `;
 export const Content = styled.div`
-  /* height: 40%; */
+  height: 20%;
   font-size: 16px;
   font-weight: 400;
   color: #454545;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  ${mediaQuery("mobile")`
-  -webkit-line-clamp: 1;
-  `}
+  ${media.mobile} {
+    -webkit-line-clamp: 1;
+    height: auto;
+  }
+`;
+export const TagWrapper = styled.div`
+  width: 100%;
+  height: 30%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+  ${media.mobile} {
+    flex-wrap: nowrap;
+    margin-top: 5px;
+  }
+`;
+export const Tag = styled.div`
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  background-color: black;
+  margin-right: 10px;
+  margin-bottom: 7px;
+  padding: 0.3em 1em;
+  border-radius: 15px;
+  ${media.mobile} {
+    margin-bottom: 0;
+    font-size: 12px;
+  }
 `;
 export const Footer = styled.div`
   width: 100%;
@@ -198,15 +215,10 @@ export const IconButton = styled.button`
   cursor: pointer;
 `;
 export const HeartNotFillIcon = styled(AiOutlineHeart)`
-  color: ${theme.brandColor.coral};
-  font-size: 20px;
-`;
-export const HeartFillIcon = styled(AiFillHeart)`
-  color: ${theme.brandColor.coral};
-  font-size: 20px;
+  color: ${theme.colors.gray};
+  font-size: 16px;
 `;
 export const CommentIcon = styled(AiOutlineMessage)`
-  /* color: ${theme.brandColor.coral}; */
   color: ${theme.colors.gray};
   font-size: 16px;
 `;
@@ -217,7 +229,6 @@ export const FeedbackNum = styled.div`
   color: ${theme.colors.gray};
 `;
 export const ViewIcon = styled(BsEye)`
-  /* color: ${theme.brandColor.coral}; */
   color: ${theme.colors.gray};
   font-size: 16px;
 `;

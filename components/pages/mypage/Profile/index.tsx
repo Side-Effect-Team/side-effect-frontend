@@ -32,7 +32,7 @@ export default function Profile(data: MypageProps) {
           <SectionTitle>Skill</SectionTitle>
           <Border></Border>
         </SectionHeaderWrapper>
-        <Skill stacks={data.stacks} />
+        <Skill tags={data.tags} />
       </SectionWrapper>
       <SectionWrapper>
         <SectionHeaderWrapper>
