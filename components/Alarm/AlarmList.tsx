@@ -13,14 +13,8 @@ import {
   Wrapper,
 } from "./styled";
 import { useRouter } from "next/router";
-import { useQueryClient } from "@tanstack/react-query";
 import { useReadAlarm } from "@/hooks/mutations/useReadAlarm";
 import { useDeleteAlarm } from "@/hooks/mutations/useDeleteAlarm";
-// export interface AlarmProps {
-//   lastId: number;
-//   alarmNum: number;
-//   alarms: AlarmProps[];
-// }
 
 export interface AlarmProps {
   id: number;
@@ -36,9 +30,8 @@ interface TestProps {
 }
 interface AlarmListProps {
   alarmData: TestProps[];
-  // alarmList: TestProps;
   setOpenAlarm: Dispatch<SetStateAction<boolean>>;
-  Observer: () => JSX.Element | null;
+  Observer: () => JSX.Element | undefined;
 }
 
 export default function AlarmList({
