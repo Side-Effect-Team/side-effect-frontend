@@ -12,7 +12,7 @@ export const getProjectData = async (
     : { headers: {} };
   //
   const response = await axios.get(
-    `/free-boards/scroll?size=8&filter=${filter}&keyword=${keyword}&lastId=${page}`,
+    `/free-boards/scroll?size=4&filter=${filter}&keyword=${keyword}&lastId=${page}`,
     config,
   );
   return response.data;
