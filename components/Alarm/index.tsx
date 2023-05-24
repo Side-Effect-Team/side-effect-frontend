@@ -1,14 +1,17 @@
-import { Dispatch, MouseEvent, SetStateAction } from "react";
+import { Dispatch, MouseEvent, SetStateAction, useEffect } from "react";
 import { AlarmButton, AlarmDiv, AlarmIconDiv, AlarmCount } from "./styled";
 import AlarmList, { AlarmProps } from "./AlarmList";
-import { useGetAlarmList } from "@/hooks/queries/useGetAlarmList";
+import { useGetAlarmDataAll } from "@/hooks/queries/useGetAlarmDataAll";
+import { useGetAlarmData } from "@/hooks/queries/useGetAlarmData";
 
 interface FromHeaderProps {
   openAlarm: boolean;
   setOpenAlarm: Dispatch<SetStateAction<boolean>>;
 }
 export default function Alarm({ openAlarm, setOpenAlarm }: FromHeaderProps) {
-  const { data: alarmList } = useGetAlarmList();
+  const { data: alarmList } = useGetAlarmDataAll();
+  const { data: alarmData, Observer, isLoading } = useGetAlarmData();
+  console.log(alarmData);
   // 읽지 않은 알람 갯수 세기
   const countAlarm = () => {
     if (alarmList) {
@@ -30,9 +33,20 @@ export default function Alarm({ openAlarm, setOpenAlarm }: FromHeaderProps) {
           <AlarmButton />
           {count !== 0 && <AlarmCount>{count}</AlarmCount>}
         </AlarmIconDiv>
-        {openAlarm && alarmList && (
+        {/* {openAlarm && alarmList && (
           <AlarmList alarmList={alarmList.data} setOpenAlarm={setOpenAlarm} />
-        )}
+        )} */}
+        {openAlarm &&
+          alarmData &&
+          (isLoading ? (
+            <div>로딩중</div>
+          ) : (
+            <AlarmList
+              alarmData={alarmData}
+              setOpenAlarm={setOpenAlarm}
+              Observer={Observer}
+            />
+          ))}
       </AlarmDiv>
     </>
   );
