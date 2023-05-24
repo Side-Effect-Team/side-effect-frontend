@@ -49,6 +49,7 @@ export default function ProjectPage() {
         <ProjectList data={data} />
       )}
       {Observer()}
+      <Skeleton />
     </Wrapper>
   );
 }

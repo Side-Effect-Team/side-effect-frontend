@@ -55,7 +55,7 @@ export const SkeletonCardWrapper = styled.div`
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
   ${media.mobile} {
     width: 95%;
-    min-height: 150px;
+    max-height: 150px;
     flex-direction: row;
     margin-left: auto;
     margin-right: auto;
@@ -64,11 +64,10 @@ export const SkeletonCardWrapper = styled.div`
 export const Header = styled(SkeletonItem)`
   width: 100%;
   height: 150px;
-  border-bottom-left-radius: 0px;
-  border-bottom-right-radius: 0px;
+  border-radius: 0%;
+
   &:before {
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
+    border-radius: 0%;
   }
   ${media.mobile} {
     width: 35%;
@@ -95,11 +94,17 @@ export const Title = styled(SkeletonItem)`
   margin-bottom: 15px;
   width: 150px;
   height: 20px;
+  ${media.mobile} {
+    width: 100px;
+  }
 `;
 export const Content = styled(SkeletonItem)`
   margin-bottom: 15px;
   width: 200px;
   height: 20px;
+  ${media.mobile} {
+    width: 150px;
+  }
 `;
 export const Footer = styled.div`
   width: 100%;
@@ -113,8 +118,14 @@ export const CreateAt = styled(SkeletonItem)`
   margin-bottom: 15px;
   width: 120px;
   height: 20px;
+  ${media.mobile} {
+    width: 100px;
+  }
 `;
 export const Comment = styled(SkeletonItem)`
   margin-bottom: 15px;
   width: 80px;
+  ${media.mobile} {
+    width: 70px;
+  }
 `;
