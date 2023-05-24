@@ -1,5 +1,14 @@
 import axios from "axios";
 
+export const getAlarmNum = async () => {
+  const token = localStorage.getItem("accessToken");
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  const response = await axios.get(`/notice/view-count`, config);
+  return response;
+};
+
 export const getAlarmDataAll = async () => {
   const token = localStorage.getItem("accessToken");
   const config = {
