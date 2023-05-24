@@ -5,7 +5,7 @@ export const getAlarmList = async () => {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
-  return axios.get(`${process.env.NEXT_PUBLIC_API_URL}/notice`, config);
+  return axios.get(`/notice`, config);
 };
 
 export const readAlarm = async (id: number) => {
@@ -13,11 +13,7 @@ export const readAlarm = async (id: number) => {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
-  const response = await axios.post(
-    `${process.env.NEXT_PUBLIC_API_URL}/notice/${id}`,
-    null,
-    config,
-  );
+  const response = await axios.post(`/notice/${id}`, null, config);
   return response;
 };
 
@@ -26,9 +22,6 @@ export const deleteAlarm = async (id: number) => {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
-  const response = await axios.delete(
-    `${process.env.NEXT_PUBLIC_API_URL}/notice/${id}`,
-    config,
-  );
+  const response = await axios.delete(`/notice/${id}`, config);
   return response;
 };

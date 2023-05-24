@@ -14,9 +14,7 @@ export default function MyPageId() {
     const id = router.query.mypageId;
     if (!id) return;
     try {
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/user/mypage/${id}`,
-      );
+      const response = await axios.get(`/user/mypage/${id}`);
       setData(response.data);
       console.log(response.data);
     } catch (error) {

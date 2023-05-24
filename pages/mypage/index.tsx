@@ -6,10 +6,10 @@ import {
 } from "@/components/pages/mypage/styled";
 import Profile from "@/components/pages/mypage/Profile";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { BoardCardProps } from "@/components/BoardCard";
 import TabBoards from "@/components/pages/mypage/TabBoards";
 import Account from "@/components/pages/mypage/Account";
+import { useGetMypageData } from "@/hooks/queries/useGetMypageData";
 
 export interface MypageProps {
   id: number;
@@ -17,7 +17,7 @@ export interface MypageProps {
   nickname: string;
   email: string;
   introduction?: string;
-  stacks?: string[];
+  tags?: string[];
   position: string;
   career: string;
   githubUrl?: string;
@@ -30,7 +30,6 @@ export interface MypageProps {
 }
 
 export default function MyPage() {
-  const [data, setData] = useState<MypageProps | null>(null);
   const [boards, setBoards] = useState<BoardCardProps[] | undefined | null>(
     null,
   );
@@ -50,29 +49,8 @@ export default function MyPage() {
     setActiveTab(tabName);
   };
 
-  const fetchData = async () => {
-    try {
-      const id = localStorage.getItem("id");
-      const token = localStorage.getItem("accessToken");
-      const config = {
-        headers: { Authorization: `Bearer ${token}` },
-      };
-      const result = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/user/mypage/${id}`,
-        config,
-      );
-      console.log(result.data);
-      setData(result.data);
-    } catch (error) {
-      setData(null);
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const data = useGetMypageData();
   console.log(data);
-
   useEffect(() => {
     if (activeTab === "likeBoards" && data) {
       setBoards(data.likeBoards);
@@ -81,7 +59,7 @@ export default function MyPage() {
     } else if (activeTab === "applyBoards" && data) {
       setBoards(data.applyBoards);
     }
-  }, [activeTab]);
+  }, [activeTab, data]);
 
   return (
     <Container>
