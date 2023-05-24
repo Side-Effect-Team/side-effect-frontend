@@ -10,6 +10,7 @@ interface ProjectDetailPageProps {
 }
 
 export default function ProjectDetailPage({ project }: ProjectDetailPageProps) {
+  console.log(project);
   const {
     comments,
     content,
@@ -40,7 +41,7 @@ export default function ProjectDetailPage({ project }: ProjectDetailPageProps) {
           projectUrl={projectUrl}
           imgSrc={imgUrl}
         />
-        <CommentBox comments={comments} />
+        <CommentBox boardId={id} comments={comments} />
       </Contents>
     </Wrapper>
   );

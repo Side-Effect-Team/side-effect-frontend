@@ -6,7 +6,6 @@ import { UserProfile } from "@/detailComps/PostData/styled";
 import {
   CommentWrapper,
   ProfileBox,
-  CommentContentsBox,
   CommentContents,
   CommentEditBtnBox,
   OptionBtn,
@@ -17,7 +16,6 @@ interface CommentBoxProps {
 }
 
 export default function CommentItem({ comment }: CommentBoxProps) {
-  console.log(comment);
   const [isEdit, setIsEdit] = useState(false);
   const [commentValue, setCommentValue] = useState(comment.content);
   const router = useRouter();
