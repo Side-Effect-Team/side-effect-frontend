@@ -10,7 +10,7 @@ interface FromHeaderProps {
 }
 export default function Alarm({ openAlarm, setOpenAlarm }: FromHeaderProps) {
   const { data: alarmList } = useGetAlarmDataAll();
-  const { data: alarmData, Observer, isLoading } = useGetAlarmData();
+  const { data: alarmData, Observer } = useGetAlarmData();
   console.log(alarmData);
   // 읽지 않은 알람 갯수 세기
   const countAlarm = () => {
@@ -25,7 +25,6 @@ export default function Alarm({ openAlarm, setOpenAlarm }: FromHeaderProps) {
     e.stopPropagation();
     setOpenAlarm((prev) => !prev);
   };
-
   return (
     <>
       <AlarmDiv openAlarm={openAlarm}>
@@ -36,17 +35,13 @@ export default function Alarm({ openAlarm, setOpenAlarm }: FromHeaderProps) {
         {/* {openAlarm && alarmList && (
           <AlarmList alarmList={alarmList.data} setOpenAlarm={setOpenAlarm} />
         )} */}
-        {openAlarm &&
-          alarmData &&
-          (isLoading ? (
-            <div>로딩중</div>
-          ) : (
-            <AlarmList
-              alarmData={alarmData}
-              setOpenAlarm={setOpenAlarm}
-              Observer={Observer}
-            />
-          ))}
+        {openAlarm && alarmData && (
+          <AlarmList
+            alarmData={alarmData}
+            setOpenAlarm={setOpenAlarm}
+            Observer={Observer}
+          />
+        )}
       </AlarmDiv>
     </>
   );
