@@ -45,7 +45,7 @@ export default function TabBoards({ boards, title }: TabBoards) {
             <SectionTitle>{title}</SectionTitle>
             <Border></Border>
           </SectionHeaderWrapper>
-          {title !== "applyBoards" && (
+          {title !== "지원목록" && (
             <FilterWrapper>
               {filterMenuTap.map((filter) => (
                 <FilterMenu

@@ -50,7 +50,7 @@ export const TapMenu = styled.div<{ isActive: boolean }>`
 `;
 
 export const ContentsWrapper = styled.div`
-  padding: 1rem;
+  padding: 0 1rem;
   width: calc(100% - 190px);
   margin-left: auto;
   ${media.mobile} {

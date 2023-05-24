@@ -11,9 +11,7 @@ export const BoardWrapper = styled.div`
   ${media.mobile} {
     display: flex;
     flex-direction: column;
-    ${media.mobile} {
-      margin-top: 4rem;
-    }
+    margin-top: 4rem;
   }
 `;
 export const NullMessage = styled.div`
