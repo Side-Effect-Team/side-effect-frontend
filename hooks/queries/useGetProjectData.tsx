@@ -34,14 +34,7 @@ export const useGetProjectData = (
     if (!hasNextPage) return;
 
     // 데이터를 불러오는동안 스켈레톤컴포넌트를 보여준다.
-    return isFetchingNextPage ? (
-      <Skeleton />
-    ) : (
-      <div
-        ref={ref}
-        style={{ height: "100px", margin: "auto", marginTop: "50px" }}
-      />
-    );
+    return isFetchingNextPage ? <Skeleton /> : <div ref={ref} />;
   };
 
   return {

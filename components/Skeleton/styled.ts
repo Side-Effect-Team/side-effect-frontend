@@ -18,6 +18,7 @@ const SkeletonItem = styled.div`
   height: 20px;
   border-radius: 15px;
   position: relative;
+
   &:before {
     content: "";
     position: absolute;
@@ -35,6 +36,7 @@ export const SkelectonContainer = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   row-gap: 1rem;
   column-gap: 1rem;
+  margin-bottom: 1rem;
   ${media.mobile} {
     display: flex;
     flex-direction: column;
