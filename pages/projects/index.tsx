@@ -9,6 +9,7 @@ import Loading from "@/components/Loading";
 import PageHead from "@/components/PageHead";
 import BatchCarousel from "@/components/Carousel/BatchCarousel";
 import ProjectList from "@/components/pages/project/ProjectLIst";
+import Skeleton from "@/components/Skeleton";
 const FILTER_OPTIONS = [
   { name: "최신순", value: "latest" },
   { name: "조회순", value: "views" },
@@ -43,7 +44,7 @@ export default function ProjectPage() {
       {isDataEmpty ? (
         <NoData />
       ) : isLoading ? (
-        <Loading width={10} height={150} />
+        <Skeleton />
       ) : (
         <ProjectList data={data} />
       )}

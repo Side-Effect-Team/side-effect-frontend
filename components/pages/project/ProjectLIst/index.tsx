@@ -13,7 +13,6 @@ interface ProjectDataType {
 
 export default function ProjectList({ data }: any) {
   //data 타입수정필요
-  console.log(data);
   return (
     <ProjectListWrapper>
       {data.pages.map((page: PageType) => {
