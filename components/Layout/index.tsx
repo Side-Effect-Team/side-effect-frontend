@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
 import Link from "next/link";
 import { ThemeProvider } from "styled-components";
 import { Wrapper, MobileNavBar, MobileMenuItem } from "./styled";
@@ -37,9 +36,6 @@ export default function Layout({ children }: PropType) {
   console.log("authenticated", authenticated);
   console.log("token", token);
 
-  const router = useRouter();
-  const currentPage = router.route;
-
   const handleMobileMenu = () => {
     setMobileMenuOpen((prev) => !prev);
   };
@@ -56,18 +52,6 @@ export default function Layout({ children }: PropType) {
       return () => window.removeEventListener("resize", detectViewportWidth);
     }
   });
-
-  /** userinfo 페이지에선 헤더가 안보이기위한 코드 */
-  if (currentPage.startsWith("/userinfo")) {
-    return (
-      <>
-        <ThemeProvider theme={theme}>
-          <GlobalStyles />
-          {children}
-        </ThemeProvider>
-      </>
-    );
-  }
 
   return (
     <ThemeProvider theme={theme}>
