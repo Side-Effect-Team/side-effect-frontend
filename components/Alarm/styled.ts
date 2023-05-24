@@ -135,6 +135,7 @@ export const Wrapper = styled.div<{ watched: boolean }>`
 export const RowWrapper = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
 `;
 export const Title = styled.div`
   width: 100%;
@@ -143,15 +144,11 @@ export const Title = styled.div`
 `;
 
 export const Contents = styled.div`
-  width: 100%;
   font-size: 14px;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 `;
 export const Date = styled.div`
   color: #d9d9d9;
+  font-size: 14px;
 `;
 export const EmptyMessage = styled.div`
   font-size: 16px;
