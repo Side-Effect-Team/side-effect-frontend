@@ -54,7 +54,7 @@ export default function Info({
     } else {
       setPositionTitle("포지션");
     }
-  }, []);
+  }, [career, position]);
 
   return (
     <>
