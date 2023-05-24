@@ -11,7 +11,6 @@ interface RecruitDetailPageProps {
 }
 
 export default function RecruitDetailPage({ recruit }: RecruitDetailPageProps) {
-  console.log(recruit);
   const {
     id,
     title,

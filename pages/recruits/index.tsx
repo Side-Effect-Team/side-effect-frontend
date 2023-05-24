@@ -26,7 +26,6 @@ export default function RecruitsPage() {
   if (isLoading) {
     return <h2>Loading...</h2>;
   }
-  console.log(data);
 
   return (
     <Wrapper>

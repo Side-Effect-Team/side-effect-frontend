@@ -10,7 +10,6 @@ interface ProjectDetailPageProps {
 }
 
 export default function ProjectDetailPage({ project }: ProjectDetailPageProps) {
-  console.log(project);
   const {
     comments,
     content,
