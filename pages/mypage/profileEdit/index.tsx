@@ -15,10 +15,10 @@ import {
   TapMenu,
   TapWrapper,
 } from "@/components/pages/mypage/styled";
-import { MypageProps } from "..";
 import { useRouter } from "next/router";
-import axios from "axios";
 import useToast from "@/hooks/common/useToast";
+import { useGetProfileData } from "@/hooks/queries/useGetPofileData";
+import { useEditProfile } from "@/hooks/mutations/useEditProfile";
 export interface FormData {
   githubUrl?: string;
   blogUrl?: string;
@@ -29,7 +29,7 @@ export interface MypageEditProps {
   imgUrl: string | undefined;
   nickname: string;
   introduction: string | undefined;
-  stacks: string[] | undefined;
+  tags: string[] | undefined;
   position: string;
   career: string;
   githubUrl?: string | undefined;
@@ -37,11 +37,12 @@ export interface MypageEditProps {
   portfolioUrl?: string | undefined;
 }
 export default function MyPageEdit() {
-  const [data, setData] = useState<MypageEditProps | null>(null);
+  const data = useGetProfileData();
+  console.log(data);
   const router = useRouter();
   const [introduction, setIntroduction] = useState(data?.introduction);
   const [imgUrl, setImgUrl] = useState(data?.imgUrl);
-  const [stacks, setStacks] = useState<string[]>(data?.stacks || []);
+  const [tags, setTags] = useState<string[]>(data?.tags || []);
   const [career, setCareer] = useState<string>(data?.career || "");
   const [position, setPosition] = useState<string>(data?.position || "");
   const {
@@ -52,34 +53,13 @@ export default function MyPageEdit() {
   const { addToast, deleteToast } = useToast();
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const token = localStorage.getItem("accessToken");
-        const config = {
-          headers: { Authorization: `Bearer ${token}` },
-        };
-        const result = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL}/user/editpage`,
-          config,
-        );
-        console.log(result.data);
-        setData(result.data);
-      } catch (error) {
-        router.push("/");
-        setData(null);
-        console.log(error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    setStacks(data?.stacks || []);
+    setTags(data?.tags || []);
     setCareer(data?.career || "");
     setPosition(data?.position || "");
     setIntroduction(data?.introduction);
   }, [data]);
+
+  const editMutate = useEditProfile();
 
   const onClickEdit = async (p: FormData) => {
     if (data) {
@@ -92,7 +72,7 @@ export default function MyPageEdit() {
       const changedData: MypageEditProps = {
         career,
         position,
-        stacks,
+        tags,
         introduction,
         imgUrl,
         ...changedFormData,
@@ -103,36 +83,7 @@ export default function MyPageEdit() {
         alert("변경사항이 없습니다.");
         return;
       }
-
-      try {
-        const id = localStorage.getItem("id");
-        const token = localStorage.getItem("accessToken");
-        const config = {
-          headers: { Authorization: `Bearer ${token}` },
-        };
-        const result = await axios.patch(
-          `${process.env.NEXT_PUBLIC_API_URL}/user/${id}`,
-          changes,
-          config,
-        );
-        console.log(result.data);
-        addToast({
-          type: "success",
-          title: "success",
-          content: "프로필 편집에 성공하였습니다.",
-        });
-        deleteToast("unique-id");
-        router.push(`/mypage`);
-      } catch (error) {
-        console.log(error);
-        addToast({
-          type: "error",
-          title: "error",
-          content: "프로필 편집에 실패하였습니다.",
-        });
-
-        deleteToast("unique-id");
-      }
+      editMutate(changes);
     }
   };
 
@@ -190,7 +141,7 @@ export default function MyPageEdit() {
               <SectionTitle>Skill</SectionTitle>
               <Border></Border>
             </SectionHeaderWrapper>
-            <SkillEdit stacks={stacks} setStacks={setStacks} />
+            <SkillEdit stacks={tags} setStacks={setTags} />
           </SectionWrapper>
           <SectionWrapper>
             <SectionHeaderWrapper>

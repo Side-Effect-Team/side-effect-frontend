@@ -1,29 +1,14 @@
 import { Dispatch, MouseEvent, SetStateAction } from "react";
 import { AlarmButton, AlarmDiv, AlarmIconDiv, AlarmCount } from "./styled";
 import AlarmList, { AlarmProps } from "./AlarmList";
-import { useQuery } from "@tanstack/react-query";
-import { getAlarmList } from "./AlarmQurey";
-import useToast from "@/hooks/common/useToast";
-import useOutsideClick from "../../hooks/common/useOutsideClick";
+import { useGetAlarmList } from "@/hooks/queries/useGetAlarmList";
 
 interface FromHeaderProps {
   openAlarm: boolean;
   setOpenAlarm: Dispatch<SetStateAction<boolean>>;
 }
 export default function Alarm({ openAlarm, setOpenAlarm }: FromHeaderProps) {
-  const { addToast, deleteToast } = useToast();
-
-  const { data: alarmList } = useQuery(["notice"], getAlarmList, {
-    onError: () => {
-      addToast({
-        type: "error",
-        title: "error",
-        content: "알람을 가져오지 못했습니다.",
-      });
-      deleteToast("unique-id");
-    },
-    retry: false,
-  });
+  const { data: alarmList } = useGetAlarmList();
   // 읽지 않은 알람 갯수 세기
   const countAlarm = () => {
     if (alarmList) {

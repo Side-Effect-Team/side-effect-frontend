@@ -7,7 +7,7 @@ export const getProjectData = async (
   const token = localStorage.getItem("accessToken");
   const config = token
     ? {
-        headers: { Authorization: token },
+        headers: { Authorization: `Bearer ${token}` },
       }
     : { headers: {} };
   //

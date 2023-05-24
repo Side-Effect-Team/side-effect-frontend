@@ -11,20 +11,17 @@ import {
   Footer,
   Header,
   ProjectName,
-  HeartFillIcon,
   HeartNotFillIcon,
   Tag,
   TagWrapper,
   Title,
   ViewIcon,
-  TestHeartFillIcon,
-  TestHeartNotFillIcon,
+  HeartWrapper,
+  HeartFillIcon,
 } from "./styled";
 import { useRouter } from "next/router";
-import axios from "axios";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import useToast from "@/hooks/common/useToast";
-import { color } from "framer-motion";
+import { useAddLikeProject } from "@/hooks/mutations/useAddLikeProject";
+import { useAddLikeRecruit } from "@/hooks/mutations/useAddLikeRecuit";
 export interface BoardCardProps {
   id: number;
   headerImage?: string;
@@ -45,51 +42,31 @@ interface BoardCardDataProps {
 }
 
 export default function BoardCard({ data, category }: BoardCardDataProps) {
-  const [isLike, setIsLike] = useState(data?.like);
-  const [likeNum, setLikeNum] = useState(data?.likeNum || 0);
+  const projectMutate = useAddLikeProject();
+  const recruitMutate = useAddLikeRecruit();
   const router = useRouter();
-  const { addToast, deleteToast } = useToast();
-  console.log(data);
-
-  const onClickHeart = async (e: MouseEvent<HTMLButtonElement>) => {
+  const onClickHeart = async (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
-
-    // 좋아요 API 추가
-    const id = e.currentTarget.id;
+    const id = Number(e.currentTarget.id);
     const token = localStorage.getItem("accessToken");
     if (token) {
-      try {
-        const config = {
-          headers: { Authorization: `Bearer ${token}` },
-        };
-
-        let url;
-        if (category === "projects") {
-          url = `${process.env.NEXT_PUBLIC_API_URL}/like/${id}`;
-        } else {
-          url = `${process.env.NEXT_PUBLIC_API_URL}/recruit-board/likes/${id}`;
-        }
-        const response = await axios.post(url, null, config);
-        setIsLike((prev) => !prev);
-        if (isLike && likeNum) {
-          setLikeNum(likeNum - 1);
-        }
-        if (!isLike && likeNum >= 0) {
-          setLikeNum(likeNum + 1);
-          addToast({
-            type: "success",
-            title: "success",
-            content: "관심 게시물에 추가되었습니다.",
-          });
-          deleteToast("unique-id");
-        }
-      } catch (error) {
-        console.log(error);
-        addToast({
-          type: "error",
-          title: "error",
-          content: "error.",
+      if (category === "projects") {
+        projectMutate(id, {
+          onSuccess: (res) => {
+            if (res.data.message.includes("추천했습니다")) {
+              setHeartLike(true);
+            } else setHeartLike(false);
+          },
         });
+      } else {
+        recruitMutate(id, {
+          onSuccess: (res) => {
+            if (res.data.message.includes("추천했습니다")) {
+              setHeartLike(true);
+            } else setHeartLike(false);
+          },
+        });
+        console.log(data);
       }
     } else alert("로그인 후 이용가능합니다.");
   };
@@ -99,17 +76,29 @@ export default function BoardCard({ data, category }: BoardCardDataProps) {
       router.push(`/recruits/${e.currentTarget.id}`);
     } else router.push(`/projects/${e.currentTarget.id}`);
   };
-  // console.log(data);
+  const [heartLike, setHeartLike] = useState(data?.like || false);
 
+  useEffect(() => {
+    setHeartLike(false);
+  }, []);
   return (
     <Container id={data?.id.toString()} onClick={onClickGoToBoard}>
       <Header category={category} src={data?.headerImage}>
-        <IconButton id={data?.id.toString()} onClick={onClickHeart}>
-          {isLike ? <TestHeartFillIcon /> : <TestHeartNotFillIcon />}
-        </IconButton>
+        <HeartWrapper
+          isLike={data?.like || false}
+          id={data?.id.toString()}
+          onClick={onClickHeart}
+        >
+          <HeartFillIcon
+            islike={data?.like ? data?.like.toString() : "false"}
+            heartlike={heartLike.toString()}
+          />
+        </HeartWrapper>
         <ProjectName>{data?.projectName}</ProjectName>
       </Header>
       <ContentsWrapper>
+        <Title>{data?.title}</Title>
+        <Content>{data?.content}</Content>
         {data?.tags && (
           <TagWrapper>
             {data?.tags.map((el, index) => (
@@ -117,21 +106,13 @@ export default function BoardCard({ data, category }: BoardCardDataProps) {
             ))}
           </TagWrapper>
         )}
-        <Title>{data?.title}</Title>
-        <Content>{data?.content}</Content>
         <Footer>
           <CreateAt>{data?.createdAt}</CreateAt>
           <ButtonsWrapper>
-            {/* <IconButton id={data?.id.toString()} onClick={onClickHeart}>
-              {isLike ? <HeartFillIcon /> : <HeartNotFillIcon />}
-            </IconButton>
-            <FeedbackNum>{likeNum}</FeedbackNum> */}
-            {/* ///////////////////////////////////////////////////  view 추가 로직 */}
             <IconButton>
               <ViewIcon />
             </IconButton>
-            <FeedbackNum>{data?.views || 0}</FeedbackNum>
-            {/*  */}
+            <FeedbackNum>{data?.views}</FeedbackNum>
             {data?.commentNum !== undefined && (
               <>
                 <IconButton>
@@ -140,6 +121,10 @@ export default function BoardCard({ data, category }: BoardCardDataProps) {
                 <FeedbackNum>{data?.commentNum}</FeedbackNum>
               </>
             )}
+            <IconButton>
+              <HeartNotFillIcon />
+            </IconButton>
+            <FeedbackNum>{data?.likeNum}</FeedbackNum>
           </ButtonsWrapper>
         </Footer>
       </ContentsWrapper>
@@ -148,5 +133,4 @@ export default function BoardCard({ data, category }: BoardCardDataProps) {
 }
 
 // 사용하는 법
-
 //     <BoardCard data={data} category={string}/>
