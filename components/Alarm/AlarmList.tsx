@@ -39,7 +39,6 @@ export default function AlarmList({
   setOpenAlarm,
   Observer,
 }: AlarmListProps) {
-  console.log(alarmData);
   const router = useRouter();
   const onClickCloseAlarm = (e: MouseEvent<SVGAElement>) => {
     e.stopPropagation();

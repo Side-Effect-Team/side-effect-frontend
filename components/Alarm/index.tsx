@@ -12,7 +12,6 @@ export default function Alarm({ openAlarm, setOpenAlarm }: FromHeaderProps) {
   const { data: alarmNum } = useGetAlarmNum();
 
   const { data: alarmData, Observer } = useGetAlarmData();
-  console.log(alarmData);
 
   const onClickOpenAlarm = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
