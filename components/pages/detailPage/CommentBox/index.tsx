@@ -1,19 +1,22 @@
 import {
   StyledHeader,
   CommentNumber,
-  CommentWrapper,
   CommentInput,
   CommentInputBox,
   CommentSubmitBtn,
+  CommentList,
 } from "./styled";
-import { useState } from "react";
+import CommentItem from "../CommentItem";
 
-export default function CommentBox() {
-  const [comments, setComments] = useState();
+interface CommentBoxProps {
+  comments: CommentType[];
+}
+
+export default function CommentBox({ comments }: CommentBoxProps) {
   return (
-    <div>
+    <>
       <StyledHeader>
-        댓글 <CommentNumber color="green">2</CommentNumber>
+        댓글 <CommentNumber color="green">{comments.length}</CommentNumber>
       </StyledHeader>
 
       <form>
@@ -22,10 +25,12 @@ export default function CommentBox() {
           <CommentSubmitBtn type="submit">등록</CommentSubmitBtn>
         </CommentInputBox>
       </form>
-    </div>
-  );
-}
 
-function Comment() {
-  return <CommentWrapper></CommentWrapper>;
+      <CommentList>
+        {comments.map((comment: CommentType) => (
+          <CommentItem key={comment.commentId} comment={comment} />
+        ))}
+      </CommentList>
+    </>
+  );
 }

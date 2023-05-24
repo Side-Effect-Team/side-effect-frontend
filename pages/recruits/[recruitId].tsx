@@ -3,7 +3,6 @@ import { GetServerSidePropsContext } from "next";
 import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
 import PositionDetail from "@/detailComps/PositionDetail";
 import ContentDetail from "@/detailComps/ContentDetail";
-import CommentBox from "@/detailComps/CommentBox";
 import PostData from "@/detailComps/PostData";
 
 interface RecruitDetailPageProps {
@@ -42,7 +41,6 @@ export default function RecruitDetailPage({ recruit }: RecruitDetailPageProps) {
           content={content}
           imgSrc={imgSrc}
         />
-        <CommentBox />
       </Contents>
     </Wrapper>
   );

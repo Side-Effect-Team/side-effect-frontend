@@ -8,10 +8,6 @@ export const CommentNumber = styled.span<{ color: string }>`
   color: ${(p) => p.color};
 `;
 
-export const CommentWrapper = styled.div`
-  background: rgba(0, 0, 0, 0.2);
-`;
-
 export const CommentInputBox = styled.div`
   display: flex;
   height: 100px;
@@ -41,7 +37,13 @@ export const CommentInput = styled.textarea`
   margin-top: 0.5rem;
   border-radius: 5px;
   border: none;
+  padding: 0.5rem;
   resize: none;
   width: 100%;
   height: 95%;
+  background: ${(p) => p.theme.colors.lightGray};
+`;
+
+export const CommentList = styled.div`
+  margin: 1rem 0;
 `;
