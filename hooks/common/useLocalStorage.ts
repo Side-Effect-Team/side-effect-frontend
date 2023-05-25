@@ -16,5 +16,9 @@ export const useLocalStorage = () => {
     localStorage.setItem(key, JSON.stringify(value));
   };
 
-  return { getter, setter };
+  const cleaner = (key: string) => {
+    localStorage.removeItem(key);
+  };
+
+  return { getter, setter, cleaner };
 };
