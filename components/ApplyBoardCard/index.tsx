@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import Button from "../Button";
 import {
   ColumnWrapper,
@@ -11,6 +11,7 @@ import {
   TitleGray,
 } from "./styled";
 import { useRouter } from "next/router";
+import { useCancelApply } from "@/hooks/mutations/useCancelApply";
 
 export interface ApplyBoardCardProps {
   id: number;
@@ -18,6 +19,7 @@ export interface ApplyBoardCardProps {
   position: string;
   status: string;
   title: string;
+  applicantId?: number;
 }
 export interface dataProps {
   data: ApplyBoardCardProps;
@@ -53,9 +55,17 @@ export default function ApplyBoardCard({ data }: dataProps) {
     }
   }, [status]);
   const router = useRouter();
-  const onClickGoToBoard = () => {
+  const onClickGoToBoard = (e: MouseEvent<HTMLDivElement>) => {
     router.push(`/recruits/${data.id}`);
   };
+
+  const cancelMutate = useCancelApply();
+
+  const onClickCancelApply =
+    (id: number) => (e: MouseEvent<HTMLButtonElement>) => {
+      e.stopPropagation();
+      cancelMutate(id);
+    };
   return (
     <Container onClick={onClickGoToBoard}>
       <ColumnWrapper>
@@ -69,7 +79,12 @@ export default function ApplyBoardCard({ data }: dataProps) {
         </RowWrapper>
       </ColumnWrapper>
       {data.status === "PENDING" ? (
-        <Button color="coral">{status}</Button>
+        <Button
+          color="coral"
+          onClick={onClickCancelApply(data.applicantId || 0)}
+        >
+          {status}
+        </Button>
       ) : data.status === "APPROVED" ? (
         <Status status={data.status} isRecruiting={data.isRecruiting}>
           {status}
