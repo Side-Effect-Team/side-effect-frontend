@@ -18,7 +18,7 @@ declare interface ProjectType {
   projectName: string;
   like?: boolean;
   likeNum: number;
-  comments?: CommentType[];
+  comments: CommentType[];
   commentNum?: number;
   createdAt: string;
 }
