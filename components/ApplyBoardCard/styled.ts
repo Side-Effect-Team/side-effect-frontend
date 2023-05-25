@@ -1,10 +1,11 @@
+import { theme } from "@/styles/Theme";
 import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
   height: 80px;
   border: 1px solid lightgray;
-  border-radius: 15px;
+  border-radius: 10px;
   overflow: hidden;
   background-color: white;
   display: flex;
@@ -32,16 +33,30 @@ export const Title = styled.div`
 
 export const TitleGray = styled.div`
   font-size: 18px;
-  font-weight: 500;
   color: gray;
   margin-right: 5px;
 `;
 
 export const Position = styled.div`
   font-size: 14px;
+  font-weight: 600;
 `;
 export const PositionGray = styled.div`
   font-size: 14px;
   color: gray;
   margin-right: 5px;
+`;
+export const Status = styled.div<{ status: string; isRecruiting: boolean }>`
+  font-size: 1rem;
+  border-radius: 4px;
+  padding: 0 1rem;
+
+  color: ${(p) =>
+    p.status === "APPROVED"
+      ? theme.brandColor.primary
+      : p.status === "REJECTED"
+      ? "gray"
+      : p.isRecruiting === false
+      ? "gray"
+      : null};
 `;

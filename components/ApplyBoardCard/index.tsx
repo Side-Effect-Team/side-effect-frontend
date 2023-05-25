@@ -6,6 +6,7 @@ import {
   Position,
   PositionGray,
   RowWrapper,
+  Status,
   Title,
   TitleGray,
 } from "./styled";
@@ -24,6 +25,7 @@ export interface dataProps {
 
 export default function ApplyBoardCard({ data }: dataProps) {
   const [position, setPosition] = useState(data.position);
+  const [status, setStatus] = useState(data.status);
   useEffect(() => {
     if (data.position === "FRONTEND") {
       setPosition("프론트엔드");
@@ -41,7 +43,15 @@ export default function ApplyBoardCard({ data }: dataProps) {
       setPosition("포지션");
     }
   }, [position]);
-
+  useEffect(() => {
+    if (data.status === "PENDING") {
+      setStatus("지원취소");
+    } else if (data.status === "APPROVED") {
+      setStatus("•참여");
+    } else if (data.status === "REJECTED") {
+      setStatus("•방출");
+    }
+  }, [status]);
   const router = useRouter();
   const onClickGoToBoard = () => {
     router.push(`/recruits/${data.id}`);
@@ -58,7 +68,17 @@ export default function ApplyBoardCard({ data }: dataProps) {
           <Position>{position}</Position>
         </RowWrapper>
       </ColumnWrapper>
-      <Button>지원취소</Button>
+      {data.status === "PENDING" ? (
+        <Button color="coral">{status}</Button>
+      ) : data.status === "APPROVED" ? (
+        <Status status={data.status} isRecruiting={data.isRecruiting}>
+          {status}
+        </Status>
+      ) : (
+        <Status status={data.status} isRecruiting={data.isRecruiting}>
+          {status}
+        </Status>
+      )}
     </Container>
   );
 }
