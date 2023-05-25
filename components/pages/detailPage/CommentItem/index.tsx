@@ -16,9 +16,10 @@ import useToast from "@/hooks/common/useToast";
 
 interface CommentBoxProps {
   comment: CommentType;
+  onDelete: (commentId: number) => void;
 }
 
-export default function CommentItem({ comment }: CommentBoxProps) {
+export default function CommentItem({ comment, onDelete }: CommentBoxProps) {
   const [isEdit, setIsEdit] = useState(false);
   const [commentValue, setCommentValue] = useState(comment.content);
   const textareaEl = useRef<HTMLTextAreaElement>(null);
@@ -72,27 +73,28 @@ export default function CommentItem({ comment }: CommentBoxProps) {
   };
 
   // 삭제 API 호출
-  const deleteComment = async () => {
-    const url = `/comments/${comment.commentId}`;
-    try {
-      const res = await axios.delete(url, {
-        headers: {
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
-          "Content-Type": "application/json",
-        },
-      });
-      window.alert("댓글 삭제에 성공했습니다");
-      router.reload();
-    } catch (err) {
-      console.log(err);
-      addToast({
-        type: "error",
-        title: "error",
-        content: "댓글 삭제에 실패했습니다",
-      });
-    }
-  };
+  // const deleteComment = async () => {
+  //   const url = `/comments/${comment.commentId}`;
+  //   try {
+  //     const res = await axios.delete(url, {
+  //       headers: {
+  //         Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
+  //     window.alert("댓글 삭제에 성공했습니다");
+  //     router.reload();
+  //   } catch (err) {
+  //     console.log(err);
+  //     addToast({
+  //       type: "error",
+  //       title: "error",
+  //       content: "댓글 삭제에 실패했습니다",
+  //     });
+  //   }
+  // };
 
+  // 렌더링 시 댓글 크기 조절
   useEffect(() => {
     resizeTextAreaHeight();
   }, [textareaEl]);
@@ -132,7 +134,10 @@ export default function CommentItem({ comment }: CommentBoxProps) {
               <BiEditAlt size={17} />
               <BtnText>수정</BtnText>
             </OptionBtn>
-            <OptionBtn option="delete" onClick={deleteComment}>
+            <OptionBtn
+              option="delete"
+              onClick={() => onDelete(comment.commentId)}
+            >
               <BiTrash size={17} />
               <BtnText>삭제</BtnText>
             </OptionBtn>

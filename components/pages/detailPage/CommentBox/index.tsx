@@ -57,6 +57,36 @@ export default function CommentBox({ boardId, comments }: CommentBoxProps) {
     }
   };
 
+  const deleteComment = async (commentId: number) => {
+    const url = `/comments/${commentId}`;
+    try {
+      const res = await axios.delete(url, {
+        headers: {
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      const newCommentArr = commentArr.filter(
+        (comment) => comment.commentId !== commentId,
+      );
+      setCommentArr(newCommentArr);
+
+      addToast({
+        type: "success",
+        title: "success",
+        content: "댓글 삭제에 성공했습니다",
+      });
+    } catch (err) {
+      console.log(err);
+      addToast({
+        type: "error",
+        title: "error",
+        content: "댓글 삭제에 실패했습니다",
+      });
+    }
+  };
+
   return (
     <>
       <StyledHeader>
@@ -73,7 +103,11 @@ export default function CommentBox({ boardId, comments }: CommentBoxProps) {
       <CommentList>
         {commentArr.length &&
           commentArr.map((comment: CommentType) => (
-            <CommentItem key={comment.commentId} comment={comment} />
+            <CommentItem
+              key={comment.commentId}
+              comment={comment}
+              onDelete={deleteComment}
+            />
           ))}
       </CommentList>
     </>
