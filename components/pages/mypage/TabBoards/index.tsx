@@ -39,40 +39,30 @@ export default function TabBoards({ boards, title }: TabBoards) {
 
   return (
     <>
+      <SectionHeaderWrapper>
+        <SectionTitle>{title}</SectionTitle>
+        <Border></Border>
+      </SectionHeaderWrapper>
+      <FilterWrapper>
+        {filterMenuTap.map((filter) => (
+          <FilterMenu
+            key={filter.type}
+            onClick={onClickFilterMenu(filter.type)}
+            isActive={filterMenu === filter.type}
+          >
+            {filter.label}
+          </FilterMenu>
+        ))}
+      </FilterWrapper>
       {boards?.length !== 0 ? (
-        <>
-          <SectionHeaderWrapper>
-            <SectionTitle>{title}</SectionTitle>
-            <Border></Border>
-          </SectionHeaderWrapper>
-          {title !== "지원목록" && (
-            <FilterWrapper>
-              {filterMenuTap.map((filter) => (
-                <FilterMenu
-                  key={filter.type}
-                  onClick={onClickFilterMenu(filter.type)}
-                  isActive={filterMenu === filter.type}
-                >
-                  {filter.label}
-                </FilterMenu>
-              ))}
-            </FilterWrapper>
-          )}
-          <BoardWrapper>
-            {filterBoards &&
-              filterBoards.map((el, index) => (
-                <BoardCard key={index} data={el} category={el.category || ""} />
-              ))}
-          </BoardWrapper>
-        </>
+        <BoardWrapper>
+          {filterBoards &&
+            filterBoards.map((el, index) => (
+              <BoardCard key={index} data={el} category={el.category || ""} />
+            ))}
+        </BoardWrapper>
       ) : (
-        <>
-          <SectionHeaderWrapper>
-            <SectionTitle>{title}</SectionTitle>
-            <Border></Border>
-          </SectionHeaderWrapper>
-          <NullMessage>게시물이 없습니다.</NullMessage>
-        </>
+        <NullMessage>게시물이 없습니다.</NullMessage>
       )}
     </>
   );
