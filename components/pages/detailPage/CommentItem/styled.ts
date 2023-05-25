@@ -28,6 +28,7 @@ export const CommentContents = styled.textarea`
   resize: none;
   width: 100%;
   height: auto;
+  overflow-y: hidden;
 `;
 
 export const ProfileBox = styled.div`

@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { BiUserCircle, BiEditAlt, BiTrash, BiCheck, BiX } from "react-icons/bi";
 import axios from "axios";
 import { useRouter } from "next/router";
@@ -25,6 +25,13 @@ export default function CommentItem({ comment }: CommentBoxProps) {
   const router = useRouter();
   const { addToast } = useToast();
 
+  const resizeTextAreaHeight = () => {
+    if (textareaEl.current) {
+      textareaEl.current.style.height = "auto";
+      textareaEl.current.style.height = textareaEl.current.scrollHeight + "px";
+    }
+  };
+
   const startEdit = () => {
     setIsEdit((prev) => !prev);
     if (textareaEl.current) textareaEl.current.focus();
@@ -32,7 +39,7 @@ export default function CommentItem({ comment }: CommentBoxProps) {
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setCommentValue(e.target.value);
-    handleResizeHeight();
+    resizeTextAreaHeight();
   };
 
   // 수정 취소
@@ -40,13 +47,6 @@ export default function CommentItem({ comment }: CommentBoxProps) {
     setCommentValue(comment.content);
     setIsEdit((prev) => !prev);
     if (textareaEl.current) textareaEl.current.style.height = "auto";
-  };
-
-  const handleResizeHeight = () => {
-    if (textareaEl.current) {
-      textareaEl.current.style.height = "auto";
-      textareaEl.current.style.height = textareaEl.current.scrollHeight + "px";
-    }
   };
 
   // 수정 API 호출
@@ -92,6 +92,10 @@ export default function CommentItem({ comment }: CommentBoxProps) {
       });
     }
   };
+
+  useEffect(() => {
+    resizeTextAreaHeight();
+  }, [textareaEl]);
 
   return (
     <CommentWrapper>

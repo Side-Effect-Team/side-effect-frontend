@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from "react";
+import { useState, useRef } from "react";
 import axios from "axios";
 import {
   StyledHeader,
@@ -18,16 +18,20 @@ interface CommentBoxProps {
 
 export default function CommentBox({ boardId, comments }: CommentBoxProps) {
   const [commentArr, setCommentArr] = useState(comments);
-  const [newCommentValue, setNewCommentValue] = useState("");
+  const textareaEl = useRef<HTMLTextAreaElement>(null);
   const { addToast } = useToast();
 
-  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setNewCommentValue(e.target.value);
+  const handleChange = () => {
+    // textarea height resize
+    if (textareaEl.current) {
+      textareaEl.current.style.height = "auto";
+      textareaEl.current.style.height = textareaEl.current.scrollHeight + "px";
+    }
   };
 
   const submitComment = async () => {
     const url = "/comments";
-    const data = { boardId, content: newCommentValue };
+    const data = { boardId, content: textareaEl.current?.value };
     try {
       const res = await axios.post(url, data, {
         headers: {
@@ -37,7 +41,7 @@ export default function CommentBox({ boardId, comments }: CommentBoxProps) {
       });
       const addedComment = await res.data;
       await setCommentArr((prev) => [...prev, addedComment]);
-      await setNewCommentValue("");
+      if (textareaEl.current) textareaEl.current.value = "";
       addToast({
         type: "success",
         title: "success",
@@ -60,7 +64,7 @@ export default function CommentBox({ boardId, comments }: CommentBoxProps) {
       </StyledHeader>
 
       <CommentInputBox>
-        <CommentInput onChange={handleChange} value={newCommentValue} />
+        <CommentInput onChange={handleChange} rows={4} ref={textareaEl} />
         <CommentSubmitBtn type="button" onClick={submitComment}>
           등록
         </CommentSubmitBtn>

@@ -10,7 +10,7 @@ export const CommentNumber = styled.span<{ color: string }>`
 
 export const CommentInputBox = styled.div`
   display: flex;
-  height: 100px;
+  height: 100%;
   align-items: center;
   justify-content: center;
   gap: 1rem;
@@ -20,7 +20,7 @@ export const CommentSubmitBtn = styled.button`
   color: ${(p) => p.theme.colors.white};
   font-weight: 600;
   width: 80px;
-  height: 95%;
+  height: 90px;
   outline: none;
   border: none;
   border-radius: 5px;
@@ -40,7 +40,7 @@ export const CommentInput = styled.textarea`
   padding: 0.5rem;
   resize: none;
   width: 100%;
-  height: 95%;
+  height: 100%;
   background: ${(p) => p.theme.colors.lightGray};
 `;
 
