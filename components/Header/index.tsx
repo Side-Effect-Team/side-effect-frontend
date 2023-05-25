@@ -6,26 +6,20 @@ import Button from "../Button";
 import { useAppDispatch } from "@/store/hooks";
 import { openModal } from "@/store/modalSlice";
 import Alarm from "../Alarm";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import useOutsideClick from "../../hooks/common/useOutsideClick";
-import { useLocalStorage } from "@/hooks/common/useLocalStorage";
 
 interface HeaderProps {
+  isLogin: boolean;
   handleMobileMenu: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-export default function Header({ handleMobileMenu }: HeaderProps) {
+export default function Header({ isLogin, handleMobileMenu }: HeaderProps) {
   const dispatch = useAppDispatch();
   const [openAlarm, setOpenAlarm] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
   const AlarmListRef = useRef(null);
-  const { getter } = useLocalStorage();
 
   useOutsideClick(AlarmListRef, () => setOpenAlarm(false));
-
-  useEffect(() => {
-    if (getter("accessToken")) setIsLogin(true);
-  }, [isLogin]);
 
   return (
     <Wrapper ref={AlarmListRef}>
@@ -52,6 +46,7 @@ export default function Header({ handleMobileMenu }: HeaderProps) {
           </Button>
         </BoxStyled>
         <MobileMenuBox
+          isLogin={isLogin}
           handleMobileMenu={handleMobileMenu}
           openAlarm={openAlarm}
           setOpenAlarm={setOpenAlarm}

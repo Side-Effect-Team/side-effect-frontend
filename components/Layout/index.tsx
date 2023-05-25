@@ -13,6 +13,8 @@ import { BOARD_LIST } from "../../enum";
 import ScrollToTop from "../ScrollToTop";
 import Head from "next/head";
 import { useAppSelector } from "@/store/hooks";
+import { useLocalStorage } from "@/hooks/common/useLocalStorage";
+
 interface PropType {
   children: React.ReactNode;
 }
@@ -32,8 +34,10 @@ interface MobileMenuProps {
 }
 
 export default function Layout({ children }: PropType) {
+  const [isLogin, setIsLogin] = useState<boolean>(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const { authenticated, token } = useAppSelector((state) => state.auth);
+  const { getter } = useLocalStorage();
   console.log("authenticated", authenticated);
   console.log("token", token);
 
@@ -57,6 +61,10 @@ export default function Layout({ children }: PropType) {
     }
   });
 
+  useEffect(() => {
+    if (getter("accessToken")) setIsLogin(true);
+  }, [isLogin]);
+
   /** userinfo 페이지에선 헤더가 안보이기위한 코드 */
   if (currentPage.startsWith("/userinfo")) {
     return (
@@ -79,7 +87,7 @@ export default function Layout({ children }: PropType) {
         />
         <title>사이드 이펙트 | 빠르게 프로젝트를 시작하세요</title>
       </Head>
-      <Header handleMobileMenu={handleMobileMenu} />
+      <Header isLogin={isLogin} handleMobileMenu={handleMobileMenu} />
       <ScrollToTop />
       <Toast />
       <MobileMenu hide={!mobileMenuOpen} handleClick={handleMobileMenu} />
