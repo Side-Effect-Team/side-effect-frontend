@@ -22,7 +22,7 @@ export default function GoogleLoginButton() {
         .then((res) => {
           console.log(res);
           localStorage.setItem("accessToken", res.headers.authorization);
-          localStorage.setItem("id", res.data);
+          localStorage.setItem("id", res.data.userId);
 
           dispatch(createAuthentication(res.headers.authorization));
           dispatch(closeModal());

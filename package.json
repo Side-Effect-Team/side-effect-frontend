@@ -38,6 +38,7 @@
     "@reduxjs/toolkit": "^1.9.5",
     "@tanstack/react-query": "^4.29.3",
     "axios": "^1.4.0",
+    "cookies-next": "^2.1.1",
     "framer-motion": "^10.12.4",
     "next": "^13.3.0",
     "polished": "^4.2.2",

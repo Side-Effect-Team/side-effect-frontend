@@ -16,7 +16,6 @@ export default function KakaoLoginButton() {
   const handleKakaoLogin = () => {
     Kakao.Auth.login({
       success: (res: any) => {
-        console.log(res);
         axios
           .post(`${process.env.NEXT_PUBLIC_API_URL}/social/login`, null, {
             headers: {
@@ -27,7 +26,7 @@ export default function KakaoLoginButton() {
           .then((res) => {
             console.log(res);
             localStorage.setItem("accessToken", res.headers.authorization);
-            localStorage.setItem("id", res.data);
+            localStorage.setItem("id", res.data.userId);
 
             dispatch(createAuthentication(res.headers.authorization));
             dispatch(closeModal());
