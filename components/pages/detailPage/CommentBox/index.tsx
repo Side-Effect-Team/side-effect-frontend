@@ -57,6 +57,40 @@ export default function CommentBox({ boardId, comments }: CommentBoxProps) {
     }
   };
 
+  const editComment = async (commentId: number, content: string) => {
+    const url = `/comments/${commentId}`;
+
+    try {
+      const res = await axios.patch(
+        url,
+        { content },
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+            "Content-Type": "application/json",
+          },
+        },
+      );
+      const newCommentArr = commentArr.map((comment) => {
+        if (comment.commentId === commentId) return { ...comment, content };
+        return comment;
+      });
+      await setCommentArr(newCommentArr);
+      addToast({
+        type: "success",
+        title: "success",
+        content: "댓글 수정에 성공했습니다.",
+      });
+    } catch (err) {
+      console.log(err);
+      addToast({
+        type: "error",
+        title: "error",
+        content: "댓글 수정에 실패했습니다.",
+      });
+    }
+  };
+
   const deleteComment = async (commentId: number) => {
     const url = `/comments/${commentId}`;
     try {
@@ -106,6 +140,7 @@ export default function CommentBox({ boardId, comments }: CommentBoxProps) {
             <CommentItem
               key={comment.commentId}
               comment={comment}
+              onEdit={editComment}
               onDelete={deleteComment}
             />
           ))}

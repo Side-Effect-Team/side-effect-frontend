@@ -1,7 +1,5 @@
 import { useState, useRef, useEffect } from "react";
 import { BiUserCircle, BiEditAlt, BiTrash, BiCheck, BiX } from "react-icons/bi";
-import axios from "axios";
-import { useRouter } from "next/router";
 import { UserProfile } from "@/detailComps/PostData/styled";
 import {
   CommentWrapper,
@@ -12,19 +10,21 @@ import {
   OptionBtn,
   BtnText,
 } from "./styled";
-import useToast from "@/hooks/common/useToast";
 
 interface CommentBoxProps {
   comment: CommentType;
+  onEdit: (commentId: number, content: string) => void;
   onDelete: (commentId: number) => void;
 }
 
-export default function CommentItem({ comment, onDelete }: CommentBoxProps) {
+export default function CommentItem({
+  comment,
+  onEdit,
+  onDelete,
+}: CommentBoxProps) {
   const [isEdit, setIsEdit] = useState(false);
   const [commentValue, setCommentValue] = useState(comment.content);
   const textareaEl = useRef<HTMLTextAreaElement>(null);
-  const router = useRouter();
-  const { addToast } = useToast();
 
   const resizeTextAreaHeight = () => {
     if (textareaEl.current) {
@@ -49,50 +49,6 @@ export default function CommentItem({ comment, onDelete }: CommentBoxProps) {
     setIsEdit((prev) => !prev);
     if (textareaEl.current) textareaEl.current.style.height = "auto";
   };
-
-  // 수정 API 호출
-  const editComment = async () => {
-    const url = `/comments/${comment.commentId}`;
-    try {
-      const res = await axios.patch(url, commentValue, {
-        headers: {
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
-          "Content-Type": "application/json",
-        },
-      });
-      window.alert("댓글 수정에 성공했습니다");
-      router.reload();
-    } catch (err) {
-      console.log(err);
-      addToast({
-        type: "error",
-        title: "error",
-        content: "댓글 수정에 실패했습니다",
-      });
-    }
-  };
-
-  // 삭제 API 호출
-  // const deleteComment = async () => {
-  //   const url = `/comments/${comment.commentId}`;
-  //   try {
-  //     const res = await axios.delete(url, {
-  //       headers: {
-  //         Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
-  //     window.alert("댓글 삭제에 성공했습니다");
-  //     router.reload();
-  //   } catch (err) {
-  //     console.log(err);
-  //     addToast({
-  //       type: "error",
-  //       title: "error",
-  //       content: "댓글 삭제에 실패했습니다",
-  //     });
-  //   }
-  // };
 
   // 렌더링 시 댓글 크기 조절
   useEffect(() => {
@@ -119,7 +75,10 @@ export default function CommentItem({ comment, onDelete }: CommentBoxProps) {
       <CommentEditBtnBox>
         {isEdit ? (
           <>
-            <OptionBtn option="edit" onClick={editComment}>
+            <OptionBtn
+              option="edit"
+              onClick={() => onEdit(comment.commentId, commentValue)}
+            >
               <BiCheck size={17} />
               <BtnText>완료</BtnText>
             </OptionBtn>
