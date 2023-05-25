@@ -22,9 +22,8 @@ export const CommentContents = styled.textarea`
   border: none;
   padding: 0.5rem;
   resize: none;
-  min-width: 300px;
-  width: 80vw;
-  height: 100%;
+  width: auto;
+  height: auto;
 `;
 
 export const ProfileBox = styled.div`
