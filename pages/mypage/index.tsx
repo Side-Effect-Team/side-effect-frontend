@@ -10,6 +10,8 @@ import { BoardCardProps } from "@/components/BoardCard";
 import TabBoards from "@/components/pages/mypage/TabBoards";
 import Account from "@/components/pages/mypage/Account";
 import { useGetMypageData } from "@/hooks/queries/useGetMypageData";
+import TabApplyBoards from "@/components/pages/mypage/TabApplyBoards";
+import { ApplyBoardCardProps } from "@/components/ApplyBoardCard";
 
 export interface MypageProps {
   id: number;
@@ -25,12 +27,16 @@ export interface MypageProps {
   portfolioUrl?: string;
   likeBoards?: BoardCardProps[];
   uploadBoards?: BoardCardProps[];
-  applyBoards?: BoardCardProps[];
+  applyBoards?: ApplyBoardCardProps[];
   isOwner?: boolean;
 }
 
 export default function MyPage() {
   const [boards, setBoards] = useState<BoardCardProps[] | undefined | null>(
+    null,
+  );
+
+  const [applyBoard, setApplyBoard] = useState<ApplyBoardCardProps[] | null>(
     null,
   );
   const [activeTab, setActiveTab] = useState("profile");
@@ -57,7 +63,7 @@ export default function MyPage() {
     } else if (activeTab === "uploadBoards" && data) {
       setBoards(data.uploadBoards);
     } else if (activeTab === "applyBoards" && data) {
-      setBoards(data.applyBoards);
+      setApplyBoard(data.applyBoards);
     }
   }, [activeTab, data]);
 
@@ -80,6 +86,8 @@ export default function MyPage() {
           <Profile {...data} />
         ) : activeTab === "account" ? (
           <Account email={data?.email || ""} nickname={data?.nickname || ""} />
+        ) : activeTab === "applyBoards" ? (
+          <TabApplyBoards boards={applyBoard} title={title || ""} />
         ) : (
           <TabBoards boards={boards} title={title || ""} />
         )}
