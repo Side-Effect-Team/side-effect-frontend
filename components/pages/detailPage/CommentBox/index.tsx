@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState, ChangeEvent } from "react";
 import axios from "axios";
 import {
   StyledHeader,
@@ -19,30 +19,29 @@ export default function CommentBox({ boardId, comments }: CommentBoxProps) {
   const [commentArr, setCommentArr] = useState(comments);
   const [newCommentValue, setNewCommentValue] = useState("");
 
-  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setNewCommentValue(e.target.value);
   };
 
   const submitComment = async () => {
-    const url = `${process.env.NEXT_PUBLIC_API_KEY}/comments`;
+    const url = "/comments";
     const data = { boardId, content: newCommentValue };
     try {
       const res = await axios.post(url, data, {
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
         },
       });
-      await setCommentArr(res.data);
-      console.log(res);
+      const addedComment = await res.data;
+      await setCommentArr((prev) => [...prev, addedComment]);
+      await setNewCommentValue("");
+      // toast 추가
     } catch (err) {
       console.log(err);
-      window.alert("댓글 작성에 실패했습니다");
+      // toast 추가
     }
   };
-
-  useEffect(() => {
-    console.log(newCommentValue);
-  }, [newCommentValue]);
 
   return (
     <>
@@ -50,12 +49,12 @@ export default function CommentBox({ boardId, comments }: CommentBoxProps) {
         댓글 <CommentNumber color="green">{comments.length}</CommentNumber>
       </StyledHeader>
 
-      <form onSubmit={submitComment}>
-        <CommentInputBox>
-          <CommentInput onChange={handleChange} />
-          <CommentSubmitBtn type="submit">등록</CommentSubmitBtn>
-        </CommentInputBox>
-      </form>
+      <CommentInputBox>
+        <CommentInput onChange={handleChange} value={newCommentValue} />
+        <CommentSubmitBtn type="button" onClick={submitComment}>
+          등록
+        </CommentSubmitBtn>
+      </CommentInputBox>
 
       <CommentList>
         {commentArr.length &&

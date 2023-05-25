@@ -9,6 +9,7 @@ import {
   CommentContents,
   CommentEditBtnBox,
   OptionBtn,
+  BtnText,
 } from "./styled";
 
 interface CommentBoxProps {
@@ -16,6 +17,7 @@ interface CommentBoxProps {
 }
 
 export default function CommentItem({ comment }: CommentBoxProps) {
+  console.log(comment);
   const [isEdit, setIsEdit] = useState(false);
   const [commentValue, setCommentValue] = useState(comment.content);
   const router = useRouter();
@@ -36,32 +38,31 @@ export default function CommentItem({ comment }: CommentBoxProps) {
 
   // 수정 API 호출
   const editComment = async () => {
-    const url = `${process.env.NEXT_PUBLIC_API_KEY}/comments/${comment.commentId}`;
+    const url = `/comments/${comment.commentId}`;
     try {
-      const res = await axios.patch(
-        url,
-        { content: commentValue },
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
-          },
+      const res = await axios.patch(url, commentValue, {
+        headers: {
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
         },
-      );
-      window.alert("댓글 수정에 성공했습니다");
-      router.reload();
+      });
+      const edittedComment = res.data.content;
+      setCommentValue(edittedComment);
+
+      // toast
     } catch (err) {
       console.log(err);
-      window.alert("댓글 수정에 실패했습니다");
+      // toast
     }
   };
 
   // 삭제 API 호출
   const deleteComment = async () => {
-    const url = `${process.env.NEXT_PUBLIC_API_KEY}/comments/${comment.commentId}`;
+    const url = `/comments/${comment.commentId}`;
     try {
       const res = await axios.delete(url, {
         headers: {
           Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+          "Content-Type": "application/json",
         },
       });
       window.alert("댓글 삭제에 성공했습니다");
@@ -92,22 +93,22 @@ export default function CommentItem({ comment }: CommentBoxProps) {
           <>
             <OptionBtn option="edit" onClick={editComment}>
               <BiCheck size={17} />
-              <span>완료</span>
+              <BtnText>완료</BtnText>
             </OptionBtn>
             <OptionBtn option="delete" onClick={resetEdit}>
               <BiX size={17} />
-              <span>취소</span>
+              <BtnText>취소</BtnText>
             </OptionBtn>
           </>
         ) : (
           <>
             <OptionBtn option="edit" onClick={toggleEdit}>
               <BiEditAlt size={17} />
-              <span>수정</span>
+              <BtnText>수정</BtnText>
             </OptionBtn>
             <OptionBtn option="delete" onClick={deleteComment}>
               <BiTrash size={17} />
-              <span>삭제</span>
+              <BtnText>삭제</BtnText>
             </OptionBtn>
           </>
         )}

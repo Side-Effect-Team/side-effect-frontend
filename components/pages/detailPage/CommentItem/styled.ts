@@ -15,10 +15,6 @@ export const CommentWrapper = styled.div`
   }
 `;
 
-export const CommentContentsBox = styled.div`
-  display: flex;
-`;
-
 export const CommentContents = styled.textarea`
   background: inherit;
   border-radius: 5px;
@@ -26,7 +22,8 @@ export const CommentContents = styled.textarea`
   border: none;
   padding: 0.5rem;
   resize: none;
-  width: 100%;
+  min-width: 300px;
+  width: 80vw;
   height: 100%;
 `;
 
@@ -47,10 +44,14 @@ export const CommentEditBtnBox = styled.div`
   transform: translateX(0.5rem);
 `;
 
+export const BtnText = styled.span`
+  font-size: 0.75rem;
+`;
+
 export const OptionBtn = styled.button<OptionBtnProps>`
   color: ${(p) => p.theme.colors.white};
   font-weight: 600;
-  width: 4.5rem;
+  width: 3.5rem;
   height: 2.5rem;
   border: none;
   border-radius: 8px;
