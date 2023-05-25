@@ -1,37 +1,35 @@
 import { Dispatch, MouseEvent, SetStateAction } from "react";
 import { AlarmButton, AlarmDiv, AlarmIconDiv, AlarmCount } from "./styled";
-import AlarmList, { AlarmProps } from "./AlarmList";
-import { useGetAlarmList } from "@/hooks/queries/useGetAlarmList";
+import AlarmList from "./AlarmList";
+import { useGetAlarmData } from "@/hooks/queries/useGetAlarmData";
+import { useGetAlarmNum } from "@/hooks/queries/useGetAlarmNum";
 
 interface FromHeaderProps {
   openAlarm: boolean;
   setOpenAlarm: Dispatch<SetStateAction<boolean>>;
 }
 export default function Alarm({ openAlarm, setOpenAlarm }: FromHeaderProps) {
-  const { data: alarmList } = useGetAlarmList();
-  // 읽지 않은 알람 갯수 세기
-  const countAlarm = () => {
-    if (alarmList) {
-      return alarmList.data.filter((item: AlarmProps) => item.watched === false)
-        .length;
-    }
-  };
-  const count = countAlarm();
+  const { data: alarmNum } = useGetAlarmNum();
+
+  const { data: alarmData, Observer } = useGetAlarmData();
 
   const onClickOpenAlarm = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     setOpenAlarm((prev) => !prev);
   };
-
   return (
     <>
       <AlarmDiv openAlarm={openAlarm}>
         <AlarmIconDiv openAlarm={openAlarm} onClick={onClickOpenAlarm}>
           <AlarmButton />
-          {count !== 0 && <AlarmCount>{count}</AlarmCount>}
+          {alarmNum?.data !== 0 && <AlarmCount>{alarmNum?.data}</AlarmCount>}
         </AlarmIconDiv>
-        {openAlarm && alarmList && (
-          <AlarmList alarmList={alarmList.data} setOpenAlarm={setOpenAlarm} />
+        {openAlarm && alarmData && (
+          <AlarmList
+            alarmData={alarmData}
+            setOpenAlarm={setOpenAlarm}
+            Observer={Observer}
+          />
         )}
       </AlarmDiv>
     </>

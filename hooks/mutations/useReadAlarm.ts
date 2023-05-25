@@ -8,6 +8,7 @@ export const useReadAlarm = () => {
     mutationFn: readAlarm,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["notice"] });
+      queryClient.invalidateQueries({ queryKey: ["noticeNum"] });
     },
   });
   return mutate;

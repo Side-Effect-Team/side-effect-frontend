@@ -1,11 +1,30 @@
 import axios from "axios";
 
-export const getAlarmList = async () => {
+export const getAlarmNum = async () => {
   const token = localStorage.getItem("accessToken");
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
-  return axios.get(`/notice`, config);
+  const response = await axios.get(`/notice/view-count`, config);
+  return response;
+};
+
+export const getAlarmDataAll = async () => {
+  const token = localStorage.getItem("accessToken");
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  const response = await axios.get(`/notice`, config);
+  return response;
+};
+
+export const getAlarmData = async (lastId: number) => {
+  const token = localStorage.getItem("accessToken");
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  const response = await axios.get(`/notice/scroll/${lastId}`, config);
+  return response.data;
 };
 
 export const readAlarm = async (id: number) => {
