@@ -1,7 +1,15 @@
 export const useLocalStorage = () => {
   const getter = (key: string) => {
-    const result = localStorage.getItem(key);
-    return result ? JSON.parse(result) : null;
+    const value = localStorage.getItem(key);
+    if (value) {
+      try {
+        return JSON.parse(value);
+      } catch (err) {
+        return value;
+      }
+    } else {
+      return null;
+    }
   };
 
   const setter = (key: string, value: unknown) => {
