@@ -15,14 +15,18 @@ export const CommentWrapper = styled.div`
   }
 `;
 
+export const CommentColumn = styled.div`
+  width: 100%;
+`;
+
 export const CommentContents = styled.textarea`
   background: inherit;
   border-radius: 5px;
-  outline: none;
+  outline: ${(p) => (p.readOnly ? "none" : "")};
   border: none;
   padding: 0.5rem;
   resize: none;
-  width: auto;
+  width: 100%;
   height: auto;
 `;
 
@@ -39,7 +43,6 @@ export const CommentEditBtnBox = styled.div`
   align-items: center;
   flex-direction: column;
   gap: 0.5rem;
-  background: aquamarine;
   transform: translateX(0.5rem);
 `;
 

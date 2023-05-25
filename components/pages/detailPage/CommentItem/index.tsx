@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { UserProfile } from "@/detailComps/PostData/styled";
 import {
   CommentWrapper,
+  CommentColumn,
   ProfileBox,
   CommentContents,
   CommentEditBtnBox,
@@ -22,8 +23,9 @@ export default function CommentItem({ comment }: CommentBoxProps) {
   const textareaEl = useRef<HTMLTextAreaElement>(null);
   const router = useRouter();
 
-  const toggleEdit = () => {
+  const startEdit = () => {
     setIsEdit((prev) => !prev);
+    if (textareaEl.current) textareaEl.current.focus();
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -34,7 +36,8 @@ export default function CommentItem({ comment }: CommentBoxProps) {
   // 수정 취소
   const resetEdit = () => {
     setCommentValue(comment.content);
-    toggleEdit();
+    setIsEdit((prev) => !prev);
+    if (textareaEl.current) textareaEl.current.style.height = "auto";
   };
 
   const handleResizeHeight = () => {
@@ -82,7 +85,7 @@ export default function CommentItem({ comment }: CommentBoxProps) {
 
   return (
     <CommentWrapper>
-      <div>
+      <CommentColumn>
         <ProfileBox>
           <UserProfile>
             <BiUserCircle size={25} />
@@ -96,7 +99,7 @@ export default function CommentItem({ comment }: CommentBoxProps) {
           rows={1}
           ref={textareaEl}
         />
-      </div>
+      </CommentColumn>
       <CommentEditBtnBox>
         {isEdit ? (
           <>
@@ -111,7 +114,7 @@ export default function CommentItem({ comment }: CommentBoxProps) {
           </>
         ) : (
           <>
-            <OptionBtn option="edit" onClick={toggleEdit}>
+            <OptionBtn option="edit" onClick={startEdit}>
               <BiEditAlt size={17} />
               <BtnText>수정</BtnText>
             </OptionBtn>
