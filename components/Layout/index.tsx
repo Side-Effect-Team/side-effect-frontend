@@ -9,7 +9,6 @@ import { breakPoints } from "@/styles/Media";
 import Header from "../Header";
 import Footer from "../Footer";
 import Toast from "../Toast";
-import { BOARD_LIST } from "../../enum";
 import ScrollToTop from "../ScrollToTop";
 import Head from "next/head";
 import { useAppSelector } from "@/store/hooks";
@@ -19,17 +18,10 @@ interface PropType {
   children: React.ReactNode;
 }
 
-const MOBILE_BOARD_LIST = [
-  ...BOARD_LIST,
-  {
-    ID: 2,
-    TITLE: "로그인",
-    LINK: "/",
-  },
-];
-
 interface MobileMenuProps {
   hide: boolean;
+  isLogin: boolean;
+  logout: () => void;
   handleClick: () => void;
 }
 
@@ -37,7 +29,7 @@ export default function Layout({ children }: PropType) {
   const [isLogin, setIsLogin] = useState<boolean>(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const { authenticated, token } = useAppSelector((state) => state.auth);
-  const { getter } = useLocalStorage();
+  const { getter, cleaner } = useLocalStorage();
   console.log("authenticated", authenticated);
   console.log("token", token);
 
@@ -46,6 +38,16 @@ export default function Layout({ children }: PropType) {
 
   const handleMobileMenu = () => {
     setMobileMenuOpen((prev) => !prev);
+  };
+
+  const logout = () => {
+    cleaner("accessToken");
+    setIsLogin(false);
+  };
+
+  const mobileLogout = () => {
+    handleMobileMenu();
+    logout();
   };
 
   // 뷰포트 width가 모바일 width 보다 커지면 모바일 메뉴 닫음
@@ -87,33 +89,43 @@ export default function Layout({ children }: PropType) {
         />
         <title>사이드 이펙트 | 빠르게 프로젝트를 시작하세요</title>
       </Head>
-      <Header isLogin={isLogin} handleMobileMenu={handleMobileMenu} />
+      <Header
+        isLogin={isLogin}
+        logout={logout}
+        handleMobileMenu={handleMobileMenu}
+      />
       <ScrollToTop />
       <Toast />
-      <MobileMenu hide={!mobileMenuOpen} handleClick={handleMobileMenu} />
+      <MobileMenu
+        hide={!mobileMenuOpen}
+        isLogin={isLogin}
+        logout={mobileLogout}
+        handleClick={handleMobileMenu}
+      />
       <Wrapper mobileMenuOpen={mobileMenuOpen}>{children}</Wrapper>
       <Footer />
     </ThemeProvider>
   );
 }
 
-function MobileMenu({ hide, handleClick }: MobileMenuProps) {
+function MobileMenu({ hide, isLogin, logout, handleClick }: MobileMenuProps) {
   return (
     <MobileNavBar hide={hide}>
-      {MOBILE_BOARD_LIST.map((board) => {
-        if (board.TITLE === "로그인") {
-          return (
-            <MobileMenuItem key={board.ID} onClick={handleClick}>
-              <Link href={board.LINK}>{board.TITLE}</Link>
-            </MobileMenuItem>
-          );
-        }
-        return (
-          <MobileMenuItem key={board.ID} onClick={handleClick}>
-            <Link href={board.LINK}>{board.TITLE}</Link>
-          </MobileMenuItem>
-        );
-      })}
+      <MobileMenuItem onClick={handleClick}>
+        <Link href="/projects">프로젝트 자랑 게시판</Link>
+      </MobileMenuItem>
+      <MobileMenuItem onClick={handleClick}>
+        <Link href="/recruits">팀원 모집 게시판</Link>
+      </MobileMenuItem>
+      {isLogin ? (
+        <MobileMenuItem onClick={logout}>
+          <Link href="/">로그아웃</Link>
+        </MobileMenuItem>
+      ) : (
+        <MobileMenuItem onClick={handleClick}>
+          <Link href="/">로그인</Link>
+        </MobileMenuItem>
+      )}
     </MobileNavBar>
   );
 }

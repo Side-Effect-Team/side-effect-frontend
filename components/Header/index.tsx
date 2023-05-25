@@ -11,10 +11,15 @@ import useOutsideClick from "../../hooks/common/useOutsideClick";
 
 interface HeaderProps {
   isLogin: boolean;
+  logout: () => void;
   handleMobileMenu: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-export default function Header({ isLogin, handleMobileMenu }: HeaderProps) {
+export default function Header({
+  isLogin,
+  logout,
+  handleMobileMenu,
+}: HeaderProps) {
   const dispatch = useAppDispatch();
   const [openAlarm, setOpenAlarm] = useState(false);
   const AlarmListRef = useRef(null);
@@ -38,12 +43,15 @@ export default function Header({ isLogin, handleMobileMenu }: HeaderProps) {
           {isLogin && (
             <Alarm openAlarm={openAlarm} setOpenAlarm={setOpenAlarm} />
           )}
-
-          <Button
-            onClick={() => dispatch(openModal({ modalType: "LoginModal" }))}
-          >
-            로그인
-          </Button>
+          {isLogin ? (
+            <Button onClick={logout}>로그아웃</Button>
+          ) : (
+            <Button
+              onClick={() => dispatch(openModal({ modalType: "LoginModal" }))}
+            >
+              로그인
+            </Button>
+          )}
         </BoxStyled>
         <MobileMenuBox
           isLogin={isLogin}
