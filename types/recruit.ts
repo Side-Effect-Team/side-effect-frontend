@@ -22,4 +22,5 @@ declare interface RecruitType {
   views: number;
   likeNum: number;
   userId: number;
+  like: boolean;
 }

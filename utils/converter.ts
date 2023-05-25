@@ -10,6 +10,7 @@ export const recruitBoardCardConverter = (fetchedData: RecruitType) => {
     likeNum,
     createdAt,
     views,
+    like,
   } = fetchedData;
   const newTags = tags ? tags.map((tag) => tag.stackType) : [];
   return {
@@ -20,7 +21,7 @@ export const recruitBoardCardConverter = (fetchedData: RecruitType) => {
     title,
     content,
     createdAt,
-    like: !!Math.round(Math.random()), // 화면 확인을 위해 임시로 랜덤하게
+    like,
     likeNum,
     views,
   };
