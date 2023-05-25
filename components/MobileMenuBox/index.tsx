@@ -2,7 +2,14 @@ import { Wrapper } from "./styled";
 import { IoReorderThree } from "react-icons/io5";
 import Button from "@/components/Button";
 import Alarm from "../Alarm";
-import { Dispatch, MutableRefObject, SetStateAction } from "react";
+import {
+  Dispatch,
+  MutableRefObject,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
+import { useLocalStorage } from "@/hooks/common/useLocalStorage";
 
 interface MobileMenuBoxProps {
   handleMobileMenu: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -15,9 +22,16 @@ export default function MobileMenuBox({
   openAlarm,
   setOpenAlarm,
 }: MobileMenuBoxProps) {
+  const [isLogin, setIsLogin] = useState(false);
+  const { getter } = useLocalStorage();
+
+  useEffect(() => {
+    if (getter("accessToken")) setIsLogin(true);
+  }, [isLogin]);
+
   return (
     <Wrapper>
-      {/* <Alarm openAlarm={openAlarm} setOpenAlarm={setOpenAlarm} /> */}
+      {isLogin && <Alarm openAlarm={openAlarm} setOpenAlarm={setOpenAlarm} />}
       <Button onClick={handleMobileMenu}>
         <IoReorderThree />
       </Button>
