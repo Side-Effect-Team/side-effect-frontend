@@ -12,7 +12,9 @@ import Toast from "../Toast";
 import ScrollToTop from "../ScrollToTop";
 import Head from "next/head";
 import { useAppSelector } from "@/store/hooks";
+import { useAppDispatch } from "@/store/hooks";
 import { useLocalStorage } from "@/hooks/common/useLocalStorage";
+import { openModal } from "@/store/modalSlice";
 
 interface PropType {
   children: React.ReactNode;
@@ -46,8 +48,8 @@ export default function Layout({ children }: PropType) {
   };
 
   const mobileLogout = () => {
-    handleMobileMenu();
     logout();
+    handleMobileMenu();
   };
 
   // 뷰포트 width가 모바일 width 보다 커지면 모바일 메뉴 닫음
@@ -109,6 +111,8 @@ export default function Layout({ children }: PropType) {
 }
 
 function MobileMenu({ hide, isLogin, logout, handleClick }: MobileMenuProps) {
+  const dispatch = useAppDispatch();
+
   return (
     <MobileNavBar hide={hide}>
       <MobileMenuItem onClick={handleClick}>
@@ -122,7 +126,9 @@ function MobileMenu({ hide, isLogin, logout, handleClick }: MobileMenuProps) {
           <Link href="/">로그아웃</Link>
         </MobileMenuItem>
       ) : (
-        <MobileMenuItem onClick={handleClick}>
+        <MobileMenuItem
+          onClick={() => dispatch(openModal({ modalType: "LoginModal" }))}
+        >
           <Link href="/">로그인</Link>
         </MobileMenuItem>
       )}
