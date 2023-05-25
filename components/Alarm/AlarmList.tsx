@@ -1,4 +1,4 @@
-import { Dispatch, MouseEvent, SetStateAction, useRef } from "react";
+import { Dispatch, MouseEvent, SetStateAction, useEffect, useRef } from "react";
 import {
   CloseButton,
   Container,
@@ -13,31 +13,33 @@ import {
   Wrapper,
 } from "./styled";
 import { useRouter } from "next/router";
-import { useQueryClient } from "@tanstack/react-query";
 import { useReadAlarm } from "@/hooks/mutations/useReadAlarm";
 import { useDeleteAlarm } from "@/hooks/mutations/useDeleteAlarm";
-// export interface AlarmProps {
-//   lastId: number;
-//   alarmNum: number;
-//   alarms: AlarmProps[];
-// }
 
 export interface AlarmProps {
   id: number;
   watched: boolean;
   title: string;
   contents: string;
-  createAt: string;
+  createdAt: string;
   link: string;
 }
+interface ResponseProps {
+  lastId: number;
+  notificationResponses: AlarmProps[];
+}
 interface AlarmListProps {
-  alarmList: AlarmProps[];
+  alarmData: ResponseProps[];
   setOpenAlarm: Dispatch<SetStateAction<boolean>>;
+  Observer: () => JSX.Element | undefined;
 }
 
-export default function AlarmList({ alarmList, setOpenAlarm }: AlarmListProps) {
+export default function AlarmList({
+  alarmData,
+  setOpenAlarm,
+  Observer,
+}: AlarmListProps) {
   const router = useRouter();
-  const queryClient = useQueryClient();
   const onClickCloseAlarm = (e: MouseEvent<SVGAElement>) => {
     e.stopPropagation();
     setOpenAlarm(false);
@@ -61,32 +63,36 @@ export default function AlarmList({ alarmList, setOpenAlarm }: AlarmListProps) {
       e.stopPropagation();
       deleteMutate(id);
     };
+
   return (
     <Container>
       <Header>
         <HeaderTitle>알림</HeaderTitle>
         <CloseButton onClick={onClickCloseAlarm} />
       </Header>
-      {alarmList && alarmList.length !== 0 ? (
-        alarmList.map((alarm) => (
-          <Wrapper
-            watched={alarm.watched}
-            key={alarm.id}
-            onClick={onClickReadAlarm(alarm.link, alarm.id)}
-          >
-            <RowWrapper>
-              <Title>{alarm.contents}</Title>
-              <DeleteButton onClick={onClickDeleteAlarm(alarm.id)} />
-            </RowWrapper>
-            <RowWrapper>
-              <Contents>{alarm.title}</Contents>
-              <Date>{alarm.createAt}</Date>
-            </RowWrapper>
-          </Wrapper>
-        ))
-      ) : (
+      {alarmData && alarmData[0].notificationResponses.length === 0 ? (
         <EmptyMessage>알림창이 비어있어요</EmptyMessage>
+      ) : (
+        alarmData.map((page: ResponseProps) => {
+          return page.notificationResponses.map((alarm) => (
+            <Wrapper
+              watched={alarm.watched}
+              key={alarm.id}
+              onClick={onClickReadAlarm(alarm.link, alarm.id)}
+            >
+              <RowWrapper>
+                <Title>{alarm.contents}</Title>
+                <DeleteButton onClick={onClickDeleteAlarm(alarm.id)} />
+              </RowWrapper>
+              <RowWrapper>
+                <Contents>{alarm.title}</Contents>
+                <Date>{alarm.createdAt}</Date>
+              </RowWrapper>
+            </Wrapper>
+          ));
+        })
       )}
+      {Observer()}
     </Container>
   );
 }
