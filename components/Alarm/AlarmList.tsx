@@ -24,12 +24,12 @@ export interface AlarmProps {
   createdAt: string;
   link: string;
 }
-interface TestProps {
+interface ResponseProps {
   lastId: number;
   notificationResponses: AlarmProps[];
 }
 interface AlarmListProps {
-  alarmData: TestProps[];
+  alarmData: ResponseProps[];
   setOpenAlarm: Dispatch<SetStateAction<boolean>>;
   Observer: () => JSX.Element | undefined;
 }
@@ -73,7 +73,7 @@ export default function AlarmList({
       {alarmData && alarmData[0].notificationResponses.length === 0 ? (
         <EmptyMessage>알림창이 비어있어요</EmptyMessage>
       ) : (
-        alarmData.map((page: TestProps) => {
+        alarmData.map((page: ResponseProps) => {
           return page.notificationResponses.map((alarm) => (
             <Wrapper
               watched={alarm.watched}
