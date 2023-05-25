@@ -9,6 +9,7 @@ import {
   CommentList,
 } from "./styled";
 import CommentItem from "../CommentItem";
+import useToast from "@/hooks/common/useToast";
 
 interface CommentBoxProps {
   comments: CommentType[];
@@ -18,6 +19,7 @@ interface CommentBoxProps {
 export default function CommentBox({ boardId, comments }: CommentBoxProps) {
   const [commentArr, setCommentArr] = useState(comments);
   const [newCommentValue, setNewCommentValue] = useState("");
+  const { addToast } = useToast();
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setNewCommentValue(e.target.value);
@@ -36,10 +38,18 @@ export default function CommentBox({ boardId, comments }: CommentBoxProps) {
       const addedComment = await res.data;
       await setCommentArr((prev) => [...prev, addedComment]);
       await setNewCommentValue("");
-      // toast 추가
+      addToast({
+        type: "success",
+        title: "success",
+        content: "댓글 등록에 성공했습니다.",
+      });
     } catch (err) {
       console.log(err);
-      // toast 추가
+      addToast({
+        type: "error",
+        title: "error",
+        content: "댓글 등록에 실패했습니다",
+      });
     }
   };
 

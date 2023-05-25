@@ -12,6 +12,7 @@ import {
   OptionBtn,
   BtnText,
 } from "./styled";
+import useToast from "@/hooks/common/useToast";
 
 interface CommentBoxProps {
   comment: CommentType;
@@ -22,6 +23,7 @@ export default function CommentItem({ comment }: CommentBoxProps) {
   const [commentValue, setCommentValue] = useState(comment.content);
   const textareaEl = useRef<HTMLTextAreaElement>(null);
   const router = useRouter();
+  const { addToast } = useToast();
 
   const startEdit = () => {
     setIsEdit((prev) => !prev);
@@ -61,7 +63,11 @@ export default function CommentItem({ comment }: CommentBoxProps) {
       router.reload();
     } catch (err) {
       console.log(err);
-      window.alert("댓글 삭제에 실패했습니다");
+      addToast({
+        type: "error",
+        title: "error",
+        content: "댓글 수정에 실패했습니다",
+      });
     }
   };
 
@@ -79,7 +85,11 @@ export default function CommentItem({ comment }: CommentBoxProps) {
       router.reload();
     } catch (err) {
       console.log(err);
-      window.alert("댓글 삭제에 실패했습니다");
+      addToast({
+        type: "error",
+        title: "error",
+        content: "댓글 삭제에 실패했습니다",
+      });
     }
   };
 
