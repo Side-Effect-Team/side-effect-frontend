@@ -1,3 +1,4 @@
+import Image from "next/image";
 import {
   NickName,
   ProfileImage,
@@ -21,7 +22,14 @@ export default function Introduction({
 }: IntroductionProps) {
   return (
     <ProfileWrapper>
-      <ProfileImage src={imgUrl || "/images/BoardDefaultBackground.png"} />
+      <ProfileImage
+        src={
+          imgUrl
+            ? `${process.env.NEXT_PUBLIC_API_URL}/user/image/${imgUrl}`
+            : "/images/BoardDefaultBackground.png"
+        }
+        alt="프로필 이미지"
+      />
       <NickName>{nickname || ""}</NickName>
       <Text>{email}</Text>
       <ShortBorder></ShortBorder>

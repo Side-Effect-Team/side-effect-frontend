@@ -27,8 +27,8 @@ interface IntroEditProps {
   nickname: string | undefined;
   introduction: string | undefined;
   setIntroduction: Dispatch<SetStateAction<string | undefined>>;
-  imgUrl: string | undefined;
-  setImgUrl: Dispatch<SetStateAction<string | undefined>>;
+  imgSrc: string;
+  handleImgChange: (e: ChangeEvent<HTMLInputElement>) => void;
   introRegister: UseFormRegister<Pick<FormData, "nickname">>;
   errors: FieldErrors<Pick<FormData, "nickname">>;
 }
@@ -36,8 +36,8 @@ export default function IntroductionEdit({
   nickname,
   introduction,
   setIntroduction,
-  imgUrl,
-  setImgUrl,
+  imgSrc,
+  handleImgChange,
   introRegister,
   errors,
 }: IntroEditProps) {
@@ -52,17 +52,7 @@ export default function IntroductionEdit({
       fileRef.current.click();
     }
   };
-  const onChangeImage = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const fileReader = new FileReader();
-    fileReader.readAsDataURL(file);
-    fileReader.onload = (e) => {
-      if (typeof e.target?.result === "string") {
-        setImgUrl(e.target?.result);
-      }
-    };
-  };
+
   // 닉네임 값이 빈값으로 반환되는 문제 해결
   useEffect(() => {
     const inputElement = document.querySelector<HTMLInputElement>("#nickname");
@@ -74,15 +64,16 @@ export default function IntroductionEdit({
     <>
       <ProfileWrapper>
         <ProfileImageWrapper>
-          <ProfileImage src={imgUrl || "/images/BoardDefaultBackground.png"} />
+          <ProfileImage src={imgSrc} alt="프로필 이미지" />
           <Button type="button" onClick={onClickChangeImage}>
             사진변경
           </Button>
           <input
             ref={fileRef}
             type="file"
+            accept="image/*"
             style={{ display: "none" }}
-            onChange={onChangeImage}
+            onChange={handleImgChange}
           />
         </ProfileImageWrapper>
         <ProfileContentsWrapper>
