@@ -5,19 +5,21 @@ import Alarm from "../Alarm";
 import { Dispatch, MutableRefObject, SetStateAction } from "react";
 
 interface MobileMenuBoxProps {
+  isLogin: boolean;
   handleMobileMenu: (e: React.MouseEvent<HTMLButtonElement>) => void;
   openAlarm: boolean;
   setOpenAlarm: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function MobileMenuBox({
+  isLogin,
   handleMobileMenu,
   openAlarm,
   setOpenAlarm,
 }: MobileMenuBoxProps) {
   return (
     <Wrapper>
-      {/* <Alarm openAlarm={openAlarm} setOpenAlarm={setOpenAlarm} /> */}
+      {isLogin && <Alarm openAlarm={openAlarm} setOpenAlarm={setOpenAlarm} />}
       <Button onClick={handleMobileMenu}>
         <IoReorderThree />
       </Button>
