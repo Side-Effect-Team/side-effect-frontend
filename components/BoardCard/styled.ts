@@ -22,6 +22,7 @@ export const Container = styled.div`
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
   :hover {
     box-shadow: 1px 1px 5px rgba(21, 94, 239, 0.25);
+    transform: translateY(-5px);
   }
   ${media.mobile} {
     width: 95%;
