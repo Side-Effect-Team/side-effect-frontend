@@ -62,7 +62,9 @@ export default function MyPageEdit() {
   const editMutate = useEditProfile();
 
   const { imgSrc, handleImgChange, uploadImg } = useInputImage(
-    `${process.env.NEXT_PUBLIC_API_URL}/user/image/${data?.imgUrl}`,
+    data?.imgUrl
+      ? `${process.env.NEXT_PUBLIC_API_URL}/user/image/${data?.imgUrl}`
+      : data?.imgUrl,
   );
 
   const onClickEdit = async (p: FormData) => {
@@ -82,12 +84,24 @@ export default function MyPageEdit() {
       };
       const changes = compareData(data, changedData);
       console.log(changes);
-      if (Object.keys(changes).length === 0 && imgSrc.startsWith("http")) {
+      if (
+        Object.keys(changes).length === 0 &&
+        (imgSrc === null || imgSrc.startsWith("http"))
+      ) {
         alert("변경사항이 없습니다.");
         return;
-      } else if (Object.keys(changes).length === 0) {
+      } else if (
+        Object.keys(changes).length !== 0 &&
+        (imgSrc === null || imgSrc.startsWith("http"))
+      ) {
+        editMutate(changes);
+      } else if (
+        Object.keys(changes).length === 0 &&
+        !(imgSrc === null || imgSrc.startsWith("http"))
+      ) {
         await uploadImg(`${process.env.NEXT_PUBLIC_API_URL}/user/image`);
       } else {
+        await uploadImg(`${process.env.NEXT_PUBLIC_API_URL}/user/image`);
         editMutate(changes);
       }
       router.push("/mypage");
