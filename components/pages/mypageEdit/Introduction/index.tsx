@@ -64,7 +64,10 @@ export default function IntroductionEdit({
     <>
       <ProfileWrapper>
         <ProfileImageWrapper>
-          <ProfileImage src={imgSrc} alt="프로필 이미지" />
+          <ProfileImage
+            src={imgSrc ? imgSrc : "/images/mypageDefaultImage.png"}
+            alt="프로필 이미지"
+          />
           <Button type="button" onClick={onClickChangeImage}>
             사진변경
           </Button>

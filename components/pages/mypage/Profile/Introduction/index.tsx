@@ -26,7 +26,7 @@ export default function Introduction({
         src={
           imgUrl
             ? `${process.env.NEXT_PUBLIC_API_URL}/user/image/${imgUrl}`
-            : "/images/BoardDefaultBackground.png"
+            : "/images/mypageDefaultImage.png"
         }
         alt="프로필 이미지"
       />
