@@ -1,39 +1,40 @@
-import BoardCard, { BoardCardProps } from "@/components/BoardCard";
+import ApplyBoardCard, {
+  ApplyBoardCardProps,
+} from "@/components/ApplyBoardCard";
 import { Border, SectionHeaderWrapper, SectionTitle } from "../styled";
-import { BoardWrapper, FilterMenu, FilterWrapper, NullMessage } from "./styled";
+import { FilterMenu, FilterWrapper, NullMessage } from "../TabBoards/styled";
+import { ApplyBoardWrapper } from "./styled";
 import { useEffect, useState } from "react";
 
-interface TabBoards {
-  boards?: BoardCardProps[] | null;
+interface TabApplyBoardsProps {
+  boards?: ApplyBoardCardProps[] | null;
   title: string;
 }
 
-export default function TabBoards({ boards, title }: TabBoards) {
+export default function TabApplyBoards({ boards, title }: TabApplyBoardsProps) {
   const [filterMenu, setFilterMenu] = useState("all");
   const [filterBoards, setFilterBoards] = useState(boards);
 
-  const projectsBoards = boards?.filter(
-    (boards) => boards.category === "projects",
-  );
-  const recruitsBoards = boards?.filter(
-    (boards) => boards.category === "recruits",
+  const openBoards = boards?.filter((boards) => boards.isRecruiting === true);
+  const closedBoards = boards?.filter(
+    (boards) => boards.isRecruiting === false,
   );
 
   const onClickFilterMenu = (type: string) => () => {
-    if (type === "projects") setFilterMenu("projects");
-    else if (type === "recruits") setFilterMenu("recruits");
+    if (type === "open") setFilterMenu("open");
+    else if (type === "closed") setFilterMenu("closed");
     else setFilterMenu("all");
   };
 
   const filterMenuTap = [
     { type: "all", label: "전체" },
-    { type: "projects", label: "자랑게시판" },
-    { type: "recruits", label: "모집게시판" },
+    { type: "open", label: "모집중" },
+    { type: "closed", label: "모집완료" },
   ];
 
   useEffect(() => {
-    if (filterMenu === "projects") setFilterBoards(projectsBoards);
-    else if (filterMenu === "recruits") setFilterBoards(recruitsBoards);
+    if (filterMenu === "open") setFilterBoards(openBoards);
+    else if (filterMenu === "closed") setFilterBoards(closedBoards);
     else setFilterBoards(boards);
   }, [filterMenu, boards]);
 
@@ -54,13 +55,12 @@ export default function TabBoards({ boards, title }: TabBoards) {
           </FilterMenu>
         ))}
       </FilterWrapper>
-      {boards?.length !== 0 ? (
-        <BoardWrapper>
-          {filterBoards &&
-            filterBoards.map((el, index) => (
-              <BoardCard key={index} data={el} category={el.category || ""} />
-            ))}
-        </BoardWrapper>
+      {filterBoards?.length !== 0 ? (
+        <ApplyBoardWrapper>
+          {filterBoards?.map((el) => (
+            <ApplyBoardCard key={el.id} data={el} />
+          ))}
+        </ApplyBoardWrapper>
       ) : (
         <NullMessage>게시물이 없습니다.</NullMessage>
       )}
