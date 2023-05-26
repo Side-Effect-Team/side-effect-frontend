@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 export const useInputImage = (defaultImgSrc: string) => {
@@ -21,6 +21,9 @@ export const useInputImage = (defaultImgSrc: string) => {
     };
   };
 
+  useEffect(() => {
+    setImgSrc(defaultImgSrc);
+  }, [defaultImgSrc]);
   // 서버에 이미지 업로드하는 API
   const uploadImg = async (url: string) => {
     try {
@@ -30,6 +33,7 @@ export const useInputImage = (defaultImgSrc: string) => {
         },
       });
       console.log(res);
+      return res.data;
     } catch (err) {
       console.log(err);
       window.alert("사진 등록에 실패했습니다");
