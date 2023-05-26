@@ -67,7 +67,7 @@ export default function Layout({ children }: PropType) {
 
   useEffect(() => {
     if (getter("accessToken")) setIsLogin(true);
-  }, [isLogin]);
+  });
 
   /** userinfo 페이지에선 헤더가 안보이기위한 코드 */
   if (currentPage.startsWith("/userinfo")) {
