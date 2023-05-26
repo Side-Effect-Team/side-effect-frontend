@@ -26,7 +26,7 @@ export const useInputImage = (defaultImgSrc: string) => {
     try {
       const res = await axios.post(url, imgFile, {
         headers: {
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
       });
       console.log(res);

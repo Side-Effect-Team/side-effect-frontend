@@ -64,8 +64,7 @@ export default function PostProjectPage() {
         try {
           const res = await axios.post(url, data, {
             headers: {
-              // 로그인 기능 미구현으로 NEXT_PUBLIC_TOKEN에 발급받은 토큰을 넣고 실행!
-              Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
             },
           });
           const projectId = await res.data.id;

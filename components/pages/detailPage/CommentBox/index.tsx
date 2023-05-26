@@ -36,7 +36,7 @@ export default function CommentBox({ boardId, comments }: CommentBoxProps) {
       const res = await axios.post(url, data, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
       });
       const addedComment = await res.data;
@@ -66,7 +66,7 @@ export default function CommentBox({ boardId, comments }: CommentBoxProps) {
         { content },
         {
           headers: {
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
             "Content-Type": "application/json",
           },
         },
@@ -96,7 +96,7 @@ export default function CommentBox({ boardId, comments }: CommentBoxProps) {
     try {
       const res = await axios.delete(url, {
         headers: {
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
           "Content-Type": "application/json",
         },
       });

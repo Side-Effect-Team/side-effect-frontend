@@ -8,6 +8,7 @@ import {
   StatusBox,
   CloseBtn,
 } from "./styled";
+import { applyPosition } from "@/apis/ApplicantAPI";
 
 interface PositionDetailProps {
   positions: PositionType[];
@@ -20,6 +21,8 @@ interface PositionRowProps {
 }
 
 export default function PositionDetail({ positions }: PositionDetailProps) {
+  console.log("포지션 정보", positions);
+
   return (
     <Wrapper>
       <StyledHeader>모집 포지션</StyledHeader>
