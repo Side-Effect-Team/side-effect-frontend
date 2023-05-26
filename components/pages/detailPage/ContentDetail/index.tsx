@@ -86,7 +86,7 @@ export default function ContentDetail({
         )}
       </div>
       <Description>
-        <textarea readOnly>{content}</textarea>
+        <textarea readOnly value={content} />
       </Description>
       <hr />
     </Wrapper>

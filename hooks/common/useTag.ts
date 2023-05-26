@@ -13,6 +13,9 @@ export const useTag = (initialVals: string[]) => {
     // 아무것도 없는 상태에서 엔터키 누르면 종료
     if (inputEl.value === "") return;
 
+    // 기존 태그 갯수가 5개이면 종료
+    if (tags.length >= 5) return;
+
     if (e.key === "Enter") {
       // 태그 추가 엔터 시 폼이 자동 등록되는 것 막기
       e.preventDefault();

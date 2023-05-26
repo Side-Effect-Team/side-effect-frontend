@@ -41,7 +41,7 @@ export default function ProjectDetailPage({ project }: ProjectDetailPageProps) {
           projectUrl={projectUrl}
           imgSrc={imgUrl}
         />
-        <CommentBox />
+        <CommentBox boardId={id} comments={comments} />
       </Contents>
     </Wrapper>
   );

@@ -26,7 +26,6 @@ export default function RecruitsPage() {
   if (isLoading) {
     return <h2>Loading...</h2>;
   }
-  console.log(data);
 
   return (
     <Wrapper>
@@ -57,6 +56,7 @@ export default function RecruitsPage() {
         </ContentsHeader>
         <ContentsMain>
           {data.map((item: RecruitType) => {
+            console.log(item);
             const boardCardData = recruitBoardCardConverter(item);
             return (
               <BoardCard

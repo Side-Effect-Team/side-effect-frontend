@@ -28,7 +28,6 @@ interface EditRecruitPageProps {
 }
 
 export default function EditRecruitPage({ recruit }: EditRecruitPageProps) {
-  console.log(recruit);
   const router = useRouter();
   const { tags, deleteTag, addTag } = useTag(
     recruit.tags.map((tag) => tag.stackType),

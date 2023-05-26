@@ -28,7 +28,6 @@ interface EditProjectPageProps {
 }
 
 export default function EditProjectPage({ project }: EditProjectPageProps) {
-  console.log(project);
   const router = useRouter();
   const [projectUrl, setProjectUrl] = useState("");
   const { imgSrc, handleImgChange } = useInputImage(DEFAULT_RECRUIT_CARD_IMAGE);
