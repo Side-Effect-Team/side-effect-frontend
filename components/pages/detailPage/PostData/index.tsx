@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -22,25 +22,32 @@ import {
 } from "@/detailComps/PostData/styled";
 
 interface PostDataProps {
-  id: number;
+  postId: number;
   title: string;
   createdAt: string;
   views: number;
   likeNum: number;
+  userId: number;
 }
 
 interface OptionPopupProps {
-  id: number;
+  postId: number;
 }
 
 export default function PostData({
-  id,
+  postId,
   title,
   createdAt,
   views,
   likeNum,
+  userId,
 }: PostDataProps) {
+  const [isOwner, setIsOwner] = useState(false);
   const [popupOn, setPopupOn] = useState(false);
+
+  useEffect(() => {
+    setIsOwner(+localStorage.getItem("id")! === userId);
+  }, [userId]);
 
   return (
     <div>
@@ -75,18 +82,21 @@ export default function PostData({
         <div>
           <span>좋아요 </span>
           <SpanStyled>{likeNum}</SpanStyled>
-          {popupOn && <OptionPopup id={id} />}
+          {popupOn && <OptionPopup postId={postId} />}
         </div>
-        <OptionBox onClick={() => setPopupOn((prev) => !prev)}>
-          <BiDotsHorizontalRounded size={25} />
-        </OptionBox>
+        {/* 로그인한 유저가 작성자가 아니면 수정 팝업 안보임 */}
+        {isOwner && (
+          <OptionBox onClick={() => setPopupOn((prev) => !prev)}>
+            <BiDotsHorizontalRounded size={25} />
+          </OptionBox>
+        )}
       </Row>
       <hr />
     </div>
   );
 }
 
-function OptionPopup({ id }: OptionPopupProps) {
+function OptionPopup({ postId }: OptionPopupProps) {
   const router = useRouter();
   const postCategory = router.pathname.split("/")[1];
 
@@ -112,13 +122,13 @@ function OptionPopup({ id }: OptionPopupProps) {
 
   const handleDelete = async () => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
-      await deletePost(id);
+      await deletePost(postId);
       await router.push(`/${postCategory}`);
     }
   };
 
   const handleEdit = async () => {
-    await router.push(`/${postCategory}/edit/${id}`);
+    await router.push(`/${postCategory}/edit/${postId}`);
   };
 
   return (
