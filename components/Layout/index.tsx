@@ -43,8 +43,10 @@ export default function Layout({ children }: PropType) {
   };
 
   const logout = () => {
-    cleaner("accessToken");
-    setIsLogin(false);
+    if (window.confirm("정말 로그아웃하시겠습니까?")) {
+      cleaner("accessToken");
+      setIsLogin(false);
+    }
   };
 
   const mobileLogout = () => {
