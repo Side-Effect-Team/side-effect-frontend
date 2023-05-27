@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { handleAuth } from "@/utils/auth";
 export const getMypageData = async () => {
   const token = localStorage.getItem("accessToken");
   const id = localStorage.getItem("id");
@@ -43,4 +43,17 @@ export const editProfile = async (changes: MypageEditProps) => {
   };
   const response = await axios.patch(`/user/${id}`, changes, config);
   return response;
+};
+
+export const handleRefreshAccessToken = async () => {
+  try {
+    const response = await axios.post(
+      "/token/at-issue",
+      {},
+      { withCredentials: true },
+    );
+    handleAuth.setToken(response.headers.authorization);
+  } catch (error) {
+    console.log(error);
+  }
 };

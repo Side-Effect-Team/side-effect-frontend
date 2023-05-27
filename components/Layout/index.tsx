@@ -13,7 +13,8 @@ import ScrollToTop from "../ScrollToTop";
 import Head from "next/head";
 import { useAppSelector } from "@/store/hooks";
 import axios from "axios";
-axios.defaults.withCredentials = true;
+import { handleRefreshAccessToken } from "apis/UserAPI";
+
 interface PropType {
   children: React.ReactNode;
 }
@@ -53,6 +54,13 @@ export default function Layout({ children }: PropType) {
       return () => window.removeEventListener("resize", detectViewportWidth);
     }
   });
+  // 새로고침시 액세스토큰이 휘발되기때문에 만약 로그인상태인데 새로고침을했다면 새로운 액세스토큰으로 갱신
+  useEffect(() => {
+    if (authenticated) {
+      handleRefreshAccessToken();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>

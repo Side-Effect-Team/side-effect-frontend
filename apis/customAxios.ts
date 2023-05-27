@@ -1,6 +1,7 @@
 import axios from "axios";
 import { store } from "@/store/store";
 import { removeAuthentication } from "@/store/authSlice";
+import { handleRefreshAccessToken } from "./UserAPI";
 import { handleAuth } from "@/utils/auth";
 const baseURL = process.env.NEXT_PUBLIC_API_URL;
 const customAxios = axios.create({
@@ -28,11 +29,11 @@ customAxios.interceptors.response.use(
   async (error) => {
     const { config } = error;
     console.log("error", error);
+    //액세스토큰 재발급 갱신
     if (error.response?.data.code === "AT_001") {
       console.log("액세스토큰만료");
       try {
-        const response = await axios.post(`${baseURL}/token/at-issue`);
-        handleAuth.setToken(response.headers.authorization);
+        handleRefreshAccessToken();
         return customAxios.request(config);
       } catch (error) {
         console.log("response error", error);
