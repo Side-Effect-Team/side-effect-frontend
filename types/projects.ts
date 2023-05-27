@@ -17,9 +17,10 @@ declare interface ProjectType {
   projectUrl: string;
   imgUrl: string;
   projectName: string;
-  like?: boolean;
+  like: boolean;
   likeNum: number;
   comments: CommentType[];
   commentNum?: number;
   createdAt: string;
+  writer: string;
 }

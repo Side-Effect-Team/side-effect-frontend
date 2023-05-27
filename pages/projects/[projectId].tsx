@@ -23,6 +23,7 @@ export default function ProjectDetailPage({ project }: ProjectDetailPageProps) {
     title,
     userId,
     views,
+    writer,
   } = project;
 
   return (
@@ -35,6 +36,7 @@ export default function ProjectDetailPage({ project }: ProjectDetailPageProps) {
           views={views}
           likeNum={likeNum}
           userId={userId}
+          writer={writer}
         />
         <ContentDetail
           projectName={projectName}

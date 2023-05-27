@@ -28,6 +28,7 @@ interface PostDataProps {
   views: number;
   likeNum: number;
   userId: number;
+  writer: string;
 }
 
 interface OptionPopupProps {
@@ -41,6 +42,7 @@ export default function PostData({
   views,
   likeNum,
   userId,
+  writer,
 }: PostDataProps) {
   const [isOwner, setIsOwner] = useState(false);
   const [popupOn, setPopupOn] = useState(false);
@@ -58,7 +60,7 @@ export default function PostData({
             <BiUserCircle size={25} />
           </UserProfile>
           <p>
-            <Link href="#">작성자1</Link>
+            <Link href="#">{writer}</Link>
           </p>
         </UserBox>
         <Column />
