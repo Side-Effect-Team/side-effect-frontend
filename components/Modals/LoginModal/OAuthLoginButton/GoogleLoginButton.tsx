@@ -9,7 +9,7 @@ import axios from "axios";
 import Image from "next/image";
 import GoogleImg from "../../../../public/images/Google.png";
 import useToast from "@/hooks/common/useToast";
-
+import { handleAuth } from "@/utils/auth";
 export default function GoogleLoginButton() {
   const dispatch = useAppDispatch();
   const { addToast } = useToast();
@@ -20,11 +20,9 @@ export default function GoogleLoginButton() {
           headers: { token: res.access_token, ProviderType: "google" },
         })
         .then((res) => {
-          console.log(res);
-          localStorage.setItem("accessToken", res.headers.authorization);
           localStorage.setItem("id", res.data.userId);
-
-          dispatch(createAuthentication(res.headers.authorization));
+          handleAuth.setToken(res.headers.authorization);
+          dispatch(createAuthentication());
           dispatch(closeModal());
         })
         .catch((error) => {

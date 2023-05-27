@@ -12,6 +12,8 @@ import { BOARD_LIST } from "../../enum";
 import ScrollToTop from "../ScrollToTop";
 import Head from "next/head";
 import { useAppSelector } from "@/store/hooks";
+import axios from "axios";
+axios.defaults.withCredentials = true;
 interface PropType {
   children: React.ReactNode;
 }
@@ -32,9 +34,8 @@ interface MobileMenuProps {
 
 export default function Layout({ children }: PropType) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
-  const { authenticated, token } = useAppSelector((state) => state.auth);
+  const { authenticated } = useAppSelector((state) => state.auth);
   console.log("authenticated", authenticated);
-  console.log("token", token);
 
   const handleMobileMenu = () => {
     setMobileMenuOpen((prev) => !prev);
