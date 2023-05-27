@@ -72,37 +72,39 @@ export default function CommentItem({
           ref={textareaEl}
         />
       </CommentColumn>
-      <CommentEditBtnBox>
-        {isEdit ? (
-          <>
-            <OptionBtn
-              option="edit"
-              onClick={() => onEdit(comment.commentId, commentValue)}
-            >
-              <BiCheck size={17} />
-              <BtnText>완료</BtnText>
-            </OptionBtn>
-            <OptionBtn option="delete" onClick={resetEdit}>
-              <BiX size={17} />
-              <BtnText>취소</BtnText>
-            </OptionBtn>
-          </>
-        ) : (
-          <>
-            <OptionBtn option="edit" onClick={startEdit}>
-              <BiEditAlt size={17} />
-              <BtnText>수정</BtnText>
-            </OptionBtn>
-            <OptionBtn
-              option="delete"
-              onClick={() => onDelete(comment.commentId)}
-            >
-              <BiTrash size={17} />
-              <BtnText>삭제</BtnText>
-            </OptionBtn>
-          </>
-        )}
-      </CommentEditBtnBox>
+      {comment.writerId === +localStorage.getItem("id")! && (
+        <CommentEditBtnBox>
+          {isEdit ? (
+            <>
+              <OptionBtn
+                option="edit"
+                onClick={() => onEdit(comment.commentId, commentValue)}
+              >
+                <BiCheck size={17} />
+                <BtnText>완료</BtnText>
+              </OptionBtn>
+              <OptionBtn option="delete" onClick={resetEdit}>
+                <BiX size={17} />
+                <BtnText>취소</BtnText>
+              </OptionBtn>
+            </>
+          ) : (
+            <>
+              <OptionBtn option="edit" onClick={startEdit}>
+                <BiEditAlt size={17} />
+                <BtnText>수정</BtnText>
+              </OptionBtn>
+              <OptionBtn
+                option="delete"
+                onClick={() => onDelete(comment.commentId)}
+              >
+                <BiTrash size={17} />
+                <BtnText>삭제</BtnText>
+              </OptionBtn>
+            </>
+          )}
+        </CommentEditBtnBox>
+      )}
     </CommentWrapper>
   );
 }
