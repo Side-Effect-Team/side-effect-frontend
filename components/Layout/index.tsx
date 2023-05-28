@@ -32,7 +32,7 @@ interface MobileMenuProps {
 export default function Layout({ children }: PropType) {
   const [isLogin, setIsLogin] = useState<boolean>(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
-  const { authenticated, token } = useAppSelector((state) => state.auth);
+  const { authenticated } = useAppSelector((state) => state.auth);
   const { getter, cleaner } = useLocalStorage();
   console.log("authenticated", authenticated);
 
