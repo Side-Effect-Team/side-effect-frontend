@@ -53,3 +53,12 @@ export const handleRefreshAccessToken = async () => {
   );
   handleAuth.setToken(response.headers.authorization);
 };
+
+export const onSuccessLogin = async (token: string, ProviderType: string) => {
+  const response = await axios.post(
+    "/social/login",
+    {},
+    { headers: { token, ProviderType } },
+  );
+  return response;
+};
