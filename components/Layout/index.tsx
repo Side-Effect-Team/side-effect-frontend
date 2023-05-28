@@ -12,7 +12,7 @@ import { BOARD_LIST } from "../../enum";
 import ScrollToTop from "../ScrollToTop";
 import Head from "next/head";
 import { useAppSelector } from "@/store/hooks";
-import axios from "axios";
+import { handleAuth } from "../../utils/auth";
 import { handleRefreshAccessToken } from "apis/UserAPI";
 
 interface PropType {
@@ -56,12 +56,17 @@ export default function Layout({ children }: PropType) {
   });
   // 새로고침시 액세스토큰이 휘발되기때문에 만약 로그인상태인데 새로고침을했다면 새로운 액세스토큰으로 갱신
   useEffect(() => {
+    //유저가 로그인상태에서 새로고침을 하면 액세스토큰 갱신,로그인상태가 아닌상태에서 새로고침을했다면 갱신요청보내지않음.
     if (authenticated) {
-      handleRefreshAccessToken();
+      try {
+        handleRefreshAccessToken();
+        console.log(handleAuth.getToken());
+      } catch (error) {
+        console.log(error);
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />

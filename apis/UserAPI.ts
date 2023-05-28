@@ -46,14 +46,10 @@ export const editProfile = async (changes: MypageEditProps) => {
 };
 
 export const handleRefreshAccessToken = async () => {
-  try {
-    const response = await axios.post(
-      "/token/at-issue",
-      {},
-      { withCredentials: true },
-    );
-    handleAuth.setToken(response.headers.authorization);
-  } catch (error) {
-    console.log(error);
-  }
+  const response = await axios.post(
+    "/token/at-issue",
+    {},
+    { withCredentials: true },
+  );
+  handleAuth.setToken(response.headers.authorization);
 };

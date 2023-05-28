@@ -1,5 +1,5 @@
 class HandleAuth {
-  token: string;
+  private token: string;
   constructor() {
     this.token = "";
   }
