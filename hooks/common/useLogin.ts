@@ -5,17 +5,28 @@ import { handleAuth } from "@/utils/auth";
 import useToast from "./useToast";
 import { handleModalView } from "@/store/loginViewTransitionSlice";
 import { addProviderType, addEmail } from "@/store/userInfoStoreSlice";
+import { AxiosError, AxiosResponse } from "axios";
+
+interface ResponseType {
+  userId: string;
+  authorization: string;
+}
+interface ErrorResponseType {
+  status: number;
+  email: string;
+}
+
 const useLogin = (providerType: "GOOGLE" | "KAKAO") => {
   const dispatch = useAppDispatch();
   const { addToast } = useToast();
 
-  const handleSuccessLogin = (res: any) => {
+  const handleSuccessLogin = (res: AxiosResponse<ResponseType>) => {
     localStorage.setItem("id", res.data.userId);
     handleAuth.setToken(res.headers.authorization);
-    dispatch(createAuthentication(res.headers.authorization));
+    dispatch(createAuthentication());
     dispatch(closeModal());
   };
-  const handleFailedLogin = (error: any) => {
+  const handleFailedLogin = (error: AxiosError<ErrorResponseType>) => {
     if (error?.response?.status === 400) {
       dispatch(addProviderType(providerType));
       dispatch(addEmail(error.response.data.email));
