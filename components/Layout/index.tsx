@@ -8,10 +8,13 @@ import { breakPoints } from "@/styles/Media";
 import Header from "../Header";
 import Footer from "../Footer";
 import Toast from "../Toast";
-import { BOARD_LIST } from "../../enum";
 import ScrollToTop from "../ScrollToTop";
 import Head from "next/head";
 import { useAppSelector } from "@/store/hooks";
+import { useAppDispatch } from "@/store/hooks";
+import { useLocalStorage } from "@/hooks/common/useLocalStorage";
+import { openModal } from "@/store/modalSlice";
+
 import { handleAuth } from "../../utils/auth";
 import { handleRefreshAccessToken } from "apis/UserAPI";
 
@@ -19,27 +22,32 @@ interface PropType {
   children: React.ReactNode;
 }
 
-const MOBILE_BOARD_LIST = [
-  ...BOARD_LIST,
-  {
-    ID: 2,
-    TITLE: "로그인",
-    LINK: "/",
-  },
-];
-
 interface MobileMenuProps {
   hide: boolean;
+  isLogin: boolean;
+  logout: () => void;
   handleClick: () => void;
 }
 
 export default function Layout({ children }: PropType) {
+  const [isLogin, setIsLogin] = useState<boolean>(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
-  const { authenticated } = useAppSelector((state) => state.auth);
+  const { authenticated, token } = useAppSelector((state) => state.auth);
+  const { getter, cleaner } = useLocalStorage();
   console.log("authenticated", authenticated);
 
   const handleMobileMenu = () => {
     setMobileMenuOpen((prev) => !prev);
+  };
+
+  const logout = () => {
+    cleaner("accessToken");
+    setIsLogin(false);
+  };
+
+  const mobileLogout = () => {
+    logout();
+    handleMobileMenu();
   };
 
   // 뷰포트 width가 모바일 width 보다 커지면 모바일 메뉴 닫음
@@ -54,6 +62,10 @@ export default function Layout({ children }: PropType) {
       return () => window.removeEventListener("resize", detectViewportWidth);
     }
   });
+  useEffect(() => {
+    if (getter("accessToken")) setIsLogin(true);
+  });
+
   // 새로고침시 액세스토큰이 휘발되기때문에 만약 로그인상태인데 새로고침을했다면 새로운 액세스토큰으로 갱신
   useEffect(() => {
     //유저가 로그인상태에서 새로고침을 하면 액세스토큰 갱신,로그인상태가 아닌상태에서 새로고침을했다면 갱신요청보내지않음.
@@ -77,33 +89,47 @@ export default function Layout({ children }: PropType) {
         />
         <title>사이드 이펙트 | 빠르게 프로젝트를 시작하세요</title>
       </Head>
-      <Header handleMobileMenu={handleMobileMenu} />
+      <Header
+        isLogin={isLogin}
+        logout={logout}
+        handleMobileMenu={handleMobileMenu}
+      />
       <ScrollToTop />
       <Toast />
-      <MobileMenu hide={!mobileMenuOpen} handleClick={handleMobileMenu} />
+      <MobileMenu
+        hide={!mobileMenuOpen}
+        isLogin={isLogin}
+        logout={mobileLogout}
+        handleClick={handleMobileMenu}
+      />
       <Wrapper mobileMenuOpen={mobileMenuOpen}>{children}</Wrapper>
       <Footer />
     </ThemeProvider>
   );
 }
 
-function MobileMenu({ hide, handleClick }: MobileMenuProps) {
+function MobileMenu({ hide, isLogin, logout, handleClick }: MobileMenuProps) {
+  const dispatch = useAppDispatch();
+
   return (
     <MobileNavBar hide={hide}>
-      {MOBILE_BOARD_LIST.map((board) => {
-        if (board.TITLE === "로그인") {
-          return (
-            <MobileMenuItem key={board.ID} onClick={handleClick}>
-              <Link href={board.LINK}>{board.TITLE}</Link>
-            </MobileMenuItem>
-          );
-        }
-        return (
-          <MobileMenuItem key={board.ID} onClick={handleClick}>
-            <Link href={board.LINK}>{board.TITLE}</Link>
-          </MobileMenuItem>
-        );
-      })}
+      <MobileMenuItem onClick={handleClick}>
+        <Link href="/projects">프로젝트 자랑 게시판</Link>
+      </MobileMenuItem>
+      <MobileMenuItem onClick={handleClick}>
+        <Link href="/recruits">팀원 모집 게시판</Link>
+      </MobileMenuItem>
+      {isLogin ? (
+        <MobileMenuItem onClick={logout}>
+          <Link href="/">로그아웃</Link>
+        </MobileMenuItem>
+      ) : (
+        <MobileMenuItem
+          onClick={() => dispatch(openModal({ modalType: "LoginModal" }))}
+        >
+          <Link href="/">로그인</Link>
+        </MobileMenuItem>
+      )}
     </MobileNavBar>
   );
 }

@@ -1,12 +1,24 @@
 export const useLocalStorage = () => {
   const getter = (key: string) => {
-    const result = localStorage.getItem(key);
-    return result ? JSON.parse(result) : null;
+    const value = localStorage.getItem(key);
+    if (value) {
+      try {
+        return JSON.parse(value);
+      } catch (err) {
+        return value;
+      }
+    } else {
+      return null;
+    }
   };
 
   const setter = (key: string, value: unknown) => {
     localStorage.setItem(key, JSON.stringify(value));
   };
 
-  return { getter, setter };
+  const cleaner = (key: string) => {
+    localStorage.removeItem(key);
+  };
+
+  return { getter, setter, cleaner };
 };
