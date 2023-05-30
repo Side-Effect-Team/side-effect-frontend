@@ -8,7 +8,6 @@ import {
   StatusBox,
   CloseBtn,
 } from "./styled";
-import { applyPosition } from "@/apis/ApplicantAPI";
 
 interface PositionDetailProps {
   positions: PositionType[];

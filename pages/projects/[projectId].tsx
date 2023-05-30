@@ -1,4 +1,5 @@
 import axios from "axios";
+import customAxios from "@/apis/customAxios";
 import { GetServerSidePropsContext } from "next";
 import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
 import ContentDetail from "@/detailComps/ContentDetail";
@@ -10,7 +11,6 @@ interface ProjectDetailPageProps {
 }
 
 export default function ProjectDetailPage({ project }: ProjectDetailPageProps) {
-  console.log("project", project);
   const {
     comments,
     content,

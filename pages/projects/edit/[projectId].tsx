@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import customAxios from "@/apis/customAxios";
 import { GetServerSidePropsContext } from "next";
 import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
 import { useRouter } from "next/router";
@@ -67,13 +68,9 @@ export default function EditProjectPage({ project }: EditProjectPageProps) {
         };
 
         // request
-        const url = `${process.env.NEXT_PUBLIC_API_URL}/free-boards/${project.id}`;
-        axios
-          .patch(url, patchData, {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-            },
-          })
+        const url = `/free-boards/${project.id}`;
+        customAxios
+          .patch(url, patchData)
           .then((res) => {
             console.log(res);
             if (res.status === 200) {
@@ -181,7 +178,7 @@ export default function EditProjectPage({ project }: EditProjectPageProps) {
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   const projectId = ctx.params?.projectId;
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/free-boards/${projectId}`;
+  const url = `/free-boards/${projectId}`;
   try {
     const res = await axios.get(url);
     const project = await res.data;

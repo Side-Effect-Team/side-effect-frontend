@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import customAxios from "@/apis/customAxios";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import {
@@ -104,18 +104,16 @@ function OptionPopup({ postId }: OptionPopupProps) {
 
   // 게시글 삭제
   const deletePost = async (id: number) => {
-    let url = process.env.NEXT_PUBLIC_API_URL as string;
+    let url = "";
     if (postCategory === "recruits") url += "/recruit-board/" + id;
     if (postCategory === "projects") url += "/free-boards/" + id;
 
     try {
-      const res = await axios.delete(url, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      });
-      if (res.status === 200)
+      const res = await customAxios.delete(url);
+      if (res.status === 200) {
         await window.alert("게시물이 성공적으로 삭제되었습니다");
+        await router.push(`/${postCategory}`);
+      }
     } catch (err) {
       console.log(err);
       window.alert("게시물 삭제에 실패했습니다");
@@ -125,7 +123,6 @@ function OptionPopup({ postId }: OptionPopupProps) {
   const handleDelete = async () => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
       await deletePost(postId);
-      await router.push(`/${postCategory}`);
     }
   };
 

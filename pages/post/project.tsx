@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import Image from "next/image";
-import axios from "axios";
+import customAxios from "@/apis/customAxios";
 import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
 import { PostTitleStyled } from "@/postComps/common/Title.styled";
 import {
@@ -60,13 +60,9 @@ export default function PostProjectPage() {
         const data = { ...postForm, projectUrl };
 
         // request
-        const url = `${process.env.NEXT_PUBLIC_API_URL}/free-boards`;
+        const url = `/free-boards`;
         try {
-          const res = await axios.post(url, data, {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-            },
-          });
+          const res = await customAxios.post(url, data);
           const projectId = await res.data.id;
           const imgUrl = url + "/image/" + projectId;
 

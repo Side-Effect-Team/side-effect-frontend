@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import Image from "next/image";
 import { GoPlus } from "react-icons/go";
-import axios from "axios";
+import customAxios from "@/apis/customAxios";
 import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
 import { PostTitleStyled } from "@/postComps/common/Title.styled";
 import {
@@ -83,13 +83,9 @@ export default function PostRecruitPage() {
         };
 
         // request
-        const url = `${process.env.NEXT_PUBLIC_API_URL}/recruit-board`;
+        const url = `/recruit-board`;
         try {
-          const res = await axios.post(url, data, {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-            },
-          });
+          const res = await customAxios.post(url, data);
           const recruitId = await res.data.id;
           const imgUrl = url + "/image/" + recruitId;
 

@@ -12,9 +12,7 @@ export default function RecruitsPage() {
   const { data, isError, isLoading } = useQuery({
     queryKey: ["recruits"],
     queryFn: async () => {
-      const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/recruit-board/all`,
-      );
+      const res = await axios.get(`/recruit-board/all`);
       return res.data.recruitBoards;
     },
   });

@@ -1,6 +1,6 @@
 import { breakPoints } from "@/styles/Media";
 import { useState } from "react";
-import { useGetProjectData } from "../../hooks/queries/useGetProjectData";
+import { useGetProjectData } from "@/hooks/queries/useGetProjectData";
 import styled from "styled-components";
 import SelectBox from "../../components/SelectBox";
 import Search from "@/components/Search";
