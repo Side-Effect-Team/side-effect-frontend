@@ -54,7 +54,6 @@ export default function RecruitsPage() {
         </ContentsHeader>
         <ContentsMain>
           {data.map((item: RecruitType) => {
-            console.log(item);
             const boardCardData = recruitBoardCardConverter(item);
             return (
               <BoardCard

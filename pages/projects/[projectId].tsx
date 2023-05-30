@@ -1,5 +1,4 @@
 import axios from "axios";
-import customAxios from "@/apis/customAxios";
 import { GetServerSidePropsContext } from "next";
 import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
 import ContentDetail from "@/detailComps/ContentDetail";
