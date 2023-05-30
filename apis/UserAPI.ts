@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { handleAuth } from "@/utils/auth";
 export const getMypageData = async () => {
   const token = localStorage.getItem("accessToken");
   const id = localStorage.getItem("id");
@@ -48,4 +48,22 @@ export const editProfile = async (changes: MypageEditProps) => {
 export const duplicateNickname = async (nickname: string) => {
   const response = await axios.get(`/user/duple/${nickname}`);
   return response.data;
+};
+
+export const handleRefreshAccessToken = async () => {
+  const response = await axios.post(
+    "/token/at-issue",
+    {},
+    { withCredentials: true },
+  );
+  handleAuth.setToken(response.headers.authorization);
+};
+
+export const onSuccessLogin = async (token: string, ProviderType: string) => {
+  const response = await axios.post(
+    "/social/login",
+    {},
+    { headers: { token, ProviderType } },
+  );
+  return response;
 };
