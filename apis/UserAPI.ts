@@ -44,3 +44,8 @@ export const editProfile = async (changes: MypageEditProps) => {
   const response = await axios.patch(`/user/${id}`, changes, config);
   return response;
 };
+
+export const duplicateNickname = async (nickname: string) => {
+  const response = await axios.get(`/user/duple/${nickname}`);
+  return response.data;
+};
