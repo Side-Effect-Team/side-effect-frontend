@@ -15,7 +15,7 @@ export default function ProjectList({ data }: any) {
   //data 타입수정필요
   return (
     <ProjectListWrapper>
-      {data.pages.map((page: PageType) => {
+      {data?.pages.map((page: PageType) => {
         return page.projects.map((project) => {
           return (
             <BoardCard key={project.id} data={project} category="projects" />
