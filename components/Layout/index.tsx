@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
 import Link from "next/link";
 import { ThemeProvider } from "styled-components";
 import { Wrapper, MobileNavBar, MobileMenuItem } from "./styled";
@@ -16,6 +15,9 @@ import { useAppDispatch } from "@/store/hooks";
 import { useLocalStorage } from "@/hooks/common/useLocalStorage";
 import { openModal } from "@/store/modalSlice";
 
+import { handleAuth } from "../../utils/auth";
+import { handleRefreshAccessToken } from "apis/UserAPI";
+
 interface PropType {
   children: React.ReactNode;
 }
@@ -30,13 +32,9 @@ interface MobileMenuProps {
 export default function Layout({ children }: PropType) {
   const [isLogin, setIsLogin] = useState<boolean>(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
-  const { authenticated, token } = useAppSelector((state) => state.auth);
+  const { authenticated } = useAppSelector((state) => state.auth);
   const { getter, cleaner } = useLocalStorage();
   console.log("authenticated", authenticated);
-  console.log("token", token);
-
-  const router = useRouter();
-  const currentPage = router.route;
 
   const handleMobileMenu = () => {
     setMobileMenuOpen((prev) => !prev);
@@ -67,23 +65,23 @@ export default function Layout({ children }: PropType) {
       return () => window.removeEventListener("resize", detectViewportWidth);
     }
   });
-
   useEffect(() => {
     if (getter("accessToken")) setIsLogin(true);
   });
 
-  /** userinfo 페이지에선 헤더가 안보이기위한 코드 */
-  if (currentPage.startsWith("/userinfo")) {
-    return (
-      <>
-        <ThemeProvider theme={theme}>
-          <GlobalStyles />
-          {children}
-        </ThemeProvider>
-      </>
-    );
-  }
-
+  // 새로고침시 액세스토큰이 휘발되기때문에 만약 로그인상태인데 새로고침을했다면 새로운 액세스토큰으로 갱신
+  useEffect(() => {
+    //유저가 로그인상태에서 새로고침을 하면 액세스토큰 갱신,로그인상태가 아닌상태에서 새로고침을했다면 갱신요청보내지않음.
+    if (authenticated) {
+      try {
+        handleRefreshAccessToken();
+        console.log(handleAuth.getToken());
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />

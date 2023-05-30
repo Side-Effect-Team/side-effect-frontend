@@ -5,7 +5,6 @@ import styled from "styled-components";
 import SelectBox from "../../components/SelectBox";
 import Search from "@/components/Search";
 import NoData from "@/components/Nodata";
-import Loading from "@/components/Loading";
 import PageHead from "@/components/PageHead";
 import BatchCarousel from "@/components/Carousel/BatchCarousel";
 import ProjectList from "@/components/pages/project/ProjectLIst";
