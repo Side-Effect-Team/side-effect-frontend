@@ -10,7 +10,8 @@
       "@/pages/*": ["pages/*"],
       "@/postComps/*": ["components/pages/post/*"],
       "@/utils/*": ["utils/*"],
-      "@/detailComps/*": ["components/pages/detailPage/*"]
+      "@/detailComps/*": ["components/pages/detailPage/*"],
+      "@/apis/*": ["apis/*"]
     },
     "target": "ESNext",
     "lib": [

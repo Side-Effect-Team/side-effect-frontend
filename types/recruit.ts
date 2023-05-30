@@ -23,4 +23,5 @@ declare interface RecruitType {
   likeNum: number;
   userId: number;
   like: boolean;
+  writer: string;
 }
