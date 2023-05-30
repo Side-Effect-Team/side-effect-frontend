@@ -22,6 +22,7 @@ import {
 import { useRouter } from "next/router";
 import { useAddLikeProject } from "@/hooks/mutations/useAddLikeProject";
 import { useAddLikeRecruit } from "@/hooks/mutations/useAddLikeRecuit";
+import { useAppSelector } from "@/store/hooks";
 export interface BoardCardProps {
   id: number;
   headerImage?: string;
@@ -42,14 +43,14 @@ interface BoardCardDataProps {
 }
 
 export default function BoardCard({ data, category }: BoardCardDataProps) {
+  const { authenticated } = useAppSelector((state) => state.auth);
   const projectMutate = useAddLikeProject();
   const recruitMutate = useAddLikeRecruit();
   const router = useRouter();
   const onClickHeart = async (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     const id = Number(e.currentTarget.id);
-    const token = localStorage.getItem("accessToken");
-    if (token) {
+    if (authenticated) {
       if (category === "projects") {
         projectMutate(id, {
           onSuccess: (res) => {
