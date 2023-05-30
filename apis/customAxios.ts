@@ -1,7 +1,6 @@
 import axios from "axios";
 import { store } from "@/store/store";
 import { removeAuthentication } from "@/store/authSlice";
-import { handleAuth } from "@/utils/auth";
 import { handleRefreshAccessToken } from "./UserAPI";
 const baseURL = process.env.NEXT_PUBLIC_API_URL;
 const customAxios = axios.create({
@@ -11,9 +10,8 @@ const customAxios = axios.create({
 
 customAxios.interceptors.request.use(
   (config) => {
-    const accessToken = handleAuth.getToken();
-    console.log(accessToken);
-    if (accessToken) {
+    if (!config.headers["Authorization"]) {
+      const accessToken = store.getState().auth.token;
       config.headers["Authorization"] = `Bearer ${accessToken}`;
     }
     return config;
@@ -35,7 +33,8 @@ customAxios.interceptors.response.use(
     if (error.response?.data.code === "AT_001") {
       try {
         await handleRefreshAccessToken();
-        const newAccessToken = handleAuth.getToken();
+        const newAccessToken = store.getState().auth.token;
+
         config.headers["Authorization"] = `Bearer ${newAccessToken}`;
         return customAxios.request(config);
       } catch (error: any) {
