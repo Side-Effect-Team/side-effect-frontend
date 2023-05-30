@@ -23,17 +23,20 @@ export default function RecruitDetailPage({ recruit }: RecruitDetailPageProps) {
     userId,
     likeNum,
     imgSrc,
+    writer,
   } = recruit;
 
   return (
     <Wrapper>
       <Contents>
         <PostData
-          id={id}
+          postId={id}
           title={title}
           createdAt={createdAt}
           views={views}
           likeNum={likeNum}
+          userId={userId}
+          writer={writer}
         />
         <PositionDetail positions={positions} />
         <ContentDetail

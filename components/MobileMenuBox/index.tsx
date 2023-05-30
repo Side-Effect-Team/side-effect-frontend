@@ -1,25 +1,28 @@
-import { Wrapper } from "./styled";
+import { Dispatch, SetStateAction } from "react";
 import { IoReorderThree } from "react-icons/io5";
+import { Wrapper } from "./styled";
 import Button from "@/components/Button";
 import Alarm from "../Alarm";
-import { Dispatch, MutableRefObject, SetStateAction } from "react";
+import { useAppSelector } from "@/store/hooks";
 
 interface MobileMenuBoxProps {
-  isLogin: boolean;
   handleMobileMenu: (e: React.MouseEvent<HTMLButtonElement>) => void;
   openAlarm: boolean;
   setOpenAlarm: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function MobileMenuBox({
-  isLogin,
   handleMobileMenu,
   openAlarm,
   setOpenAlarm,
 }: MobileMenuBoxProps) {
+  const { authenticated } = useAppSelector((state) => state.auth);
+
   return (
     <Wrapper>
-      {isLogin && <Alarm openAlarm={openAlarm} setOpenAlarm={setOpenAlarm} />}
+      {authenticated && (
+        <Alarm openAlarm={openAlarm} setOpenAlarm={setOpenAlarm} />
+      )}
       <Button onClick={handleMobileMenu}>
         <IoReorderThree />
       </Button>
