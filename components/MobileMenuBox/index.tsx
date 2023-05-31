@@ -16,13 +16,11 @@ export default function MobileMenuBox({
   openAlarm,
   setOpenAlarm,
 }: MobileMenuBoxProps) {
-  const { authenticated } = useAppSelector((state) => state.auth);
+  const { token } = useAppSelector((state) => state.auth);
 
   return (
     <Wrapper>
-      {authenticated && (
-        <Alarm openAlarm={openAlarm} setOpenAlarm={setOpenAlarm} />
-      )}
+      {token && <Alarm openAlarm={openAlarm} setOpenAlarm={setOpenAlarm} />}
       <Button onClick={handleMobileMenu}>
         <IoReorderThree />
       </Button>
