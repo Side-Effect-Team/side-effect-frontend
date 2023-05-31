@@ -27,7 +27,7 @@ export const DarkModeCircle = styled.label<{ isDark: boolean }>`
       p.isDark
         ? "linear-gradient(180deg, #777, #3a3a3a)"
         : "linear-gradient(180deg, #ffcc89, #d8860b)"};
-    border-radius: 180px;
+    border-radius: 200px;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
     transition: 0.3s ease;
   }
@@ -39,7 +39,6 @@ export const DarkModeCircle = styled.label<{ isDark: boolean }>`
     transition: 0.3s ease;
   }
 `;
-export const IconSvg = styled.svg``;
 export const LightModeIcon = styled(BsFillSunFill)`
   left: 7px;
 `;

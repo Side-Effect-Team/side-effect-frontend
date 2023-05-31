@@ -4,7 +4,6 @@ import {
   DarkModeIcon,
   LightModeIcon,
 } from "./styled";
-import { BsFillSunFill, BsFillMoonStarsFill } from "react-icons/bs";
 
 import { useState } from "react";
 export default function DarkModeToggle() {
@@ -13,7 +12,7 @@ export default function DarkModeToggle() {
   const handleDarkModeToggle = () => {
     setIsDark(!isDark);
   };
-  const handleDarkMode = () => {
+  const handleDarkModeOnOff = () => {
     if (localStorage.getItem("theme") === "dark") {
       localStorage.removeItem("theme");
     } else {
@@ -27,11 +26,11 @@ export default function DarkModeToggle() {
         id="darkmode"
         type="checkbox"
         onChange={handleDarkModeToggle}
-        onClick={handleDarkMode}
+        onClick={handleDarkModeOnOff}
       />
       <DarkModeCircle isDark={isDark} htmlFor="darkmode">
-        <LightModeIcon  className="icon" />
-        <DarkModeIcon  className="icon" />
+        <LightModeIcon className="icon" />
+        <DarkModeIcon className="icon" />
       </DarkModeCircle>
     </>
   );
