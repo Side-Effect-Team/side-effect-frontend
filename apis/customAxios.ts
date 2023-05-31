@@ -1,18 +1,15 @@
 import axios from "axios";
 import { store } from "@/store/store";
 import { removeAuthentication } from "@/store/authSlice";
-import { handleAuth } from "@/utils/auth";
 import { handleRefreshAccessToken } from "./UserAPI";
 const baseURL = process.env.NEXT_PUBLIC_API_URL;
 const customAxios = axios.create({
   baseURL,
   withCredentials: true,
 });
-
 customAxios.interceptors.request.use(
   (config) => {
-    const accessToken = handleAuth.getToken();
-    console.log(accessToken);
+    const accessToken = store.getState().auth.token;
     if (accessToken) {
       config.headers["Authorization"] = `Bearer ${accessToken}`;
     }
@@ -31,11 +28,12 @@ customAxios.interceptors.response.use(
   async (error) => {
     const { config } = error;
     console.log("error", error);
-    //액세스토큰 재발급 갱신
+    //액세스토큰만료시 자동 재발급 갱신
     if (error.response?.data.code === "AT_001") {
       try {
         await handleRefreshAccessToken();
-        const newAccessToken = handleAuth.getToken();
+        const newAccessToken = store.getState().auth.token;
+
         config.headers["Authorization"] = `Bearer ${newAccessToken}`;
         return customAxios.request(config);
       } catch (error: any) {
@@ -47,6 +45,12 @@ customAxios.interceptors.response.use(
         }
         console.log(error);
       }
+    }
+    //로컬스토리지에서 액세스토큰을 조작하는경우 핸들링
+    if (error.response.data.code === "AT_003") {
+      store.dispatch(removeAuthentication());
+      window.alert("비정상적인 접근입니다.");
+      window.location.replace("/");
     }
     return Promise.reject(error);
   },

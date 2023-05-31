@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { media } from "@/styles/mediatest";
 import { theme } from "@/styles/Theme";
+import { darken, lighten } from "polished";
+
 export const ScrollToTopWrapper = styled.div`
   position: fixed;
   bottom: 30px;
@@ -13,7 +15,11 @@ export const ScrollToTopWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 999;
   cursor: pointer;
+  &:hover {
+    background-color: ${lighten(0.05, theme.brandColor.primary)};
+  }
   ${media.mobile} {
     width: 40px;
     height: 40px;

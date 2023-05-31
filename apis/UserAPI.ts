@@ -1,5 +1,6 @@
 import axios from "axios";
-import { handleAuth } from "@/utils/auth";
+import { store } from "@/store/store";
+import { createAuthentication } from "@/store/authSlice";
 import customAxios from "./customAxios";
 export const getMypageData = async () => {
   const id = localStorage.getItem("id");
@@ -57,7 +58,12 @@ export const handleRefreshAccessToken = async () => {
     {},
     { withCredentials: true },
   );
-  handleAuth.setToken(response.headers.authorization);
+  store.dispatch(
+    createAuthentication({
+      userId: store.getState().auth.userId,
+      token: response.headers.authorization,
+    }),
+  );
 };
 
 export const onSuccessLogin = async (token: string, ProviderType: string) => {
