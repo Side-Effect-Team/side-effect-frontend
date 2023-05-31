@@ -3,25 +3,12 @@ import { store } from "@/store/store";
 import { createAuthentication } from "@/store/authSlice";
 import customAxios from "./customAxios";
 export const getMypageData = async () => {
-  const id = localStorage.getItem("id");
-  // const token = localStorage.getItem("accessToken");
-  // const config = {
-  //   headers: { Authorization: `Bearer ${token}` },
-  // };
+  const id = store.getState().auth.userId;
   const response = await customAxios.get(`/user/mypage/${id}`);
   return response;
 };
 
-// export const getUserMypageData = async (id: string) => {
-//   const response = await axios.get(`/user/mypage/${id}`);
-//   return response;
-// };
-
 export const getProfileData = async () => {
-  // const token = localStorage.getItem("accessToken");
-  // const config = {
-  //   headers: { Authorization: `Bearer ${token}` },
-  // };
   const response = await customAxios.get(`/user/editpage`);
   return response.data;
 };
@@ -38,11 +25,7 @@ export interface MypageEditProps {
   portfolioUrl?: string;
 }
 export const editProfile = async (changes: MypageEditProps) => {
-  const id = localStorage.getItem("id");
-  // const token = localStorage.getItem("accessToken");
-  // const config = {
-  //   headers: { Authorization: `Bearer ${token}` },
-  // };
+  const id = store.getState().auth.userId;
   const response = await customAxios.patch(`/user/${id}`, changes);
   return response;
 };
