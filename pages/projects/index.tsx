@@ -10,6 +10,7 @@ import BatchCarousel from "@/components/Carousel/BatchCarousel";
 import ProjectList from "@/components/pages/project/ProjectLIst";
 import Skeleton from "@/components/Skeleton/BoardCardSkeleton";
 import { useAppSelector } from "@/store/hooks";
+import DarkModeToggle from "@/components/DarkModeToggle";
 
 const FILTER_OPTIONS = [
   { name: "최신순", value: "latest" },
@@ -32,6 +33,7 @@ export default function ProjectPage() {
   }, [refetch, token]);
   return (
     <Wrapper>
+      <DarkModeToggle />
       <PageHead pageTitle="프로젝트 자랑 | 사이드 이펙트" />
       <BatchCarousel
         title="이달의 베스트 프로젝트"
