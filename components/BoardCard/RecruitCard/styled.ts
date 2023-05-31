@@ -27,9 +27,9 @@ export const Container = styled.div`
     width: 95%;
     height: 150px;
     min-height: 150px;
-    flex-direction: row;
     margin-left: auto;
     margin-right: auto;
+    padding-bottom: 10px;
   }
 `;
 export const IsRecruiting = styled.div<{ isRecruiting: boolean }>`
@@ -39,9 +39,13 @@ export const IsRecruiting = styled.div<{ isRecruiting: boolean }>`
   /* color: ${(p) => (p.isRecruiting ? "#8696EE" : "#d9d9d9")}; */
   margin-top: 10px;
   margin-bottom: 15px;
+  ${media.mobile} {
+    display: none;
+  }
 `;
 
 export const Title = styled.div`
+  height: 60px;
   font-size: 20px;
   font-weight: 700;
   line-height: 150%;
@@ -49,29 +53,63 @@ export const Title = styled.div`
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   ${media.mobile} {
+    width: 90%;
     -webkit-line-clamp: 1;
-    margin-top: 7px;
-    height: auto;
-    width: 80%;
+    margin-top: 0px;
+    margin-bottom: 10px;
     font-size: 16px;
   }
 `;
-
+export const TagContainer = styled.div`
+  ${media.mobile} {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+  }
+`;
 export const TagTitle = styled.div`
   font-size: 14px;
   font-weight: 600;
   color: gray;
   margin-bottom: 10px;
+  ${media.mobile} {
+    margin-bottom: 0px;
+    margin-right: 10px;
+  }
 `;
 
 export const TagWrapper = styled.div`
   width: 100%;
-  height: 60px;
+  height: 65px;
   display: flex;
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 7px;
   margin-bottom: 20px;
+  overflow: hidden;
+  ${media.mobile} {
+    width: calc(100% - 100px);
+    height: 25px;
+    overflow: hidden;
+    margin-bottom: 5px;
+  }
+`;
+
+export const TagCount = styled.div`
+  ${media.mobile} {
+    font-size: 12px;
+    color: white;
+    font-weight: 600;
+    background-color: ${theme.brandColor.primary};
+    border-radius: 50%;
+    padding: 5px;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 `;

@@ -1,7 +1,6 @@
-import { MouseEvent, useEffect, useState } from "react";
+import { MouseEvent, useEffect, useRef, useState } from "react";
 import {
   ButtonsWrapper,
-  CommentIcon,
   CreateAt,
   FeedbackNum,
   Footer,
@@ -12,40 +11,36 @@ import {
   ViewIcon,
 } from "../styled";
 import { useAddLikeRecruit } from "@/hooks/mutations/useAddLikeRecuit";
-import { Container, IsRecruiting, TagTitle, TagWrapper, Title } from "./styled";
+import {
+  Container,
+  IsRecruiting,
+  TagContainer,
+  TagTitle,
+  TagWrapper,
+  Title,
+} from "./styled";
 import Tag from "@/components/Tag";
+import { useRouter } from "next/router";
 interface RecruitDataProps {
   id: number;
-  isRecruiting: boolean;
-  languages: string[];
-  position: string[];
+  closed?: boolean;
+  tags?: string[];
+  positions?: string[];
   title: string;
   createdAt: string;
-  like: boolean;
-  likeNum: number;
-  views: number;
+  like?: boolean;
+  likeNum?: number;
+  views?: number;
 }
 interface RecruitCardProps {
   data: RecruitDataProps;
 }
 
-const data: RecruitDataProps = {
-  id: 1231,
-  isRecruiting: true,
-  languages: ["javascript", "java", "figma", "spring", "react"],
-  title: "사이드프로젝트 2달동안 같이 하실 팀원 모집합니다",
-  // position: ["frontend", "backend", "designer", "devops", "marketer", "pm"],
-  position: ["frontend", "backend", "designer"],
-  createdAt: "2022.06.05",
-  like: false,
-  likeNum: 3,
-  views: 5,
-};
-
-export default function RecruitCard() {
+export default function RecruitCard({ data }: RecruitCardProps) {
   const [heartLike, setHeartLike] = useState(data?.like || false);
   const recruitMutate = useAddLikeRecruit();
-  const [recruitingTitle, setRecruitingTitle] = useState("모집중");
+  const [recruitingTitle, setRecruitingTitle] = useState("• 모집중");
+  const router = useRouter();
 
   const onClickHeart = async (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
@@ -66,49 +61,71 @@ export default function RecruitCard() {
     setHeartLike(false);
   }, []);
   useEffect(() => {
-    if (data?.isRecruiting) {
+    if (!data?.closed) {
       setRecruitingTitle("• 모집중");
     } else setRecruitingTitle("• 모집완료");
   }, [recruitingTitle]);
 
   const newPosition: string[] = [];
-  if (data?.position.includes("frontend")) newPosition.push("프론트엔드");
-  if (data?.position.includes("backend")) newPosition.push("백엔드");
-  if (data?.position.includes("designer")) newPosition.push("디자이너");
-  if (data?.position.includes("devops")) newPosition.push("데브옵스");
-  if (data?.position.includes("marketer")) newPosition.push("마케터");
-  if (data?.position.includes("pm")) newPosition.push("기획자");
+  if (data?.positions && data?.positions.includes("frontend"))
+    newPosition.push("프론트엔드");
+  if (data?.positions && data?.positions.includes("backend"))
+    newPosition.push("백엔드");
+  if (data?.positions && data?.positions.includes("designer"))
+    newPosition.push("디자이너");
+  if (data?.positions && data?.positions.includes("devops"))
+    newPosition.push("데브옵스");
+  if (data?.positions && data?.positions.includes("marketer"))
+    newPosition.push("마케터");
+  if (data?.positions && data?.positions.includes("pm"))
+    newPosition.push("기획자");
 
+  const onClickGoToBoard = () => {
+    router.push(`/recruits/${data.id}`);
+  };
+
+  const tagRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const wrapper = tagRef.current;
+    if (wrapper) {
+      console.log(wrapper.scrollWidth);
+      console.log(wrapper.clientWidth);
+      console.log(wrapper.children.length);
+    }
+  }, []);
   return (
-    <Container>
+    <Container onClick={onClickGoToBoard}>
       <HeartWrapper
-        isLike={data?.like}
+        isLike={data?.like || false}
         id={data?.id.toString()}
         onClick={onClickHeart}
       >
         <HeartFillIcon
-          islike={data?.like.toString()}
+          islike={(data?.like && data?.like.toString()) || "false"}
           heartlike={heartLike.toString()}
         />
       </HeartWrapper>
-      <IsRecruiting isRecruiting={data?.isRecruiting}>
+      <IsRecruiting isRecruiting={!data?.closed}>
         {recruitingTitle}
       </IsRecruiting>
       <Title>{data?.title}</Title>
-      <TagTitle>모집분야</TagTitle>
-      <TagWrapper>
-        {newPosition.map((lan, index) => (
-          <Tag key={index} fill="false" fontSize="15px">
-            {lan}
-          </Tag>
-        ))}
-      </TagWrapper>
-      <TagTitle>사용언어</TagTitle>
-      <TagWrapper>
-        {data?.languages.map((lan, index) => (
-          <Tag key={index}>{lan}</Tag>
-        ))}
-      </TagWrapper>
+      <TagContainer>
+        <TagTitle>모집분야</TagTitle>
+        <TagWrapper>
+          {newPosition.map((lan, index) => (
+            <Tag key={index} fill="false" fontSize="15px">
+              {lan}
+            </Tag>
+          ))}
+        </TagWrapper>
+      </TagContainer>
+      <TagContainer>
+        <TagTitle>사용언어</TagTitle>
+        <TagWrapper ref={tagRef}>
+          {data?.tags &&
+            data?.tags.map((lan, index) => <Tag key={index}>{lan} </Tag>)}
+        </TagWrapper>
+      </TagContainer>
       <Footer>
         <CreateAt>{data?.createdAt}</CreateAt>
         <ButtonsWrapper>
