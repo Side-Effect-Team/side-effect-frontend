@@ -122,7 +122,7 @@ export const ContentsWrapper = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  padding: 5%;
+  padding: 15px;
   ${media.mobile} {
     width: 65%;
     height: 150px;

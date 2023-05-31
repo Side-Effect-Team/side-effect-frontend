@@ -2,11 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import styled from "styled-components";
 import { breakPoints, mediaQuery } from "@/styles/Media";
 import Banner from "@/components/Banner";
-import BoardCard from "@/components/BoardCard";
+import ProjectCard from "@/components/BoardCard/ProjectCard";
 import { BANNER_CONTENTS } from "../../enum";
 import PageHead from "@/components/PageHead";
 import axios from "axios";
 import { recruitBoardCardConverter } from "@/utils/converter";
+import RecruitCard from "@/components/BoardCard/RecruitCard";
 
 export default function RecruitsPage() {
   const { data, isError, isLoading } = useQuery({
@@ -56,14 +57,15 @@ export default function RecruitsPage() {
         </ContentsHeader>
         <ContentsMain>
           {data.map((item: RecruitType) => {
-            console.log(item);
+            // console.log(item);
             const boardCardData = recruitBoardCardConverter(item);
             return (
-              <BoardCard
-                key={item.id}
-                data={boardCardData}
-                category="recruits"
-              />
+              // <BoardCard
+              //   key={item.id}
+              //   data={boardCardData}
+              //   category="recruits"
+              // />
+              <RecruitCard key={item.id} data={boardCardData} />
             );
           })}
         </ContentsMain>

@@ -1,4 +1,5 @@
 import { MouseEvent, useEffect, useRef, useState } from "react";
+
 import {
   ButtonsWrapper,
   CreateAt,
@@ -9,7 +10,7 @@ import {
   HeartWrapper,
   IconButton,
   ViewIcon,
-} from "../styled";
+} from "../ProjectCard/styled";
 import { useAddLikeRecruit } from "@/hooks/mutations/useAddLikeRecuit";
 import {
   Container,

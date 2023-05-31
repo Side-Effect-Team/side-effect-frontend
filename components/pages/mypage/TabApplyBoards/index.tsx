@@ -1,6 +1,6 @@
 import ApplyBoardCard, {
   ApplyBoardCardProps,
-} from "@/components/ApplyBoardCard";
+} from "@/components/BoardCard/ApplyBoardCard";
 import { Border, SectionHeaderWrapper, SectionTitle } from "../styled";
 import { FilterMenu, FilterWrapper, NullMessage } from "../TabBoards/styled";
 import { ApplyBoardWrapper } from "./styled";

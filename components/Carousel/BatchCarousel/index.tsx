@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import BoardCard from "../../BoardCard";
+import ProjectCard from "../../BoardCard/ProjectCard";
 import { Wrapper, CarouselTitle, CardContainer } from "./styled";
 import axios from "axios";
 import { recruitBoardCardConverter } from "@/utils/converter";
@@ -32,7 +32,7 @@ export default function BatchCarousel({
           data.map((recruit: RecruitType) => {
             const convertedRecruit = recruitBoardCardConverter(recruit);
             return (
-              <BoardCard
+              <ProjectCard
                 key={recruit.id}
                 category={category}
                 data={convertedRecruit}

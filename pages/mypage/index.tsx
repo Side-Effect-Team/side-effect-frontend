@@ -6,12 +6,12 @@ import {
 } from "@/components/pages/mypage/styled";
 import Profile from "@/components/pages/mypage/Profile";
 import { useEffect, useState } from "react";
-import { BoardCardProps } from "@/components/BoardCard";
+import { BoardCardProps } from "@/components/BoardCard/ProjectCard";
 import TabBoards from "@/components/pages/mypage/TabBoards";
 import Account from "@/components/pages/mypage/Account";
 import { useGetMypageData } from "@/hooks/queries/useGetMypageData";
 import TabApplyBoards from "@/components/pages/mypage/TabApplyBoards";
-import { ApplyBoardCardProps } from "@/components/ApplyBoardCard";
+import { ApplyBoardCardProps } from "@/components/BoardCard/ApplyBoardCard";
 
 export interface MypageProps {
   id: number;

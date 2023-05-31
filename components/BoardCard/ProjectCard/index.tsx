@@ -35,13 +35,15 @@ export interface BoardCardProps {
   commentNum?: number;
   views?: number;
   category?: string; // type error로 추가
+  closed?: boolean;
+  positions?: string[];
 }
 interface BoardCardDataProps {
   data?: BoardCardProps;
   category: string;
 }
 
-export default function BoardCard({ data, category }: BoardCardDataProps) {
+export default function ProjectCard({ data, category }: BoardCardDataProps) {
   const projectMutate = useAddLikeProject();
   const recruitMutate = useAddLikeRecruit();
   const router = useRouter();

@@ -1,5 +1,5 @@
 import { MouseEvent, useEffect, useState } from "react";
-import Button from "../Button";
+import Button from "../../Button";
 import {
   ColumnWrapper,
   Container,

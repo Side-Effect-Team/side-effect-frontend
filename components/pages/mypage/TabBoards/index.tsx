@@ -1,4 +1,6 @@
-import BoardCard, { BoardCardProps } from "@/components/BoardCard";
+import ProjectCard, {
+  BoardCardProps,
+} from "@/components/BoardCard/ProjectCard";
 import { Border, SectionHeaderWrapper, SectionTitle } from "../styled";
 import { BoardWrapper, FilterMenu, FilterWrapper, NullMessage } from "./styled";
 import { useEffect, useState } from "react";
@@ -64,7 +66,11 @@ export default function TabBoards({ boards, title }: TabBoards) {
           {filterBoards &&
             filterBoards.map((el, index) =>
               el.category === "projects" ? (
-                <BoardCard key={index} data={el} category={el.category || ""} />
+                <ProjectCard
+                  key={index}
+                  data={el}
+                  category={el.category || ""}
+                />
               ) : (
                 <RecruitCard key={index} data={el} />
               ),
