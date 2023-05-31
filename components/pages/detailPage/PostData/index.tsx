@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import customAxios from "@/apis/customAxios";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -20,6 +20,7 @@ import {
   OptionBtn,
   Container,
 } from "@/detailComps/PostData/styled";
+import { useAppSelector } from "@/store/hooks";
 
 interface PostDataProps {
   postId: number;
@@ -27,7 +28,7 @@ interface PostDataProps {
   createdAt: string;
   views: number;
   likeNum: number;
-  userId: number;
+  writerId: number;
   writer: string;
 }
 
@@ -41,15 +42,11 @@ export default function PostData({
   createdAt,
   views,
   likeNum,
-  userId,
+  writerId,
   writer,
 }: PostDataProps) {
-  const [isOwner, setIsOwner] = useState(false);
+  const { userId } = useAppSelector((state) => state.auth);
   const [popupOn, setPopupOn] = useState(false);
-
-  useEffect(() => {
-    setIsOwner(+localStorage.getItem("id")! === userId);
-  }, [userId]);
 
   return (
     <div>
@@ -87,7 +84,7 @@ export default function PostData({
           {popupOn && <OptionPopup postId={postId} />}
         </div>
         {/* 로그인한 유저가 작성자가 아니면 수정 팝업 안보임 */}
-        {isOwner && (
+        {userId === writerId + "" && (
           <OptionBox onClick={() => setPopupOn((prev) => !prev)}>
             <BiDotsHorizontalRounded size={25} />
           </OptionBox>

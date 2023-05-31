@@ -34,7 +34,7 @@ export default function RecruitDetailPage({ recruit }: RecruitDetailPageProps) {
           createdAt={createdAt}
           views={views}
           likeNum={likeNum}
-          userId={userId}
+          writerId={userId}
           writer={writer}
         />
         <PositionDetail positions={positions} />
