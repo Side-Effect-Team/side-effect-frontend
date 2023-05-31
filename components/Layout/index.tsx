@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ThemeProvider } from "styled-components";
 import { Wrapper, MobileNavBar, MobileMenuItem } from "./styled";
 import GlobalStyles from "@/styles/Global";
-import { theme } from "@/styles/Theme";
+import { darkTheme, lightTheme } from "@/styles/Theme";
 import { breakPoints } from "@/styles/Media";
 import Header from "../Header";
 import Footer from "../Footer";
@@ -26,6 +26,7 @@ interface MobileMenuProps {
 
 export default function Layout({ children }: PropType) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+  const { isDark } = useAppSelector((state) => state.darkMode);
   const dispatch = useAppDispatch();
 
   const handleMobileMenu = () => {
@@ -54,11 +55,9 @@ export default function Layout({ children }: PropType) {
       return () => window.removeEventListener("resize", detectViewportWidth);
     }
   });
-  const isDark = localStorage.getItem("theme");
   console.log("isDark", isDark);
-
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
       <GlobalStyles />
       <Head>
         <meta

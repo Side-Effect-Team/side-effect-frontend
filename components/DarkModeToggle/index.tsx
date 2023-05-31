@@ -4,14 +4,14 @@ import {
   DarkModeIcon,
   LightModeIcon,
 } from "./styled";
-
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { handleDarkMode } from "@/store/darkModeSlice";
+import { useEffect } from "react";
 export default function DarkModeToggle() {
   const { isDark } = useAppSelector((state) => state.darkMode);
   const dispatch = useAppDispatch();
   const handleDarkModeToggle = () => {
-    dispatch(handleDarkMode());
+    dispatch(handleDarkMode({ isDark: !isDark }));
   };
   const handleDarkModeOnOff = () => {
     if (localStorage.getItem("theme") === "dark") {
@@ -20,7 +20,13 @@ export default function DarkModeToggle() {
       localStorage.setItem("theme", "dark");
     }
   };
-  console.log("isDark", isDark);
+  //브라우저껏다가 다시 킬떄 끄기전 적용했던 다크모드를 적용
+  useEffect(() => {
+    if (isDark) {
+      dispatch(handleDarkMode({ isDark: true }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <>
       <DarkModeCheck
