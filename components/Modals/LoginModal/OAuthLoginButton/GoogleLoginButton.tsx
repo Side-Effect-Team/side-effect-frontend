@@ -8,7 +8,7 @@ import { onSuccessLogin } from "apis/UserAPI";
 export default function GoogleLoginButton() {
   const { handleSuccessLogin, handleFailedLogin } = useLogin("GOOGLE");
   const login = useGoogleLogin({
-    onSuccess: async (res) => {
+    onSuccess: (res) => {
       onSuccessLogin(res.access_token, "google")
         .then((res) => {
           handleSuccessLogin(res);
