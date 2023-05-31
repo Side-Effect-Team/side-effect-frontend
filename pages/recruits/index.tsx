@@ -5,14 +5,14 @@ import Banner from "@/components/Banner";
 import BoardCard from "@/components/BoardCard";
 import { BANNER_CONTENTS } from "../../enum";
 import PageHead from "@/components/PageHead";
-import axios from "axios";
+import customAxios from "@/apis/customAxios";
 import { recruitBoardCardConverter } from "@/utils/converter";
 
 export default function RecruitsPage() {
   const { data, isError, isLoading } = useQuery({
     queryKey: ["recruits"],
     queryFn: async () => {
-      const res = await axios.get(`/recruit-board/all`);
+      const res = await customAxios.get(`/recruit-board/all`);
       return res.data.recruitBoards;
     },
   });
