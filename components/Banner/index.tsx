@@ -12,7 +12,7 @@ interface BannerProps {
 
 /** 컴포넌트 설명 : 1버튼을 가진 배너로, 버튼 링크를 설정할 수 있습니다 */
 export default function Banner({ title, subTitle, btnLink }: BannerProps) {
-  const { authenticated } = useAppSelector((state) => state.auth);
+  const { token } = useAppSelector((state) => state.auth);
   const { addToast } = useToast();
 
   return (
@@ -21,7 +21,7 @@ export default function Banner({ title, subTitle, btnLink }: BannerProps) {
         <Contents>
           <h2>{title}</h2>
           <h3>{subTitle}</h3>
-          {authenticated ? (
+          {token ? (
             <Button>
               <Link href={btnLink}>모집하기</Link>
             </Button>
