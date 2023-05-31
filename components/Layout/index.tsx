@@ -34,7 +34,7 @@ export default function Layout({ children }: PropType) {
 
   const logout = () => {
     if (window.confirm("정말 로그아웃하시겠습니까?"))
-      dispatch(() => removeAuthentication());
+      dispatch(removeAuthentication());
   };
 
   const mobileLogout = () => {
