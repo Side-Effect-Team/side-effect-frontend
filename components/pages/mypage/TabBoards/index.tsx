@@ -2,6 +2,7 @@ import BoardCard, { BoardCardProps } from "@/components/BoardCard";
 import { Border, SectionHeaderWrapper, SectionTitle } from "../styled";
 import { BoardWrapper, FilterMenu, FilterWrapper, NullMessage } from "./styled";
 import { useEffect, useState } from "react";
+import RecruitCard from "@/components/BoardCard/RecruitCard";
 
 interface TabBoards {
   boards?: BoardCardProps[] | null;
@@ -56,10 +57,18 @@ export default function TabBoards({ boards, title }: TabBoards) {
       </FilterWrapper>
       {boards?.length !== 0 ? (
         <BoardWrapper>
-          {filterBoards &&
+          {/* {filterBoards &&
             filterBoards.map((el, index) => (
               <BoardCard key={index} data={el} category={el.category || ""} />
-            ))}
+            ))} */}
+          {filterBoards &&
+            filterBoards.map((el, index) =>
+              el.category === "projects" ? (
+                <BoardCard key={index} data={el} category={el.category || ""} />
+              ) : (
+                <RecruitCard key={index} data={el} />
+              ),
+            )}
         </BoardWrapper>
       ) : (
         <NullMessage>게시물이 없습니다.</NullMessage>
