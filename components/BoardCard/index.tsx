@@ -43,14 +43,14 @@ interface BoardCardDataProps {
 }
 
 export default function BoardCard({ data, category }: BoardCardDataProps) {
-  const { authenticated } = useAppSelector((state) => state.auth);
+  const { token } = useAppSelector((state) => state.auth);
   const projectMutate = useAddLikeProject();
   const recruitMutate = useAddLikeRecruit();
   const router = useRouter();
   const onClickHeart = async (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     const id = Number(e.currentTarget.id);
-    if (authenticated) {
+    if (token) {
       if (category === "projects") {
         projectMutate(id, {
           onSuccess: (res) => {
