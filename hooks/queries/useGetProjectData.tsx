@@ -14,9 +14,11 @@ export const useGetProjectData = (
     isLoading,
     isSuccess,
     isFetchingNextPage,
+    refetch,
   } = useInfiniteQuery(
     ["projectData", filter, keyword],
     ({ pageParam = -1 }) => getProjectData(pageParam, filter, keyword),
+
     {
       getNextPageParam: (lastPage) => {
         return lastPage.lastId === 1 ? undefined : lastPage.lastId;
@@ -45,5 +47,6 @@ export const useGetProjectData = (
     isSuccess,
     isFetchingNextPage,
     Observer,
+    refetch,
   };
 };

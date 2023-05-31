@@ -7,11 +7,10 @@ const customAxios = axios.create({
   baseURL,
   withCredentials: true,
 });
-
 customAxios.interceptors.request.use(
   (config) => {
-    if (!config.headers["Authorization"]) {
-      const accessToken = store.getState().auth.token;
+    const accessToken = store.getState().auth.token;
+    if (accessToken) {
       config.headers["Authorization"] = `Bearer ${accessToken}`;
     }
     return config;
@@ -29,7 +28,7 @@ customAxios.interceptors.response.use(
   async (error) => {
     const { config } = error;
     console.log("error", error);
-    //액세스토큰 재발급 갱신
+    //액세스토큰만료시 자동 재발급 갱신
     if (error.response?.data.code === "AT_001") {
       try {
         await handleRefreshAccessToken();
@@ -46,6 +45,12 @@ customAxios.interceptors.response.use(
         }
         console.log(error);
       }
+    }
+    //로컬스토리지에서 액세스토큰을 조작하는경우 핸들링
+    if (error.response.data.code === "T_001") {
+      store.dispatch(removeAuthentication());
+      window.alert("비정상적인 접근입니다.");
+      window.location.replace("/");
     }
     return Promise.reject(error);
   },
