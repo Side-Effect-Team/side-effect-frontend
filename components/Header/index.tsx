@@ -3,26 +3,22 @@ import { Wrapper, HeaderStyled, Logo, NavStyled, BoxStyled } from "./styled";
 import MobileMenuBox from "../MobileMenuBox";
 import { BOARD_LIST } from "../../enum";
 import Button from "../Button";
-import { useAppDispatch } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { openModal } from "@/store/modalSlice";
 import Alarm from "../Alarm";
 import { useRef, useState } from "react";
 import useOutsideClick from "../../hooks/common/useOutsideClick";
 
 interface HeaderProps {
-  isLogin: boolean;
   logout: () => void;
   handleMobileMenu: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-export default function Header({
-  isLogin,
-  logout,
-  handleMobileMenu,
-}: HeaderProps) {
-  const dispatch = useAppDispatch();
+export default function Header({ logout, handleMobileMenu }: HeaderProps) {
   const [openAlarm, setOpenAlarm] = useState(false);
   const AlarmListRef = useRef(null);
+  const dispatch = useAppDispatch();
+  const { token } = useAppSelector((state) => state.auth);
 
   useOutsideClick(AlarmListRef, () => setOpenAlarm(false));
 
@@ -40,10 +36,8 @@ export default function Header({
           ))}
         </NavStyled>
         <BoxStyled>
-          {isLogin && (
-            <Alarm openAlarm={openAlarm} setOpenAlarm={setOpenAlarm} />
-          )}
-          {isLogin ? (
+          {token && <Alarm openAlarm={openAlarm} setOpenAlarm={setOpenAlarm} />}
+          {token ? (
             <Button onClick={logout}>로그아웃</Button>
           ) : (
             <Button
@@ -54,7 +48,6 @@ export default function Header({
           )}
         </BoxStyled>
         <MobileMenuBox
-          isLogin={isLogin}
           handleMobileMenu={handleMobileMenu}
           openAlarm={openAlarm}
           setOpenAlarm={setOpenAlarm}

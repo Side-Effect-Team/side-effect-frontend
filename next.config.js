@@ -7,9 +7,9 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "http",
-        hostname: "54.64.103.42",
-        port: "8080",
+        protocol: "https",
+        hostname: "sideeffectproject.com",
+        port: "443",
         pathname: "/**",
       },
     ],

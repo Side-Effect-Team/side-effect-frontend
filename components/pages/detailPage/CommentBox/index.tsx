@@ -1,5 +1,4 @@
 import { useState, useRef } from "react";
-import axios from "axios";
 import {
   StyledHeader,
   CommentNumber,
@@ -10,6 +9,7 @@ import {
 } from "./styled";
 import CommentItem from "../CommentItem";
 import useToast from "@/hooks/common/useToast";
+import customAxios from "@/apis/customAxios";
 
 interface CommentBoxProps {
   comments: CommentType[];
@@ -33,10 +33,9 @@ export default function CommentBox({ boardId, comments }: CommentBoxProps) {
     const url = "/comments";
     const data = { boardId, content: textareaEl.current?.value };
     try {
-      const res = await axios.post(url, data, {
+      const res = await customAxios.post(url, data, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
         },
       });
       const addedComment = await res.data;
@@ -61,12 +60,11 @@ export default function CommentBox({ boardId, comments }: CommentBoxProps) {
     const url = `/comments/${commentId}`;
 
     try {
-      const res = await axios.patch(
+      const res = await customAxios.patch(
         url,
         { content },
         {
           headers: {
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
             "Content-Type": "application/json",
           },
         },
@@ -94,9 +92,8 @@ export default function CommentBox({ boardId, comments }: CommentBoxProps) {
   const deleteComment = async (commentId: number) => {
     const url = `/comments/${commentId}`;
     try {
-      const res = await axios.delete(url, {
+      const res = await customAxios.delete(url, {
         headers: {
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
           "Content-Type": "application/json",
         },
       });

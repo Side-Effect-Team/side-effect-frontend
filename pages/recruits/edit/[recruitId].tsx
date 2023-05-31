@@ -1,4 +1,5 @@
 import axios from "axios";
+import customAxios from "@/apis/customAxios";
 import { GetServerSidePropsContext } from "next";
 import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
 import { useRouter } from "next/router";
@@ -69,14 +70,9 @@ export default function EditRecruitPage({ recruit }: EditRecruitPageProps) {
         };
 
         // request
-        const url = `${process.env.NEXT_PUBLIC_API_URL}/recruit-board/${recruit.id}`;
-        axios
-          .patch(url, patchData, {
-            headers: {
-              // 로그인 기능 미구현으로 NEXT_PUBLIC_TOKEN에 발급받은 토큰을 넣고 실행!
-              Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
-            },
-          })
+        const url = `/recruit-board/${recruit.id}`;
+        customAxios
+          .patch(url, patchData)
           .then((res) => {
             console.log(res);
             if (res.status === 200) {
