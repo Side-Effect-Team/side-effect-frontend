@@ -47,7 +47,7 @@ customAxios.interceptors.response.use(
       }
     }
     //로컬스토리지에서 액세스토큰을 조작하는경우 핸들링
-    if (error.response.data.code === "T_001") {
+    if (error.response.data.code === "AT_003") {
       store.dispatch(removeAuthentication());
       window.alert("비정상적인 접근입니다.");
       window.location.replace("/");
