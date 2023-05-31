@@ -5,12 +5,13 @@ import {
   LightModeIcon,
 } from "./styled";
 
-import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { handleDarkMode } from "@/store/darkModeSlice";
 export default function DarkModeToggle() {
-  const [isDark, setIsDark] = useState(false);
-
+  const { isDark } = useAppSelector((state) => state.darkMode);
+  const dispatch = useAppDispatch();
   const handleDarkModeToggle = () => {
-    setIsDark(!isDark);
+    dispatch(handleDarkMode());
   };
   const handleDarkModeOnOff = () => {
     if (localStorage.getItem("theme") === "dark") {

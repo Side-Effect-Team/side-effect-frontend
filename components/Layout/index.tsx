@@ -54,6 +54,8 @@ export default function Layout({ children }: PropType) {
       return () => window.removeEventListener("resize", detectViewportWidth);
     }
   });
+  const isDark = localStorage.getItem("theme");
+  console.log("isDark", isDark);
 
   return (
     <ThemeProvider theme={theme}>
