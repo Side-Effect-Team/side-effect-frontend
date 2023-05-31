@@ -20,6 +20,8 @@ interface PositionRowProps {
 }
 
 export default function PositionDetail({ positions }: PositionDetailProps) {
+  console.log("포지션 정보", positions);
+
   return (
     <Wrapper>
       <StyledHeader>모집 포지션</StyledHeader>

@@ -10,7 +10,6 @@ interface RecruitDetailPageProps {
 }
 
 export default function RecruitDetailPage({ recruit }: RecruitDetailPageProps) {
-  console.log(recruit);
   const {
     id,
     title,
@@ -23,17 +22,20 @@ export default function RecruitDetailPage({ recruit }: RecruitDetailPageProps) {
     userId,
     likeNum,
     imgSrc,
+    writer,
   } = recruit;
 
   return (
     <Wrapper>
       <Contents>
         <PostData
-          id={id}
+          postId={id}
           title={title}
           createdAt={createdAt}
           views={views}
           likeNum={likeNum}
+          writerId={userId}
+          writer={writer}
         />
         <PositionDetail positions={positions} />
         <ContentDetail
@@ -49,7 +51,7 @@ export default function RecruitDetailPage({ recruit }: RecruitDetailPageProps) {
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   const recruitId = ctx.params?.recruitId;
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/recruit-board/${recruitId}`;
+  const url = `/recruit-board/${recruitId}`;
 
   try {
     const res = await axios.get(url);

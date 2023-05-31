@@ -11,6 +11,7 @@ import axios from "axios";
 import Script from "next/script";
 import Layout from "@/components/Layout";
 import GlobalModal from "@/components/Modals/GlobalModal";
+
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
 axios.defaults.withCredentials = true;
 const queryClient = new QueryClient();

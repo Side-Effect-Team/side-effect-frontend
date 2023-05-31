@@ -5,7 +5,6 @@ import Banner from "@/components/Banner";
 import BoardCard from "@/components/BoardCard";
 import { BANNER_CONTENTS } from "../../enum";
 import PageHead from "@/components/PageHead";
-import axios from "axios";
 import { recruitBoardCardConverter } from "@/utils/converter";
 import customAxios from "apis/customAxios";
 
@@ -13,9 +12,7 @@ export default function RecruitsPage() {
   const { data, isError, isLoading } = useQuery({
     queryKey: ["recruits"],
     queryFn: async () => {
-      const res = await customAxios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/recruit-board/all`,
-      );
+      const res = await customAxios.get(`/recruit-board/all`);
       return res.data.recruitBoards;
     },
   });
@@ -57,7 +54,6 @@ export default function RecruitsPage() {
         </ContentsHeader>
         <ContentsMain>
           {data.map((item: RecruitType) => {
-            console.log(item);
             const boardCardData = recruitBoardCardConverter(item);
             return (
               <BoardCard

@@ -10,7 +10,6 @@ interface ProjectDetailPageProps {
 }
 
 export default function ProjectDetailPage({ project }: ProjectDetailPageProps) {
-  console.log(project);
   const {
     comments,
     content,
@@ -23,17 +22,20 @@ export default function ProjectDetailPage({ project }: ProjectDetailPageProps) {
     title,
     userId,
     views,
+    writer,
   } = project;
 
   return (
     <Wrapper>
       <Contents>
         <PostData
-          id={id}
+          postId={id}
           title={title}
           createdAt={createdAt}
           views={views}
           likeNum={likeNum}
+          writerId={userId}
+          writer={writer}
         />
         <ContentDetail
           projectName={projectName}

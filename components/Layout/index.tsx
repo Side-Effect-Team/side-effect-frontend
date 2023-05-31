@@ -10,31 +10,31 @@ import Footer from "../Footer";
 import Toast from "../Toast";
 import ScrollToTop from "../ScrollToTop";
 import Head from "next/head";
-import { useAppDispatch } from "@/store/hooks";
-import { useLocalStorage } from "@/hooks/common/useLocalStorage";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { openModal } from "@/store/modalSlice";
+import { removeAuthentication } from "@/store/authSlice";
+
 interface PropType {
   children: React.ReactNode;
 }
 
 interface MobileMenuProps {
   hide: boolean;
-  isLogin: boolean;
   logout: () => void;
   handleClick: () => void;
 }
 
 export default function Layout({ children }: PropType) {
-  const [isLogin, setIsLogin] = useState<boolean>(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
-  const { getter, cleaner } = useLocalStorage();
+  const dispatch = useAppDispatch();
+
   const handleMobileMenu = () => {
     setMobileMenuOpen((prev) => !prev);
   };
 
   const logout = () => {
-    cleaner("accessToken");
-    setIsLogin(false);
+    if (window.confirm("정말 로그아웃하시겠습니까?"))
+      dispatch(removeAuthentication());
   };
 
   const mobileLogout = () => {
@@ -54,9 +54,6 @@ export default function Layout({ children }: PropType) {
       return () => window.removeEventListener("resize", detectViewportWidth);
     }
   });
-  useEffect(() => {
-    if (getter("accessToken")) setIsLogin(true);
-  });
 
   return (
     <ThemeProvider theme={theme}>
@@ -68,16 +65,11 @@ export default function Layout({ children }: PropType) {
         />
         <title>사이드 이펙트 | 빠르게 프로젝트를 시작하세요</title>
       </Head>
-      <Header
-        isLogin={isLogin}
-        logout={logout}
-        handleMobileMenu={handleMobileMenu}
-      />
+      <Header logout={logout} handleMobileMenu={handleMobileMenu} />
       <ScrollToTop />
       <Toast />
       <MobileMenu
         hide={!mobileMenuOpen}
-        isLogin={isLogin}
         logout={mobileLogout}
         handleClick={handleMobileMenu}
       />
@@ -87,8 +79,9 @@ export default function Layout({ children }: PropType) {
   );
 }
 
-function MobileMenu({ hide, isLogin, logout, handleClick }: MobileMenuProps) {
+function MobileMenu({ hide, logout, handleClick }: MobileMenuProps) {
   const dispatch = useAppDispatch();
+  const { token } = useAppSelector((state) => state.auth);
 
   return (
     <MobileNavBar hide={hide}>
@@ -98,7 +91,7 @@ function MobileMenu({ hide, isLogin, logout, handleClick }: MobileMenuProps) {
       <MobileMenuItem onClick={handleClick}>
         <Link href="/recruits">팀원 모집 게시판</Link>
       </MobileMenuItem>
-      {isLogin ? (
+      {token ? (
         <MobileMenuItem onClick={logout}>
           <Link href="/">로그아웃</Link>
         </MobileMenuItem>
