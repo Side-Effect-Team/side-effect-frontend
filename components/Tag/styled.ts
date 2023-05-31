@@ -1,4 +1,5 @@
 import { theme } from "@/styles/Theme";
+import { media } from "@/styles/mediatest";
 import styled, { css } from "styled-components";
 
 export interface TagProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -25,6 +26,9 @@ export const TagWrapper = styled.div<TagProps>`
           background-color: white;
           border: 2px solid ${p.color};
         `};
+  ${media.mobile} {
+    font-size: calc(${(p) => p.fontSize} * 0.8);
+  }
 `;
 
 TagWrapper.defaultProps = {

@@ -85,15 +85,6 @@ export default function RecruitCard({ data }: RecruitCardProps) {
     router.push(`/recruits/${data.id}`);
   };
 
-  const tagRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const wrapper = tagRef.current;
-    if (wrapper) {
-      console.log(wrapper.scrollWidth);
-      console.log(wrapper.clientWidth);
-      console.log(wrapper.children.length);
-    }
-  }, []);
   return (
     <Container onClick={onClickGoToBoard}>
       <HeartWrapper
@@ -122,7 +113,7 @@ export default function RecruitCard({ data }: RecruitCardProps) {
       </TagContainer>
       <TagContainer>
         <TagTitle>사용언어</TagTitle>
-        <TagWrapper ref={tagRef}>
+        <TagWrapper>
           {data?.tags &&
             data?.tags.map((lan, index) => <Tag key={index}>{lan} </Tag>)}
         </TagWrapper>
