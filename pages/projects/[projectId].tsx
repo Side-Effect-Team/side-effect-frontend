@@ -34,7 +34,7 @@ export default function ProjectDetailPage({ project }: ProjectDetailPageProps) {
           createdAt={createdAt}
           views={views}
           likeNum={likeNum}
-          userId={userId}
+          writerId={userId}
           writer={writer}
         />
         <ContentDetail
