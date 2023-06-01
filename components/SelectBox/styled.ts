@@ -19,9 +19,10 @@ export const SelectOptionWrapper = styled.ul<SelectOptionType>`
   margin: 0;
   padding: 0;
   position: absolute;
-  background-color: ${(p) => p.theme.bgColor};
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
-    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  background-color: ${(p) => p.theme.componentBgColor};
+  box-shadow: inset 0 0 0.5px 1px hsla(0, 0%, 100%, 0.075),
+    0 0 0 1px hsla(0, 0%, 0%, 0.05), 0 0.3px 0.4px hsla(0, 0%, 0%, 0.02),
+    0 0.9px 1.5px hsla(0, 0%, 0%, 0.045), 0 3.5px 6px hsla(0, 0%, 0%, 0.09);
   border-radius: 5px;
   width: 100%;
   z-index: 10;
@@ -34,15 +35,16 @@ export const SelectOption = styled.li`
   text-align: center;
   padding: 20px 20px;
   &:hover {
-    background-color: #eaecf0;
-    color: black;
+    background-color: ${(p) => p.theme.hover};
+    color: ${(p) => p.theme.textColor};
   }
 `;
 export const SelectValue = styled.div`
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
-    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  box-shadow: inset 0 0 0.5px 1px hsla(0, 0%, 100%, 0.075),
+    0 0 0 1px hsla(0, 0%, 0%, 0.05), 0 0.3px 0.4px hsla(0, 0%, 0%, 0.02),
+    0 0.9px 1.5px hsla(0, 0%, 0%, 0.045), 0 3.5px 6px hsla(0, 0%, 0%, 0.09);
   text-align: center;
   border-radius: 5px;
   padding: 10px;
-  background-color: white;
+  background-color: ${(p) => p.theme.componentBgColor};
 `;

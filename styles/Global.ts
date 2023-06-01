@@ -6,13 +6,15 @@ const global = createGlobalStyle`
   ${normalize}
   ${fontsCss}
 
-  *,
+  * ,
   *::before,
   *::after {
     box-sizing: border-box;
   }
 
   body {
+    background: ${(p) => p.theme.mainBackGround};
+    color:${(p) => p.theme.textColor};
     margin: 0;
     padding: 0;
   }
