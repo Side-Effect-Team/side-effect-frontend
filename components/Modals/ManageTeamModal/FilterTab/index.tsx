@@ -1,6 +1,4 @@
-import styled from "styled-components";
-import { theme } from "../../../styles/Theme";
-
+import { FilterTabList, FilterItem } from "./styled";
 interface FilterType {
   name: string;
   value: string;
@@ -34,19 +32,3 @@ export default function FilterTab({
     </FilterTabList>
   );
 }
-const FilterTabList = styled.ul`
-  display: flex;
-  gap: 10px;
-  margin: 0;
-  padding: 10px 20px;
-`;
-const FilterItem = styled.li`
-  padding: 8px;
-  cursor: pointer;
-  border-radius: 8px;
-  font-weight: 500;
-  &.focused {
-    color: white;
-    background-color: ${theme.brandColor.primary};
-  }
-`;
