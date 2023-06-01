@@ -6,7 +6,7 @@ const global = createGlobalStyle`
   ${normalize}
   ${fontsCss}
 
-  * ,
+  *,
   *::before,
   *::after {
     box-sizing: border-box;
@@ -15,6 +15,8 @@ const global = createGlobalStyle`
   body {
     background: ${(p) => p.theme.mainBackGround};
     color:${(p) => p.theme.textColor};
+    transition:  all .3s;
+
     margin: 0;
     padding: 0;
   }

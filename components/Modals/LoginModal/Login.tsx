@@ -1,5 +1,4 @@
-import { media } from "@/styles/mediatest";
-import styled from "styled-components";
+import { ButtonWrapper } from "./styled";
 import LoginTitle from "./LoginTitle";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import GoogleLoginButton from "./OAuthLoginButton/GoogleLoginButton";
@@ -21,17 +20,3 @@ export default function Login() {
     </>
   );
 }
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  gap: 30px;
-  justify-content: center;
-  padding: 30px;
-  ${media.mobile} {
-    flex-direction: column;
-
-    margin-top: 0 auto;
-    width: 80%;
-    gap: 0;
-  }
-`;
