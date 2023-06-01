@@ -109,8 +109,10 @@ export const DeleteButton = styled(IoClose)`
 export const Wrapper = styled.div<{ watched: boolean }>`
   width: 100%;
   height: 90px;
-  border: 1px solid ${(p) => p.theme.brandColor.skyBlue};
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
+  border: 1.5px solid
+    ${(p) =>
+      p.watched ? p.theme.colors.lightGray : p.theme.brandColor.skyBlue};
+  /* box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25); */
   border-radius: 10px;
   margin-bottom: 10px;
   cursor: pointer;
@@ -127,7 +129,7 @@ export const Wrapper = styled.div<{ watched: boolean }>`
     }
   }
   ${media.mobile} {
-    box-shadow: 1px 1px 5px rgba(21, 94, 239, 0.25);
+    /* box-shadow: 1px 1px 5px rgba(21, 94, 239, 0.25); */
   }
 `;
 

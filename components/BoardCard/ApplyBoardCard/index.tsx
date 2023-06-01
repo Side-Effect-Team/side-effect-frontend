@@ -71,7 +71,7 @@ export default function ApplyBoardCard({ data }: dataProps) {
     <Container onClick={onClickGoToBoard}>
       <ColumnWrapper>
         <RowWrapper>
-          <TitleGray>제목 : </TitleGray>
+          {/* <TitleGray>제목 : </TitleGray> */}
           <Title>{data.title}</Title>
         </RowWrapper>
         <RowWrapper>

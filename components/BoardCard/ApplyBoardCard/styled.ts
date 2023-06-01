@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   width: 100%;
   height: 80px;
-  border: 1.5px solid ${(p) => p.theme.brandColor.lightGray};
+  border: 1.5px solid ${(p) => p.theme.colors.mediumGray};
   border-radius: 10px;
   overflow: hidden;
   background-color: ${(p) => p.theme.colors.white};

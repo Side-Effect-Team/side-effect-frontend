@@ -11,14 +11,14 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  border: 1px solid ${(p) => p.theme.colors.lightGray};
+  border: 2px solid ${(p) => p.theme.colors.mediumGray};
   border-radius: 15px;
   overflow: hidden;
   background-color: ${(p) => p.theme.colors.white};
   position: relative;
 
   cursor: pointer;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
+  /* box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25); */
   :hover {
     box-shadow: 1px 1px 5px rgba(21, 94, 239, 0.25);
     transform: translateY(-5px);
