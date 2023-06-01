@@ -5,8 +5,8 @@ import Banner from "@/components/Banner";
 import BoardCard from "@/components/BoardCard";
 import { BANNER_CONTENTS } from "../../enum";
 import PageHead from "@/components/PageHead";
-import customAxios from "@/apis/customAxios";
 import { recruitBoardCardConverter } from "@/utils/converter";
+import customAxios from "apis/customAxios";
 
 export default function RecruitsPage() {
   const { data, isError, isLoading } = useQuery({
