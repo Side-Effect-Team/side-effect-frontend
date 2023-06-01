@@ -1,10 +1,6 @@
-import axios from "axios";
+import customAxios from "./customAxios";
 
 export const cancelApply = async (id: number) => {
-  const token = localStorage.getItem("accessToken");
-  const config = {
-    headers: { Authorization: `Bearer ${token}` },
-  };
-  const response = axios.delete(`/applicant/${id}`, config);
+  const response = customAxios.delete(`/applicant/${id}`);
   return response;
 };
