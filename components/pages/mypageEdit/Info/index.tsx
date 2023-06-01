@@ -74,7 +74,7 @@ export default function InfoEdit({
     } else {
       setPositionTitle("포지션");
     }
-  }, [career]);
+  }, [career, position]);
   return (
     <>
       <InfoWrapper>
