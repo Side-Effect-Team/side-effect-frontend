@@ -15,11 +15,12 @@ import { useCancelApply } from "@/hooks/mutations/useCancelApply";
 
 export interface ApplyBoardCardProps {
   id: number;
-  isRecruiting: boolean;
+  closed: boolean;
   position: string;
   status: string;
   title: string;
-  applicantId?: number;
+  applicationId: number;
+  boardId: number;
 }
 export interface dataProps {
   data: ApplyBoardCardProps;
@@ -55,17 +56,17 @@ export default function ApplyBoardCard({ data }: dataProps) {
     }
   }, [status]);
   const router = useRouter();
-  const onClickGoToBoard = (e: MouseEvent<HTMLDivElement>) => {
-    router.push(`/recruits/${data.id}`);
+  const onClickGoToBoard = () => {
+    router.push(`/recruits/${data.boardId}`);
   };
 
   const cancelMutate = useCancelApply();
 
-  const onClickCancelApply =
-    (id: number) => (e: MouseEvent<HTMLButtonElement>) => {
-      e.stopPropagation();
-      cancelMutate(id);
-    };
+  const onClickCancelApply = (e: MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    console.log(data.applicationId);
+    cancelMutate(data?.applicationId);
+  };
   return (
     <Container onClick={onClickGoToBoard}>
       <ColumnWrapper>
@@ -79,18 +80,15 @@ export default function ApplyBoardCard({ data }: dataProps) {
         </RowWrapper>
       </ColumnWrapper>
       {data.status === "PENDING" ? (
-        <Button
-          color="coral"
-          onClick={onClickCancelApply(data.applicantId || 0)}
-        >
+        <Button color="coral" onClick={onClickCancelApply}>
           {status}
         </Button>
       ) : data.status === "APPROVED" ? (
-        <Status status={data.status} isRecruiting={data.isRecruiting}>
+        <Status status={data.status} closed={data.closed}>
           {status}
         </Status>
       ) : (
-        <Status status={data.status} isRecruiting={data.isRecruiting}>
+        <Status status={data.status} closed={data.closed}>
           {status}
         </Status>
       )}

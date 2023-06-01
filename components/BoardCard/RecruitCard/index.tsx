@@ -68,18 +68,16 @@ export default function RecruitCard({ data }: RecruitCardProps) {
   }, [recruitingTitle]);
 
   const newPosition: string[] = [];
-  if (data?.positions && data?.positions.includes("frontend"))
-    newPosition.push("프론트엔드");
-  if (data?.positions && data?.positions.includes("backend"))
-    newPosition.push("백엔드");
-  if (data?.positions && data?.positions.includes("designer"))
-    newPosition.push("디자이너");
-  if (data?.positions && data?.positions.includes("devops"))
-    newPosition.push("데브옵스");
-  if (data?.positions && data?.positions.includes("marketer"))
-    newPosition.push("마케터");
-  if (data?.positions && data?.positions.includes("pm"))
-    newPosition.push("기획자");
+  const positions = data?.positions?.map((position) => position.toLowerCase());
+
+  if (positions) {
+    if (positions.includes("frontend")) newPosition.push("프론트엔드");
+    if (positions.includes("backend")) newPosition.push("백엔드");
+    if (positions.includes("designer")) newPosition.push("디자이너");
+    if (positions.includes("devops")) newPosition.push("데브옵스");
+    if (positions.includes("marketer")) newPosition.push("마케터");
+    if (positions.includes("pm")) newPosition.push("기획자");
+  }
 
   const onClickGoToBoard = () => {
     router.push(`/recruits/${data.id}`);

@@ -46,7 +46,7 @@ export const PositionGray = styled.div`
   color: gray;
   margin-right: 5px;
 `;
-export const Status = styled.div<{ status: string; isRecruiting: boolean }>`
+export const Status = styled.div<{ status: string; closed: boolean }>`
   font-size: 1rem;
   border-radius: 4px;
   padding: 0 1rem;
@@ -56,7 +56,7 @@ export const Status = styled.div<{ status: string; isRecruiting: boolean }>`
       ? theme.brandColor.primary
       : p.status === "REJECTED"
       ? "gray"
-      : p.isRecruiting === false
+      : p.closed === true
       ? "gray"
       : null};
 `;
