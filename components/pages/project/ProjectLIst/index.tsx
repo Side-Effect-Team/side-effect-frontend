@@ -17,9 +17,7 @@ export default function ProjectList({ data }: any) {
     <ProjectListWrapper>
       {data?.pages.map((page: PageType) => {
         return page.projects.map((project) => {
-          return (
-            <ProjectCard key={project.id} data={project} category="projects" />
-          );
+          return <ProjectCard key={project.id} data={project} />;
         });
       })}
     </ProjectListWrapper>

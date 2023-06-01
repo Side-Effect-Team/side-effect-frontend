@@ -64,18 +64,10 @@ export default function TabBoards({ boards, title, activeTab }: TabBoards) {
       </FilterWrapper>
       {boards?.length !== 0 ? (
         <BoardWrapper>
-          {/* {filterBoards &&
-            filterBoards.map((el, index) => (
-              <BoardCard key={index} data={el} category={el.category || ""} />
-            ))} */}
           {filterBoards &&
             filterBoards.map((el, index) =>
               el.category === "projects" ? (
-                <ProjectCard
-                  key={index}
-                  data={el}
-                  category={el.category || ""}
-                />
+                <ProjectCard key={index} data={el} />
               ) : (
                 <RecruitCard key={index} data={el} />
               ),
