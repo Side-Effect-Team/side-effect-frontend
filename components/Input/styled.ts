@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { theme } from "../../styles/Theme";
 import React from "react";
 
 export interface InputStyle
@@ -12,7 +11,7 @@ export const StyledInput = styled.input`
   height: 3rem;
   padding: 0 10px;
   :focus {
-    border: 1px solid ${theme.brandColor.primary};
+    border: 1px solid ${(p) => p.theme.brandColor.primary};
     outline: none;
   }
 `;

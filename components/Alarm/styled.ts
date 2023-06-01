@@ -1,4 +1,3 @@
-import { theme } from "@/styles/Theme";
 import { media } from "@/styles/mediatest";
 import { IoClose, IoNotificationsOutline } from "react-icons/io5";
 import styled from "styled-components";
@@ -28,7 +27,7 @@ export const AlarmIconDiv = styled.div<{ openAlarm: boolean }>`
   }
 `;
 export const AlarmButton = styled(IoNotificationsOutline)`
-  color: ${theme.brandColor.primary};
+  color: ${(p) => p.theme.brandColor.primary};
   font-size: 24px;
 `;
 export const AlarmCount = styled.div`
@@ -38,7 +37,7 @@ export const AlarmCount = styled.div`
   background-color: red;
   padding: 2px 4px;
   border-radius: 10px;
-  color: white;
+  color: ${(p) => p.theme.colors.white};
   font-weight: 700;
   font-size: 12px;
 `;
@@ -48,8 +47,8 @@ export const Container = styled.div`
   width: 350px;
   min-height: 100px;
   max-height: 400px;
-  background-color: white;
-  border: 1px solid #d9d9d9;
+  background-color: ${(p) => p.theme.colors.white};
+  border: 1px solid ${(p) => p.theme.colors.mediumGray};
   border-radius: 10px;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
   padding: 10px;
@@ -92,16 +91,16 @@ export const HeaderTitle = styled.div`
 `;
 export const CloseButton = styled(IoClose)`
   font-size: 28px;
-  color: #d9d9d9;
+  color: ${(p) => p.theme.colors.mediumGray};
   cursor: pointer;
 `;
 export const DeleteButton = styled(IoClose)`
   font-size: 16px;
-  color: #d9d9d9;
+  color: ${(p) => p.theme.colors.mediumGray};
   cursor: pointer;
   display: none;
   :hover {
-    color: ${theme.brandColor.primary};
+    color: ${(p) => p.theme.brandColor.primary};
   }
   ${media.mobile} {
     display: block;
@@ -110,7 +109,7 @@ export const DeleteButton = styled(IoClose)`
 export const Wrapper = styled.div<{ watched: boolean }>`
   width: 100%;
   height: 90px;
-  border: 1px solid ${theme.brandColor.skyBlue};
+  border: 1px solid ${(p) => p.theme.brandColor.skyBlue};
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   margin-bottom: 10px;
@@ -119,7 +118,7 @@ export const Wrapper = styled.div<{ watched: boolean }>`
   flex-direction: column;
   justify-content: space-between;
   padding: 15px;
-  color: ${(p) => (p.watched ? "#d9d9d9" : "black")};
+  color: ${(p) => (p.watched ? p.theme.colors.mediumGray : "black")};
 
   :hover {
     box-shadow: 1px 1px 5px rgba(21, 94, 239, 0.25);
@@ -147,11 +146,11 @@ export const Contents = styled.div`
   font-size: 14px;
 `;
 export const Date = styled.div`
-  color: #d9d9d9;
+  color: ${(p) => p.theme.colors.mediumGray};
   font-size: 14px;
 `;
 export const EmptyMessage = styled.div`
   font-size: 16px;
-  color: #d9d9d9;
+  color: ${(p) => p.theme.colors.mediumGray};
   margin-left: 15px;
 `;

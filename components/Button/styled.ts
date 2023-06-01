@@ -7,7 +7,6 @@ export interface ButtonStyle
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode;
   size?: "small" | "medium" | "large";
-  // fill?: boolean;
   fill?: "true" | "false";
 
   color?: BrandColorTypes;
@@ -37,7 +36,6 @@ const sizeStyles = css<ButtonStyle>`
 const fillStyle = css<ButtonStyle>`
   ${(p) =>
     p.fill === "false" &&
-    // !p.fill &&
     css`
       border: 2px solid ${p.color && theme.brandColor[p.color]};
       color: ${p.color && theme.brandColor[p.color]};

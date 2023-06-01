@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { theme } from "@/styles/Theme";
 import { AiFillHeart, AiOutlineHeart, AiOutlineMessage } from "react-icons/ai";
 import { BsEye } from "react-icons/bs";
 import { media } from "@/styles/mediatest";
@@ -12,10 +11,10 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  border: 1px solid lightgray;
+  border: 1px solid ${(p) => p.theme.colors.lightGray};
   border-radius: 15px;
   overflow: hidden;
-  background-color: white;
+  background-color: ${(p) => p.theme.colors.white};
   position: relative;
 
   cursor: pointer;
@@ -48,7 +47,7 @@ interface HeartProps {
   heartlike: string;
 }
 export const HeartFillIcon = styled(AiFillHeart)<HeartProps>`
-  color: ${(p) => (p.islike === "true" ? theme.brandColor.coral : "white")};
+  color: ${(p) => (p.islike === "true" ? p.theme.brandColor.coral : "white")};
   font-size: 25px;
   font-weight: 600;
   animation: ${(p) =>
@@ -102,7 +101,7 @@ export const Header = styled.div<HeaderProps>`
 
 export const ProjectName = styled.div`
   width: 80%;
-  color: white;
+  color: ${(p) => p.theme.colors.white};
   font-size: 24px;
   font-weight: 600;
   word-break: keep-all;
@@ -152,7 +151,6 @@ export const Content = styled.div`
   height: 20%;
   font-size: 16px;
   font-weight: 400;
-  color: #454545;
   margin-bottom: 10px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -181,7 +179,7 @@ export const TagWrapper = styled.div`
 export const Tag = styled.div`
   font-size: 14px;
   font-weight: 600;
-  color: white;
+  color: ${(p) => p.theme.colors.white};
   background-color: black;
   margin-right: 10px;
   margin-bottom: 7px;
@@ -202,7 +200,7 @@ export const Footer = styled.div`
 `;
 export const CreateAt = styled.div`
   font-size: 16px;
-  color: #454545;
+  color: ${(p) => p.theme.colors.gray};
 `;
 export const ButtonsWrapper = styled.div`
   display: flex;
@@ -216,20 +214,19 @@ export const IconButton = styled.button`
   cursor: pointer;
 `;
 export const HeartNotFillIcon = styled(AiOutlineHeart)`
-  color: ${theme.colors.gray};
+  color: ${(p) => p.theme.colors.gray};
   font-size: 16px;
 `;
 export const CommentIcon = styled(AiOutlineMessage)`
-  color: ${theme.colors.gray};
+  color: ${(p) => p.theme.colors.gray};
   font-size: 16px;
 `;
 export const FeedbackNum = styled.div`
   font-size: 16px;
   margin-right: 5px;
-  color: #454545;
-  color: ${theme.colors.gray};
+  color: ${(p) => p.theme.colors.gray};
 `;
 export const ViewIcon = styled(BsEye)`
-  color: ${theme.colors.gray};
+  color: ${(p) => p.theme.colors.gray};
   font-size: 16px;
 `;

@@ -1,9 +1,10 @@
 import Button from "@/components/Button";
-import { Email, Nickname, Wrapper } from "./style";
+import { Wrapper } from "./style";
 import axios from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useToast from "@/hooks/common/useToast";
 import { useRouter } from "next/router";
+import { NickName, Text } from "../Profile/Introduction/styled";
 interface AccountProps {
   email: string;
   nickname: string;
@@ -50,8 +51,8 @@ export default function Account({ email, nickname }: AccountProps) {
   };
   return (
     <Wrapper>
-      <Nickname>{nickname}님</Nickname>
-      <Email>email : {email}</Email>
+      <NickName>{nickname}님</NickName>
+      <Text>email : {email}</Text>
       <Button onClick={onClickDeleteAccount}>계정 탈퇴</Button>
     </Wrapper>
   );

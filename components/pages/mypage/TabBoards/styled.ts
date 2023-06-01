@@ -17,7 +17,7 @@ export const BoardWrapper = styled.div`
 export const NullMessage = styled.div`
   font-size: 20px;
   font-weight: 600;
-  color: #d9d9d9;
+  color: ${(p) => p.theme.colors.mediumGray};
   ${media.mobile} {
     margin-top: 2rem;
   }
@@ -30,7 +30,7 @@ export const FilterWrapper = styled.div`
   margin-bottom: 15px;
   ${media.mobile} {
     position: fixed;
-    background-color: white;
+    background-color: ${(p) => p.theme.colors.white};
     z-index: 4;
     padding: 1rem 0;
   }
@@ -38,6 +38,6 @@ export const FilterWrapper = styled.div`
 export const FilterMenu = styled.div<{ isActive: boolean }>`
   font-size: 16px;
   /* color: #d9d9d9; */
-  color: ${(p) => (p.isActive ? "black" : "#d9d9d9")};
+  color: ${(p) => (p.isActive ? "black" : p.theme.colors.mediumGray)};
   cursor: pointer;
 `;

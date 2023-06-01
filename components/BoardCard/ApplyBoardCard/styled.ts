@@ -1,13 +1,12 @@
-import { theme } from "@/styles/Theme";
 import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
   height: 80px;
-  border: 1px solid lightgray;
+  border: 1.5px solid ${(p) => p.theme.brandColor.lightGray};
   border-radius: 10px;
   overflow: hidden;
-  background-color: white;
+  background-color: ${(p) => p.theme.colors.white};
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -33,7 +32,7 @@ export const Title = styled.div`
 
 export const TitleGray = styled.div`
   font-size: 18px;
-  color: gray;
+  color: ${(p) => p.theme.colors.mediumGray};
   margin-right: 5px;
 `;
 
@@ -43,7 +42,7 @@ export const Position = styled.div`
 `;
 export const PositionGray = styled.div`
   font-size: 14px;
-  color: gray;
+  color: ${(p) => p.theme.colors.mediumGray};
   margin-right: 5px;
 `;
 export const Status = styled.div<{ status: string; closed: boolean }>`
@@ -53,10 +52,10 @@ export const Status = styled.div<{ status: string; closed: boolean }>`
 
   color: ${(p) =>
     p.status === "APPROVED"
-      ? theme.brandColor.primary
+      ? p.theme.brandColor.primary
       : p.status === "REJECTED"
-      ? "gray"
+      ? p.theme.colors.gray
       : p.closed === true
-      ? "gray"
+      ? p.theme.colors.gray
       : null};
 `;

@@ -14,7 +14,7 @@ const loading = keyframes`
     }
 `;
 const SkeletonItem = styled.div`
-  background-color: ${theme.brandColor.lightGray};
+  background-color: ${(p) => p.theme.brandColor.lightGray};
   height: 20px;
   border-radius: 15px;
   position: relative;
@@ -38,10 +38,10 @@ export const RecruitSkeletonWrapper = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  border: 1px solid lightgray;
+  border: 1px solid ${(p) => p.theme.brandColor.lightGray};
   border-radius: 15px;
   overflow: hidden;
-  background-color: white;
+  background-color: ${(p) => p.theme.brandColor.white};
   position: relative;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
   padding: 15px;

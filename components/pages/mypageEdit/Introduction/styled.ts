@@ -52,10 +52,10 @@ export const ProfileContentsWrapper = styled.div`
 export const TextArea = styled.textarea`
   width: 100%;
   padding: 10px;
-  border: 1px solid #d9d9d9;
+  border: 1px solid ${(p) => p.theme.brandColor.mediumGray};
   resize: none;
   :focus {
-    border: 1px solid ${theme.brandColor.primary};
+    border: 1px solid ${(p) => p.theme.brandColor.primary};
     outline: none;
   }
 `;
@@ -72,5 +72,5 @@ export const GuideText = styled.p`
 export const ErrorMessage = styled.div`
   font-size: 12px;
   padding: 10px;
-  color: ${theme.colors.danger};
+  color: ${(p) => p.theme.colors.danger};
 `;

@@ -9,6 +9,8 @@ export const theme = {
     success: "#16B364",
     background: "#fff",
     white: "#fff",
+    mediumGray: "#d9d9d9",
+    darkGray: "#667085",
   },
   fonts: {
     pretendard: "Pretendard-Regular",

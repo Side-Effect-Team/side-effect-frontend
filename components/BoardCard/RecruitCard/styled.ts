@@ -1,4 +1,3 @@
-import { theme } from "@/styles/Theme";
 import { media } from "@/styles/mediatest";
 import styled from "styled-components";
 
@@ -10,10 +9,10 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  border: 1px solid lightgray;
+  border: 1px solid ${(p) => p.theme.colors.lightGray};
   border-radius: 15px;
   overflow: hidden;
-  background-color: white;
+  background-color: ${(p) => p.theme.colors.white};
   position: relative;
   padding: 15px;
 
@@ -35,8 +34,8 @@ export const Container = styled.div`
 export const IsRecruiting = styled.div<{ isRecruiting: boolean }>`
   font-size: 16px;
   font-weight: 700;
-  color: ${(p) => (p.isRecruiting ? theme.brandColor.primary : "#d9d9d9")};
-  /* color: ${(p) => (p.isRecruiting ? "#8696EE" : "#d9d9d9")}; */
+  color: ${(p) =>
+    p.isRecruiting ? p.theme.brandColor.primary : p.theme.colors.mediumGray};
   margin-top: 10px;
   margin-bottom: 15px;
   ${media.mobile} {
@@ -75,7 +74,7 @@ export const TagContainer = styled.div`
 export const TagTitle = styled.div`
   font-size: 14px;
   font-weight: 600;
-  color: gray;
+  color: ${(p) => p.theme.colors.gray};
   margin-bottom: 10px;
   ${media.mobile} {
     margin-bottom: 0px;
@@ -103,9 +102,9 @@ export const TagWrapper = styled.div`
 export const TagCount = styled.div`
   ${media.mobile} {
     font-size: 12px;
-    color: white;
+    color: ${(p) => p.theme.colors.white};
     font-weight: 600;
-    background-color: ${theme.brandColor.primary};
+    background-color: ${(p) => p.theme.brandColor.primary};
     border-radius: 50%;
     padding: 5px;
     position: absolute;

@@ -8,13 +8,3 @@ export const Wrapper = styled.div`
   justify-content: center;
   margin: 50px 0;
 `;
-export const Nickname = styled.div`
-  font-weight: 700;
-  font-size: 25px;
-  color: #d9d9d9;
-  margin-bottom: 15px;
-`;
-export const Email = styled.div`
-  font-weight: 700;
-  margin-bottom: 50px;
-`;
