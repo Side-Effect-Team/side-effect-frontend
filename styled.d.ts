@@ -17,5 +17,6 @@ declare module "styled-components" {
     textColor: string;
     componentBgColor: stirng;
     hover: string;
+    boxShadow: string;
   }
 }

@@ -14,7 +14,7 @@ const loading = keyframes`
     }
 `;
 const SkeletonItem = styled.div`
-  background-color: ${theme.brandColor.lightGray};
+  background-color: ${(p) => p.theme.componentBgColor};
   height: 20px;
   border-radius: 15px;
   position: relative;
@@ -49,12 +49,13 @@ export const SkeletonCardWrapper = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  border: 1px solid lightgray;
   border-radius: 15px;
   overflow: hidden;
-  background-color: white;
+  background-color: ${(p) => p.theme.mainBackGround};
   position: relative;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0 0 0.5px 1px hsla(0, 0%, 100%, 0.075),
+    0 0 0 1px hsla(0, 0%, 0%, 0.05), 0 0.3px 0.4px hsla(0, 0%, 0%, 0.02),
+    0 0.9px 1.5px hsla(0, 0%, 0%, 0.045), 0 3.5px 6px hsla(0, 0%, 0%, 0.09);
   ${media.mobile} {
     width: 95%;
     max-height: 150px;

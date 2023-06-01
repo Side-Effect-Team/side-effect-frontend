@@ -13,6 +13,7 @@ import Head from "next/head";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { openModal } from "@/store/modalSlice";
 import { removeAuthentication } from "@/store/authSlice";
+import { useLayoutEffect } from "react";
 
 interface PropType {
   children: React.ReactNode;
@@ -26,8 +27,14 @@ interface MobileMenuProps {
 
 export default function Layout({ children }: PropType) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+  const [isMounted, setIsMounted] = useState(false);
   const { isDark } = useAppSelector((state) => state.darkMode);
   const dispatch = useAppDispatch();
+
+  //다크모드일경우 새로고침시 화면 반짝임을 제어합니다.
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const handleMobileMenu = () => {
     setMobileMenuOpen((prev) => !prev);
@@ -55,10 +62,10 @@ export default function Layout({ children }: PropType) {
       return () => window.removeEventListener("resize", detectViewportWidth);
     }
   });
-  console.log("isDark", isDark);
+
   return (
     <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
-      <GlobalStyles />
+      <GlobalStyles isMounted={isMounted} />
       <Head>
         <meta
           name="viewport"

@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components";
 import { normalize } from "styled-normalize";
 import fontsCss from "./fonts.module.css";
 
-const global = createGlobalStyle`
+const global = createGlobalStyle<{ isMounted: boolean }>`
   ${normalize}
   ${fontsCss}
 
@@ -15,8 +15,7 @@ const global = createGlobalStyle`
   body {
     background: ${(p) => p.theme.mainBackGround};
     color:${(p) => p.theme.textColor};
-    transition:  all .3s;
-
+    transition: ${(p) => (p.isMounted ? ".3s all" : "none")};
     margin: 0;
     padding: 0;
   }

@@ -69,6 +69,7 @@ const Wrapper = styled.div`
   max-width: ${breakPoints.desktop}px;
   margin: 0 auto;
   gap: 20px;
+  /* background-color: white; */
 `;
 const FilterSection = styled.div`
   display: flex;

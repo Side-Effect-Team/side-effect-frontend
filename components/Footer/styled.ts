@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-  background: ${(p) => p.theme.colors.gray};
+  background: ${(p) => p.theme.componentBgColor};
+  color: ${(p) => p.theme.textColor};
 `;
 
 export const FooterStyled = styled.footer`

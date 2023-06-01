@@ -11,7 +11,6 @@ export const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   background: ${(p) => p.theme.componentBgColor};
-  transition: 0.3s all;
   height: ${(p) => p.theme.height.header};
 `;
 

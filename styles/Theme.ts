@@ -31,6 +31,11 @@ export const theme = {
     skyBlue: "#CDDEFF",
     lightGray: "#EAECF0",
   },
+  boxShadow: `inset 0 0 1px 1px hsla(0, 0%, 100%, 0.15),
+0 0 0 1px hsla(0, 0%, 0%, 0.1),
+0 1px 2px hsla(0, 0%, 0%, 0.05),
+0 2px 4px hsla(0, 0%, 0%, 0.1),
+0 6px 10px hsla(0, 0%, 0%, 0.2);`,
 };
 
 export const darkTheme = {
