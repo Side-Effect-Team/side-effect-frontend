@@ -19,6 +19,7 @@ import { useRouter } from "next/router";
 import useToast from "@/hooks/common/useToast";
 import { useGetProfileData } from "@/hooks/queries/useGetPofileData";
 import { useEditProfile } from "@/hooks/mutations/useEditProfile";
+import { useInputImage } from "@/hooks/common/useInputImage";
 export interface FormData {
   githubUrl?: string;
   blogUrl?: string;
@@ -26,7 +27,7 @@ export interface FormData {
   nickname: string;
 }
 export interface MypageEditProps {
-  imgUrl: string | undefined;
+  imgUrl?: string | undefined;
   nickname: string;
   introduction: string | undefined;
   tags: string[] | undefined;
@@ -41,7 +42,6 @@ export default function MyPageEdit() {
   console.log(data);
   const router = useRouter();
   const [introduction, setIntroduction] = useState(data?.introduction);
-  const [imgUrl, setImgUrl] = useState(data?.imgUrl);
   const [tags, setTags] = useState<string[]>(data?.tags || []);
   const [career, setCareer] = useState<string>(data?.career || "");
   const [position, setPosition] = useState<string>(data?.position || "");
@@ -61,6 +61,12 @@ export default function MyPageEdit() {
 
   const editMutate = useEditProfile();
 
+  const { imgSrc, handleImgChange, uploadImg } = useInputImage(
+    data?.imgUrl
+      ? `${process.env.NEXT_PUBLIC_API_URL}/user/image/${data?.imgUrl}`
+      : data?.imgUrl,
+  );
+
   const onClickEdit = async (p: FormData) => {
     if (data) {
       const changedFormData: FormData = { nickname: data.nickname };
@@ -74,16 +80,31 @@ export default function MyPageEdit() {
         position,
         tags,
         introduction,
-        imgUrl,
         ...changedFormData,
       };
       const changes = compareData(data, changedData);
       console.log(changes);
-      if (Object.keys(changes).length === 0) {
+      if (
+        Object.keys(changes).length === 0 &&
+        (imgSrc === null || imgSrc.startsWith("http"))
+      ) {
         alert("변경사항이 없습니다.");
         return;
+      } else if (
+        Object.keys(changes).length !== 0 &&
+        (imgSrc === null || imgSrc.startsWith("http"))
+      ) {
+        editMutate(changes);
+      } else if (
+        Object.keys(changes).length === 0 &&
+        !(imgSrc === null || imgSrc.startsWith("http"))
+      ) {
+        await uploadImg(`${process.env.NEXT_PUBLIC_API_URL}/user/image`);
+      } else {
+        await uploadImg(`${process.env.NEXT_PUBLIC_API_URL}/user/image`);
+        editMutate(changes);
       }
-      editMutate(changes);
+      router.push("/mypage");
     }
   };
 
@@ -131,8 +152,8 @@ export default function MyPageEdit() {
             nickname={data?.nickname}
             introduction={introduction}
             setIntroduction={setIntroduction}
-            imgUrl={imgUrl}
-            setImgUrl={setImgUrl}
+            imgSrc={imgSrc}
+            handleImgChange={handleImgChange}
             introRegister={register}
             errors={errors}
           />

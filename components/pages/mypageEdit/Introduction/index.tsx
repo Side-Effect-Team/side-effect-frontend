@@ -22,13 +22,14 @@ import {
 import { Input } from "../Info/styled";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { FormData } from "@/pages/mypage/profileEdit";
+import { duplicateNickname } from "apis/UserAPI";
 
 interface IntroEditProps {
   nickname: string | undefined;
   introduction: string | undefined;
   setIntroduction: Dispatch<SetStateAction<string | undefined>>;
-  imgUrl: string | undefined;
-  setImgUrl: Dispatch<SetStateAction<string | undefined>>;
+  imgSrc: string;
+  handleImgChange: (e: ChangeEvent<HTMLInputElement>) => void;
   introRegister: UseFormRegister<Pick<FormData, "nickname">>;
   errors: FieldErrors<Pick<FormData, "nickname">>;
 }
@@ -36,8 +37,8 @@ export default function IntroductionEdit({
   nickname,
   introduction,
   setIntroduction,
-  imgUrl,
-  setImgUrl,
+  imgSrc,
+  handleImgChange,
   introRegister,
   errors,
 }: IntroEditProps) {
@@ -52,17 +53,7 @@ export default function IntroductionEdit({
       fileRef.current.click();
     }
   };
-  const onChangeImage = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const fileReader = new FileReader();
-    fileReader.readAsDataURL(file);
-    fileReader.onload = (e) => {
-      if (typeof e.target?.result === "string") {
-        setImgUrl(e.target?.result);
-      }
-    };
-  };
+
   // 닉네임 값이 빈값으로 반환되는 문제 해결
   useEffect(() => {
     const inputElement = document.querySelector<HTMLInputElement>("#nickname");
@@ -74,15 +65,19 @@ export default function IntroductionEdit({
     <>
       <ProfileWrapper>
         <ProfileImageWrapper>
-          <ProfileImage src={imgUrl || "/images/BoardDefaultBackground.png"} />
+          <ProfileImage
+            src={imgSrc ? imgSrc : "/images/mypageDefaultImage.png"}
+            alt="프로필 이미지"
+          />
           <Button type="button" onClick={onClickChangeImage}>
             사진변경
           </Button>
           <input
             ref={fileRef}
             type="file"
+            accept="image/*"
             style={{ display: "none" }}
-            onChange={onChangeImage}
+            onChange={handleImgChange}
           />
         </ProfileImageWrapper>
         <ProfileContentsWrapper>
@@ -108,9 +103,15 @@ export default function IntroductionEdit({
                     value: 15,
                     message: "닉네임은 15글자 이하로 입력해주세요",
                   },
-                  validate: (value) => {
+                  validate: async (value) => {
                     if (value.trim().length === 0) {
                       return "닉네임을 작성해주세요";
+                    }
+                    if (
+                      value !== nickname &&
+                      (await duplicateNickname(value))
+                    ) {
+                      return "이미 존재하는 닉네임 입니다.";
                     }
                     return true;
                   },

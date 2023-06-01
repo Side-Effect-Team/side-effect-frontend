@@ -1,26 +1,15 @@
 import axios from "axios";
-import { handleAuth } from "@/utils/auth";
+import { store } from "@/store/store";
+import { createAuthentication } from "@/store/authSlice";
+import customAxios from "./customAxios";
 export const getMypageData = async () => {
-  const token = localStorage.getItem("accessToken");
-  const id = localStorage.getItem("id");
-  const config = {
-    headers: { Authorization: `Bearer ${token}` },
-  };
-  const response = await axios.get(`/user/mypage/${id}`, config);
+  const id = store.getState().auth.userId;
+  const response = await customAxios.get(`/user/mypage/${id}`);
   return response;
 };
 
-// export const getUserMypageData = async (id: string) => {
-//   const response = await axios.get(`/user/mypage/${id}`);
-//   return response;
-// };
-
 export const getProfileData = async () => {
-  const token = localStorage.getItem("accessToken");
-  const config = {
-    headers: { Authorization: `Bearer ${token}` },
-  };
-  const response = await axios.get(`/user/editpage`, config);
+  const response = await customAxios.get(`/user/editpage`);
   return response.data;
 };
 
@@ -36,13 +25,14 @@ export interface MypageEditProps {
   portfolioUrl?: string;
 }
 export const editProfile = async (changes: MypageEditProps) => {
-  const id = localStorage.getItem("id");
-  const token = localStorage.getItem("accessToken");
-  const config = {
-    headers: { Authorization: `Bearer ${token}` },
-  };
-  const response = await axios.patch(`/user/${id}`, changes, config);
+  const id = store.getState().auth.userId;
+  const response = await customAxios.patch(`/user/${id}`, changes);
   return response;
+};
+
+export const duplicateNickname = async (nickname: string) => {
+  const response = await axios.get(`/user/duple/${nickname}`);
+  return response.data;
 };
 
 export const handleRefreshAccessToken = async () => {
@@ -51,7 +41,12 @@ export const handleRefreshAccessToken = async () => {
     {},
     { withCredentials: true },
   );
-  handleAuth.setToken(response.headers.authorization);
+  store.dispatch(
+    createAuthentication({
+      userId: store.getState().auth.userId,
+      token: response.headers.authorization,
+    }),
+  );
 };
 
 export const onSuccessLogin = async (token: string, ProviderType: string) => {

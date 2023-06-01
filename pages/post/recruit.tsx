@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import Image from "next/image";
 import { GoPlus } from "react-icons/go";
-import axios from "axios";
+import customAxios from "@/apis/customAxios";
 import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
 import { PostTitleStyled } from "@/postComps/common/Title.styled";
 import {
@@ -83,14 +83,9 @@ export default function PostRecruitPage() {
         };
 
         // request
-        const url = `${process.env.NEXT_PUBLIC_API_URL}/recruit-board`;
+        const url = `/recruit-board`;
         try {
-          const res = await axios.post(url, data, {
-            headers: {
-              // 로그인 기능 미구현으로 NEXT_PUBLIC_TOKEN에 발급받은 토큰을 넣고 실행!
-              Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
-            },
-          });
+          const res = await customAxios.post(url, data);
           const recruitId = await res.data.id;
           const imgUrl = url + "/image/" + recruitId;
 

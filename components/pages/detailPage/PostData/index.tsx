@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import customAxios from "@/apis/customAxios";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import {
@@ -20,26 +20,32 @@ import {
   OptionBtn,
   Container,
 } from "@/detailComps/PostData/styled";
+import { useAppSelector } from "@/store/hooks";
 
 interface PostDataProps {
-  id: number;
+  postId: number;
   title: string;
   createdAt: string;
   views: number;
   likeNum: number;
+  writerId: number;
+  writer: string;
 }
 
 interface OptionPopupProps {
-  id: number;
+  postId: number;
 }
 
 export default function PostData({
-  id,
+  postId,
   title,
   createdAt,
   views,
   likeNum,
+  writerId,
+  writer,
 }: PostDataProps) {
+  const { userId } = useAppSelector((state) => state.auth);
   const [popupOn, setPopupOn] = useState(false);
 
   return (
@@ -51,7 +57,7 @@ export default function PostData({
             <BiUserCircle size={25} />
           </UserProfile>
           <p>
-            <Link href="#">작성자1</Link>
+            <Link href="#">{writer}</Link>
           </p>
         </UserBox>
         <Column />
@@ -75,36 +81,36 @@ export default function PostData({
         <div>
           <span>좋아요 </span>
           <SpanStyled>{likeNum}</SpanStyled>
-          {popupOn && <OptionPopup id={id} />}
+          {popupOn && <OptionPopup postId={postId} />}
         </div>
-        <OptionBox onClick={() => setPopupOn((prev) => !prev)}>
-          <BiDotsHorizontalRounded size={25} />
-        </OptionBox>
+        {/* 로그인한 유저가 작성자가 아니면 수정 팝업 안보임 */}
+        {userId === writerId + "" && (
+          <OptionBox onClick={() => setPopupOn((prev) => !prev)}>
+            <BiDotsHorizontalRounded size={25} />
+          </OptionBox>
+        )}
       </Row>
       <hr />
     </div>
   );
 }
 
-function OptionPopup({ id }: OptionPopupProps) {
+function OptionPopup({ postId }: OptionPopupProps) {
   const router = useRouter();
   const postCategory = router.pathname.split("/")[1];
 
   // 게시글 삭제
   const deletePost = async (id: number) => {
-    let url = process.env.NEXT_PUBLIC_API_URL as string;
+    let url = "";
     if (postCategory === "recruits") url += "/recruit-board/" + id;
     if (postCategory === "projects") url += "/free-boards/" + id;
 
     try {
-      const res = await axios.delete(url, {
-        headers: {
-          // 로그인 기능 미구현으로 NEXT_PUBLIC_TOKEN에 발급받은 토큰을 넣고 실행!
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
-        },
-      });
-      if (res.status === 200)
+      const res = await customAxios.delete(url);
+      if (res.status === 200) {
         await window.alert("게시물이 성공적으로 삭제되었습니다");
+        await router.push(`/${postCategory}`);
+      }
     } catch (err) {
       console.log(err);
       window.alert("게시물 삭제에 실패했습니다");
@@ -113,13 +119,12 @@ function OptionPopup({ id }: OptionPopupProps) {
 
   const handleDelete = async () => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
-      await deletePost(id);
-      await router.push(`/${postCategory}`);
+      await deletePost(postId);
     }
   };
 
   const handleEdit = async () => {
-    await router.push(`/${postCategory}/edit/${id}`);
+    await router.push(`/${postCategory}/edit/${postId}`);
   };
 
   return (

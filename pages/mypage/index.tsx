@@ -12,6 +12,7 @@ import Account from "@/components/pages/mypage/Account";
 import { useGetMypageData } from "@/hooks/queries/useGetMypageData";
 import TabApplyBoards from "@/components/pages/mypage/TabApplyBoards";
 import { ApplyBoardCardProps } from "@/components/BoardCard/ApplyBoardCard";
+import { withAuth } from "@/components/hocs/withAuth";
 
 export interface MypageProps {
   id: number;
@@ -31,7 +32,7 @@ export interface MypageProps {
   isOwner?: boolean;
 }
 
-export default function MyPage() {
+function MyPage() {
   const [boards, setBoards] = useState<BoardCardProps[] | undefined | null>(
     null,
   );
@@ -95,3 +96,5 @@ export default function MyPage() {
     </Container>
   );
 }
+
+export default withAuth(MyPage);

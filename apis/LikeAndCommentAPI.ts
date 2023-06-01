@@ -1,10 +1,6 @@
-import axios from "axios";
+import customAxios from "./customAxios";
 
 export const addLikeProject = async (id: number) => {
-  const token = localStorage.getItem("accessToken");
-  const config = {
-    headers: { Authorization: `Bearer ${token}` },
-  };
-  const response = await axios.post(`/like/${id}`, null, config);
+  const response = await customAxios.post(`/like/${id}`, null);
   return response;
 };

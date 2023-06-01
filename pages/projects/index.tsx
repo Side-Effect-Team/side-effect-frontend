@@ -1,5 +1,5 @@
 import { breakPoints } from "@/styles/Media";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGetProjectData } from "../../hooks/queries/useGetProjectData";
 import styled from "styled-components";
 import SelectBox from "../../components/SelectBox";
@@ -9,6 +9,8 @@ import PageHead from "@/components/PageHead";
 import BatchCarousel from "@/components/Carousel/BatchCarousel";
 import ProjectList from "@/components/pages/project/ProjectLIst";
 import Skeleton from "@/components/Skeleton/BoardCardSkeleton";
+import { useAppSelector } from "@/store/hooks";
+
 const FILTER_OPTIONS = [
   { name: "최신순", value: "latest" },
   { name: "조회순", value: "views" },
@@ -19,8 +21,15 @@ const FILTER_OPTIONS = [
 export default function ProjectPage() {
   const [filter, setFilter] = useState("latest");
   const [keyword, setKeyword] = useState("");
-  const { data, isLoading, Observer } = useGetProjectData(filter, keyword);
+  const { data, isLoading, Observer, refetch } = useGetProjectData(
+    filter,
+    keyword,
+  );
   const isDataEmpty = data?.pages[0].projects.length === 0;
+  const { token } = useAppSelector((state) => state.auth);
+  useEffect(() => {
+    refetch();
+  }, [refetch, token]);
   return (
     <Wrapper>
       <PageHead pageTitle="프로젝트 자랑 | 사이드 이펙트" />

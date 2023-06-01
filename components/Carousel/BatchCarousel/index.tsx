@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import ProjectCard from "../../BoardCard/ProjectCard";
 import { Wrapper, CarouselTitle, CardContainer } from "./styled";
-import axios from "axios";
+import customAxios from "@/apis/customAxios";
 import { recruitBoardCardConverter } from "@/utils/converter";
 
 interface BatchCarouselProps {
@@ -60,6 +60,6 @@ const fetchData = async (size: number, queryKey: string) => {
     selector = "projects";
   }
 
-  const res = await axios.get(url);
+  const res = await customAxios.get(url);
   return res.data[selector];
 };
