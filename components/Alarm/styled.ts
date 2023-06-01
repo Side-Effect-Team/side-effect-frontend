@@ -48,10 +48,9 @@ export const Container = styled.div`
   width: 350px;
   min-height: 100px;
   max-height: 400px;
-  background-color: white;
-  border: 1px solid #d9d9d9;
+  background-color: ${(p) => p.theme.componentBgColor};
   border-radius: 10px;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
+  box-shadow: ${(p) => p.theme.boxShadow};
   padding: 10px;
   position: absolute;
   top: 47px;
