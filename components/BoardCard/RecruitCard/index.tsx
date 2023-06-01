@@ -1,4 +1,4 @@
-import { MouseEvent, useEffect, useRef, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 
 import {
   ButtonsWrapper,
@@ -22,6 +22,7 @@ import {
 } from "./styled";
 import Tag from "@/components/Tag";
 import { useRouter } from "next/router";
+import { useAppSelector } from "@/store/hooks";
 interface RecruitDataProps {
   id: number;
   closed?: boolean;
@@ -42,11 +43,11 @@ export default function RecruitCard({ data }: RecruitCardProps) {
   const recruitMutate = useAddLikeRecruit();
   const [recruitingTitle, setRecruitingTitle] = useState("• 모집중");
   const router = useRouter();
+  const { token } = useAppSelector((state) => state.auth);
 
   const onClickHeart = async (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     const id = Number(e.currentTarget.id);
-    const token = localStorage.getItem("accessToken");
     if (token) {
       recruitMutate(id, {
         onSuccess: (res) => {
