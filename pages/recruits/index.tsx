@@ -10,6 +10,7 @@ import RecruitCard from "@/components/BoardCard/RecruitCard";
 import customAxios from "apis/customAxios";
 
 export default function RecruitsPage() {
+  window.sessionStorage.removeItem("activeTab");
   const { data, isError, isLoading } = useQuery({
     queryKey: ["recruits"],
     queryFn: async () => {

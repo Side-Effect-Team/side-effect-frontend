@@ -9,9 +9,10 @@ import RecruitCard from "@/components/BoardCard/RecruitCard";
 interface TabBoards {
   boards?: BoardCardProps[] | null;
   title: string;
+  activeTab: string;
 }
 
-export default function TabBoards({ boards, title }: TabBoards) {
+export default function TabBoards({ boards, title, activeTab }: TabBoards) {
   const [filterMenu, setFilterMenu] = useState("all");
   const [filterBoards, setFilterBoards] = useState(boards);
 
@@ -39,6 +40,10 @@ export default function TabBoards({ boards, title }: TabBoards) {
     else if (filterMenu === "recruits") setFilterBoards(recruitsBoards);
     else setFilterBoards(boards);
   }, [filterMenu, boards]);
+
+  useEffect(() => {
+    setFilterMenu("all");
+  }, [activeTab]);
 
   return (
     <>

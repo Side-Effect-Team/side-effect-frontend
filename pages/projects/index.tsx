@@ -19,6 +19,7 @@ const FILTER_OPTIONS = [
 ];
 
 export default function ProjectPage() {
+  window.sessionStorage.removeItem("activeTab");
   const [filter, setFilter] = useState("latest");
   const [keyword, setKeyword] = useState("");
   const { data, isLoading, Observer, refetch } = useGetProjectData(
