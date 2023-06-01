@@ -17,9 +17,11 @@ export const ScrollToTopWrapper = styled.div`
   align-items: center;
   z-index: 999;
   cursor: pointer;
+  box-shadow: ${(p) => p.theme.boxShadow};
   &:hover {
     background-color: ${lighten(0.05, theme.brandColor.primary)};
   }
+
   ${media.mobile} {
     width: 40px;
     height: 40px;

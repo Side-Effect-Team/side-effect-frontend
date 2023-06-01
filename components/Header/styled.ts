@@ -10,8 +10,9 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: ${(p) => p.theme.componentBgColor};
+  background: ${(p) => p.theme.mainBackGround};
   height: ${(p) => p.theme.height.header};
+  transition: all 0.3s;
 `;
 
 export const HeaderStyled = styled.header`

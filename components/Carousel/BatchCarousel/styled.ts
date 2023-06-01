@@ -7,6 +7,7 @@ export const Wrapper = styled.div`
   width: 100%;
   height: ${(p) => p.theme.height.batchCarousel};
   background: ${(p) => p.theme.mainBackGround};
+  transition: all 0.3s;
 `;
 
 export const CarouselTitle = styled.h2`

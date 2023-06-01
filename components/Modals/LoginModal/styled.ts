@@ -39,7 +39,7 @@ export const Wrapper = styled.div<{ isOpen: boolean }>`
   margin: auto;
   height: 550px;
   width: 550px;
-  background-color: ${(p) => p.theme.componentBgColor};
+  background-color: ${(p) => p.theme.mainBackGround};
   z-index: 30;
   border-radius: 15px;
   ${media.mobile} {

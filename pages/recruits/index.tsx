@@ -72,7 +72,7 @@ export default function RecruitsPage() {
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
-  background: ${(p) => p.theme.colors.background};
+  background: ${(p) => p.theme.mainBackGround};
 `;
 
 const Contents = styled.div`

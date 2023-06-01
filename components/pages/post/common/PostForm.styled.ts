@@ -12,6 +12,7 @@ export const GuideWrapper = styled.div`
   align-items: center;
 
   p {
+    color: ${(p) => p.theme.textColor};
     margin-left: 1rem;
     font-size: 0.85rem;
     transform: translateY(50%);
@@ -63,6 +64,6 @@ export const ErrorMsg = styled.span`
 export const ImageBox = styled.div`
   p {
     font-size: 0.75rem;
-    color: rgba(0, 0, 0, 0.75);
+    color: ${(p) => p.theme.textColor};
   }
 `;

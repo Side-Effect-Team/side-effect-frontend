@@ -18,5 +18,6 @@ declare module "styled-components" {
     componentBgColor: stirng;
     hover: string;
     boxShadow: string;
+    footerBgColor: string;
   }
 }

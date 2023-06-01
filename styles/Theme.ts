@@ -40,10 +40,11 @@ export const theme = {
 
 export const darkTheme = {
   ...theme,
-  mainBackGround: "#000000",
-  componentBgColor: "#181818",
+  mainBackGround: "#202225",
+  componentBgColor: "#35383F",
   hover: "#232323",
   textColor: "#ffffff",
+  footerBgColor: "#35383F",
 };
 export const lightTheme = {
   ...theme,
@@ -51,6 +52,7 @@ export const lightTheme = {
   componentBgColor: "#ffffff",
   hover: "#eaecf0",
   textColor: "#000000",
+  footerBgColor: "#1867B6",
 };
 
 export type BrandColorTypes = keyof typeof theme.brandColor;
