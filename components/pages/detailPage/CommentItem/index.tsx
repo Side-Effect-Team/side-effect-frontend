@@ -10,6 +10,7 @@ import {
   OptionBtn,
   BtnText,
 } from "./styled";
+import { useAppSelector } from "@/store/hooks";
 
 interface CommentBoxProps {
   comment: CommentType;
@@ -25,6 +26,7 @@ export default function CommentItem({
   const [isEdit, setIsEdit] = useState(false);
   const [commentValue, setCommentValue] = useState(comment.content);
   const textareaEl = useRef<HTMLTextAreaElement>(null);
+  const userId = useAppSelector((state) => +state.auth.userId);
 
   const resizeTextAreaHeight = () => {
     if (textareaEl.current) {
@@ -72,7 +74,7 @@ export default function CommentItem({
           ref={textareaEl}
         />
       </CommentColumn>
-      {comment.writerId === +localStorage.getItem("id")! && (
+      {comment.writerId === userId && (
         <CommentEditBtnBox>
           {isEdit ? (
             <>

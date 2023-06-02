@@ -1,69 +1,81 @@
-import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
 import { GetServerSidePropsContext } from "next";
 import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
 import PositionDetail from "@/detailComps/PositionDetail";
 import ContentDetail from "@/detailComps/ContentDetail";
 import PostData from "@/detailComps/PostData";
+import { getRecruitPost } from "@/apis/RecruitBoardAPI";
+import CommentBox from "@/detailComps/CommentBox";
 
 interface RecruitDetailPageProps {
-  recruit: RecruitType;
+  recruitId: string;
 }
 
-export default function RecruitDetailPage({ recruit }: RecruitDetailPageProps) {
-  const {
-    id,
-    title,
-    projectName,
-    positions,
-    createdAt,
-    views,
-    tags,
-    content,
-    userId,
-    likeNum,
-    imgSrc,
-    writer,
-  } = recruit;
+export default function RecruitDetailPage({
+  recruitId,
+}: RecruitDetailPageProps) {
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["recruitPost"],
+    queryFn: () => getRecruitPost(recruitId),
+    staleTime: 2000,
+  });
 
-  return (
-    <Wrapper>
-      <Contents>
-        <PostData
-          postId={id}
-          title={title}
-          createdAt={createdAt}
-          views={views}
-          likeNum={likeNum}
-          writerId={userId}
-          writer={writer}
-        />
-        <PositionDetail positions={positions} />
-        <ContentDetail
-          projectName={projectName}
-          tags={tags}
-          content={content}
-          imgSrc={imgSrc}
-        />
-      </Contents>
-    </Wrapper>
-  );
+  if (isLoading) {
+    return <h2>Loading...</h2>;
+  }
+
+  if (isError) {
+    return <h2>데이터를 불러오는데 실패했습니다</h2>;
+  }
+
+  if (data) {
+    console.log("포지션 정보", data);
+    const {
+      id,
+      title,
+      createdAt,
+      views,
+      likeNum,
+      userId,
+      writer,
+      positions,
+      projectName,
+      tags,
+      content,
+      imgSrc,
+      comments,
+    } = data.data;
+    return (
+      <Wrapper>
+        <Contents>
+          <PostData
+            postId={id}
+            title={title}
+            createdAt={createdAt}
+            views={views}
+            likeNum={likeNum}
+            writerId={userId}
+            writer={writer}
+          />
+          <PositionDetail writerId={userId} positions={positions} />
+          <ContentDetail
+            projectName={projectName}
+            tags={tags}
+            content={content}
+            imgSrc={imgSrc}
+          />
+          <CommentBox boardId={id} comments={comments} />
+        </Contents>
+      </Wrapper>
+    );
+  }
 }
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
-  const recruitId = ctx.params?.recruitId;
-  const url = `/recruit-board/${recruitId}`;
-
-  try {
-    const res = await axios.get(url);
-    const recruit = await res.data;
-
-    return {
-      props: {
-        recruit,
-      },
-    };
-  } catch (err) {
-    console.log(err);
-    return { notFound: true };
-  }
+  const recruitId = ctx.params?.recruitId as string;
+  return {
+    props: {
+      recruitId,
+    },
+  };
 }

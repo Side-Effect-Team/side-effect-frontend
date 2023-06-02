@@ -5,7 +5,7 @@ import { Wrapper, MobileNavBar, MobileMenuItem } from "./styled";
 import GlobalStyles from "@/styles/Global";
 import { darkTheme, lightTheme } from "@/styles/Theme";
 import { breakPoints } from "@/styles/Media";
-import Header from "../Header";
+import GlobalNavBar from "../Header/GlobalNavBar";
 import Footer from "../Footer";
 import Toast from "../Toast";
 import ScrollToTop from "../ScrollToTop";
@@ -13,7 +13,6 @@ import Head from "next/head";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { openModal } from "@/store/modalSlice";
 import { removeAuthentication } from "@/store/authSlice";
-import { useLayoutEffect } from "react";
 
 interface PropType {
   children: React.ReactNode;
@@ -73,7 +72,7 @@ export default function Layout({ children }: PropType) {
         />
         <title>사이드 이펙트 | 빠르게 프로젝트를 시작하세요</title>
       </Head>
-      <Header logout={logout} handleMobileMenu={handleMobileMenu} />
+      <GlobalNavBar logout={logout} handleMobileMenu={handleMobileMenu} />
       <ScrollToTop />
       <Toast />
       <MobileMenu

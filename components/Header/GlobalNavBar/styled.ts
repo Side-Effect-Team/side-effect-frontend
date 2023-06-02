@@ -47,18 +47,14 @@ export const NavStyled = styled.nav`
 `;
 
 export const BoxStyled = styled.div`
-  width: 150px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+`;
 
+export const ButtonBox = styled.div`
   ${mediaQuery("mobile")`
     display: none;
-  `}
-
-  button {
-    svg {
-      transform: scale(1.2);
-    }
-  }
+  `};
 `;

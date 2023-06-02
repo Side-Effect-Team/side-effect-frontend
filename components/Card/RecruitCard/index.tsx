@@ -20,7 +20,7 @@ import {
 import Tag from "@/components/Tag";
 import { useRouter } from "next/router";
 import HeartButton from "@/components/Button/HeartButton";
-interface RecruitDataProps {
+export interface RecruitDataProps {
   id: number;
   closed?: boolean;
   tags?: string[];
