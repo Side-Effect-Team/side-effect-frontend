@@ -29,6 +29,7 @@ export default function RecruitDetailPage({
   }
 
   if (data) {
+    console.log("포지션 정보", data);
     const {
       id,
       title,
@@ -56,7 +57,7 @@ export default function RecruitDetailPage({
             writerId={userId}
             writer={writer}
           />
-          <PositionDetail positions={positions} />
+          <PositionDetail writerId={userId} positions={positions} />
           <ContentDetail
             projectName={projectName}
             tags={tags}

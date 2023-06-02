@@ -13,7 +13,6 @@ import Head from "next/head";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { openModal } from "@/store/modalSlice";
 import { removeAuthentication } from "@/store/authSlice";
-import { useLayoutEffect } from "react";
 
 interface PropType {
   children: React.ReactNode;
