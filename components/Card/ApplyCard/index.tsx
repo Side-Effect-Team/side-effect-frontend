@@ -8,7 +8,6 @@ import {
   RowWrapper,
   Status,
   Title,
-  TitleGray,
 } from "./styled";
 import { useRouter } from "next/router";
 import { useCancelApply } from "@/hooks/mutations/useCancelApply";
@@ -71,7 +70,6 @@ export default function ApplyBoardCard({ data }: dataProps) {
     <Container onClick={onClickGoToBoard}>
       <ColumnWrapper>
         <RowWrapper>
-          {/* <TitleGray>제목 : </TitleGray> */}
           <Title>{data.title}</Title>
         </RowWrapper>
         <RowWrapper>

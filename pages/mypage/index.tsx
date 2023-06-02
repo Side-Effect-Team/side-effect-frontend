@@ -11,7 +11,7 @@ import TabBoards from "@/components/pages/mypage/TabBoards";
 import Account from "@/components/pages/mypage/Account";
 import { useGetMypageData } from "@/hooks/queries/useGetMypageData";
 import TabApplyBoards from "@/components/pages/mypage/TabApplyBoards";
-import { ApplyBoardCardProps } from "@/components/Card/ApplyBoardCard";
+import { ApplyBoardCardProps } from "@/components/Card/ApplyCard";
 import { withAuth } from "@/components/hocs/withAuth";
 
 export interface MypageProps {

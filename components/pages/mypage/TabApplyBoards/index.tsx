@@ -1,6 +1,6 @@
 import ApplyBoardCard, {
   ApplyBoardCardProps,
-} from "@/components/Card/ApplyBoardCard";
+} from "@/components/Card/ApplyCard";
 import { FilterMenu, FilterWrapper, NullMessage } from "../TabBoards/styled";
 import { ApplyBoardWrapper } from "./styled";
 import { useEffect, useState } from "react";
