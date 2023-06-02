@@ -31,13 +31,7 @@ export default function BatchCarousel({
         {data &&
           data.map((recruit: RecruitType) => {
             const convertedRecruit = recruitBoardCardConverter(recruit);
-            return (
-              <ProjectCard
-                key={recruit.id}
-                category={category}
-                data={convertedRecruit}
-              />
-            );
+            return <ProjectCard key={recruit.id} data={convertedRecruit} />;
           })}
       </CardContainer>
     </Wrapper>
