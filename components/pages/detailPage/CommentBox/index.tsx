@@ -132,7 +132,7 @@ export default function CommentBox({ boardId, comments }: CommentBoxProps) {
       </CommentInputBox>
 
       <CommentList>
-        {commentArr.length &&
+        {commentArr.length > 0 &&
           commentArr.map((comment: CommentType) => (
             <CommentItem
               key={comment.commentId}
