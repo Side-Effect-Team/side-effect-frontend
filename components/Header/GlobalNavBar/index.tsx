@@ -1,20 +1,30 @@
 import Link from "next/link";
-import { Wrapper, HeaderStyled, Logo, NavStyled, BoxStyled } from "./styled";
+import {
+  Wrapper,
+  HeaderStyled,
+  Logo,
+  NavStyled,
+  BoxStyled,
+  LoggedInBox,
+} from "./styled";
 import MobileMenuBox from "../MobileMenuBox";
-import { BOARD_LIST } from "../../enum";
-import Button from "../Button";
+import { BOARD_LIST } from "../../../enum";
+import Button from "../../Button";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { openModal } from "@/store/modalSlice";
-import Alarm from "../Alarm";
+import Alarm from "../../Alarm";
 import { useRef, useState } from "react";
-import useOutsideClick from "../../hooks/common/useOutsideClick";
+import useOutsideClick from "@/hooks/common/useOutsideClick";
 
-interface HeaderProps {
+interface GlobalNavBarProps {
   logout: () => void;
   handleMobileMenu: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-export default function Header({ logout, handleMobileMenu }: HeaderProps) {
+export default function GlobalNavBar({
+  logout,
+  handleMobileMenu,
+}: GlobalNavBarProps) {
   const [openAlarm, setOpenAlarm] = useState(false);
   const AlarmListRef = useRef(null);
   const dispatch = useAppDispatch();
@@ -36,7 +46,12 @@ export default function Header({ logout, handleMobileMenu }: HeaderProps) {
           ))}
         </NavStyled>
         <BoxStyled>
-          {token && <Alarm openAlarm={openAlarm} setOpenAlarm={setOpenAlarm} />}
+          {token && (
+            <LoggedInBox>
+              <div>프로필</div>
+              <Alarm openAlarm={openAlarm} setOpenAlarm={setOpenAlarm} />
+            </LoggedInBox>
+          )}
           {token ? (
             <Button onClick={logout}>로그아웃</Button>
           ) : (

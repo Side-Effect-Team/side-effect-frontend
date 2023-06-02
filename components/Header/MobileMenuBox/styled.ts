@@ -11,13 +11,4 @@ export const Wrapper = styled.div`
   `}
 
   display: none;
-
-  /* svg {
-    transform: scale(1.5);
-    margin: auto;
-  } */
-
-  /* &:hover {
-    opacity: 0.6;
-  } */
 `;

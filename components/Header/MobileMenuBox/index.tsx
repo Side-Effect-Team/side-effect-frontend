@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 import { IoReorderThree } from "react-icons/io5";
 import { Wrapper } from "./styled";
 import Button from "@/components/Button";
-import Alarm from "../Alarm";
+import Alarm from "../../Alarm";
 import { useAppSelector } from "@/store/hooks";
 
 interface MobileMenuBoxProps {

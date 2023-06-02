@@ -47,7 +47,8 @@ export const NavStyled = styled.nav`
 `;
 
 export const BoxStyled = styled.div`
-  width: 150px;
+  width: 200px;
+  background: aquamarine;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -61,4 +62,12 @@ export const BoxStyled = styled.div`
       transform: scale(1.2);
     }
   }
+`;
+
+export const LoggedInBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-right: 1rem;
 `;
