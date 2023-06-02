@@ -20,6 +20,7 @@ import useToast from "@/hooks/common/useToast";
 import { useGetProfileData } from "@/hooks/queries/useGetPofileData";
 import { useEditProfile } from "@/hooks/mutations/useEditProfile";
 import { useInputImage } from "@/hooks/common/useInputImage";
+import { useQueryClient } from "@tanstack/react-query";
 export interface FormData {
   githubUrl?: string;
   blogUrl?: string;
@@ -37,6 +38,9 @@ export interface MypageEditProps {
   portfolioUrl?: string;
 }
 export default function MyPageEdit() {
+  const queryClient = useQueryClient();
+  queryClient.invalidateQueries({ queryKey: ["editProfile"] });
+
   const data = useGetProfileData();
   // console.log(data);
   const router = useRouter();

@@ -17,8 +17,8 @@ export const useEditProfile = () => {
         content: "프로필 편집에 성공하였습니다..",
       });
       deleteToast("unique-id");
-      router.push("/mypage");
       queryClient.invalidateQueries({ queryKey: ["editProfile"] });
+      router.push("/mypage");
     },
     onError: () => {
       addToast({
