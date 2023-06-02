@@ -9,17 +9,10 @@ import {
   ViewIcon,
 } from "../ProjectCard/styled";
 import { useAddLikeRecruit } from "@/hooks/mutations/useAddLikeRecuit";
-import {
-  Container,
-  IsRecruiting,
-  TagContainer,
-  TagTitle,
-  TagWrapper,
-  Title,
-} from "./styled";
-import Tag from "@/components/Tag";
+import { Container, IsRecruiting, Title } from "./styled";
 import { useRouter } from "next/router";
 import HeartButton from "@/components/Button/HeartButton";
+import TagBox from "@/components/Tag/TagBox";
 interface RecruitDataProps {
   closed: boolean;
   commentNum: number;
@@ -74,23 +67,13 @@ export default function RecruitCard({ data }: RecruitCardProps) {
         {recruitingTitle}
       </IsRecruiting>
       <Title>{data?.title}</Title>
-      <TagContainer>
-        <TagTitle>모집분야</TagTitle>
-        <TagWrapper>
-          {newPosition.map((lan, index) => (
-            <Tag key={index} fill="false" fontSize="15px">
-              {lan}
-            </Tag>
-          ))}
-        </TagWrapper>
-      </TagContainer>
-      <TagContainer>
-        <TagTitle>사용언어</TagTitle>
-        <TagWrapper>
-          {data?.tags &&
-            data?.tags.map((lan, index) => <Tag key={index}>{lan} </Tag>)}
-        </TagWrapper>
-      </TagContainer>
+      <TagBox
+        title="모집분야"
+        tagArray={newPosition}
+        fill="false"
+        fontSize="15px"
+      />
+      <TagBox title="사용언어" tagArray={data?.tags} />
       <Footer>
         <CreateAt>{data?.createdAt}</CreateAt>
         <ButtonsWrapper>
