@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import ManageCard from "./ManageCard";
+import ManageCard from "../ManageCard/index";
+import { ManageListWrapper } from "./styled";
 interface ApplicantType {
   email: string;
   nickName: string;
@@ -31,10 +31,3 @@ export default function ManageList({
     </ManageListWrapper>
   );
 }
-const ManageListWrapper = styled.ul`
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  padding: 20px;
-  gap: 15px;
-`;

@@ -1,5 +1,4 @@
-import styled from "styled-components";
-import { media } from "@/styles/mediatest";
+import { Title, LogoWrapper, TempLogo, MainTitle, SubTitle } from "./styled";
 export default function LoginTitle() {
   return (
     <Title>
@@ -11,27 +10,3 @@ export default function LoginTitle() {
     </Title>
   );
 }
-const Title = styled.div`
-  padding: 10px 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
-`;
-const MainTitle = styled.div`
-  font-size: xx-large;
-  font-weight: bolder;
-  ${media.mobile} {
-    font-size: large;
-  }
-`;
-const SubTitle = styled.div`
-  font-size: large;
-  font-weight: bolder;
-  ${media.mobile} {
-    font-size: small;
-  }
-`;
-const LogoWrapper = styled.div``;
-const TempLogo = styled.div``;
