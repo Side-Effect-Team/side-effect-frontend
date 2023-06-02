@@ -57,3 +57,9 @@ export const onSuccessLogin = async (token: string, ProviderType: string) => {
   );
   return response;
 };
+
+export const deleteAccount = async () => {
+  const id = store.getState().auth.userId;
+  const response = await customAxios.delete(`/user/${id}`);
+  return response;
+};

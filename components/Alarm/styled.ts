@@ -1,7 +1,6 @@
-import { theme } from "@/styles/Theme";
 import { media } from "@/styles/mediatest";
 import { IoClose, IoNotificationsOutline } from "react-icons/io5";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 // 알람 아이콘
 export const AlarmDiv = styled.div<{ openAlarm: boolean }>`
@@ -28,19 +27,21 @@ export const AlarmIconDiv = styled.div<{ openAlarm: boolean }>`
   }
 `;
 export const AlarmButton = styled(IoNotificationsOutline)`
-  color: ${theme.brandColor.primary};
+  color: ${(p) => p.theme.brandColor.primary};
   font-size: 24px;
 `;
 export const AlarmCount = styled.div`
+  min-width: 16px;
   position: absolute;
-  top: 1px;
+  top: -3px;
   left: 15px;
   background-color: red;
   padding: 2px 4px;
-  border-radius: 10px;
-  color: white;
+  border-radius: 50%;
+  color: ${(p) => p.theme.colors.white};
   font-weight: 700;
   font-size: 12px;
+  text-align: center;
 `;
 
 // 알람 리스트
@@ -48,6 +49,7 @@ export const Container = styled.div`
   width: 350px;
   min-height: 100px;
   max-height: 400px;
+  border: 1px solid ${(p) => p.theme.colors.mediumGray};
   background-color: ${(p) => p.theme.componentBgColor};
   border-radius: 10px;
   box-shadow: ${(p) => p.theme.boxShadow};
@@ -56,9 +58,19 @@ export const Container = styled.div`
   top: 47px;
   right: -10px;
   overflow: auto;
+  animation: openAlarm 0.3s ease-in-out;
   ::-webkit-scrollbar {
     display: none;
   }
+  @keyframes openAlarm {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
   ${media.mobile} {
     width: 100%;
     height: 100%;
@@ -91,16 +103,16 @@ export const HeaderTitle = styled.div`
 `;
 export const CloseButton = styled(IoClose)`
   font-size: 28px;
-  color: #d9d9d9;
+  color: ${(p) => p.theme.colors.mediumGray};
   cursor: pointer;
 `;
 export const DeleteButton = styled(IoClose)`
   font-size: 16px;
-  color: #d9d9d9;
+  color: ${(p) => p.theme.colors.mediumGray};
   cursor: pointer;
   display: none;
   :hover {
-    color: ${theme.brandColor.primary};
+    color: ${(p) => p.theme.brandColor.primary};
   }
   ${media.mobile} {
     display: block;
@@ -109,8 +121,9 @@ export const DeleteButton = styled(IoClose)`
 export const Wrapper = styled.div<{ watched: boolean }>`
   width: 100%;
   height: 90px;
-  border: 1px solid ${theme.brandColor.skyBlue};
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
+  border: 2px solid
+    ${(p) =>
+      p.watched ? p.theme.alarmCheckedColor : p.theme.alarmDefaultColor};
   border-radius: 10px;
   margin-bottom: 10px;
   cursor: pointer;
@@ -118,16 +131,12 @@ export const Wrapper = styled.div<{ watched: boolean }>`
   flex-direction: column;
   justify-content: space-between;
   padding: 15px;
-  color: ${(p) => (p.watched ? "#d9d9d9" : "black")};
+  color: ${(p) => (p.watched ? p.theme.alarmCheckedColor : p.theme.textColor)};
 
   :hover {
-    box-shadow: 1px 1px 5px rgba(21, 94, 239, 0.25);
     ${DeleteButton} {
       display: block;
     }
-  }
-  ${media.mobile} {
-    box-shadow: 1px 1px 5px rgba(21, 94, 239, 0.25);
   }
 `;
 
@@ -146,11 +155,10 @@ export const Contents = styled.div`
   font-size: 14px;
 `;
 export const Date = styled.div`
-  color: #d9d9d9;
   font-size: 14px;
 `;
 export const EmptyMessage = styled.div`
   font-size: 16px;
-  color: #d9d9d9;
+  color: ${(p) => p.theme.colors.mediumGray};
   margin-left: 15px;
 `;

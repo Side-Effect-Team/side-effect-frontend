@@ -1,6 +1,6 @@
 import ApplyBoardCard, {
   ApplyBoardCardProps,
-} from "@/components/ApplyBoardCard";
+} from "@/components/Card/ApplyBoardCard";
 import { Border, SectionHeaderWrapper, SectionTitle } from "../styled";
 import { FilterMenu, FilterWrapper, NullMessage } from "../TabBoards/styled";
 import { ApplyBoardWrapper } from "./styled";
@@ -15,10 +15,8 @@ export default function TabApplyBoards({ boards, title }: TabApplyBoardsProps) {
   const [filterMenu, setFilterMenu] = useState("all");
   const [filterBoards, setFilterBoards] = useState(boards);
 
-  const openBoards = boards?.filter((boards) => boards.isRecruiting === true);
-  const closedBoards = boards?.filter(
-    (boards) => boards.isRecruiting === false,
-  );
+  const openBoards = boards?.filter((boards) => boards.closed === false);
+  const closedBoards = boards?.filter((boards) => boards.closed === true);
 
   const onClickFilterMenu = (type: string) => () => {
     if (type === "open") setFilterMenu("open");
@@ -58,7 +56,7 @@ export default function TabApplyBoards({ boards, title }: TabApplyBoardsProps) {
       {filterBoards?.length !== 0 ? (
         <ApplyBoardWrapper>
           {filterBoards?.map((el) => (
-            <ApplyBoardCard key={el.id} data={el} />
+            <ApplyBoardCard key={el.applicationId} data={el} />
           ))}
         </ApplyBoardWrapper>
       ) : (

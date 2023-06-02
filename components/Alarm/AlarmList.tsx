@@ -63,6 +63,7 @@ export default function AlarmList({
       e.stopPropagation();
       deleteMutate(id);
     };
+  console.log(alarmData);
 
   return (
     <Container>
@@ -92,7 +93,8 @@ export default function AlarmList({
           ));
         })
       )}
-      {Observer()}
+      {alarmData[0].notificationResponses.length > 10 && Observer()}
+      {/* {Observer()} */}
     </Container>
   );
 }

@@ -16,7 +16,7 @@ export const CarouselTitle = styled.h2`
 `;
 
 export const CardContainer = styled.div`
-  padding: 1px;
+  padding: 5px 0;
   width: 99.5%;
   height: 91%;
   display: flex;
