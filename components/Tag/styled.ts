@@ -23,7 +23,7 @@ export const TagWrapper = styled.div<TagProps>`
         `
       : css`
           color: ${p.color};
-          background-color: white;
+          background-color: ${(p) => p.theme.componentBgColor};
           border: 2px solid ${p.color};
         `};
   ${media.mobile} {

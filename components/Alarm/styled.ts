@@ -50,7 +50,7 @@ export const Container = styled.div`
   min-height: 100px;
   max-height: 400px;
   border: 1px solid ${(p) => p.theme.colors.mediumGray};
-  background-color: ${(p) => p.theme.componentBgColor};
+  background-color: ${(p) => p.theme.mainBackGround};
   border-radius: 10px;
   box-shadow: ${(p) => p.theme.boxShadow};
   padding: 10px;
@@ -122,8 +122,7 @@ export const Wrapper = styled.div<{ watched: boolean }>`
   width: 100%;
   height: 90px;
   border: 2px solid
-    ${(p) =>
-      p.watched ? p.theme.alarmCheckedColor : p.theme.alarmDefaultColor};
+    ${(p) => (p.watched ? p.theme.grayToDark : p.theme.alarmDefaultColor)};
   border-radius: 10px;
   margin-bottom: 10px;
   cursor: pointer;
@@ -131,7 +130,8 @@ export const Wrapper = styled.div<{ watched: boolean }>`
   flex-direction: column;
   justify-content: space-between;
   padding: 15px;
-  color: ${(p) => (p.watched ? p.theme.alarmCheckedColor : p.theme.textColor)};
+  color: ${(p) => (p.watched ? p.theme.grayToDark : p.theme.textColor)};
+  background-color: ${(p) => p.theme.componentBgColor};
 
   :hover {
     ${DeleteButton} {

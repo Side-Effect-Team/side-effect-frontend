@@ -31,8 +31,8 @@ export const TapWrapper = styled.div`
     margin: 0;
     border: none;
     border-radius: 0;
-    border-bottom: 2px solid ${(p) => p.theme.brandColor.lightGray};
-    background-color: ${(p) => p.theme.colors.white};
+    border-bottom: 2px solid ${(p) => p.theme.grayToDark};
+    background-color: ${(p) => p.theme.mainBackGround};
     z-index: 4;
   }
 `;
@@ -43,7 +43,7 @@ export const TapMenu = styled.div<{ isActive: boolean }>`
   margin: 7px 0;
   cursor: pointer;
   color: ${(p) =>
-    p.isActive ? p.theme.brandColor.primary : p.theme.colors.mediumGray};
+    p.isActive ? p.theme.brandColor.primary : p.theme.grayToDark};
   ${media.mobile} {
     font-size: 16px;
   }
