@@ -1,22 +1,9 @@
 import { MouseEvent } from "react";
-import {
-  IconButton,
-  ButtonsWrapper,
-  CommentIcon,
-  Container,
-  Content,
-  ContentsWrapper,
-  CreateAt,
-  FeedbackNum,
-  Footer,
-  Header,
-  HeartNotFillIcon,
-  Title,
-  ViewIcon,
-} from "./styled";
+import { Container, Content, ContentsWrapper, Header, Title } from "./styled";
 import { useRouter } from "next/router";
 import { useAddLikeProject } from "@/hooks/mutations/useAddLikeProject";
 import HeartButton from "@/components/Button/HeartButton";
+import CardFooter from "../../Footer/CardFooter";
 export interface BoardCardProps {
   category: string;
   closed: boolean;
@@ -44,7 +31,7 @@ interface ProjectCardProps {
   views: number;
 }
 interface BoardCardDataProps {
-  data?: ProjectCardProps;
+  data: ProjectCardProps;
 }
 
 export default function ProjectCard({ data }: BoardCardDataProps) {
@@ -67,23 +54,12 @@ export default function ProjectCard({ data }: BoardCardDataProps) {
       <ContentsWrapper>
         <Title>{data?.title}</Title>
         <Content>{data?.subTitle}</Content>
-        <Footer>
-          <CreateAt>{data?.createdAt}</CreateAt>
-          <ButtonsWrapper>
-            <IconButton>
-              <ViewIcon />
-            </IconButton>
-            <FeedbackNum>{data?.views}</FeedbackNum>
-            <IconButton>
-              <CommentIcon />
-            </IconButton>
-            <FeedbackNum>{data?.commentNum}</FeedbackNum>
-            <IconButton>
-              <HeartNotFillIcon />
-            </IconButton>
-            <FeedbackNum>{data?.likeNum}</FeedbackNum>
-          </ButtonsWrapper>
-        </Footer>
+        <CardFooter
+          createdAt={data?.createdAt}
+          views={data?.views}
+          commentNum={data?.commentNum}
+          likeNum={data?.likeNum}
+        />
       </ContentsWrapper>
     </Container>
   );

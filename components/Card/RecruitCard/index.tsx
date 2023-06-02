@@ -1,18 +1,10 @@
 import { useEffect, useState } from "react";
-import {
-  ButtonsWrapper,
-  CreateAt,
-  FeedbackNum,
-  Footer,
-  HeartNotFillIcon,
-  IconButton,
-  ViewIcon,
-} from "../ProjectCard/styled";
 import { useAddLikeRecruit } from "@/hooks/mutations/useAddLikeRecuit";
 import { Container, IsRecruiting, Title } from "./styled";
 import { useRouter } from "next/router";
 import HeartButton from "@/components/Button/HeartButton";
 import TagBox from "@/components/Tag/TagBox";
+import CardFooter from "../../Footer/CardFooter";
 interface RecruitDataProps {
   closed: boolean;
   commentNum: number;
@@ -74,19 +66,12 @@ export default function RecruitCard({ data }: RecruitCardProps) {
         fontSize="15px"
       />
       <TagBox title="사용언어" tagArray={data?.tags} />
-      <Footer>
-        <CreateAt>{data?.createdAt}</CreateAt>
-        <ButtonsWrapper>
-          <IconButton>
-            <ViewIcon />
-          </IconButton>
-          <FeedbackNum>{data?.views}</FeedbackNum>
-          <IconButton>
-            <HeartNotFillIcon />
-          </IconButton>
-          <FeedbackNum>{data?.likeNum}</FeedbackNum>
-        </ButtonsWrapper>
-      </Footer>
+      <CardFooter
+        createdAt={data?.createdAt}
+        views={data?.views}
+        commentNum={data?.commentNum}
+        likeNum={data?.likeNum}
+      />
     </Container>
   );
 }
