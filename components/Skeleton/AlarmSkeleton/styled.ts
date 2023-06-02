@@ -1,11 +1,9 @@
-import { theme } from "@/styles/Theme";
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
   width: 100%;
   height: 90px;
-  border: 1px solid ${theme.brandColor.lightGray};
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
+  border: 1.5px solid ${(p) => p.theme.alarmCheckedColor};
   border-radius: 10px;
   margin-bottom: 10px;
   display: flex;
@@ -22,18 +20,18 @@ export const RowWrapper = styled.div`
 export const Title = styled.div`
   width: 60%;
   height: 16px;
-  background-color: ${theme.brandColor.lightGray};
+  background-color: ${(p) => p.theme.alarmCheckedColor};
 `;
 
 export const Contents = styled.div`
   width: 50%;
   height: 14px;
   font-size: 14px;
-  background-color: ${theme.brandColor.lightGray};
+  background-color: ${(p) => p.theme.alarmCheckedColor};
 `;
 export const Date = styled.div`
   width: 25%;
   height: 14px;
   font-size: 14px;
-  background-color: ${theme.brandColor.lightGray};
+  background-color: ${(p) => p.theme.alarmCheckedColor};
 `;

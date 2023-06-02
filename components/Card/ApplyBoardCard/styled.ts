@@ -1,13 +1,13 @@
-import { theme } from "@/styles/Theme";
 import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
   height: 80px;
-  border: 1px solid lightgray;
+  border: 1.5px solid ${(p) => p.theme.colors.mediumGray};
   border-radius: 10px;
   overflow: hidden;
-  background-color: white;
+  background-color: ${(p) => p.theme.componentBgColor};
+  box-shadow: ${(p) => p.theme.cardBoxShadow};
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -29,11 +29,12 @@ export const RowWrapper = styled.div`
 export const Title = styled.div`
   font-size: 18px;
   font-weight: 600;
+  color: ${(p) => p.theme.textColor};
 `;
 
 export const TitleGray = styled.div`
   font-size: 18px;
-  color: gray;
+  color: ${(p) => p.theme.colors.mediumGray};
   margin-right: 5px;
 `;
 
@@ -43,20 +44,20 @@ export const Position = styled.div`
 `;
 export const PositionGray = styled.div`
   font-size: 14px;
-  color: gray;
+  color: ${(p) => p.theme.colors.mediumGray};
   margin-right: 5px;
 `;
-export const Status = styled.div<{ status: string; isRecruiting: boolean }>`
+export const Status = styled.div<{ status: string; closed: boolean }>`
   font-size: 1rem;
   border-radius: 4px;
   padding: 0 1rem;
 
   color: ${(p) =>
     p.status === "APPROVED"
-      ? theme.brandColor.primary
+      ? p.theme.brandColor.primary
       : p.status === "REJECTED"
-      ? "gray"
-      : p.isRecruiting === false
-      ? "gray"
+      ? p.theme.colors.gray
+      : p.closed === true
+      ? p.theme.colors.gray
       : null};
 `;

@@ -1,5 +1,5 @@
 import { ProjectListWrapper } from "./styled";
-import BoardCard from "@/components/BoardCard";
+import ProjectCard from "@/components/Card/ProjectCard";
 
 interface PageType {
   hasNext: boolean;
@@ -17,9 +17,7 @@ export default function ProjectList({ data }: any) {
     <ProjectListWrapper>
       {data?.pages.map((page: PageType) => {
         return page.projects.map((project) => {
-          return (
-            <BoardCard key={project.id} data={project} category="projects" />
-          );
+          return <ProjectCard key={project.id} data={project} />;
         });
       })}
     </ProjectListWrapper>

@@ -1,14 +1,16 @@
-import BoardCard, { BoardCardProps } from "@/components/BoardCard";
+import ProjectCard, { BoardCardProps } from "@/components/Card/ProjectCard";
 import { Border, SectionHeaderWrapper, SectionTitle } from "../styled";
 import { BoardWrapper, FilterMenu, FilterWrapper, NullMessage } from "./styled";
 import { useEffect, useState } from "react";
+import RecruitCard from "@/components/Card/RecruitCard";
 
 interface TabBoards {
   boards?: BoardCardProps[] | null;
   title: string;
+  activeTab: string;
 }
 
-export default function TabBoards({ boards, title }: TabBoards) {
+export default function TabBoards({ boards, title, activeTab }: TabBoards) {
   const [filterMenu, setFilterMenu] = useState("all");
   const [filterBoards, setFilterBoards] = useState(boards);
 
@@ -37,6 +39,10 @@ export default function TabBoards({ boards, title }: TabBoards) {
     else setFilterBoards(boards);
   }, [filterMenu, boards]);
 
+  useEffect(() => {
+    setFilterMenu("all");
+  }, [activeTab]);
+
   return (
     <>
       <SectionHeaderWrapper>
@@ -57,9 +63,13 @@ export default function TabBoards({ boards, title }: TabBoards) {
       {boards?.length !== 0 ? (
         <BoardWrapper>
           {filterBoards &&
-            filterBoards.map((el, index) => (
-              <BoardCard key={index} data={el} category={el.category || ""} />
-            ))}
+            filterBoards.map((el, index) =>
+              el.category === "projects" ? (
+                <ProjectCard key={index} data={el} />
+              ) : (
+                <RecruitCard key={index} data={el} />
+              ),
+            )}
         </BoardWrapper>
       ) : (
         <NullMessage>게시물이 없습니다.</NullMessage>

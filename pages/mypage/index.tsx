@@ -6,12 +6,12 @@ import {
 } from "@/components/pages/mypage/styled";
 import Profile from "@/components/pages/mypage/Profile";
 import { useEffect, useState } from "react";
-import { BoardCardProps } from "@/components/BoardCard";
+import { BoardCardProps } from "@/components/Card/ProjectCard";
 import TabBoards from "@/components/pages/mypage/TabBoards";
 import Account from "@/components/pages/mypage/Account";
 import { useGetMypageData } from "@/hooks/queries/useGetMypageData";
 import TabApplyBoards from "@/components/pages/mypage/TabApplyBoards";
-import { ApplyBoardCardProps } from "@/components/ApplyBoardCard";
+import { ApplyBoardCardProps } from "@/components/Card/ApplyBoardCard";
 import { withAuth } from "@/components/hocs/withAuth";
 
 export interface MypageProps {
@@ -54,6 +54,8 @@ function MyPage() {
 
   const onClickTab = (tabName: string) => {
     setActiveTab(tabName);
+    // 마이페이지에 등록된 게시물에서 뒤로가기를 눌렀을 때 탭이 유지되도록 설정
+    sessionStorage.setItem("activeTab", tabName);
   };
 
   const data = useGetMypageData();
@@ -68,6 +70,11 @@ function MyPage() {
     }
   }, [activeTab, data]);
 
+  // 마이페이지에 등록된 게시물에서 뒤로가기를 눌렀을 때 탭이 유지되도록 설정
+  useEffect(() => {
+    const savedActiveTab = window.sessionStorage.getItem("activeTab");
+    if (savedActiveTab) setActiveTab(savedActiveTab);
+  }, []);
   return (
     <Container>
       <TapWrapper>
@@ -90,7 +97,11 @@ function MyPage() {
         ) : activeTab === "applyBoards" ? (
           <TabApplyBoards boards={applyBoard} title={title || ""} />
         ) : (
-          <TabBoards boards={boards} title={title || ""} />
+          <TabBoards
+            boards={boards}
+            title={title || ""}
+            activeTab={activeTab}
+          />
         )}
       </ContentsWrapper>
     </Container>

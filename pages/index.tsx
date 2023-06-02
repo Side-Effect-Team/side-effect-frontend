@@ -4,6 +4,7 @@ import MainCarousel from "@/components/Carousel/MainCarousel";
 import BatchCarousel from "@/components/Carousel/BatchCarousel";
 
 export default function HomePage() {
+  window.sessionStorage.removeItem("activeTab");
   return (
     <Wrapper>
       <MainCarousel data={CAROUSEL_CONTENTS_LIST} />

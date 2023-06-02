@@ -2,7 +2,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { getProjectData } from "apis/ProjectAPI";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-import Skeleton from "@/components/Skeleton/BoardCardSkeleton";
+import ProjectCardSkeleton from "@/components/Skeleton/ProjectCardSkeleton";
 export const useGetProjectData = (
   filter: string = "",
   keyword: string = "",
@@ -36,7 +36,7 @@ export const useGetProjectData = (
     if (!hasNextPage) return;
 
     // 데이터를 불러오는동안 스켈레톤컴포넌트를 보여준다.
-    return isFetchingNextPage ? <Skeleton /> : <div ref={ref} />;
+    return isFetchingNextPage ? <ProjectCardSkeleton /> : <div ref={ref} />;
   };
 
   return {

@@ -1,57 +1,30 @@
 import Button from "@/components/Button";
-import { Email, Nickname, Wrapper } from "./style";
-import axios from "axios";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import useToast from "@/hooks/common/useToast";
+import { Wrapper } from "./style";
+import { NickName, Text } from "../Profile/Introduction/styled";
+import { useDeleteAccount } from "@/hooks/mutations/useDeleteAccount";
+import { useAppDispatch } from "@/store/hooks";
+import { removeAuthentication } from "@/store/authSlice";
 import { useRouter } from "next/router";
+import { store } from "@/store/store";
 interface AccountProps {
   email: string;
   nickname: string;
 }
 
-export const DELETE_ACCOUNT = async () => {
-  const id = localStorage.getItem("id");
-  const token = localStorage.getItem("accessToken");
-  const config = {
-    headers: { Authorization: `Bearer ${token}` },
-  };
-  const response = await axios.delete(
-    `${process.env.NEXT_PUBLIC_API_URL}/user/${id}`,
-    config,
-  );
-  return response;
-};
 export default function Account({ email, nickname }: AccountProps) {
-  const { addToast, deleteToast } = useToast();
+  const deleteAccountMutate = useDeleteAccount();
   const router = useRouter();
-
-  const { mutate: deleteAccountMutate } = useMutation({
-    mutationFn: DELETE_ACCOUNT,
-    onSuccess: () => {
-      addToast({
-        type: "success",
-        title: "success",
-        content: "계정이 삭제되었습니다.",
-      });
-      deleteToast("unique-id");
-      localStorage.removeItem("id");
-      localStorage.removeItem("accessToken");
-      router.push("/");
-    },
-    onError: () => {
-      alert("에러");
-    },
-  });
 
   const onClickDeleteAccount = async () => {
     const response = confirm("사이드 이펙트 계정을 삭제하시겠습니까?");
     if (!response) return;
-    deleteAccountMutate();
+    router.push(`/`);
+    await deleteAccountMutate();
   };
   return (
     <Wrapper>
-      <Nickname>{nickname}님</Nickname>
-      <Email>email : {email}</Email>
+      <NickName>{nickname}님</NickName>
+      <Text>email : {email}</Text>
       <Button onClick={onClickDeleteAccount}>계정 탈퇴</Button>
     </Wrapper>
   );

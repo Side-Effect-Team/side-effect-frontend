@@ -9,6 +9,8 @@ export const theme = {
     success: "#16B364",
     background: "#fff",
     white: "#fff",
+    mediumGray: "#d9d9d9",
+    darkGray: "#667085",
   },
   sizes: {
     mobile: breakPoints.mobile + "px",
@@ -45,6 +47,15 @@ export const darkTheme = {
   hover: "#232323",
   textColor: "#ffffff",
   footerBgColor: "#35383F",
+  alarmDefaultColor: "#d9d9d9",
+  alarmCheckedColor: "#667085",
+  cardBoxShadow: `
+  0 0 0 1px hsla(0, 0%, 0%, 0.1),
+  0 1px 2px hsla(0, 0%, 0%, 0.05),
+  0 2px 4px hsla(0, 0%, 0%, 0.1),
+  0 6px 10px hsla(0, 0%, 0%, 0.2);
+  `,
+  cardBorder: "none",
 };
 export const lightTheme = {
   ...theme,
@@ -53,6 +64,10 @@ export const lightTheme = {
   hover: "#eaecf0",
   textColor: "#000000",
   footerBgColor: "#1867B6",
+  alarmDefaultColor: "#CDDEFF",
+  alarmCheckedColor: "#d9d9d9",
+  cardBoxShadow: "none",
+  cardBorder: "#d9d9d9",
 };
 
 export type BrandColorTypes = keyof typeof theme.brandColor;
