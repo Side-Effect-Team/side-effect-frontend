@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
-import Image from "next/image";
 import { GoPlus } from "react-icons/go";
 import customAxios from "@/apis/customAxios";
 import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
@@ -13,7 +12,6 @@ import {
   TextareaForm,
   SubmitBtnBox,
   ErrorMsg,
-  ImageBox,
   GuideWrapper,
 } from "@/postComps/common/PostForm.styled";
 import Button from "@/components/Button";
@@ -21,8 +19,6 @@ import TagBox from "@/postComps/TagBox";
 import { useTag } from "@/hooks/common/useTag";
 import { useForm } from "@/hooks/common/useForm";
 import PositionBox from "@/components/pages/post/PositionBox";
-import { useInputImage } from "@/hooks/common/useInputImage";
-import { DEFAULT_RECRUIT_CARD_IMAGE } from "../../enum";
 import PageHead from "@/components/PageHead";
 
 export const POSITIONS = [
@@ -43,9 +39,6 @@ export default function PostRecruitPage() {
   const router = useRouter();
   const [positions, setPositions] = useState([...POSITIONS]);
   const { tags, deleteTag, addTag } = useTag([]);
-  const { imgSrc, handleImgChange, uploadImg } = useInputImage(
-    DEFAULT_RECRUIT_CARD_IMAGE,
-  );
   const { postForm, errMsgs, touched, handleChange, handleBlur, handleSubmit } =
     useForm({
       initialVals: { ...POST_FORM },
@@ -86,15 +79,6 @@ export default function PostRecruitPage() {
         const url = `/recruit-board`;
         try {
           const res = await customAxios.post(url, data);
-          const recruitId = await res.data.id;
-          const imgUrl = url + "/image/" + recruitId;
-
-          // image upload
-          if (res.status === 200) {
-            await uploadImg(imgUrl);
-            await window.alert("게시글 등록이 완료되었습니다");
-            await router.push(`/recruits/${recruitId}`);
-          }
         } catch (err) {
           console.log(err);
           window.alert("게시글 등록에 실패했습니다");
@@ -189,21 +173,6 @@ export default function PostRecruitPage() {
                 </Button>
               </div>
             </PositionBoxContainer>
-          </InputBox>
-          <InputBox>
-            <LabelForm htmlFor="image">대표 이미지</LabelForm>
-            <InputForm
-              name="image"
-              type="file"
-              accept="image/*"
-              onChange={handleImgChange}
-            />
-            <ImageBox>
-              {imgSrc === DEFAULT_RECRUIT_CARD_IMAGE && (
-                <p>이미지 미설정 시 적용될 기본 이미지입니다</p>
-              )}
-              <Image src={imgSrc} alt="" width={250} height={150} priority />
-            </ImageBox>
           </InputBox>
           <TagBox tags={tags} deleteTag={deleteTag} addTag={addTag} />
           <InputBox>
