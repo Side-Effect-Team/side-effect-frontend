@@ -11,7 +11,7 @@ import ProjectList from "@/components/pages/project/ProjectLIst";
 import ProjectCardSkeleton from "@/components/Skeleton/ProjectCardSkeleton";
 import { useAppSelector } from "@/store/hooks";
 import DarkModeToggle from "@/components/DarkModeToggle";
-
+import RankingCard from "@/components/Card/RankingCard";
 const FILTER_OPTIONS = [
   { name: "최신순", value: "latest" },
   { name: "조회순", value: "views" },
@@ -34,6 +34,7 @@ export default function ProjectPage() {
   }, [refetch, token]);
   return (
     <Wrapper>
+      <RankingCard />
       <DarkModeToggle />
       <PageHead pageTitle="프로젝트 자랑 | 사이드 이펙트" />
       <BatchCarousel
@@ -70,7 +71,6 @@ const Wrapper = styled.div`
   max-width: ${breakPoints.desktop}px;
   margin: 0 auto;
   gap: 20px;
-  /* background-color: white; */
 `;
 const FilterSection = styled.div`
   display: flex;
