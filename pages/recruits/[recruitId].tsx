@@ -1,15 +1,19 @@
-import { useRouter } from "next/router";
 import { useQuery } from "@tanstack/react-query";
+import { GetServerSidePropsContext } from "next";
 import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
 import PositionDetail from "@/detailComps/PositionDetail";
 import ContentDetail from "@/detailComps/ContentDetail";
 import PostData from "@/detailComps/PostData";
 import { getRecruitPost } from "@/apis/RecruitBoardAPI";
+import CommentBox from "@/detailComps/CommentBox";
 
-export default function RecruitDetailPage() {
-  const router = useRouter();
-  const recruitId = router.query.recruitId as string;
+interface RecruitDetailPageProps {
+  recruitId: string;
+}
 
+export default function RecruitDetailPage({
+  recruitId,
+}: RecruitDetailPageProps) {
   const { data, isLoading, isError } = useQuery({
     queryKey: ["recruitPost"],
     queryFn: () => getRecruitPost(recruitId),
@@ -25,6 +29,7 @@ export default function RecruitDetailPage() {
   }
 
   if (data) {
+    console.log("코멘트있나", data);
     const {
       id,
       title,
@@ -58,8 +63,18 @@ export default function RecruitDetailPage() {
             content={content}
             imgSrc={imgSrc}
           />
+          {/*<CommentBox boardId={id} comments={comments} />*/}
         </Contents>
       </Wrapper>
     );
   }
+}
+
+export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+  const recruitId = ctx.params?.recruitId as string;
+  return {
+    props: {
+      recruitId,
+    },
+  };
 }

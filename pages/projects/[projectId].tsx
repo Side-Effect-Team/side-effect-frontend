@@ -1,4 +1,4 @@
-import { useRouter } from "next/router";
+import type { GetServerSidePropsContext } from "next";
 import { useQuery } from "@tanstack/react-query";
 import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
 import ContentDetail from "@/detailComps/ContentDetail";
@@ -6,10 +6,13 @@ import CommentBox from "@/detailComps/CommentBox";
 import PostData from "@/detailComps/PostData";
 import { getProjectPost } from "@/apis/ProjectAPI";
 
-export default function ProjectDetailPage() {
-  const router = useRouter();
-  const projectId = router.query.projectId as string;
+interface ProjectDetailPageProps {
+  projectId: string;
+}
 
+export default function ProjectDetailPage({
+  projectId,
+}: ProjectDetailPageProps) {
   const { data, isLoading, isError } = useQuery({
     queryKey: ["projectPost"],
     queryFn: () => getProjectPost(projectId),
@@ -62,4 +65,13 @@ export default function ProjectDetailPage() {
       </Wrapper>
     );
   }
+}
+
+export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+  const projectId = ctx.params?.projectId as string;
+  return {
+    props: {
+      projectId,
+    },
+  };
 }
