@@ -31,15 +31,17 @@ export const AlarmButton = styled(IoNotificationsOutline)`
   font-size: 24px;
 `;
 export const AlarmCount = styled.div`
+  min-width: 16px;
   position: absolute;
-  top: 1px;
+  top: -3px;
   left: 15px;
   background-color: red;
   padding: 2px 4px;
-  border-radius: 10px;
+  border-radius: 50%;
   color: ${(p) => p.theme.colors.white};
   font-weight: 700;
   font-size: 12px;
+  text-align: center;
 `;
 
 // 알람 리스트
@@ -109,9 +111,9 @@ export const DeleteButton = styled(IoClose)`
 export const Wrapper = styled.div<{ watched: boolean }>`
   width: 100%;
   height: 90px;
-  border: 1.5px solid
+  border: 2px solid
     ${(p) => (p.watched ? p.theme.closedColor : p.theme.openColor)};
-  /* box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25); */
+  box-shadow: ${(p) => p.theme.cardBoxShadow};
   border-radius: 10px;
   margin-bottom: 10px;
   cursor: pointer;
@@ -123,7 +125,9 @@ export const Wrapper = styled.div<{ watched: boolean }>`
 
   :hover {
     /* box-shadow: 1px 1px 5px rgba(21, 94, 239, 0.25); */
-    box-shadow: ${(p) => p.theme.boxShadow};
+    transition: all 0.3s;
+    transform: translateX(-0.3rem);
+    /* box-shadow: ${(p) => p.theme.boxShadow}; */
     ${DeleteButton} {
       display: block;
     }

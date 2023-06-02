@@ -5,7 +5,10 @@ export const Input = styled.input`
   width: 100%;
   height: 3rem;
   padding: 0 10px;
-  border: 1px solid ${(p) => p.theme.brandColor.mediumGray};
+  color: ${(p) => p.theme.textColor};
+  border: 1px solid ${(p) => p.theme.colors.mediumGray};
+  background-color: ${(p) => p.theme.mainBackGround};
+  border-radius: 10px;
   ${media.mobile} {
     width: 100%;
   }

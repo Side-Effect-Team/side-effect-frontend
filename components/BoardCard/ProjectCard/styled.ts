@@ -11,11 +11,11 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  border: 2px solid ${(p) => p.theme.colors.mediumGray};
+  border: 2px solid ${(p) => p.theme.cardBorder};
   border-radius: 15px;
   overflow: hidden;
-  background-color: ${(p) => p.theme.colors.white};
   position: relative;
+  box-shadow: ${(p) => p.theme.cardBoxShadow};
   cursor: pointer;
   :hover {
     transition: all 0.3s;
@@ -31,14 +31,14 @@ export const Container = styled.div`
   }
 `;
 export const HeartWrapper = styled.div<{ isLike: boolean }>`
-  background-color: ${({ isLike }) => (isLike ? "white" : "#d9d9d9")};
+  background-color: ${(p) => (p.isLike ? "white" : p.theme.colors.mediumGray)};
   border-radius: 50%;
   padding: 5px;
   position: absolute;
   top: 10px;
   right: 10px;
   display: flex;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0.2px 0.2px 2px rgba(0, 0, 0, 0.5);
 `;
 interface HeartProps {
   islike: string;
@@ -69,9 +69,8 @@ export const Header = styled.div<{ src?: string }>`
   height: 250px;
   background-image: ${(p) =>
     `url(${
-      !p.src || p.src === "DefaultBackground.png"
-        ? // ? "/images/ProjectDefaultBackground.png"
-          "/images/ProjectBackground.png"
+      !p.src
+        ? "/images/ProjectBackground.png"
         : `${process.env.NEXT_PUBLIC_API_URL}/free-boards/image/${p.src}`
     })`};
 

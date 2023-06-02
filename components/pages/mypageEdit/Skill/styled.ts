@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { theme } from "@/styles/Theme";
 
 export const TagWrapper = styled.div`
   width: 100%;
@@ -9,7 +8,7 @@ export const TagWrapper = styled.div`
   align-items: center;
   flex-wrap: wrap;
   padding: 5px;
-  border: 1px solid ${(p) => p.theme.brandColor.mediumGray};
+  border: 1px solid ${(p) => p.theme.colors.mediumGray};
   border-radius: 10px;
   &:focus-within {
     border-color: ${(p) => p.theme.brandColor.primary};
@@ -36,4 +35,6 @@ export const TagInput = styled.input`
   border: none;
   outline: none;
   margin: 5px;
+  background-color: ${(p) => p.theme.mainBackGround};
+  color: ${(p) => p.theme.textColor};
 `;

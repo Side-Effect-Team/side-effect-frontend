@@ -52,7 +52,10 @@ export const ProfileContentsWrapper = styled.div`
 export const TextArea = styled.textarea`
   width: 100%;
   padding: 10px;
-  border: 1px solid ${(p) => p.theme.brandColor.mediumGray};
+  color: ${(p) => p.theme.textColor};
+  border: 1px solid ${(p) => p.theme.colors.mediumGray};
+  background-color: ${(p) => p.theme.mainBackGround};
+  border-radius: 10px;
   resize: none;
   :focus {
     border: 1px solid ${(p) => p.theme.brandColor.primary};

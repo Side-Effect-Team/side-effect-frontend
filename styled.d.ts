@@ -21,5 +21,7 @@ declare module "styled-components" {
     footerBgColor: string;
     openColor: string;
     closedColor: string;
+    cardBoxShadow: string;
+    cardBorder: string;
   }
 }

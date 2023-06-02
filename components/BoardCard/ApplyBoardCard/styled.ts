@@ -7,6 +7,7 @@ export const Container = styled.div`
   border-radius: 10px;
   overflow: hidden;
   background-color: ${(p) => p.theme.componentBgColor};
+  box-shadow: ${(p) => p.theme.cardBoxShadow};
   display: flex;
   align-items: center;
   justify-content: space-between;

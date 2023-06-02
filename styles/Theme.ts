@@ -49,6 +49,13 @@ export const darkTheme = {
   footerBgColor: "#35383F",
   openColor: "#d9d9d9",
   closedColor: "#667085",
+  cardBoxShadow: `
+  0 0 0 1px hsla(0, 0%, 0%, 0.1),
+  0 1px 2px hsla(0, 0%, 0%, 0.05),
+  0 2px 4px hsla(0, 0%, 0%, 0.1),
+  0 6px 10px hsla(0, 0%, 0%, 0.2);
+  `,
+  cardBorder: "none",
 };
 export const lightTheme = {
   ...theme,
@@ -59,6 +66,8 @@ export const lightTheme = {
   footerBgColor: "#1867B6",
   openColor: "#CDDEFF",
   closedColor: "#d9d9d9",
+  cardBoxShadow: "none",
+  cardBorder: "#d9d9d9",
 };
 
 export type BrandColorTypes = keyof typeof theme.brandColor;

@@ -9,13 +9,13 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  border: 2px solid ${(p) => p.theme.colors.mediumGray};
+  border: 2px solid ${(p) => p.theme.cardBorder};
   border-radius: 15px;
   overflow: hidden;
   background-color: ${(p) => p.theme.componentBgColor};
+  box-shadow: ${(p) => p.theme.cardBoxShadow};
   position: relative;
   padding: 15px;
-
   cursor: pointer;
   :hover {
     transition: all 0.3s;
