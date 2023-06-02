@@ -75,7 +75,7 @@ export default function PositionRow({
       {!isPossible ? (
         <CloseBtn>모집 완료</CloseBtn>
       ) : isApplied ? (
-        <Button onClick={() => cancelMutation.mutate(positionId)}>
+        <Button color="coral" onClick={() => cancelMutation.mutate(positionId)}>
           지원 취소
         </Button>
       ) : (
