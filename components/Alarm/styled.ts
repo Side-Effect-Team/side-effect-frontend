@@ -1,6 +1,6 @@
 import { media } from "@/styles/mediatest";
 import { IoClose, IoNotificationsOutline } from "react-icons/io5";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 // 알람 아이콘
 export const AlarmDiv = styled.div<{ openAlarm: boolean }>`
@@ -58,9 +58,19 @@ export const Container = styled.div`
   top: 47px;
   right: -10px;
   overflow: auto;
+  animation: openAlarm 0.3s ease-in-out;
   ::-webkit-scrollbar {
     display: none;
   }
+  @keyframes openAlarm {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
   ${media.mobile} {
     width: 100%;
     height: 100%;
@@ -112,8 +122,8 @@ export const Wrapper = styled.div<{ watched: boolean }>`
   width: 100%;
   height: 90px;
   border: 2px solid
-    ${(p) => (p.watched ? p.theme.closedColor : p.theme.openColor)};
-  box-shadow: ${(p) => p.theme.cardBoxShadow};
+    ${(p) =>
+      p.watched ? p.theme.alarmCheckedColor : p.theme.alarmDefaultColor};
   border-radius: 10px;
   margin-bottom: 10px;
   cursor: pointer;
@@ -121,19 +131,12 @@ export const Wrapper = styled.div<{ watched: boolean }>`
   flex-direction: column;
   justify-content: space-between;
   padding: 15px;
-  color: ${(p) => (p.watched ? p.theme.closedColor : p.theme.textColor)};
+  color: ${(p) => (p.watched ? p.theme.alarmCheckedColor : p.theme.textColor)};
 
   :hover {
-    /* box-shadow: 1px 1px 5px rgba(21, 94, 239, 0.25); */
-    transition: all 0.3s;
-    transform: translateX(-0.3rem);
-    /* box-shadow: ${(p) => p.theme.boxShadow}; */
     ${DeleteButton} {
       display: block;
     }
-  }
-  ${media.mobile} {
-    /* box-shadow: 1px 1px 5px rgba(21, 94, 239, 0.25); */
   }
 `;
 
@@ -143,7 +146,6 @@ export const RowWrapper = styled.div`
   justify-content: space-between;
 `;
 export const Title = styled.div`
-  /* color: ${(p) => p.theme.textColor}; */
   width: 100%;
   font-size: 16px;
   font-weight: 700;

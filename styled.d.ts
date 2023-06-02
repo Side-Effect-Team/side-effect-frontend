@@ -19,8 +19,8 @@ declare module "styled-components" {
     hover: string;
     boxShadow: string;
     footerBgColor: string;
-    openColor: string;
-    closedColor: string;
+    alarmDefaultColor: string;
+    alarmCheckedColor: string;
     cardBoxShadow: string;
     cardBorder: string;
   }

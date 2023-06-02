@@ -47,8 +47,8 @@ export const darkTheme = {
   hover: "#232323",
   textColor: "#ffffff",
   footerBgColor: "#35383F",
-  openColor: "#d9d9d9",
-  closedColor: "#667085",
+  alarmDefaultColor: "#d9d9d9",
+  alarmCheckedColor: "#667085",
   cardBoxShadow: `
   0 0 0 1px hsla(0, 0%, 0%, 0.1),
   0 1px 2px hsla(0, 0%, 0%, 0.05),
@@ -64,8 +64,8 @@ export const lightTheme = {
   hover: "#eaecf0",
   textColor: "#000000",
   footerBgColor: "#1867B6",
-  openColor: "#CDDEFF",
-  closedColor: "#d9d9d9",
+  alarmDefaultColor: "#CDDEFF",
+  alarmCheckedColor: "#d9d9d9",
   cardBoxShadow: "none",
   cardBorder: "#d9d9d9",
 };
