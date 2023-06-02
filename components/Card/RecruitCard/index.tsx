@@ -1,13 +1,10 @@
-import { MouseEvent, useEffect, useState } from "react";
-
+import { useEffect, useState } from "react";
 import {
   ButtonsWrapper,
   CreateAt,
   FeedbackNum,
   Footer,
-  HeartFillIcon,
   HeartNotFillIcon,
-  HeartWrapper,
   IconButton,
   ViewIcon,
 } from "../ProjectCard/styled";
@@ -22,7 +19,7 @@ import {
 } from "./styled";
 import Tag from "@/components/Tag";
 import { useRouter } from "next/router";
-import { useAppSelector } from "@/store/hooks";
+import HeartButton from "@/components/Button/HeartButton";
 interface RecruitDataProps {
   id: number;
   closed?: boolean;
@@ -39,29 +36,10 @@ interface RecruitCardProps {
 }
 
 export default function RecruitCard({ data }: RecruitCardProps) {
-  const [heartLike, setHeartLike] = useState(data?.like || false);
   const recruitMutate = useAddLikeRecruit();
   const [recruitingTitle, setRecruitingTitle] = useState("• 모집중");
   const router = useRouter();
-  const { token } = useAppSelector((state) => state.auth);
 
-  const onClickHeart = async (e: MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
-    const id = Number(e.currentTarget.id);
-    if (token) {
-      recruitMutate(id, {
-        onSuccess: (res) => {
-          if (res.data.message.includes("추천했습니다")) {
-            setHeartLike(true);
-          } else setHeartLike(false);
-        },
-      });
-      console.log(data);
-    } else alert("로그인 후 이용가능합니다.");
-  };
-  useEffect(() => {
-    setHeartLike(false);
-  }, []);
   useEffect(() => {
     if (!data?.closed) {
       setRecruitingTitle("• 모집중");
@@ -86,16 +64,11 @@ export default function RecruitCard({ data }: RecruitCardProps) {
 
   return (
     <Container onClick={onClickGoToBoard}>
-      <HeartWrapper
+      <HeartButton
         isLike={data?.like || false}
-        id={data?.id.toString()}
-        onClick={onClickHeart}
-      >
-        <HeartFillIcon
-          islike={(data?.like && data?.like.toString()) || "false"}
-          heartlike={heartLike.toString()}
-        />
-      </HeartWrapper>
+        id={data?.id || 0}
+        likeMutate={recruitMutate}
+      />
       <IsRecruiting isRecruiting={!data?.closed}>
         {recruitingTitle}
       </IsRecruiting>

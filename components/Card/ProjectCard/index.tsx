@@ -1,4 +1,4 @@
-import { MouseEvent, useEffect, useState } from "react";
+import { MouseEvent } from "react";
 import {
   IconButton,
   ButtonsWrapper,
@@ -13,12 +13,10 @@ import {
   HeartNotFillIcon,
   Title,
   ViewIcon,
-  HeartWrapper,
-  HeartFillIcon,
 } from "./styled";
 import { useRouter } from "next/router";
 import { useAddLikeProject } from "@/hooks/mutations/useAddLikeProject";
-import { useAppSelector } from "@/store/hooks";
+import HeartButton from "@/components/Button/HeartButton";
 export interface BoardCardProps {
   id: number;
   headerImage?: string;
@@ -36,48 +34,24 @@ export interface BoardCardProps {
 }
 interface BoardCardDataProps {
   data?: BoardCardProps;
-  // category: string;
 }
 
 export default function BoardCard({ data }: BoardCardDataProps) {
-  const { token } = useAppSelector((state) => state.auth);
   const projectMutate = useAddLikeProject();
   const router = useRouter();
-  const onClickHeart = async (e: MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
-    const id = Number(e.currentTarget.id);
-    if (token) {
-      projectMutate(id, {
-        onSuccess: (res) => {
-          if (res.data.message.includes("추천했습니다")) {
-            setHeartLike(true);
-          } else setHeartLike(false);
-        },
-      });
-    } else alert("로그인 후 이용가능합니다.");
-  };
 
   const onClickGoToBoard = (e: MouseEvent<HTMLDivElement>) => {
     router.push(`/projects/${e.currentTarget.id}`);
   };
-  const [heartLike, setHeartLike] = useState(data?.like || false);
 
-  useEffect(() => {
-    setHeartLike(false);
-  }, []);
   return (
     <Container id={data?.id.toString()} onClick={onClickGoToBoard}>
       <Header src={data?.headerImage}>
-        <HeartWrapper
+        <HeartButton
           isLike={data?.like || false}
-          id={data?.id.toString()}
-          onClick={onClickHeart}
-        >
-          <HeartFillIcon
-            islike={data?.like ? data?.like.toString() : "false"}
-            heartlike={heartLike.toString()}
-          />
-        </HeartWrapper>
+          id={data?.id || 0}
+          likeMutate={projectMutate}
+        />
       </Header>
       <ContentsWrapper>
         <Title>{data?.title}</Title>
