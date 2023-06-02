@@ -1,6 +1,6 @@
-import { theme } from "@/styles/Theme";
-import { media } from "@/styles/mediatest";
 import styled, { keyframes } from "styled-components";
+import { media } from "@/styles/mediatest";
+import { theme } from "../../../styles/Theme";
 
 const loading = keyframes`
  0% {
@@ -30,51 +30,87 @@ const SkeletonItem = styled.div`
     border-radius: 15px;
   }
 `;
-
-export const RecruitSkeletonWrapper = styled.div`
+export const SkelectonContainer = styled.div`
+  display: grid;
+  justify-items: center;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  row-gap: 1rem;
+  column-gap: 1rem;
+  margin-bottom: 1rem;
+  ${media.mobile} {
+    display: flex;
+    flex-direction: column;
+  }
+`;
+export const SkeletonCardWrapper = styled.div`
   width: 300px;
   height: 400px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  border: 2px solid ${(p) => p.theme.cardBorder};
   border-radius: 15px;
   overflow: hidden;
-  background-color: ${(p) => p.theme.componentBgColor};
+  background-color: ${(p) => p.theme.mainBackGround};
+  border: 2px solid ${(p) => p.theme.cardBorder};
   position: relative;
   box-shadow: ${(p) => p.theme.cardBoxShadow};
-  padding: 15px;
+
   ${media.mobile} {
     width: 95%;
+    max-height: 150px;
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: auto;
+  }
+`;
+export const Header = styled(SkeletonItem)`
+  width: 100%;
+  height: 250px;
+  border-radius: 0%;
+
+  &:before {
+    border-radius: 0%;
+  }
+  ${media.mobile} {
+    width: 35%;
     height: 150px;
   }
 `;
 
+export const ContentsWrapper = styled.div`
+  width: 100%;
+  height: calc(100% - 250px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 5%;
+  background-color: ${(p) => p.theme.componentBgColor};
+
+  ${media.mobile} {
+    width: 65%;
+    height: 150px;
+    padding: 10px;
+    justify-content: space-between;
+  }
+`;
 export const Title = styled(SkeletonItem)`
+  margin-bottom: 15px;
   width: 150px;
   height: 20px;
-  margin-top: 30px;
-  margin-bottom: 50px;
+  ${media.mobile} {
+    width: 100px;
+  }
+`;
+export const Content = styled(SkeletonItem)`
+  margin-bottom: 15px;
+  width: 200px;
+  height: 20px;
   ${media.mobile} {
     width: 150px;
-    margin-top: 0px;
-    margin-bottom: 15px;
   }
 `;
-
-export const TagWrapper = styled(SkeletonItem)`
-  width: 100%;
-  height: 70px;
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 30px;
-  ${media.mobile} {
-    height: 20px;
-    margin-bottom: 10px;
-  }
-`;
-
 export const Footer = styled.div`
   width: 100%;
   display: flex;
@@ -84,6 +120,7 @@ export const Footer = styled.div`
   margin-top: auto;
 `;
 export const CreateAt = styled(SkeletonItem)`
+  margin-bottom: 15px;
   width: 120px;
   height: 20px;
   ${media.mobile} {
@@ -91,6 +128,7 @@ export const CreateAt = styled(SkeletonItem)`
   }
 `;
 export const Comment = styled(SkeletonItem)`
+  margin-bottom: 15px;
   width: 80px;
   ${media.mobile} {
     width: 70px;
