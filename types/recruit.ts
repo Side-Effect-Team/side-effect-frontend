@@ -3,6 +3,7 @@ declare interface PositionType {
   id: number;
   positionType: string;
   targetNumber: number;
+  supported: boolean;
 }
 
 declare interface TagType {

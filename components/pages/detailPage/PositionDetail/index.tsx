@@ -1,30 +1,30 @@
+import { AiOutlineTeam } from "react-icons/ai";
 import { POSITION_LIST } from "enum";
-import Button from "@/components/Button";
-import {
-  Wrapper,
-  StyledHeader,
-  Row,
-  NameBox,
-  StatusBox,
-  CloseBtn,
-} from "./styled";
+import { Wrapper, StyledHeader } from "./styled";
+import { useAppSelector } from "@/store/hooks";
+import PositionRow from "@/detailComps/PositionRow";
 
 interface PositionDetailProps {
+  writerId: number;
   positions: PositionType[];
 }
 
-interface PositionRowProps {
-  positionName: string;
-  currentNumber: number;
-  targetNumber: number;
-}
-
-export default function PositionDetail({ positions }: PositionDetailProps) {
-  console.log("포지션 정보", positions);
-
+export default function PositionDetail({
+  writerId,
+  positions,
+}: PositionDetailProps) {
+  const userId = useAppSelector((state) => +state.auth.userId);
   return (
     <Wrapper>
-      <StyledHeader>모집 포지션</StyledHeader>
+      <div>
+        <StyledHeader>모집 포지션</StyledHeader>
+        {writerId === userId && (
+          <span>
+            <AiOutlineTeam />
+          </span>
+        )}
+      </div>
+
       {positions.map((position) => {
         // 영문 포지션 이름을 한글로 바꿈
         let positionName = "";
@@ -39,32 +39,12 @@ export default function PositionDetail({ positions }: PositionDetailProps) {
             positionName={positionName}
             currentNumber={position.currentNumber}
             targetNumber={position.targetNumber}
+            supported={position.supported}
+            positionId={position.id}
           />
         );
       })}
       <hr />
     </Wrapper>
-  );
-}
-
-function PositionRow({
-  positionName,
-  currentNumber,
-  targetNumber,
-}: PositionRowProps) {
-  const isPossible = targetNumber > 0 && targetNumber > currentNumber;
-
-  return (
-    <Row>
-      <NameBox>
-        <span>{positionName}</span>
-      </NameBox>
-      <StatusBox>
-        <span>
-          {currentNumber} / {targetNumber}
-        </span>
-      </StatusBox>
-      {isPossible ? <Button>지원</Button> : <CloseBtn>모집 완료</CloseBtn>}
-    </Row>
   );
 }

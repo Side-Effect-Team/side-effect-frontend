@@ -2,6 +2,7 @@ import axios from "axios";
 import { store } from "@/store/store";
 import { createAuthentication } from "@/store/authSlice";
 import customAxios from "./customAxios";
+
 export const getMypageData = async () => {
   const id = store.getState().auth.userId;
   const response = await customAxios.get(`/user/mypage/${id}`);
