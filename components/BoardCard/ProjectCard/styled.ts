@@ -72,7 +72,8 @@ export const Header = styled.div<{ src?: string }>`
   background-image: ${(p) =>
     `url(${
       !p.src || p.src === "DefaultBackground.png"
-        ? "/images/ProjectDefaultBackground.png"
+        ? // ? "/images/ProjectDefaultBackground.png"
+          "/images/ProjectBackground.png"
         : `${process.env.NEXT_PUBLIC_API_URL}/free-boards/image/${p.src}`
     })`};
 
