@@ -1,6 +1,6 @@
 import { ChangeEvent, InputHTMLAttributes, useEffect, useState } from "react";
 import { SearchBtn, SearchDiv, SearchIcon, StyledInput } from "./styled";
-import { BoardCardProps } from "../BoardCard/ProjectCard";
+import { BoardCardProps } from "../Card/ProjectCard";
 
 type InputProps = InputHTMLAttributes<HTMLInputElement>;
 interface FilterProps extends InputProps {

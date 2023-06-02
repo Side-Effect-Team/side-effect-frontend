@@ -1,10 +1,8 @@
-import ProjectCard, {
-  BoardCardProps,
-} from "@/components/BoardCard/ProjectCard";
+import ProjectCard, { BoardCardProps } from "@/components/Card/ProjectCard";
 import { Border, SectionHeaderWrapper, SectionTitle } from "../styled";
 import { BoardWrapper, FilterMenu, FilterWrapper, NullMessage } from "./styled";
 import { useEffect, useState } from "react";
-import RecruitCard from "@/components/BoardCard/RecruitCard";
+import RecruitCard from "@/components/Card/RecruitCard";
 
 interface TabBoards {
   boards?: BoardCardProps[] | null;

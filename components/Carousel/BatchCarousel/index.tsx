@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import ProjectCard from "../../BoardCard/ProjectCard";
+import ProjectCard from "../../Card/ProjectCard";
 import { Wrapper, CarouselTitle, CardContainer } from "./styled";
 import customAxios from "@/apis/customAxios";
 import { recruitBoardCardConverter } from "@/utils/converter";

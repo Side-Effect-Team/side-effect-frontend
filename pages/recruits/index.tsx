@@ -5,7 +5,7 @@ import Banner from "@/components/Banner";
 import { BANNER_CONTENTS } from "../../enum";
 import PageHead from "@/components/PageHead";
 import { recruitBoardCardConverter } from "@/utils/converter";
-import RecruitCard from "@/components/BoardCard/RecruitCard";
+import RecruitCard from "@/components/Card/RecruitCard";
 import customAxios from "apis/customAxios";
 
 export default function RecruitsPage() {
