@@ -10,7 +10,7 @@ import {
   SkelectonContainer,
 } from "./styled";
 
-export default function Skeleton() {
+export default function ProjectCardSkeleton() {
   return (
     <SkelectonContainer>
       {[...Array(4)].fill("").map((_, index) => {

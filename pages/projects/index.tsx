@@ -8,7 +8,7 @@ import NoData from "@/components/Nodata";
 import PageHead from "@/components/PageHead";
 import BatchCarousel from "@/components/Carousel/BatchCarousel";
 import ProjectList from "@/components/pages/project/ProjectLIst";
-import Skeleton from "@/components/Skeleton/BoardCardSkeleton";
+import ProjectCardSkeleton from "@/components/Skeleton/ProjectCardSkeleton";
 import { useAppSelector } from "@/store/hooks";
 import DarkModeToggle from "@/components/DarkModeToggle";
 
@@ -55,7 +55,7 @@ export default function ProjectPage() {
       {isDataEmpty ? (
         <NoData />
       ) : isLoading ? (
-        <Skeleton />
+        <ProjectCardSkeleton />
       ) : (
         <ProjectList data={data} />
       )}
