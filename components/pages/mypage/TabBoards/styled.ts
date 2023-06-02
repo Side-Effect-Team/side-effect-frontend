@@ -38,6 +38,6 @@ export const FilterWrapper = styled.div`
 export const FilterMenu = styled.div<{ isActive: boolean }>`
   font-size: 16px;
   /* color: #d9d9d9; */
-  color: ${(p) => (p.isActive ? "black" : p.theme.colors.mediumGray)};
+  color: ${(p) => (p.isActive ? p.theme.textColor : p.theme.colors.mediumGray)};
   cursor: pointer;
 `;

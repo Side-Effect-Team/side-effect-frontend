@@ -13,11 +13,13 @@ export const InfoTitle = styled.p`
   font-weight: 600;
 `;
 export const InfoContent = styled.p`
+  color: ${(p) => p.theme.textColor};
   font-weight: 600;
 `;
 export const InfoContentLink = styled.a`
   font-weight: 600;
   cursor: pointer;
+  color: ${(p) => p.theme.textColor};
 `;
 export const Text = styled.p`
   color: ${(p) => p.theme.colors.darkGray};

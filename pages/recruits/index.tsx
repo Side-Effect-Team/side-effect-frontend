@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import styled from "styled-components";
 import { breakPoints, mediaQuery } from "@/styles/Media";
 import Banner from "@/components/Banner";
-import ProjectCard from "@/components/BoardCard/ProjectCard";
 import { BANNER_CONTENTS } from "../../enum";
 import PageHead from "@/components/PageHead";
 import { recruitBoardCardConverter } from "@/utils/converter";

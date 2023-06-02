@@ -6,7 +6,7 @@ export const Container = styled.div`
   border: 1.5px solid ${(p) => p.theme.colors.mediumGray};
   border-radius: 10px;
   overflow: hidden;
-  background-color: ${(p) => p.theme.colors.white};
+  background-color: ${(p) => p.theme.componentBgColor};
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -28,6 +28,7 @@ export const RowWrapper = styled.div`
 export const Title = styled.div`
   font-size: 18px;
   font-weight: 600;
+  color: ${(p) => p.theme.textColor};
 `;
 
 export const TitleGray = styled.div`

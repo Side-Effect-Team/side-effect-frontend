@@ -47,6 +47,8 @@ export const darkTheme = {
   hover: "#232323",
   textColor: "#ffffff",
   footerBgColor: "#35383F",
+  openColor: "#d9d9d9",
+  closedColor: "#667085",
 };
 export const lightTheme = {
   ...theme,
@@ -55,6 +57,8 @@ export const lightTheme = {
   hover: "#eaecf0",
   textColor: "#000000",
   footerBgColor: "#1867B6",
+  openColor: "#CDDEFF",
+  closedColor: "#d9d9d9",
 };
 
 export type BrandColorTypes = keyof typeof theme.brandColor;

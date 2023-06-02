@@ -12,15 +12,14 @@ export const Container = styled.div`
   border: 2px solid ${(p) => p.theme.colors.mediumGray};
   border-radius: 15px;
   overflow: hidden;
-  background-color: ${(p) => p.theme.colors.white};
+  background-color: ${(p) => p.theme.componentBgColor};
   position: relative;
   padding: 15px;
 
   cursor: pointer;
-  /* box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25); */
   :hover {
-    box-shadow: 1px 1px 5px rgba(21, 94, 239, 0.25);
-    transform: translateY(-5px);
+    transition: all 0.3s;
+    transform: translateY(-0.5rem);
   }
   ${media.mobile} {
     width: 95%;
