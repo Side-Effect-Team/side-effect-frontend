@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { MypageProps } from ".";
 import styled from "styled-components";
 import { theme } from "@/styles/Theme";
+import { store } from "@/store/store";
 
 export default function MyPageId() {
   const router = useRouter();
@@ -23,7 +24,8 @@ export default function MyPageId() {
   };
 
   useEffect(() => {
-    if (router.query.mypageId === localStorage.getItem("id")) {
+    const id = store.getState().auth.userId;
+    if (router.query.mypageId === id.toString()) {
       router.push(`/mypage`);
       return;
     }

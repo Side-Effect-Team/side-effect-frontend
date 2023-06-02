@@ -52,10 +52,10 @@ export const SkeletonCardWrapper = styled.div`
   border-radius: 15px;
   overflow: hidden;
   background-color: ${(p) => p.theme.mainBackGround};
+  border: 2px solid ${(p) => p.theme.cardBorder};
   position: relative;
-  box-shadow: inset 0 0 0.5px 1px hsla(0, 0%, 100%, 0.075),
-    0 0 0 1px hsla(0, 0%, 0%, 0.05), 0 0.3px 0.4px hsla(0, 0%, 0%, 0.02),
-    0 0.9px 1.5px hsla(0, 0%, 0%, 0.045), 0 3.5px 6px hsla(0, 0%, 0%, 0.09);
+  box-shadow: ${(p) => p.theme.cardBoxShadow};
+
   ${media.mobile} {
     width: 95%;
     max-height: 150px;
@@ -66,7 +66,7 @@ export const SkeletonCardWrapper = styled.div`
 `;
 export const Header = styled(SkeletonItem)`
   width: 100%;
-  height: 150px;
+  height: 250px;
   border-radius: 0%;
 
   &:before {
@@ -80,12 +80,14 @@ export const Header = styled(SkeletonItem)`
 
 export const ContentsWrapper = styled.div`
   width: 100%;
-  height: calc(100% - 150px);
+  height: calc(100% - 250px);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
   padding: 5%;
+  background-color: ${(p) => p.theme.componentBgColor};
+
   ${media.mobile} {
     width: 65%;
     height: 150px;

@@ -23,7 +23,7 @@ export const NickName = styled.div`
   margin-bottom: 15px;
 `;
 export const Text = styled.p`
-  color: #667085;
+  color: ${(p) => p.theme.colors.darkGray};
   margin: 0;
   margin-bottom: 15px;
 `;
@@ -45,15 +45,15 @@ export const ContentNum = styled.p`
   font-weight: 600;
   margin: 0;
   margin-bottom: 10px;
-  color: #667085;
+  color: ${(p) => p.theme.colors.darkGray};
 `;
 export const ContentTitle = styled.p`
   font-weight: 600;
   margin: 0;
-  color: #667085;
+  color: ${(p) => p.theme.colors.darkGray};
 `;
 export const ShortBorder = styled.div`
   width: 30px;
-  border: 2px solid #667085;
+  border: 2px solid ${(p) => p.theme.colors.darkGray};
   margin: 15px 0;
 `;

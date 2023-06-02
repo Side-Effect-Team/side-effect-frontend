@@ -1,4 +1,3 @@
-import { theme } from "@/styles/Theme";
 import { AiOutlineSearch } from "react-icons/ai";
 import styled from "styled-components";
 
@@ -6,12 +5,12 @@ export const SearchDiv = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid ${theme.colors.gray};
+  border: 1px solid ${(p) => p.theme.colors.gray};
   border-radius: 5px;
   padding: 0 10px;
   margin-left: 10px;
   :focus-within {
-    border: 1px solid ${theme.brandColor.primary};
+    border: 1px solid ${(p) => p.theme.brandColor.primary};
   }
 `;
 export const StyledInput = styled.input`
