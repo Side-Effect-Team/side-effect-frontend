@@ -21,6 +21,7 @@ import { useGetProfileData } from "@/hooks/queries/useGetPofileData";
 import { useEditProfile } from "@/hooks/mutations/useEditProfile";
 import { useInputImage } from "@/hooks/common/useInputImage";
 import { useQueryClient } from "@tanstack/react-query";
+import { compareData } from "@/utils/compareData";
 export interface FormData {
   githubUrl?: string;
   blogUrl?: string;
@@ -109,27 +110,6 @@ export default function MyPageEdit() {
       }
       router.push("/mypage");
     }
-  };
-
-  // 기존 데이터와 변경된 데이터 비교
-  const compareData = (
-    originData: MypageEditProps,
-    changedData: MypageEditProps,
-  ) => {
-    const keys = Object.keys(originData);
-    const changes: Partial<MypageEditProps> & Record<string, any> = {};
-    for (const key of keys) {
-      if (
-        originData[key as keyof MypageEditProps] !==
-        changedData[key as keyof MypageEditProps]
-      ) {
-        changes[key] = changedData[key as keyof MypageEditProps];
-        if (changes[key] === undefined) {
-          delete changes[key];
-        }
-      }
-    }
-    return changes;
   };
 
   const onClickEditCancel = () => {
