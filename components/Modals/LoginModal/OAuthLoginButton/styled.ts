@@ -5,7 +5,7 @@ export const OAuthLogin = styled.button<{ site?: string }>`
   cursor: pointer;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 15px;
-  background-color: ${({ site }) => (site === "kakao" ? "#ffe812" : null)};
+  background-color: ${({ site }) => (site === "kakao" ? "#ffe812" : "white")};
 `;
 export const OAuthLoginWrapper = styled.div`
   display: flex;

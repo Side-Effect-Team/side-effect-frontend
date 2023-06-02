@@ -47,10 +47,10 @@ export const Container = styled.div`
   width: 350px;
   min-height: 100px;
   max-height: 400px;
-  background-color: ${(p) => p.theme.colors.white};
   border: 1px solid ${(p) => p.theme.colors.mediumGray};
+  background-color: ${(p) => p.theme.componentBgColor};
   border-radius: 10px;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
+  box-shadow: ${(p) => p.theme.boxShadow};
   padding: 10px;
   position: absolute;
   top: 47px;
@@ -110,8 +110,7 @@ export const Wrapper = styled.div<{ watched: boolean }>`
   width: 100%;
   height: 90px;
   border: 1.5px solid
-    ${(p) =>
-      p.watched ? p.theme.colors.lightGray : p.theme.brandColor.skyBlue};
+    ${(p) => (p.watched ? p.theme.closedColor : p.theme.openColor)};
   /* box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25); */
   border-radius: 10px;
   margin-bottom: 10px;
@@ -120,10 +119,11 @@ export const Wrapper = styled.div<{ watched: boolean }>`
   flex-direction: column;
   justify-content: space-between;
   padding: 15px;
-  color: ${(p) => (p.watched ? p.theme.colors.mediumGray : "black")};
+  color: ${(p) => (p.watched ? p.theme.closedColor : p.theme.textColor)};
 
   :hover {
-    box-shadow: 1px 1px 5px rgba(21, 94, 239, 0.25);
+    /* box-shadow: 1px 1px 5px rgba(21, 94, 239, 0.25); */
+    box-shadow: ${(p) => p.theme.boxShadow};
     ${DeleteButton} {
       display: block;
     }
@@ -139,6 +139,7 @@ export const RowWrapper = styled.div`
   justify-content: space-between;
 `;
 export const Title = styled.div`
+  /* color: ${(p) => p.theme.textColor}; */
   width: 100%;
   font-size: 16px;
   font-weight: 700;
@@ -148,7 +149,6 @@ export const Contents = styled.div`
   font-size: 14px;
 `;
 export const Date = styled.div`
-  color: ${(p) => p.theme.colors.mediumGray};
   font-size: 14px;
 `;
 export const EmptyMessage = styled.div`

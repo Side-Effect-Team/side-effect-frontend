@@ -10,8 +10,9 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: ${(p) => p.theme.colors.background};
+  background: ${(p) => p.theme.mainBackGround};
   height: ${(p) => p.theme.height.header};
+  transition: all 0.3s;
 `;
 
 export const HeaderStyled = styled.header`
@@ -37,10 +38,12 @@ export const NavStyled = styled.nav`
   justify-content: space-evenly;
   align-items: center;
   font-weight: 600;
-
+  a {
+    color: ${(p) => p.theme.textColor};
+  }
   ${mediaQuery("mobile")`
     display: none;
-  `}
+  `};
 `;
 
 export const BoxStyled = styled.div`

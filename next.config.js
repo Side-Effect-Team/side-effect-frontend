@@ -9,7 +9,7 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "sideeffectproject.com",
-        port: "443",
+        port: "",
         pathname: "/**",
       },
     ],

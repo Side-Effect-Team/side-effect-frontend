@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { AiFillHeart, AiOutlineHeart, AiOutlineMessage } from "react-icons/ai";
 import { BsEye } from "react-icons/bs";
 import { media } from "@/styles/mediatest";
@@ -16,12 +16,10 @@ export const Container = styled.div`
   overflow: hidden;
   background-color: ${(p) => p.theme.colors.white};
   position: relative;
-
   cursor: pointer;
-  /* box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25); */
   :hover {
-    box-shadow: 1px 1px 5px rgba(21, 94, 239, 0.25);
-    transform: translateY(-5px);
+    transition: all 0.3s;
+    transform: translateY(-0.5rem);
   }
   ${media.mobile} {
     width: 95%;
@@ -77,7 +75,6 @@ export const Header = styled.div<{ src?: string }>`
         : `${process.env.NEXT_PUBLIC_API_URL}/free-boards/image/${p.src}`
     })`};
 
-  // headerImage의 width에 맞추기 위해 아래 코드 추가했습니다
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -95,6 +92,7 @@ export const ContentsWrapper = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
   padding: 15px;
+  background-color: ${(p) => p.theme.componentBgColor};
   ${media.mobile} {
     width: 65%;
     height: 150px;
@@ -122,6 +120,7 @@ export const Content = styled.div`
   font-size: 16px;
   font-weight: 400;
   line-height: 140%;
+  color: ${(p) => p.theme.textColor};
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
