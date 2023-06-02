@@ -21,15 +21,16 @@ import Tag from "@/components/Tag";
 import { useRouter } from "next/router";
 import HeartButton from "@/components/Button/HeartButton";
 interface RecruitDataProps {
-  id: number;
-  closed?: boolean;
-  tags?: string[];
-  positions?: string[];
-  title: string;
+  closed: boolean;
+  commentNum: number;
   createdAt: string;
-  like?: boolean;
-  likeNum?: number;
-  views?: number;
+  id: number;
+  like: boolean;
+  likeNum: number;
+  positions: string[];
+  tags: string[];
+  title: string;
+  views: number;
 }
 interface RecruitCardProps {
   data: RecruitDataProps;

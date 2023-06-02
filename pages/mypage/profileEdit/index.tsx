@@ -27,24 +27,23 @@ export interface FormData {
   nickname: string;
 }
 export interface MypageEditProps {
-  imgUrl?: string | undefined;
   nickname: string;
-  introduction: string | undefined;
-  tags: string[] | undefined;
+  introduction: string;
+  tags: string[];
   position: string;
   career: string;
-  githubUrl?: string | undefined;
-  blogUrl?: string | undefined;
-  portfolioUrl?: string | undefined;
+  githubUrl?: string;
+  blogUrl?: string;
+  portfolioUrl?: string;
 }
 export default function MyPageEdit() {
   const data = useGetProfileData();
-  console.log(data);
+  // console.log(data);
   const router = useRouter();
   const [introduction, setIntroduction] = useState(data?.introduction);
-  const [tags, setTags] = useState<string[]>(data?.tags || []);
-  const [career, setCareer] = useState<string>(data?.career || "");
-  const [position, setPosition] = useState<string>(data?.position || "");
+  const [tags, setTags] = useState<string[]>(data?.tags);
+  const [career, setCareer] = useState<string>(data?.career);
+  const [position, setPosition] = useState<string>(data?.position);
   const {
     register,
     handleSubmit,
@@ -53,9 +52,9 @@ export default function MyPageEdit() {
   const { addToast, deleteToast } = useToast();
 
   useEffect(() => {
-    setTags(data?.tags || []);
-    setCareer(data?.career || "");
-    setPosition(data?.position || "");
+    setTags(data?.tags);
+    setCareer(data?.career);
+    setPosition(data?.position);
     setIntroduction(data?.introduction);
   }, [data]);
 

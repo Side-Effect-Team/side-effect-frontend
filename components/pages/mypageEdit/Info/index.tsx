@@ -13,9 +13,9 @@ interface InfoEditProps {
   infoRegister: UseFormRegister<
     Pick<FormData, "githubUrl" | "blogUrl" | "portfolioUrl" | "nickname">
   >;
-  githubUrl: string | undefined;
-  blogUrl: string | undefined;
-  portfolioUrl: string | undefined;
+  githubUrl: string;
+  blogUrl: string;
+  portfolioUrl: string;
 }
 const SELECT_POSITIONS = [
   { name: "프론트엔드", value: "FRONTEND" },

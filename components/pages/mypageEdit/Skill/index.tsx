@@ -8,7 +8,7 @@ import {
 import { DeleteTag, Tag, TagInput, TagWrapper } from "./styled";
 
 interface SkillEditProps {
-  stacks?: string[];
+  stacks: string[];
   setStacks: Dispatch<SetStateAction<string[]>>;
 }
 

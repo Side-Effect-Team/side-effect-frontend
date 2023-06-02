@@ -25,9 +25,9 @@ import { FormData } from "@/pages/mypage/profileEdit";
 import { duplicateNickname } from "apis/UserAPI";
 
 interface IntroEditProps {
-  nickname: string | undefined;
-  introduction: string | undefined;
-  setIntroduction: Dispatch<SetStateAction<string | undefined>>;
+  nickname: string;
+  introduction: string;
+  setIntroduction: Dispatch<SetStateAction<string>>;
   imgSrc: string;
   handleImgChange: (e: ChangeEvent<HTMLInputElement>) => void;
   introRegister: UseFormRegister<Pick<FormData, "nickname">>;
