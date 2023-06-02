@@ -41,7 +41,7 @@ export const RecruitSkeletonWrapper = styled.div`
   border: 1px solid ${(p) => p.theme.brandColor.lightGray};
   border-radius: 15px;
   overflow: hidden;
-  background-color: ${(p) => p.theme.brandColor.white};
+  background-color: ${(p) => p.theme.componentBgColor};
   position: relative;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
   padding: 15px;
