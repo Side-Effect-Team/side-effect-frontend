@@ -29,7 +29,6 @@ export default function RecruitDetailPage({
   }
 
   if (data) {
-    console.log("코멘트있나", data);
     const {
       id,
       title,
@@ -43,6 +42,7 @@ export default function RecruitDetailPage({
       tags,
       content,
       imgSrc,
+      comments,
     } = data.data;
     return (
       <Wrapper>
@@ -63,7 +63,7 @@ export default function RecruitDetailPage({
             content={content}
             imgSrc={imgSrc}
           />
-          {/*<CommentBox boardId={id} comments={comments} />*/}
+          <CommentBox boardId={id} comments={comments} />
         </Contents>
       </Wrapper>
     );
