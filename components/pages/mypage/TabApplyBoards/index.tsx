@@ -1,10 +1,10 @@
 import ApplyBoardCard, {
   ApplyBoardCardProps,
 } from "@/components/Card/ApplyBoardCard";
-import { Border, SectionHeaderWrapper, SectionTitle } from "../styled";
 import { FilterMenu, FilterWrapper, NullMessage } from "../TabBoards/styled";
 import { ApplyBoardWrapper } from "./styled";
 import { useEffect, useState } from "react";
+import SectionBorder from "@/components/Boarder/SectionBorder";
 
 interface TabApplyBoardsProps {
   boards?: ApplyBoardCardProps[] | null;
@@ -38,10 +38,7 @@ export default function TabApplyBoards({ boards, title }: TabApplyBoardsProps) {
 
   return (
     <>
-      <SectionHeaderWrapper>
-        <SectionTitle>{title}</SectionTitle>
-        <Border></Border>
-      </SectionHeaderWrapper>
+      <SectionBorder title={title} />
       <FilterWrapper>
         {filterMenuTap.map((filter) => (
           <FilterMenu

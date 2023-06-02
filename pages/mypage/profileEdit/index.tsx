@@ -5,12 +5,9 @@ import IntroductionEdit from "../../../components/pages/mypageEdit/Introduction"
 import SkillEdit from "../../../components/pages/mypageEdit/Skill";
 import { useForm } from "react-hook-form";
 import {
-  Border,
   ButtonWrapper,
   Container,
   ContentsWrapper,
-  SectionHeaderWrapper,
-  SectionTitle,
   SectionWrapper,
   TapMenu,
   TapWrapper,
@@ -22,6 +19,7 @@ import { useEditProfile } from "@/hooks/mutations/useEditProfile";
 import { useInputImage } from "@/hooks/common/useInputImage";
 import { useQueryClient } from "@tanstack/react-query";
 import { compareData } from "@/utils/compareData";
+import SectionBorder from "@/components/Boarder/SectionBorder";
 export interface FormData {
   githubUrl?: string;
   blogUrl?: string;
@@ -141,17 +139,11 @@ export default function MyPageEdit() {
             errors={errors}
           />
           <SectionWrapper>
-            <SectionHeaderWrapper>
-              <SectionTitle>Skill</SectionTitle>
-              <Border></Border>
-            </SectionHeaderWrapper>
+            <SectionBorder title="Skill" />
             <SkillEdit stacks={tags} setStacks={setTags} />
           </SectionWrapper>
           <SectionWrapper>
-            <SectionHeaderWrapper>
-              <SectionTitle>Info</SectionTitle>
-              <Border></Border>
-            </SectionHeaderWrapper>
+            <SectionBorder title="Info" />
             <InfoEdit
               githubUrl={data?.githubUrl}
               blogUrl={data?.blogUrl}
