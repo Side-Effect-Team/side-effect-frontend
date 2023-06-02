@@ -57,7 +57,7 @@ export const Title = styled.div`
     height: auto;
     -webkit-line-clamp: 1;
     margin-top: 5px;
-    margin-bottom: 7px;
+    margin-bottom: 12px;
     font-size: 16px;
   }
 `;

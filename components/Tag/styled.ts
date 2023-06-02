@@ -28,6 +28,7 @@ export const TagWrapper = styled.div<TagProps>`
         `};
   ${media.mobile} {
     font-size: calc(${(p) => p.fontSize} * 0.8);
+    padding: calc(${(p) => p.fontSize} * 0.1) calc(${(p) => p.fontSize} * 0.3);
   }
 `;
 

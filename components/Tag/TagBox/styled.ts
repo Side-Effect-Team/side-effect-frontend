@@ -9,6 +9,7 @@ export const TagContainer = styled.div`
     justify-content: flex-start;
     align-items: center;
     position: relative;
+    margin-bottom: 5px;
   }
 `;
 export const TagTitle = styled.div`
@@ -35,6 +36,6 @@ export const TagWrapper = styled.div`
     width: calc(100% - 100px);
     height: 25px;
     overflow: hidden;
-    margin-bottom: 5px;
+    margin-bottom: 0px;
   }
 `;

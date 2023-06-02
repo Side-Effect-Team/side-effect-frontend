@@ -59,12 +59,7 @@ export default function RecruitCard({ data }: RecruitCardProps) {
         {recruitingTitle}
       </IsRecruiting>
       <Title>{data?.title}</Title>
-      <TagBox
-        title="모집분야"
-        tagArray={newPosition}
-        fill="false"
-        fontSize="15px"
-      />
+      <TagBox title="모집분야" tagArray={newPosition} fill="false" />
       <TagBox title="사용언어" tagArray={data?.tags} />
       <CardFooter
         createdAt={data?.createdAt}
