@@ -10,9 +10,6 @@ export const theme = {
     background: "#fff",
     white: "#fff",
   },
-  fonts: {
-    pretendard: "Pretendard-Regular",
-  },
   sizes: {
     mobile: breakPoints.mobile + "px",
     desktop: breakPoints.desktop + "px",
@@ -34,6 +31,33 @@ export const theme = {
     skyBlue: "#CDDEFF",
     lightGray: "#EAECF0",
   },
+  boxShadow: `inset 0 0 1px 1px hsla(0, 0%, 100%, 0.15),
+0 0 0 1px hsla(0, 0%, 0%, 0.1),
+0 1px 2px hsla(0, 0%, 0%, 0.05),
+0 2px 4px hsla(0, 0%, 0%, 0.1),
+0 6px 10px hsla(0, 0%, 0%, 0.2);`,
+};
+
+export const darkTheme = {
+  ...theme,
+  mainBackGround: "#202225",
+  componentBgColor: "#35383F",
+  hover: "#232323",
+  textColor: "#ffffff",
+  footerBgColor: "#35383F",
+};
+export const lightTheme = {
+  ...theme,
+  mainBackGround: "#ffffff",
+  componentBgColor: "#ffffff",
+  hover: "#eaecf0",
+  textColor: "#000000",
+  footerBgColor: "#1867B6",
 };
 
 export type BrandColorTypes = keyof typeof theme.brandColor;
+export type ColorsType = typeof lightTheme.colors;
+export type SizesType = typeof lightTheme.sizes;
+export type HeightType = typeof lightTheme.height;
+export type WidthType = typeof lightTheme.width;
+export type BrandColorType = typeof lightTheme.brandColor;

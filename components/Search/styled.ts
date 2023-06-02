@@ -18,6 +18,8 @@ export const StyledInput = styled.input`
   width: 180px;
   border: none;
   outline: none;
+  background-color: ${(p) => p.theme.mainBackGround};
+  color: ${(p) => p.theme.textColor};
   :focus {
     outline: none;
   }

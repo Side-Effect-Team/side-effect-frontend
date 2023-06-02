@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { theme } from "@/styles/Theme";
 import { AiFillHeart, AiOutlineHeart, AiOutlineMessage } from "react-icons/ai";
 import { BsEye } from "react-icons/bs";
@@ -12,16 +12,14 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  border: 1px solid lightgray;
   border-radius: 15px;
+  box-shadow: ${(p) => p.theme.boxShadow};
   overflow: hidden;
-  background-color: white;
   position: relative;
-
   cursor: pointer;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
   :hover {
-    box-shadow: 1px 1px 5px rgba(21, 94, 239, 0.25);
+    transition: all 0.3s;
+    transform: translateY(-0.5rem);
   }
   ${media.mobile} {
     width: 95%;
@@ -122,6 +120,7 @@ export const ContentsWrapper = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
   padding: 5%;
+  background-color: ${(p) => p.theme.componentBgColor};
   ${media.mobile} {
     width: 65%;
     height: 150px;
@@ -151,7 +150,7 @@ export const Content = styled.div`
   height: 20%;
   font-size: 16px;
   font-weight: 400;
-  color: #454545;
+  color: ${(p) => p.theme.textColor};
   margin-bottom: 10px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -201,7 +200,7 @@ export const Footer = styled.div`
 `;
 export const CreateAt = styled.div`
   font-size: 16px;
-  color: #454545;
+  color: ${(p) => p.theme.textColor};
 `;
 export const ButtonsWrapper = styled.div`
   display: flex;

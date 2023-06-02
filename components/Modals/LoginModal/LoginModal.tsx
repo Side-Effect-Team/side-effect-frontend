@@ -1,8 +1,7 @@
-import styled, { keyframes } from "styled-components";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { media } from "@/styles/mediatest";
 import { closeModal } from "@/store/modalSlice";
 import { AiOutlineClose } from "react-icons/ai";
+import { Wrapper, Header } from "./styled";
 import RegisterNickname from "./RegisterView/RegisterNickname";
 import RegisterUserInfo from "./RegisterView/RegisterUserInfo";
 import Login from "./Login";
@@ -37,44 +36,3 @@ export default function LoginModal() {
     </Wrapper>
   );
 }
-const Wrapper = styled.div<{ isOpen: boolean }>`
-  visibility: ${({ isOpen }) => (isOpen ? "visible" : "hidden")};
-  animation: ${({ isOpen }) => isOpen && zoomIn} 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-  height: 550px;
-  width: 550px;
-  background-color: white;
-  z-index: 30;
-  border-radius: 15px;
-  ${media.mobile} {
-    width: 100%;
-    height: 100%;
-    border-radius: 0;
-    align-items: center;
-  }
-`;
-const Header = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  padding: 1rem;
-  position: absolute;
-  top: 0;
-`;
-
-const zoomIn = keyframes`
-  0%{
-    transform: scale(0);
-  }
-  100%{
-    transform: scale(1);
-  }
-`;

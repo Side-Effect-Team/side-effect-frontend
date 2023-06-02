@@ -26,7 +26,7 @@ export default function HomePage() {
 }
 
 const Wrapper = styled.div`
-  background: ${(p) => p.theme.colors.background};
+  background: ${(p) => p.theme.mainBackGround};
 `;
 
 const MainStyled = styled.section`

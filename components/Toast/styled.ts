@@ -45,6 +45,7 @@ export const ToastContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
+  color: #000000;
 `;
 export const ToastTitle = styled.div`
   font-size: large;
