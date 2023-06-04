@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
-  height: 80px;
+  height: 90px;
   border: 1.5px solid ${(p) => p.theme.colors.mediumGray};
   border-radius: 10px;
   overflow: hidden;
@@ -14,22 +14,26 @@ export const Container = styled.div`
   justify-content: space-between;
   padding: 15px;
   cursor: pointer;
+  ${media.mobile} {
+    height: 100px;
+  }
 `;
 export const ColumnWrapper = styled.div`
-  width: calc(100% - 100px);
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  ${media.mobile} {
-    width: calc(100% - 90px);
-  }
 `;
 export const RowWrapper = styled.div`
+  width: 100%;
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-end;
+  ${media.mobile} {
+    align-items: flex-end;
+  }
 `;
 export const Title = styled.div`
   font-size: 18px;
@@ -47,6 +51,7 @@ export const Title = styled.div`
 export const Position = styled.div`
   font-size: 14px;
   font-weight: 600;
+  margin-right: auto;
 `;
 export const PositionGray = styled.div`
   font-size: 14px;

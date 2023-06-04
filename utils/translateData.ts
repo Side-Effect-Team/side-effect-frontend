@@ -39,3 +39,16 @@ export const translatePosition = (
     setPositionTitle("포지션");
   }
 };
+
+export const translateStatus = (
+  status: string,
+  setStatusTitle: Dispatch<SetStateAction<string>>,
+) => {
+  if (status === "PENDING") {
+    setStatusTitle("지원취소");
+  } else if (status === "APPROVED") {
+    setStatusTitle("•참여");
+  } else if (status === "REJECTED") {
+    setStatusTitle("•방출");
+  }
+};
