@@ -1,4 +1,3 @@
-import { theme } from "@/styles/Theme";
 import { media } from "@/styles/mediatest";
 import styled from "styled-components";
 
@@ -12,6 +11,7 @@ export const BoardWrapper = styled.div`
     display: flex;
     flex-direction: column;
     margin-top: 4rem;
+    gap: 15px;
   }
 `;
 export const NullMessage = styled.div`
