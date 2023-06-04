@@ -30,61 +30,38 @@ export default function Info({
     translatePosition(position, setPositionTitle);
   }, [career, position]);
 
+  const infoData = [
+    { title: "포지션", value: positionTitle },
+    { title: "경력", value: careerTitle },
+    { title: "깃허브", url: githubUrl },
+    { title: "블로그", url: blogUrl },
+    { title: "포트폴리오", url: portfolioUrl },
+  ];
   return (
     <>
-      <InfoWrapper>
-        <InfoTitle>포지션</InfoTitle>
-        <InfoContent>{positionTitle}</InfoContent>
-      </InfoWrapper>
-      <InfoWrapper>
-        <InfoTitle>경력</InfoTitle>
-        <InfoContent>{careerTitle}</InfoContent>
-      </InfoWrapper>
-      <InfoWrapper>
-        <InfoTitle>깃허브</InfoTitle>
-        {githubUrl ? (
-          <InfoContentLink
-            href={`${
-              githubUrl.startsWith("https://") ? "" : "https://"
-            }${githubUrl}`}
-            target="_blank"
-          >
-            {githubUrl}
-          </InfoContentLink>
-        ) : (
-          <Text>아직 작성된 정보가 없습니다.</Text>
-        )}
-      </InfoWrapper>
-      <InfoWrapper>
-        <InfoTitle>블로그</InfoTitle>
-        {blogUrl ? (
-          <InfoContentLink
-            href={`${
-              blogUrl.startsWith("https://") ? "" : "https://"
-            }${blogUrl}`}
-            target="_blank"
-          >
-            {blogUrl}
-          </InfoContentLink>
-        ) : (
-          <Text>아직 작성된 정보가 없습니다.</Text>
-        )}
-      </InfoWrapper>
-      <InfoWrapper>
-        <InfoTitle>포트폴리오</InfoTitle>
-        {portfolioUrl ? (
-          <InfoContentLink
-            href={`${
-              portfolioUrl.startsWith("https://") ? "" : "https://"
-            }${portfolioUrl}`}
-            target="_blank"
-          >
-            {portfolioUrl}
-          </InfoContentLink>
-        ) : (
-          <Text>아직 작성된 정보가 없습니다.</Text>
-        )}
-      </InfoWrapper>
+      {infoData.map((data, index) => (
+        <InfoWrapper key={index}>
+          <InfoTitle>{data.title}</InfoTitle>
+          {data.value ? (
+            <InfoContent>{data.value}</InfoContent>
+          ) : (
+            <>
+              {data.url ? (
+                <InfoContentLink
+                  href={`${data.url.startsWith("https://") ? "" : "https://"}${
+                    data.url
+                  }`}
+                  target="_blank"
+                >
+                  {data.url}
+                </InfoContentLink>
+              ) : (
+                <Text>아직 작성된 정보가 없습니다.</Text>
+              )}
+            </>
+          )}
+        </InfoWrapper>
+      ))}
     </>
   );
 }
