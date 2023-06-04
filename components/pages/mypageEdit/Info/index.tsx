@@ -5,34 +5,19 @@ import { UseFormRegister } from "react-hook-form";
 import { InfoTitle, InfoWrapper } from "../../mypage/Profile/Info/styled";
 import { FormData } from "@/pages/mypage/profileEdit";
 import { translateCareer, translatePosition } from "@/utils/translateData";
+import { SELECT_CAREER, SELECT_POSITIONS } from "enum";
 
 interface InfoEditProps {
   career: string;
   setCareer: Dispatch<SetStateAction<string>>;
   position: string;
   setPosition: Dispatch<SetStateAction<string>>;
-  infoRegister: UseFormRegister<
-    Pick<FormData, "githubUrl" | "blogUrl" | "portfolioUrl" | "nickname">
-  >;
+  infoRegister: UseFormRegister<FormData>;
   githubUrl: string;
   blogUrl: string;
   portfolioUrl: string;
 }
-const SELECT_POSITIONS = [
-  { name: "프론트엔드", value: "FRONTEND" },
-  { name: "백엔드", value: "BACKEND" },
-  { name: "디자이너", value: "DESIGNER" },
-  { name: "데브옵스", value: "DEVOPS" },
-  { name: "기획자", value: "PM" },
-  { name: "마케터", value: "MARKETER" },
-];
-const SELECT_CAREER = [
-  { name: "취업준비생", value: "empty" },
-  { name: "신입(0년차)", value: "new" },
-  { name: "주니어(1~3년차)", value: "junior" },
-  { name: "미들(4~6년차)", value: "middle" },
-  { name: "시니어(7년이상)", value: "senior" },
-];
+
 export default function InfoEdit({
   career,
   setCareer,
@@ -49,6 +34,18 @@ export default function InfoEdit({
     translateCareer(career, setCareerTitle);
     translatePosition(position, setPositionTitle);
   }, [career, position]);
+
+  interface infoDataProps {
+    title: string;
+    url?: string;
+    register: "githubUrl" | "blogUrl" | "portfolioUrl";
+  }
+  const infoData: infoDataProps[] = [
+    { title: "깃허브", url: githubUrl, register: "githubUrl" },
+    { title: "블로그", url: blogUrl, register: "blogUrl" },
+    { title: "포트폴리오", url: portfolioUrl, register: "portfolioUrl" },
+  ];
+
   return (
     <>
       <InfoWrapper>
@@ -67,45 +64,21 @@ export default function InfoEdit({
           title={careerTitle}
         />
       </InfoWrapper>
-      <InfoWrapper>
-        <InfoTitle>깃허브</InfoTitle>
-        <Input
-          defaultValue={githubUrl}
-          placeholder="정보를 등록해주세요"
-          {...infoRegister("githubUrl")}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              e.preventDefault();
-            }
-          }}
-        />
-      </InfoWrapper>
-      <InfoWrapper>
-        <InfoTitle>블로그</InfoTitle>
-        <Input
-          defaultValue={blogUrl}
-          placeholder="정보를 등록해주세요"
-          {...infoRegister("blogUrl")}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              e.preventDefault();
-            }
-          }}
-        />
-      </InfoWrapper>
-      <InfoWrapper>
-        <InfoTitle>포트폴리오</InfoTitle>
-        <Input
-          defaultValue={portfolioUrl}
-          placeholder="정보를 등록해주세요"
-          {...infoRegister("portfolioUrl")}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              e.preventDefault();
-            }
-          }}
-        />
-      </InfoWrapper>
+      {infoData.map((data, index) => (
+        <InfoWrapper key={index}>
+          <InfoTitle>{data.title}</InfoTitle>
+          <Input
+            defaultValue={data.url}
+            placeholder="정보를 등록해주세요"
+            {...infoRegister(data.register)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+              }
+            }}
+          />
+        </InfoWrapper>
+      ))}
     </>
   );
 }
