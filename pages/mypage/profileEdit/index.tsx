@@ -106,7 +106,9 @@ export default function MyPageEdit() {
         await uploadImg(`${process.env.NEXT_PUBLIC_API_URL}/user/image`);
         editMutate(changes);
       }
-      router.push("/mypage");
+      setTimeout(() => {
+        router.push("/mypage");
+      }, 300); // 데이터가 반영된 후 페이지 이동
     }
   };
 

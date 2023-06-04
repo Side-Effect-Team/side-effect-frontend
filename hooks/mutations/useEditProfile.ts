@@ -1,12 +1,9 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { editProfile } from "apis/UserAPI";
 import useToast from "../common/useToast";
-import { useRouter } from "next/router";
 
 export const useEditProfile = () => {
-  const router = useRouter();
   const { addToast, deleteToast } = useToast();
-  const queryClient = useQueryClient();
 
   const { mutate } = useMutation({
     mutationFn: editProfile,
@@ -17,8 +14,6 @@ export const useEditProfile = () => {
         content: "프로필 편집에 성공하였습니다..",
       });
       deleteToast("unique-id");
-      queryClient.invalidateQueries({ queryKey: ["editProfile"] });
-      router.push("/mypage");
     },
     onError: () => {
       addToast({
