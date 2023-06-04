@@ -4,6 +4,7 @@ import { Input } from "./styled";
 import { UseFormRegister } from "react-hook-form";
 import { InfoTitle, InfoWrapper } from "../../mypage/Profile/Info/styled";
 import { FormData } from "@/pages/mypage/profileEdit";
+import { translateCareer, translatePosition } from "@/utils/translateData";
 
 interface InfoEditProps {
   career: string;
@@ -45,35 +46,8 @@ export default function InfoEdit({
   const [careerTitle, setCareerTitle] = useState("");
   const [positionTitle, setPositionTitle] = useState("");
   useEffect(() => {
-    if (career === "empty") {
-      setCareerTitle("취업준비생");
-    } else if (career === "new") {
-      setCareerTitle("신입(0년차)");
-    } else if (career === "junior") {
-      setCareerTitle("주니어(1~3년차)");
-    } else if (career === "middle") {
-      setCareerTitle("미들(4~6년차)");
-    } else if (career === "senior") {
-      setCareerTitle("시니어(7년이상)");
-    } else {
-      setCareerTitle("경력");
-    }
-
-    if (position === "FRONTEND") {
-      setPositionTitle("프론트엔드");
-    } else if (position === "BACKEND") {
-      setPositionTitle("백엔드");
-    } else if (position === "DESIGNER") {
-      setPositionTitle("디자이너");
-    } else if (position === "DEVOPS") {
-      setPositionTitle("데브옵스");
-    } else if (position === "MARKETER") {
-      setPositionTitle("마케터");
-    } else if (position === "PM") {
-      setPositionTitle("기획자");
-    } else {
-      setPositionTitle("포지션");
-    }
+    translateCareer(career, setCareerTitle);
+    translatePosition(position, setPositionTitle);
   }, [career, position]);
   return (
     <>
