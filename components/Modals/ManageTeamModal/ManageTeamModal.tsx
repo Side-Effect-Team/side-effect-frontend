@@ -6,9 +6,9 @@ import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { Wrapper, Title, ManageSection } from "./styled";
 import axios from "axios";
-import FilterTab from "./FilterTab";
-import PositionFilterTab from "./PositionFilterTab";
-import ManageList from "./ManageList";
+import FilterTab from "./FilterTab/index";
+import PositionFilterTab from "./PositionFilterTab/index";
+import ManageList from "./ManageList/index";
 import WaitingImage from "./WaitingImage";
 const FILTER_TAB = [
   { name: "지원현황", value: "pending" },

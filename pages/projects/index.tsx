@@ -11,7 +11,6 @@ import ProjectList from "@/components/pages/project/ProjectLIst";
 import ProjectCardSkeleton from "@/components/Skeleton/ProjectCardSkeleton";
 import { useAppSelector } from "@/store/hooks";
 import DarkModeToggle from "@/components/DarkModeToggle";
-
 const FILTER_OPTIONS = [
   { name: "최신순", value: "latest" },
   { name: "조회순", value: "views" },
@@ -70,7 +69,6 @@ const Wrapper = styled.div`
   max-width: ${breakPoints.desktop}px;
   margin: 0 auto;
   gap: 20px;
-  /* background-color: white; */
 `;
 const FilterSection = styled.div`
   display: flex;
