@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { GoPlus } from "react-icons/go";
 import customAxios from "@/apis/customAxios";
 import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
@@ -79,6 +79,9 @@ export default function PostRecruitPage() {
         const url = `/recruit-board`;
         try {
           const res = await customAxios.post(url, data);
+          const recruitId = await res.data.id;
+          await window.alert("게시글 등록이 완료되었습니다");
+          await router.push(`/recruits/${recruitId}`);
         } catch (err) {
           console.log(err);
           window.alert("게시글 등록에 실패했습니다");
@@ -112,12 +115,29 @@ export default function PostRecruitPage() {
     setPositions([...newPositions]);
   };
 
+  // 포지션 검증
+  const validatePosition = () => {
+    let isValidate = true;
+    positions.map((position) => {
+      if (position.targetNumber <= 0) {
+        window.alert("1명 이상의 모집 인원을 입력해야 합니다");
+        isValidate = false;
+      }
+    });
+    return isValidate;
+  };
+
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (validatePosition()) handleSubmit();
+  };
+
   return (
     <Wrapper>
       <PageHead pageTitle="팀원 모집 글쓰기 | 사이드 이펙트" />
       <Contents>
         <PostTitleStyled>팀원 모집하기</PostTitleStyled>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={onSubmit}>
           <InputBox>
             <GuideWrapper>
               <LabelForm htmlFor="projectName">프로젝트명</LabelForm>

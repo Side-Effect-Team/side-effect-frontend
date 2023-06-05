@@ -7,3 +7,14 @@ export const Wrapper = styled.div`
 export const StyledHeader = styled.h2`
   margin-bottom: 0.75rem;
 `;
+
+export const HeaderBox = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2rem;
+
+  button {
+    transform: translateY(-0.3rem);
+  }
+`;
