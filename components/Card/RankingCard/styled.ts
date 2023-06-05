@@ -1,38 +1,74 @@
 import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
-import { media } from "@/styles/mediatest";
+import { AiFillHeart } from "react-icons/ai";
+
+export const HeartIcon = styled(AiFillHeart)`
+  color: ${(p) => p.theme.brandColor.coral};
+`;
+
 export const StyledLink = styled(Link)`
   max-width: 300px;
-  max-height: 300px;
-  width: 100%;
-  height: 100%;
+  min-height: 400px;
   position: relative;
-  border-radius: 20px;
   overflow: hidden;
-
+  border-radius: 35px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   &:hover {
-    span {
+    & span {
       transition: all 0.3s;
-      filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
+      filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
     }
   }
 `;
 export const StyledImage = styled(Image)`
   width: 100%;
-  height: 100%;
-  object-fit: contain;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 35px;
   &:hover {
-    transition: all 0.3s;
-    transform: scale(1.2);
+    transition: all 0.5s;
+    transform: scale(1.1);
   }
 `;
-
-export const Title = styled.span`
+export const ProjectInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
   position: absolute;
-  bottom: 10px;
-  left: 10px;
-  font-size: xx-large;
-  text-shadow: 3px 4px 7px rgba(81, 67, 21, 0.8);
-  color: ${(p) => p.theme.colors.white};
+  padding: 10px;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  border-radius: 35px;
+  z-index: 10;
+`;
+export const GlassOverlay = styled.div`
+  position: absolute;
+  height: 100%;
+  max-height: 70px;
+  width: 100%;
+  bottom: 0;
+  z-index: 0;
+  background: rgba(250, 250, 250, 0.25);
+  backdrop-filter: blur(8px);
+  /* border-radius: 35px; */
+  box-shadow: ${(p) => p.theme.boxShadow};
+  transition: all 0.3s;
+`;
+
+export const LikeNum = styled.span`
+  display: flex;
+  gap: 5px;
+  font-size: medium;
+  font-weight: bold;
+  text-shadow: 0 0.5px 3px rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+`;
+export const Title = styled.span`
+  font-size: larger;
+  font-weight: bold;
+  text-shadow: 0 0.5px 3px rgba(0, 0, 0, 0.6);
+  color: #ffffff;
 `;

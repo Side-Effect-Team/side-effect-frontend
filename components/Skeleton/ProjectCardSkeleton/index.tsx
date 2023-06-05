@@ -13,7 +13,7 @@ import {
 export default function ProjectCardSkeleton() {
   return (
     <SkelectonContainer>
-      {[...Array(4)].fill("").map((_, index) => {
+      {[...Array(8)].fill("").map((_, index) => {
         return (
           <SkeletonCardWrapper key={index}>
             <Header />
