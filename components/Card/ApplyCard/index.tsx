@@ -14,13 +14,13 @@ import { useCancelApply } from "@/hooks/mutations/useCancelApply";
 import { translatePosition, translateStatus } from "@/utils/translateData";
 
 export interface ApplyBoardCardProps {
-  id: number;
+  boardId: number;
+  category: string;
   closed: boolean;
   position: string;
+  positionId: number;
   status: string;
   title: string;
-  applicationId: number;
-  boardId: number;
 }
 interface dataProps {
   data: ApplyBoardCardProps;
@@ -42,8 +42,7 @@ export default function ApplyBoardCard({ data }: dataProps) {
 
   const onClickCancelApply = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    console.log(data.applicationId);
-    cancelMutate(data?.applicationId);
+    cancelMutate(data?.positionId);
   };
   return (
     <Container onClick={onClickGoToBoard}>

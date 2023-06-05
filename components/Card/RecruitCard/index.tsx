@@ -23,7 +23,6 @@ interface RecruitCardProps {
 }
 
 export default function RecruitCard({ data }: RecruitCardProps) {
-  console.log(data);
   const recruitMutate = useAddLikeRecruit();
   const [recruitingTitle, setRecruitingTitle] = useState("• 모집중");
   const router = useRouter();

@@ -57,7 +57,6 @@ export default function InfoEdit({
   const onChangeUrl =
     (setState: Dispatch<SetStateAction<string>>) =>
     (e: ChangeEvent<HTMLInputElement>) => {
-      console.log(e.currentTarget.value);
       setState(e.currentTarget.value);
     };
   return (

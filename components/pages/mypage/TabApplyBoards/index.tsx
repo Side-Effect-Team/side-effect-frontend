@@ -53,7 +53,7 @@ export default function TabApplyBoards({ boards, title }: TabApplyBoardsProps) {
       {filterBoards?.length !== 0 ? (
         <ApplyBoardWrapper>
           {filterBoards?.map((el) => (
-            <ApplyBoardCard key={el.applicationId} data={el} />
+            <ApplyBoardCard key={el.positionId} data={el} />
           ))}
         </ApplyBoardWrapper>
       ) : (
