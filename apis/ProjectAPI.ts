@@ -6,7 +6,7 @@ export const getProjectData = async (
   keyword: string,
 ) => {
   const response = await customAxios.get(
-    `/free-boards/scroll?size=4&filter=${filter}&keyword=${keyword}&lastId=${page}`,
+    `/free-boards/scroll?size=8&filter=${filter}&keyword=${keyword}&lastId=${page}`,
   );
   return response.data;
 };
