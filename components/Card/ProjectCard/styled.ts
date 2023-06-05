@@ -26,6 +26,10 @@ export const Container = styled.div`
     flex-direction: row;
     margin-left: auto;
     margin-right: auto;
+    :hover {
+      transition: none;
+      transform: none;
+    }
   }
 `;
 
@@ -73,6 +77,7 @@ export const Title = styled.div`
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  width: 100%;
   ${media.mobile} {
     margin-top: 5px;
     height: auto;

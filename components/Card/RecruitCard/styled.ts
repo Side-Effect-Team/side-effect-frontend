@@ -28,6 +28,10 @@ export const Container = styled.div`
     margin-left: auto;
     margin-right: auto;
     padding-bottom: 10px;
+    :hover {
+      transition: none;
+      transform: none;
+    }
   }
 `;
 export const IsRecruiting = styled.div<{ isRecruiting: boolean }>`
@@ -51,6 +55,7 @@ export const Title = styled.div`
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  width: 100%;
   margin-bottom: 10px;
   ${media.mobile} {
     width: calc(100% - 40px);

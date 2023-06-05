@@ -42,6 +42,7 @@ export const Title = styled.div`
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  width: 100%;
   color: ${(p) => p.theme.textColor};
   ${media.mobile} {
     font-size: 16px;
