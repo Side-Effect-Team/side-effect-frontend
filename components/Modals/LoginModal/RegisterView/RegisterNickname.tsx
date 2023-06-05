@@ -3,13 +3,16 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { handleModalView } from "@/store/loginViewTransitionSlice";
 import { addNickname } from "@/store/userInfoStoreSlice";
 import { Input, Label, ButtonWrapper, Form, ViewWrapper } from "./styled";
+import { duplicateNickname } from "@/apis/UserAPI";
 import ErrorMessage from "./ErrorMessage";
 import Button from "@/components/Button";
+import { useState } from "react";
 interface FormInput {
   nickname: string;
 }
 export default function RegisterNickname() {
   const dispatch = useAppDispatch();
+  const [isNicknameAvailable, setIsNicknameAvailable] = useState(true);
   const {
     register,
     handleSubmit,
@@ -20,7 +23,13 @@ export default function RegisterNickname() {
     dispatch(handleModalView({ modalView: "registerUserInfo" }));
     console.log(errors);
   };
-
+  const validateNickName = async (value: string) => {
+    const response = await duplicateNickname(value);
+    if (response) {
+      return "이미 사용중인 닉네임 입니다.";
+    }
+    return true;
+  };
   return (
     <ViewWrapper
       initial={{ opacity: 0 }}
@@ -44,6 +53,7 @@ export default function RegisterNickname() {
               value: 15,
               message: "닉네임은 15글자 이하로 입력해주세요",
             },
+            validate: (value) => validateNickName(value),
           })}
         />
         {errors.nickname && (

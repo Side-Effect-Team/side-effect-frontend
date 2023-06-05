@@ -56,7 +56,7 @@ export default function RegisterUserInfo() {
       };
       console.log(mergedUserInfo);
       await axios
-        .post(`${process.env.NEXT_PUBLIC_API_URL}/user/join`, mergedUserInfo)
+        .post(`/user/join`, mergedUserInfo)
         .then(() => {
           dispatch(handleModalView({ modalView: "registerSuccess" }));
         })
