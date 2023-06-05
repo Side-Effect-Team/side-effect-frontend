@@ -14,7 +14,7 @@ export const useDeleteAccount = () => {
     onSuccess: () => {
       addToast({
         type: "success",
-        title: "success",
+        title: "삭제 성공!",
         content: "계정이 삭제되었습니다.",
       });
       deleteToast("unique-id");
@@ -23,8 +23,8 @@ export const useDeleteAccount = () => {
     onError: () => {
       addToast({
         type: "error",
-        title: "error",
-        content: "회원탈퇴 실패.",
+        title: "삭제 실패!",
+        content: "계정이 삭제되지 않았습니다. 다시 시도해주세요",
       });
     },
   });

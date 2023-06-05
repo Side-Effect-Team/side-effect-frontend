@@ -16,7 +16,7 @@ export const withAuth =
       if (!token) {
         addToast({
           type: "info",
-          title: "info",
+          title: "로그인 필요!",
           content: "로그인 후 이용이 가능합니다.",
         });
         router.push("/");

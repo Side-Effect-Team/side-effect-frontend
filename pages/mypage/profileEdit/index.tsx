@@ -87,7 +87,7 @@ export default function MyPageEdit() {
     if (!response) return;
     addToast({
       type: "info",
-      title: "info",
+      title: "편집 취소!",
       content: "프로필 편집을 취소하셨습니다.",
     });
 

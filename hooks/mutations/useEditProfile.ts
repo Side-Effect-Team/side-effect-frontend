@@ -10,7 +10,7 @@ export const useEditProfile = () => {
     onSuccess: () => {
       addToast({
         type: "success",
-        title: "success",
+        title: "편집 성공!",
         content: "프로필 편집에 성공하였습니다.",
       });
       deleteToast("unique-id");
@@ -18,7 +18,7 @@ export const useEditProfile = () => {
     onError: () => {
       addToast({
         type: "error",
-        title: "error",
+        title: "편집 실패!",
         content: "프로필 편집에 실패하였습니다.",
       });
 

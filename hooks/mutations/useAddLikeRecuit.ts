@@ -11,7 +11,7 @@ export const useAddLikeRecruit = () => {
       if (res.data.message.includes("추천했습니다")) {
         addToast({
           type: "success",
-          title: "success",
+          title: "등록 성공!",
           content: "관심게시물로 등록되었습니다",
         });
       }
