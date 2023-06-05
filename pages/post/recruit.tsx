@@ -79,6 +79,9 @@ export default function PostRecruitPage() {
         const url = `/recruit-board`;
         try {
           const res = await customAxios.post(url, data);
+          const recruitId = await res.data.id;
+          await window.alert("게시글 등록이 완료되었습니다");
+          await router.push(`/recruits/${recruitId}`);
         } catch (err) {
           console.log(err);
           window.alert("게시글 등록에 실패했습니다");
