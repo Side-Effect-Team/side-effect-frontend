@@ -5,16 +5,17 @@ import { useRouter } from "next/router";
 import HeartButton from "@/components/Button/HeartButton";
 import TagBox from "@/components/Tag/TagBox";
 import CardFooter from "../../Footer/CardFooter";
-interface RecruitDataProps {
+
+export interface RecruitDataProps {
+  id: number;
   closed: boolean;
   commentNum: number;
+  title: string;
   createdAt: string;
-  id: number;
   like: boolean;
   likeNum: number;
   positions: string[];
   tags: string[];
-  title: string;
   views: number;
 }
 interface RecruitCardProps {
@@ -22,6 +23,7 @@ interface RecruitCardProps {
 }
 
 export default function RecruitCard({ data }: RecruitCardProps) {
+  console.log(data);
   const recruitMutate = useAddLikeRecruit();
   const [recruitingTitle, setRecruitingTitle] = useState("• 모집중");
   const router = useRouter();

@@ -39,8 +39,7 @@ export const useForm = ({ initialVals, validate, onSubmit }: UseFormProps) => {
     });
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     const newTouched = { ...initialTouched };
     for (const key in newTouched) {
       // @ts-ignore

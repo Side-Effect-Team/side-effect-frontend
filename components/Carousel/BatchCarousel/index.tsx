@@ -1,8 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import ProjectCard from "../../Card/ProjectCard";
+import RecruitCard from "@/components/Card/RecruitCard";
 import { Wrapper, CarouselTitle, CardContainer } from "./styled";
 import customAxios from "@/apis/customAxios";
-import { recruitBoardCardConverter } from "@/utils/converter";
+import { RecruitDataProps } from "@/components/Card/RecruitCard";
+import { BoardCardProps } from "@/components/Card/ProjectCard";
 
 interface BatchCarouselProps {
   title: string;
@@ -22,17 +24,27 @@ export default function BatchCarousel({
     queryFn: () => fetchData(maxCards, queryKey),
   });
 
+  if (!data) {
+    return (
+      <Wrapper>
+        <CarouselTitle>{title}</CarouselTitle>
+        {isLoading && <h2>Loading...</h2>}
+        {isError && <h2>데이터를 불러오는데 실패했습니다</h2>}
+      </Wrapper>
+    );
+  }
+
   return (
     <Wrapper>
       <CarouselTitle>{title}</CarouselTitle>
-      {isLoading && <h2>Loading...</h2>}
-      {isError && <h2>데이터를 불러오는데 실패했습니다</h2>}
       <CardContainer>
-        {data &&
-          data.map((recruit: RecruitType) => {
-            const convertedRecruit = recruitBoardCardConverter(recruit);
-            return <ProjectCard key={recruit.id} data={convertedRecruit} />;
-          })}
+        {data.length && category === "recruits"
+          ? data.map((recruit: RecruitDataProps) => {
+              return <RecruitCard key={recruit.id} data={recruit} />;
+            })
+          : data.map((project: BoardCardProps) => {
+              return <ProjectCard key={project.id} data={project} />;
+            })}
       </CardContainer>
     </Wrapper>
   );

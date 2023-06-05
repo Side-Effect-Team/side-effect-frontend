@@ -4,16 +4,16 @@ import { breakPoints, mediaQuery } from "@/styles/Media";
 import Banner from "@/components/Banner";
 import { BANNER_CONTENTS } from "../../enum";
 import PageHead from "@/components/PageHead";
-import { recruitBoardCardConverter } from "@/utils/converter";
 import RecruitCard from "@/components/Card/RecruitCard";
 import customAxios from "apis/customAxios";
+import { RecruitDataProps } from "@/components/Card/RecruitCard";
 
 export default function RecruitsPage() {
   window.sessionStorage.removeItem("activeTab");
   const { data, isError, isLoading } = useQuery({
     queryKey: ["recruits"],
     queryFn: async () => {
-      const res = await customAxios.get(`/recruit-board/all`);
+      const res = await customAxios.get(`/recruit-board/scroll?size=1000`);
       return res.data.recruitBoards;
     },
   });
@@ -54,10 +54,8 @@ export default function RecruitsPage() {
           </FilterBox>
         </ContentsHeader>
         <ContentsMain>
-          {data.map((item: RecruitType) => {
-            // console.log(item);
-            const boardCardData = recruitBoardCardConverter(item);
-            return <RecruitCard key={item.id} data={boardCardData} />;
+          {data.map((item: RecruitDataProps) => {
+            return <RecruitCard key={item.id} data={item} />;
           })}
         </ContentsMain>
       </Contents>

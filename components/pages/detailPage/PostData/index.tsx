@@ -84,7 +84,7 @@ export default function PostData({
           {popupOn && <OptionPopup postId={postId} />}
         </div>
         {/* 로그인한 유저가 작성자가 아니면 수정 팝업 안보임 */}
-        {userId === writerId + "" && (
+        {+userId === writerId && (
           <OptionBox onClick={() => setPopupOn((prev) => !prev)}>
             <BiDotsHorizontalRounded size={25} />
           </OptionBox>
