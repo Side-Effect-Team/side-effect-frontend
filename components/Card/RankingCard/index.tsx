@@ -28,10 +28,10 @@ export default function RankingCard(card: RankingCardType) {
         placeholder="blur"
       />
       <ProjectInfo>
-        <Title>{title}Side-Effect</Title>
+        <Title>{title}</Title>
         <LikeNum>
           <HeartIcon />
-          {likeNum}12
+          {likeNum}
         </LikeNum>
       </ProjectInfo>
       <GlassOverlay />
