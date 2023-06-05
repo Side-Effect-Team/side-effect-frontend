@@ -14,7 +14,7 @@ const VIEW_COMPONENTS = {
 };
 export default function LoginModal() {
   const dispatch = useAppDispatch();
-  const { isOpen } = useAppSelector((state) => state.modal);
+  const { isOpen, modalType } = useAppSelector((state) => state.modal);
   const { modalView } = useAppSelector((state) => state.loginView);
   const handleModalClose = () => {
     dispatch(closeModal());
@@ -22,6 +22,7 @@ export default function LoginModal() {
   const handleViewRender = () => {
     return VIEW_COMPONENTS[modalView];
   };
+  if (modalType !== "LoginModal") return null;
 
   return (
     <Wrapper isOpen={isOpen}>

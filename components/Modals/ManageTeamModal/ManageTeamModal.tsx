@@ -27,7 +27,7 @@ export default function ManageTeamModal() {
   const [currentTabIndex, value, handleFilterTab] = useFilterTab(0, "pending");
   const [positionTabIndex, positionValue, handlePositionFilterTab] =
     useFilterTab(0, "프론트엔드");
-  const { isOpen } = useAppSelector((state) => state.modal);
+  const { isOpen, modalType } = useAppSelector((state) => state.modal);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const token = "";
@@ -61,7 +61,7 @@ export default function ManageTeamModal() {
   );
 
   const { applicants, applicantNum } = data;
-
+  if (modalType !== "ManageTeamModal") return null;
   return (
     <Wrapper isOpen={isOpen}>
       <Title>
