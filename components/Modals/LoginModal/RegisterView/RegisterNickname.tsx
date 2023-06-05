@@ -6,13 +6,11 @@ import { Input, Label, ButtonWrapper, Form, ViewWrapper } from "./styled";
 import { duplicateNickname } from "@/apis/UserAPI";
 import ErrorMessage from "./ErrorMessage";
 import Button from "@/components/Button";
-import { useState } from "react";
 interface FormInput {
   nickname: string;
 }
 export default function RegisterNickname() {
   const dispatch = useAppDispatch();
-  const [isNicknameAvailable, setIsNicknameAvailable] = useState(true);
   const {
     register,
     handleSubmit,
