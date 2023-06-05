@@ -1,9 +1,13 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import SelectBox from "@/components/SelectBox";
 import { Input } from "./styled";
-import { UseFormRegister } from "react-hook-form";
 import { InfoTitle, InfoWrapper } from "../../mypage/Profile/Info/styled";
-import { FormData } from "@/pages/mypage/profileEdit";
 import { translateCareer, translatePosition } from "@/utils/translateData";
 import { SELECT_CAREER, SELECT_POSITIONS } from "enum";
 
@@ -12,10 +16,12 @@ interface InfoEditProps {
   setCareer: Dispatch<SetStateAction<string>>;
   position: string;
   setPosition: Dispatch<SetStateAction<string>>;
-  infoRegister: UseFormRegister<FormData>;
   githubUrl: string;
+  setGithubUrl: Dispatch<SetStateAction<string>>;
   blogUrl: string;
+  setBlogUrl: Dispatch<SetStateAction<string>>;
   portfolioUrl: string;
+  setPortfolioUrl: Dispatch<SetStateAction<string>>;
 }
 
 export default function InfoEdit({
@@ -23,10 +29,12 @@ export default function InfoEdit({
   setCareer,
   position,
   setPosition,
-  infoRegister,
   githubUrl,
+  setGithubUrl,
   blogUrl,
+  setBlogUrl,
   portfolioUrl,
+  setPortfolioUrl,
 }: InfoEditProps) {
   const [careerTitle, setCareerTitle] = useState("");
   const [positionTitle, setPositionTitle] = useState("");
@@ -38,14 +46,20 @@ export default function InfoEdit({
   interface infoDataProps {
     title: string;
     url?: string;
-    register: "githubUrl" | "blogUrl" | "portfolioUrl";
+    setState: Dispatch<SetStateAction<string>>;
   }
   const infoData: infoDataProps[] = [
-    { title: "깃허브", url: githubUrl, register: "githubUrl" },
-    { title: "블로그", url: blogUrl, register: "blogUrl" },
-    { title: "포트폴리오", url: portfolioUrl, register: "portfolioUrl" },
+    { title: "깃허브", url: githubUrl, setState: setGithubUrl },
+    { title: "블로그", url: blogUrl, setState: setBlogUrl },
+    { title: "포트폴리오", url: portfolioUrl, setState: setPortfolioUrl },
   ];
 
+  const onChangeUrl =
+    (setState: Dispatch<SetStateAction<string>>) =>
+    (e: ChangeEvent<HTMLInputElement>) => {
+      console.log(e.currentTarget.value);
+      setState(e.currentTarget.value);
+    };
   return (
     <>
       <InfoWrapper>
@@ -70,7 +84,7 @@ export default function InfoEdit({
           <Input
             defaultValue={data.url}
             placeholder="정보를 등록해주세요"
-            {...infoRegister(data.register)}
+            onInput={onChangeUrl(data.setState)}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
                 e.preventDefault();

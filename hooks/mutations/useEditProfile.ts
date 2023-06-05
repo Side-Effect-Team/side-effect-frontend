@@ -11,7 +11,7 @@ export const useEditProfile = () => {
       addToast({
         type: "success",
         title: "success",
-        content: "프로필 편집에 성공하였습니다..",
+        content: "프로필 편집에 성공하였습니다.",
       });
       deleteToast("unique-id");
     },

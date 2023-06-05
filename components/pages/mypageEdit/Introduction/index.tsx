@@ -21,7 +21,7 @@ import {
 } from "./styled";
 import { Input } from "../Info/styled";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
-import { FormData } from "@/pages/mypage/profileEdit";
+// import { FormData } from "@/pages/mypage/profileEdit";
 import { duplicateNickname } from "apis/UserAPI";
 
 interface IntroEditProps {
@@ -30,8 +30,8 @@ interface IntroEditProps {
   setIntroduction: Dispatch<SetStateAction<string>>;
   imgSrc: string;
   handleImgChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  introRegister: UseFormRegister<Pick<FormData, "nickname">>;
-  errors: FieldErrors<Pick<FormData, "nickname">>;
+  introRegister: UseFormRegister<{ nickname: string }>;
+  errors: FieldErrors<{ nickname: string }>;
 }
 export default function IntroductionEdit({
   nickname,
