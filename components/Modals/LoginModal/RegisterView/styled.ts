@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import Link from "next/link";
+import { darken, lighten } from "polished";
 
 export const Label = styled.label`
   text-align: start;
@@ -14,11 +16,13 @@ export const InputSection = styled.div`
   gap: 10px;
 `;
 export const Input = styled.input`
-  outline: none;
   border: none;
-  padding: 10px 0;
+  outline: none;
+  border-radius: 10px;
+  padding: 15px;
+  background-color: ${(p) => p.theme.componentBgColor};
+  color: ${(p) => p.theme.textColor};
   width: 100%;
-  border-bottom: 2px solid black;
 `;
 export const ButtonWrapper = styled.div`
   margin-top: 15px;
@@ -26,6 +30,17 @@ export const ButtonWrapper = styled.div`
   gap: 15px;
   flex-direction: column;
   width: 100%;
+`;
+export const StyledLink = styled(Link)`
+  width: 100%;
+  padding: 1rem;
+  color: ${(p) => p.theme.colors.white};
+  background-color: ${(p) => p.theme.colors.primary};
+  font-weight: bold;
+  font-size: large;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: ${(p) => p.theme.boxShadow};
 `;
 export const SelectSection = styled.div`
   display: flex;

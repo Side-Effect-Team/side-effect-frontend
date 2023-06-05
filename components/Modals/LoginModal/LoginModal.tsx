@@ -29,7 +29,7 @@ export default function LoginModal() {
       <Header>
         <AiOutlineClose
           onClick={handleModalClose}
-          size={30}
+          size={40}
           style={{ cursor: "pointer" }}
         />
       </Header>

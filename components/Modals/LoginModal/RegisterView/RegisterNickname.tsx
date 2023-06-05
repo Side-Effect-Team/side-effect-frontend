@@ -28,6 +28,7 @@ export default function RegisterNickname() {
     }
     return true;
   };
+  console.log(errors);
   return (
     <ViewWrapper
       initial={{ opacity: 0 }}
