@@ -20,7 +20,8 @@ declare interface ProjectType {
   like: boolean;
   likeNum: number;
   comments: CommentType[];
-  commentNum?: number;
+  commentNum: number;
   createdAt: string;
   writer: string;
+  subTitle: string;
 }
