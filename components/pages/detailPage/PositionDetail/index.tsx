@@ -1,8 +1,11 @@
 import { AiOutlineTeam } from "react-icons/ai";
 import { POSITION_LIST } from "enum";
-import { Wrapper, StyledHeader } from "./styled";
-import { useAppSelector } from "@/store/hooks";
+import { Wrapper, HeaderBox, StyledHeader } from "./styled";
 import PositionRow from "@/detailComps/PositionRow";
+import Button from "@/components/Button";
+import ManageTeamModal from "@/components/Modals/ManageTeamModal/ManageTeamModal";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { openModal } from "@/store/modalSlice";
 
 interface PositionDetailProps {
   writerId: number;
@@ -14,16 +17,23 @@ export default function PositionDetail({
   positions,
 }: PositionDetailProps) {
   const userId = useAppSelector((state) => +state.auth.userId);
+  const dispatch = useAppDispatch();
+  const { isOpen } = useAppSelector((state) => state.modal);
+
   return (
     <Wrapper>
-      <div>
+      <HeaderBox>
         <StyledHeader>모집 포지션</StyledHeader>
         {writerId === userId && (
-          <span>
-            <AiOutlineTeam />
-          </span>
+          <Button
+            onClick={() =>
+              dispatch(openModal({ modalType: "ManageTeamModal" }))
+            }
+          >
+            <AiOutlineTeam size={25} />
+          </Button>
         )}
-      </div>
+      </HeaderBox>
 
       {positions.map((position) => {
         // 영문 포지션 이름을 한글로 바꿈
@@ -45,6 +55,7 @@ export default function PositionDetail({
         );
       })}
       <hr />
+      {isOpen && <ManageTeamModal />}
     </Wrapper>
   );
 }
