@@ -27,6 +27,8 @@ export default function Nickname({
     }
   }, []);
 
+  const specialCharactersRegex = /^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣\s]*$/;
+
   return (
     <IntroductionWrapper>
       <IntroductionTitle>닉네임:</IntroductionTitle>
@@ -47,6 +49,10 @@ export default function Nickname({
             maxLength: {
               value: 15,
               message: "닉네임은 15글자 이하로 입력해주세요",
+            },
+            pattern: {
+              value: specialCharactersRegex,
+              message: "특수 문자는 사용할 수 없습니다",
             },
             validate: async (value: string) => {
               if (value.trim().length === 0) {
