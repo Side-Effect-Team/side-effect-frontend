@@ -44,7 +44,7 @@ export default function RecruitDetailPage({
       content,
       imgSrc,
       comments,
-    } = data.data;
+    } = data;
     return (
       <Wrapper>
         <Contents>

@@ -1,30 +1,25 @@
-import { useQuery } from "@tanstack/react-query";
+import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { breakPoints, mediaQuery } from "@/styles/Media";
 import Banner from "@/components/Banner";
 import { BANNER_CONTENTS } from "../../enum";
 import PageHead from "@/components/PageHead";
 import RecruitCard from "@/components/Card/RecruitCard";
-import customAxios from "apis/customAxios";
 import { RecruitDataProps } from "@/components/Card/RecruitCard";
+import RecruitCardSkeleton from "@/components/Skeleton/RecruitCardSkeleton";
+import { useGetRecruitData } from "@/hooks/queries/useGetRecruitData";
+import { useObserver } from "@/hooks/common/useObserver";
 
 export default function RecruitsPage() {
   window.sessionStorage.removeItem("activeTab");
-  const { data, isError, isLoading } = useQuery({
-    queryKey: ["recruits"],
-    queryFn: async () => {
-      const res = await customAxios.get(`/recruit-board/scroll?size=1000`);
-      return res.data.recruitBoards;
-    },
-  });
+  const fetchMoreEl = useRef<HTMLDivElement | null>(null);
+  const intersecting = useObserver(fetchMoreEl);
+  const { data, isLoading, isError, hasNextPage, fetchNextPage } =
+    useGetRecruitData();
 
-  if (isError) {
-    return <h2>일시적으로 페이지를 로드할 수 없습니다</h2>;
-  }
-
-  if (isLoading) {
-    return <h2>Loading...</h2>;
-  }
+  useEffect(() => {
+    if (intersecting && hasNextPage) fetchNextPage();
+  }, [intersecting, hasNextPage, fetchNextPage]);
 
   return (
     <Wrapper>
@@ -54,9 +49,14 @@ export default function RecruitsPage() {
           </FilterBox>
         </ContentsHeader>
         <ContentsMain>
-          {data.map((item: RecruitDataProps) => {
-            return <RecruitCard key={item.id} data={item} />;
-          })}
+          {isLoading && <RecruitCardSkeleton />}
+          {isError && <h2>일시적으로 페이지를 로드할 수 없습니다</h2>}
+          {data?.pages.map((page) =>
+            page.recruitBoards.map((recruit: RecruitDataProps) => (
+              <RecruitCard key={recruit.id} data={recruit} />
+            )),
+          )}
+          <div ref={fetchMoreEl} />
         </ContentsMain>
       </Contents>
     </Wrapper>
