@@ -111,7 +111,7 @@ export default function RegisterUserInfo() {
               )
             }
           >
-            뒤로가기
+            뒤로
           </Button>
         </ButtonWrapper>
       </Form>

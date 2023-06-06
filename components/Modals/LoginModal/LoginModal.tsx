@@ -7,7 +7,6 @@ import RegisterUserInfo from "./RegisterView/RegisterUserInfo";
 import Login from "./Login";
 import RegisterSuccess from "./RegisterView/RegisterSuccess";
 import { AnimatePresence } from "framer-motion";
-import { handleModalView } from "@/store/loginViewTransitionSlice";
 const VIEW_COMPONENTS = {
   startLogin: <Login />,
   registerNickname: <RegisterNickname />,

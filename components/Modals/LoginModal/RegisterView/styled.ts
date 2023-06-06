@@ -22,6 +22,7 @@ export const Input = styled.input`
   padding: 15px;
   background-color: ${(p) => p.theme.componentBgColor};
   color: ${(p) => p.theme.textColor};
+  border: 1px solid ${(p) => p.theme.cardBorder};
   width: 100%;
 `;
 export const ButtonWrapper = styled.div`

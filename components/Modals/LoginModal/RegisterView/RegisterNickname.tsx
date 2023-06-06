@@ -66,7 +66,7 @@ export default function RegisterNickname() {
         )}
         <ButtonWrapper>
           <Button type="submit" size="large">
-            Next
+            다음
           </Button>
           <Button
             type="button"
@@ -79,7 +79,7 @@ export default function RegisterNickname() {
               )
             }
           >
-            Back
+            뒤로
           </Button>
         </ButtonWrapper>
       </Form>
