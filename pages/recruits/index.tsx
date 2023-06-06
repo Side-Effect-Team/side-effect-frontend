@@ -49,7 +49,14 @@ export default function RecruitsPage() {
           </FilterBox>
         </ContentsHeader>
         <ContentsMain>
-          {isLoading && <RecruitCardSkeleton />}
+          {isLoading && (
+            <>
+              <RecruitCardSkeleton />
+              <RecruitCardSkeleton />
+              <RecruitCardSkeleton />
+              <RecruitCardSkeleton />
+            </>
+          )}
           {isError && <h2>일시적으로 페이지를 로드할 수 없습니다</h2>}
           {data?.pages.map((page) =>
             page.recruitBoards.map((recruit: RecruitDataProps) => (
