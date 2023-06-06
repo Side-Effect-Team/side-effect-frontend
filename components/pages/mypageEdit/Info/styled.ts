@@ -11,6 +11,8 @@ export const Input = styled.input`
   border-radius: 10px;
   ${media.mobile} {
     width: 100%;
+    font-size: 14px;
+    height: 2.5rem;
   }
 
   :focus {

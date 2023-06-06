@@ -20,7 +20,7 @@ declare module "styled-components" {
     boxShadow: string;
     footerBgColor: string;
     alarmDefaultColor: string;
-    alarmCheckedColor: string;
+    grayToDark: string;
     cardBoxShadow: string;
     cardBorder: string;
   }

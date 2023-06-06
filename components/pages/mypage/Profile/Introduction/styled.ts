@@ -1,3 +1,4 @@
+import { media } from "@/styles/mediatest";
 import styled from "styled-components";
 
 export const ProfileWrapper = styled.div`
@@ -21,11 +22,17 @@ export const NickName = styled.div`
   font-size: 24px;
   font-weight: 600;
   margin-bottom: 15px;
+  ${media.mobile} {
+    font-size: 18px;
+  }
 `;
 export const Text = styled.p`
   color: ${(p) => p.theme.colors.darkGray};
   margin: 0;
   margin-bottom: 15px;
+  ${media.mobile} {
+    font-size: 14px;
+  }
 `;
 export const ContentsList = styled.div`
   display: flex;

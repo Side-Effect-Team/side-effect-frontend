@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getProfileData } from "apis/UserAPI";
 import useToast from "../common/useToast";
 
@@ -8,7 +8,7 @@ export const useGetProfileData = () => {
     onError: () => {
       addToast({
         type: "error",
-        title: "error",
+        title: "에러 발생!",
         content: "정보를 가져오지 못했습니다.",
       });
       deleteToast("unique-id");

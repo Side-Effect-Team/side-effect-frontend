@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { theme } from "@/styles/Theme";
+import { media } from "@/styles/mediatest";
 
 export const ProfileWrapper = styled.div`
   width: 100%;
@@ -19,12 +20,16 @@ export const ProfileImage = styled.img`
 `;
 export const IntroductionTitle = styled.div`
   width: 100px;
+  margin-top: 15px;
+  ${media.mobile} {
+    margin-top: 10px;
+  }
 `;
 export const IntroductionWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 10px;
 `;
 export const FiledWrapper = styled.div`
@@ -60,6 +65,9 @@ export const TextArea = styled.textarea`
   :focus {
     border: 1px solid ${(p) => p.theme.brandColor.primary};
     outline: none;
+  }
+  ${media.mobile} {
+    font-size: 14px;
   }
 `;
 export const InputGuideWrapper = styled.div`

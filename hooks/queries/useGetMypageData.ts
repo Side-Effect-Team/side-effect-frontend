@@ -7,7 +7,7 @@ export const useGetMypageData = () => {
     onError: () => {
       addToast({
         type: "error",
-        title: "error",
+        title: "에러 발생!",
         content: "정보를 가져오지 못했습니다.",
       });
       deleteToast("unique-id");
