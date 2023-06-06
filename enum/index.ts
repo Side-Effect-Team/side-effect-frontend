@@ -71,3 +71,51 @@ export const POSITION_LIST = [
 export const DEFAULT_RECRUIT_CARD_IMAGE = "/images/BoardDefaultBackground.png";
 export const DEFAULT_PROJECT_CARD_IMAGE =
   "/images/ProjectDefaultBackground.png";
+
+// 게시글 생성 시의 tag & 모집 게시판에서 필터
+export const SKILL_LIST = [
+  {
+    name: "JavaScript",
+    value: "javascript",
+  },
+  {
+    name: "TypeScript",
+    value: "typescript",
+  },
+  {
+    name: "React",
+    value: "react",
+  },
+  {
+    name: "Vue.js",
+    value: "vue",
+  },
+  {
+    name: "Svelte",
+    value: "svelte",
+  },
+  {
+    name: "Next.js",
+    value: "nextjs",
+  },
+  {
+    name: "NestJS",
+    value: "nestjs",
+  },
+  {
+    name: "Node.js",
+    value: "nodejs",
+  },
+  {
+    name: "Java",
+    value: "java",
+  },
+  {
+    name: "Spring",
+    value: "spring",
+  },
+  {
+    name: "Go",
+    value: "go",
+  },
+];
