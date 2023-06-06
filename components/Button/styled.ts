@@ -2,6 +2,7 @@ import styled, { css } from "styled-components";
 import { BrandColorTypes, theme } from "../../styles/Theme";
 import React from "react";
 import { darken, lighten } from "polished";
+import { media } from "@/styles/mediatest";
 
 export interface ButtonStyle
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -18,18 +19,30 @@ const sizeStyles = css<ButtonStyle>`
     css`
       height: 1.75rem;
       font-size: 0.875rem;
+      ${media.mobile} {
+        height: 1.25rem;
+        font-size: 0.7rem;
+      }
     `}
   ${(p) =>
     p.size === "medium" &&
     css`
       height: 2.25rem;
       font-size: 1rem;
+      ${media.mobile} {
+        height: 1.75rem;
+        font-size: 0.875rem;
+      }
     `}
     ${(p) =>
     p.size === "large" &&
     css`
       height: 3rem;
       font-size: 1.25rem;
+      ${media.mobile} {
+        height: 2.5rem;
+        font-size: 1.125rem;
+      }
     `}
 `;
 

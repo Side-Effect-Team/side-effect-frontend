@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { AiFillHeart } from "react-icons/ai";
 
 export const HeartWrapper = styled.div<{ isLike: boolean }>`
-  background-color: ${(p) => (p.isLike ? "white" : p.theme.colors.mediumGray)};
+  background-color: ${(p) => (p.isLike ? "white" : p.theme.grayToDark)};
   border-radius: 50%;
   padding: 5px;
   position: absolute;

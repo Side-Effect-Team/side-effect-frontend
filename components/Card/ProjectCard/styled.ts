@@ -1,6 +1,4 @@
-import styled, { keyframes } from "styled-components";
-import { AiFillHeart, AiOutlineHeart, AiOutlineMessage } from "react-icons/ai";
-import { BsEye } from "react-icons/bs";
+import styled from "styled-components";
 import { media } from "@/styles/mediatest";
 
 export const Container = styled.div`
@@ -28,6 +26,10 @@ export const Container = styled.div`
     flex-direction: row;
     margin-left: auto;
     margin-right: auto;
+    :hover {
+      transition: none;
+      transform: none;
+    }
   }
 `;
 
@@ -45,7 +47,8 @@ export const Header = styled.div<{ src?: string }>`
   background-position: center;
   background-repeat: no-repeat;
   ${media.mobile} {
-    width: 35%;
+    /* width: 35%; */
+    width: 200px;
     height: 150px;
   }
 `;
@@ -62,24 +65,27 @@ export const ContentsWrapper = styled.div`
   ${media.mobile} {
     width: 65%;
     height: 150px;
-    padding: 10px;
     justify-content: space-between;
   }
 `;
 
 export const Title = styled.div`
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 15px;
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  width: 100%;
   ${media.mobile} {
-    margin-top: 7px;
+    margin-top: 5px;
     height: auto;
-    width: 80%;
+    width: calc(100% - 40px);
     font-size: 16px;
+    -webkit-line-clamp: 2;
+    line-height: 140%;
+    margin-bottom: 7px;
   }
 `;
 export const Content = styled.div`
@@ -92,47 +98,7 @@ export const Content = styled.div`
   -webkit-box-orient: vertical;
   overflow: hidden;
   ${media.mobile} {
+    font-size: 14px;
     height: auto;
   }
-`;
-
-export const Footer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: auto;
-`;
-export const CreateAt = styled.div`
-  font-size: 16px;
-  color: ${(p) => p.theme.colors.gray};
-`;
-export const ButtonsWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-`;
-export const IconButton = styled.button`
-  background: none;
-  border: none;
-  cursor: pointer;
-`;
-export const HeartNotFillIcon = styled(AiOutlineHeart)`
-  color: ${(p) => p.theme.colors.gray};
-  font-size: 16px;
-`;
-export const CommentIcon = styled(AiOutlineMessage)`
-  color: ${(p) => p.theme.colors.gray};
-  font-size: 16px;
-`;
-export const FeedbackNum = styled.div`
-  font-size: 16px;
-  margin-right: 5px;
-  color: ${(p) => p.theme.colors.gray};
-`;
-export const ViewIcon = styled(BsEye)`
-  color: ${(p) => p.theme.colors.gray};
-  font-size: 16px;
 `;

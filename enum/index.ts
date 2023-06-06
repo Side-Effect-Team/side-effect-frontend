@@ -72,50 +72,18 @@ export const DEFAULT_RECRUIT_CARD_IMAGE = "/images/BoardDefaultBackground.png";
 export const DEFAULT_PROJECT_CARD_IMAGE =
   "/images/ProjectDefaultBackground.png";
 
-// 게시글 생성 시의 tag & 모집 게시판에서 필터
-export const SKILL_LIST = [
-  {
-    name: "JavaScript",
-    value: "javascript",
-  },
-  {
-    name: "TypeScript",
-    value: "typescript",
-  },
-  {
-    name: "React",
-    value: "react",
-  },
-  {
-    name: "Vue.js",
-    value: "vue",
-  },
-  {
-    name: "Svelte",
-    value: "svelte",
-  },
-  {
-    name: "Next.js",
-    value: "nextjs",
-  },
-  {
-    name: "NestJS",
-    value: "nestjs",
-  },
-  {
-    name: "Node.js",
-    value: "nodejs",
-  },
-  {
-    name: "Java",
-    value: "java",
-  },
-  {
-    name: "Spring",
-    value: "spring",
-  },
-  {
-    name: "Go",
-    value: "go",
-  },
+export const SELECT_POSITIONS = [
+  { name: "프론트엔드", value: "FRONTEND" },
+  { name: "백엔드", value: "BACKEND" },
+  { name: "디자이너", value: "DESIGNER" },
+  { name: "데브옵스", value: "DEVOPS" },
+  { name: "기획자", value: "PM" },
+  { name: "마케터", value: "MARKETER" },
+];
+export const SELECT_CAREER = [
+  { name: "취업준비생", value: "empty" },
+  { name: "신입(0년차)", value: "new" },
+  { name: "주니어(1~3년차)", value: "junior" },
+  { name: "미들(4~6년차)", value: "middle" },
+  { name: "시니어(7년이상)", value: "senior" },
 ];

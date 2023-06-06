@@ -5,12 +5,9 @@ import IntroductionEdit from "../../../components/pages/mypageEdit/Introduction"
 import SkillEdit from "../../../components/pages/mypageEdit/Skill";
 import { useForm } from "react-hook-form";
 import {
-  Border,
   ButtonWrapper,
   Container,
   ContentsWrapper,
-  SectionHeaderWrapper,
-  SectionTitle,
   SectionWrapper,
   TapMenu,
   TapWrapper,
@@ -20,44 +17,34 @@ import useToast from "@/hooks/common/useToast";
 import { useGetProfileData } from "@/hooks/queries/useGetPofileData";
 import { useEditProfile } from "@/hooks/mutations/useEditProfile";
 import { useInputImage } from "@/hooks/common/useInputImage";
+import { useQueryClient } from "@tanstack/react-query";
+import { compareData } from "@/utils/compareData";
+import SectionBorder from "@/components/Boarder/SectionBorder";
+import { ChangeProps, updateData } from "@/utils/updateData";
 export interface FormData {
-  githubUrl?: string;
-  blogUrl?: string;
-  portfolioUrl?: string;
   nickname: string;
 }
-export interface MypageEditProps {
-  imgUrl?: string | undefined;
-  nickname: string;
-  introduction: string | undefined;
-  tags: string[] | undefined;
-  position: string;
-  career: string;
-  githubUrl?: string | undefined;
-  blogUrl?: string | undefined;
-  portfolioUrl?: string | undefined;
-}
+
 export default function MyPageEdit() {
+  const queryClient = useQueryClient();
+  queryClient.invalidateQueries({ queryKey: ["editProfile"] });
+
   const data = useGetProfileData();
-  console.log(data);
   const router = useRouter();
-  const [introduction, setIntroduction] = useState(data?.introduction);
-  const [tags, setTags] = useState<string[]>(data?.tags || []);
-  const [career, setCareer] = useState<string>(data?.career || "");
-  const [position, setPosition] = useState<string>(data?.position || "");
+  const [introduction, setIntroduction] = useState<string>(data?.introduction);
+  const [tags, setTags] = useState<string[]>(data?.tags);
+  const [career, setCareer] = useState<string>(data?.career);
+  const [position, setPosition] = useState<string>(data?.position);
+  const [githubUrl, setGithubUrl] = useState<string>(data?.githubUrl);
+  const [blogUrl, setBlogUrl] = useState<string>(data?.blogUrl);
+  const [portfolioUrl, setPortfolioUrl] = useState<string>(data?.portfolioUrl);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>();
+  } = useForm<{ nickname: string }>();
   const { addToast, deleteToast } = useToast();
-
-  useEffect(() => {
-    setTags(data?.tags || []);
-    setCareer(data?.career || "");
-    setPosition(data?.position || "");
-    setIntroduction(data?.introduction);
-  }, [data]);
 
   const editMutate = useEditProfile();
 
@@ -67,66 +54,32 @@ export default function MyPageEdit() {
       : data?.imgUrl,
   );
 
-  const onClickEdit = async (p: FormData) => {
+  const onClickEdit = (p: FormData) => {
     if (data) {
       const changedFormData: FormData = { nickname: data.nickname };
       if (p.nickname) changedFormData.nickname = p.nickname;
-      if (p.githubUrl) changedFormData.githubUrl = p.githubUrl;
-      if (p.blogUrl) changedFormData.blogUrl = p.blogUrl;
-      if (p.portfolioUrl) changedFormData.portfolioUrl = p.portfolioUrl;
 
-      const changedData: MypageEditProps = {
+      const changedData: ChangeProps = {
         career,
         position,
         tags,
         introduction,
+        githubUrl,
+        blogUrl,
+        portfolioUrl,
         ...changedFormData,
       };
-      const changes = compareData(data, changedData);
+      const changes: ChangeProps = compareData(data, changedData);
       console.log(changes);
+      updateData(changes, imgSrc, uploadImg, editMutate, `user/image`);
       if (
-        Object.keys(changes).length === 0 &&
-        (imgSrc === null || imgSrc.startsWith("http"))
-      ) {
-        alert("변경사항이 없습니다.");
-        return;
-      } else if (
-        Object.keys(changes).length !== 0 &&
-        (imgSrc === null || imgSrc.startsWith("http"))
-      ) {
-        editMutate(changes);
-      } else if (
-        Object.keys(changes).length === 0 &&
+        Object.keys(changes).length !== 0 ||
         !(imgSrc === null || imgSrc.startsWith("http"))
-      ) {
-        await uploadImg(`${process.env.NEXT_PUBLIC_API_URL}/user/image`);
-      } else {
-        await uploadImg(`${process.env.NEXT_PUBLIC_API_URL}/user/image`);
-        editMutate(changes);
-      }
-      router.push("/mypage");
+      )
+        setTimeout(() => {
+          router.push("/mypage");
+        }, 300); // 데이터가 반영된 후 페이지 이동
     }
-  };
-
-  // 기존 데이터와 변경된 데이터 비교
-  const compareData = (
-    originData: MypageEditProps,
-    changedData: MypageEditProps,
-  ) => {
-    const keys = Object.keys(originData);
-    const changes: Partial<MypageEditProps> & Record<string, any> = {};
-    for (const key of keys) {
-      if (
-        originData[key as keyof MypageEditProps] !==
-        changedData[key as keyof MypageEditProps]
-      ) {
-        changes[key] = changedData[key as keyof MypageEditProps];
-        if (changes[key] === undefined) {
-          delete changes[key];
-        }
-      }
-    }
-    return changes;
   };
 
   const onClickEditCancel = () => {
@@ -134,13 +87,23 @@ export default function MyPageEdit() {
     if (!response) return;
     addToast({
       type: "info",
-      title: "info",
+      title: "편집 취소!",
       content: "프로필 편집을 취소하셨습니다.",
     });
 
     deleteToast("unique-id");
     router.push("/mypage");
   };
+
+  useEffect(() => {
+    setIntroduction(data?.introduction);
+    setTags(data?.tags);
+    setCareer(data?.career);
+    setPosition(data?.position);
+    setGithubUrl(data?.githubUrl);
+    setBlogUrl(data?.blogUrl);
+    setPortfolioUrl(data?.portfolioUrl);
+  }, [data]);
   return (
     <Container>
       <TapWrapper>
@@ -158,26 +121,22 @@ export default function MyPageEdit() {
             errors={errors}
           />
           <SectionWrapper>
-            <SectionHeaderWrapper>
-              <SectionTitle>Skill</SectionTitle>
-              <Border></Border>
-            </SectionHeaderWrapper>
+            <SectionBorder title="Skill" />
             <SkillEdit stacks={tags} setStacks={setTags} />
           </SectionWrapper>
           <SectionWrapper>
-            <SectionHeaderWrapper>
-              <SectionTitle>Info</SectionTitle>
-              <Border></Border>
-            </SectionHeaderWrapper>
+            <SectionBorder title="Info" />
             <InfoEdit
               githubUrl={data?.githubUrl}
+              setGithubUrl={setGithubUrl}
               blogUrl={data?.blogUrl}
+              setBlogUrl={setBlogUrl}
               portfolioUrl={data?.portfolioUrl}
+              setPortfolioUrl={setPortfolioUrl}
               career={career}
               setCareer={setCareer}
               position={position}
               setPosition={setPosition}
-              infoRegister={register}
             />
           </SectionWrapper>
           <ButtonWrapper>

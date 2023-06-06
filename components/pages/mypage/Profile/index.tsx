@@ -1,17 +1,12 @@
 import { MypageProps } from "@/pages/mypage";
 import { useRouter } from "next/router";
-import {
-  Border,
-  ButtonWrapper,
-  SectionHeaderWrapper,
-  SectionTitle,
-  SectionWrapper,
-} from "../styled";
+import { ButtonWrapper, SectionWrapper } from "../styled";
 import Introduction from "./Introduction";
 import Skill from "./Skill";
 import Info from "./Info";
 import Button from "@/components/Button";
 import { Wrapper } from "./styled";
+import SectionBorder from "@/components/Boarder/SectionBorder";
 
 export default function Profile(data: MypageProps) {
   const router = useRouter();
@@ -26,19 +21,12 @@ export default function Profile(data: MypageProps) {
         email={data.email}
         introduction={data.introduction}
       />
-
       <SectionWrapper>
-        <SectionHeaderWrapper>
-          <SectionTitle>Skill</SectionTitle>
-          <Border></Border>
-        </SectionHeaderWrapper>
+        <SectionBorder title="Skill" />
         <Skill tags={data.tags} />
       </SectionWrapper>
       <SectionWrapper>
-        <SectionHeaderWrapper>
-          <SectionTitle>Info</SectionTitle>
-          <Border></Border>
-        </SectionHeaderWrapper>
+        <SectionBorder title="Info" />
         <Info
           position={data.position}
           career={data.career}

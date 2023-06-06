@@ -11,25 +11,25 @@ import TabBoards from "@/components/pages/mypage/TabBoards";
 import Account from "@/components/pages/mypage/Account";
 import { useGetMypageData } from "@/hooks/queries/useGetMypageData";
 import TabApplyBoards from "@/components/pages/mypage/TabApplyBoards";
-import { ApplyBoardCardProps } from "@/components/Card/ApplyBoardCard";
+import { ApplyBoardCardProps } from "@/components/Card/ApplyCard";
 import { withAuth } from "@/components/hocs/withAuth";
 
 export interface MypageProps {
-  id: number;
-  imgUrl?: string;
-  nickname: string;
-  email: string;
-  introduction?: string;
-  tags?: string[];
-  position: string;
+  applyBoards: ApplyBoardCardProps[];
+  blogUrl: string;
   career: string;
-  githubUrl?: string;
-  blogUrl?: string;
-  portfolioUrl?: string;
-  likeBoards?: BoardCardProps[];
-  uploadBoards?: BoardCardProps[];
-  applyBoards?: ApplyBoardCardProps[];
-  isOwner?: boolean;
+  email: string;
+  githubUrl: string;
+  id: number;
+  imgUrl: string;
+  introduction: string;
+  isOwner: boolean;
+  likeBoards: BoardCardProps[];
+  nickname: string;
+  portfolioUrl: string;
+  position: string;
+  tags: string[];
+  uploadBoards: BoardCardProps[];
 }
 
 function MyPage() {
@@ -93,7 +93,7 @@ function MyPage() {
         {data && activeTab === "profile" ? (
           <Profile {...data} />
         ) : activeTab === "account" ? (
-          <Account email={data?.email || ""} nickname={data?.nickname || ""} />
+          <Account email={data?.email} nickname={data?.nickname} />
         ) : activeTab === "applyBoards" ? (
           <TabApplyBoards boards={applyBoard} title={title || ""} />
         ) : (
