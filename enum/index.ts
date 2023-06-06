@@ -67,7 +67,20 @@ export const POSITION_LIST = [
     value: "pm",
   },
 ];
+export const CAREER_LIST = [
+  { name: "취업준비생", value: "empty" },
+  { name: "신입(0년차)", value: "new" },
+  { name: "주니어(1~3년차)", value: "junior" },
+  { name: "미들(4~6년차)", value: "middle" },
+  { name: "시니어(7년이상)", value: "sinior" },
+];
 
 export const DEFAULT_RECRUIT_CARD_IMAGE = "/images/BoardDefaultBackground.png";
 export const DEFAULT_PROJECT_CARD_IMAGE =
   "/images/ProjectDefaultBackground.png";
+
+export const ANIMATION_DIRECTION = {
+  onTheRight: { x: "50%", opacity: 0 },
+  inTheCenter: { x: 0, opacity: 1 },
+  onTheLeft: { x: "-50%", opacity: 0 },
+};

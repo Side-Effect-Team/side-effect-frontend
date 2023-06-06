@@ -3,6 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { handleModalView } from "@/store/loginViewTransitionSlice";
 import { addNickname } from "@/store/userInfoStoreSlice";
 import { Input, Label, ButtonWrapper, Form, ViewWrapper } from "./styled";
+import { ANIMATION_DIRECTION } from "enum";
 import { duplicateNickname } from "@/apis/UserAPI";
 import ErrorMessage from "./ErrorMessage";
 import Button from "@/components/Button";
@@ -33,58 +34,55 @@ export default function RegisterNickname() {
     }
     return true;
   };
-  const onTheRight = { x: "50%", opacity: 0 };
-  const inTheCenter = { x: 0, opacity: 1 };
-  const onTheLeft = { x: "-50%", opacity: 0 };
+
+  const { onTheLeft, onTheRight, inTheCenter } = ANIMATION_DIRECTION;
   return (
     <ViewWrapper
       initial={direction === "right" ? onTheRight : onTheLeft}
       animate={inTheCenter}
       exit={direction === "right" ? onTheLeft : onTheRight}
     >
-      {
-        <Form onSubmit={handleSubmit(onSubmit)}>
-          <h1>안녕하세요!</h1>
-          <h3>Side-Effect에서 사용할 닉네임을 입력해주세요.</h3>
-          <Label htmlFor="nickname">닉네임 </Label>
-          <Input
-            id="nickname"
-            {...register("nickname", {
-              required: "닉네임을 작성해주세요",
-              minLength: {
-                value: 2,
-                message: "닉네임은 2글자 이상 입력해주세요",
-              },
-              maxLength: {
-                value: 15,
-                message: "닉네임은 15글자 이하로 입력해주세요",
-              },
-              validate: (value) => validateNickName(value),
-            })}
-          />
-          {errors.nickname && (
-            <ErrorMessage>{errors.nickname.message}</ErrorMessage>
-          )}
-          <ButtonWrapper>
-            <Button type="submit" size="large">
-              Next
-            </Button>
-            <Button
-              type="button"
-              size="large"
-              onClick={() =>
-                dispatch(
-                  handleModalView({
-                    modalView: "startLogin",
-                  }),
-                )
-              }
-            >
-              Back
-            </Button>
-          </ButtonWrapper>
-        </Form>
-      }
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <h1>안녕하세요!</h1>
+        <h3>Side-Effect에서 사용할 닉네임을 입력해주세요.</h3>
+        <Label htmlFor="nickname">닉네임 </Label>
+        <Input
+          id="nickname"
+          {...register("nickname", {
+            required: "닉네임을 작성해주세요",
+            minLength: {
+              value: 2,
+              message: "닉네임은 2글자 이상 입력해주세요",
+            },
+            maxLength: {
+              value: 15,
+              message: "닉네임은 15글자 이하로 입력해주세요",
+            },
+            validate: (value) => validateNickName(value),
+          })}
+        />
+        {errors.nickname && (
+          <ErrorMessage>{errors.nickname.message}</ErrorMessage>
+        )}
+        <ButtonWrapper>
+          <Button type="submit" size="large">
+            Next
+          </Button>
+          <Button
+            type="button"
+            size="large"
+            onClick={() =>
+              dispatch(
+                handleModalView({
+                  modalView: "startLogin",
+                }),
+              )
+            }
+          >
+            Back
+          </Button>
+        </ButtonWrapper>
+      </Form>
     </ViewWrapper>
   );
 }
