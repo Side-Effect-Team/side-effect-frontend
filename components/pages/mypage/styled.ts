@@ -26,14 +26,20 @@ export const TapWrapper = styled.div`
     width: 100%;
     height: 50px;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     margin: 0;
     border: none;
     border-radius: 0;
-    border-bottom: 2px solid ${(p) => p.theme.brandColor.lightGray};
-    background-color: ${(p) => p.theme.colors.white};
+    border-bottom: 2px solid ${(p) => p.theme.grayToDark};
+    background-color: ${(p) => p.theme.mainBackGround};
     z-index: 4;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 `;
 
@@ -43,9 +49,10 @@ export const TapMenu = styled.div<{ isActive: boolean }>`
   margin: 7px 0;
   cursor: pointer;
   color: ${(p) =>
-    p.isActive ? p.theme.brandColor.primary : p.theme.colors.mediumGray};
+    p.isActive ? p.theme.brandColor.primary : p.theme.grayToDark};
   ${media.mobile} {
     font-size: 16px;
+    margin-right: 18px;
   }
 `;
 
@@ -66,28 +73,6 @@ export const SectionWrapper = styled.div`
   height: auto;
   min-height: 30%;
   margin-bottom: 50px;
-`;
-
-export const SectionHeaderWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  ${media.mobile} {
-    display: none;
-  }
-`;
-
-export const SectionTitle = styled.p`
-  font-size: 24px;
-  font-weight: 600;
-  margin-right: 15px;
-`;
-
-export const Border = styled.div`
-  flex: 1;
-  border-bottom: 2px solid ${(p) => p.theme.brandColor.lightGray};
 `;
 
 export const ButtonWrapper = styled.div`

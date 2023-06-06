@@ -2,6 +2,7 @@ import axios from "axios";
 import { store } from "@/store/store";
 import { createAuthentication } from "@/store/authSlice";
 import customAxios from "./customAxios";
+import { ChangeProps } from "@/utils/updateData";
 
 export const getMypageData = async () => {
   const id = store.getState().auth.userId;
@@ -14,18 +15,7 @@ export const getProfileData = async () => {
   return response.data;
 };
 
-export interface MypageEditProps {
-  imgUrl?: string;
-  nickname?: string;
-  introduction?: string;
-  tags?: string[];
-  position?: string;
-  career?: string;
-  githubUrl?: string;
-  blogUrl?: string;
-  portfolioUrl?: string;
-}
-export const editProfile = async (changes: MypageEditProps) => {
+export const editProfile = async (changes: ChangeProps) => {
   const id = store.getState().auth.userId;
   const response = await customAxios.patch(`/user/${id}`, changes);
   return response;

@@ -1,4 +1,3 @@
-import { theme } from "@/styles/Theme";
 import { media } from "@/styles/mediatest";
 import styled from "styled-components";
 
@@ -12,6 +11,7 @@ export const BoardWrapper = styled.div`
     display: flex;
     flex-direction: column;
     margin-top: 4rem;
+    gap: 15px;
   }
 `;
 export const NullMessage = styled.div`
@@ -30,7 +30,7 @@ export const FilterWrapper = styled.div`
   margin-bottom: 15px;
   ${media.mobile} {
     position: fixed;
-    background-color: ${(p) => p.theme.colors.white};
+    background-color: ${(p) => p.theme.mainBackGround};
     z-index: 4;
     padding: 1rem 0;
   }
@@ -38,6 +38,6 @@ export const FilterWrapper = styled.div`
 export const FilterMenu = styled.div<{ isActive: boolean }>`
   font-size: 16px;
   /* color: #d9d9d9; */
-  color: ${(p) => (p.isActive ? p.theme.textColor : p.theme.colors.mediumGray)};
+  color: ${(p) => (p.isActive ? p.theme.textColor : p.theme.grayToDark)};
   cursor: pointer;
 `;

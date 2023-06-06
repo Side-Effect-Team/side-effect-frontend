@@ -1,3 +1,4 @@
+import { media } from "@/styles/mediatest";
 import styled from "styled-components";
 
 export const TagWrapper = styled.div`
@@ -19,6 +20,9 @@ export const Tag = styled.div`
   margin-bottom: 7px;
   padding: 0.5em 1em;
   border-radius: 15px;
+  ${media.mobile} {
+    font-size: 14px;
+  }
 `;
 export const Text = styled.p`
   color: ${(p) => p.theme.colors.darkGray};

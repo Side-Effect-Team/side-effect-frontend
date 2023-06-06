@@ -1,8 +1,9 @@
+import { media } from "@/styles/mediatest";
 import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
-  height: 80px;
+  height: 90px;
   border: 1.5px solid ${(p) => p.theme.colors.mediumGray};
   border-radius: 10px;
   overflow: hidden;
@@ -13,8 +14,12 @@ export const Container = styled.div`
   justify-content: space-between;
   padding: 15px;
   cursor: pointer;
+  ${media.mobile} {
+    height: 100px;
+  }
 `;
 export const ColumnWrapper = styled.div`
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -22,25 +27,32 @@ export const ColumnWrapper = styled.div`
   align-items: flex-start;
 `;
 export const RowWrapper = styled.div`
+  width: 100%;
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-end;
+  ${media.mobile} {
+    align-items: flex-end;
+  }
 `;
 export const Title = styled.div`
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 700;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  width: 100%;
   color: ${(p) => p.theme.textColor};
-`;
-
-export const TitleGray = styled.div`
-  font-size: 18px;
-  color: ${(p) => p.theme.colors.mediumGray};
-  margin-right: 5px;
+  ${media.mobile} {
+    font-size: 16px;
+  }
 `;
 
 export const Position = styled.div`
   font-size: 14px;
   font-weight: 600;
+  margin-right: auto;
 `;
 export const PositionGray = styled.div`
   font-size: 14px;

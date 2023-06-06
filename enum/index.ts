@@ -71,3 +71,19 @@ export const POSITION_LIST = [
 export const DEFAULT_RECRUIT_CARD_IMAGE = "/images/BoardDefaultBackground.png";
 export const DEFAULT_PROJECT_CARD_IMAGE =
   "/images/ProjectDefaultBackground.png";
+
+export const SELECT_POSITIONS = [
+  { name: "프론트엔드", value: "FRONTEND" },
+  { name: "백엔드", value: "BACKEND" },
+  { name: "디자이너", value: "DESIGNER" },
+  { name: "데브옵스", value: "DEVOPS" },
+  { name: "기획자", value: "PM" },
+  { name: "마케터", value: "MARKETER" },
+];
+export const SELECT_CAREER = [
+  { name: "취업준비생", value: "empty" },
+  { name: "신입(0년차)", value: "new" },
+  { name: "주니어(1~3년차)", value: "junior" },
+  { name: "미들(4~6년차)", value: "middle" },
+  { name: "시니어(7년이상)", value: "senior" },
+];

@@ -1,3 +1,4 @@
+import { media } from "@/styles/mediatest";
 import styled from "styled-components";
 
 export const TagWrapper = styled.div`
@@ -22,6 +23,9 @@ export const Tag = styled.div`
   margin: 5px;
   padding: 0.5em 1em;
   border-radius: 15px;
+  ${media.mobile} {
+    font-size: 14px;
+  }
 `;
 
 export const DeleteTag = styled.button`
@@ -37,4 +41,7 @@ export const TagInput = styled.input`
   margin: 5px;
   background-color: ${(p) => p.theme.mainBackGround};
   color: ${(p) => p.theme.textColor};
+  ${media.mobile} {
+    font-size: 14px;
+  }
 `;

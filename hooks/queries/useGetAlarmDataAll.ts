@@ -11,7 +11,7 @@ export const useGetAlarmDataAll = () => {
       onError: () => {
         addToast({
           type: "error",
-          title: "error",
+          title: "에러 발생!",
           content: "알람을 가져오지 못했습니다.",
         });
         deleteToast("unique-id");

@@ -19,7 +19,9 @@ export const StyledInput = styled.input`
     outline: none;
   }
 `;
-export const Label = styled.div`
+
+export const Label = styled.label`
+  display: block;
   width: 100%;
   font-size: 14px;
   font-weight: 700;
