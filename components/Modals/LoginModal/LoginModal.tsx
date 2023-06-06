@@ -28,10 +28,6 @@ export default function LoginModal() {
   // 모달들을 isOpen 하나의 상태로 열고닫기를 관리하기때문에 만약 두개 세개의 모달이 한페이지에 있다면 어떤모달을 열었는지 판단해주는코드.
   if (modalType !== "LoginModal") return null;
 
-  //토큰이없다면 즉 로그인상태가 아니라면 로그인모달을 열었을시 로그인 첫단계부터 시작.
-  if (!token) {
-    dispatch(handleModalView({ modalView: "startLogin" }));
-  }
   return (
     <Wrapper isOpen={isOpen}>
       <Header>
