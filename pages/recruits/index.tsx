@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { breakPoints, mediaQuery } from "@/styles/Media";
 import Banner from "@/components/Banner";
@@ -9,13 +9,19 @@ import { RecruitDataProps } from "@/components/Card/RecruitCard";
 import RecruitCardSkeleton from "@/components/Skeleton/RecruitCardSkeleton";
 import { useGetRecruitData } from "@/hooks/queries/useGetRecruitData";
 import { useObserver } from "@/hooks/common/useObserver";
+import SelectBox from "@/components/SelectBox";
+import { SKILL_LIST } from "../../enum";
+
+type SkillType = (typeof SKILL_LIST)[number]["value"];
 
 export default function RecruitsPage() {
   window.sessionStorage.removeItem("activeTab");
+  const [skill, setSkill] = useState<SkillType>("javascript");
+  const [keyword, setKeyword] = useState<string>("");
   const fetchMoreEl = useRef<HTMLDivElement | null>(null);
   const intersecting = useObserver(fetchMoreEl);
   const { data, isLoading, isError, hasNextPage, fetchNextPage } =
-    useGetRecruitData();
+    useGetRecruitData(8, skill, keyword); // default size = 8
 
   useEffect(() => {
     if (intersecting && hasNextPage) fetchNextPage();
@@ -31,21 +37,21 @@ export default function RecruitsPage() {
       />
       <Contents>
         <ContentsHeader>
-          <div>
-            <h2>팀원 모집 게시판</h2>
-          </div>
+          <h2>팀원 모집 게시판</h2>
           <FilterBox>
-            <select>
-              <option value="">선택하세요</option>
-              <option value="nodejs">Nodejs</option>
-              <option value="java">Java</option>
-              <option value="spring">Spring</option>
-              <option value="python">Python</option>
-              <option value="django">Django</option>
-              <option value="swift">Swift</option>
-              <option value="kotlin">Kotlin</option>
-            </select>
-            <input type="search" placeholder="검색할 내용을 입력하세요" />
+            <SelectBoxWrapper>
+              <SelectBox
+                options={SKILL_LIST}
+                setValue={setSkill}
+                title="JavaScript"
+              />
+            </SelectBoxWrapper>
+            <SearchInput
+              type="text"
+              placeholder="검색할 내용을 입력하세요"
+              value={keyword}
+              onChange={(e) => setKeyword(e.target.value)}
+            />
           </FilterBox>
         </ContentsHeader>
         <ContentsMain>
@@ -88,20 +94,24 @@ const ContentsHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
+`;
+
+const SelectBoxWrapper = styled.div`
+  width: 150px;
+`;
+
+const SearchWrapper = styled.div``;
+
+const SearchInput = styled.input`
+  padding: 0.5rem;
+  width: 225px;
 `;
 
 const FilterBox = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-
-  select {
-    margin-right: 1rem;
-  }
-  input {
-    width: 250px;
-  }
+  gap: 1rem;
 `;
 
 const ContentsMain = styled.main`

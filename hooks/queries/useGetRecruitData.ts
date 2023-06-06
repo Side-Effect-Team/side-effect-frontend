@@ -2,9 +2,9 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { getRecruits } from "@/apis/RecruitBoardAPI";
 
 export const useGetRecruitData = (
-  size: number = 8, // default size = 8
-  stackType: string = "",
-  keyword: string = "",
+  size: number,
+  stackType: string,
+  keyword: string,
 ) => {
   const { data, isLoading, isError, hasNextPage, fetchNextPage } =
     useInfiniteQuery({
