@@ -41,10 +41,19 @@ export default function TagBox({
     }
   };
 
+  let resizeTimer: NodeJS.Timeout;
+  const handleResize = () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      calculateTagWidths();
+    }, 300);
+  };
+
   useEffect(() => {
-    window.addEventListener("resize", calculateTagWidths);
+    calculateTagWidths(); // 첫 렌더링 시에도 숨겨진 태그가 보이도록
+    window.addEventListener("resize", handleResize);
     return () => {
-      window.removeEventListener("resize", calculateTagWidths);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
