@@ -28,6 +28,9 @@ export default function RegisterNickname() {
     console.log(errors);
   };
   const validateNickName = async (value: string) => {
+    if (value.trim().length === 0) {
+      return "닉네임을 작성해주세요.";
+    }
     const response = await duplicateNickname(value);
     if (response) {
       return "이미 사용중인 닉네임 입니다.";

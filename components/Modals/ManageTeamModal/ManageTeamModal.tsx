@@ -5,7 +5,7 @@ import { useFilterTab } from "@/hooks/common/useFilterTab";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { Wrapper, Title, ManageSection } from "./styled";
-import axios from "axios";
+import customAxios from "@/apis/customAxios";
 import FilterTab from "./FilterTab/index";
 import PositionFilterTab from "./PositionFilterTab/index";
 import ManageList from "./ManageList/index";
@@ -30,16 +30,14 @@ export default function ManageTeamModal() {
   const { isOpen, modalType } = useAppSelector((state) => state.modal);
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const token = "";
-  const projectId = router.query.projectId;
+  const recruitId = router.query.recruitId;
   const handleModalClose = () => {
     dispatch(closeModal());
   };
 
   const getApplicantData = async () => {
-    const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/applicant/list/${projectId}?status=${value}`,
-      { headers: { Authorization: token } },
+    const response = await customAxios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}/applicant/list/${recruitId}?status=${value}`,
     );
     return response.data;
   };
@@ -47,6 +45,7 @@ export default function ManageTeamModal() {
     ["ApplicantData", value],
     getApplicantData,
     {
+      enabled: !!recruitId,
       select: (data) => {
         const applicantNum: { [key: string]: number } = {};
         for (const position in data) {
@@ -89,7 +88,7 @@ export default function ManageTeamModal() {
             <ManageList
               applicants={applicants}
               filter={value}
-              projectId={projectId}
+              projectId={recruitId}
             />
           ) : (
             <WaitingImage filter={value} />
