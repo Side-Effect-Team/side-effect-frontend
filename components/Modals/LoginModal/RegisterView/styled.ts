@@ -59,4 +59,5 @@ export const ViewWrapper = styled(motion.div)`
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  width: 100%;
 `;

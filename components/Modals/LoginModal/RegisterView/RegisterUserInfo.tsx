@@ -39,9 +39,11 @@ export default function RegisterUserInfo() {
   const [position, setPosition] = useState<string | number>("");
   const [career, setCareer] = useState<string | number>("");
   const { userInfo } = useAppSelector((state) => state.userInfo);
+  const { direction } = useAppSelector((state) => state.loginView);
   const { register, handleSubmit } = useForm<FormData>();
   const { addToast } = useToast();
   const dispatch = useAppDispatch();
+  console.log(direction);
 
   const onSubmit = async (data: FormData) => {
     if (!career || !position) {
@@ -58,7 +60,11 @@ export default function RegisterUserInfo() {
       await axios
         .post(`/user/join`, mergedUserInfo)
         .then(() => {
-          dispatch(handleModalView({ modalView: "registerSuccess" }));
+          dispatch(
+            handleModalView({
+              modalView: "registerSuccess",
+            }),
+          );
         })
         .catch((error) => {
           console.log(error);
@@ -70,12 +76,14 @@ export default function RegisterUserInfo() {
         });
     }
   };
+  const onTheRight = { x: "50%", opacity: 0 };
+  const inTheCenter = { x: 0, opacity: 1 };
+  const onTheLeft = { x: "-50%", opacity: 0 };
   return (
     <ViewWrapper
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
+      initial={direction === "right" ? onTheRight : onTheLeft}
+      animate={inTheCenter}
+      exit={direction === "right" ? onTheLeft : onTheRight}
     >
       <Form onSubmit={handleSubmit(onSubmit)}>
         <h1>포지션,경력을 선택해주세요.</h1>
@@ -110,7 +118,11 @@ export default function RegisterUserInfo() {
             type="button"
             size="large"
             onClick={() =>
-              dispatch(handleModalView({ modalView: "registerNickname" }))
+              dispatch(
+                handleModalView({
+                  modalView: "registerNickname",
+                }),
+              )
             }
           >
             뒤로가기

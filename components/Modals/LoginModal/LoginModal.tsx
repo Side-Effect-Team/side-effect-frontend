@@ -6,6 +6,7 @@ import RegisterNickname from "./RegisterView/RegisterNickname";
 import RegisterUserInfo from "./RegisterView/RegisterUserInfo";
 import Login from "./Login";
 import RegisterSuccess from "./RegisterView/RegisterSuccess";
+import { AnimatePresence } from "framer-motion";
 const VIEW_COMPONENTS = {
   startLogin: <Login />,
   registerNickname: <RegisterNickname />,
@@ -33,7 +34,9 @@ export default function LoginModal() {
           style={{ cursor: "pointer" }}
         />
       </Header>
-      {handleViewRender()}
+      <AnimatePresence mode="wait" initial={false}>
+        {handleViewRender()}
+      </AnimatePresence>
     </Wrapper>
   );
 }
