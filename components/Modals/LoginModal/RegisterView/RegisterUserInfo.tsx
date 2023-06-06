@@ -15,6 +15,7 @@ import {
   ViewWrapper,
 } from "./styled";
 import Button from "@/components/Button";
+import { createAuthentication } from "@/store/authSlice";
 const SELECT_POSITIONS = [
   { name: "프론트엔드", value: "frontend" },
   { name: "백엔드", value: "backend" },
@@ -43,7 +44,6 @@ export default function RegisterUserInfo() {
   const { register, handleSubmit } = useForm<FormData>();
   const { addToast } = useToast();
   const dispatch = useAppDispatch();
-  console.log(direction);
 
   const onSubmit = async (data: FormData) => {
     if (!career || !position) {
@@ -56,10 +56,15 @@ export default function RegisterUserInfo() {
         career,
         password: "",
       };
-      console.log(mergedUserInfo);
       await axios
         .post(`/user/join`, mergedUserInfo)
-        .then(() => {
+        .then((res) => {
+          dispatch(
+            createAuthentication({
+              token: res.headers.authorization,
+              userId: res.data.userId,
+            }),
+          );
           dispatch(
             handleModalView({
               modalView: "registerSuccess",

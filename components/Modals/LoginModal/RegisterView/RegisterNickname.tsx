@@ -33,7 +33,6 @@ export default function RegisterNickname() {
     }
     return true;
   };
-  console.log(direction);
   const onTheRight = { x: "50%", opacity: 0 };
   const inTheCenter = { x: 0, opacity: 1 };
   const onTheLeft = { x: "-50%", opacity: 0 };
