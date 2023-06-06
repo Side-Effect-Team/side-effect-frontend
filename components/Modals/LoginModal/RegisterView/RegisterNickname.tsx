@@ -34,7 +34,7 @@ export default function RegisterNickname() {
     }
     return true;
   };
-
+  const specialCharactersRegex = /^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣\s]*$/;
   const { onTheLeft, onTheRight, inTheCenter } = ANIMATION_DIRECTION;
   return (
     <ViewWrapper
@@ -57,6 +57,10 @@ export default function RegisterNickname() {
             maxLength: {
               value: 15,
               message: "닉네임은 15글자 이하로 입력해주세요",
+            },
+            pattern: {
+              value: specialCharactersRegex,
+              message: "특수 문자는 사용할 수 없습니다",
             },
             validate: (value) => validateNickName(value),
           })}

@@ -2,7 +2,13 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { handleModalView } from "@/store/loginViewTransitionSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { ANIMATION_DIRECTION, POSITION_LIST, CAREER_LIST } from "enum";
+import {
+  ANIMATION_DIRECTION,
+  POSITION_LIST,
+  CAREER_LIST,
+  SELECT_CAREER,
+  SELECT_POSITIONS,
+} from "enum";
 import useToast from "@/hooks/common/useToast";
 import axios from "axios";
 import SelectBox from "@/components/SelectBox";
@@ -79,11 +85,15 @@ export default function RegisterUserInfo() {
         <h1>포지션,경력을 선택해주세요.</h1>
         <SelectSection>
           <SelectBox
-            options={POSITION_LIST}
+            options={SELECT_POSITIONS}
             setValue={setPosition}
             title="포지션"
           />
-          <SelectBox options={CAREER_LIST} setValue={setCareer} title="경력" />
+          <SelectBox
+            options={SELECT_CAREER}
+            setValue={setCareer}
+            title="경력"
+          />
         </SelectSection>
         <InputSection>
           <h4>
