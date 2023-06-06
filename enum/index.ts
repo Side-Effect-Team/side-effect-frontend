@@ -87,3 +87,50 @@ export const SELECT_CAREER = [
   { name: "미들(4~6년차)", value: "middle" },
   { name: "시니어(7년이상)", value: "senior" },
 ];
+
+export const SKILL_LIST = [
+  {
+    name: "JavaScript",
+    value: "javascript",
+  },
+  {
+    name: "TypeScript",
+    value: "typescript",
+  },
+  {
+    name: "React",
+    value: "react",
+  },
+  {
+    name: "Vue.js",
+    value: "vue",
+  },
+  {
+    name: "Svelte",
+    value: "svelte",
+  },
+  {
+    name: "Next.js",
+    value: "nextjs",
+  },
+  {
+    name: "NestJS",
+    value: "nestjs",
+  },
+  {
+    name: "Node.js",
+    value: "nodejs",
+  },
+  {
+    name: "Java",
+    value: "java",
+  },
+  {
+    name: "Spring",
+    value: "spring",
+  },
+  {
+    name: "Go",
+    value: "go",
+  },
+] as const;
