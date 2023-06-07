@@ -2,7 +2,6 @@ import Image from "next/image";
 import profilePic from "../../../../public/images/profilePic.png";
 import GithubImg from "../../../../public/images/Github.png";
 import Button from "@/components/Button";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { handleCareerTranslate } from "@/utils/translateData";
 import {
@@ -14,12 +13,8 @@ import {
   Nickname,
   Info,
 } from "./styled";
-import axios from "axios";
-import useToast from "@/hooks/common/useToast";
-import {
-  manageApplicant,
-  handleRemoveMember,
-} from "../../../../apis/ApplicantAPI";
+import { useManageApplicant } from "../../../../hooks/mutations/useManageApplicant";
+import { useManageTeam } from "../../../../hooks/mutations/useManageTeam";
 interface ApplicatnsType {
   filter: string;
   email: string;
@@ -39,45 +34,8 @@ export default function ManageCard({
   const isApplicantManage = filter === "pending";
   const router = useRouter();
   const { email, nickName, applicantId, userId, career, githubUrl } = applicant;
-  const { addToast } = useToast();
-  const queryClient = useQueryClient();
-
-  const { mutate: removeMember } = useMutation(handleRemoveMember, {
-    onSuccess: () => {
-      addToast({
-        type: "success",
-        title: "방출완료!",
-        content: `${nickName}님을 팀에서 방출하였습니다.`,
-      });
-      queryClient.invalidateQueries(["ApplicantData"]);
-    },
-    onError: () => {
-      addToast({
-        type: "error",
-        title: "요청실패!",
-        content:
-          "서비스가 현재 원활하지 않습니다.불편사항은 대표이메일에 문의 부탁드립니다.",
-      });
-    },
-  });
-  const { mutate } = useMutation(manageApplicant, {
-    onSuccess: () => {
-      addToast({
-        type: "success",
-        title: "알림 전송완료!",
-        content: `${nickName}님에게 결과를 전달하였습니다.`,
-      });
-      queryClient.invalidateQueries(["ApplicantData"]);
-    },
-    onError: () => {
-      addToast({
-        type: "error",
-        title: "요청실패!",
-        content:
-          "서비스가 현재 원활하지 않습니다.불편사항은 대표이메일에 문의 부탁드립니다.",
-      });
-    },
-  });
+  const { mutate: manageApplicant } = useManageApplicant(nickName);
+  const { mutate: removeMember } = useManageTeam(nickName);
   const handleManageButton = () => {
     if (isApplicantManage) {
       return (
@@ -94,7 +52,7 @@ export default function ManageCard({
           )}
           <Button
             onClick={() =>
-              mutate({
+              manageApplicant({
                 recruitBoardId: projectId,
                 applicantId: applicantId,
                 status: "approved",
@@ -105,7 +63,7 @@ export default function ManageCard({
           </Button>
           <Button
             onClick={() =>
-              mutate({
+              manageApplicant({
                 recruitBoardId: projectId,
                 applicantId: applicantId,
                 status: "rejected",
