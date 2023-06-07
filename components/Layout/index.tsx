@@ -106,7 +106,7 @@ function MobileMenu({ hide, logout, handleClick }: MobileMenuProps) {
         <MobileMenuItem
           onClick={() => dispatch(openModal({ modalType: "LoginModal" }))}
         >
-          <Link href="/">로그인</Link>
+          로그인
         </MobileMenuItem>
       )}
     </MobileNavBar>
