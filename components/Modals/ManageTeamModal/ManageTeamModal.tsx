@@ -2,14 +2,13 @@ import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { closeModal } from "../../../store/modalSlice";
 import { AiOutlineClose } from "react-icons/ai";
 import { useFilterTab } from "@/hooks/common/useFilterTab";
-import { useQuery } from "@tanstack/react-query";
-import { useRouter } from "next/router";
 import { Wrapper, Title, ManageSection } from "./styled";
-import customAxios from "@/apis/customAxios";
+import { useGetApplicantData } from "@/hooks/queries/useGetApplicantData";
 import FilterTab from "./FilterTab/index";
 import PositionFilterTab from "./PositionFilterTab/index";
 import ManageList from "./ManageList/index";
 import WaitingImage from "./WaitingImage";
+import ManageCardSkeletion from "@/components/Skeleton/ManageCardSkeleton";
 const FILTER_TAB = [
   { name: "지원현황", value: "pending" },
   { name: "팀원관리", value: "approved" },
@@ -29,37 +28,16 @@ export default function ManageTeamModal() {
     useFilterTab(0, "프론트엔드");
   const { isOpen, modalType } = useAppSelector((state) => state.modal);
   const dispatch = useAppDispatch();
-  const router = useRouter();
-  const recruitId = router.query.recruitId;
   const handleModalClose = () => {
     dispatch(closeModal());
   };
-
-  const getApplicantData = async () => {
-    const response = await customAxios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/applicant/list/${recruitId}?status=${value}`,
-    );
-    return response.data;
-  };
-  const { data = { applicants: [], applicantNum: {} }, isLoading } = useQuery(
-    ["ApplicantData", value],
-    getApplicantData,
-    {
-      enabled: !!recruitId,
-      select: (data) => {
-        const applicantNum: { [key: string]: number } = {};
-        for (const position in data) {
-          applicantNum[position] = data[position].size;
-        }
-        return {
-          applicants: data[positionValue].applicants,
-          applicantNum,
-        };
-      },
-    },
-  );
-
+  const {
+    data = { applicantNum: {}, applicants: [] },
+    isLoading,
+    isSuccess,
+  } = useGetApplicantData(value, positionValue);
   const { applicants, applicantNum } = data;
+  console.log(data);
   if (modalType !== "ManageTeamModal") return null;
   return (
     <Wrapper isOpen={isOpen}>
@@ -85,17 +63,13 @@ export default function ManageTeamModal() {
       {!isLoading ? (
         <ManageSection>
           {applicants.length !== 0 ? (
-            <ManageList
-              applicants={applicants}
-              filter={value}
-              projectId={recruitId}
-            />
+            <ManageList applicants={applicants} filter={value} />
           ) : (
             <WaitingImage filter={value} />
           )}
         </ManageSection>
       ) : (
-        <div>loading...</div>
+        <ManageCardSkeletion />
       )}
     </Wrapper>
   );

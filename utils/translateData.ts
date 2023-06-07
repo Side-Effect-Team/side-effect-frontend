@@ -52,3 +52,20 @@ export const translateStatus = (
     setStatusTitle("•방출");
   }
 };
+export const handleCareerTranslate = (career: string) => {
+  if (career === "empty") {
+    return "취업준비생";
+  }
+  if (career === "new") {
+    return "신입(0년차)";
+  }
+  if (career === "junior") {
+    return "주니어(1~3년차)";
+  }
+  if (career === "middle") {
+    return "미들(4~6년차)";
+  }
+  if (career === "senior") {
+    return "시니어(7년이상)";
+  }
+};

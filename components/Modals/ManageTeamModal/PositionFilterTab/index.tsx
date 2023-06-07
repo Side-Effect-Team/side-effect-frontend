@@ -25,7 +25,7 @@ export default function PositionFilterTab({
           >
             {position}
             <NumberOfPosition isExistApplicant={isExistApplicant}>
-              {apllicantNum[position]}
+              {apllicantNum[position] ? apllicantNum[position] : 0}
             </NumberOfPosition>
           </PositionItem>
         );
