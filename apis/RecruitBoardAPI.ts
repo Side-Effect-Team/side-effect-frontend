@@ -19,7 +19,7 @@ export const getRecruits = async (
   lastId: number,
 ) => {
   let url = `/recruit-board/scroll?size=${size}`;
-  if (stackType) url += `&stackType=${stackType}`;
+  if (stackType) url += `&stackTypes=${stackType}`;
   if (keyword) url += `&keyword=${keyword}`;
   if (lastId && lastId > 1) url += `&lastId=${lastId}`;
   console.log(url);
