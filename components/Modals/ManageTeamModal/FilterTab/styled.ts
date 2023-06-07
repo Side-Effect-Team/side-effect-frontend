@@ -1,12 +1,11 @@
 import styled from "styled-components";
-import { theme } from "@/styles/Theme";
 
 export const FilterTabList = styled.ul`
   display: flex;
   gap: 10px;
   margin: 0;
   padding: 10px 20px;
-  background-color: ${(p) => p.theme.componentBgColor};
+  background-color: ${(p) => p.theme.mainBackGround};
 `;
 export const FilterItem = styled.li`
   padding: 8px;
@@ -15,6 +14,6 @@ export const FilterItem = styled.li`
   font-weight: 500;
   &.focused {
     color: white;
-    background-color: ${theme.brandColor.primary};
+    background-color: ${(p) => p.theme.brandColor.primary};
   }
 `;

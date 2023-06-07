@@ -37,7 +37,7 @@ export default function ManageTeamModal() {
 
   const getApplicantData = async () => {
     const response = await customAxios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/applicant/list/${recruitId}?status=${value}`,
+      `/applicant/list/${recruitId}?status=${value}`,
     );
     return response.data;
   };
@@ -60,6 +60,7 @@ export default function ManageTeamModal() {
   );
 
   const { applicants, applicantNum } = data;
+  console.log(applicants);
   if (modalType !== "ManageTeamModal") return null;
   return (
     <Wrapper isOpen={isOpen}>

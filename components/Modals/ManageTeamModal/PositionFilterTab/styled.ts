@@ -2,11 +2,12 @@ import styled from "styled-components";
 
 export const PositionTabList = styled.ul`
   display: flex;
+  width: 100%;
   margin: 0;
+  padding: 0px 20px;
   overflow: auto;
   overflow-y: hidden;
-  /* border-bottom: 1px solid black; */
-  border-top: 1px solid black;
+  border-top: 2px solid ${(p) => p.theme.colors.darkGray};
 `;
 export const PositionItem = styled.li`
   display: flex;
@@ -19,7 +20,7 @@ export const PositionItem = styled.li`
   &.focused {
     font-weight: bold;
     color: ${(p) => p.theme.textColor};
-    border-bottom: 3px solid ${(p) => p.theme.colors.primary};
+    border-bottom: 4px solid ${(p) => p.theme.colors.primary};
   }
 `;
 export const NumberOfPosition = styled.div<{ isExistApplicant: boolean }>`
@@ -27,5 +28,5 @@ export const NumberOfPosition = styled.div<{ isExistApplicant: boolean }>`
   padding: 5px 10px;
   color: ${(p) => p.theme.brandColor.lightGray};
   background-color: ${(p) =>
-    p.isExistApplicant ? p.theme.brandColor.coral : p.theme.colors.darkGray};
+    p.isExistApplicant ? p.theme.brandColor.coral : "#35383F"};
 `;

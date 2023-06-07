@@ -5,6 +5,7 @@ interface ApplicantType {
   nickName: string;
   applicantId: number;
   userId: number;
+  career: string;
 }
 interface ManagePropsType {
   filter: string;

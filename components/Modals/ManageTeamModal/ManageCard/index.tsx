@@ -3,6 +3,7 @@ import profilePic from "../../../../public/images/profilePic.png";
 import Button from "@/components/Button";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
+import { handleCareerTranslate } from "@/utils/translateData";
 import {
   ManageCardWrapper,
   ProfileImage,
@@ -20,6 +21,7 @@ interface ApplicatnsType {
   nickName: string;
   applicantId: number;
   userId: number;
+  career: string;
   projectId: string | string[] | undefined;
 }
 
@@ -30,7 +32,7 @@ export default function ManageCard({
 }: ApplicatnsType) {
   const isApplicantManage = filter === "pending";
   const router = useRouter();
-  const { email, nickName, applicantId, userId } = applicant;
+  const { email, nickName, applicantId, userId, career } = applicant;
   const { addToast } = useToast();
   const queryClient = useQueryClient();
   const token = "";
@@ -126,7 +128,10 @@ export default function ManageCard({
           />
         </ProfileImage>
         <ProfileInfo>
-          <Nickname>{nickName}</Nickname>
+          <Nickname>
+            {nickName}
+            {handleCareerTranslate(career)}
+          </Nickname>
           <Info>{email}</Info>
         </ProfileInfo>
       </ProfileSection>

@@ -8,7 +8,7 @@ export const Wrapper = styled.div<{ isOpen: boolean }>`
   display: flex;
   flex-direction: column;
   position: fixed;
-  background-color: ${(p) => p.theme.componentBgColor};
+  background-color: ${(p) => p.theme.mainBackGround};
   width: 775px;
   height: 100vh;
   right: 0;
@@ -16,9 +16,7 @@ export const Wrapper = styled.div<{ isOpen: boolean }>`
   z-index: 30;
   border-top-left-radius: 25px;
   border-bottom-left-radius: 25px;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  box-shadow: ${(p) => p.theme.boxShadow};
   ${media.mobile} {
     height: 80%;
     width: 100%;
@@ -32,7 +30,7 @@ export const Title = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid ${(p) => p.theme.colors.darkGray};
   padding: 20px;
 `;
 export const ManageSection = styled.section`
