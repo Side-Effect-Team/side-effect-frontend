@@ -99,9 +99,9 @@ export const ANIMATION_DIRECTION = {
   onTheLeft: { x: "-50%", opacity: 0 },
 };
 
-export const SKILL_LIST = [
+export const SKILL_LIST_IN_FILTER = [
   {
-    name: "전체 기술",
+    name: "전체",
     value: "",
   },
   {
