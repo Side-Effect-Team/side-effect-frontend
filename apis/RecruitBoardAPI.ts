@@ -20,9 +20,8 @@ export const getRecruits = async (
 ) => {
   let url = `/recruit-board/scroll?size=${size}`;
   if (stackType) url += `&stackTypes=${stackType}`;
-  if (keyword) url += `&keyword=${keyword}`;
+  if (keyword.trim().length > 0) url += `&keyword=${keyword.trim()}`;
   if (lastId && lastId > 1) url += `&lastId=${lastId}`;
-  console.log(url);
   const response = await customAxios.get(url);
   return response.data;
 };
