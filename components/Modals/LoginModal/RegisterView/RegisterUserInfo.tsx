@@ -2,6 +2,13 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { handleModalView } from "@/store/loginViewTransitionSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import {
+  ANIMATION_DIRECTION,
+  POSITION_LIST,
+  CAREER_LIST,
+  SELECT_CAREER,
+  SELECT_POSITIONS,
+} from "enum";
 import useToast from "@/hooks/common/useToast";
 import axios from "axios";
 import SelectBox from "@/components/SelectBox";
@@ -15,21 +22,8 @@ import {
   ViewWrapper,
 } from "./styled";
 import Button from "@/components/Button";
-const SELECT_POSITIONS = [
-  { name: "프론트엔드", value: "frontend" },
-  { name: "백엔드", value: "backend" },
-  { name: "디자이너", value: "designer" },
-  { name: "데브옵스", value: "devops" },
-  { name: "기획자", value: "marketer" },
-  { name: "마케터", value: "pm" },
-];
-const SELECT_CAREER = [
-  { name: "취업준비생", value: "empty" },
-  { name: "신입(0년차)", value: "new" },
-  { name: "주니어(1~3년차)", value: "junior" },
-  { name: "미들(4~6년차)", value: "middle" },
-  { name: "시니어(7년이상)", value: "sinior" },
-];
+import { createAuthentication } from "@/store/authSlice";
+
 interface FormData {
   githubUrl: string;
   blogUrl: string;
@@ -39,6 +33,7 @@ export default function RegisterUserInfo() {
   const [position, setPosition] = useState<string | number>("");
   const [career, setCareer] = useState<string | number>("");
   const { userInfo } = useAppSelector((state) => state.userInfo);
+  const { direction } = useAppSelector((state) => state.loginView);
   const { register, handleSubmit } = useForm<FormData>();
   const { addToast } = useToast();
   const dispatch = useAppDispatch();
@@ -54,11 +49,20 @@ export default function RegisterUserInfo() {
         career,
         password: "",
       };
-      console.log(mergedUserInfo);
       await axios
-        .post(`${process.env.NEXT_PUBLIC_API_URL}/user/join`, mergedUserInfo)
-        .then(() => {
-          dispatch(handleModalView({ modalView: "registerSuccess" }));
+        .post(`/user/join`, mergedUserInfo)
+        .then((res) => {
+          dispatch(
+            createAuthentication({
+              token: res.headers.authorization,
+              userId: res.data.userId,
+            }),
+          );
+          dispatch(
+            handleModalView({
+              modalView: "registerSuccess",
+            }),
+          );
         })
         .catch((error) => {
           console.log(error);
@@ -70,12 +74,12 @@ export default function RegisterUserInfo() {
         });
     }
   };
+  const { onTheLeft, onTheRight, inTheCenter } = ANIMATION_DIRECTION;
   return (
     <ViewWrapper
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
+      initial={direction === "right" ? onTheRight : onTheLeft}
+      animate={inTheCenter}
+      exit={direction === "right" ? onTheLeft : onTheRight}
     >
       <Form onSubmit={handleSubmit(onSubmit)}>
         <h1>포지션,경력을 선택해주세요.</h1>
@@ -110,10 +114,14 @@ export default function RegisterUserInfo() {
             type="button"
             size="large"
             onClick={() =>
-              dispatch(handleModalView({ modalView: "registerNickname" }))
+              dispatch(
+                handleModalView({
+                  modalView: "registerNickname",
+                }),
+              )
             }
           >
-            뒤로가기
+            뒤로
           </Button>
         </ButtonWrapper>
       </Form>

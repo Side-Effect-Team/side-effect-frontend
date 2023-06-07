@@ -35,6 +35,7 @@ export const ProfileInfo = styled.div`
 export const ButtonSection = styled.div`
   display: flex;
   justify-content: flex-end;
+  gap: 10px;
   width: 100%;
 `;
 export const Nickname = styled.span`

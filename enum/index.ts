@@ -67,11 +67,13 @@ export const POSITION_LIST = [
     value: "pm",
   },
 ];
-
-export const DEFAULT_RECRUIT_CARD_IMAGE = "/images/BoardDefaultBackground.png";
-export const DEFAULT_PROJECT_CARD_IMAGE =
-  "/images/ProjectDefaultBackground.png";
-
+export const CAREER_LIST = [
+  { name: "취업준비생", value: "empty" },
+  { name: "신입(0년차)", value: "new" },
+  { name: "주니어(1~3년차)", value: "junior" },
+  { name: "미들(4~6년차)", value: "middle" },
+  { name: "시니어(7년이상)", value: "sinior" },
+];
 export const SELECT_POSITIONS = [
   { name: "프론트엔드", value: "FRONTEND" },
   { name: "백엔드", value: "BACKEND" },
@@ -87,50 +89,12 @@ export const SELECT_CAREER = [
   { name: "미들(4~6년차)", value: "middle" },
   { name: "시니어(7년이상)", value: "senior" },
 ];
+export const DEFAULT_RECRUIT_CARD_IMAGE = "/images/BoardDefaultBackground.png";
+export const DEFAULT_PROJECT_CARD_IMAGE =
+  "/images/ProjectDefaultBackground.png";
 
-export const SKILL_LIST = [
-  {
-    name: "JavaScript",
-    value: "javascript",
-  },
-  {
-    name: "TypeScript",
-    value: "typescript",
-  },
-  {
-    name: "React",
-    value: "react",
-  },
-  {
-    name: "Vue.js",
-    value: "vue",
-  },
-  {
-    name: "Svelte",
-    value: "svelte",
-  },
-  {
-    name: "Next.js",
-    value: "nextjs",
-  },
-  {
-    name: "NestJS",
-    value: "nestjs",
-  },
-  {
-    name: "Node.js",
-    value: "nodejs",
-  },
-  {
-    name: "Java",
-    value: "java",
-  },
-  {
-    name: "Spring",
-    value: "spring",
-  },
-  {
-    name: "Go",
-    value: "go",
-  },
-] as const;
+export const ANIMATION_DIRECTION = {
+  onTheRight: { x: "50%", opacity: 0 },
+  inTheCenter: { x: 0, opacity: 1 },
+  onTheLeft: { x: "-50%", opacity: 0 },
+};

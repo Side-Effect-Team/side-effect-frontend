@@ -1,6 +1,5 @@
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
-import { AnimatePresence } from "framer-motion";
 import { Provider } from "react-redux";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -37,13 +36,11 @@ export default function App({
         <PersistGate persistor={persistor} loading={null}>
           <Layout>
             <GlobalModal />
-            <AnimatePresence>
-              <Component key={pageKey} {...pageProps} />
-              <Script
-                src="https://developers.kakao.com/sdk/js/kakao.js"
-                onLoad={kakaoInit}
-              />
-            </AnimatePresence>
+            <Component key={pageKey} {...pageProps} />
+            <Script
+              src="https://developers.kakao.com/sdk/js/kakao.js"
+              onLoad={kakaoInit}
+            />
           </Layout>
         </PersistGate>
       </Provider>
