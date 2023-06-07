@@ -7,6 +7,7 @@ interface ApplicantType {
   userId: number;
   career: string;
   githubUrl: string;
+  imgUrl: string;
 }
 interface ManagePropsType {
   filter: string;

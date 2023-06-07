@@ -8,6 +8,7 @@ import FilterTab from "./FilterTab/index";
 import PositionFilterTab from "./PositionFilterTab/index";
 import ManageList from "./ManageList/index";
 import WaitingImage from "./WaitingImage";
+import ManageCardSkeletion from "@/components/Skeleton/ManageCardSkeleton";
 const FILTER_TAB = [
   { name: "지원현황", value: "pending" },
   { name: "팀원관리", value: "approved" },
@@ -68,7 +69,7 @@ export default function ManageTeamModal() {
           )}
         </ManageSection>
       ) : (
-        <div>loading...</div>
+        <ManageCardSkeletion />
       )}
     </Wrapper>
   );
