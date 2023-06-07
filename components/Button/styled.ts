@@ -91,6 +91,9 @@ export const StyledButton = styled.button`
   font-weight: bold;
   cursor: pointer;
   padding: 0 1rem;
+  ${media.mobile} {
+    padding: 0 0.5rem;
+  }
 
   /*크기*/
   height: 2.25rem;
