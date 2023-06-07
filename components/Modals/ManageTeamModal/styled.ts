@@ -3,8 +3,8 @@ import { media } from "@/styles/mediatest";
 
 export const Wrapper = styled.div<{ isOpen: boolean }>`
   visibility: ${({ isOpen }) => (isOpen ? "visible" : "hidden")};
-  animation: ${({ isOpen }) => (isOpen ? slideIn : slideOut)} 0.3s ease;
-  transition: 0.3s;
+  animation: ${({ isOpen }) => (isOpen ? slideIn : slideOut)} 0.4s ease-in-out;
+  transition: 0.4s;
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -23,7 +23,8 @@ export const Wrapper = styled.div<{ isOpen: boolean }>`
     font-size: small;
     border-bottom-left-radius: 0px;
     border-top-right-radius: 25px;
-    animation: ${({ isOpen }) => (isOpen ? slideUp : slideDown)} 0.3s ease;
+    animation: ${({ isOpen }) => (isOpen ? slideUp : slideDown)} 0.4s
+      ease-in-out;
   }
 `;
 export const Title = styled.header`

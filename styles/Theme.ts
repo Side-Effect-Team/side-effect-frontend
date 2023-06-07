@@ -32,6 +32,7 @@ export const theme = {
     coral: "#FF6D60",
     skyBlue: "#CDDEFF",
     lightGray: "#EAECF0",
+    black: "#202225",
   },
   boxShadow: `inset 0 0 1px 1px hsla(0, 0%, 100%, 0.15),
 0 0 0 1px hsla(0, 0%, 0%, 0.1),

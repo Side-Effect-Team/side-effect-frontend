@@ -1,5 +1,6 @@
 import Image from "next/image";
 import GithubImg from "../../../../../public/images/Github.png";
+
 import Button from "@/components/Button";
 import { useManageApplicant } from "../../../../../hooks/mutations/useManageApplicant";
 import { useManageTeam } from "../../../../../hooks/mutations/useManageTeam";
@@ -55,7 +56,7 @@ export default function ButtonSection({
   return (
     <ButtonSectionWrapper>
       {githubUrl && (
-        <Button onClick={() => window.open(githubUrl, "_blank")}>
+        <Button color="black" onClick={() => window.open(githubUrl, "_blank")}>
           <Image
             src={GithubImg}
             alt="지원자 깃허브 주소"
@@ -65,7 +66,9 @@ export default function ButtonSection({
         </Button>
       )}
       <Button onClick={() => handleManageApplicant("approved")}>수락</Button>
-      <Button onClick={() => handleManageApplicant("rejected")}>거절</Button>
+      <Button color="coral" onClick={() => handleManageApplicant("rejected")}>
+        거절
+      </Button>
       <Button onClick={() => handleMoveProfile(userId)}>프로필</Button>
     </ButtonSectionWrapper>
   );

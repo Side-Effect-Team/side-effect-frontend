@@ -26,7 +26,6 @@ export default function ManageCard({ filter, ...applicant }: ApplicatnsType) {
   const isApplicantManage = filter === "pending";
   const { email, nickName, applicantId, userId, career, githubUrl, imgUrl } =
     applicant;
-  console.log(imgUrl);
   return (
     <ManageCardWrapper>
       <ProfileSection>
