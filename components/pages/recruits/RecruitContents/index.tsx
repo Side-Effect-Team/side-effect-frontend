@@ -2,7 +2,7 @@ import { useState } from "react";
 import { SKILL_LIST_IN_FILTER } from "enum";
 import { Wrapper, ContentsHeader } from "./styled";
 import RecruitFilters from "@/pageComponents/recruits/RecruitFilters";
-import RecruitList from "@/pageComponents/recruits/recruitList";
+import RecruitList from "components/pages/recruits/RecruitList";
 import { useDebounce } from "@/hooks/common/useDebounce";
 
 type SkillType = (typeof SKILL_LIST_IN_FILTER)[number]["value"];
