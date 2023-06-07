@@ -2,10 +2,8 @@ import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { closeModal } from "../../../store/modalSlice";
 import { AiOutlineClose } from "react-icons/ai";
 import { useFilterTab } from "@/hooks/common/useFilterTab";
-import { useQuery } from "@tanstack/react-query";
-import { useRouter } from "next/router";
 import { Wrapper, Title, ManageSection } from "./styled";
-import customAxios from "@/apis/customAxios";
+import { useGetApplicantData } from "@/hooks/queries/useGetApplicantData";
 import FilterTab from "./FilterTab/index";
 import PositionFilterTab from "./PositionFilterTab/index";
 import ManageList from "./ManageList/index";
@@ -29,37 +27,16 @@ export default function ManageTeamModal() {
     useFilterTab(0, "프론트엔드");
   const { isOpen, modalType } = useAppSelector((state) => state.modal);
   const dispatch = useAppDispatch();
-  const router = useRouter();
-  const recruitBoardId = router.query.recruitId as string;
   const handleModalClose = () => {
     dispatch(closeModal());
   };
-
-  const getApplicantData = async () => {
-    const response = await customAxios.get(
-      `/applicant/list/${recruitBoardId}?status=${value}`,
-    );
-    return response.data;
-  };
-  const { data = { applicants: [], applicantNum: {} }, isLoading } = useQuery(
-    ["ApplicantData", value],
-    getApplicantData,
-    {
-      enabled: !!recruitBoardId,
-      select: (data) => {
-        const applicantNum: { [key: string]: number } = {};
-        for (const position in data) {
-          applicantNum[position] = data[position].size;
-        }
-        return {
-          applicants: data[positionValue].applicants,
-          applicantNum,
-        };
-      },
-    },
-  );
-
+  const {
+    data = { applicantNum: {}, applicants: [] },
+    isLoading,
+    isSuccess,
+  } = useGetApplicantData(value, positionValue);
   const { applicants, applicantNum } = data;
+
   if (modalType !== "ManageTeamModal") return null;
   return (
     <Wrapper isOpen={isOpen}>
@@ -85,10 +62,7 @@ export default function ManageTeamModal() {
       {!isLoading ? (
         <ManageSection>
           {applicants.length !== 0 ? (
-            <ManageList
-              applicants={applicants}
-              filter={value}
-            />
+            <ManageList applicants={applicants} filter={value} />
           ) : (
             <WaitingImage filter={value} />
           )}

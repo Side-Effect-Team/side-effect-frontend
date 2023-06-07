@@ -13,6 +13,21 @@ export const applyPosition = async (positionId: number) => {
   const res = await customAxios.post(`/applicant/${positionId}`);
   return res;
 };
+
+export const getApplicantData = async (
+  recruitBoardId: string,
+  value: string,
+) => {
+  try {
+    const response = await customAxios.get(
+      `/applicant/list/${recruitBoardId}?status=${value}`,
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const manageApplicant = async (data: ApplicantType) => {
   const { recruitBoardId, applicantId, status } = data;
   try {
