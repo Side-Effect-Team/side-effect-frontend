@@ -33,6 +33,7 @@ const useLogin = (providerType: "GOOGLE" | "KAKAO") => {
       dispatch(addEmail(error.response.data.email));
       dispatch(handleModalView({ modalView: "registerNickname" }));
     } else {
+      console.log(error);
       addToast({
         type: "error",
         title: "로그인 실패",

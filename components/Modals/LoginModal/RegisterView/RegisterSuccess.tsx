@@ -1,6 +1,7 @@
-import Button from "@/components/Button";
-import { ViewWrapper, ButtonWrapper } from "./styled";
+import { ViewWrapper, ButtonWrapper, StyledLink } from "./styled";
+import { useAppSelector } from "@/store/hooks";
 export default function RegisterSuccess() {
+  const { nickname } = useAppSelector((state) => state.userInfo.userInfo);
   return (
     <ViewWrapper
       initial={{ opacity: 0 }}
@@ -8,10 +9,10 @@ export default function RegisterSuccess() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <h2>환영합니다!</h2>
+      <h2>{nickname}님 환영합니다!</h2>
       <ButtonWrapper>
-        <Button size="large">팀 구하러가기</Button>
-        <Button size="large">프로젝트 구경하러가기</Button>
+        <StyledLink href={"/recruits"}>팀 구하러 가기</StyledLink>
+        <StyledLink href={"/projects"}>프로젝트 구경하러가기</StyledLink>
       </ButtonWrapper>
     </ViewWrapper>
   );

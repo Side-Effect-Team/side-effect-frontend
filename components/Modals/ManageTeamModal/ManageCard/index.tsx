@@ -1,5 +1,5 @@
 import Image from "next/image";
-import profilePic from "../../../public/images/profilePic.png";
+import profilePic from "../../../../public/images/profilePic.png";
 import Button from "@/components/Button";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
@@ -117,13 +117,13 @@ export default function ManageCard({
     <ManageCardWrapper>
       <ProfileSection>
         <ProfileImage>
-          {/* <Image
+          <Image
             src={profilePic}
             alt="Profile Image"
             style={{ objectFit: "cover" }}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             fill
-          /> */}
+          />
         </ProfileImage>
         <ProfileInfo>
           <Nickname>{nickName}</Nickname>

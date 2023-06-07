@@ -16,6 +16,7 @@ export default function PositionFilterTab({
   return (
     <PositionTabList>
       {positionList.map((position, index) => {
+        const isExistApplicant = apllicantNum[position] > 0 ? true : false;
         return (
           <PositionItem
             className={index === positionTabIndex ? "focused" : ""}
@@ -23,7 +24,9 @@ export default function PositionFilterTab({
             onClick={() => handlePositionFilterTab(index, position)}
           >
             {position}
-            <NumberOfPosition>{apllicantNum[position]}</NumberOfPosition>
+            <NumberOfPosition isExistApplicant={isExistApplicant}>
+              {apllicantNum[position]}
+            </NumberOfPosition>
           </PositionItem>
         );
       })}
