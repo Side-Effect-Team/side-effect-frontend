@@ -49,7 +49,10 @@ export default function ButtonSection({
   if (!isApplicantManage) {
     return (
       <ButtonSectionWrapper>
-        <Button onClick={handleRemoveMember}>내보내기</Button>
+        <Button onClick={() => handleMoveProfile(userId)}>프로필</Button>
+        <Button color="coral" onClick={handleRemoveMember}>
+          내보내기
+        </Button>
       </ButtonSectionWrapper>
     );
   }

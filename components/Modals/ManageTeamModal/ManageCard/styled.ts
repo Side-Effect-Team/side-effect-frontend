@@ -41,8 +41,8 @@ export const ButtonSection = styled.div`
   width: 100%;
 `;
 export const Nickname = styled.span`
-  font-weight: 500;
-  font-size: large;
+  font-weight: 600;
+  font-size: larger;
   ${media.mobile} {
     font-size: medium;
   }
