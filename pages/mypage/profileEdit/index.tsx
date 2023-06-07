@@ -35,9 +35,11 @@ export default function MyPageEdit() {
   const [tags, setTags] = useState<string[]>(data?.tags);
   const [career, setCareer] = useState<string>(data?.career);
   const [position, setPosition] = useState<string>(data?.position);
-  const [githubUrl, setGithubUrl] = useState<string>(data?.githubUrl);
-  const [blogUrl, setBlogUrl] = useState<string>(data?.blogUrl);
-  const [portfolioUrl, setPortfolioUrl] = useState<string>(data?.portfolioUrl);
+  const [url, setUrl] = useState({
+    githubUrl: data?.githubUrl,
+    blogUrl: data?.blogUrl,
+    portfolioUrl: data?.portfolioUrl,
+  });
 
   const {
     register,
@@ -64,9 +66,7 @@ export default function MyPageEdit() {
         position,
         tags,
         introduction,
-        githubUrl,
-        blogUrl,
-        portfolioUrl,
+        ...url,
         ...changedFormData,
       };
       const changes: ChangeProps = compareData(data, changedData);
@@ -100,10 +100,13 @@ export default function MyPageEdit() {
     setTags(data?.tags);
     setCareer(data?.career);
     setPosition(data?.position);
-    setGithubUrl(data?.githubUrl);
-    setBlogUrl(data?.blogUrl);
-    setPortfolioUrl(data?.portfolioUrl);
+    setUrl({
+      githubUrl: data?.githubUrl,
+      blogUrl: data?.blogUrl,
+      portfolioUrl: data?.portfolioUrl,
+    });
   }, [data]);
+
   return (
     <Container>
       <TapWrapper>
@@ -117,7 +120,7 @@ export default function MyPageEdit() {
             setIntroduction={setIntroduction}
             imgSrc={imgSrc}
             handleImgChange={handleImgChange}
-            introRegister={register}
+            register={register}
             errors={errors}
           />
           <SectionWrapper>
@@ -127,16 +130,12 @@ export default function MyPageEdit() {
           <SectionWrapper>
             <SectionBorder title="Info" />
             <InfoEdit
-              githubUrl={data?.githubUrl}
-              setGithubUrl={setGithubUrl}
-              blogUrl={data?.blogUrl}
-              setBlogUrl={setBlogUrl}
-              portfolioUrl={data?.portfolioUrl}
-              setPortfolioUrl={setPortfolioUrl}
               career={career}
               setCareer={setCareer}
               position={position}
               setPosition={setPosition}
+              url={url}
+              setUrl={setUrl}
             />
           </SectionWrapper>
           <ButtonWrapper>

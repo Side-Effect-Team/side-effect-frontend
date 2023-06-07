@@ -1,9 +1,9 @@
-import { deleteAccount } from "@/apis/UserAPI";
+import { deleteAccount, handleLogout } from "@/apis/UserAPI";
 import { useMutation } from "@tanstack/react-query";
 import useToast from "../common/useToast";
-import { useRouter } from "next/router";
 import { useAppDispatch } from "@/store/hooks";
 import { removeAuthentication } from "@/store/authSlice";
+import { handleModalView } from "@/store/loginViewTransitionSlice";
 
 export const useDeleteAccount = () => {
   const { addToast, deleteToast } = useToast();
@@ -19,6 +19,7 @@ export const useDeleteAccount = () => {
       });
       deleteToast("unique-id");
       dispatch(removeAuthentication());
+      dispatch(handleModalView({ modalView: "startLogin" }));
     },
     onError: () => {
       addToast({
