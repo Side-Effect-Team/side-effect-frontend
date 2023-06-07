@@ -98,3 +98,54 @@ export const ANIMATION_DIRECTION = {
   inTheCenter: { x: 0, opacity: 1 },
   onTheLeft: { x: "-50%", opacity: 0 },
 };
+
+export const SKILL_LIST = [
+  {
+    name: "전체 기술",
+    value: "",
+  },
+  {
+    name: "JavaScript",
+    value: "javascript",
+  },
+  {
+    name: "TypeScript",
+    value: "typescript",
+  },
+  {
+    name: "React",
+    value: "react",
+  },
+  {
+    name: "Vue.js",
+    value: "vue",
+  },
+  {
+    name: "Svelte",
+    value: "svelte",
+  },
+  {
+    name: "Next.js",
+    value: "nextjs",
+  },
+  {
+    name: "NestJS",
+    value: "nestjs",
+  },
+  {
+    name: "Node.js",
+    value: "nodejs",
+  },
+  {
+    name: "Java",
+    value: "java",
+  },
+  {
+    name: "Spring",
+    value: "spring",
+  },
+  {
+    name: "Go",
+    value: "go",
+  },
+] as const;
