@@ -1,5 +1,6 @@
 import Image from "next/image";
 import profilePic from "../../../../public/images/profilePic.png";
+import GithubImg from "../../../../public/images/Github.png";
 import Button from "@/components/Button";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
@@ -15,6 +16,10 @@ import {
 } from "./styled";
 import axios from "axios";
 import useToast from "@/hooks/common/useToast";
+import {
+  manageApplicant,
+  handleRemoveMember,
+} from "../../../../apis/ApplicantAPI";
 interface ApplicatnsType {
   filter: string;
   email: string;
@@ -22,6 +27,7 @@ interface ApplicatnsType {
   applicantId: number;
   userId: number;
   career: string;
+  githubUrl: string;
   projectId: string | string[] | undefined;
 }
 
@@ -32,33 +38,11 @@ export default function ManageCard({
 }: ApplicatnsType) {
   const isApplicantManage = filter === "pending";
   const router = useRouter();
-  const { email, nickName, applicantId, userId, career } = applicant;
+  const { email, nickName, applicantId, userId, career, githubUrl } = applicant;
   const { addToast } = useToast();
   const queryClient = useQueryClient();
-  const token = "";
-  const handleApplicant = async (status: "approved" | "rejected") => {
-    try {
-      await axios.patch(
-        `${process.env.NEXT_PUBLIC_API_URL}/applicant`,
-        {
-          recruitBoardId: projectId,
-          applicantId,
-          status,
-        },
-        { headers: { Authorization: token } },
-      );
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  const handleMemberRemove = async () => {
-    await axios.patch(
-      `${process.env.NEXT_PUBLIC_API_URL}/applicant/release`,
-      { recruitBoardId: projectId, applicantId },
-      { headers: { Authorization: token } },
-    );
-  };
-  const { mutate: removeMember } = useMutation(handleMemberRemove, {
+
+  const { mutate: removeMember } = useMutation(handleRemoveMember, {
     onSuccess: () => {
       addToast({
         type: "success",
@@ -76,7 +60,7 @@ export default function ManageCard({
       });
     },
   });
-  const { mutate } = useMutation(handleApplicant, {
+  const { mutate } = useMutation(manageApplicant, {
     onSuccess: () => {
       addToast({
         type: "success",
@@ -94,22 +78,57 @@ export default function ManageCard({
       });
     },
   });
-
   const handleManageButton = () => {
     if (isApplicantManage) {
       return (
         <>
-          <Button onClick={() => mutate("approved")}>수락</Button>
-          <Button onClick={() => mutate("rejected")}>거절</Button>
+          {githubUrl && (
+            <Button onClick={() => window.open(githubUrl, "_blank")}>
+              <Image
+                src={GithubImg}
+                alt="지원자 깃허브 주소"
+                width={25}
+                height={25}
+              />
+            </Button>
+          )}
+          <Button
+            onClick={() =>
+              mutate({
+                recruitBoardId: projectId,
+                applicantId: applicantId,
+                status: "approved",
+              })
+            }
+          >
+            수락
+          </Button>
+          <Button
+            onClick={() =>
+              mutate({
+                recruitBoardId: projectId,
+                applicantId: applicantId,
+                status: "rejected",
+              })
+            }
+          >
+            거절
+          </Button>
           <Button onClick={() => router.push(`/mypage/${userId}`)}>
-            마이페이지
+            프로필
           </Button>
         </>
       );
     } else {
       return (
         <>
-          <Button onClick={() => removeMember()}>추방</Button>
+          <Button
+            onClick={() =>
+              removeMember({ recruitBoardId: projectId, applicantId })
+            }
+          >
+            추방
+          </Button>
         </>
       );
     }
@@ -128,11 +147,11 @@ export default function ManageCard({
           />
         </ProfileImage>
         <ProfileInfo>
-          <Nickname>
-            {nickName}
-            {handleCareerTranslate(career)}
-          </Nickname>
-          <Info>{email}</Info>
+          <Nickname>{nickName}</Nickname>
+          <Info>
+            <div>{email} </div>
+            <div>{handleCareerTranslate(career)}</div>
+          </Info>
         </ProfileInfo>
       </ProfileSection>
       <ButtonSection>{handleManageButton()}</ButtonSection>
