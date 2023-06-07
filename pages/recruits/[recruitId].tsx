@@ -15,8 +15,9 @@ export default function RecruitDetailPage({
   recruitId,
 }: RecruitDetailPageProps) {
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["recruitPost"],
+    queryKey: ["recruitPost", recruitId],
     queryFn: () => getRecruitPost(recruitId),
+    staleTime: 2000,
     refetchOnWindowFocus: false,
   });
 
