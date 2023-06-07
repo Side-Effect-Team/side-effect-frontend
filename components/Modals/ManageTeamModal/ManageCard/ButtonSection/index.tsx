@@ -5,7 +5,7 @@ import { useManageApplicant } from "../../../../../hooks/mutations/useManageAppl
 import { useManageTeam } from "../../../../../hooks/mutations/useManageTeam";
 import { ApplicatnsType } from "../index";
 import { useRouter } from "next/router";
-
+import { ButtonSectionWrapper } from "./styled";
 type Type = Pick<
   ApplicatnsType,
   "applicantId" | "githubUrl" | "userId" | "nickName"
@@ -47,13 +47,13 @@ export default function ButtonSection({
 
   if (!isApplicantManage) {
     return (
-      <>
+      <ButtonSectionWrapper>
         <Button onClick={handleRemoveMember}>내보내기</Button>
-      </>
+      </ButtonSectionWrapper>
     );
   }
   return (
-    <>
+    <ButtonSectionWrapper>
       {githubUrl && (
         <Button onClick={() => window.open(githubUrl, "_blank")}>
           <Image
@@ -67,6 +67,6 @@ export default function ButtonSection({
       <Button onClick={() => handleManageApplicant("approved")}>수락</Button>
       <Button onClick={() => handleManageApplicant("rejected")}>거절</Button>
       <Button onClick={() => handleMoveProfile(userId)}>프로필</Button>
-    </>
+    </ButtonSectionWrapper>
   );
 }

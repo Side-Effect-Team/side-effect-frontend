@@ -36,7 +36,7 @@ export default function ManageTeamModal() {
     isSuccess,
   } = useGetApplicantData(value, positionValue);
   const { applicants, applicantNum } = data;
-
+  console.log(data);
   if (modalType !== "ManageTeamModal") return null;
   return (
     <Wrapper isOpen={isOpen}>
