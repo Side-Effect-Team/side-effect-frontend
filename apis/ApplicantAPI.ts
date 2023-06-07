@@ -36,8 +36,12 @@ export const manageApplicant = async (data: ApplicantType) => {
       applicantId,
       status,
     });
-  } catch (error) {
+  } catch (error: any) {
     console.log(error);
+    if (error.response.data.code === "BP_002") {
+      throw new Error(error.response.data.message);
+    }
+    throw new Error("서버가 원활하지 않습니다. 고객센터로 문의 바랍니다.");
   }
 };
 export const handleRemoveMember = async (data: ApplicantType) => {

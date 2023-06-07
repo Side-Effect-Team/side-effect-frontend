@@ -14,12 +14,12 @@ export const useManageApplicant = (nickName: string) => {
       });
       queryClient.invalidateQueries(["ApplicantData"]);
     },
-    onError: () => {
+    onError: (error) => {
+      console.log("error", error);
       addToast({
         type: "error",
         title: "요청실패!",
-        content:
-          "서비스가 현재 원활하지 않습니다.불편사항은 대표이메일에 문의 부탁드립니다.",
+        content: `${error}`,
       });
     },
   });
