@@ -1,7 +1,8 @@
 import axios from "axios";
 import { store } from "@/store/store";
-import { removeAuthentication } from "@/store/authSlice";
+import { removeAuthentication, createAuthentication } from "@/store/authSlice";
 import { handleRefreshAccessToken } from "./UserAPI";
+axios.defaults.withCredentials = true;
 const baseURL = process.env.NEXT_PUBLIC_API_URL;
 const customAxios = axios.create({
   baseURL,
@@ -28,22 +29,27 @@ customAxios.interceptors.response.use(
   async (error) => {
     const { config } = error;
     console.log("error", error);
-    //액세스토큰만료시 자동 재발급 갱신
+    //액세스토큰만료되었을때 자동 재발급 갱신
     if (error.response?.data.code === "AT_001") {
       try {
-        await handleRefreshAccessToken();
-        const newAccessToken = store.getState().auth.token;
-
-        config.headers["Authorization"] = `Bearer ${newAccessToken}`;
-        return customAxios.request(config);
+        const response = await axios.post("/token/at-issue");
+        const newAccessToken = response.headers.authorization;
+        store.dispatch(
+          createAuthentication({
+            token: newAccessToken,
+            userId: store.getState().auth.userId,
+          }),
+        );
+        config.headers.Authorization = `Bearer ${newAccessToken}`;
+        return await customAxios.request(config);
       } catch (error: any) {
-        //리프레쉬토큰 만료
+        // 리프레쉬토큰이 만료되었을때
         if (error.response.data.code === "RT_001") {
+          // await axios.delete("/token/logout");
           store.dispatch(removeAuthentication());
-          window.alert("로그인 유지기간이 만료되었습니다.");
+          alert("로그인 유지 기간이 만료되었습니다.");
           window.location.replace("/");
         }
-        console.log(error);
       }
     }
     //로컬스토리지에서 액세스토큰을 조작하는경우 핸들링

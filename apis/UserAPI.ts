@@ -1,7 +1,8 @@
 import axios from "axios";
 import { store } from "@/store/store";
-import { createAuthentication } from "@/store/authSlice";
+import { createAuthentication, removeAuthentication } from "@/store/authSlice";
 import customAxios from "./customAxios";
+import { handleModalView } from "@/store/loginViewTransitionSlice";
 import { ChangeProps } from "@/utils/updateData";
 
 export const getMypageData = async () => {
@@ -53,4 +54,10 @@ export const deleteAccount = async () => {
   const id = store.getState().auth.userId;
   const response = await customAxios.delete(`/user/${id}`);
   return response;
+};
+
+export const handleLogout = () => {
+  axios.delete("/token/logout");
+  store.dispatch(removeAuthentication());
+  store.dispatch(handleModalView({ modalView: "startLogin" }));
 };

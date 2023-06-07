@@ -37,11 +37,12 @@ export const Wrapper = styled.div<{ isOpen: boolean }>`
   right: 0;
   bottom: 0;
   margin: auto;
-  height: 550px;
+  height: 650px;
   width: 550px;
-  background-color: ${(p) => p.theme.mainBackGround};
   z-index: 30;
-  border-radius: 15px;
+  border-radius: 25px;
+  background-color: ${(p) => p.theme.mainBackGround};
+  box-shadow: ${(p) => p.theme.boxShadow};
   ${media.mobile} {
     width: 100%;
     height: 100%;
