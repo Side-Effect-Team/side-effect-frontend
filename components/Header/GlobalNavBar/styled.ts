@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { mediaQuery } from "@/styles/Media";
+import { media } from "@/styles/mediatest";
 
 export const Wrapper = styled.div`
   z-index: 10;
@@ -51,6 +52,10 @@ export const BoxStyled = styled.div`
   align-items: center;
   justify-content: flex-end;
   gap: 1rem;
+  ${media.mobile} {
+    margin-left: auto;
+    margin-right: 20px;
+  }
 `;
 
 export const ButtonBox = styled.div`
