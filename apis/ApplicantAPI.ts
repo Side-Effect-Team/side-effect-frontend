@@ -1,6 +1,6 @@
 import customAxios from "./customAxios";
 interface ApplicantType {
-  recruitBoardId: string | string[] | undefined;
+  recruitBoardId: string;
   applicantId: number;
   status?: "approved" | "rejected";
 }

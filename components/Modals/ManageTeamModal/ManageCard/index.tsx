@@ -19,14 +19,9 @@ export interface ApplicatnsType {
   userId: number;
   career: string;
   githubUrl: string;
-  recruitBoardId: string | string[] | undefined;
 }
 
-export default function ManageCard({
-  filter,
-  recruitBoardId,
-  ...applicant
-}: ApplicatnsType) {
+export default function ManageCard({ filter, ...applicant }: ApplicatnsType) {
   const isApplicantManage = filter === "pending";
   const { email, nickName, applicantId, userId, career, githubUrl } = applicant;
 
@@ -56,7 +51,6 @@ export default function ManageCard({
         applicantId={applicantId}
         userId={userId}
         githubUrl={githubUrl}
-        recruitBoardId={recruitBoardId}
       />
     </ManageCardWrapper>
   );

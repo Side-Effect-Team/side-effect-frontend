@@ -10,24 +10,14 @@ interface ApplicantType {
 }
 interface ManagePropsType {
   filter: string;
-  recruitBoardId: string | string[] | undefined;
   applicants: ApplicantType[];
 }
-export default function ManageList({
-  applicants,
-  filter,
-  recruitBoardId,
-}: ManagePropsType) {
+export default function ManageList({ applicants, filter }: ManagePropsType) {
   return (
     <ManageListWrapper>
       {applicants.map(({ ...applicant }) => {
         return (
-          <ManageCard
-            key={applicant.userId}
-            {...applicant}
-            filter={filter}
-            recruitBoardId={recruitBoardId}
-          />
+          <ManageCard key={applicant.userId} {...applicant} filter={filter} />
         );
       })}
     </ManageListWrapper>

@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 
 type Type = Pick<
   ApplicatnsType,
-  "applicantId" | "githubUrl" | "userId" | "recruitBoardId" | "nickName"
+  "applicantId" | "githubUrl" | "userId" | "nickName"
 >;
 interface ManageType extends Type {
   isApplicantManage: boolean;
@@ -17,13 +17,13 @@ export default function ButtonSection({
   githubUrl,
   isApplicantManage,
   nickName,
-  recruitBoardId,
   applicantId,
   userId,
 }: ManageType) {
   const { mutate: manageApplicant } = useManageApplicant(nickName);
   const { mutate: removeMember } = useManageTeam(nickName);
   const router = useRouter();
+  const recruitBoardId = router.query.recruitId as string;
   const handleMoveProfile = (userId: number) => {
     router.push(`/mypage/${userId}`);
   };
@@ -48,7 +48,7 @@ export default function ButtonSection({
   if (!isApplicantManage) {
     return (
       <>
-        <Button onClick={handleRemoveMember}>추방</Button>
+        <Button onClick={handleRemoveMember}>내보내기</Button>
       </>
     );
   }

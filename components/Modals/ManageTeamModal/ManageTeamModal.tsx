@@ -30,7 +30,7 @@ export default function ManageTeamModal() {
   const { isOpen, modalType } = useAppSelector((state) => state.modal);
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const recruitBoardId = router.query.recruitId;
+  const recruitBoardId = router.query.recruitId as string;
   const handleModalClose = () => {
     dispatch(closeModal());
   };
@@ -60,7 +60,6 @@ export default function ManageTeamModal() {
   );
 
   const { applicants, applicantNum } = data;
-  console.log(applicants);
   if (modalType !== "ManageTeamModal") return null;
   return (
     <Wrapper isOpen={isOpen}>
@@ -89,7 +88,6 @@ export default function ManageTeamModal() {
             <ManageList
               applicants={applicants}
               filter={value}
-              recruitBoardId={recruitBoardId}
             />
           ) : (
             <WaitingImage filter={value} />
