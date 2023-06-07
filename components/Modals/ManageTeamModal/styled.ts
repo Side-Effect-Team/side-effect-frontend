@@ -13,7 +13,7 @@ export const Wrapper = styled.div<{ isOpen: boolean }>`
   height: 100vh;
   right: 0;
   bottom: 0;
-  z-index: 30;
+  z-index: 9999;
   border-top-left-radius: 25px;
   border-bottom-left-radius: 25px;
   box-shadow: ${(p) => p.theme.boxShadow};
