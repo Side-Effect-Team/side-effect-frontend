@@ -5,27 +5,20 @@ interface ApplicantType {
   nickName: string;
   applicantId: number;
   userId: number;
+  career: string;
+  githubUrl: string;
+  imgUrl: string;
 }
 interface ManagePropsType {
   filter: string;
-  projectId: string | string[] | undefined;
   applicants: ApplicantType[];
 }
-export default function ManageList({
-  applicants,
-  filter,
-  projectId,
-}: ManagePropsType) {
+export default function ManageList({ applicants, filter }: ManagePropsType) {
   return (
     <ManageListWrapper>
       {applicants.map(({ ...applicant }) => {
         return (
-          <ManageCard
-            key={applicant.userId}
-            {...applicant}
-            filter={filter}
-            projectId={projectId}
-          />
+          <ManageCard key={applicant.userId} {...applicant} filter={filter} />
         );
       })}
     </ManageListWrapper>

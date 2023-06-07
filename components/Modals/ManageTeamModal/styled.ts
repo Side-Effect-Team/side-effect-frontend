@@ -3,36 +3,35 @@ import { media } from "@/styles/mediatest";
 
 export const Wrapper = styled.div<{ isOpen: boolean }>`
   visibility: ${({ isOpen }) => (isOpen ? "visible" : "hidden")};
-  animation: ${({ isOpen }) => (isOpen ? slideIn : slideOut)} 0.3s ease;
-  transition: 0.3s;
+  animation: ${({ isOpen }) => (isOpen ? slideIn : slideOut)} 0.4s ease-in-out;
+  transition: 0.4s;
   display: flex;
   flex-direction: column;
   position: fixed;
-  background-color: ${(p) => p.theme.componentBgColor};
+  background-color: ${(p) => p.theme.mainBackGround};
   width: 775px;
   height: 100vh;
   right: 0;
   bottom: 0;
-  z-index: 30;
+  z-index: 9999;
   border-top-left-radius: 25px;
   border-bottom-left-radius: 25px;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  box-shadow: ${(p) => p.theme.boxShadow};
   ${media.mobile} {
     height: 80%;
     width: 100%;
     font-size: small;
     border-bottom-left-radius: 0px;
     border-top-right-radius: 25px;
-    animation: ${({ isOpen }) => (isOpen ? slideUp : slideDown)} 0.3s ease;
+    animation: ${({ isOpen }) => (isOpen ? slideUp : slideDown)} 0.4s
+      ease-in-out;
   }
 `;
 export const Title = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid ${(p) => p.theme.colors.darkGray};
   padding: 20px;
 `;
 export const ManageSection = styled.section`

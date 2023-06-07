@@ -7,8 +7,9 @@ export const ManageCardWrapper = styled.li`
   border-radius: 15px;
   align-items: center;
   gap: 5px;
-  box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px,
-    rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+  box-shadow: ${(p) => p.theme.boxShadow};
+
+  background-color: ${(p) => p.theme.componentBgColor};
   ${media.mobile} {
     flex-direction: column;
   }
@@ -24,7 +25,8 @@ export const ProfileImage = styled.div`
   position: relative;
   width: 80px;
   height: 80px;
-  border-radius: 50%;
+  border-radius: 25%;
+  box-shadow: ${(p) => p.theme.boxShadow};
   overflow: hidden;
 `;
 export const ProfileInfo = styled.div`
@@ -39,10 +41,16 @@ export const ButtonSection = styled.div`
   width: 100%;
 `;
 export const Nickname = styled.span`
-  font-weight: 500;
-  font-size: large;
+  font-weight: 600;
+  font-size: larger;
   ${media.mobile} {
     font-size: medium;
   }
 `;
-export const Info = styled.span``;
+export const Info = styled.span`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: small;
+  font-weight: normal;
+`;

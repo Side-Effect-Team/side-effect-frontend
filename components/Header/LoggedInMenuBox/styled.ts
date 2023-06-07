@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { mediaQuery } from "@/styles/Media";
 
 export const Container = styled.div`
   display: flex;
@@ -13,13 +12,6 @@ export const Container = styled.div`
       transform: scale(1.2);
     }
   }
-
-  ${mediaQuery("mobile")`
-    position: fixed;
-    top: 1.2rem;
-    right: 5rem;
-    margin: auto;
-  `};
 `;
 
 export const ImgContainer = styled.div`
