@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { manageApplicant, handleRemoveMember } from "@/apis/ApplicantAPI";
+import { manageApplicant } from "@/apis/ApplicantAPI";
 import useToast from "../common/useToast";
 
 export const useManageApplicant = (nickName: string) => {
@@ -9,8 +9,8 @@ export const useManageApplicant = (nickName: string) => {
     onSuccess: () => {
       addToast({
         type: "success",
-        title: "방출완료!",
-        content: `${nickName}님을 팀에서 방출하였습니다.`,
+        title: "알림 전송완료!",
+        content: `${nickName}님에게 결과를 전달하였습니다.`,
       });
       queryClient.invalidateQueries(["ApplicantData"]);
     },

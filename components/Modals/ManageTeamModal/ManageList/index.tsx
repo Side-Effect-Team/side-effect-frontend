@@ -6,16 +6,17 @@ interface ApplicantType {
   applicantId: number;
   userId: number;
   career: string;
+  githubUrl: string;
 }
 interface ManagePropsType {
   filter: string;
-  projectId: string | string[] | undefined;
+  recruitBoardId: string | string[] | undefined;
   applicants: ApplicantType[];
 }
 export default function ManageList({
   applicants,
   filter,
-  projectId,
+  recruitBoardId,
 }: ManagePropsType) {
   return (
     <ManageListWrapper>
@@ -25,7 +26,7 @@ export default function ManageList({
             key={applicant.userId}
             {...applicant}
             filter={filter}
-            projectId={projectId}
+            recruitBoardId={recruitBoardId}
           />
         );
       })}

@@ -30,14 +30,14 @@ export default function ManageTeamModal() {
   const { isOpen, modalType } = useAppSelector((state) => state.modal);
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const recruitId = router.query.recruitId;
+  const recruitBoardId = router.query.recruitId;
   const handleModalClose = () => {
     dispatch(closeModal());
   };
 
   const getApplicantData = async () => {
     const response = await customAxios.get(
-      `/applicant/list/${recruitId}?status=${value}`,
+      `/applicant/list/${recruitBoardId}?status=${value}`,
     );
     return response.data;
   };
@@ -45,7 +45,7 @@ export default function ManageTeamModal() {
     ["ApplicantData", value],
     getApplicantData,
     {
-      enabled: !!recruitId,
+      enabled: !!recruitBoardId,
       select: (data) => {
         const applicantNum: { [key: string]: number } = {};
         for (const position in data) {
@@ -89,7 +89,7 @@ export default function ManageTeamModal() {
             <ManageList
               applicants={applicants}
               filter={value}
-              projectId={recruitId}
+              recruitBoardId={recruitBoardId}
             />
           ) : (
             <WaitingImage filter={value} />
