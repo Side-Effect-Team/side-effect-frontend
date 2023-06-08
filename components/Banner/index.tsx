@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { useRouter } from "next/router";
 import { Wrapper, ImageContainer, Contents } from "./styled";
 import Button from "../Button";
 import { useAppSelector } from "@/store/hooks";
@@ -7,11 +7,17 @@ import useToast from "@/hooks/common/useToast";
 interface BannerProps {
   title: string;
   subTitle: string;
+  btnTitle: string;
   btnLink: string;
 }
 
-/** 컴포넌트 설명 : 1버튼을 가진 배너로, 버튼 링크를 설정할 수 있습니다 */
-export default function Banner({ title, subTitle, btnLink }: BannerProps) {
+export default function Banner({
+  title,
+  subTitle,
+  btnTitle,
+  btnLink,
+}: BannerProps) {
+  const router = useRouter();
   const { token } = useAppSelector((state) => state.auth);
   const { addToast } = useToast();
 
@@ -22,9 +28,7 @@ export default function Banner({ title, subTitle, btnLink }: BannerProps) {
           <h2>{title}</h2>
           <h3>{subTitle}</h3>
           {token ? (
-            <Button>
-              <Link href={btnLink}>모집하기</Link>
-            </Button>
+            <Button onClick={() => router.push(btnLink)}>{btnTitle}</Button>
           ) : (
             <Button
               onClick={() =>
@@ -35,7 +39,7 @@ export default function Banner({ title, subTitle, btnLink }: BannerProps) {
                 })
               }
             >
-              모집하기
+              {btnTitle}
             </Button>
           )}
         </Contents>
