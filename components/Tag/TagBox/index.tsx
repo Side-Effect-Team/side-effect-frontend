@@ -1,11 +1,18 @@
 import { useEffect, useRef, useState } from "react";
 import Tag from "..";
-import { PlusTag, TagContainer, TagTitle, TagWrapper } from "./styled";
+import {
+  EmptyTitle,
+  PlusTag,
+  TagContainer,
+  TagTitle,
+  TagWrapper,
+} from "./styled";
 interface TagArrayProps {
   tagArray: string[];
   title: string;
   fill?: string;
   fontSize?: string;
+  isRecruiting?: boolean;
 }
 
 export default function TagBox({
@@ -13,6 +20,7 @@ export default function TagBox({
   tagArray,
   fill,
   fontSize,
+  isRecruiting,
 }: TagArrayProps) {
   const tagRef = useRef<HTMLDivElement>(null); // 태그가 차지할 수 있는 영역
   const [hiddenTagCount, setHiddenTagCount] = useState(0);
@@ -60,13 +68,22 @@ export default function TagBox({
   return (
     <TagContainer>
       <TagTitle>{title}</TagTitle>
-      <TagWrapper ref={tagRef}>
-        {tagArray.map((el, index) => (
-          <Tag key={index} fill={fill} fontSize={fontSize}>
-            {el}
-          </Tag>
-        ))}
-      </TagWrapper>
+      {tagArray.length === 0 ? (
+        <EmptyTitle>- 추후 논의</EmptyTitle>
+      ) : (
+        <TagWrapper ref={tagRef}>
+          {tagArray.map((el, index) => (
+            <Tag
+              key={index}
+              fill={fill}
+              fontSize={fontSize}
+              isRecruiting={isRecruiting}
+            >
+              {el}
+            </Tag>
+          ))}
+        </TagWrapper>
+      )}
       {hiddenTagCount ? (
         <PlusTag fill={fill || "true"}>+ {hiddenTagCount}</PlusTag>
       ) : (
