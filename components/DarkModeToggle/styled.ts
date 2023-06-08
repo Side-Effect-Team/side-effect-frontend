@@ -1,47 +1,42 @@
 import styled from "styled-components";
-import { theme } from "@/styles/Theme";
-import { BsFillSunFill, BsFillMoonStarsFill } from "react-icons/bs";
-
+import { BiSun, BiMoon } from "react-icons/bi";
 export const DarkModeCheck = styled.input`
   outline: none;
   appearance: none;
 `;
 export const DarkModeCircle = styled.label<{ isDark: boolean }>`
   width: 80px;
-  height: 30px;
+  height: 35px;
   position: relative;
   display: block;
-  background: ${theme.brandColor.lightGray};
+  justify-content: center;
   border-radius: 200px;
-  box-shadow: inset 0px 5px 15px rgba(0, 0, 0, 0.4),
-    inset 0px -5px 15px rgba(255, 255, 255, 0.4);
+  background: ${(p) => (p.isDark ? "black" : "white")};
+  border: 1px solid ${(p) => p.theme.cardBorder};
   cursor: pointer;
   &::after {
     content: "";
     width: 25px;
     height: 25px;
     position: absolute;
-    top: 2px;
+    top: 4px;
     left: ${(p) => (p.isDark ? "53px" : "3px")};
-    background: ${(p) =>
-      p.isDark
-        ? "linear-gradient(180deg, #777, #3a3a3a)"
-        : "linear-gradient(180deg, #ffcc89, #d8860b)"};
+    background-color: ${(p) => (p.isDark ? "white" : "black")};
     border-radius: 200px;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
     transition: 0.3s ease;
   }
   .icon {
-    fill: ${(p) => (p.isDark ? "#ffffff" : "#000000")};
     z-index: 10;
     position: absolute;
     top: 7px;
     transition: 0.3s ease;
   }
 `;
-export const LightModeIcon = styled(BsFillSunFill)`
-  left: 7px;
+export const LightModeIcon = styled(BiSun)<{ isDark: boolean }>`
+  left: 5px;
+  fill: ${(p) => (p.isDark ? "gray" : "white")};
 `;
-export const DarkModeIcon = styled(BsFillMoonStarsFill)`
-  left: 57px;
+export const DarkModeIcon = styled(BiMoon)<{ isDark: boolean }>`
+  left: 56px;
+  fill: ${(p) => (p.isDark ? "black" : "gray")};
 `;
