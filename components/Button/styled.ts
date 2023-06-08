@@ -52,11 +52,11 @@ const fillStyle = css<ButtonStyle>`
     css`
       border: 2px solid ${p.color && theme.brandColor[p.color]};
       color: ${p.color && theme.brandColor[p.color]};
-      background-color: white;
+      background-color: ${(p) => p.theme.mainBackGround};
       :hover {
         border: 2px solid ${p.color && lighten(0.1, theme.brandColor[p.color])};
         color: ${p.color && lighten(0.1, theme.brandColor[p.color])};
-        background-color: white;
+        background-color: ${(p) => p.theme.mainBackGround};
       }
       :active {
         border: 2px solid ${p.color && darken(0.1, theme.brandColor[p.color])};

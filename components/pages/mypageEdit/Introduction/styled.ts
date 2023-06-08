@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { theme } from "@/styles/Theme";
 import { media } from "@/styles/mediatest";
 
 export const ProfileWrapper = styled.div`
@@ -58,7 +57,7 @@ export const TextArea = styled.textarea`
   width: 100%;
   padding: 10px;
   color: ${(p) => p.theme.textColor};
-  border: 1px solid ${(p) => p.theme.colors.mediumGray};
+  border: 1px solid ${(p) => p.theme.grayToDark};
   background-color: ${(p) => p.theme.mainBackGround};
   border-radius: 10px;
   resize: none;
