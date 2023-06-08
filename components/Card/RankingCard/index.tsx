@@ -4,12 +4,9 @@ import {
   StyledImage,
   LikeNum,
   ProjectInfo,
-  GlassOverlay,
   HeartIcon,
 } from "./styled";
-
 import DefaultImg from "../../../public/images/ProjectBackground.png";
-
 interface RankingCardType {
   id: number;
   title: string;
@@ -34,7 +31,6 @@ export default function RankingCard(card: RankingCardType) {
           {likeNum}
         </LikeNum>
       </ProjectInfo>
-      <GlassOverlay />
     </StyledLink>
   );
 }
