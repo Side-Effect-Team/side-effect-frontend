@@ -19,7 +19,7 @@ export const DarkModeCircle = styled.label<{ isDark: boolean }>`
     height: 25px;
     position: absolute;
     top: 4px;
-    left: ${(p) => (p.isDark ? "53px" : "3px")};
+    left: ${(p) => (p.isDark ? "51px" : "3px")};
     background-color: ${(p) => (p.isDark ? "white" : "black")};
     border-radius: 200px;
     transition: 0.3s ease;
@@ -38,6 +38,6 @@ export const LightModeIcon = styled.svg<{ isDark: boolean }>`
   color: ${(p) => (p.isDark ? "gray" : "white")};
 `;
 export const DarkModeIcon = styled.svg<{ isDark: boolean }>`
-  left: 56px;
+  left: 54px;
   color: ${(p) => (p.isDark ? "black" : "gray")};
 `;
