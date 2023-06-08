@@ -1,10 +1,19 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
 import { AiFillHeart } from "react-icons/ai";
 
+const zoomIn = keyframes`
+  from{
+    transform: scale(1);
+  }
+  to{
+    transform: scale(1.1);
+  }
+`;
+
 export const HeartIcon = styled(AiFillHeart)`
-  color: ${(p) => p.theme.brandColor.coral};
+  fill: ${(p) => p.theme.brandColor.coral};
 `;
 
 export const StyledLink = styled(Link)`
@@ -13,6 +22,7 @@ export const StyledLink = styled(Link)`
   position: relative;
   overflow: hidden;
   border-radius: 15px;
+  background-color: transparent;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   &:hover {
     & span {
@@ -26,36 +36,23 @@ export const StyledImage = styled(Image)`
   max-height: 400px;
   object-fit: cover;
   border-radius: 15px;
+
   &:hover {
-    transition: all 0.5s;
-    transform: scale(1.1);
+    animation: ${zoomIn} 0.2s ease-in forwards;
   }
 `;
 export const ProjectInfo = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
+  justify-content: center;
   position: absolute;
   padding: 10px;
   bottom: 0px;
   left: 0px;
   width: 100%;
-  border-radius: 35px;
   z-index: 10;
-`;
-export const GlassOverlay = styled.div`
-  position: absolute;
-  height: 100%;
-  max-height: 70px;
-  width: 100%;
-  bottom: 0;
-  z-index: 0;
-  background: rgba(250, 250, 250, 0.25);
-  backdrop-filter: blur(8px);
-  /* border-radius: 35px; */
-  box-shadow: ${(p) => p.theme.boxShadow};
-  transition: all 0.3s;
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.8));
 `;
 
 export const LikeNum = styled.span`
