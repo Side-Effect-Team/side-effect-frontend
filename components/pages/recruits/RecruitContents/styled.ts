@@ -3,7 +3,7 @@ import { breakPoints } from "@/styles/Media";
 
 export const Wrapper = styled.div`
   margin: 0 auto;
-  padding: 1.5rem 1rem;
+  padding: 1.5rem 0;
   max-width: ${breakPoints.desktop}px;
 `;
 
