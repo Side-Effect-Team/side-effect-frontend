@@ -59,7 +59,10 @@ export default function ButtonSection({
   return (
     <ButtonSectionWrapper>
       {githubUrl && (
-        <Button color="black" onClick={() => window.open(githubUrl, "_blank")}>
+        <Button
+          color="darkGray"
+          onClick={() => window.open(githubUrl, "_blank")}
+        >
           <Image
             src={GithubImg}
             alt="지원자 깃허브 주소"

@@ -2,7 +2,7 @@ import { breakPoints } from "./Media";
 
 export const theme = {
   colors: {
-    primary: "#155EEF",
+    primary: "#87A2FB",
     gray: "#98A2B3",
     lightGray: "#e9e9e9",
     danger: "#F04438",
@@ -28,11 +28,12 @@ export const theme = {
   },
   // 추후 브랜드 컬러 추가 시 (아래는 임시 컬러)
   brandColor: {
-    primary: "#155EEF",
+    primary: "#87A2FB",
     coral: "#FF6D60",
-    skyBlue: "#CDDEFF",
+    skyBlue: "#ECF2FF",
     lightGray: "#EAECF0",
     black: "#202225",
+    darkGray: "#667085",
   },
   boxShadow: `inset 0 0 1px 1px hsla(0, 0%, 100%, 0.15),
 0 0 0 1px hsla(0, 0%, 0%, 0.1),
