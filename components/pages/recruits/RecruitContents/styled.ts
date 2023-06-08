@@ -9,8 +9,12 @@ export const Wrapper = styled.div`
 
 export const ContentsHeader = styled.div`
   width: 100%;
-  padding: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+`;
+
+export const HeaderStyled = styled.h2`
+  padding: 0.5rem 0;
 `;
