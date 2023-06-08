@@ -6,7 +6,7 @@ import {
 } from "./styled";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { handleDarkMode } from "@/store/darkModeSlice";
-import useState from "react";
+import { BiSun, BiMoon } from "react-icons/bi";
 export default function DarkModeToggle() {
   const { isDark } = useAppSelector((state) => state.darkMode);
   const dispatch = useAppDispatch();
@@ -19,12 +19,15 @@ export default function DarkModeToggle() {
       <DarkModeCheck
         id="darkmode"
         type="checkbox"
-        // checked={}
         onChange={handleDarkModeToggle}
       />
       <DarkModeCircle isDark={isDark} htmlFor="darkmode">
-        <LightModeIcon className="icon" size={20} isDark={isDark} />
-        <DarkModeIcon className="icon" size={20} isDark={isDark} />
+        <LightModeIcon className="icon" isDark={isDark}>
+          <BiSun size={20} />
+        </LightModeIcon>
+        <DarkModeIcon className="icon" isDark={isDark}>
+          <BiMoon size={20} />
+        </DarkModeIcon>
       </DarkModeCircle>
     </>
   );

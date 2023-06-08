@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { BiSun, BiMoon } from "react-icons/bi";
 export const DarkModeCheck = styled.input`
   outline: none;
   appearance: none;
@@ -30,13 +29,15 @@ export const DarkModeCircle = styled.label<{ isDark: boolean }>`
     position: absolute;
     top: 7px;
     transition: 0.3s ease;
+    width: 20px;
+    height: 20px;
   }
 `;
-export const LightModeIcon = styled(BiSun)<{ isDark: boolean }>`
+export const LightModeIcon = styled.svg<{ isDark: boolean }>`
   left: 5px;
-  fill: ${(p) => (p.isDark ? "gray" : "white")};
+  color: ${(p) => (p.isDark ? "gray" : "white")};
 `;
-export const DarkModeIcon = styled(BiMoon)<{ isDark: boolean }>`
+export const DarkModeIcon = styled.svg<{ isDark: boolean }>`
   left: 56px;
-  fill: ${(p) => (p.isDark ? "black" : "gray")};
+  color: ${(p) => (p.isDark ? "black" : "gray")};
 `;
