@@ -24,5 +24,6 @@ declare module "styled-components" {
     cardBoxShadow: string;
     cardBorder: string;
     buttonTextColor: string;
+    landingPageColor: string;
   }
 }
