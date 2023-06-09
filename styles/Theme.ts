@@ -58,6 +58,7 @@ export const darkTheme = {
   0 6px 10px hsla(0, 0%, 0%, 0.2);
   `,
   cardBorder: "none",
+  buttonTextColor: "#000000",
 };
 export const lightTheme = {
   ...theme,
@@ -70,6 +71,7 @@ export const lightTheme = {
   grayToDark: "#d9d9d9",
   cardBoxShadow: "none",
   cardBorder: "#d9d9d9",
+  buttonTextColor: "#ffffff",
 };
 
 export type BrandColorTypes = keyof typeof theme.brandColor;

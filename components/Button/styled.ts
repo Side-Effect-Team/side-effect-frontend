@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import { BrandColorTypes, theme } from "../../styles/Theme";
 import React from "react";
-import { darken, lighten } from "polished";
+import { darken, lighten, transparentize } from "polished";
 import { media } from "@/styles/mediatest";
 
 export interface ButtonStyle
@@ -9,8 +9,7 @@ export interface ButtonStyle
   children?: React.ReactNode;
   size?: "small" | "medium" | "large";
   fill?: "true" | "false";
-
-  color?: BrandColorTypes;
+  color?: string;
 }
 
 const sizeStyles = css<ButtonStyle>`
@@ -50,17 +49,20 @@ const fillStyle = css<ButtonStyle>`
   ${(p) =>
     p.fill === "false" &&
     css`
-      border: 2px solid ${p.color && theme.brandColor[p.color]};
-      color: ${p.color && theme.brandColor[p.color]};
+      border: 1.5px solid ${p.color};
+      color: ${p.color};
       background-color: ${(p) => p.theme.mainBackGround};
       :hover {
-        border: 2px solid ${p.color && lighten(0.1, theme.brandColor[p.color])};
-        color: ${p.color && lighten(0.1, theme.brandColor[p.color])};
+        border: 1.5px solid ${p.color && lighten(0.1, p.color)};
+        color: ${p.color && lighten(0.1, p.color)};
         background-color: ${(p) => p.theme.mainBackGround};
+        background-color: ${p.color === p.theme.textColor
+          ? p.theme.grayToDark
+          : p.theme.mainBackGround};
       }
       :active {
-        border: 2px solid ${p.color && darken(0.1, theme.brandColor[p.color])};
-        color: ${p.color && darken(0.1, theme.brandColor[p.color])};
+        border: 1.5px solid ${p.color && darken(0.1, p.color)};
+        color: ${p.color && darken(0.1, p.color)};
       }
     `}
 `;
@@ -68,12 +70,18 @@ const colorStyle = css<ButtonStyle>`
   ${(p) =>
     p.color &&
     css`
-      background-color: ${theme.brandColor[p.color]};
+      color: ${p.color === p.theme.textColor
+        ? p.theme.buttonTextColor
+        : "white"};
+      background-color: ${p.color};
       &:hover {
-        background-color: ${lighten(0.05, theme.brandColor[p.color])};
+        background-color: ${lighten(0.1, p.color)};
+        background-color: ${p.color === p.theme.textColor
+          ? p.theme.colors.darkGray
+          : lighten(0.1, p.color)};
       }
       &:active {
-        background: ${darken(0.05, theme.brandColor[p.color])};
+        background-color: ${darken(0.1, p.color)};
       }
     `}
 `;
@@ -115,5 +123,5 @@ export const StyledButton = styled.button`
 StyledButton.defaultProps = {
   size: "medium",
   fill: "true",
-  color: "primary",
+  color: primary,
 };
