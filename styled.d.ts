@@ -23,6 +23,7 @@ declare module "styled-components" {
     grayToDark: string;
     cardBoxShadow: string;
     cardBorder: string;
+    mode: string;
     buttonTextColor: string;
   }
 }

@@ -1,13 +1,16 @@
  <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 
-<svg xmlns="http://www.w3.org/2000/svg" width="865.76" height="682.89" viewBox="0 0 865.76 682.89">
+<!-- <svg xmlns="http://www.w3.org/2000/svg" width="865.76" height="682.89" viewBox="0 0 865.76 682.89"> -->
+<svg xmlns="http://www.w3.org/2000/svg" width="current" height="current" viewBox="0 0 865.76 682.89">
 
 <defs>
 
-<style xmlns="http://www.w3.org/1999/xhtml">*, ::after, ::before { box-sizing: border-box; }
+<!-- <style xmlns="http://www.w3.org/1999/xhtml">*, ::after, ::before { box-sizing: border-box; }
 img, svg { vertical-align: middle; }
+</style> -->
+<style xmlns="http://www.w3.org/1999/xhtml">*,
+img, svg { vertical-align: middle; }, 
 </style>
-
 <style xmlns="http://www.w3.org/1999/xhtml">*, body, html { -webkit-font-smoothing: antialiased; }
 img, svg { max-width: 100%; }
 </style>
