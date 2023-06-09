@@ -1,12 +1,12 @@
+import { KeyboardEvent, MouseEvent } from "react";
+import { TiTimes } from "react-icons/ti";
 import { TagWrapper, Container, KeywordWrapper, TagsContainer } from "./styled";
-
 import {
   GuideWrapper,
   InputBox,
   InputForm,
   LabelForm,
 } from "@/postComps/common/PostForm.styled";
-import { KeyboardEvent, MouseEvent } from "react";
 
 interface TagBoxProps {
   tags: string[];
@@ -45,7 +45,10 @@ function Tag({ keyword, deleteTag }: TagProps) {
   return (
     <TagWrapper>
       <Container>
-        <KeywordWrapper onClick={deleteTag}>{keyword}</KeywordWrapper>
+        <KeywordWrapper onClick={deleteTag}>
+          {keyword}
+          <TiTimes size={15} />
+        </KeywordWrapper>
       </Container>
     </TagWrapper>
   );

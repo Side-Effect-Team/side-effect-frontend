@@ -27,6 +27,10 @@ export const Container = styled.div`
 export const KeywordWrapper = styled.span`
   display: inline-block;
   transform: translateY(-3%);
+
+  svg {
+    transform: translateY(13.5%);
+  }
 `;
 
 export const TagsContainer = styled.div`
