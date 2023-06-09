@@ -15,6 +15,7 @@ import {
 import { useRouter } from "next/router";
 import HeartButton from "@/components/Button/HeartButton";
 import TagBox from "@/components/Tag/TagBox";
+import { getBoardDate } from "@/utils/getTodayDate";
 
 export interface RecruitDataProps {
   id: number;
@@ -59,6 +60,8 @@ export default function RecruitCard({ data }: RecruitCardProps) {
     router.push(`/recruits/${data.id}`);
   };
 
+  const date = getBoardDate(data?.createdAt);
+
   return (
     <Container onClick={onClickGoToBoard}>
       <HeartButton
@@ -82,7 +85,7 @@ export default function RecruitCard({ data }: RecruitCardProps) {
         isRecruiting={!data?.closed}
       />
       <Footer>
-        <CreateAt>{data?.createdAt}</CreateAt>
+        <CreateAt>{date}</CreateAt>
         <IconWrapper>
           <ViewIcon />
           <Num>{data?.views}</Num>
