@@ -1,4 +1,5 @@
 import { media } from "@/styles/mediatest";
+import { BiBell } from "react-icons/bi";
 import { IoClose, IoNotificationsOutline } from "react-icons/io5";
 import styled, { css } from "styled-components";
 
@@ -26,7 +27,7 @@ export const AlarmIconDiv = styled.div<{ openAlarm: boolean }>`
     visibility: ${(p) => p.openAlarm && "hidden"};
   }
 `;
-export const AlarmButton = styled(IoNotificationsOutline)`
+export const AlarmButton = styled(BiBell)`
   color: ${(p) => p.theme.brandColor.primary};
   font-size: 24px;
 `;
