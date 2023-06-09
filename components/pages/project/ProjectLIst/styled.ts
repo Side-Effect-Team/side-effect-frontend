@@ -10,5 +10,7 @@ export const ProjectListWrapper = styled.main`
   ${media.mobile} {
     display: flex;
     flex-direction: column;
+    // 추가
+    gap: 0;
   }
 `;

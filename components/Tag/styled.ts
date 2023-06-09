@@ -7,6 +7,7 @@ export interface TagProps extends React.HTMLAttributes<HTMLDivElement> {
   color?: string;
   fill?: string;
   fontSize?: string;
+  isRecruiting?: boolean;
 }
 
 export const TagWrapper = styled.div<TagProps>`
@@ -18,17 +19,21 @@ export const TagWrapper = styled.div<TagProps>`
     p.fill === "true"
       ? css`
           color: white;
-          background-color: ${p.color};
-          border: 2px solid ${p.color};
+          background-color: ${p.isRecruiting ? p.color : p.theme.colors.gray};
+          border: 2px solid ${p.isRecruiting ? p.color : p.theme.colors.gray};
         `
       : css`
-          color: ${p.color};
+          color: ${p.isRecruiting ? p.color : p.theme.colors.gray};
           background-color: ${(p) => p.theme.componentBgColor};
-          border: 2px solid ${p.color};
+          border: 2px solid ${p.isRecruiting ? p.color : p.theme.colors.gray};
+          ${media.mobile} {
+            background-color: ${(p) => p.theme.mainBackGround};
+          }
         `};
   ${media.mobile} {
     font-size: calc(${(p) => p.fontSize} * 0.8);
     padding: calc(${(p) => p.fontSize} * 0.1) calc(${(p) => p.fontSize} * 0.3);
+    // 추가
   }
 `;
 

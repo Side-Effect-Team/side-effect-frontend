@@ -6,7 +6,7 @@ export const InfoWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  border-bottom: 1px solid ${(p) => p.theme.brandColor.lightGray};
+  border-bottom: 1px solid ${(p) => p.theme.grayToDark};
 `;
 export const InfoTitle = styled.p`
   min-width: 30%;

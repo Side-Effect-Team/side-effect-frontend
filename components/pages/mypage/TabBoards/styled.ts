@@ -11,7 +11,7 @@ export const BoardWrapper = styled.div`
     display: flex;
     flex-direction: column;
     margin-top: 4rem;
-    gap: 15px;
+    gap: 0;
   }
 `;
 export const NullMessage = styled.div`

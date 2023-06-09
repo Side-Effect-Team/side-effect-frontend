@@ -27,6 +27,6 @@ export const CardContainer = styled.div`
     overflow-x: unset;
     overflow-y: scroll;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0;
   `}
 `;

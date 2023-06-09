@@ -1,4 +1,6 @@
 import { media } from "@/styles/mediatest";
+import { AiOutlineHeart, AiOutlineMessage } from "react-icons/ai";
+import { BsEye } from "react-icons/bs";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -21,13 +23,20 @@ export const Container = styled.div`
     transition: all 0.3s;
     transform: translateY(-0.5rem);
   }
+
   ${media.mobile} {
     width: 95%;
-    height: 150px;
-    min-height: 150px;
+    height: 170px;
+    min-height: 170px;
     margin-left: auto;
     margin-right: auto;
     padding-bottom: 10px;
+    border: none;
+    border-radius: 0;
+    border-bottom: 2px solid ${(p) => p.theme.grayToDark};
+    padding: 10px;
+    background-color: ${(p) => p.theme.mainBackGround};
+
     :hover {
       transition: none;
       transform: none;
@@ -38,15 +47,17 @@ export const IsRecruiting = styled.div<{ isRecruiting: boolean }>`
   font-size: 16px;
   font-weight: 700;
   color: ${(p) =>
-    p.isRecruiting ? p.theme.brandColor.primary : p.theme.colors.mediumGray};
+    p.isRecruiting ? p.theme.brandColor.primary : p.theme.colors.gray};
   margin-top: 10px;
   margin-bottom: 15px;
   ${media.mobile} {
-    display: none;
+    font-size: 14px;
+    margin-top: 5px;
+    margin-bottom: 5px;
   }
 `;
 
-export const Title = styled.div`
+export const Title = styled.div<{ isRecruiting: boolean }>`
   height: 60px;
   font-size: 20px;
   font-weight: 700;
@@ -57,13 +68,15 @@ export const Title = styled.div`
   overflow: hidden;
   width: 100%;
   margin-bottom: 10px;
+  color: ${(p) => (p.isRecruiting ? p.theme.textColor : p.theme.colors.gray)};
+
   ${media.mobile} {
-    width: calc(100% - 40px);
+    width: calc(100% - 45px);
     height: auto;
     -webkit-line-clamp: 1;
     margin-top: 5px;
-    margin-bottom: 12px;
-    font-size: 16px;
+    margin-bottom: 8px;
+    font-size: 18px;
   }
 `;
 
@@ -78,5 +91,63 @@ export const TagCount = styled.div`
     position: absolute;
     top: 0;
     right: 0;
+  }
+`;
+
+export const Footer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  ${media.mobile} {
+    justify-content: space-between;
+  }
+`;
+export const CreateAt = styled.div`
+  font-size: 16px;
+  margin-top: 2px;
+  color: ${(p) => p.theme.colors.gray};
+
+  ${media.mobile} {
+    font-size: 14px;
+  }
+`;
+export const IconWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 5px;
+`;
+export const HeartNotFillIcon = styled(AiOutlineHeart)`
+  color: ${(p) => p.theme.colors.gray};
+  font-size: 16px;
+  ${media.mobile} {
+    font-size: 14px;
+  }
+`;
+export const CommentIcon = styled(AiOutlineMessage)`
+  color: ${(p) => p.theme.colors.gray};
+  font-size: 16px;
+  ${media.mobile} {
+    font-size: 14px;
+  }
+`;
+export const Num = styled.div`
+  font-size: 16px;
+  margin-right: 5px;
+  margin-top: 2px;
+  color: ${(p) => p.theme.colors.gray};
+  ${media.mobile} {
+    font-size: 14px;
+  }
+`;
+export const ViewIcon = styled(BsEye)`
+  color: ${(p) => p.theme.colors.gray};
+  font-size: 16px;
+  ${media.mobile} {
+    font-size: 14px;
   }
 `;
