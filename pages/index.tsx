@@ -2,12 +2,14 @@ import styled from "styled-components";
 import { CAROUSEL_CONTENTS_LIST } from "../enum";
 import MainCarousel from "@/components/Carousel/MainCarousel";
 import BatchCarousel from "@/components/Carousel/BatchCarousel";
-
+import FirstSection from "@/components/pages/landing/first";
+import SecondSection from "@/components/pages/landing/second";
+import ThirdSection from "@/components/pages/landing/third";
 export default function HomePage() {
   window.sessionStorage.removeItem("activeTab");
   return (
-    <Wrapper>
-      <MainCarousel data={CAROUSEL_CONTENTS_LIST} />
+    <>
+      {/* <MainCarousel data={CAROUSEL_CONTENTS_LIST} />
       <MainStyled>
         <BatchCarousel
           title="이달의 베스트 프로젝트"
@@ -21,8 +23,11 @@ export default function HomePage() {
           maxCards={8}
           queryKey="newRecruits"
         />
-      </MainStyled>
-    </Wrapper>
+      </MainStyled> */}
+      <FirstSection />
+      <SecondSection />
+      <ThirdSection />
+    </>
   );
 }
 

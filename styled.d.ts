@@ -23,5 +23,6 @@ declare module "styled-components" {
     grayToDark: string;
     cardBoxShadow: string;
     cardBorder: string;
+    landingPageColor: string;
   }
 }

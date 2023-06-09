@@ -57,6 +57,7 @@ export const darkTheme = {
   0 6px 10px hsla(0, 0%, 0%, 0.2);
   `,
   cardBorder: "none",
+  landingPageColor: "#191a1c",
 };
 export const lightTheme = {
   ...theme,
@@ -69,6 +70,7 @@ export const lightTheme = {
   grayToDark: "#d9d9d9",
   cardBoxShadow: "none",
   cardBorder: "#d9d9d9",
+  landingPageColor: "#f8f8f8",
 };
 
 export type BrandColorTypes = keyof typeof theme.brandColor;
