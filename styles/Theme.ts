@@ -12,6 +12,9 @@ export const theme = {
     mediumGray: "#d9d9d9",
     darkGray: "#667085",
   },
+  fonts: {
+    pretendard: "Pretendard-Regular",
+  },
   sizes: {
     mobile: breakPoints.mobile + "px",
     desktop: breakPoints.desktop + "px",

@@ -1,4 +1,4 @@
-import { NoDataWrapper, NoDataContent } from "./styeld";
+import { NoDataWrapper, NoDataContent } from "./styled";
 import Image from "next/image";
 import NoDataSvg from "../../public/images/Nodata.svg";
 
@@ -7,7 +7,7 @@ export default function NoData() {
     <NoDataWrapper>
       <Image
         src={NoDataSvg}
-        alt="검색결과 가 존재하지않습니다."
+        alt="검색결과가 존재하지 않습니다."
         width={300}
         height={300}
       />

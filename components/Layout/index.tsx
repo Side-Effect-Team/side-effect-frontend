@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { ThemeProvider } from "styled-components";
 import { Wrapper, MobileNavBar, MobileMenuItem } from "./styled";
 import GlobalStyles from "@/styles/Global";
@@ -29,6 +30,7 @@ export default function Layout({ children }: PropType) {
   const [isMounted, setIsMounted] = useState(false);
   const { isDark } = useAppSelector((state) => state.darkMode);
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   //다크모드일경우 새로고침시 화면 반짝임을 제어합니다.
   useEffect(() => {
@@ -40,8 +42,10 @@ export default function Layout({ children }: PropType) {
   };
 
   const logout = () => {
-    if (window.confirm("정말 로그아웃하시겠습니까?"))
+    if (window.confirm("정말 로그아웃하시겠습니까?")) {
       dispatch(removeAuthentication());
+      if (router.pathname === "/mypage") router.replace("/");
+    }
   };
 
   const mobileLogout = () => {
@@ -106,7 +110,7 @@ function MobileMenu({ hide, logout, handleClick }: MobileMenuProps) {
         <MobileMenuItem
           onClick={() => dispatch(openModal({ modalType: "LoginModal" }))}
         >
-          <Link href="/">로그인</Link>
+          로그인
         </MobileMenuItem>
       )}
     </MobileNavBar>

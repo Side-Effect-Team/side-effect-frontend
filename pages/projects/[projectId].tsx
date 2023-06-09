@@ -14,9 +14,10 @@ export default function ProjectDetailPage({
   projectId,
 }: ProjectDetailPageProps) {
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["projectPost"],
+    queryKey: ["projectPost", projectId],
     queryFn: () => getProjectPost(projectId),
     staleTime: 2000,
+    refetchOnWindowFocus: false,
   });
 
   if (isLoading) {

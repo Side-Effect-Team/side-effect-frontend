@@ -12,7 +12,7 @@ interface OptionsType {
   value: string | number;
 }
 interface SelectBoxProps {
-  options: OptionsType[];
+  options: readonly OptionsType[];
   setValue: React.Dispatch<React.SetStateAction<any>>;
   title: string | number;
 }

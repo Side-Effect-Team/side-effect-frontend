@@ -40,6 +40,7 @@ export const MobileMenuItem = styled.div`
   border-bottom: 1px solid black;
   font-size: 1.5rem;
   font-weight: 600;
+  cursor: pointer;
 
   &:first-child {
     border-top: 1px solid black;
