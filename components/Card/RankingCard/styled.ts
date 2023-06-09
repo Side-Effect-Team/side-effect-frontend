@@ -17,8 +17,9 @@ export const HeartIcon = styled(AiFillHeart)`
 `;
 
 export const StyledLink = styled(Link)`
-  max-width: 300px;
-  min-height: 400px;
+  width: 300px;
+  min-width: 300px;
+  max-height: 400px;
   position: relative;
   overflow: hidden;
   border-radius: 15px;
@@ -33,10 +34,10 @@ export const StyledLink = styled(Link)`
 `;
 export const StyledImage = styled(Image)`
   width: 100%;
+  max-width: 300px;
   max-height: 400px;
   object-fit: cover;
   border-radius: 15px;
-
   &:hover {
     animation: ${zoomIn} 0.2s ease-in forwards;
   }
