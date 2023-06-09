@@ -20,5 +20,5 @@ export const SectionTitle = styled.p`
 
 export const Border = styled.div`
   flex: 1;
-  border-bottom: 2px solid ${(p) => p.theme.brandColor.lightGray};
+  border-bottom: 2px solid ${(p) => p.theme.grayToDark};
 `;

@@ -1,10 +1,21 @@
 import { useEffect, useState } from "react";
 import { useAddLikeRecruit } from "@/hooks/mutations/useAddLikeRecuit";
-import { Container, IsRecruiting, Title } from "./styled";
+import {
+  CommentIcon,
+  Container,
+  CreateAt,
+  Footer,
+  HeartNotFillIcon,
+  IconWrapper,
+  IsRecruiting,
+  Num,
+  Title,
+  ViewIcon,
+} from "./styled";
 import { useRouter } from "next/router";
 import HeartButton from "@/components/Button/HeartButton";
 import TagBox from "@/components/Tag/TagBox";
-import CardFooter from "../../Footer/CardFooter";
+import { getBoardDate } from "@/utils/getDate";
 
 export interface RecruitDataProps {
   id: number;
@@ -49,6 +60,8 @@ export default function RecruitCard({ data }: RecruitCardProps) {
     router.push(`/recruits/${data.id}`);
   };
 
+  const date = getBoardDate(data?.createdAt);
+
   return (
     <Container onClick={onClickGoToBoard}>
       <HeartButton
@@ -59,15 +72,29 @@ export default function RecruitCard({ data }: RecruitCardProps) {
       <IsRecruiting isRecruiting={!data?.closed}>
         {recruitingTitle}
       </IsRecruiting>
-      <Title>{data?.title}</Title>
-      <TagBox title="모집분야" tagArray={newPosition} fill="false" />
-      <TagBox title="사용언어" tagArray={data?.tags} />
-      <CardFooter
-        createdAt={data?.createdAt}
-        views={data?.views}
-        commentNum={data?.commentNum}
-        likeNum={data?.likeNum}
+      <Title isRecruiting={!data?.closed}>{data?.title}</Title>
+      <TagBox
+        title="모집분야"
+        tagArray={newPosition}
+        fill="false"
+        isRecruiting={!data?.closed}
       />
+      <TagBox
+        title="사용언어"
+        tagArray={data?.tags}
+        isRecruiting={!data?.closed}
+      />
+      <Footer>
+        <CreateAt>{date}</CreateAt>
+        <IconWrapper>
+          <ViewIcon />
+          <Num>{data?.views}</Num>
+          <CommentIcon />
+          <Num>{data?.commentNum}</Num>
+          <HeartNotFillIcon />
+          <Num>{data?.likeNum}</Num>
+        </IconWrapper>
+      </Footer>
     </Container>
   );
 }

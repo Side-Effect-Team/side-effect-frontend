@@ -9,7 +9,7 @@ export const TagWrapper = styled.div`
   align-items: center;
   flex-wrap: wrap;
   padding: 5px;
-  border: 1px solid ${(p) => p.theme.colors.mediumGray};
+  border: 1px solid ${(p) => p.theme.grayToDark};
   border-radius: 10px;
   &:focus-within {
     border-color: ${(p) => p.theme.brandColor.primary};

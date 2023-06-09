@@ -6,7 +6,7 @@ export const Input = styled.input`
   height: 3rem;
   padding: 0 10px;
   color: ${(p) => p.theme.textColor};
-  border: 1px solid ${(p) => p.theme.colors.mediumGray};
+  border: 1px solid ${(p) => p.theme.grayToDark};
   background-color: ${(p) => p.theme.mainBackGround};
   border-radius: 10px;
   ${media.mobile} {

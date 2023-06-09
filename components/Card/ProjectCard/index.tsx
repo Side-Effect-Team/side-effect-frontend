@@ -1,9 +1,22 @@
 import { MouseEvent } from "react";
-import { Container, Content, ContentsWrapper, Header, Title } from "./styled";
+import {
+  CommentIcon,
+  Container,
+  Content,
+  ContentsWrapper,
+  CreateAt,
+  Footer,
+  Header,
+  HeartNotFillIcon,
+  IconWrapper,
+  Num,
+  Title,
+  ViewIcon,
+} from "./styled";
 import { useRouter } from "next/router";
 import { useAddLikeProject } from "@/hooks/mutations/useAddLikeProject";
 import HeartButton from "@/components/Button/HeartButton";
-import CardFooter from "../../Footer/CardFooter";
+import { getBoardDate } from "@/utils/getDate";
 export interface BoardCardProps {
   category: string;
   closed: boolean;
@@ -35,12 +48,14 @@ interface BoardCardDataProps {
 }
 
 export default function ProjectCard({ data }: BoardCardDataProps) {
+  console.log(data);
   const projectMutate = useAddLikeProject();
   const router = useRouter();
 
   const onClickGoToBoard = (e: MouseEvent<HTMLDivElement>) => {
     router.push(`/projects/${e.currentTarget.id}`);
   };
+  const date = getBoardDate(data?.createdAt);
 
   return (
     <Container id={data?.id.toString()} onClick={onClickGoToBoard}>
@@ -54,12 +69,17 @@ export default function ProjectCard({ data }: BoardCardDataProps) {
       <ContentsWrapper>
         <Title>{data?.title}</Title>
         <Content>{data?.subTitle}</Content>
-        <CardFooter
-          createdAt={data?.createdAt}
-          views={data?.views}
-          commentNum={data?.commentNum}
-          likeNum={data?.likeNum}
-        />
+        <Footer>
+          <CreateAt>{date}</CreateAt>
+          <IconWrapper>
+            <ViewIcon />
+            <Num>{data?.views}</Num>
+            <CommentIcon />
+            <Num>{data?.commentNum}</Num>
+            <HeartNotFillIcon />
+            <Num>{data?.likeNum}</Num>
+          </IconWrapper>
+        </Footer>
       </ContentsWrapper>
     </Container>
   );
