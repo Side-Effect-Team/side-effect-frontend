@@ -7,17 +7,15 @@ export const FlowContainer = styled.div`
   white-space: nowrap;
   overflow: hidden;
   transition: 0.3s;
-  font-size: 2.5rem;
   font-weight: 500;
-  color: white;
+  color: ${(p) => p.theme.mainBackGround};
   font-style: italic;
-  font-size: 33px;
+  font-size: 25px;
   width: 100%;
   background-color: ${(p) => p.theme.brandColor.primary};
-  height: 66px;
+  height: 55px;
   display: flex;
   align-items: center;
-
   ${media.mobile} {
     height: 47px;
     font-size: 20px;
@@ -47,11 +45,14 @@ export const FlowWrapper = styled.div`
     }
   }
 `;
-export const LightningSvg = styled.img`
-  width: 30px;
+
+export const IconWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 20px;
   height: 30px;
   ${media.mobile} {
-    width: 20px;
+    width: 15px;
     height: 20px;
   }
 `;

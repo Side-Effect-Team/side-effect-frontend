@@ -1,6 +1,10 @@
-import { FlowContainer, FlowWrapper, LightningSvg } from "./styled";
+import { FlowContainer, FlowWrapper, IconWrapper } from "./styled";
+import Lightning from "../../public/images/lightningIcon.svg";
+import { useTheme } from "styled-components";
 
 export default function FlowBox() {
+  const theme = useTheme();
+
   return (
     <FlowContainer>
       {Array(15)
@@ -8,7 +12,9 @@ export default function FlowBox() {
         .map((el, index) => (
           <FlowWrapper key={index}>
             <p>SIDE EFFECT</p>
-            <LightningSvg src="/images/lightningIcon.svg" />
+            <IconWrapper>
+              <Lightning fill={theme.mainBackGround} height="100%" />
+            </IconWrapper>
           </FlowWrapper>
         ))}
     </FlowContainer>
