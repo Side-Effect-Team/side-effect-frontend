@@ -5,7 +5,8 @@ import BatchCarousel from "@/components/Carousel/BatchCarousel";
 import FirstSection from "@/components/pages/landing/first";
 import SecondSection from "@/components/pages/landing/second";
 import ThirdSection from "@/components/pages/landing/third";
-export default function HomePage() {
+import axios from "axios";
+export default function HomePage({ data }: any) {
   window.sessionStorage.removeItem("activeTab");
   return (
     <>
@@ -26,18 +27,14 @@ export default function HomePage() {
       </MainStyled> */}
       <FirstSection />
       <SecondSection />
-      <ThirdSection />
+      <ThirdSection data={data} />
     </>
   );
 }
 
-const Wrapper = styled.div`
-  background: ${(p) => p.theme.mainBackGround};
-`;
-
-const MainStyled = styled.section`
-  margin: 0 auto;
-  padding: 1rem;
-  width: 100%;
-  max-width: ${(p) => p.theme.sizes.desktop};
-`;
+export async function getStaticProps() {
+  const { data } = await axios.get("/free-boards/rank");
+  return {
+    props: { data },
+  };
+}
