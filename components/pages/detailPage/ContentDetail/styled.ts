@@ -45,3 +45,7 @@ export const ProjectTitleBox = styled.div`
   align-items: center;
   line-height: normal;
 `;
+
+export const ProjectSubTitleBox = styled.h4`
+  letter-spacing: 0.06rem;
+`;

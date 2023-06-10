@@ -25,6 +25,7 @@ export const POST_FORM = {
   projectName: "",
   title: "",
   content: "",
+  projectSubTitle: "",
 };
 
 export default function PostProjectPage() {
@@ -39,6 +40,10 @@ export default function PostProjectPage() {
       validate: (postForm: typeof POST_FORM) => {
         const newErrorMsgs = { ...POST_FORM };
 
+        // 게시글 제목
+        if (postForm.title.trim().length < 5)
+          newErrorMsgs.title = "게시글 제목은 5자 이상 입력해야 합니다";
+
         // 프로젝트명
         if (
           postForm.projectName.trim().length < 3 ||
@@ -46,9 +51,13 @@ export default function PostProjectPage() {
         )
           newErrorMsgs.projectName = "프로젝트명은 3~20자 이내로 입력해주세요";
 
-        // 게시글 제목
-        if (postForm.title.trim().length < 5)
-          newErrorMsgs.title = "게시글 제목은 5자 이상 입력해야 합니다";
+        // 프로젝트 한 줄 소개
+        if (
+          postForm.projectSubTitle.trim().length < 3 ||
+          postForm.projectSubTitle.trim().length > 20
+        )
+          newErrorMsgs.projectSubTitle =
+            "한 줄 소개는 3~30자 이내로 입력해주세요";
 
         // 상세 내용
         if (postForm.content.trim().length < 20)
@@ -92,6 +101,23 @@ export default function PostProjectPage() {
         <form onSubmit={handleSubmit}>
           <InputBox>
             <GuideWrapper>
+              <LabelForm htmlFor="title">게시글 제목</LabelForm>
+              <p>제목에 핵심 내용을 드러내보세요</p>
+            </GuideWrapper>
+            <InputForm
+              type="text"
+              id="title"
+              name="title"
+              value={postForm.title}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            {touched.title && errMsgs.title && (
+              <ErrorMsg>{errMsgs.title}</ErrorMsg>
+            )}
+          </InputBox>
+          <InputBox>
+            <GuideWrapper>
               <LabelForm htmlFor="projectName">프로젝트명</LabelForm>
               <p>멋진 프로젝트 이름을 정해보세요</p>
             </GuideWrapper>
@@ -110,19 +136,22 @@ export default function PostProjectPage() {
           </InputBox>
           <InputBox>
             <GuideWrapper>
-              <LabelForm htmlFor="title">게시글 제목</LabelForm>
-              <p>제목에 핵심 내용을 드러내보세요</p>
+              <LabelForm htmlFor="projectSubTitle">
+                프로젝트 한 줄 소개
+              </LabelForm>
+              <p>프로젝트를 한 줄로 요약해보세요</p>
             </GuideWrapper>
             <InputForm
               type="text"
-              id="title"
-              name="title"
-              value={postForm.title}
+              id="projectSubTitle"
+              name="projectSubTitle"
+              value={postForm.projectSubTitle}
               onChange={handleChange}
               onBlur={handleBlur}
+              placeholder="3~30자 이내로 입력해주세요"
             />
-            {touched.title && errMsgs.title && (
-              <ErrorMsg>{errMsgs.title}</ErrorMsg>
+            {touched.projectSubTitle && errMsgs.projectSubTitle && (
+              <ErrorMsg>{errMsgs.projectSubTitle}</ErrorMsg>
             )}
           </InputBox>
           <ProjectUrlBox
