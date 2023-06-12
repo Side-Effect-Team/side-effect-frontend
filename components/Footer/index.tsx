@@ -1,14 +1,82 @@
+import Image from "next/image";
 import Link from "next/link";
-import { Wrapper, FooterStyled } from "./styled";
+import { BsGithub } from "react-icons/bs";
+import { useAppSelector } from "@/store/hooks";
+
+import {
+  Wrapper,
+  Contents,
+  GithubIcon,
+  IconBox,
+  ColumnBox,
+  Title,
+  Column,
+} from "./styled";
 
 export default function Footer() {
+  const { isDark } = useAppSelector((state) => state.darkMode);
+
   return (
     <Wrapper>
-      <FooterStyled>
-        <span>
-          Copyright &copy; <Link href="/">사이드 이펙트</Link>
-        </span>
-      </FooterStyled>
+      <Contents>
+        <IconBox>
+          <Link href="/">
+            <Image
+              src="/images/mainLogo.svg"
+              alt="사이드이펙트 로고"
+              width={100}
+              height={50}
+              priority
+            />
+          </Link>
+          <GithubIcon isDark={isDark}>
+            <Link href="https://github.com/Side-Effect-Team">
+              <BsGithub size={50} />
+            </Link>
+          </GithubIcon>
+        </IconBox>
+        <ColumnBox>
+          <Column>
+            <Title>팀</Title>
+            <Link href="https://github.com/Side-Effect-Team" target="_blank">
+              팀 소개
+            </Link>
+            <Link
+              href="https://github.com/Side-Effect-Team/side-effect-backend"
+              target="_blank"
+            >
+              백엔드 개발진
+            </Link>
+            <Link
+              href="https://github.com/Side-Effect-Team/side-effect-frontend"
+              target="_blank"
+            >
+              프론트엔드 개발진
+            </Link>
+          </Column>
+          <Column>
+            <Title>고객지원</Title>
+            <Link
+              href="https://github.com/Side-Effect-Team/side-effect-frontend/issues"
+              target="_blank"
+            >
+              이용 문의
+            </Link>
+            <Link
+              href="https://github.com/Side-Effect-Team/side-effect-frontend/issues"
+              target="_blank"
+            >
+              버그 제보
+            </Link>
+            <Link
+              href="https://github.com/Side-Effect-Team/side-effect-frontend/issues"
+              target="_blank"
+            >
+              컨트리뷰션
+            </Link>
+          </Column>
+        </ColumnBox>
+      </Contents>
     </Wrapper>
   );
 }
