@@ -6,14 +6,17 @@ import {
   NavStyled,
   BoxStyled,
   ButtonBox,
+  IconWrapper,
 } from "./styled";
 import MobileMenuBox from "../MobileMenuBox";
 import { BOARD_LIST } from "../../../enum";
 import Button from "../../Button";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { openModal } from "@/store/modalSlice";
+import MainLogo from "../../../public/images/mainLogo.svg";
 
 import LoggedInMenuBox from "@/components/Header/LoggedInMenuBox";
+import { useTheme } from "styled-components";
 
 interface GlobalNavBarProps {
   logout: () => void;
@@ -26,18 +29,15 @@ export default function GlobalNavBar({
 }: GlobalNavBarProps) {
   const dispatch = useAppDispatch();
   const { token } = useAppSelector((state) => state.auth);
+  const theme = useTheme();
 
   return (
     <Wrapper>
       <HeaderStyled>
         <Link href="/">
-          <Image
-            src="./images/mainLogo.svg"
-            alt="사이드이펙트 로고"
-            width={100}
-            height={50}
-            priority
-          />
+          <IconWrapper>
+            <MainLogo fill={theme.textColor} height="100%" />
+          </IconWrapper>
         </Link>
         <NavStyled>
           {BOARD_LIST.map((board) => (

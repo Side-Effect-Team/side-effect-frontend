@@ -37,19 +37,18 @@ export const Container = styled.div`
   }
 `;
 export const SvgWrapper = styled.div`
-  width: 50%;
-  max-width: 500px;
+  width: 60%;
+  max-width: 600px;
   animation: ${slideAnimationSvg} 1s ease-out;
   ${media.mobile} {
-    width: 80%;
+    width: 100%;
   }
 `;
 export const TextWrapper = styled.div`
-  width: 50%;
+  width: 40%;
   display: flex;
   flex-direction: column;
   animation: ${slideAnimationText} 1s ease-out;
-
   ${media.mobile} {
     width: auto;
   }

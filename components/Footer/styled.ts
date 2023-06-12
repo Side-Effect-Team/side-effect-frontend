@@ -1,3 +1,4 @@
+import { media } from "@/styles/mediatest";
 import styled, { css } from "styled-components";
 
 interface GithubIconProps {
@@ -63,4 +64,12 @@ export const Column = styled.div`
 
 export const Title = styled.h3`
   font-size: 1.2rem;
+`;
+export const IconWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 110px;
+  ${media.mobile} {
+    width: 90px;
+  }
 `;

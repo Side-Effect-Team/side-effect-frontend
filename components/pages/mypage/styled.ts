@@ -15,7 +15,7 @@ export const TapWrapper = styled.div`
   height: auto;
   margin: 10px 0;
   padding: 20px;
-  border: 2px solid ${(p) => p.theme.brandColor.lightGray};
+  border: 2px solid ${(p) => p.theme.grayToDark};
   border-radius: 10px;
   display: flex;
   flex-direction: column;

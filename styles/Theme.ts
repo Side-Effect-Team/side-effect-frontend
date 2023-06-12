@@ -61,6 +61,7 @@ export const darkTheme = {
   0 6px 10px hsla(0, 0%, 0%, 0.2);
   `,
   cardBorder: "none",
+  mode: "dark",
   buttonTextColor: "#000000",
   landingPageColor: "#191a1c",
 };
@@ -75,6 +76,7 @@ export const lightTheme = {
   grayToDark: "#d9d9d9",
   cardBoxShadow: "none",
   cardBorder: "#d9d9d9",
+  mode: "light",
   buttonTextColor: "#ffffff",
   landingPageColor: "#f8f8f8",
 };

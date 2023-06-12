@@ -21,6 +21,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { compareData } from "@/utils/compareData";
 import SectionBorder from "@/components/Boarder/SectionBorder";
 import { ChangeProps, updateData } from "@/utils/updateData";
+import { useTheme } from "styled-components";
 export interface FormData {
   nickname: string;
 }
@@ -107,6 +108,7 @@ export default function MyPageEdit() {
     });
   }, [data]);
 
+  const theme = useTheme();
   return (
     <Container>
       <TapWrapper>

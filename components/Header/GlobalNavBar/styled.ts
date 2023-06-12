@@ -56,3 +56,12 @@ export const ButtonBox = styled.div`
     display: none;
   `};
 `;
+
+export const IconWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 110px;
+  ${media.mobile} {
+    width: 90px;
+  }
+`;
