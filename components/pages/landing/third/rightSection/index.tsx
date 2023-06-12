@@ -36,7 +36,7 @@ export default function RightSection({
               spaceBetween: 30,
             },
           }}
-          autoplay={{ delay: 2000 }}
+          // autoplay={{ delay: 2000 }}
           loop={true}
           direction={getDirection()}
           onResize={(swiper) => {

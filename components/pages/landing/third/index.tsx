@@ -10,7 +10,6 @@ import RightSection from "./RightSection";
 export default function ThirdSection({ data }: any) {
   const { ref, inView } = useInView({ threshold: 0.8 });
   const [project, setProject] = useState<any>();
-
   const selectProject = (id: number) => {
     const selectedProject = data.find((project: any) => project.id === id);
     setProject(selectedProject);
