@@ -1,17 +1,48 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.footer`
+  margin-top: 1rem;
   background: ${(p) => p.theme.footerBgColor};
-  color: #ffffff;
-`;
-
-export const FooterStyled = styled.footer`
-  width: 100%;
-  height: 100%;
-  max-width: ${(p) => p.theme.sizes.desktop};
-  margin: 0 auto;
-  padding: 2rem 1rem;
+  color: ${(p) => p.theme.textColor};
+  padding: 4rem 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const Contents = styled.div`
+  max-width: ${(p) => p.theme.sizes.desktop};
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20vw;
+`;
+
+export const IconBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1.5rem;
+`;
+
+export const ColumnBox = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12.5vw;
+  flex-wrap: wrap;
+`;
+
+export const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  a {
+    color: ${(p) => p.theme.textColor};
+  }
+`;
+
+export const Title = styled.h3`
+  font-size: 1.2rem;
 `;
