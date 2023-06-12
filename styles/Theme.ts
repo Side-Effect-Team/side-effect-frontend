@@ -70,7 +70,7 @@ export const lightTheme = {
   componentBgColor: "#ffffff",
   hover: "#eaecf0",
   textColor: "#000000",
-  footerBgColor: "#1867B6",
+  footerBgColor: "#d9d9d9",
   alarmDefaultColor: "#CDDEFF",
   grayToDark: "#d9d9d9",
   cardBoxShadow: "none",
