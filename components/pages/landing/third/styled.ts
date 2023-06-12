@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { media } from "@/styles/mediatest";
-export const SecondSectionContainer = styled.div`
+export const ThirdSectionContainer = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
   gap: 20px;
-  ${media.mobile} {
+  ${media.custom(640)} {
     flex-direction: column;
   }
 `;

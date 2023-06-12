@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Image from "next/image";
 import { media } from "@/styles/mediatest";
 export const ImageWrapper = styled.div`
-  flex: 4;
+  flex: 5;
   position: relative;
   height: 100%;
   width: 100%;
