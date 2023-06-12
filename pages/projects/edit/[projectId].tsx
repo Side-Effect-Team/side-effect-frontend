@@ -22,7 +22,7 @@ import {
 } from "@/postComps/common/PostForm.styled";
 import Button from "@/components/Button";
 import Image from "next/image";
-import { POST_FORM } from "@/pages/post/recruit";
+import { POST_FORM } from "@/pages/post/project";
 
 interface EditProjectPageProps {
   project: ProjectType;
@@ -38,6 +38,7 @@ export default function EditProjectPage({ project }: EditProjectPageProps) {
         projectName: project.projectName,
         title: project.title,
         content: project.content,
+        projectSubTitle: project.subTitle,
       },
       validate: (postForm: typeof POST_FORM) => {
         const newErrorMsgs = { ...POST_FORM };
@@ -63,7 +64,6 @@ export default function EditProjectPage({ project }: EditProjectPageProps) {
         const patchData = {
           ...project,
           ...postForm,
-          imgSrc: null, // 이미지 사용 불가하여 null 대체
           projectUrl,
         };
 
@@ -99,6 +99,23 @@ export default function EditProjectPage({ project }: EditProjectPageProps) {
         <form onSubmit={handleSubmit}>
           <InputBox>
             <GuideWrapper>
+              <LabelForm htmlFor="title">게시글 제목</LabelForm>
+              <p>제목에 핵심 내용을 드러내보세요</p>
+            </GuideWrapper>
+            <InputForm
+              type="text"
+              id="title"
+              name="title"
+              value={postForm.title}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            {touched.title && errMsgs.title && (
+              <ErrorMsg>{errMsgs.title}</ErrorMsg>
+            )}
+          </InputBox>
+          <InputBox>
+            <GuideWrapper>
               <LabelForm htmlFor="projectName">프로젝트명</LabelForm>
               <p>멋진 프로젝트 이름을 정해보세요</p>
             </GuideWrapper>
@@ -117,19 +134,22 @@ export default function EditProjectPage({ project }: EditProjectPageProps) {
           </InputBox>
           <InputBox>
             <GuideWrapper>
-              <LabelForm htmlFor="title">게시글 제목</LabelForm>
-              <p>제목에 핵심 내용을 드러내보세요</p>
+              <LabelForm htmlFor="projectSubTitle">
+                프로젝트 한 줄 소개
+              </LabelForm>
+              <p>프로젝트를 한 줄로 요약해보세요</p>
             </GuideWrapper>
             <InputForm
               type="text"
-              id="title"
-              name="title"
-              value={postForm.title}
+              id="projectSubTitle"
+              name="projectSubTitle"
+              value={postForm.projectSubTitle}
               onChange={handleChange}
               onBlur={handleBlur}
+              placeholder="3~30자 이내로 입력해주세요"
             />
-            {touched.title && errMsgs.title && (
-              <ErrorMsg>{errMsgs.title}</ErrorMsg>
+            {touched.projectSubTitle && errMsgs.projectSubTitle && (
+              <ErrorMsg>{errMsgs.projectSubTitle}</ErrorMsg>
             )}
           </InputBox>
           <ProjectUrlBox
@@ -189,7 +209,6 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
       },
     };
   } catch (err) {
-    console.log(err);
     return { notFound: true };
   }
 }

@@ -6,10 +6,16 @@ import {
   FocusEventHandler,
   FormEvent,
 } from "react";
-import { POST_FORM } from "@/pages/post/project";
+
+interface PostFormType {
+  projectName: string;
+  title: string;
+  content: string;
+  projectSubTitle?: string;
+}
 
 interface UseFormProps {
-  initialVals: typeof POST_FORM;
+  initialVals: PostFormType;
   validate: Function;
   onSubmit: Function;
 }
@@ -22,7 +28,7 @@ export const useForm = ({ initialVals, validate, onSubmit }: UseFormProps) => {
   }
   // form data, 에러 메시지, 입력이 발생한 필드
   const [postForm, setPostForm] = useState({ ...initialVals });
-  const [errMsgs, setErrMsgs] = useState({ ...initialVals }); // FIXME 나중에 데이터 추가 후 수정
+  const [errMsgs, setErrMsgs] = useState({ ...initialVals });
   const [touched, setTouched] = useState({ ...initialTouched });
 
   const handleChange = (
@@ -39,7 +45,8 @@ export const useForm = ({ initialVals, validate, onSubmit }: UseFormProps) => {
     });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
     const newTouched = { ...initialTouched };
     for (const key in newTouched) {
       // @ts-ignore
