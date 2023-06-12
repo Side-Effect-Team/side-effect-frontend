@@ -1,8 +1,8 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   Wrapper,
   HeaderStyled,
-  Logo,
   NavStyled,
   BoxStyled,
   ButtonBox,
@@ -30,9 +30,15 @@ export default function GlobalNavBar({
   return (
     <Wrapper>
       <HeaderStyled>
-        <Logo>
-          <Link href="/">사이드이펙트</Link>
-        </Logo>
+        <Link href="/">
+          <Image
+            src="./images/mainLogo.svg"
+            alt="사이드이펙트 로고"
+            width={100}
+            height={50}
+            priority
+          />
+        </Link>
         <NavStyled>
           {BOARD_LIST.map((board) => (
             <Link key={board.ID} href={board.LINK}>
