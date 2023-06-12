@@ -1,6 +1,6 @@
 import { useTheme } from "styled-components";
 import { SectionContainer } from "../styled";
-import LandingFirst from "../../../../public/images/landingFirst.svg";
+import Landing1 from "../../../../public/images/landing1.svg";
 import Scroll from "../../../../public/images/scroll.svg";
 import FlowBox from "@/components/FlowBox";
 import { Container, LandingImgWrapper, ScrollWrapper, Wrapper } from "./styled";
@@ -13,7 +13,7 @@ export default function FirstSection() {
       <Container>
         <Wrapper>
           <LandingImgWrapper>
-            <LandingFirst fill={theme.textColor} />
+            <Landing1 fill={theme.textColor} />
           </LandingImgWrapper>
           <ScrollWrapper>
             <Scroll fill={theme.textColor} />
