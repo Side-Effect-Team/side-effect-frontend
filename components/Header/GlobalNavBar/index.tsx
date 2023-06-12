@@ -1,8 +1,8 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   Wrapper,
   HeaderStyled,
-  Logo,
   NavStyled,
   BoxStyled,
   ButtonBox,
@@ -34,9 +34,6 @@ export default function GlobalNavBar({
   return (
     <Wrapper>
       <HeaderStyled>
-        {/* <Logo>
-          <Link href="/">사이드이펙트</Link>
-        </Logo> */}
         <Link href="/">
           <IconWrapper>
             <MainLogo fill={theme.textColor} height="100%" />
