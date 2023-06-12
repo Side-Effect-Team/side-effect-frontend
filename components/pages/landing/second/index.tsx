@@ -3,12 +3,12 @@ import { SectionContainer } from "../styled";
 import { useInView } from "react-intersection-observer";
 import { MainText, SubText, SubWrapper, Wrapper } from "./styled";
 export default function SecondSection() {
-  const { ref, inView } = useInView({ threshold: 0.5 });
+  const { ref, inView } = useInView({ threshold: 0.6 });
 
   return (
     <SectionContainer ref={ref}>
-      <Wrapper>
-        <MainText style={{ display: inView ? "block" : "none" }}>
+      <Wrapper style={{ display: inView ? "flex" : "none" }}>
+        <MainText>
           사이드이펙트에서
           <br /> 프로젝트 모집부터 결과물까지 <br />
           한번에 관리해보세요!

@@ -12,7 +12,7 @@ import {
 } from "./styled";
 
 export default function FourthSection() {
-  const { ref, inView } = useInView({ threshold: 0.8 });
+  const { ref, inView } = useInView({ threshold: 0.6 });
   return (
     <SectionContainer ref={ref}>
       <Container style={{ display: inView ? "flex" : "none" }}>

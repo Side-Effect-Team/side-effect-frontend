@@ -14,7 +14,7 @@ export const Wrapper = styled.div`
   background: ${(p) => p.theme.mainBackGround};
   height: ${(p) => p.theme.height.header};
   transition: all 0.3s;
-  border-bottom: 1.5px solid ${(p) => p.theme.grayToDark};
+  box-shadow: 0 8px 8px -12px black;
 `;
 
 export const HeaderStyled = styled.header`

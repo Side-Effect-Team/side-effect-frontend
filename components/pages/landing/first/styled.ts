@@ -7,6 +7,7 @@ export const Container = styled.div`
 `;
 export const Wrapper = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -15,6 +16,7 @@ export const Wrapper = styled.div`
   overflow: hidden;
   ${media.mobile} {
     height: calc(100vh - 75px - 47px); // 헤더, 플로우박스 높이 제외
+    gap: 10vh;
   }
 `;
 export const LandingImgWrapper = styled.div`
@@ -22,5 +24,19 @@ export const LandingImgWrapper = styled.div`
   max-width: 1200px;
   ${media.mobile} {
     width: 90vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+`;
+export const ScrollWrapper = styled.div`
+  ${media.mobile} {
+    width: 20vw;
+    max-width: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 `;

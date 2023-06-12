@@ -5,6 +5,7 @@ import BatchCarousel from "@/components/Carousel/BatchCarousel";
 import FirstSection from "@/components/pages/landing/first";
 import SecondSection from "@/components/pages/landing/second";
 import ThirdSection from "@/components/pages/landing/third";
+import FourthSection from "@/components/pages/landing/fourth";
 export default function HomePage() {
   window.sessionStorage.removeItem("activeTab");
   return (
@@ -27,6 +28,7 @@ export default function HomePage() {
       <FirstSection />
       <SecondSection />
       <ThirdSection />
+      <FourthSection />
     </>
   );
 }

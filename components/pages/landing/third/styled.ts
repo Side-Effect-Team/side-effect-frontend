@@ -51,15 +51,17 @@ export const TextWrapper = styled.div`
   animation: ${slideAnimationText} 1s ease-out;
 
   ${media.mobile} {
-    width: 100%;
+    width: auto;
   }
 `;
 export const ColorText = styled.div`
   font-size: 25px;
   color: ${(p) => p.theme.brandColor.primary};
-  margin-bottom: 20px;
+  margin-bottom: 18px;
+  font-weight: bold;
   ${media.mobile} {
-    font-size: 15px;
+    font-size: 20px;
+    margin-bottom: 10px;
   }
 `;
 export const MainText = styled.div`

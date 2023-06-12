@@ -1,9 +1,19 @@
 import styled, { keyframes } from "styled-components";
 import { media } from "@/styles/mediatest";
 
-const slideAnimation = keyframes`
+const slideAnimationMain = keyframes`
   0% {
-    transform: translateY(30%);
+    transform: translateY(20%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+`;
+const slideAnimationSub = keyframes`
+  0% {
+    transform: translateY(10%);
     opacity: 0;
   }
   100% {
@@ -19,7 +29,7 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   position: relative;
   padding: 7vh 0;
-  background-image: url("/images/landingSecond.svg");
+  background-image: url("/images/landing2.svg");
   background-repeat: no-repeat;
   background-size: contain;
   background-position-x: right;
@@ -36,7 +46,7 @@ export const MainText = styled.div`
   line-height: 130%;
   -webkit-text-stroke: 1px ${(p) => p.theme.textColor};
   margin-bottom: 13vh;
-  animation: ${slideAnimation} 1s ease-out;
+  animation: ${slideAnimationMain} 1s ease-out;
   ${media.mobile} {
     font-size: 25px;
     font-weight: 500;
@@ -49,12 +59,14 @@ export const SubWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
+  animation: ${slideAnimationSub} 1s ease-out;
 `;
 export const SubText = styled.div`
   font-size: 22px;
   color: ${(p) => p.theme.colors.darkGray};
   text-align: center;
   line-height: 150%;
+
   ${media.mobile} {
     font-size: 15px;
     line-height: 150%;

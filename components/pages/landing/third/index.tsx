@@ -11,7 +11,7 @@ import {
 import Landing3 from "../../../../public/images/landing3.svg";
 
 export default function ThirdSection() {
-  const { ref, inView } = useInView({ threshold: 0.8 });
+  const { ref, inView } = useInView({ threshold: 0.6 });
   return (
     <SectionContainer ref={ref}>
       <Container style={{ display: inView ? "flex" : "none" }}>
