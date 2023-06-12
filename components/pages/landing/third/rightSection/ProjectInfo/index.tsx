@@ -1,7 +1,6 @@
 import { ProjectInfoWrapper, ProjectTitle } from "./styled";
 export default function ProjectInfo({ selectedData }: any) {
   const { title, subTitle, likeNum } = selectedData;
-  console.log(subTitle);
   return (
     <ProjectInfoWrapper>
       <ProjectTitle>

@@ -5,13 +5,16 @@ export const ThirdSectionContainer = styled.div`
   width: 100%;
   height: 100%;
   gap: 20px;
+  padding: 20px 0px;
   ${media.custom(640)} {
     flex-direction: column;
   }
 `;
-export const Title = styled.h2`
+export const Title = styled.div`
   text-align: start;
   width: 100%;
   font-size: xx-large;
-  padding: 20px 0px;
+  font-weight: bolder;
+  padding: 10px 0;
+  color: ${(p) => p.theme.colors.primary};
 `;

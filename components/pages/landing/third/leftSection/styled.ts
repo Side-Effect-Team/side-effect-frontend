@@ -25,5 +25,5 @@ export const StyledImage = styled(Image)`
   height: 100%;
   border-radius: 15px;
 
-  animation: ${slideUp} 0.3s ease-in;
+  animation: ${slideUp} 0.3s ease-in-out;
 `;

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Image from "next/image";
 import { media } from "@/styles/mediatest";
+
 export const RightSectionWrapper = styled.div`
   flex: 5;
   border-radius: 15px;
@@ -19,6 +20,9 @@ export const StyledImage = styled(Image)`
   height: 100%;
 `;
 export const SwiperContainer = styled.div`
+  .clicked {
+    border: 6px solid ${(p) => p.theme.textColor};
+  }
   .swiper {
     width: 100%;
     height: 100%;

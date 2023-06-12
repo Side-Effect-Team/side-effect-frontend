@@ -17,8 +17,8 @@ export default function ThirdSection({ data }: any) {
   const selectedImage = project ? project.imgUrl : data[0].imgUrl;
   const selectedData = project ? project : data[0];
   return (
-    <SectionContainer ref={ref}>
-      {/* <Title>TOP RANKED PROJECTS</Title> */}
+    <SectionContainer>
+      <Title>TOP RANKED PROJECTS</Title>
       <ThirdSectionContainer>
         <LeftSection selectedImage={selectedImage} />
         <RightSection
