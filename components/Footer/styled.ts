@@ -1,4 +1,8 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+
+interface GithubIconProps {
+  isDark: boolean;
+}
 
 export const Wrapper = styled.footer`
   background: ${(p) => p.theme.footerBgColor};
@@ -15,6 +19,21 @@ export const Contents = styled.div`
   align-items: center;
   flex-wrap: wrap;
   gap: 20vw;
+`;
+
+export const GithubIcon = styled.div<GithubIconProps>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ${(p) =>
+    p.isDark &&
+    css`
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: ${(p) => p.theme.textColor};
+    `}
 `;
 
 export const IconBox = styled.div`

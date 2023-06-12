@@ -1,10 +1,21 @@
 import Image from "next/image";
 import Link from "next/link";
 import { BsGithub } from "react-icons/bs";
+import { useAppSelector } from "@/store/hooks";
 
-import { Wrapper, Contents, IconBox, ColumnBox, Title, Column } from "./styled";
+import {
+  Wrapper,
+  Contents,
+  GithubIcon,
+  IconBox,
+  ColumnBox,
+  Title,
+  Column,
+} from "./styled";
 
 export default function Footer() {
+  const { isDark } = useAppSelector((state) => state.darkMode);
+
   return (
     <Wrapper>
       <Contents>
@@ -18,9 +29,11 @@ export default function Footer() {
               priority
             />
           </Link>
-          <Link href="https://github.com/Side-Effect-Team">
-            <BsGithub size={50} />
-          </Link>
+          <GithubIcon isDark={isDark}>
+            <Link href="https://github.com/Side-Effect-Team">
+              <BsGithub size={50} />
+            </Link>
+          </GithubIcon>
         </IconBox>
         <ColumnBox>
           <Column>
