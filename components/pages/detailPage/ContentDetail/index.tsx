@@ -9,6 +9,7 @@ import {
   TagContainer,
   ProjectTitle,
   ProjectTitleBox,
+  ProjectSubTitleBox,
 } from "@/detailComps/ContentDetail/styled";
 import { TagWrapper } from "@/postComps/TagBox/styled";
 
@@ -18,6 +19,7 @@ interface ContentDetailProps {
   tags?: TagType[];
   projectUrl?: string;
   imgSrc: string;
+  subTitle?: string;
 }
 
 export default function ContentDetail({
@@ -26,6 +28,7 @@ export default function ContentDetail({
   tags,
   projectUrl,
   imgSrc,
+  subTitle,
 }: ContentDetailProps) {
   return (
     <Wrapper>
@@ -43,9 +46,7 @@ export default function ContentDetail({
       )}
       <StyledHeader>프로젝트 소개</StyledHeader>
       <ProjectTitleBox>
-        <div>
-          <h4>프로젝트명</h4>
-        </div>
+        <h4>프로젝트명</h4>
         <Column />
         <div>
           {tags ? (
@@ -57,6 +58,13 @@ export default function ContentDetail({
           )}
         </div>
       </ProjectTitleBox>
+      {subTitle && (
+        <ProjectTitleBox>
+          <ProjectSubTitleBox>한 줄 소개</ProjectSubTitleBox>
+          <Column />
+          <p>{subTitle}</p>
+        </ProjectTitleBox>
+      )}
       <h4>상세 내용</h4>
       <div>
         {tags ? (

@@ -38,6 +38,7 @@ export default function ProjectDetailPage({
       likeNum,
       projectName,
       projectUrl,
+      subTitle,
       title,
       userId,
       views,
@@ -60,6 +61,7 @@ export default function ProjectDetailPage({
             content={content}
             projectUrl={projectUrl}
             imgSrc={imgUrl}
+            subTitle={subTitle}
           />
           <CommentBox boardId={id} comments={comments} />
         </Contents>

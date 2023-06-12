@@ -24,9 +24,10 @@ export default function ProjectUrlBox({
         type="url"
         id="projectUrl"
         name="projectUrl"
-        placeholder="전체 URL 주소를 입력해주세요"
+        placeholder="https로 시작하는 전체 URL 주소를 입력해주세요"
         value={projectUrl}
         onChange={(e) => setProjectUrl(e.target.value)}
+        required
       />
     </InputBox>
   );
