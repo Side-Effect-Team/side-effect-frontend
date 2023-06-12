@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.footer`
-  margin-top: 1rem;
   background: ${(p) => p.theme.footerBgColor};
   color: ${(p) => p.theme.textColor};
   padding: 4rem 1rem;
