@@ -23,7 +23,6 @@ export default function FifthSection({ data }: BestProjectType) {
   const selectedImage = project ? project.imgUrl : data[0].imgUrl;
   const selectedData = project ? project : data[0];
   const selectedId = project ? project.id : data[0].id;
-  console.log(project);
   return (
     <SectionContainer>
       <FifthSectionContainer>
