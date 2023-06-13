@@ -13,22 +13,14 @@ export default function ProjectInfo({ selectedData }: any) {
   return (
     <ProjectInfoWrapper>
       <ProjectTitle>
-        <Title>
-          {title}ㅁㅈㅇㅁㅈㅇㅁㅈㅇㅁㅈㅇㅁ ㅁㅈㅇㅁㅈㅇㅁㅈㅇㅁㅈㅇㅁㅈㅇㅁㅈㅇ
-        </Title>
+        <Title>{title}</Title>
         <Heart>
           <HeartIcon />
           {likeNum}
         </Heart>
       </ProjectTitle>
       <ProjectSubTitle>{subTitle}</ProjectSubTitle>
-      <ProjectContent>
-        {content}ㅏㅜ라ㅣ머ㅜㄴ랑ㅁ너ㅜ랴ㅏㅁ너ㅠ랴ㅐㅁ너ㅠ
-        ㅏㅜ라ㅣ머ㅜㄴ랑ㅁ너ㅜ랴ㅏㅁ너ㅠ랴ㅐㅁ너ㅠㅏㅜ라ㅣ머ㅜㄴ랑ㅁ너ㅜ랴ㅏㅁ너ㅠ랴ㅐㅁ너ㅠ
-        ㅏㅜ라ㅣ머ㅜㄴ랑ㅁ너ㅜ랴ㅏㅁ너ㅠ랴ㅐㅁ너ㅠㅏㅜ라ㅣ머ㅜㄴ랑ㅁ너ㅜ랴ㅏㅁ너ㅠ랴ㅐㅁ너ㅠ
-        ㅏㅜ라ㅣ머ㅜㄴ랑ㅁ너ㅜ랴ㅏㅁ너ㅠ랴ㅐㅁ너ㅠ
-        ㅏㅜ라ㅣ머ㅜㄴ랑ㅁ너ㅜ랴ㅏㅁ너ㅠ랴ㅐㅁ너ㅠ
-      </ProjectContent>
+      <ProjectContent>{content}</ProjectContent>
     </ProjectInfoWrapper>
   );
 }
