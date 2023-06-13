@@ -11,6 +11,7 @@ import {
   ProjectTitle,
   ProjectTitleBox,
   ImageContainer,
+  DescriptionText,
 } from "@/detailComps/ContentDetail/styled";
 import { TagWrapper } from "@/postComps/TagBox/styled";
 import resizeElementHeight from "utils/resizeElementHeight";
@@ -82,7 +83,12 @@ export default function ContentDetail({
         </ImageContainer>
       )}
       <Description>
-        <textarea ref={textAreaRef} readOnly value={content} />
+        <DescriptionText
+          ref={textAreaRef}
+          readOnly
+          value={content}
+          wrap="virtual"
+        />
       </Description>
       <hr />
     </Wrapper>

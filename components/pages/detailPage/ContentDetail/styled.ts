@@ -54,3 +54,7 @@ export const ImageContainer = styled.div`
   max-height: 350px;
   margin-bottom: 1rem;
 `;
+
+export const DescriptionText = styled.textarea`
+  width: 100%;
+`;
