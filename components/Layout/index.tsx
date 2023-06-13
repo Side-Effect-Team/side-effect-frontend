@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { ThemeProvider } from "styled-components";
-import { Wrapper, MobileNavBar, MobileMenuItem } from "./styled";
+import { Wrapper } from "./styled";
 import GlobalStyles from "styles/Global";
 import { darkTheme, lightTheme } from "styles/Theme";
 import { sizes } from "styles/media";
@@ -12,22 +11,16 @@ import Toast from "../Toast";
 import ScrollToTop from "../ScrollToTop";
 import Head from "next/head";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { openModal } from "store/modalSlice";
 import { removeAuthentication } from "store/authSlice";
+import MobileHeader from "../Header/MobileHeader";
 
-interface PropType {
+interface LayoutProps {
   children: React.ReactNode;
 }
 
-interface MobileMenuProps {
-  hide: boolean;
-  logout: () => void;
-  handleClick: () => void;
-}
-
-export default function Layout({ children }: PropType) {
+export default function Layout({ children }: LayoutProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
-  const [isMounted, setIsMounted] = useState(false);
+  const [isMounted, setIsMounted] = useState<boolean>(false);
   const { isDark } = useAppSelector((state) => state.darkMode);
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -79,7 +72,7 @@ export default function Layout({ children }: PropType) {
       <GlobalNavBar logout={logout} handleMobileMenu={handleMobileMenu} />
       <ScrollToTop />
       <Toast />
-      <MobileMenu
+      <MobileHeader
         hide={!mobileMenuOpen}
         logout={mobileLogout}
         handleClick={handleMobileMenu}
@@ -87,32 +80,5 @@ export default function Layout({ children }: PropType) {
       <Wrapper mobileMenuOpen={mobileMenuOpen}>{children}</Wrapper>
       <Footer />
     </ThemeProvider>
-  );
-}
-
-function MobileMenu({ hide, logout, handleClick }: MobileMenuProps) {
-  const dispatch = useAppDispatch();
-  const { token } = useAppSelector((state) => state.auth);
-
-  return (
-    <MobileNavBar hide={hide}>
-      <MobileMenuItem onClick={handleClick}>
-        <Link href="/projects">프로젝트 자랑 게시판</Link>
-      </MobileMenuItem>
-      <MobileMenuItem onClick={handleClick}>
-        <Link href="/recruits">팀원 모집 게시판</Link>
-      </MobileMenuItem>
-      {token ? (
-        <MobileMenuItem onClick={logout}>
-          <Link href="/">로그아웃</Link>
-        </MobileMenuItem>
-      ) : (
-        <MobileMenuItem
-          onClick={() => dispatch(openModal({ modalType: "LoginModal" }))}
-        >
-          로그인
-        </MobileMenuItem>
-      )}
-    </MobileNavBar>
   );
 }
