@@ -34,7 +34,6 @@ export default function ManageTeamModal() {
   const {
     data = { applicantNum: {}, applicants: [] },
     isLoading,
-    isSuccess,
   } = useGetApplicantData(value, positionValue);
   const { applicants, applicantNum } = data;
   console.log(data);

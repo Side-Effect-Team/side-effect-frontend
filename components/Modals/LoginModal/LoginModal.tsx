@@ -17,7 +17,6 @@ export default function LoginModal() {
   const dispatch = useAppDispatch();
   const { isOpen, modalType } = useAppSelector((state) => state.modal);
   const { modalView } = useAppSelector((state) => state.loginView);
-  const { token } = useAppSelector((state) => state.auth);
   const handleModalClose = () => {
     dispatch(closeModal());
   };

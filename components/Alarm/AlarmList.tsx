@@ -1,4 +1,4 @@
-import { Dispatch, MouseEvent, SetStateAction, useEffect, useRef } from "react";
+import { Dispatch, MouseEvent, SetStateAction } from "react";
 import {
   CloseButton,
   Container,
