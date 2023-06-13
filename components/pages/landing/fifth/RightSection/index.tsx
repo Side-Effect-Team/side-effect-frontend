@@ -1,7 +1,7 @@
 import { RightSectionWrapper, SwiperContainer } from "./styled";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Image from "next/image";
-import { Autoplay, Navigation } from "swiper";
+import { Autoplay, Mousewheel, Navigation } from "swiper";
 import ProjectInfo from "./ProjectInfo";
 import { useState } from "react";
 export default function RightSection({
@@ -20,7 +20,8 @@ export default function RightSection({
       <ProjectInfo selectedData={selectedData} />
       <SwiperContainer>
         <Swiper
-          modules={[Autoplay]}
+          modules={[Autoplay, Mousewheel]}
+          mousewheel={true}
           effect={"slide"}
           breakpoints={{
             0: {
@@ -34,12 +35,12 @@ export default function RightSection({
               spaceBetween: 30,
             },
           }}
-          autoplay={{ delay: 2000 }}
           loop={true}
           direction={getDirection()}
           onResize={(swiper) => {
             swiper.changeDirection(getDirection());
           }}
+          autoplay={{ delay: 2000 }}
           onClick={(swiper) => {
             const clickedSlide = swiper.clickedSlide;
             if (clickedSlide) {
@@ -50,23 +51,21 @@ export default function RightSection({
             return;
           }}
         >
-          {data.map((project: any, index: number) => {
+          {data.map((project: any) => {
             return (
               <SwiperSlide
                 key={project.id}
                 className={project.id === activeSlide ? "clicked" : ""}
                 project-id={project.id}
                 onClick={() => {
-                  console.log("index", index);
-
                   selectProject(project.id);
                 }}
               >
                 <Image
                   src={`${process.env.NEXT_PUBLIC_API_URL}/free-boards/image/${project.imgUrl}`}
                   alt="이달의 베스트 프로젝트"
-                  layout="fill"
-                  objectFit="cover"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
               </SwiperSlide>
             );

@@ -1,14 +1,11 @@
 import styled from "styled-components";
 import { media } from "@/styles/mediatest";
-export const ThirdSectionContainer = styled.div`
+export const FifthSectionContainer = styled.div`
   display: flex;
-  width: 100%;
   height: 100%;
-  gap: 20px;
-  padding: 20px 0px;
-  ${media.custom(640)} {
-    flex-direction: column;
-  }
+  max-width: ${(p) => p.theme.sizes.desktop};
+  width: 100%;
+  flex-direction: column;
 `;
 export const Title = styled.div`
   text-align: start;
@@ -17,4 +14,11 @@ export const Title = styled.div`
   font-weight: bolder;
   padding: 10px 0;
   color: ${(p) => p.theme.colors.primary};
+`;
+export const SectionWrapper = styled.div`
+  display: flex;
+  height: 100%;
+  ${media.mobile} {
+    flex-direction: column;
+  }
 `;

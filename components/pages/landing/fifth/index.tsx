@@ -1,14 +1,12 @@
 import { SectionContainer } from "../styled";
-import { ThirdSectionContainer, Title } from "./styled";
-import { useInView } from "react-intersection-observer";
+import { FifthSectionContainer, Title, SectionWrapper } from "./styled";
 import { useState } from "react";
 import "swiper/css";
 import "swiper/swiper.min.css";
 import "swiper/css/navigation";
 import LeftSection from "./LeftSection";
 import RightSection from "./RightSection";
-export default function ThirdSection({ data }: any) {
-  const { ref, inView } = useInView({ threshold: 0.8 });
+export default function FifthSection({ data }: any) {
   const [project, setProject] = useState<any>();
   const selectProject = (id: number) => {
     const selectedProject = data.find((project: any) => project.id === id);
@@ -18,15 +16,17 @@ export default function ThirdSection({ data }: any) {
   const selectedData = project ? project : data[0];
   return (
     <SectionContainer>
-      <Title>TOP RANKED PROJECTS</Title>
-      <ThirdSectionContainer>
-        <LeftSection selectedImage={selectedImage} />
-        <RightSection
-          data={data}
-          selectProject={selectProject}
-          selectedData={selectedData}
-        />
-      </ThirdSectionContainer>
+      <FifthSectionContainer>
+        <Title>TOP RANKED PROJECTS</Title>
+        <SectionWrapper>
+          <LeftSection selectedImage={selectedImage} />
+          <RightSection
+            data={data}
+            selectProject={selectProject}
+            selectedData={selectedData}
+          />
+        </SectionWrapper>
+      </FifthSectionContainer>
     </SectionContainer>
   );
 }

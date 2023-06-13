@@ -6,16 +6,16 @@ export const RightSectionWrapper = styled.div`
   flex: 5;
   border-radius: 15px;
   display: flex;
-  background-color: #e6effe;
+  background-color: ${(p) => p.theme.componentBgColor};
   padding: 20px;
   overflow: hidden;
+  height: 100%;
   ${media.mobile} {
     flex-direction: column;
   }
 `;
 export const StyledImage = styled(Image)`
   object-fit: cover;
-  display: block;
   width: 100%;
   height: 100%;
 `;
@@ -23,6 +23,7 @@ export const SwiperContainer = styled.div`
   .clicked {
     border: 6px solid ${(p) => p.theme.textColor};
   }
+
   .swiper {
     width: 100%;
     height: 100%;
@@ -30,6 +31,8 @@ export const SwiperContainer = styled.div`
   .swiper-slide {
     cursor: pointer;
     overflow: hidden;
+    position: relative;
+
     min-width: 200px;
     max-width: 200px;
     min-height: 200px;

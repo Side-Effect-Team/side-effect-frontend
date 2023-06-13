@@ -1,5 +1,6 @@
 import styled, { keyframes } from "styled-components";
 import Image from "next/image";
+import { media } from "@/styles/mediatest";
 const slideUp = keyframes`
   0%{
     opacity: 0;
@@ -18,6 +19,7 @@ export const ImageWrapper = styled.div`
   width: 100%;
   overflow: hidden;
   border-radius: 15px;
+  border: 1px solid black;
 `;
 export const StyledImage = styled(Image)`
   object-fit: cover;
