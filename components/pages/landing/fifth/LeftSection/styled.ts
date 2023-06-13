@@ -1,6 +1,6 @@
 import styled, { keyframes } from "styled-components";
+import Link from "next/link";
 import Image from "next/image";
-import { media } from "@/styles/mediatest";
 const slideUp = keyframes`
   0%{
     opacity: 0;
@@ -12,13 +12,14 @@ const slideUp = keyframes`
 
   }
 `;
-export const ImageWrapper = styled.div`
+export const ImageWrapper = styled(Link)`
   flex: 5;
   position: relative;
   height: 100%;
   width: 100%;
   overflow: hidden;
   border-radius: 15px;
+  cursor: pointer;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 `;

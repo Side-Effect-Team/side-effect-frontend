@@ -14,12 +14,14 @@ export default function FifthSection({ data }: any) {
   };
   const selectedImage = project ? project.imgUrl : data[0].imgUrl;
   const selectedData = project ? project : data[0];
+  const selectedId = project ? project.id : data[0].id;
+  console.log(project);
   return (
     <SectionContainer>
       <FifthSectionContainer>
         <Title>이달의 베스트 프로젝트</Title>
         <SectionWrapper>
-          <LeftSection selectedImage={selectedImage} />
+          <LeftSection selectedImage={selectedImage} id={selectedId} />
           <RightSection
             data={data}
             selectProject={selectProject}

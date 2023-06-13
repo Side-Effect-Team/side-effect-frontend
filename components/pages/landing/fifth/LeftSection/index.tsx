@@ -1,13 +1,13 @@
 import { ImageWrapper, StyledImage } from "./styled";
-import TestImg from "../../../../../public/images/ProjectBackground.png";
-import { motion } from "framer-motion";
 export default function LeftSection({
   selectedImage,
+  id,
 }: {
   selectedImage: string;
+  id: number;
 }) {
   return (
-    <ImageWrapper>
+    <ImageWrapper href={`projects/${id}`}>
       <StyledImage
         key={selectedImage}
         src={`${process.env.NEXT_PUBLIC_API_URL}/free-boards/image/${selectedImage}`}
