@@ -44,9 +44,7 @@ export default function ContentDetail({
       )}
       <StyledHeader>프로젝트 소개</StyledHeader>
       <ProjectTitleBox>
-        <div>
-          <h4>프로젝트명</h4>
-        </div>
+        <h4>프로젝트명</h4>
         <Column />
         <div>
           {tags ? (
@@ -59,20 +57,8 @@ export default function ContentDetail({
         </div>
       </ProjectTitleBox>
       <h4>상세 내용</h4>
-      <ImageContainer>
-        {tags ? (
-          <Image
-            src={
-              imgSrc
-                ? `${process.env.NEXT_PUBLIC_API_URL}/recruit-board/image/${imgSrc}`
-                : "/images/BoardDefaultBackground.png"
-            }
-            alt="프로젝트 사진"
-            style={{ objectFit: "contain" }}
-            fill
-            priority
-          />
-        ) : (
+      {tags && (
+        <ImageContainer>
           <Image
             src={
               imgSrc
@@ -84,8 +70,8 @@ export default function ContentDetail({
             fill
             priority
           />
-        )}
-      </ImageContainer>
+        </ImageContainer>
+      )}
       <Description>
         <textarea readOnly value={content} />
       </Description>
