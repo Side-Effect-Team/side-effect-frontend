@@ -154,6 +154,11 @@ export const Title = styled.div`
 
 export const Contents = styled.div`
   font-size: 14px;
+  width: calc(100% - 100px);
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 `;
 export const Date = styled.div`
   font-size: 14px;
