@@ -1,4 +1,5 @@
 import { ImageWrapper, StyledImage } from "./styled";
+import { useInView } from "react-intersection-observer";
 export default function LeftSection({
   selectedImage,
   id,
@@ -6,8 +7,9 @@ export default function LeftSection({
   selectedImage: string;
   id: number;
 }) {
+  const { ref, inView } = useInView();
   return (
-    <ImageWrapper href={`projects/${id}`}>
+    <ImageWrapper href={`projects/${id}`} ref={ref} inView={inView}>
       <StyledImage
         key={selectedImage}
         src={`${process.env.NEXT_PUBLIC_API_URL}/free-boards/image/${selectedImage}`}

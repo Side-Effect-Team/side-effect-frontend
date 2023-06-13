@@ -1,8 +1,8 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Image from "next/image";
 import { media } from "@/styles/mediatest";
 
-export const RightSectionWrapper = styled.div`
+export const RightSectionWrapper = styled.div<{ inView: boolean }>`
   flex: 5;
   border-radius: 15px;
   display: flex;
@@ -14,6 +14,8 @@ export const RightSectionWrapper = styled.div`
   background-color: ${(p) => p.theme.componentBgColor};
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  transform: ${(p) => (p.inView ? "translateX(0%)" : "translateX(100%)")};
+  transition: 0.5s ease;
   ${media.mobile} {
     flex-direction: column;
   }

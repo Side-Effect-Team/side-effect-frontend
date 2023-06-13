@@ -12,7 +12,7 @@ const slideUp = keyframes`
 
   }
 `;
-export const ImageWrapper = styled(Link)`
+export const ImageWrapper = styled(Link)<{ inView: boolean }>`
   flex: 5;
   position: relative;
   height: 100%;
@@ -22,6 +22,8 @@ export const ImageWrapper = styled(Link)`
   cursor: pointer;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  transform: ${(p) => (p.inView ? "translatex(0%)" : "translatex(-100%)")};
+  transition: all 0.5s;
 `;
 export const StyledImage = styled(Image)`
   object-fit: cover;

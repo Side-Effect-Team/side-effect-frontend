@@ -5,6 +5,7 @@ import { Autoplay, Mousewheel } from "swiper";
 import ProjectInfo from "./ProjectInfo";
 import { useState } from "react";
 import { BestProjectDataType } from "@/pages/index";
+import { useInView } from "react-intersection-observer";
 interface PropsType {
   data: BestProjectDataType[];
   selectProject: (id: number) => void;
@@ -16,13 +17,14 @@ export default function RightSection({
   selectedData,
 }: PropsType) {
   const [activeSlide, setActiveSlide] = useState(0);
+  const { ref, inView } = useInView();
   const getDirection = () => {
     const windowWidth = window.innerWidth;
     const direction = windowWidth <= 768 ? "horizontal" : "vertical";
     return direction;
   };
   return (
-    <RightSectionWrapper>
+    <RightSectionWrapper ref={ref} inView={inView}>
       <ProjectInfo selectedData={selectedData} />
       <SwiperContainer>
         <Swiper
