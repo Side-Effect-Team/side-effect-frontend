@@ -1,7 +1,7 @@
 import styled, { keyframes } from "styled-components";
 import Link from "next/link";
 import Image from "next/image";
-import { media } from "@/styles/mediatest";
+import { media } from "styles/mediatest";
 const slideUp = keyframes`
   0%{
     opacity: 0;
@@ -14,6 +14,7 @@ const slideUp = keyframes`
   }
 `;
 export const ImageWrapper = styled(Link)<{ inView: boolean }>`
+  flex: 5;
   position: relative;
   height: 100%;
   width: 100%;

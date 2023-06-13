@@ -3,6 +3,7 @@ import Image from "next/image";
 import { media } from "@/styles/mediatest";
 
 export const RightSectionWrapper = styled.div<{ inView: boolean }>`
+  flex: 5;
   border-radius: 15px;
   display: flex;
   justify-content: space-between;

@@ -11,6 +11,7 @@ export const ProjectTitle = styled.header`
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   font-weight: bold;
   font-size: xx-large;
   gap: 10px;
