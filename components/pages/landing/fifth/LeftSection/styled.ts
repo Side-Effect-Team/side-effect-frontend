@@ -1,6 +1,7 @@
 import styled, { keyframes } from "styled-components";
 import Link from "next/link";
 import Image from "next/image";
+import { media } from "@/styles/mediatest";
 const slideUp = keyframes`
   0%{
     opacity: 0;
@@ -24,6 +25,9 @@ export const ImageWrapper = styled(Link)<{ inView: boolean }>`
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
   transform: ${(p) => (p.inView ? "translatex(0%)" : "translatex(-100%)")};
   transition: all 0.5s;
+  ${media.mobile} {
+    min-height: 230px;
+  }
 `;
 export const StyledImage = styled(Image)`
   object-fit: cover;

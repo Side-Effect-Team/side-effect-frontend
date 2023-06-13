@@ -8,7 +8,7 @@ export const FifthSectionContainer = styled.div`
   width: 100%;
   flex-direction: column;
   ${media.mobile} {
-    padding: 0;
+    padding: 20px 0px;
   }
 `;
 export const Title = styled.div`
@@ -18,6 +18,9 @@ export const Title = styled.div`
   font-weight: bolder;
   padding: 10px 0;
   color: ${(p) => p.theme.colors.primary};
+  ${media.mobile} {
+    font-size: x-large;
+  }
 `;
 export const SectionWrapper = styled.div`
   display: flex;

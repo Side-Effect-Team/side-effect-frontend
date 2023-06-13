@@ -15,9 +15,11 @@ export const RightSectionWrapper = styled.div<{ inView: boolean }>`
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
   transform: ${(p) => (p.inView ? "translateX(0%)" : "translateX(100%)")};
+  opacity: ${(p) => (p.inView ? "1" : "0")};
   transition: 0.5s ease;
   ${media.mobile} {
     flex-direction: column;
+    min-height: 265px;
   }
 `;
 export const StyledImage = styled(Image)`
@@ -38,7 +40,6 @@ export const SwiperContainer = styled.div`
     cursor: pointer;
     overflow: hidden;
     position: relative;
-
     min-width: 200px;
     max-width: 200px;
     min-height: 200px;

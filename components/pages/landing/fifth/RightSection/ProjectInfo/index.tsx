@@ -8,9 +8,7 @@ import {
 } from "./styled";
 
 export default function ProjectInfo({ selectedData }: any) {
-  console.log(selectedData);
   const { title, subTitle, likeNum, content } = selectedData;
-  console.log(selectedData);
   return (
     <ProjectInfoWrapper>
       <ProjectTitle>

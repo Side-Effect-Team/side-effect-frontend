@@ -16,7 +16,6 @@ export interface BestProjectType {
   data: BestProjectDataType[];
 }
 export default function HomePage({ data }: BestProjectType) {
-  console.log(data);
   window.sessionStorage.removeItem("activeTab");
   return (
     <>
