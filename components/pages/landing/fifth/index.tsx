@@ -1,15 +1,23 @@
 import { SectionContainer } from "../styled";
 import { FifthSectionContainer, Title, SectionWrapper } from "./styled";
+import { BestProjectType, BestProjectDataType } from "@/pages/index";
 import { useState } from "react";
 import "swiper/css";
 import "swiper/swiper.min.css";
 import "swiper/css/navigation";
 import LeftSection from "./LeftSection";
 import RightSection from "./RightSection";
-export default function FifthSection({ data }: any) {
-  const [project, setProject] = useState<any>();
+
+interface ProjectType {
+  imgUrl: string;
+  id: number;
+}
+export default function FifthSection({ data }: BestProjectType) {
+  const [project, setProject] = useState<BestProjectDataType>();
   const selectProject = (id: number) => {
-    const selectedProject = data.find((project: any) => project.id === id);
+    const selectedProject = data.find(
+      (project: ProjectType) => project.id === id,
+    );
     setProject(selectedProject);
   };
   const selectedImage = project ? project.imgUrl : data[0].imgUrl;

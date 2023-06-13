@@ -1,14 +1,20 @@
 import { RightSectionWrapper, SwiperContainer } from "./styled";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Image from "next/image";
-import { Autoplay, Mousewheel, Navigation } from "swiper";
+import { Autoplay, Mousewheel } from "swiper";
 import ProjectInfo from "./ProjectInfo";
 import { useState } from "react";
+import { BestProjectDataType } from "@/pages/index";
+interface PropsType {
+  data: BestProjectDataType[];
+  selectProject: (id: number) => void;
+  selectedData: BestProjectDataType;
+}
 export default function RightSection({
   data,
   selectProject,
   selectedData,
-}: any) {
+}: PropsType) {
   const [activeSlide, setActiveSlide] = useState(0);
   const getDirection = () => {
     const windowWidth = window.innerWidth;
@@ -22,7 +28,6 @@ export default function RightSection({
         <Swiper
           modules={[Autoplay, Mousewheel]}
           mousewheel={true}
-          effect={"slide"}
           breakpoints={{
             0: {
               slidesPerView: "auto",
@@ -51,7 +56,7 @@ export default function RightSection({
             return;
           }}
         >
-          {data.map((project: any) => {
+          {data.map((project: BestProjectDataType) => {
             return (
               <SwiperSlide
                 key={project.id}
