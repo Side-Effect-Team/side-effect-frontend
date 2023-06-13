@@ -1,13 +1,13 @@
 import styled from "styled-components";
-import { mediaQuery } from "@/styles/Media";
+import { media } from "@/styles/media";
 
 export const Wrapper = styled.div`
-  ${mediaQuery("mobile")`
+  ${media.mobile} {
     cursor: pointer;
     display: flex;
-    justify-contents: center;
+    justify-content: center;
     align-items: center;
-  `}
+  }
 
   display: none;
 `;

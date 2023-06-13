@@ -5,7 +5,7 @@ import { ThemeProvider } from "styled-components";
 import { Wrapper, MobileNavBar, MobileMenuItem } from "./styled";
 import GlobalStyles from "@/styles/Global";
 import { darkTheme, lightTheme } from "@/styles/Theme";
-import { breakPoints } from "@/styles/Media";
+import { sizes } from "@/styles/media";
 import GlobalNavBar from "../Header/GlobalNavBar";
 import Footer from "../Footer";
 import Toast from "../Toast";
@@ -55,7 +55,7 @@ export default function Layout({ children }: PropType) {
 
   // 뷰포트 width가 모바일 width 보다 커지면 모바일 메뉴 닫음
   const detectViewportWidth = () => {
-    if (window.innerWidth > breakPoints.mobile) setMobileMenuOpen(false);
+    if (window.innerWidth > sizes.mobile) setMobileMenuOpen(false);
   };
 
   useEffect(() => {

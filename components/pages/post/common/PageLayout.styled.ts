@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { breakPoints } from "@/styles/Media";
+import { sizes } from "@/styles/media";
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -10,5 +10,5 @@ export const Wrapper = styled.div`
 export const Contents = styled.div`
   margin: 0 auto;
   padding: 1.5rem 1rem;
-  max-width: ${breakPoints.desktop}px;
+  max-width: ${sizes.desktop}px;
 `;

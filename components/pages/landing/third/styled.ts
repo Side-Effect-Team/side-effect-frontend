@@ -1,4 +1,4 @@
-import { media } from "@/styles/mediatest";
+import { media } from "@/styles/media";
 import styled, { keyframes } from "styled-components";
 
 const slideAnimationSvg = keyframes`

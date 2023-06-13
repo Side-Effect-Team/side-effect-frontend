@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { mediaQuery } from "@/styles/Media";
-import { media } from "@/styles/mediatest";
+import { media } from "@/styles/media";
 
 export const Wrapper = styled.div`
   z-index: 10;
@@ -35,9 +34,10 @@ export const NavStyled = styled.nav`
   a {
     color: ${(p) => p.theme.textColor};
   }
-  ${mediaQuery("mobile")`
+
+  ${media.mobile} {
     display: none;
-  `};
+  }
 `;
 
 export const BoxStyled = styled.div`
@@ -52,9 +52,9 @@ export const BoxStyled = styled.div`
 `;
 
 export const ButtonBox = styled.div`
-  ${mediaQuery("mobile")`
+  ${media.mobile} {
     display: none;
-  `};
+  }
 `;
 
 export const IconWrapper = styled.div`

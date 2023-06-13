@@ -1,4 +1,3 @@
-import { breakPoints } from "@/styles/Media";
 import { useEffect, useState } from "react";
 import { useGetProjectData } from "../../hooks/queries/useGetProjectData";
 import styled from "styled-components";
@@ -11,6 +10,8 @@ import ProjectList from "@/components/pages/project/ProjectLIst";
 import ProjectCardSkeleton from "@/components/Skeleton/ProjectCardSkeleton";
 import { useAppSelector } from "@/store/hooks";
 import DarkModeToggle from "@/components/DarkModeToggle";
+import { sizes } from "@/styles/media";
+
 const FILTER_OPTIONS = [
   { name: "최신순", value: "latest" },
   { name: "조회순", value: "views" },
@@ -66,7 +67,7 @@ export default function ProjectPage() {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: ${breakPoints.desktop}px;
+  max-width: ${sizes.desktop}px;
   margin: 0 auto;
   gap: 20px;
 `;

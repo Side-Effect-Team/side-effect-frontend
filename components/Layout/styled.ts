@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { mediaQuery } from "@/styles/Media";
+import { media } from "@/styles/media";
 
 interface WrapperProps {
   mobileMenuOpen: boolean;
@@ -26,10 +26,10 @@ export const MobileNavBar = styled.nav<MobileNavBarProps>`
           top: 75px;
         `}
 
-  ${mediaQuery("mobile")`
+  ${media.mobile} {
     background: #eee;
     width: 100%;
-  `}
+  }
 `;
 
 export const MobileMenuItem = styled.div`

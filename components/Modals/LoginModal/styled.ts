@@ -1,5 +1,5 @@
 import styled, { keyframes } from "styled-components";
-import { media } from "@/styles/mediatest";
+import { media } from "@/styles/media";
 export const Title = styled.div`
   padding: 10px 20px;
   display: flex;

@@ -1,4 +1,4 @@
-import { media } from "@/styles/mediatest";
+import { media } from "@/styles/media";
 import { BiBell } from "react-icons/bi";
 import { IoClose, IoNotificationsOutline } from "react-icons/io5";
 import styled, { css } from "styled-components";

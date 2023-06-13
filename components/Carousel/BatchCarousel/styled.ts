@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { mediaQuery } from "@/styles/Media";
+import { media } from "@/styles/media";
 
 export const Wrapper = styled.div`
   margin: 1.5rem 0;
@@ -23,10 +23,10 @@ export const CardContainer = styled.div`
   gap: 0.5rem;
   overflow-x: scroll;
 
-  ${mediaQuery("mobile")`
+  ${media.mobile} {
     overflow-x: unset;
     overflow-y: scroll;
     flex-direction: column;
     gap: 0;
-  `}
+  }
 `;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { media } from "@/styles/mediatest";
+import { media } from "@/styles/media";
 import { theme } from "@/styles/Theme";
 import { darken, lighten } from "polished";
 

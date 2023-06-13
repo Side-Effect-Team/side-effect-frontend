@@ -1,6 +1,6 @@
 import styled, { keyframes } from "styled-components";
 import { theme } from "../../styles/Theme";
-import { media } from "@/styles/mediatest";
+import { media } from "@/styles/media";
 
 const slideIn = keyframes`
     0%{
