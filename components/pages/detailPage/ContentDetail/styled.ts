@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Image from "next/image";
 
 export const Wrapper = styled.div`
   margin: 1rem 0;
@@ -44,4 +45,13 @@ export const ProjectTitleBox = styled.div`
   display: flex;
   align-items: center;
   line-height: normal;
+`;
+
+export const ImageContainer = styled.div`
+  position: relative;
+  width: 100%;
+  // next/Image fill 일때, 부모 element height 필수
+  height: 35vw;
+  max-height: 350px;
+  margin-bottom: 1rem;
 `;

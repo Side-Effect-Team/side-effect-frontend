@@ -9,6 +9,7 @@ import {
   TagContainer,
   ProjectTitle,
   ProjectTitleBox,
+  ImageContainer,
 } from "@/detailComps/ContentDetail/styled";
 import { TagWrapper } from "@/postComps/TagBox/styled";
 
@@ -58,7 +59,7 @@ export default function ContentDetail({
         </div>
       </ProjectTitleBox>
       <h4>상세 내용</h4>
-      <div>
+      <ImageContainer>
         {tags ? (
           <Image
             src={
@@ -67,8 +68,8 @@ export default function ContentDetail({
                 : "/images/BoardDefaultBackground.png"
             }
             alt="프로젝트 사진"
-            width={400}
-            height={300}
+            style={{ objectFit: "contain" }}
+            fill
             priority
           />
         ) : (
@@ -79,12 +80,12 @@ export default function ContentDetail({
                 : "/images/ProjectDefaultBackground.png"
             }
             alt="프로젝트 사진"
-            width={400}
-            height={300}
+            style={{ objectFit: "contain" }}
+            fill
             priority
           />
         )}
-      </div>
+      </ImageContainer>
       <Description>
         <textarea readOnly value={content} />
       </Description>
