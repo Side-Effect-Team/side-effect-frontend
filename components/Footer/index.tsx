@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { BsGithub } from "react-icons/bs";
 import { useAppSelector } from "@/store/hooks";
@@ -7,7 +6,6 @@ import MainLogo from "../../public/images/mainLogo.svg";
 import {
   Wrapper,
   Contents,
-  GithubIcon,
   IconBox,
   ColumnBox,
   Title,
@@ -28,11 +26,13 @@ export default function Footer() {
               <MainLogo fill={theme.textColor} height="100%" />
             </IconWrapper>
           </Link>
-          <GithubIcon isDark={isDark}>
-            <Link href="https://github.com/Side-Effect-Team">
+          <Link href="https://github.com/Side-Effect-Team">
+            {isDark ? (
+              <BsGithub size={50} style={{ color: "eee" }} />
+            ) : (
               <BsGithub size={50} />
-            </Link>
-          </GithubIcon>
+            )}
+          </Link>
         </IconBox>
         <ColumnBox>
           <Column>
