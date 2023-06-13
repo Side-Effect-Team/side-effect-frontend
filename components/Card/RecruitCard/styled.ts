@@ -36,6 +36,7 @@ export const Container = styled.div`
     border-bottom: 2px solid ${(p) => p.theme.grayToDark};
     padding: 10px;
     background-color: ${(p) => p.theme.mainBackGround};
+    box-shadow: none;
 
     :hover {
       transition: none;

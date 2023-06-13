@@ -26,14 +26,6 @@ export const HeaderStyled = styled.header`
   padding: 0 1rem;
 `;
 
-export const Logo = styled.h2`
-  background: -webkit-linear-gradient(45deg, red, blue);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-`;
-
 export const NavStyled = styled.nav`
   width: 40vw;
   display: flex;
@@ -63,4 +55,13 @@ export const ButtonBox = styled.div`
   ${mediaQuery("mobile")`
     display: none;
   `};
+`;
+
+export const IconWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 110px;
+  ${media.mobile} {
+    width: 90px;
+  }
 `;
