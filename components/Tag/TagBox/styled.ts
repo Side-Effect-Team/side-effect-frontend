@@ -41,7 +41,7 @@ export const EmptyTitle = styled.div`
   }
 `;
 
-export const PlusTag = styled.div<{ fill: string }>`
+export const PlusTag = styled.div<{ fill: string; isRecruiting: boolean }>`
   display: none;
   ${media.mobile} {
     display: block;
@@ -58,13 +58,25 @@ export const PlusTag = styled.div<{ fill: string }>`
       p.fill === "true"
         ? css`
             color: white;
-            background-color: ${(p) => p.theme.brandColor.primary};
-            border: 2px solid ${(p) => p.theme.brandColor.primary};
+            background-color: ${p.isRecruiting
+              ? p.theme.brandColor.primary
+              : p.theme.colors.gray};
+            border: 2px solid
+              ${p.isRecruiting
+                ? p.theme.brandColor.primary
+                : p.theme.colors.gray};
           `
         : css`
-            color: ${(p) => p.theme.brandColor.primary};
+            /* color: ${(p) => p.theme.brandColor.primary}; */
+            color: ${p.isRecruiting
+              ? p.theme.brandColor.primary
+              : p.theme.colors.gray};
             background-color: ${(p) => p.theme.mainBackGround};
-            border: 2px solid ${(p) => p.theme.brandColor.primary};
+            /* border: 2px solid ${(p) => p.theme.brandColor.primary}; */
+            border: 2px solid
+              ${p.isRecruiting
+                ? p.theme.brandColor.primary
+                : p.theme.colors.gray};
           `};
   }
 `;

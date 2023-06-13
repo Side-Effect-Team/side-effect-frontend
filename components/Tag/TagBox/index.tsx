@@ -79,13 +79,15 @@ export default function TagBox({
               fontSize={fontSize}
               isRecruiting={isRecruiting}
             >
-              {el}
+              {el.toLowerCase()}
             </Tag>
           ))}
         </TagWrapper>
       )}
       {hiddenTagCount ? (
-        <PlusTag fill={fill || "true"}>+ {hiddenTagCount}</PlusTag>
+        <PlusTag fill={fill || "true"} isRecruiting={isRecruiting || false}>
+          +{hiddenTagCount}
+        </PlusTag>
       ) : (
         <></>
       )}
