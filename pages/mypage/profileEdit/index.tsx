@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import {
   ButtonWrapper,
   Container,
-  ContentsWrapper,
+  ContentsEditWrapper,
   SectionWrapper,
   TapMenu,
   TapWrapper,
@@ -114,7 +114,7 @@ export default function MyPageEdit() {
       <TapWrapper>
         <TapMenu isActive>프로필 수정</TapMenu>
       </TapWrapper>
-      <ContentsWrapper>
+      <ContentsEditWrapper>
         <form onSubmit={handleSubmit(onClickEdit)}>
           <IntroductionEdit
             nickname={data?.nickname}
@@ -147,7 +147,7 @@ export default function MyPageEdit() {
             <Button>수정 완료</Button>
           </ButtonWrapper>
         </form>
-      </ContentsWrapper>
+      </ContentsEditWrapper>
     </Container>
   );
 }

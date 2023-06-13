@@ -7,5 +7,6 @@ export const ApplyBoardWrapper = styled.div`
   gap: 15px;
   ${media.mobile} {
     margin-top: 4rem;
+    padding: 0 1rem;
   }
 `;

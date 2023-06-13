@@ -13,7 +13,7 @@ export const Container = styled.div`
 export const TapWrapper = styled.div`
   width: 180px;
   height: auto;
-  margin: 10px 0;
+  margin: 20px 0;
   padding: 20px;
   border: 2px solid ${(p) => p.theme.grayToDark};
   border-radius: 10px;
@@ -63,7 +63,16 @@ export const ContentsWrapper = styled.div`
   ${media.mobile} {
     width: 100%;
     margin-top: 50px;
-    padding: 0 1rem;
+    padding: 0;
+  }
+`;
+export const ContentsEditWrapper = styled.div`
+  padding: 0 1rem;
+  width: calc(100% - 190px);
+  margin-left: auto;
+  ${media.mobile} {
+    width: 100%;
+    margin-top: 50px;
   }
 `;
 

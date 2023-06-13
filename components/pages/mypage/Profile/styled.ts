@@ -1,3 +1,4 @@
+import { media } from "@/styles/mediatest";
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
@@ -6,4 +7,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   margin-top: 30px;
+  ${media.mobile} {
+    padding: 0 1rem;
+  }
 `;

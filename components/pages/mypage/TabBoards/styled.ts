@@ -19,7 +19,8 @@ export const NullMessage = styled.div`
   font-weight: 600;
   color: ${(p) => p.theme.colors.mediumGray};
   ${media.mobile} {
-    margin-top: 2rem;
+    margin-top: 4rem;
+    padding: 0 1rem;
   }
 `;
 export const FilterWrapper = styled.div`
@@ -32,7 +33,7 @@ export const FilterWrapper = styled.div`
     position: fixed;
     background-color: ${(p) => p.theme.mainBackGround};
     z-index: 4;
-    padding: 1rem 0;
+    padding: 1rem;
   }
 `;
 export const FilterMenu = styled.div<{ isActive: boolean }>`
