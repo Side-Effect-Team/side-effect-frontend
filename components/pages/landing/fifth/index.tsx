@@ -17,7 +17,7 @@ export default function FifthSection({ data }: any) {
   return (
     <SectionContainer>
       <FifthSectionContainer>
-        <Title>TOP RANKED PROJECTS</Title>
+        <Title>이달의 베스트 프로젝트</Title>
         <SectionWrapper>
           <LeftSection selectedImage={selectedImage} />
           <RightSection

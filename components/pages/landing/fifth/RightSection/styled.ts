@@ -6,10 +6,14 @@ export const RightSectionWrapper = styled.div`
   flex: 5;
   border-radius: 15px;
   display: flex;
-  background-color: ${(p) => p.theme.componentBgColor};
+  justify-content: space-between;
   padding: 20px;
   overflow: hidden;
   height: 100%;
+  gap: 10px;
+  background-color: ${(p) => p.theme.componentBgColor};
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
   ${media.mobile} {
     flex-direction: column;
   }

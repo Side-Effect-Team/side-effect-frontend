@@ -3,14 +3,9 @@ import { media } from "@/styles/mediatest";
 import { AiFillHeart } from "react-icons/ai";
 
 export const ProjectInfoWrapper = styled.div`
-  flex: 5;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  ${media.mobile} {
-    gap: 3px;
-    flex: 4;
-  }
 `;
 export const ProjectTitle = styled.header`
   width: 100%;
@@ -43,9 +38,11 @@ export const ProjectContent = styled.div`
   text-overflow: ellipsis;
   word-break: break-all;
   overflow: hidden;
-
-  ${media.custom(425)} {
-    max-height: 100px;
+  ${media.laptop} {
+    display: -webkit-box;
+    -webkit-line-clamp: 10;
+    -webkit-box-orient: vertical;
+    max-height: 150px;
     font-size: small;
   }
 `;

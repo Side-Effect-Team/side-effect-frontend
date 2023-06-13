@@ -21,15 +21,7 @@ export default function ProjectInfo({ selectedData }: any) {
         </Heart>
       </ProjectTitle>
       <ProjectSubTitle>{subTitle}</ProjectSubTitle>
-      <ProjectContent>
-        {content} ajkwndkajwndkawjn
-        ajkwndkajwndkawjnajkwndkajwndkawjnajkwndkajwndkawjn ajkwndkajwndkawjn
-        ajkwndka ajkwndkajwndkawjn jwn dk
-        ajkwndkajwndkawjnawjnajkwndkajwndkawjnajkwndkajw ajkwndkajwndkawjn
-        ajkwndkajwndkawjn ajkwndkajwndkawjn
-        ajkwndkajwndkawjnndkawjnajkwndkajwndkawjnajkwndkajwndkawjnajkwndkajwndkawjnajkwndkajwndkawjnajkwndkajwndkawjn
-        ajkwndkajwndkawjnajkwndkajwndkawjn ajkwndkajwndkawjn
-      </ProjectContent>
+      <ProjectContent>{content}</ProjectContent>
     </ProjectInfoWrapper>
   );
 }
