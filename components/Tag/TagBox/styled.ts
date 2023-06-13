@@ -1,4 +1,4 @@
-import { media } from "@/styles/media";
+import { media } from "styles/media";
 import styled, { css } from "styled-components";
 
 export const TagContainer = styled.div`

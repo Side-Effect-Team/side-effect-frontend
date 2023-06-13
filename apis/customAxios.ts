@@ -1,6 +1,6 @@
 import axios from "axios";
-import { store } from "@/store/store";
-import { removeAuthentication, createAuthentication } from "@/store/authSlice";
+import { store } from "store/store";
+import { removeAuthentication, createAuthentication } from "store/authSlice";
 import { handleRefreshAccessToken } from "./UserAPI";
 axios.defaults.withCredentials = true;
 const baseURL = process.env.NEXT_PUBLIC_API_URL;

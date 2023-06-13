@@ -1,5 +1,5 @@
 import { ViewWrapper, ButtonWrapper, StyledLink } from "./styled";
-import { useAppSelector } from "@/store/hooks";
+import { useAppSelector } from "store/hooks";
 export default function RegisterSuccess() {
   const { nickname } = useAppSelector((state) => state.userInfo.userInfo);
   return (

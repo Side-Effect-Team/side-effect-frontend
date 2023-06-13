@@ -1,5 +1,5 @@
-// import AlarmSkeleton from "@/components/Alarm/skeleton";
-import AlarmSkeleton from "@/components/Skeleton/AlarmSkeleton";
+// import AlarmSkeleton from "components/Alarm/skeleton";
+import AlarmSkeleton from "components/Skeleton/AlarmSkeleton";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { getAlarmData } from "apis/NotificationAPI";
 import { useEffect } from "react";

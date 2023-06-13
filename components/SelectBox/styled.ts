@@ -1,5 +1,4 @@
-import styled, { css } from "styled-components";
-import { theme } from "@/styles/Theme";
+import styled from "styled-components";
 interface SelectOptionType {
   visible: boolean;
 }

@@ -8,8 +8,8 @@ import {
   CommentList,
 } from "./styled";
 import CommentItem from "../CommentItem";
-import useToast from "@/hooks/common/useToast";
-import customAxios from "@/apis/customAxios";
+import useToast from "hooks/common/useToast";
+import customAxios from "apis/customAxios";
 
 interface CommentBoxProps {
   comments: CommentType[];

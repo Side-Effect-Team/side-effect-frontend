@@ -7,7 +7,7 @@ import {
 } from "./styled";
 import { useEffect } from "react";
 import { FieldErrors, UseFormRegister, useForm } from "react-hook-form";
-import { duplicateNickname } from "@/apis/UserAPI";
+import { duplicateNickname } from "apis/UserAPI";
 
 interface NicknameProps {
   nickname: string;

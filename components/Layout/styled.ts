@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { media } from "@/styles/media";
+import { media } from "styles/media";
 
 interface WrapperProps {
   mobileMenuOpen: boolean;

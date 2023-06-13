@@ -2,7 +2,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { getProjectData } from "apis/ProjectAPI";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-import ProjectCardSkeleton from "@/components/Skeleton/ProjectCardSkeleton";
+import ProjectCardSkeleton from "components/Skeleton/ProjectCardSkeleton";
 export const useGetProjectData = (
   filter: string = "",
   keyword: string = "",

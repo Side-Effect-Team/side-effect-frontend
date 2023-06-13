@@ -1,5 +1,5 @@
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { closeModal } from "@/store/modalSlice";
+import { useAppDispatch, useAppSelector } from "store/hooks";
+import { closeModal } from "store/modalSlice";
 import { AiOutlineClose } from "react-icons/ai";
 import { Wrapper, Header } from "./styled";
 import RegisterNickname from "./RegisterView/RegisterNickname";

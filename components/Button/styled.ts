@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 import { theme } from "styles/Theme";
 import React from "react";
 import { darken, lighten } from "polished";
-import { media } from "@/styles/media";
+import { media } from "styles/media";
 
 export interface ButtonStyle
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {

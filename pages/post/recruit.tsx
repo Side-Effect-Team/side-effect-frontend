@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
 import { GoPlus } from "react-icons/go";
-import customAxios from "@/apis/customAxios";
+import customAxios from "apis/customAxios";
 import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
 import { PostTitleStyled } from "@/postComps/common/Title.styled";
 import {
@@ -14,12 +14,12 @@ import {
   ErrorMsg,
   GuideWrapper,
 } from "@/postComps/common/PostForm.styled";
-import Button from "@/components/Button";
+import Button from "components/Button";
 import TagBox from "@/postComps/TagBox";
-import { useTag } from "@/hooks/common/useTag";
-import { useForm } from "@/hooks/common/useForm";
-import PositionBox from "@/components/pages/post/PositionBox";
-import PageHead from "@/components/PageHead";
+import { useTag } from "hooks/common/useTag";
+import { useForm } from "hooks/common/useForm";
+import PositionBox from "components/pages/post/PositionBox";
+import PageHead from "components/PageHead";
 
 export const POSITIONS = [
   {

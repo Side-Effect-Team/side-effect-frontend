@@ -1,5 +1,5 @@
 import { LoadingWrapper } from "./styled";
-import { theme } from "@/styles/Theme";
+import { theme } from "styles/Theme";
 import ScaleLoader from "react-spinners/ScaleLoader";
 
 interface LoadingSizeType {

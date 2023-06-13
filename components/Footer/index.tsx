@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { BsGithub } from "react-icons/bs";
-import { useAppSelector } from "@/store/hooks";
+import { useAppSelector } from "store/hooks";
 import MainLogo from "../../public/images/mainLogo.svg";
 
 import {

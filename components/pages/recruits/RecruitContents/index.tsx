@@ -3,7 +3,7 @@ import { SKILL_LIST_IN_FILTER } from "enum";
 import { Wrapper, ContentsHeader, HeaderStyled } from "./styled";
 import RecruitFilters from "@/pageComponents/recruits/RecruitFilters";
 import RecruitList from "components/pages/recruits/RecruitList";
-import { useDebounce } from "@/hooks/common/useDebounce";
+import { useDebounce } from "hooks/common/useDebounce";
 
 type SkillType = (typeof SKILL_LIST_IN_FILTER)[number]["value"];
 

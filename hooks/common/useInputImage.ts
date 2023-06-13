@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import customAxios from "@/apis/customAxios";
+import customAxios from "apis/customAxios";
 
 export const useInputImage = (defaultImgSrc: string) => {
   const [imgFile, setImgFile] = useState<FormData | null>(null);

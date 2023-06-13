@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import Banner from "@/components/Banner";
-import { BANNER_CONTENTS } from "../../enum";
-import PageHead from "@/components/PageHead";
+import Banner from "components/Banner";
+import { BANNER_CONTENTS } from "enum";
+import PageHead from "components/PageHead";
 import RecruitContents from "@/pageComponents/recruits/RecruitContents";
 
 export default function RecruitsPage() {

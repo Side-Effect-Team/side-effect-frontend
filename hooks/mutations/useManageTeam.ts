@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { handleRemoveMember } from "@/apis/ApplicantAPI";
+import { handleRemoveMember } from "apis/ApplicantAPI";
 import useToast from "../common/useToast";
 export const useManageTeam = (nickName: string) => {
   const { addToast } = useToast();

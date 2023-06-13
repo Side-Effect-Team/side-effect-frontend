@@ -1,4 +1,4 @@
-import Button from "@/components/Button";
+import Button from "components/Button";
 import { ProfileImage, ProfileImageWrapper } from "./styled";
 import { ChangeEvent, useRef } from "react";
 

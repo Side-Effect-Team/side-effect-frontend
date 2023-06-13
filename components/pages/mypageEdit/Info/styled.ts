@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { media } from "@/styles/media";
+import { media } from "styles/media";
 
 export const Input = styled.input`
   width: 100%;

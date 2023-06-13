@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { ComponentType, useEffect } from "react";
-import useToast from "../../hooks/common/useToast";
-import { useAppSelector } from "@/store/hooks";
+import useToast from "hooks/common/useToast";
+import { useAppSelector } from "store/hooks";
 
 export const withAuth =
   (Component: ComponentType) =>

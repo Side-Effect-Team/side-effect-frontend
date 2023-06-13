@@ -1,5 +1,5 @@
 import styled, { keyframes } from "styled-components";
-import { media } from "@/styles/media";
+import { media } from "styles/media";
 
 const slideIn = keyframes`
     0%{

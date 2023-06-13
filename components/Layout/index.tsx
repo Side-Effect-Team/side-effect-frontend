@@ -3,17 +3,17 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { ThemeProvider } from "styled-components";
 import { Wrapper, MobileNavBar, MobileMenuItem } from "./styled";
-import GlobalStyles from "@/styles/Global";
-import { darkTheme, lightTheme } from "@/styles/Theme";
-import { sizes } from "@/styles/media";
+import GlobalStyles from "styles/Global";
+import { darkTheme, lightTheme } from "styles/Theme";
+import { sizes } from "styles/media";
 import GlobalNavBar from "../Header/GlobalNavBar";
 import Footer from "../Footer";
 import Toast from "../Toast";
 import ScrollToTop from "../ScrollToTop";
 import Head from "next/head";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { openModal } from "@/store/modalSlice";
-import { removeAuthentication } from "@/store/authSlice";
+import { useAppDispatch, useAppSelector } from "store/hooks";
+import { openModal } from "store/modalSlice";
+import { removeAuthentication } from "store/authSlice";
 
 interface PropType {
   children: React.ReactNode;

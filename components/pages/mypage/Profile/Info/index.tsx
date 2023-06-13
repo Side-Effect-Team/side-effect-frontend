@@ -6,7 +6,7 @@ import {
   InfoWrapper,
   Text,
 } from "./styled";
-import { translateCareer, translatePosition } from "@/utils/translateData";
+import { translateCareer, translatePosition } from "utils/translateData";
 
 export interface InfoProps {
   position: string;

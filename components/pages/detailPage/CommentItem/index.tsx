@@ -10,7 +10,7 @@ import {
   OptionBtn,
   BtnText,
 } from "./styled";
-import { useAppSelector } from "@/store/hooks";
+import { useAppSelector } from "store/hooks";
 
 interface CommentBoxProps {
   comment: CommentType;

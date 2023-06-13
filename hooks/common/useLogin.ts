@@ -1,9 +1,9 @@
-import { createAuthentication } from "@/store/authSlice";
-import { useAppDispatch } from "@/store/hooks";
-import { closeModal } from "@/store/modalSlice";
+import { createAuthentication } from "store/authSlice";
+import { useAppDispatch } from "store/hooks";
+import { closeModal } from "store/modalSlice";
 import useToast from "./useToast";
-import { handleModalView } from "@/store/loginViewTransitionSlice";
-import { addProviderType, addEmail } from "@/store/userInfoStoreSlice";
+import { handleModalView } from "store/loginViewTransitionSlice";
+import { addProviderType, addEmail } from "store/userInfoStoreSlice";
 import { AxiosError, AxiosResponse } from "axios";
 interface ResponseType {
   userId: string;

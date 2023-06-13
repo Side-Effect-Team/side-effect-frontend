@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useAddLikeRecruit } from "@/hooks/mutations/useAddLikeRecuit";
+import { useAddLikeRecruit } from "hooks/mutations/useAddLikeRecuit";
 import {
   CommentIcon,
   Container,
@@ -13,9 +13,9 @@ import {
   ViewIcon,
 } from "./styled";
 import { useRouter } from "next/router";
-import HeartButton from "@/components/Button/HeartButton";
-import TagBox from "@/components/Tag/TagBox";
-import { getBoardDate } from "@/utils/getDate";
+import HeartButton from "components/Button/HeartButton";
+import TagBox from "components/Tag/TagBox";
+import { getBoardDate } from "utils/getDate";
 
 export interface RecruitDataProps {
   id: number;

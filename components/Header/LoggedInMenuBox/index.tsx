@@ -1,12 +1,12 @@
 import { useRouter } from "next/router";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
-import Alarm from "@/components/Alarm";
-import { useAppSelector } from "@/store/hooks";
+import Alarm from "components/Alarm";
+import { useAppSelector } from "store/hooks";
 import { useRef, useState } from "react";
-import useOutsideClick from "@/hooks/common/useOutsideClick";
+import useOutsideClick from "hooks/common/useOutsideClick";
 import { Container, ImgContainer } from "./styled";
-import { getMypageData } from "@/apis/UserAPI";
+import { getMypageData } from "apis/UserAPI";
 
 export default function LoggedInMenuBox() {
   const AlarmListRef = useRef(null);

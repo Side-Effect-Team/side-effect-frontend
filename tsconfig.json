@@ -2,16 +2,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/components/*": ["components/*"],
       "@/pageComponents/*": ["components/pages/*"],
-      "@/styles/*": ["styles/*"],
-      "@/hooks/*": ["hooks/*"],
-      "@/store/*": ["store/*"],
-      "@/pages/*": ["pages/*"],
       "@/postComps/*": ["components/pages/post/*"],
-      "@/utils/*": ["utils/*"],
       "@/detailComps/*": ["components/pages/detailPage/*"],
-      "@/apis/*": ["apis/*"]
     },
     "target": "ESNext",
     "lib": [

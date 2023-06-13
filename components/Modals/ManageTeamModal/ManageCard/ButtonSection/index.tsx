@@ -1,9 +1,9 @@
 import Image from "next/image";
 import GithubImg from "../../../../../public/images/Github.png";
 
-import Button from "@/components/Button";
-import { useManageApplicant } from "../../../../../hooks/mutations/useManageApplicant";
-import { useManageTeam } from "../../../../../hooks/mutations/useManageTeam";
+import Button from "components/Button";
+import { useManageApplicant } from "hooks/mutations/useManageApplicant";
+import { useManageTeam } from "hooks/mutations/useManageTeam";
 import { ApplicatnsType } from "../index";
 import { useRouter } from "next/router";
 import { ButtonSectionWrapper } from "./styled";

@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import { useGetProjectData } from "hooks/queries/useGetProjectData";
 import styled from "styled-components";
 import SelectBox from "../../components/SelectBox";
-import Search from "@/components/Search";
-import NoData from "@/components/Nodata";
-import PageHead from "@/components/PageHead";
-import BatchCarousel from "@/components/Carousel/BatchCarousel";
-import ProjectList from "@/components/pages/project/ProjectLIst";
-import ProjectCardSkeleton from "@/components/Skeleton/ProjectCardSkeleton";
-import { useAppSelector } from "@/store/hooks";
-import DarkModeToggle from "@/components/DarkModeToggle";
-import { sizes } from "@/styles/media";
+import Search from "components/Search";
+import NoData from "components/Nodata";
+import PageHead from "components/PageHead";
+import BatchCarousel from "components/Carousel/BatchCarousel";
+import ProjectList from "components/pages/project/ProjectLIst";
+import ProjectCardSkeleton from "components/Skeleton/ProjectCardSkeleton";
+import { useAppSelector } from "store/hooks";
+import DarkModeToggle from "components/DarkModeToggle";
+import { sizes } from "styles/media";
 
 const FILTER_OPTIONS = [
   { name: "최신순", value: "latest" },

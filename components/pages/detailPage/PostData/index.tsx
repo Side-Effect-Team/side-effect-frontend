@@ -1,5 +1,5 @@
 import { useState } from "react";
-import customAxios from "@/apis/customAxios";
+import customAxios from "apis/customAxios";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import {
@@ -20,7 +20,7 @@ import {
   OptionBtn,
   Container,
 } from "@/detailComps/PostData/styled";
-import { useAppSelector } from "@/store/hooks";
+import { useAppSelector } from "store/hooks";
 
 interface PostDataProps {
   postId: number;

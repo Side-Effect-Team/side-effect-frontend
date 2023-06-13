@@ -1,5 +1,5 @@
 import styled, { keyframes } from "styled-components";
-import { media } from "@/styles/media";
+import { media } from "styles/media";
 
 export const Wrapper = styled.div<{ isOpen: boolean }>`
   visibility: ${({ isOpen }) => (isOpen ? "visible" : "hidden")};

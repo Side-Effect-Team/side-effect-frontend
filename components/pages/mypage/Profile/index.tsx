@@ -1,12 +1,12 @@
-import { MypageProps } from "@/pages/mypage";
+import { MypageProps } from "pages/mypage";
 import { useRouter } from "next/router";
 import { ButtonWrapper, SectionWrapper } from "../styled";
 import Introduction from "./Introduction";
 import Skill from "./Skill";
 import Info from "./Info";
-import Button from "@/components/Button";
+import Button from "components/Button";
 import { Wrapper } from "./styled";
-import SectionBorder from "@/components/Boarder/SectionBorder";
+import SectionBorder from "components/Boarder/SectionBorder";
 
 export default function Profile(data: MypageProps) {
   const router = useRouter();

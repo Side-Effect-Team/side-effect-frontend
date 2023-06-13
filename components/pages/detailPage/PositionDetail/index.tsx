@@ -2,10 +2,10 @@ import { AiOutlineTeam } from "react-icons/ai";
 import { POSITION_LIST } from "enum";
 import { Wrapper, HeaderBox, StyledHeader } from "./styled";
 import PositionRow from "@/detailComps/PositionRow";
-import Button from "@/components/Button";
-import ManageTeamModal from "@/components/Modals/ManageTeamModal/ManageTeamModal";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { openModal } from "@/store/modalSlice";
+import Button from "components/Button";
+import ManageTeamModal from "components/Modals/ManageTeamModal/ManageTeamModal";
+import { useAppDispatch, useAppSelector } from "store/hooks";
+import { openModal } from "store/modalSlice";
 
 interface PositionDetailProps {
   writerId: number;

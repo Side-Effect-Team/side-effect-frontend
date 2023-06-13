@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { CloseBtn, NameBox, Row, StatusBox } from "./styled";
-import Button from "@/components/Button";
-import { applyPosition, cancelApply } from "@/apis/ApplicantAPI";
-import useToast from "@/hooks/common/useToast";
+import Button from "components/Button";
+import { applyPosition, cancelApply } from "apis/ApplicantAPI";
+import useToast from "hooks/common/useToast";
 
 interface PositionRowProps {
   positionName: string;
