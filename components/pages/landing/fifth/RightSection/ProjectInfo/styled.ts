@@ -21,6 +21,14 @@ export const ProjectTitle = styled.header`
     font-size: medium;
   }
 `;
+export const Title = styled.div`
+  width: 100%;
+  max-width: 200px;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  white-space: nowrap;
+  overflow: hidden;
+`;
 export const Heart = styled.div`
   display: flex;
   align-items: center;
@@ -43,6 +51,20 @@ export const ProjectContent = styled.div`
     -webkit-line-clamp: 10;
     -webkit-box-orient: vertical;
     max-height: 150px;
+    font-size: small;
+  }
+  ${media.mobile} {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    max-height: 100px;
+    font-size: small;
+  }
+  ${media.custom(425)} {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    max-height: 100px;
     font-size: small;
   }
 `;

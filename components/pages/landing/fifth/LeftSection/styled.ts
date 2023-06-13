@@ -14,7 +14,6 @@ const slideUp = keyframes`
   }
 `;
 export const ImageWrapper = styled(Link)<{ inView: boolean }>`
-  flex: 5;
   position: relative;
   height: 100%;
   width: 100%;
