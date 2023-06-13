@@ -7,13 +7,13 @@ interface MobileNavBarProps {
 
 export const MobileNavBar = styled.nav<MobileNavBarProps>`
   position: fixed;
-  z-index: 9;
+  z-index: 7;
   transition: all ease-out 0.5s;
 
   ${(p) =>
     p.hide
       ? css`
-          top: -50px;
+          top: -235px;
         `
       : css`
           top: 75px;
@@ -26,16 +26,21 @@ export const MobileNavBar = styled.nav<MobileNavBarProps>`
 `;
 
 export const MobileMenuItem = styled.div`
-  padding: 5px;
+  padding: 1.75rem 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid ${(p) => p.theme.textColor};
   font-size: 1.5rem;
   font-weight: 600;
   cursor: pointer;
 
+  a {
+    color: ${(p) => p.theme.textColor};
+  }
+
   &:first-child {
-    border-top: 1px solid black;
+    border-bottom: 1px solid ${(p) => p.theme.textColor};
+    border-top: 1px solid ${(p) => p.theme.textColor};
   }
 `;
