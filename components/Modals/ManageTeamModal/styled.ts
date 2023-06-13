@@ -21,7 +21,7 @@ export const Wrapper = styled.div<{ isOpen: boolean }>`
     height: 80%;
     width: 100%;
     font-size: small;
-    border-bottom-left-radius: 0px;
+    border-bottom-left-radius: 0;
     border-top-right-radius: 25px;
     animation: ${({ isOpen }) => (isOpen ? slideUp : slideDown)} 0.4s
       ease-in-out;

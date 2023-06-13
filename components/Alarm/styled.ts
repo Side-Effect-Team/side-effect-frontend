@@ -1,7 +1,7 @@
 import { media } from "@/styles/media";
 import { BiBell } from "react-icons/bi";
-import { IoClose, IoNotificationsOutline } from "react-icons/io5";
-import styled, { css } from "styled-components";
+import { IoClose } from "react-icons/io5";
+import styled from "styled-components";
 
 // 알람 아이콘
 export const AlarmDiv = styled.div<{ openAlarm: boolean }>`
@@ -76,9 +76,9 @@ export const Container = styled.div`
     width: 100%;
     height: 100%;
     max-height: 100vh;
-    top: 0px;
-    right: 0px;
-    left: 0px;
+    top: 0;
+    right: 0;
+    left: 0;
     animation: slide 0.5s ease-in-out;
   }
   @keyframes slide {

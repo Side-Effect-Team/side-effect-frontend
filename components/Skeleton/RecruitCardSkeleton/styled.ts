@@ -1,4 +1,3 @@
-import { theme } from "@/styles/Theme";
 import { media } from "@/styles/media";
 import styled, { keyframes } from "styled-components";
 
@@ -58,7 +57,7 @@ export const Title = styled(SkeletonItem)`
   margin-bottom: 50px;
   ${media.mobile} {
     width: 150px;
-    margin-top: 0px;
+    margin-top: 0;
     margin-bottom: 15px;
   }
 `;

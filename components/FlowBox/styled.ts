@@ -14,7 +14,6 @@ export const FlowContainer = styled.div`
   width: 100%;
   background-color: ${(p) => p.theme.brandColor.primary};
   height: 55px;
-  display: flex;
   align-items: center;
   ${media.mobile} {
     height: 47px;

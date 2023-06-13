@@ -1,6 +1,5 @@
 import styled, { keyframes } from "styled-components";
 import { media } from "@/styles/media";
-import { theme } from "../../../styles/Theme";
 
 const loading = keyframes`
  0% {
@@ -67,10 +66,10 @@ export const SkeletonCardWrapper = styled.div`
 export const Header = styled(SkeletonItem)`
   width: 100%;
   height: 250px;
-  border-radius: 0%;
+  border-radius: 0;
 
   &:before {
-    border-radius: 0%;
+    border-radius: 0;
   }
   ${media.mobile} {
     width: 35%;

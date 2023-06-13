@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
-import { BrandColorTypes, theme } from "../../styles/Theme";
+import { theme } from "styles/Theme";
 import React from "react";
-import { darken, lighten, transparentize } from "polished";
+import { darken, lighten } from "polished";
 import { media } from "@/styles/media";
 
 export interface ButtonStyle

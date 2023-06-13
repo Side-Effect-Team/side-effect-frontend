@@ -75,7 +75,7 @@ export const ButtonWrapper = styled.div`
   ${media.mobile} {
     flex-direction: column;
 
-    margin-top: 0 auto;
+    margin: 0 auto;
     width: 80%;
     gap: 0;
   }
