@@ -11,6 +11,7 @@ import {
   BtnText,
 } from "./styled";
 import { useAppSelector } from "store/hooks";
+import resizeElementHeight from "utils/resizeElementHeight";
 
 interface CommentBoxProps {
   comment: CommentType;
@@ -23,17 +24,10 @@ export default function CommentItem({
   onEdit,
   onDelete,
 }: CommentBoxProps) {
-  const [isEdit, setIsEdit] = useState(false);
-  const [commentValue, setCommentValue] = useState(comment.content);
+  const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [commentValue, setCommentValue] = useState<string>(comment.content);
   const textareaEl = useRef<HTMLTextAreaElement>(null);
   const userId = useAppSelector((state) => +state.auth.userId);
-
-  const resizeTextAreaHeight = () => {
-    if (textareaEl.current) {
-      textareaEl.current.style.height = "auto";
-      textareaEl.current.style.height = textareaEl.current.scrollHeight + "px";
-    }
-  };
 
   const startEdit = () => {
     setIsEdit((prev) => !prev);
@@ -42,7 +36,7 @@ export default function CommentItem({
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setCommentValue(e.target.value);
-    resizeTextAreaHeight();
+    resizeElementHeight(textareaEl);
   };
 
   // 수정 취소
@@ -54,7 +48,7 @@ export default function CommentItem({
 
   // 렌더링 시 댓글 크기 조절
   useEffect(() => {
-    resizeTextAreaHeight();
+    resizeElementHeight(textareaEl);
   }, [textareaEl]);
 
   return (

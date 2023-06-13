@@ -1,3 +1,4 @@
+import { useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Column } from "../PostData/styled";
@@ -12,6 +13,7 @@ import {
   ImageContainer,
 } from "@/detailComps/ContentDetail/styled";
 import { TagWrapper } from "@/postComps/TagBox/styled";
+import resizeElementHeight from "utils/resizeElementHeight";
 
 interface ContentDetailProps {
   projectName: string;
@@ -28,6 +30,13 @@ export default function ContentDetail({
   projectUrl,
   imgSrc,
 }: ContentDetailProps) {
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+
+  // 최초 렌더링 시 textArea height를 조정
+  useEffect(() => {
+    resizeElementHeight(textAreaRef);
+  }, []);
+
   return (
     <Wrapper>
       {tags && <StyledHeader>사용 기술</StyledHeader>}
@@ -57,7 +66,7 @@ export default function ContentDetail({
         </div>
       </ProjectTitleBox>
       <h4>상세 내용</h4>
-      {tags && (
+      {!tags && (
         <ImageContainer>
           <Image
             src={
@@ -73,7 +82,7 @@ export default function ContentDetail({
         </ImageContainer>
       )}
       <Description>
-        <textarea readOnly value={content} />
+        <textarea ref={textAreaRef} readOnly value={content} />
       </Description>
       <hr />
     </Wrapper>
