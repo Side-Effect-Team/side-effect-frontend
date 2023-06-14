@@ -57,7 +57,7 @@ export default function TabBoards({ boards, title, activeTab }: TabBoards) {
           </FilterMenu>
         ))}
       </FilterWrapper>
-      {boards?.length !== 0 ? (
+      {filterBoards?.length !== 0 ? (
         <BoardWrapper>
           {filterBoards &&
             filterBoards.map((el, index) =>
