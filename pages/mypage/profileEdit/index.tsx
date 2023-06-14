@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import {
   ButtonWrapper,
   Container,
-  ContentsWrapper,
+  ContentsEditWrapper,
   SectionWrapper,
   TapMenu,
   TapWrapper,
@@ -22,11 +22,12 @@ import { compareData } from "utils/compareData";
 import SectionBorder from "components/Boarder/SectionBorder";
 import { ChangeProps, updateData } from "utils/updateData";
 import { useTheme } from "styled-components";
+import { withAuth } from "components/hocs/withAuth";
 export interface FormData {
   nickname: string;
 }
 
-export default function MyPageEdit() {
+function MyPageEdit() {
   const queryClient = useQueryClient();
   queryClient.invalidateQueries({ queryKey: ["editProfile"] });
 
@@ -114,7 +115,7 @@ export default function MyPageEdit() {
       <TapWrapper>
         <TapMenu isActive>프로필 수정</TapMenu>
       </TapWrapper>
-      <ContentsWrapper>
+      <ContentsEditWrapper>
         <form onSubmit={handleSubmit(onClickEdit)}>
           <IntroductionEdit
             nickname={data?.nickname}
@@ -147,7 +148,8 @@ export default function MyPageEdit() {
             <Button>수정 완료</Button>
           </ButtonWrapper>
         </form>
-      </ContentsWrapper>
+      </ContentsEditWrapper>
     </Container>
   );
 }
+export default withAuth(MyPageEdit);

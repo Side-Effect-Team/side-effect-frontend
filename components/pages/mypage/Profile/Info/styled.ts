@@ -10,7 +10,7 @@ export const InfoWrapper = styled.div`
 `;
 export const InfoTitle = styled.p`
   min-width: 30%;
-  color: ${(p) => p.theme.colors.darkGray};
+  color: ${(p) => p.theme.textColor};
   font-weight: 600;
   ${media.mobile} {
     font-size: 14px;

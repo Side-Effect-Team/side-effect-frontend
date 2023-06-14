@@ -57,7 +57,8 @@ export const Header = styled.div<{ src?: string }>`
   background-repeat: no-repeat;
 
   ${media.mobile} {
-    width: 200px;
+    width: 150px;
+    min-width: 150px;
     height: 150px;
     border-radius: 15px;
   }
@@ -74,7 +75,7 @@ export const ContentsWrapper = styled.div`
   background-color: ${(p) => p.theme.componentBgColor};
 
   ${media.mobile} {
-    width: 65%;
+    width: calc(100% - 150px);
     height: 150px;
     justify-content: space-between;
     padding: 5px 15px;
@@ -112,6 +113,7 @@ export const Content = styled.div`
   overflow: hidden;
   ${media.mobile} {
     font-size: 14px;
+    -webkit-line-clamp: 1;
   }
 `;
 

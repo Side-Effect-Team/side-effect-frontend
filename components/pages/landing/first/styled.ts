@@ -31,7 +31,8 @@ export const LandingImgWrapper = styled.div`
   }
 `;
 export const ScrollWrapper = styled.div`
-  ${media.mobile} {
+  display: none;
+  ${media.custom(500)} {
     width: 20vw;
     max-width: 100px;
     display: flex;
