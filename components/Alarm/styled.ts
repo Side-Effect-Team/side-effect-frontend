@@ -80,6 +80,7 @@ export const Container = styled.div`
     right: 0;
     left: 0;
     animation: slide 0.5s ease-in-out;
+    border-radius: 0;
   }
   @keyframes slide {
     0% {
@@ -122,8 +123,8 @@ export const DeleteButton = styled(IoClose)`
 export const Wrapper = styled.div<{ watched: boolean }>`
   width: 100%;
   height: 90px;
-  border: 2px solid
-    ${(p) => (p.watched ? p.theme.grayToDark : p.theme.alarmDefaultColor)};
+  border: 2px solid ${(p) => p.theme.cardBorder};
+  box-shadow: ${(p) => p.theme.cardBoxShadow};
   border-radius: 10px;
   margin-bottom: 10px;
   cursor: pointer;
