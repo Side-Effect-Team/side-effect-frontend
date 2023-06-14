@@ -3,13 +3,11 @@ import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import Alarm from "components/Alarm";
 import { useAppSelector } from "store/hooks";
-import { useRef, useState } from "react";
-import useOutsideClick from "hooks/common/useOutsideClick";
+import { useEffect, useState } from "react";
 import { Container, ImgContainer } from "./styled";
 import { getMypageData } from "apis/UserAPI";
 
 export default function LoggedInMenuBox() {
-  const AlarmListRef = useRef(null);
   const [openAlarm, setOpenAlarm] = useState(false);
   const { token } = useAppSelector((state) => state.auth);
   const router = useRouter();
@@ -19,13 +17,23 @@ export default function LoggedInMenuBox() {
     queryFn: getMypageData,
   });
 
-  useOutsideClick(AlarmListRef, () => setOpenAlarm(false));
-
+  useEffect(() => {
+    const handlePopstate = () => {
+      if (openAlarm) {
+        setOpenAlarm(false);
+        console.log("알람이벤트");
+      }
+    };
+    window.addEventListener("popstate", handlePopstate);
+    return () => {
+      window.removeEventListener("popstate", handlePopstate);
+    };
+  }, [openAlarm]);
   return (
-    <div ref={AlarmListRef}>
+    <div>
       {token && (
-        <Container onClick={() => router.push("/mypage")}>
-          <ImgContainer>
+        <Container>
+          <ImgContainer onClick={() => router.push("/mypage")}>
             {data?.data.imgUrl ? (
               <Image
                 src={`${process.env.NEXT_PUBLIC_API_URL}/user/image/${data?.data.imgUrl}`}
