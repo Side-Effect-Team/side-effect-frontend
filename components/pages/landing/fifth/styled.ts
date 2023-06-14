@@ -2,9 +2,11 @@ import styled from "styled-components";
 import { media } from "styles/media";
 export const FifthSectionContainer = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100%;
   max-width: ${(p) => p.theme.sizes.desktop};
-  padding: 40px;
+  max-height: 600px;
   width: 100%;
   flex-direction: column;
   ${media.mobile} {
@@ -25,6 +27,7 @@ export const Title = styled.div`
 export const SectionWrapper = styled.div`
   display: flex;
   height: 100%;
+  width: 100%;
   gap: 20px;
   ${media.mobile} {
     flex-direction: column;
