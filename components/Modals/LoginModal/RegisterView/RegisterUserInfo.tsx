@@ -1,17 +1,11 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { handleModalView } from "@/store/loginViewTransitionSlice";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import {
-  ANIMATION_DIRECTION,
-  POSITION_LIST,
-  CAREER_LIST,
-  SELECT_CAREER,
-  SELECT_POSITIONS,
-} from "enum";
-import useToast from "@/hooks/common/useToast";
+import { handleModalView } from "store/loginViewTransitionSlice";
+import { useAppDispatch, useAppSelector } from "store/hooks";
+import { ANIMATION_DIRECTION, SELECT_CAREER, SELECT_POSITIONS } from "enum";
+import useToast from "hooks/common/useToast";
 import axios from "axios";
-import SelectBox from "@/components/SelectBox";
+import SelectBox from "components/SelectBox";
 import {
   SelectSection,
   ButtonWrapper,
@@ -21,8 +15,8 @@ import {
   Form,
   ViewWrapper,
 } from "./styled";
-import Button from "@/components/Button";
-import { createAuthentication } from "@/store/authSlice";
+import Button from "components/Button";
+import { createAuthentication } from "store/authSlice";
 
 interface FormData {
   githubUrl: string;

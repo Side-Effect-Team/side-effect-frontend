@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { getRecruits } from "@/apis/RecruitBoardAPI";
+import { getRecruits } from "apis/RecruitBoardAPI";
 
 export const useGetRecruitData = (
   size: number,

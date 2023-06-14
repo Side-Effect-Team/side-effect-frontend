@@ -1,14 +1,14 @@
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { closeModal } from "../../../store/modalSlice";
 import { AiOutlineClose } from "react-icons/ai";
-import { useFilterTab } from "@/hooks/common/useFilterTab";
+import { useFilterTab } from "hooks/common/useFilterTab";
 import { Wrapper, Title, ManageSection } from "./styled";
-import { useGetApplicantData } from "@/hooks/queries/useGetApplicantData";
+import { useGetApplicantData } from "hooks/queries/useGetApplicantData";
 import FilterTab from "./FilterTab/index";
 import PositionFilterTab from "./PositionFilterTab/index";
 import ManageList from "./ManageList/index";
 import WaitingImage from "./WaitingImage";
-import ManageCardSkeletion from "@/components/Skeleton/ManageCardSkeleton";
+import ManageCardSkeletion from "components/Skeleton/ManageCardSkeleton";
 const FILTER_TAB = [
   { name: "지원현황", value: "pending" },
   { name: "팀원관리", value: "approved" },
@@ -34,7 +34,6 @@ export default function ManageTeamModal() {
   const {
     data = { applicantNum: {}, applicants: [] },
     isLoading,
-    isSuccess,
   } = useGetApplicantData(value, positionValue);
   const { applicants, applicantNum } = data;
   console.log(data);

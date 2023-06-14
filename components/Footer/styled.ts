@@ -1,9 +1,5 @@
-import { media } from "@/styles/mediatest";
-import styled, { css } from "styled-components";
-
-interface GithubIconProps {
-  isDark: boolean;
-}
+import { media } from "styles/media";
+import styled from "styled-components";
 
 export const Wrapper = styled.footer`
   background: ${(p) => p.theme.footerBgColor};
@@ -20,21 +16,6 @@ export const Contents = styled.div`
   align-items: center;
   flex-wrap: wrap;
   gap: 20vw;
-`;
-
-export const GithubIcon = styled.div<GithubIconProps>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  ${(p) =>
-    p.isDark &&
-    css`
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      background: ${(p) => p.theme.textColor};
-    `}
 `;
 
 export const IconBox = styled.div`
@@ -69,6 +50,7 @@ export const IconWrapper = styled.div`
   display: flex;
   justify-content: center;
   width: 110px;
+
   ${media.mobile} {
     width: 90px;
   }

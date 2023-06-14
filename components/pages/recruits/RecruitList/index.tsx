@@ -1,11 +1,11 @@
 import { useEffect, useRef } from "react";
 import { Wrapper, NoListWrapper } from "./styled";
-import RecruitCardSkeleton from "@/components/Skeleton/RecruitCardSkeleton";
-import RecruitCard, { RecruitDataProps } from "@/components/Card/RecruitCard";
-import { useGetRecruitData } from "@/hooks/queries/useGetRecruitData";
-import { useObserver } from "@/hooks/common/useObserver";
+import RecruitCardSkeleton from "components/Skeleton/RecruitCardSkeleton";
+import RecruitCard, { RecruitDataProps } from "components/Card/RecruitCard";
+import { useGetRecruitData } from "hooks/queries/useGetRecruitData";
+import { useObserver } from "hooks/common/useObserver";
 import { SKILL_LIST_IN_FILTER } from "enum";
-import NoData from "@/components/Nodata";
+import NoData from "components/Nodata";
 
 type SkillType = (typeof SKILL_LIST_IN_FILTER)[number]["value"];
 

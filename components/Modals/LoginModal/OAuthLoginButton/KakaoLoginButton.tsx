@@ -1,6 +1,6 @@
 import Image from "next/image";
 import KakaoImg from "../../../../public/images/Kakao.png";
-import useLogin from "@/hooks/common/useLogin";
+import useLogin from "hooks/common/useLogin";
 import { OAuthLogin, OAuthLoginWrapper, ButtonTitle } from "./styled";
 import { onSuccessLogin } from "apis/UserAPI";
 export default function KakaoLoginButton() {

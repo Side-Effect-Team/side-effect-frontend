@@ -1,5 +1,5 @@
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { closeModal } from "@/store/modalSlice";
+import { useAppDispatch, useAppSelector } from "store/hooks";
+import { closeModal } from "store/modalSlice";
 import { AiOutlineClose } from "react-icons/ai";
 import { Wrapper, Header } from "./styled";
 import RegisterNickname from "./RegisterView/RegisterNickname";
@@ -17,7 +17,6 @@ export default function LoginModal() {
   const dispatch = useAppDispatch();
   const { isOpen, modalType } = useAppSelector((state) => state.modal);
   const { modalView } = useAppSelector((state) => state.loginView);
-  const { token } = useAppSelector((state) => state.auth);
   const handleModalClose = () => {
     dispatch(closeModal());
   };

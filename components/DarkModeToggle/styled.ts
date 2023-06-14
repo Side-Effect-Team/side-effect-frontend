@@ -25,7 +25,7 @@ export const DarkModeCircle = styled.label<{ isDark: boolean }>`
     transition: 0.3s ease;
   }
   .icon {
-    z-index: 10;
+    z-index: 5;
     position: absolute;
     top: 7px;
     transition: 0.3s ease;

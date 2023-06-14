@@ -1,4 +1,4 @@
-import { media } from "@/styles/mediatest";
+import { media } from "styles/media";
 import styled, { css } from "styled-components";
 
 export const TagContainer = styled.div`
@@ -21,7 +21,7 @@ export const TagTitle = styled.div`
   color: ${(p) => p.theme.colors.gray};
   margin-bottom: 10px;
   ${media.mobile} {
-    margin-bottom: 0px;
+    margin-bottom: 0;
     margin-right: 10px;
   }
 `;
@@ -34,7 +34,7 @@ export const EmptyTitle = styled.div`
   margin-top: 15px;
   min-height: 65px;
   ${media.mobile} {
-    margin-bottom: 0px;
+    margin-bottom: 0;
     margin-right: 10px;
     margin-top: 0;
     min-height: 0;
@@ -93,6 +93,6 @@ export const TagWrapper = styled.div`
   ${media.mobile} {
     width: calc(100% - 90px);
     height: 25px;
-    margin-bottom: 0px;
+    margin-bottom: 0;
   }
 `;

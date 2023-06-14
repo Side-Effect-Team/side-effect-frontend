@@ -1,6 +1,6 @@
 import Image from "next/image";
 import DefaultImg from "../../../../public/images/mypageDefaultImage.png";
-import { handleCareerTranslate } from "@/utils/translateData";
+import { handleCareerTranslate } from "utils/translateData";
 import {
   ManageCardWrapper,
   ProfileImage,

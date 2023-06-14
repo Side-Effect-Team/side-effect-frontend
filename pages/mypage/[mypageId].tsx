@@ -1,12 +1,12 @@
-import Profile from "@/components/pages/mypage/Profile";
+import Profile from "components/pages/mypage/Profile";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { MypageProps } from ".";
 import styled from "styled-components";
-import { theme } from "@/styles/Theme";
-import { store } from "@/store/store";
-import { media } from "@/styles/mediatest";
+import { theme } from "styles/Theme";
+import { store } from "store/store";
+import { media } from "styles/media";
 
 export default function MyPageId() {
   const router = useRouter();

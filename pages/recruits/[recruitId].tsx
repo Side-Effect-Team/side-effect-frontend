@@ -4,7 +4,7 @@ import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
 import PositionDetail from "@/detailComps/PositionDetail";
 import ContentDetail from "@/detailComps/ContentDetail";
 import PostData from "@/detailComps/PostData";
-import { getRecruitPost } from "@/apis/RecruitBoardAPI";
+import { getRecruitPost } from "apis/RecruitBoardAPI";
 import CommentBox from "@/detailComps/CommentBox";
 
 interface RecruitDetailPageProps {

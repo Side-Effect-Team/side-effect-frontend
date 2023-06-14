@@ -1,13 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
-import customAxios from "@/apis/customAxios";
+import customAxios from "apis/customAxios";
 import { GetServerSidePropsContext } from "next";
 import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
 import { useRouter } from "next/router";
-import { useInputImage } from "@/hooks/common/useInputImage";
+import { useInputImage } from "hooks/common/useInputImage";
 import { DEFAULT_RECRUIT_CARD_IMAGE } from "../../../enum";
-import { useForm } from "@/hooks/common/useForm";
-import PageHead from "@/components/PageHead";
+import { useForm } from "hooks/common/useForm";
+import PageHead from "components/PageHead";
 import ProjectUrlBox from "@/postComps/ProjectUrlBox";
 import { PostTitleStyled } from "@/postComps/common/Title.styled";
 import {
@@ -20,9 +20,9 @@ import {
   SubmitBtnBox,
   TextareaForm,
 } from "@/postComps/common/PostForm.styled";
-import Button from "@/components/Button";
+import Button from "components/Button";
 import Image from "next/image";
-import { POST_FORM } from "@/pages/post/recruit";
+import { POST_FORM } from "pages/post/recruit";
 
 interface EditProjectPageProps {
   project: ProjectType;

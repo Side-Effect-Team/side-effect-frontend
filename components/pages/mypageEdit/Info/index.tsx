@@ -5,10 +5,10 @@ import {
   useEffect,
   useState,
 } from "react";
-import SelectBox from "@/components/SelectBox";
+import SelectBox from "components/SelectBox";
 import { Input } from "./styled";
 import { InfoTitle, InfoWrapper } from "../../mypage/Profile/Info/styled";
-import { translateCareer, translatePosition } from "@/utils/translateData";
+import { translateCareer, translatePosition } from "utils/translateData";
 import { SELECT_CAREER, SELECT_POSITIONS } from "enum";
 
 interface InfoEditProps {

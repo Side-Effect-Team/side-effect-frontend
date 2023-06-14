@@ -14,9 +14,9 @@ import {
   ViewIcon,
 } from "./styled";
 import { useRouter } from "next/router";
-import { useAddLikeProject } from "@/hooks/mutations/useAddLikeProject";
-import HeartButton from "@/components/Button/HeartButton";
-import { getBoardDate } from "@/utils/getDate";
+import { useAddLikeProject } from "hooks/mutations/useAddLikeProject";
+import HeartButton from "components/Button/HeartButton";
+import { getBoardDate } from "utils/getDate";
 export interface BoardCardProps {
   category: string;
   closed: boolean;

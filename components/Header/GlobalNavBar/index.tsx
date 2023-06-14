@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import {
   Wrapper,
   HeaderStyled,
@@ -11,11 +10,11 @@ import {
 import MobileMenuBox from "../MobileMenuBox";
 import { BOARD_LIST } from "../../../enum";
 import Button from "../../Button";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { openModal } from "@/store/modalSlice";
+import { useAppDispatch, useAppSelector } from "store/hooks";
+import { openModal } from "store/modalSlice";
 import MainLogo from "../../../public/images/mainLogo.svg";
 
-import LoggedInMenuBox from "@/components/Header/LoggedInMenuBox";
+import LoggedInMenuBox from "components/Header/LoggedInMenuBox";
 import { useTheme } from "styled-components";
 
 interface GlobalNavBarProps {

@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { media } from "@/styles/mediatest";
-import { theme } from "@/styles/Theme";
-import { darken, lighten } from "polished";
+import { media } from "styles/media";
+import { theme } from "styles/Theme";
+import { lighten } from "polished";
 
 export const ScrollToTopWrapper = styled.div`
   position: fixed;

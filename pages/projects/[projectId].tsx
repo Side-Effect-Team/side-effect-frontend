@@ -4,7 +4,7 @@ import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
 import ContentDetail from "@/detailComps/ContentDetail";
 import CommentBox from "@/detailComps/CommentBox";
 import PostData from "@/detailComps/PostData";
-import { getProjectPost } from "@/apis/ProjectAPI";
+import { getProjectPost } from "apis/ProjectAPI";
 
 interface ProjectDetailPageProps {
   projectId: string;

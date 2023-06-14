@@ -11,16 +11,16 @@ import {
   SectionWrapper,
   TapMenu,
   TapWrapper,
-} from "@/components/pages/mypage/styled";
+} from "components/pages/mypage/styled";
 import { useRouter } from "next/router";
-import useToast from "@/hooks/common/useToast";
-import { useGetProfileData } from "@/hooks/queries/useGetPofileData";
-import { useEditProfile } from "@/hooks/mutations/useEditProfile";
-import { useInputImage } from "@/hooks/common/useInputImage";
+import useToast from "hooks/common/useToast";
+import { useGetProfileData } from "hooks/queries/useGetPofileData";
+import { useEditProfile } from "hooks/mutations/useEditProfile";
+import { useInputImage } from "hooks/common/useInputImage";
 import { useQueryClient } from "@tanstack/react-query";
-import { compareData } from "@/utils/compareData";
-import SectionBorder from "@/components/Boarder/SectionBorder";
-import { ChangeProps, updateData } from "@/utils/updateData";
+import { compareData } from "utils/compareData";
+import SectionBorder from "components/Boarder/SectionBorder";
+import { ChangeProps, updateData } from "utils/updateData";
 import { useTheme } from "styled-components";
 export interface FormData {
   nickname: string;

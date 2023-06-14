@@ -1,5 +1,5 @@
 import { SKILL_LIST_IN_FILTER } from "enum";
-import SelectBox from "@/components/SelectBox";
+import SelectBox from "components/SelectBox";
 import { Wrapper, SelectBoxWrapper, SearchInput } from "./styled";
 
 type SkillType = (typeof SKILL_LIST_IN_FILTER)[number]["value"];

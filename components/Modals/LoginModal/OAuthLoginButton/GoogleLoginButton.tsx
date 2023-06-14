@@ -1,6 +1,6 @@
 import Image from "next/image";
 import GoogleImg from "../../../../public/images/Google.png";
-import useLogin from "@/hooks/common/useLogin";
+import useLogin from "hooks/common/useLogin";
 import { useGoogleLogin } from "@react-oauth/google";
 import { OAuthLogin, OAuthLoginWrapper, ButtonTitle } from "./styled";
 import { onSuccessLogin } from "apis/UserAPI";

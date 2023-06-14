@@ -1,3 +1,4 @@
+import { useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Column } from "../PostData/styled";
@@ -9,8 +10,11 @@ import {
   TagContainer,
   ProjectTitle,
   ProjectTitleBox,
+  ImageContainer,
+  DescriptionText,
 } from "@/detailComps/ContentDetail/styled";
 import { TagWrapper } from "@/postComps/TagBox/styled";
+import resizeElementHeight from "utils/resizeElementHeight";
 
 interface ContentDetailProps {
   projectName: string;
@@ -27,6 +31,13 @@ export default function ContentDetail({
   projectUrl,
   imgSrc,
 }: ContentDetailProps) {
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+
+  // 최초 렌더링 시 textArea height를 조정
+  useEffect(() => {
+    resizeElementHeight(textAreaRef);
+  }, []);
+
   return (
     <Wrapper>
       {tags && <StyledHeader>사용 기술</StyledHeader>}
@@ -43,9 +54,7 @@ export default function ContentDetail({
       )}
       <StyledHeader>프로젝트 소개</StyledHeader>
       <ProjectTitleBox>
-        <div>
-          <h4>프로젝트명</h4>
-        </div>
+        <h4>프로젝트명</h4>
         <Column />
         <div>
           {tags ? (
@@ -58,20 +67,8 @@ export default function ContentDetail({
         </div>
       </ProjectTitleBox>
       <h4>상세 내용</h4>
-      <div>
-        {tags ? (
-          <Image
-            src={
-              imgSrc
-                ? `${process.env.NEXT_PUBLIC_API_URL}/recruit-board/image/${imgSrc}`
-                : "/images/BoardDefaultBackground.png"
-            }
-            alt="프로젝트 사진"
-            width={400}
-            height={300}
-            priority
-          />
-        ) : (
+      {!tags && (
+        <ImageContainer>
           <Image
             src={
               imgSrc
@@ -79,14 +76,19 @@ export default function ContentDetail({
                 : "/images/ProjectDefaultBackground.png"
             }
             alt="프로젝트 사진"
-            width={400}
-            height={300}
+            style={{ objectFit: "contain" }}
+            fill
             priority
           />
-        )}
-      </div>
+        </ImageContainer>
+      )}
       <Description>
-        <textarea readOnly value={content} />
+        <DescriptionText
+          ref={textAreaRef}
+          readOnly
+          value={content}
+          wrap="virtual"
+        />
       </Description>
       <hr />
     </Wrapper>

@@ -3,16 +3,16 @@ import {
   ContentsWrapper,
   TapMenu,
   TapWrapper,
-} from "@/components/pages/mypage/styled";
-import Profile from "@/components/pages/mypage/Profile";
+} from "components/pages/mypage/styled";
+import Profile from "components/pages/mypage/Profile";
 import { useEffect, useState } from "react";
-import { BoardCardProps } from "@/components/Card/ProjectCard";
-import TabBoards from "@/components/pages/mypage/TabBoards";
-import Account from "@/components/pages/mypage/Account";
-import { useGetMypageData } from "@/hooks/queries/useGetMypageData";
-import TabApplyBoards from "@/components/pages/mypage/TabApplyBoards";
-import { ApplyBoardCardProps } from "@/components/Card/ApplyCard";
-import { withAuth } from "@/components/hocs/withAuth";
+import { BoardCardProps } from "components/Card/ProjectCard";
+import TabBoards from "components/pages/mypage/TabBoards";
+import Account from "components/pages/mypage/Account";
+import { useGetMypageData } from "hooks/queries/useGetMypageData";
+import TabApplyBoards from "components/pages/mypage/TabApplyBoards";
+import { ApplyBoardCardProps } from "components/Card/ApplyCard";
+import { withAuth } from "components/hocs/withAuth";
 
 export interface MypageProps {
   applyBoards: ApplyBoardCardProps[];

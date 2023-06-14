@@ -1,9 +1,9 @@
-import { deleteAccount, handleLogout } from "@/apis/UserAPI";
+import { deleteAccount } from "apis/UserAPI";
 import { useMutation } from "@tanstack/react-query";
 import useToast from "../common/useToast";
-import { useAppDispatch } from "@/store/hooks";
-import { removeAuthentication } from "@/store/authSlice";
-import { handleModalView } from "@/store/loginViewTransitionSlice";
+import { useAppDispatch } from "store/hooks";
+import { removeAuthentication } from "store/authSlice";
+import { handleModalView } from "store/loginViewTransitionSlice";
 
 export const useDeleteAccount = () => {
   const { addToast, deleteToast } = useToast();

@@ -1,12 +1,12 @@
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "store/hooks";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { handleModalView } from "@/store/loginViewTransitionSlice";
-import { addNickname } from "@/store/userInfoStoreSlice";
+import { handleModalView } from "store/loginViewTransitionSlice";
+import { addNickname } from "store/userInfoStoreSlice";
 import { Input, Label, ButtonWrapper, Form, ViewWrapper } from "./styled";
 import { ANIMATION_DIRECTION } from "enum";
-import { duplicateNickname } from "@/apis/UserAPI";
+import { duplicateNickname } from "apis/UserAPI";
 import ErrorMessage from "./ErrorMessage";
-import Button from "@/components/Button";
+import Button from "components/Button";
 interface FormInput {
   nickname: string;
 }

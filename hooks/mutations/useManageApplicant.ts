@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { manageApplicant } from "@/apis/ApplicantAPI";
+import { manageApplicant } from "apis/ApplicantAPI";
 import useToast from "../common/useToast";
 
 export const useManageApplicant = (nickName: string) => {

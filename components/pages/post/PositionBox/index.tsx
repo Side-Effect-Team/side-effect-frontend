@@ -9,8 +9,8 @@ import {
   MemberNeedsBox,
   SelectStyled,
 } from "./styled";
-import Button from "@/components/Button";
-import { POSITIONS } from "@/pages/post/recruit";
+import Button from "components/Button";
+import { POSITIONS } from "pages/post/recruit";
 
 interface PositionBoxProps {
   data: (typeof POSITIONS)[0];

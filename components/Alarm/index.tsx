@@ -1,8 +1,8 @@
 import { Dispatch, MouseEvent, SetStateAction } from "react";
 import { AlarmButton, AlarmDiv, AlarmIconDiv, AlarmCount } from "./styled";
 import AlarmList from "./AlarmList";
-import { useGetAlarmData } from "@/hooks/queries/useGetAlarmData";
-import { useGetAlarmNum } from "@/hooks/queries/useGetAlarmNum";
+import { useGetAlarmData } from "hooks/queries/useGetAlarmData";
+import { useGetAlarmNum } from "hooks/queries/useGetAlarmNum";
 
 interface FromHeaderProps {
   openAlarm: boolean;

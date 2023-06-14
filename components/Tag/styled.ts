@@ -1,5 +1,5 @@
-import { theme } from "@/styles/Theme";
-import { media } from "@/styles/mediatest";
+import { theme } from "styles/Theme";
+import { media } from "styles/media";
 import styled, { css } from "styled-components";
 
 export interface TagProps extends React.HTMLAttributes<HTMLDivElement> {

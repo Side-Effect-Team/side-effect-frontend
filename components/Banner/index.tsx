@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import { Wrapper, ImageContainer, Contents } from "./styled";
 import Button from "../Button";
-import { useAppSelector } from "@/store/hooks";
-import useToast from "@/hooks/common/useToast";
+import { useAppSelector } from "store/hooks";
+import useToast from "hooks/common/useToast";
 
 interface BannerProps {
   title: string;

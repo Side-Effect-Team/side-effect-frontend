@@ -1,9 +1,9 @@
 import Image from "next/image";
 import GithubImg from "../../../../../public/images/Github.png";
 
-import Button from "@/components/Button";
-import { useManageApplicant } from "../../../../../hooks/mutations/useManageApplicant";
-import { useManageTeam } from "../../../../../hooks/mutations/useManageTeam";
+import Button from "components/Button";
+import { useManageApplicant } from "hooks/mutations/useManageApplicant";
+import { useManageTeam } from "hooks/mutations/useManageTeam";
 import { ApplicatnsType } from "../index";
 import { useRouter } from "next/router";
 import { ButtonSectionWrapper } from "./styled";
@@ -26,7 +26,7 @@ export default function ButtonSection({
   const router = useRouter();
   const recruitBoardId = router.query.recruitId as string;
   const handleMoveProfile = (userId: number) => {
-    router.push(`/mypage/${userId}`);
+    window.open(`/mypage/${userId}`, "_blank");
   };
   const handleRemoveMember = () => {
     if (confirm(`${nickName}님을 정말 내보내시겠습니까?`)) {

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { getAlarmDataAll } from "apis/NotificationAPI";
-import useToast from "@/hooks/common/useToast";
+import useToast from "hooks/common/useToast";
 
 export const useGetAlarmDataAll = () => {
   const { addToast, deleteToast } = useToast();

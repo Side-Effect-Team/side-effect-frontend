@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getApplicantData } from "@/apis/ApplicantAPI";
+import { getApplicantData } from "apis/ApplicantAPI";
 import { useRouter } from "next/router";
 export const useGetApplicantData = (value: string, positionValue: string) => {
   const router = useRouter();
