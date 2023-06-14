@@ -22,11 +22,12 @@ import { compareData } from "utils/compareData";
 import SectionBorder from "components/Boarder/SectionBorder";
 import { ChangeProps, updateData } from "utils/updateData";
 import { useTheme } from "styled-components";
+import { withAuth } from "components/hocs/withAuth";
 export interface FormData {
   nickname: string;
 }
 
-export default function MyPageEdit() {
+function MyPageEdit() {
   const queryClient = useQueryClient();
   queryClient.invalidateQueries({ queryKey: ["editProfile"] });
 
@@ -151,3 +152,4 @@ export default function MyPageEdit() {
     </Container>
   );
 }
+export default withAuth(MyPageEdit);
