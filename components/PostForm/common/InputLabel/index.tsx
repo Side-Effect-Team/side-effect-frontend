@@ -1,4 +1,4 @@
-import { Wrapper } from "./styled";
+import { LabelStyled } from "./styled";
 
 interface InputLabelProps {
   idName: string;
@@ -6,5 +6,5 @@ interface InputLabelProps {
 }
 
 export default function InputLabel({ idName, label }: InputLabelProps) {
-  return <Wrapper htmlFor={idName}>{label}</Wrapper>;
+  return <LabelStyled htmlFor={idName}>{label}</LabelStyled>;
 }
