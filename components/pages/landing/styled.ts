@@ -6,12 +6,10 @@ export const SectionContainer = styled.section`
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 20px;
+  padding: 40px;
   overflow: hidden;
+  flex-direction: column;
   :nth-child(even) {
     background-color: ${(p) => p.theme.landingPageColor};
-  }
-  ${media.mobile} {
-    flex-direction: column;
   }
 `;
