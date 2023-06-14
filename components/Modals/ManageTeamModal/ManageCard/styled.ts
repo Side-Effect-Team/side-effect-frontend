@@ -7,7 +7,8 @@ export const ManageCardWrapper = styled.li`
   border-radius: 15px;
   align-items: center;
   gap: 5px;
-  box-shadow: ${(p) => p.theme.boxShadow};
+  border: 2px solid ${(p) => p.theme.grayToDark};
+  box-shadow: ${(p) => p.theme.cardBoxShadow};
 
   background-color: ${(p) => p.theme.componentBgColor};
   ${media.mobile} {
