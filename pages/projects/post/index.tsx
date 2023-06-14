@@ -1,6 +1,7 @@
-import FormTitle from "@/formComps/FormTitle";
-import { Wrapper, Contents } from "@/formComps/common/PageLayout.styled";
+import FormTitle from "@/postFormComps/FormTitle";
+import { Wrapper, Contents } from "@/postFormComps/common/PageLayout.styled";
 import PageHead from "components/PageHead";
+import PostTitleInput from "@/postFormComps/PostTitleInput";
 
 export default function PostProjectPage() {
   return (
@@ -9,7 +10,18 @@ export default function PostProjectPage() {
       <Contents>
         <FormTitle title="프로젝트 자랑하기" />
         <form>
-          <h2>게시글 제목</h2>
+          <PostTitleInput
+            idName="title"
+            label="게시글 제목"
+            guideText="제목에 핵심 내용을 드러내보세요"
+            placeHolder=""
+          />
+          <PostTitleInput
+            idName="projectName"
+            label="프로젝트명"
+            guideText="멋진 프로젝트 이름을 정해보세요"
+            placeHolder="3~20자 이내로 입력해주세요"
+          />
           <h2>프로젝트명</h2>
           <h2>한 줄 소개</h2>
           <h2>프로젝트 URL</h2>
