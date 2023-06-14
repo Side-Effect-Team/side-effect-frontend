@@ -20,7 +20,7 @@ export default function SecondSection() {
           <SubText>
             지금까지와는 다른 프로젝트 모집 플랫폼
             <br />
-            사이트 이펙트와 함께 커리어를 만들어가요
+            사이드 이펙트와 함께 커리어를 만들어가요
           </SubText>
         </SubWrapper>
       </Wrapper>

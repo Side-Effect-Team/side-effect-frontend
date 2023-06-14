@@ -3,6 +3,7 @@ import { Wrapper, Contents } from "@/postFormComps/common/PageLayout.styled";
 import PageHead from "components/PageHead";
 import PostTitleInput from "@/postFormComps/PostTitleInput";
 import ProjectUrlInput from "@/postFormComps/ProjectUrlInput";
+import DescriptionInput from "@/postFormComps/DescriptionInput";
 
 export default function PostProjectPage() {
   return (
@@ -36,7 +37,7 @@ export default function PostProjectPage() {
             placeHolder="https:// 부터 전체 주소를 입력해주세요"
           />
           <h2>대표 이미지</h2>
-          <h2>상세 내용</h2>
+          <DescriptionInput idName="content" label="상세 내용" />
         </form>
       </Contents>
     </Wrapper>

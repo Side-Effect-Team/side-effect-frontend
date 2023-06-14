@@ -2,6 +2,7 @@ import FormTitle from "@/postFormComps/FormTitle";
 import { Wrapper, Contents } from "@/postFormComps/common/PageLayout.styled";
 import PageHead from "components/PageHead";
 import PostTitleInput from "@/postFormComps/PostTitleInput";
+import DescriptionInput from "@/postFormComps/DescriptionInput";
 
 export default function PostRecruitPage() {
   return (
@@ -24,7 +25,7 @@ export default function PostRecruitPage() {
           />
           <h2>모집 포지션</h2>
           <h2>태그 설정</h2>
-          <h2>상세 내용</h2>
+          <DescriptionInput idName="content" label="상세 내용" />
         </form>
       </Contents>
     </Wrapper>
