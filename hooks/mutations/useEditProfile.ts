@@ -3,7 +3,7 @@ import { editProfile } from "apis/UserAPI";
 import useToast from "../common/useToast";
 
 export const useEditProfile = () => {
-  const { addToast, deleteToast } = useToast();
+  const { addToast } = useToast();
 
   const { mutate } = useMutation({
     mutationFn: editProfile,
@@ -13,7 +13,6 @@ export const useEditProfile = () => {
         title: "편집 성공!",
         content: "프로필 편집에 성공하였습니다.",
       });
-      deleteToast("unique-id");
     },
     onError: () => {
       addToast({
@@ -21,8 +20,6 @@ export const useEditProfile = () => {
         title: "편집 실패!",
         content: "프로필 편집에 실패하였습니다.",
       });
-
-      deleteToast("unique-id");
     },
   });
   return mutate;

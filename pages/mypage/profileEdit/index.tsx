@@ -21,7 +21,6 @@ import { useQueryClient } from "@tanstack/react-query";
 import { compareData } from "utils/compareData";
 import SectionBorder from "components/Boarder/SectionBorder";
 import { ChangeProps, updateData } from "utils/updateData";
-import { useTheme } from "styled-components";
 import { withAuth } from "components/hocs/withAuth";
 export interface FormData {
   nickname: string;
@@ -30,7 +29,6 @@ export interface FormData {
 function MyPageEdit() {
   const queryClient = useQueryClient();
   queryClient.invalidateQueries({ queryKey: ["editProfile"] });
-
   const data = useGetProfileData();
   const router = useRouter();
   const [introduction, setIntroduction] = useState<string>(data?.introduction);
@@ -48,7 +46,7 @@ function MyPageEdit() {
     handleSubmit,
     formState: { errors },
   } = useForm<{ nickname: string }>();
-  const { addToast, deleteToast } = useToast();
+  const { addToast } = useToast();
 
   const editMutate = useEditProfile();
 
@@ -92,8 +90,6 @@ function MyPageEdit() {
       title: "편집 취소!",
       content: "프로필 편집을 취소하셨습니다.",
     });
-
-    deleteToast("unique-id");
     router.push("/mypage");
   };
 
@@ -109,7 +105,6 @@ function MyPageEdit() {
     });
   }, [data]);
 
-  const theme = useTheme();
   return (
     <Container>
       <TapWrapper>
