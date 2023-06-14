@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { media } from "@/styles/mediatest";
+import { media } from "styles/media";
 export const FifthSectionContainer = styled.div`
   display: flex;
   height: 100%;
@@ -8,7 +8,7 @@ export const FifthSectionContainer = styled.div`
   width: 100%;
   flex-direction: column;
   ${media.mobile} {
-    padding: 20px 0px;
+    padding: 20px 0;
   }
 `;
 export const Title = styled.div`

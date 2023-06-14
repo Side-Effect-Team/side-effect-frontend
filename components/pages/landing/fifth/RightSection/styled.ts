@@ -1,6 +1,6 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import Image from "next/image";
-import { media } from "@/styles/mediatest";
+import { media } from "styles/media";
 
 export const RightSectionWrapper = styled.div<{ inView: boolean }>`
   flex: 5;

@@ -1,7 +1,7 @@
 import styled, { keyframes } from "styled-components";
 import Link from "next/link";
 import Image from "next/image";
-import { media } from "styles/mediatest";
+import { media } from "styles/media";
 const slideUp = keyframes`
   0%{
     opacity: 0;
