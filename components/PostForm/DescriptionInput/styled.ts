@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-export const TextareaStyled = styled.textarea`
+interface TextareaStyledProps {
+  idName: string;
+}
+
+export const TextareaStyled = styled.textarea<TextareaStyledProps>`
   padding: 0.25rem;
   height: 10rem;
   border: none;

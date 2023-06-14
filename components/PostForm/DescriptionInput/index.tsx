@@ -14,7 +14,7 @@ export default function DescriptionInput({
   return (
     <InputBox>
       <InputLabel idName={idName} label={label} />
-      <TextareaStyled />
+      <TextareaStyled idName={idName} />
     </InputBox>
   );
 }
