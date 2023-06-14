@@ -20,9 +20,8 @@ export const SelectOptionWrapper = styled.ul<SelectOptionType>`
   padding: 0;
   position: absolute;
   background-color: ${(p) => p.theme.componentBgColor};
-  box-shadow: inset 0 0 0.5px 1px hsla(0, 0%, 100%, 0.075),
-    0 0 0 1px hsla(0, 0%, 0%, 0.05), 0 0.3px 0.4px hsla(0, 0%, 0%, 0.02),
-    0 0.9px 1.5px hsla(0, 0%, 0%, 0.045), 0 3.5px 6px hsla(0, 0%, 0%, 0.09);
+  border: 2px solid ${(p) => p.theme.cardBorder};
+
   border-radius: 5px;
   width: 100%;
   z-index: 10;
@@ -40,9 +39,9 @@ export const SelectOption = styled.li`
   }
 `;
 export const SelectValue = styled.div`
-  box-shadow: ${(p) => p.theme.boxShadow};
   text-align: center;
   border-radius: 5px;
   padding: 10px;
   background-color: ${(p) => p.theme.componentBgColor};
+  border: 2px solid ${(p) => p.theme.cardBorder};
 `;
