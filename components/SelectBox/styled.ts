@@ -21,13 +21,13 @@ export const SelectOptionWrapper = styled.ul<SelectOptionType>`
   position: absolute;
   background-color: ${(p) => p.theme.componentBgColor};
   border: 2px solid ${(p) => p.theme.cardBorder};
-
   border-radius: 5px;
   width: 100%;
   z-index: 10;
   margin-top: 0.5rem;
   max-height: 300px;
   overflow: auto;
+  font-weight: bolder;
 `;
 export const SelectOption = styled.li`
   border-radius: 5px;
@@ -44,4 +44,5 @@ export const SelectValue = styled.div`
   padding: 10px;
   background-color: ${(p) => p.theme.componentBgColor};
   border: 2px solid ${(p) => p.theme.cardBorder};
+  font-weight: bolder;
 `;
