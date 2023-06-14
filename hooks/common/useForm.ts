@@ -8,8 +8,10 @@ import {
 } from "react";
 import { PROJECT_POST_FORM, RECRUIT_POST_FORM } from "enum";
 
+type PostForm = typeof PROJECT_POST_FORM | typeof RECRUIT_POST_FORM;
+
 interface UseFormProps {
-  initialVals: typeof PROJECT_POST_FORM | typeof RECRUIT_POST_FORM;
+  initialVals: PostForm;
   validate: Function;
   onSubmit: Function;
 }

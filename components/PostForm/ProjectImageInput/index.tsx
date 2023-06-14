@@ -11,6 +11,7 @@ interface ProjectImageInputProps {
   guideText: string;
   defaultImageGuideText: string;
   imgSrc: string;
+  handleImgChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function ProjectImageInput({
@@ -19,6 +20,7 @@ export default function ProjectImageInput({
   guideText,
   defaultImageGuideText,
   imgSrc,
+  handleImgChange,
 }: ProjectImageInputProps) {
   return (
     <InputBox>
@@ -26,16 +28,16 @@ export default function ProjectImageInput({
         <InputLabel idName={idName} label={label} />
         <InputGuideText guideText={guideText} />
       </InputHeader>
-      <ImageInput idName={idName} />
+      <ImageInput idName={idName} handleImgChange={handleImgChange} />
       <InputGuideText guideText={defaultImageGuideText} />
       <ImageContainer>
-        {/*<Image*/}
-        {/*  src={imgSrc}*/}
-        {/*  alt={label}*/}
-        {/*  style={{ objectFit: "contain" }}*/}
-        {/*  fill*/}
-        {/*  priority*/}
-        {/*/>*/}
+        <Image
+          src={imgSrc}
+          alt={label}
+          style={{ objectFit: "contain" }}
+          fill
+          priority
+        />
       </ImageContainer>
     </InputBox>
   );

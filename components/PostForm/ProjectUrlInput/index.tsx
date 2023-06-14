@@ -3,6 +3,7 @@ import InputLabel from "@/postFormComps/common/InputLabel";
 import InputGuideText from "@/postFormComps/common/InputGuideText";
 import UrlInput from "@/postFormComps/common/UrlInput";
 import { FocusEventHandler } from "react";
+import FormErrMsg from "@/postFormComps/common/FormErrMsg";
 
 interface ProjectUrlInputProps {
   idName: string;
@@ -10,7 +11,11 @@ interface ProjectUrlInputProps {
   guideText: string;
   placeHolder: string;
   value: string;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  touched: boolean;
+  errMsg: string;
+  handleChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => void;
   handleBlur: FocusEventHandler;
 }
 
@@ -20,6 +25,8 @@ export default function ProjectUrlInput({
   guideText,
   placeHolder,
   value,
+  touched,
+  errMsg,
   handleChange,
   handleBlur,
 }: ProjectUrlInputProps) {
@@ -36,6 +43,7 @@ export default function ProjectUrlInput({
         handleChange={handleChange}
         handleBlur={handleBlur}
       />
+      {touched && errMsg && <FormErrMsg msg={errMsg} />}
     </InputBox>
   );
 }

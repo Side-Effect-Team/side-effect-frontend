@@ -3,7 +3,9 @@ import { PROJECT_POST_FORM, RECRUIT_POST_FORM } from "enum";
 const formValidator = (
   postForm: typeof PROJECT_POST_FORM | typeof RECRUIT_POST_FORM,
 ) => {
-  const newErrorMsgs = { ...postForm };
+  const newErrorMsgs = isProjectPostForm(postForm)
+    ? { ...PROJECT_POST_FORM }
+    : { ...RECRUIT_POST_FORM };
 
   // 게시글 제목
   if (postForm.title.trim().length < 5)
@@ -19,11 +21,11 @@ const formValidator = (
   if (isProjectPostForm(postForm) && isProjectPostForm(newErrorMsgs)) {
     // 한 줄 소개
     if (
-      postForm.projectSubTitle.trim().length < 3 ||
+      postForm.projectSubTitle.trim().length < 10 ||
       postForm.projectSubTitle.trim().length > 30
     )
       newErrorMsgs.projectSubTitle =
-        "프로젝트 한 줄 소개는 3~30자 이내로 입력해주세요";
+        "프로젝트 한 줄 소개는 10~30자 이내로 입력해주세요";
 
     // 프로젝트 URL
     if (postForm.projectUrl.trim().length === 0)
@@ -34,7 +36,9 @@ const formValidator = (
   if (postForm.content.trim().length < 20)
     newErrorMsgs.content = "게시글 내용은 20자 이상 입력해야 합니다";
 
-  return newErrorMsgs;
+  if (isProjectPostForm(postForm) && isProjectPostForm(newErrorMsgs))
+    return newErrorMsgs as typeof PROJECT_POST_FORM;
+  return newErrorMsgs as typeof RECRUIT_POST_FORM;
 };
 
 // 타입 가드
