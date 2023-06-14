@@ -14,7 +14,7 @@ export default function PostRecruitPage() {
             idName="title"
             label="게시글 제목"
             guideText="제목에 핵심 내용을 드러내보세요"
-            placeHolder=""
+            placeHolder="3~20자 이내로 입력해주세요"
           />
           <PostTitleInput
             idName="projectName"
