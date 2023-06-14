@@ -43,12 +43,10 @@ customAxios.interceptors.response.use(
         return await customAxios.request(config);
       } catch (error: any) {
         // 리프레쉬토큰이 만료되었을때
-        if (error.response.data.code === "RT_001") {
-          // await axios.delete("/token/logout");
-          store.dispatch(removeAuthentication());
-          alert("로그인 유지 기간이 만료되었습니다.");
-          window.location.replace("/");
-        }
+        await axios.delete("/token/at-issue");
+        store.dispatch(removeAuthentication());
+        alert("로그인 유지 기간이 만료되었습니다.");
+        window.location.replace("/");
       }
     }
     //로컬스토리지에서 액세스토큰을 조작하는경우 핸들링
