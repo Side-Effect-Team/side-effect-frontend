@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import ProjectCard from "../../Card/ProjectCard";
-import RecruitCard from "@/components/Card/RecruitCard";
+import RecruitCard from "components/Card/RecruitCard";
 import { Wrapper, CarouselTitle, CardContainer } from "./styled";
-import customAxios from "@/apis/customAxios";
-import { RecruitDataProps } from "@/components/Card/RecruitCard";
-import { BoardCardProps } from "@/components/Card/ProjectCard";
+import customAxios from "apis/customAxios";
+import { RecruitDataProps } from "components/Card/RecruitCard";
+import { BoardCardProps } from "components/Card/ProjectCard";
 
 interface BatchCarouselProps {
   title: string;

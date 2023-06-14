@@ -1,10 +1,10 @@
 import ApplyBoardCard, {
   ApplyBoardCardProps,
-} from "@/components/Card/ApplyCard";
+} from "components/Card/ApplyCard";
 import { FilterMenu, FilterWrapper, NullMessage } from "../TabBoards/styled";
 import { ApplyBoardWrapper } from "./styled";
 import { useEffect, useState } from "react";
-import SectionBorder from "@/components/Boarder/SectionBorder";
+import SectionBorder from "components/Boarder/SectionBorder";
 
 interface TabApplyBoardsProps {
   boards?: ApplyBoardCardProps[] | null;

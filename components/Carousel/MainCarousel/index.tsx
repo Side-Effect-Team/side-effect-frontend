@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 import { CarouselWrapper, SlideContentsWrapper, ButtonStyled } from "./styled";
-import { CAROUSEL_CONTENTS_LIST } from "../../../enum";
+import { CAROUSEL_CONTENTS_LIST } from "enum";
 
 interface MainCarouselProps {
   data: typeof CAROUSEL_CONTENTS_LIST;

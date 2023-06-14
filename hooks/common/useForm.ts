@@ -6,7 +6,7 @@ import {
   FocusEventHandler,
   FormEvent,
 } from "react";
-import { POST_FORM } from "@/pages/post/project";
+import { POST_FORM } from "pages/post/project";
 
 interface UseFormProps {
   initialVals: typeof POST_FORM;
@@ -39,7 +39,8 @@ export const useForm = ({ initialVals, validate, onSubmit }: UseFormProps) => {
     });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
     const newTouched = { ...initialTouched };
     for (const key in newTouched) {
       // @ts-ignore

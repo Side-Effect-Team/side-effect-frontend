@@ -1,9 +1,9 @@
 import axios from "axios";
-import { store } from "@/store/store";
-import { createAuthentication, removeAuthentication } from "@/store/authSlice";
+import { store } from "store/store";
+import { createAuthentication, removeAuthentication } from "store/authSlice";
 import customAxios from "./customAxios";
-import { handleModalView } from "@/store/loginViewTransitionSlice";
-import { ChangeProps } from "@/utils/updateData";
+import { handleModalView } from "store/loginViewTransitionSlice";
+import { ChangeProps } from "utils/updateData";
 
 export const getMypageData = async () => {
   const id = store.getState().auth.userId;

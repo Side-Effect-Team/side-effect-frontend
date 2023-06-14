@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { mediaQuery } from "@/styles/Media";
+import { media } from "styles/media";
 
 interface SlideContentsWrapperProps {
   bgColor: string;
@@ -36,9 +36,9 @@ export const SlideContentsWrapper = styled.main<SlideContentsWrapperProps>`
   opacity: 0;
   transition: all 0.3s linear;
 
-  ${mediaQuery("mobile")`
+  ${media.mobile} {
     flex-direction: column;
-  `}
+  }
 
   ${(p) =>
     p.slidePos === "currentSlide"

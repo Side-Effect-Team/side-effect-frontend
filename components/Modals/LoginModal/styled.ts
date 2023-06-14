@@ -1,5 +1,5 @@
 import styled, { keyframes } from "styled-components";
-import { media } from "@/styles/mediatest";
+import { media } from "styles/media";
 export const Title = styled.div`
   padding: 10px 20px;
   display: flex;
@@ -75,7 +75,7 @@ export const ButtonWrapper = styled.div`
   ${media.mobile} {
     flex-direction: column;
 
-    margin-top: 0 auto;
+    margin: 0 auto;
     width: 80%;
     gap: 0;
   }

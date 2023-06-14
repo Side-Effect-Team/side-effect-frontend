@@ -1,4 +1,4 @@
-import { breakPoints } from "./Media";
+import { sizes } from "./media";
 
 export const theme = {
   colors: {
@@ -16,8 +16,8 @@ export const theme = {
     pretendard: "Pretendard-Regular",
   },
   sizes: {
-    mobile: breakPoints.mobile + "px",
-    desktop: breakPoints.desktop + "px",
+    mobile: sizes.mobile + "px",
+    desktop: sizes.desktop + "px",
   },
   height: {
     header: "75px",

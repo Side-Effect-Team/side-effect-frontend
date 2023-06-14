@@ -1,11 +1,10 @@
-import { DefaultTheme } from "styled-components";
 import {
   ColorsType,
   SizesType,
   HeightType,
   WidthType,
   BrandColorType,
-} from "@/styles/Theme";
+} from "styles/Theme";
 declare module "styled-components" {
   export interface DefaultTheme {
     colors: ColorsType;

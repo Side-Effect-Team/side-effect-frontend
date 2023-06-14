@@ -1,4 +1,4 @@
-import { media } from "@/styles/mediatest";
+import { media } from "styles/media";
 import styled from "styled-components";
 
 export const ManageCardWrapper = styled.li`

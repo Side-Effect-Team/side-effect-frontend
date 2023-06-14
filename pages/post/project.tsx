@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import Image from "next/image";
-import customAxios from "@/apis/customAxios";
+import customAxios from "apis/customAxios";
 import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
 import { PostTitleStyled } from "@/postComps/common/Title.styled";
 import {
@@ -14,12 +14,12 @@ import {
   ImageBox,
   GuideWrapper,
 } from "@/postComps/common/PostForm.styled";
-import Button from "@/components/Button";
-import { useForm } from "@/hooks/common/useForm";
-import { useInputImage } from "@/hooks/common/useInputImage";
+import Button from "components/Button";
+import { useForm } from "hooks/common/useForm";
+import { useInputImage } from "hooks/common/useInputImage";
 import ProjectUrlBox from "@/postComps/ProjectUrlBox";
 import { DEFAULT_PROJECT_CARD_IMAGE } from "../../enum";
-import PageHead from "@/components/PageHead";
+import PageHead from "components/PageHead";
 
 export const POST_FORM = {
   projectName: "",

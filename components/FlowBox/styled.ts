@@ -1,4 +1,4 @@
-import { media } from "@/styles/mediatest";
+import { media } from "styles/media";
 import styled from "styled-components";
 
 export const FlowContainer = styled.div`
@@ -14,7 +14,6 @@ export const FlowContainer = styled.div`
   width: 100%;
   background-color: ${(p) => p.theme.brandColor.primary};
   height: 55px;
-  display: flex;
   align-items: center;
   ${media.mobile} {
     height: 47px;

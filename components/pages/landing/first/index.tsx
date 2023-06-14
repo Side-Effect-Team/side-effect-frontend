@@ -2,7 +2,7 @@ import { useTheme } from "styled-components";
 import { SectionContainer } from "../styled";
 import Landing1 from "../../../../public/images/landing1.svg";
 import Scroll from "../../../../public/images/scroll.svg";
-import FlowBox from "@/components/FlowBox";
+import FlowBox from "components/FlowBox";
 import { Container, LandingImgWrapper, ScrollWrapper, Wrapper } from "./styled";
 
 export default function FirstSection() {

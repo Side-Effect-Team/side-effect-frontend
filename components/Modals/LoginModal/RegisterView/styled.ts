@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { darken, lighten } from "polished";
 
 export const Label = styled.label`
   text-align: start;

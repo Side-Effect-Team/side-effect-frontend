@@ -1,5 +1,5 @@
 import { ProjectListWrapper } from "./styled";
-import ProjectCard from "@/components/Card/ProjectCard";
+import ProjectCard from "components/Card/ProjectCard";
 
 interface PageType {
   hasNext: boolean;

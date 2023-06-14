@@ -1,4 +1,4 @@
-import { Dispatch, MouseEvent, SetStateAction, useEffect, useRef } from "react";
+import { Dispatch, MouseEvent, SetStateAction } from "react";
 import {
   CloseButton,
   Container,
@@ -13,8 +13,8 @@ import {
   Wrapper,
 } from "./styled";
 import { useRouter } from "next/router";
-import { useReadAlarm } from "@/hooks/mutations/useReadAlarm";
-import { useDeleteAlarm } from "@/hooks/mutations/useDeleteAlarm";
+import { useReadAlarm } from "hooks/mutations/useReadAlarm";
+import { useDeleteAlarm } from "hooks/mutations/useDeleteAlarm";
 
 export interface AlarmProps {
   id: number;

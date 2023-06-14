@@ -1,4 +1,4 @@
-import { useAppSelector } from "@/store/hooks";
+import { useAppSelector } from "store/hooks";
 import { HeartFillIcon, HeartWrapper } from "./styled";
 import { MouseEvent, useEffect, useState } from "react";
 import { UseMutateFunction } from "@tanstack/react-query";

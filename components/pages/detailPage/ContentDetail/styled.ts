@@ -45,3 +45,16 @@ export const ProjectTitleBox = styled.div`
   align-items: center;
   line-height: normal;
 `;
+
+export const ImageContainer = styled.div`
+  position: relative;
+  width: 100%;
+  // next/Image fill 일때, 부모 element height 필수
+  height: 35vw;
+  max-height: 350px;
+  margin-bottom: 1rem;
+`;
+
+export const DescriptionText = styled.textarea`
+  width: 100%;
+`;

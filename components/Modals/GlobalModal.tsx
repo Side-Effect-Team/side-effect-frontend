@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { useRouter } from "next/router";
-import { closeModal } from "@/store/modalSlice";
+import { closeModal } from "store/modalSlice";
 import ManageTeamModal from "./ManageTeamModal/ManageTeamModal";
 import LoginModal from "./LoginModal/LoginModal";
 const MODAL_TYPES = {

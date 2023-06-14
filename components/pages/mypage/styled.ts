@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { media } from "@/styles/mediatest";
+import { media } from "styles/media";
 
 export const Container = styled.div`
   min-height: 100vh;

@@ -1,6 +1,6 @@
 import { SectionContainer } from "../styled";
 import { FifthSectionContainer, Title, SectionWrapper } from "./styled";
-import { BestProjectType, BestProjectDataType } from "@/pages/index";
+import { BestProjectType, BestProjectDataType } from "pages/index";
 import { useState } from "react";
 import "swiper/css";
 import "swiper/swiper.min.css";

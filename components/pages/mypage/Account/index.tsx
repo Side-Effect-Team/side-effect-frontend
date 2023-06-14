@@ -1,11 +1,9 @@
-import Button from "@/components/Button";
+import Button from "components/Button";
 import { Wrapper } from "./style";
 import { NickName, Text } from "../Profile/Introduction/styled";
-import { useDeleteAccount } from "@/hooks/mutations/useDeleteAccount";
-import { useAppDispatch } from "@/store/hooks";
-import { removeAuthentication } from "@/store/authSlice";
+import { useDeleteAccount } from "hooks/mutations/useDeleteAccount";
 import { useRouter } from "next/router";
-import { store } from "@/store/store";
+
 interface AccountProps {
   email: string;
   nickname: string;

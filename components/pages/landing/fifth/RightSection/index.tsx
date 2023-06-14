@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Autoplay, Mousewheel } from "swiper";
 import ProjectInfo from "./ProjectInfo";
 import { useState } from "react";
-import { BestProjectDataType } from "@/pages/index";
+import { BestProjectDataType } from "pages/index";
 import { useInView } from "react-intersection-observer";
 interface PropsType {
   data: BestProjectDataType[];

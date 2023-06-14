@@ -10,8 +10,8 @@ import {
   Title,
 } from "./styled";
 import { useRouter } from "next/router";
-import { useCancelApply } from "@/hooks/mutations/useCancelApply";
-import { translatePosition, translateStatus } from "@/utils/translateData";
+import { useCancelApply } from "hooks/mutations/useCancelApply";
+import { translatePosition, translateStatus } from "utils/translateData";
 
 export interface ApplyBoardCardProps {
   boardId: number;

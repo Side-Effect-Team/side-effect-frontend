@@ -4,8 +4,8 @@ import {
   DarkModeIcon,
   LightModeIcon,
 } from "./styled";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { handleDarkMode } from "@/store/darkModeSlice";
+import { useAppDispatch, useAppSelector } from "store/hooks";
+import { handleDarkMode } from "store/darkModeSlice";
 import { BiSun, BiMoon } from "react-icons/bi";
 export default function DarkModeToggle() {
   const { isDark } = useAppSelector((state) => state.darkMode);
