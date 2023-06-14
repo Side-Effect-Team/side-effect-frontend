@@ -9,6 +9,7 @@ export const SelectWrapper = styled.div`
   border-radius: 5px;
   position: relative;
   width: 100%;
+  flex: 5;
 `;
 export const SelectOptionWrapper = styled.ul<SelectOptionType>`
   visibility: ${(p) => (p.visible ? "visible" : "hidden")};
