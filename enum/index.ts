@@ -90,8 +90,7 @@ export const SELECT_CAREER = [
   { name: "시니어(7년이상)", value: "senior" },
 ];
 export const DEFAULT_RECRUIT_CARD_IMAGE = "/images/BoardDefaultBackground.png";
-export const DEFAULT_PROJECT_CARD_IMAGE =
-  "/images/ProjectDefaultBackground.png";
+export const DEFAULT_PROJECT_CARD_IMAGE = "/images/ProjectBackground.png";
 
 export const ANIMATION_DIRECTION = {
   onTheRight: { x: "50%", opacity: 0 },
