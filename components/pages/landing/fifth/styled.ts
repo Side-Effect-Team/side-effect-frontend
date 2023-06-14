@@ -6,7 +6,7 @@ export const FifthSectionContainer = styled.div`
   align-items: center;
   height: 100%;
   max-width: ${(p) => p.theme.sizes.desktop};
-  max-height: 600px;
+  max-height: 700px;
   width: 100%;
   flex-direction: column;
   ${media.mobile} {
