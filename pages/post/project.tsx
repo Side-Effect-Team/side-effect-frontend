@@ -2,8 +2,8 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import Image from "next/image";
 import customAxios from "apis/customAxios";
-import { Wrapper, Contents } from "postComps/common/PageLayout.styled";
-import { PostTitleStyled } from "postComps/common/Title.styled";
+import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
+import { PostTitleStyled } from "@/postComps/common/Title.styled";
 import {
   InputBox,
   LabelForm,
