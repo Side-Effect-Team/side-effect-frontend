@@ -129,7 +129,7 @@ export default function PostRecruitPage() {
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (validatePosition()) handleSubmit();
+    if (validatePosition()) handleSubmit(e);
   };
 
   return (
