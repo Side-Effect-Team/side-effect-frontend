@@ -148,3 +148,17 @@ export const SKILL_LIST_IN_FILTER = [
     value: "go",
   },
 ] as const;
+
+export const PROJECT_POST_FORM = {
+  title: "",
+  projectName: "",
+  projectSubTitle: "",
+  projectUrl: "",
+  content: "",
+};
+
+export const RECRUIT_POST_FORM = {
+  title: "",
+  projectName: "",
+  content: "",
+};
