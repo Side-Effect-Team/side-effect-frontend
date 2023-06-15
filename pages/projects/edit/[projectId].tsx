@@ -12,7 +12,7 @@ import { useInputImage } from "hooks/common/useInputImage";
 import { DEFAULT_PROJECT_CARD_IMAGE, PROJECT_POST_FORM } from "enum";
 import { useForm } from "hooks/common/useForm";
 import formValidator from "utils/formValidator";
-import { submitProjectPost } from "apis/ProjectAPI";
+import { updateProjectPost } from "apis/ProjectAPI";
 
 interface EditProjectPageProps {
   project: ProjectType;
@@ -34,12 +34,15 @@ export default function EditProjectPage({ project }: EditProjectPageProps) {
       },
       validate: (form: typeof PROJECT_POST_FORM) => formValidator(form),
       onSubmit: () =>
-        submitProjectPost(
+        updateProjectPost(
+          project,
           postForm as typeof PROJECT_POST_FORM,
           uploadImg,
           router,
         ),
     });
+
+  console.log(project);
 
   return (
     <Wrapper>
@@ -74,11 +77,11 @@ export default function EditProjectPage({ project }: EditProjectPageProps) {
             label="한 줄 소개"
             guideText="어떤 프로젝트인지 한 줄로 알려주세요"
             placeHolder="3~30자 이내로 입력해주세요"
-            touched={touched.projectSubTitle as boolean}
+            touched={touched.subTitle as boolean}
             // @ts-ignore
-            errMsg={errMsgs.projectSubTitle}
+            errMsg={errMsgs.subTitle}
             // @ts-ignore
-            value={postForm.projectSubTitle}
+            value={postForm.subTitle}
             handleChange={handleChange}
             handleBlur={handleBlur}
           />

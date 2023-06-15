@@ -21,14 +21,14 @@ export const getProjectPost = async (postId: string) => {
 
 // 프로젝트 자랑 글 등록
 export const submitProjectPost = async (
-  data: typeof PROJECT_POST_FORM,
+  form: typeof PROJECT_POST_FORM,
   uploadImg: Function,
   router: NextRouter,
 ) => {
   // request
   const url = `/free-boards`;
   try {
-    const res = await customAxios.post(url, data);
+    const res = await customAxios.post(url, form);
     const projectId = await res.data.id;
     const imgUrl = url + "/image/" + projectId;
 
@@ -41,5 +41,36 @@ export const submitProjectPost = async (
   } catch (err) {
     console.log(err);
     window.alert("게시글 등록에 실패했습니다");
+  }
+};
+
+// 프로젝트 자랑 글 수정
+export const updateProjectPost = async (
+  project: ProjectType,
+  updatedForm: typeof PROJECT_POST_FORM,
+  uploadImg: Function,
+  router: NextRouter,
+) => {
+  // request
+  const data = {
+    ...project,
+    ...updatedForm,
+    imgSrc: null,
+  };
+  const url = `/free-boards/${project.id}`;
+  try {
+    const res = await customAxios.patch(url, data);
+    const projectId = project.id;
+    const imgUrl = `/free-boards/image/${projectId}`;
+
+    // image upload
+    if (res.status === 200) {
+      await uploadImg(imgUrl);
+      await window.alert("게시글 수정이 완료되었습니다");
+      await router.push(`/projects/${projectId}`);
+    }
+  } catch (err) {
+    console.log(err);
+    window.alert("게시글 수정에 실패했습니다");
   }
 };

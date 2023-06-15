@@ -72,8 +72,6 @@ export const updateRecruitPost = async (
     tags,
   };
 
-  console.log("tq", data);
-
   // request
   const url = `/recruit-board/${recruit.id}`;
   try {
