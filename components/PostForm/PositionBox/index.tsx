@@ -1,6 +1,5 @@
 import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 import { GoTrashcan } from "react-icons/go";
-import { InputForm } from "@/postComps/common/PostForm.styled";
 import { POSITION_LIST, RECRUIT_POSITION_FORM } from "enum";
 import {
   InputWrapper,
@@ -8,12 +7,12 @@ import {
   DirectBox,
   MemberNeedsBox,
   SelectStyled,
+  InputForm,
 } from "./styled";
-import Button from "components/Button";
-import { POSITIONS } from "pages/post/recruit";
+import Button from "../../Button";
 
 interface PositionBoxProps {
-  data: (typeof POSITIONS)[0];
+  data: (typeof RECRUIT_POSITION_FORM)[0];
   onDelete: (id: number) => void;
   editPosition: (
     id: number,

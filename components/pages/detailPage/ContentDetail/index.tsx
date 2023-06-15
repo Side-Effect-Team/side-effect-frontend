@@ -13,7 +13,7 @@ import {
   ImageContainer,
   DescriptionText,
 } from "@/detailComps/ContentDetail/styled";
-import { TagWrapper } from "@/postComps/TagBox/styled";
+import { TagWrapper } from "@/postFormComps/TagBox/styled";
 import resizeElementHeight from "utils/resizeElementHeight";
 
 interface ContentDetailProps {

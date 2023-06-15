@@ -1,6 +1,9 @@
 import type { GetServerSidePropsContext } from "next";
 import { useQuery } from "@tanstack/react-query";
-import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
+import {
+  Wrapper,
+  Contents,
+} from "components/PostForm/common/PageLayout.styled";
 import ContentDetail from "@/detailComps/ContentDetail";
 import CommentBox from "@/detailComps/CommentBox";
 import PostData from "@/detailComps/PostData";

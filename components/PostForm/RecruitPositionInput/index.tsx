@@ -4,7 +4,7 @@ import InputLabel from "components/PostForm/common/InputLabel";
 import InputGuideText from "components/PostForm/common/InputGuideText";
 import { PositionBoxWrapper } from "./styled";
 import { RECRUIT_POSITION_FORM } from "enum";
-import PositionBox from "components/pages/post/PositionBox";
+import PositionBox from "components/PostForm/PositionBox";
 import Button from "../../Button";
 
 interface RecruitPositionInputProps {
