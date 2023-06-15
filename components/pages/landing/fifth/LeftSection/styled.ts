@@ -30,7 +30,7 @@ export const ImageWrapper = styled(Link)<{ inView: boolean }>`
   }
 `;
 export const StyledImage = styled(Image)`
-  object-fit: cover;
+  object-fit: fill;
   width: 100%;
   height: 100%;
   border-radius: 15px;

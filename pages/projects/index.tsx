@@ -11,6 +11,7 @@ import ProjectCardSkeleton from "components/Skeleton/ProjectCardSkeleton";
 import { useAppSelector } from "store/hooks";
 import DarkModeToggle from "components/DarkModeToggle";
 import { sizes } from "styles/media";
+import { media } from "styles/media";
 
 const FILTER_OPTIONS = [
   { name: "최신순", value: "latest" },
@@ -70,9 +71,13 @@ const Wrapper = styled.div`
   max-width: ${sizes.desktop}px;
   margin: 0 auto;
   gap: 20px;
+  ${media.mobile} {
+    gap: 10px;
+  }
 `;
 const FilterSection = styled.div`
   display: flex;
-  gap: 10px;
-  justify-content: flex-end;
+  gap: 20px;
+  width: 100%;
+  padding: 0px 10px;
 `;
