@@ -12,7 +12,6 @@ import { DEFAULT_PROJECT_CARD_IMAGE, PROJECT_POST_FORM } from "enum";
 import { useForm } from "hooks/common/useForm";
 import formValidator from "utils/formValidator";
 import { submitProjectPost } from "apis/ProjectAPI";
-import { useEffect } from "react";
 
 export default function PostProjectPage() {
   const router = useRouter();
@@ -30,10 +29,6 @@ export default function PostProjectPage() {
           router,
         ),
     });
-
-  useEffect(() => {
-    console.log("err", errMsgs);
-  }, [postForm, imgSrc, errMsgs]);
 
   return (
     <Wrapper>
@@ -64,15 +59,15 @@ export default function PostProjectPage() {
             handleBlur={handleBlur}
           />
           <PostTitleInput
-            idName="projectSubTitle"
+            idName="subTitle"
             label="한 줄 소개"
             guideText="어떤 프로젝트인지 한 줄로 알려주세요"
             placeHolder="3~30자 이내로 입력해주세요"
-            touched={touched.projectSubTitle as boolean}
+            touched={touched.subTitle as boolean}
             // @ts-ignore
-            errMsg={errMsgs.projectSubTitle}
+            errMsg={errMsgs.subTitle}
             // @ts-ignore
-            value={postForm.projectSubTitle}
+            value={postForm.subTitle}
             handleChange={handleChange}
             handleBlur={handleBlur}
           />

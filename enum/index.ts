@@ -152,7 +152,7 @@ export const SKILL_LIST_IN_FILTER = [
 export const PROJECT_POST_FORM = {
   title: "",
   projectName: "",
-  projectSubTitle: "",
+  subTitle: "",
   projectUrl: "",
   content: "",
 };

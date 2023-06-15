@@ -1,4 +1,5 @@
 import { PROJECT_POST_FORM, RECRUIT_POST_FORM } from "enum";
+import urlChecker from "./urlChecker";
 
 const formValidator = (
   postForm: typeof PROJECT_POST_FORM | typeof RECRUIT_POST_FORM,
@@ -21,15 +22,18 @@ const formValidator = (
   if (isProjectPostForm(postForm) && isProjectPostForm(newErrorMsgs)) {
     // 한 줄 소개
     if (
-      postForm.projectSubTitle.trim().length < 10 ||
-      postForm.projectSubTitle.trim().length > 30
+      postForm.subTitle.trim().length < 10 ||
+      postForm.subTitle.trim().length > 30
     )
-      newErrorMsgs.projectSubTitle =
+      newErrorMsgs.subTitle =
         "프로젝트 한 줄 소개는 10~30자 이내로 입력해주세요";
 
     // 프로젝트 URL
     if (postForm.projectUrl.trim().length === 0)
       newErrorMsgs.content = "프로젝트 URL을 입력해주세요";
+
+    if (!urlChecker(postForm.projectUrl))
+      newErrorMsgs.content = "올바른 URL 형태가 아닙니다";
   }
 
   // 상세 내용
