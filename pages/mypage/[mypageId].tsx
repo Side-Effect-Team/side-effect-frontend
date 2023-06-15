@@ -6,6 +6,7 @@ import { MypageProps } from ".";
 import styled from "styled-components";
 import { theme } from "styles/Theme";
 import { store } from "store/store";
+import { media } from "styles/media";
 
 export default function MyPageId() {
   const router = useRouter();
@@ -48,4 +49,7 @@ const Wrapper = styled.div`
   margin: 0 auto;
   max-width: ${theme.sizes.desktop};
   padding: 1rem;
+  ${media.mobile} {
+    padding: 1rem 0;
+  }
 `;

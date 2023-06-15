@@ -20,8 +20,12 @@ export const ProfileImage = styled.img`
 export const IntroductionTitle = styled.div`
   width: 100px;
   margin-top: 15px;
+  color: ${(p) => p.theme.textColor};
   ${media.mobile} {
+    width: 70px;
     margin-top: 10px;
+    font-size: 14px;
+    font-weight: 600;
   }
 `;
 export const IntroductionWrapper = styled.div`

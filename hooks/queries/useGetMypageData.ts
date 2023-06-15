@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getMypageData } from "apis/UserAPI";
 import useToast from "../common/useToast";
 export const useGetMypageData = () => {
-  const { addToast, deleteToast } = useToast();
+  const { addToast } = useToast();
   const { data } = useQuery(["mypageData"], getMypageData, {
     onError: () => {
       addToast({
@@ -10,7 +10,6 @@ export const useGetMypageData = () => {
         title: "에러 발생!",
         content: "정보를 가져오지 못했습니다.",
       });
-      deleteToast("unique-id");
     },
     retry: false,
   });

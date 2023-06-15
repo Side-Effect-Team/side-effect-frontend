@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import {
   ButtonWrapper,
   Container,
-  ContentsWrapper,
+  ContentsEditWrapper,
   SectionWrapper,
   TapMenu,
   TapWrapper,
@@ -21,15 +21,14 @@ import { useQueryClient } from "@tanstack/react-query";
 import { compareData } from "utils/compareData";
 import SectionBorder from "components/Boarder/SectionBorder";
 import { ChangeProps, updateData } from "utils/updateData";
-import { useTheme } from "styled-components";
+import { withAuth } from "components/hocs/withAuth";
 export interface FormData {
   nickname: string;
 }
 
-export default function MyPageEdit() {
+function MyPageEdit() {
   const queryClient = useQueryClient();
   queryClient.invalidateQueries({ queryKey: ["editProfile"] });
-
   const data = useGetProfileData();
   const router = useRouter();
   const [introduction, setIntroduction] = useState<string>(data?.introduction);
@@ -47,7 +46,7 @@ export default function MyPageEdit() {
     handleSubmit,
     formState: { errors },
   } = useForm<{ nickname: string }>();
-  const { addToast, deleteToast } = useToast();
+  const { addToast } = useToast();
 
   const editMutate = useEditProfile();
 
@@ -91,8 +90,6 @@ export default function MyPageEdit() {
       title: "편집 취소!",
       content: "프로필 편집을 취소하셨습니다.",
     });
-
-    deleteToast("unique-id");
     router.push("/mypage");
   };
 
@@ -108,13 +105,12 @@ export default function MyPageEdit() {
     });
   }, [data]);
 
-  const theme = useTheme();
   return (
     <Container>
       <TapWrapper>
         <TapMenu isActive>프로필 수정</TapMenu>
       </TapWrapper>
-      <ContentsWrapper>
+      <ContentsEditWrapper>
         <form onSubmit={handleSubmit(onClickEdit)}>
           <IntroductionEdit
             nickname={data?.nickname}
@@ -147,7 +143,8 @@ export default function MyPageEdit() {
             <Button>수정 완료</Button>
           </ButtonWrapper>
         </form>
-      </ContentsWrapper>
+      </ContentsEditWrapper>
     </Container>
   );
 }
+export default withAuth(MyPageEdit);

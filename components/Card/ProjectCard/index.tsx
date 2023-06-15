@@ -48,7 +48,6 @@ interface BoardCardDataProps {
 }
 
 export default function ProjectCard({ data }: BoardCardDataProps) {
-  console.log(data);
   const projectMutate = useAddLikeProject();
   const router = useRouter();
 

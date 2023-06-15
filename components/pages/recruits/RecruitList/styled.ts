@@ -12,6 +12,7 @@ export const Wrapper = styled.div`
   ${media.mobile} {
     display: flex;
     flex-direction: column;
+    gap: 0;
   }
 `;
 
