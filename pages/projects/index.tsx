@@ -9,7 +9,6 @@ import BatchCarousel from "components/Carousel/BatchCarousel";
 import ProjectList from "components/pages/project/ProjectLIst";
 import ProjectCardSkeleton from "components/Skeleton/ProjectCardSkeleton";
 import { useAppSelector } from "store/hooks";
-import DarkModeToggle from "components/DarkModeToggle";
 import { sizes } from "styles/media";
 import { media } from "styles/media";
 
@@ -35,7 +34,6 @@ export default function ProjectPage() {
   }, [refetch, token]);
   return (
     <Wrapper>
-      <DarkModeToggle />
       <PageHead pageTitle="프로젝트 자랑 | 사이드 이펙트" />
       <BatchCarousel
         title="이달의 베스트 프로젝트"

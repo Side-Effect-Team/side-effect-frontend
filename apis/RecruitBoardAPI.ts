@@ -1,4 +1,6 @@
 import customAxios from "./customAxios";
+import { NextRouter } from "next/router";
+import { RECRUIT_POST_FORM, RECRUIT_POSITION_FORM } from "enum";
 
 export const addLikeRecruit = async (id: number) => {
   const response = await customAxios.post(`/recruit-board/likes/${id}`, null);
@@ -24,4 +26,60 @@ export const getRecruits = async (
   if (lastId && lastId > 1) url += `&lastId=${lastId}`;
   const response = await customAxios.get(url);
   return response.data;
+};
+
+// 모집 게시글 등록
+export const submitRecruitPost = async (
+  form: typeof RECRUIT_POST_FORM,
+  positions: typeof RECRUIT_POSITION_FORM,
+  tags: string[],
+  router: NextRouter,
+) => {
+  const newPositions = positions.map(({ positionType, targetNumber }) => ({
+    positionType,
+    targetNumber: +targetNumber,
+  }));
+
+  const data = {
+    ...form,
+    tags,
+    positions: newPositions,
+  };
+
+  // request
+  const url = `/recruit-board`;
+  try {
+    const res = await customAxios.post(url, data);
+    const recruitId = await res.data.id;
+    await window.alert("게시글 등록이 완료되었습니다");
+    await router.push(`/recruits/${recruitId}`);
+  } catch (err) {
+    console.log(err);
+    window.alert("게시글 등록에 실패했습니다");
+  }
+};
+
+// 모집 게시글 수정
+export const updateRecruitPost = async (
+  recruit: RecruitType,
+  updatedForm: typeof RECRUIT_POST_FORM,
+  tags: string[],
+  router: NextRouter,
+) => {
+  const data = {
+    ...recruit,
+    ...updatedForm,
+    tags,
+  };
+
+  // request
+  const url = `/recruit-board/${recruit.id}`;
+  try {
+    const res = await customAxios.patch(url, data);
+    window.alert("게시글 수정이 완료되었습니다");
+    router.push(`/recruits/${recruit.id}`);
+  } catch (err) {
+    console.log(err);
+    window.alert("게시글 수정에 실패했습니다");
+  }
 };

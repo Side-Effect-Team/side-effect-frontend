@@ -1,6 +1,4 @@
-import axios from "axios";
 import { useRouter } from "next/router";
-import { GetServerSidePropsContext } from "next";
 import FormTitle from "@/postFormComps/FormTitle";
 import { Wrapper, Contents } from "@/postFormComps/common/PageLayout.styled";
 import PageHead from "components/PageHead";
@@ -11,35 +9,33 @@ import SubmitBtnBox from "@/postFormComps/SubmitBtnBox";
 import { useForm } from "hooks/common/useForm";
 import { usePosition } from "hooks/common/usePosition";
 import formValidator from "utils/formValidator";
-import { RECRUIT_POST_FORM } from "enum";
-import { updateRecruitPost } from "apis/RecruitBoardAPI";
+import { RECRUIT_POST_FORM, RECRUIT_POSITION_FORM } from "enum";
+import { submitRecruitPost } from "apis/RecruitBoardAPI";
 
-interface EditRecruitPageProps {
-  recruit: RecruitType;
-}
-
-export default function EditRecruitPage({ recruit }: EditRecruitPageProps) {
+export default function PostRecruitPage() {
   const router = useRouter();
-  const { positions, addPosition, deletePosition, editPosition } =
-    usePosition();
+  const {
+    positions,
+    addPosition,
+    deletePosition,
+    validatePosition,
+    editPosition,
+  } = usePosition();
   const { postForm, errMsgs, touched, handleChange, handleBlur, handleSubmit } =
     useForm({
-      initialVals: {
-        projectName: recruit.projectName,
-        title: recruit.title,
-        content: recruit.content,
-      },
+      initialVals: { ...RECRUIT_POST_FORM },
       validate: (form: typeof RECRUIT_POST_FORM) => formValidator(form),
-      onSubmit: () => updateRecruitPost(recruit, postForm, ["react"], router),
+      onSubmit: () => {
+        if (validatePosition())
+          submitRecruitPost(postForm, positions, ["react"], router);
+      },
     });
-
-  console.log(recruit);
 
   return (
     <Wrapper>
-      <PageHead pageTitle="모집 게시글 수정하기 | 사이드 이펙트" />
+      <PageHead pageTitle="팀원 모집 글쓰기 | 사이드 이펙트" />
       <Contents>
-        <FormTitle title="팀원 모집 게시글 수정" />
+        <FormTitle title="팀원 모집하기" />
         <form onSubmit={handleSubmit}>
           <PostTitleInput
             idName="title"
@@ -65,12 +61,12 @@ export default function EditRecruitPage({ recruit }: EditRecruitPageProps) {
           />
           <RecruitPositionInput
             label="모집 포지션"
-            guideText=""
+            guideText="모집할 포지션과 인원 수를 설정할 수 있습니다"
             positions={positions}
             addPosition={addPosition}
             deletePosition={deletePosition}
             editPosition={editPosition}
-            isEdit
+            isEdit={false}
           />
           <h2>기술 스택</h2>
           <p>추가 예정</p>
@@ -88,22 +84,4 @@ export default function EditRecruitPage({ recruit }: EditRecruitPageProps) {
       </Contents>
     </Wrapper>
   );
-}
-
-export async function getServerSideProps(ctx: GetServerSidePropsContext) {
-  const recruitId = ctx.params?.recruitId;
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/recruit-board/${recruitId}`;
-
-  try {
-    const res = await axios.get(url);
-    const recruit = await res.data;
-
-    return {
-      props: {
-        recruit,
-      },
-    };
-  } catch (err) {
-    return { notFound: true };
-  }
 }

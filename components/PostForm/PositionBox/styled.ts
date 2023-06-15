@@ -30,3 +30,12 @@ export const DirectBox = styled.div`
 export const MemberNeedsBox = styled.div`
   width: 45px;
 `;
+
+export const InputForm = styled.input`
+  width: 100%;
+  height: 100%;
+  border: none;
+  padding: 0.25rem;
+  border-radius: 3px;
+  background: ${(p) => p.theme.colors.lightGray};
+`;

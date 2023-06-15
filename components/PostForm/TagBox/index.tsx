@@ -1,12 +1,15 @@
 import { KeyboardEvent, MouseEvent } from "react";
 import { TiTimes } from "react-icons/ti";
-import { TagWrapper, Container, KeywordWrapper, TagsContainer } from "./styled";
 import {
+  TagWrapper,
+  Container,
+  KeywordWrapper,
+  TagsContainer,
   GuideWrapper,
   InputBox,
   InputForm,
   LabelForm,
-} from "@/postComps/common/PostForm.styled";
+} from "./styled";
 
 interface TagBoxProps {
   tags: string[];

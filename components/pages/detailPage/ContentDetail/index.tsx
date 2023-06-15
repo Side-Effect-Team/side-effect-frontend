@@ -13,7 +13,7 @@ import {
   ImageContainer,
   DescriptionText,
 } from "@/detailComps/ContentDetail/styled";
-import { TagWrapper } from "@/postComps/TagBox/styled";
+import { TagWrapper } from "@/postFormComps/TagBox/styled";
 import resizeElementHeight from "utils/resizeElementHeight";
 
 interface ContentDetailProps {
@@ -22,6 +22,7 @@ interface ContentDetailProps {
   tags?: TagType[];
   projectUrl?: string;
   imgSrc: string;
+  subTitle?: string;
 }
 
 export default function ContentDetail({
@@ -30,6 +31,7 @@ export default function ContentDetail({
   tags,
   projectUrl,
   imgSrc,
+  subTitle,
 }: ContentDetailProps) {
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -66,6 +68,13 @@ export default function ContentDetail({
           )}
         </div>
       </ProjectTitleBox>
+      {/* 한 줄 소개 */}
+      {subTitle && (
+        <div>
+          <h4>한 줄 소개</h4>
+          <p>{subTitle}</p>
+        </div>
+      )}
       <h4>상세 내용</h4>
       {!tags && (
         <ImageContainer>

@@ -1,6 +1,9 @@
 import type { GetServerSidePropsContext } from "next";
 import { useQuery } from "@tanstack/react-query";
-import { Wrapper, Contents } from "@/postComps/common/PageLayout.styled";
+import {
+  Wrapper,
+  Contents,
+} from "components/PostForm/common/PageLayout.styled";
 import ContentDetail from "@/detailComps/ContentDetail";
 import CommentBox from "@/detailComps/CommentBox";
 import PostData from "@/detailComps/PostData";
@@ -42,7 +45,9 @@ export default function ProjectDetailPage({
       userId,
       views,
       writer,
+      subTitle,
     } = data.data;
+
     return (
       <Wrapper>
         <Contents>
@@ -60,6 +65,7 @@ export default function ProjectDetailPage({
             content={content}
             projectUrl={projectUrl}
             imgSrc={imgUrl}
+            subTitle={subTitle}
           />
           <CommentBox boardId={id} comments={comments} />
         </Contents>

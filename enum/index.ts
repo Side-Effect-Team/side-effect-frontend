@@ -90,8 +90,7 @@ export const SELECT_CAREER = [
   { name: "시니어(7년이상)", value: "senior" },
 ];
 export const DEFAULT_RECRUIT_CARD_IMAGE = "/images/BoardDefaultBackground.png";
-export const DEFAULT_PROJECT_CARD_IMAGE =
-  "/images/ProjectDefaultBackground.png";
+export const DEFAULT_PROJECT_CARD_IMAGE = "/images/ProjectBackground.png";
 
 export const ANIMATION_DIRECTION = {
   onTheRight: { x: "50%", opacity: 0 },
@@ -149,3 +148,26 @@ export const SKILL_LIST_IN_FILTER = [
     value: "go",
   },
 ] as const;
+
+export const PROJECT_POST_FORM = {
+  title: "",
+  projectName: "",
+  subTitle: "",
+  projectUrl: "",
+  content: "",
+};
+
+export const RECRUIT_POST_FORM = {
+  title: "",
+  projectName: "",
+  content: "",
+};
+
+// 포지션 기본값
+export const RECRUIT_POSITION_FORM = [
+  {
+    id: 1,
+    positionType: "frontend",
+    targetNumber: 0,
+  },
+];

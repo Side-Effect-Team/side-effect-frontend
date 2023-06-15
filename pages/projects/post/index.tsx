@@ -1,54 +1,39 @@
-import axios from "axios";
-import { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
+import FormTitle from "@/postFormComps/FormTitle";
 import { Wrapper, Contents } from "@/postFormComps/common/PageLayout.styled";
 import PageHead from "components/PageHead";
-import FormTitle from "@/postFormComps/FormTitle";
 import PostTitleInput from "@/postFormComps/PostTitleInput";
-import ProjectImageInput from "@/postFormComps/ProjectImageInput";
 import DescriptionInput from "@/postFormComps/DescriptionInput";
+import ProjectImageInput from "@/postFormComps/ProjectImageInput";
 import SubmitBtnBox from "@/postFormComps/SubmitBtnBox";
 import { useInputImage } from "hooks/common/useInputImage";
 import { DEFAULT_PROJECT_CARD_IMAGE, PROJECT_POST_FORM } from "enum";
 import { useForm } from "hooks/common/useForm";
 import formValidator from "utils/formValidator";
-import { updateProjectPost } from "apis/ProjectAPI";
+import { submitProjectPost } from "apis/ProjectAPI";
 
-interface EditProjectPageProps {
-  project: ProjectType;
-}
-
-export default function EditProjectPage({ project }: EditProjectPageProps) {
+export default function PostProjectPage() {
   const router = useRouter();
   const { imgSrc, handleImgChange, uploadImg } = useInputImage(
     DEFAULT_PROJECT_CARD_IMAGE,
   );
   const { postForm, errMsgs, touched, handleChange, handleBlur, handleSubmit } =
     useForm({
-      initialVals: {
-        projectName: project.projectName,
-        title: project.title,
-        subTitle: project.subTitle,
-        content: project.content,
-        projectUrl: project.projectUrl,
-      },
+      initialVals: { ...PROJECT_POST_FORM },
       validate: (form: typeof PROJECT_POST_FORM) => formValidator(form),
       onSubmit: () =>
-        updateProjectPost(
-          project,
+        submitProjectPost(
           postForm as typeof PROJECT_POST_FORM,
           uploadImg,
           router,
         ),
     });
 
-  console.log(project);
-
   return (
     <Wrapper>
-      <PageHead pageTitle="자랑 게시글 수정하기 | 사이드 이펙트" />
+      <PageHead pageTitle="프로젝트 자랑 글쓰기 | 사이드 이펙트" />
       <Contents>
-        <FormTitle title="프로젝트 자랑 게시글 수정하기" />
+        <FormTitle title="프로젝트 자랑하기" />
         <form onSubmit={handleSubmit}>
           <PostTitleInput
             idName="title"
@@ -73,7 +58,7 @@ export default function EditProjectPage({ project }: EditProjectPageProps) {
             handleBlur={handleBlur}
           />
           <PostTitleInput
-            idName="projectSubTitle"
+            idName="subTitle"
             label="한 줄 소개"
             guideText="어떤 프로젝트인지 한 줄로 알려주세요"
             placeHolder="3~30자 이내로 입력해주세요"
@@ -120,21 +105,4 @@ export default function EditProjectPage({ project }: EditProjectPageProps) {
       </Contents>
     </Wrapper>
   );
-}
-
-export async function getServerSideProps(ctx: GetServerSidePropsContext) {
-  const projectId = ctx.params?.projectId;
-  const url = `/free-boards/${projectId}`;
-  try {
-    const res = await axios.get(url);
-    const project = await res.data;
-
-    return {
-      props: {
-        project,
-      },
-    };
-  } catch (err) {
-    return { notFound: true };
-  }
 }

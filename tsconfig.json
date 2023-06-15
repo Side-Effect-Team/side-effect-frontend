@@ -5,6 +5,7 @@
       "@/pageComponents/*": ["components/pages/*"],
       "@/postComps/*": ["components/pages/post/*"],
       "@/detailComps/*": ["components/pages/detailPage/*"],
+      "@/postFormComps/*": ["components/PostForm/*"],
     },
     "target": "ESNext",
     "lib": [

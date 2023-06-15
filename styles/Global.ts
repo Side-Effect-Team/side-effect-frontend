@@ -25,7 +25,7 @@ const global = createGlobalStyle<{ isMounted: boolean; theme: typeof theme }>`
   
   a {
     text-decoration: none;
-    color: #000;
+    color: ${(p) => p.theme.textColor}
   }
   
   li {

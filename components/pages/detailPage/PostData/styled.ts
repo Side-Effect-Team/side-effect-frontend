@@ -43,8 +43,12 @@ export const OptionBox = styled.button`
   border: none;
 
   :hover {
-    background: rgba(0, 0, 0, 0.1);
+    background: ${(p) => p.theme.grayToDark};
     border-radius: 5px;
+  }
+
+  svg {
+    color: ${(p) => p.theme.textColor};
   }
 `;
 

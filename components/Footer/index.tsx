@@ -13,6 +13,7 @@ import {
   IconWrapper,
 } from "./styled";
 import { useTheme } from "styled-components";
+import DarkModeToggle from "../DarkModeToggle";
 
 export default function Footer() {
   const { isDark } = useAppSelector((state) => state.darkMode);
@@ -28,7 +29,7 @@ export default function Footer() {
           </Link>
           <Link href="https://github.com/Side-Effect-Team">
             {isDark ? (
-              <BsGithub size={50} style={{ color: "eee" }} />
+              <BsGithub size={50} style={{ color: "#eee" }} />
             ) : (
               <BsGithub size={50} />
             )}
@@ -73,6 +74,9 @@ export default function Footer() {
             >
               컨트리뷰션
             </Link>
+          </Column>
+          <Column>
+            <DarkModeToggle />
           </Column>
         </ColumnBox>
       </Contents>

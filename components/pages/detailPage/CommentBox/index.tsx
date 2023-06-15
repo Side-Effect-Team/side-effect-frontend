@@ -29,6 +29,15 @@ export default function CommentBox({ boardId, comments }: CommentBoxProps) {
   };
 
   const submitComment = async () => {
+    if (textareaEl.current?.value.length === 0) {
+      addToast({
+        type: "info",
+        title: "info",
+        content: "댓글 내용을 입력해주세요",
+      });
+      return;
+    }
+
     const url = "/comments";
     const data = { boardId, content: textareaEl.current?.value };
     try {
