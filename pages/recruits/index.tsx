@@ -14,7 +14,7 @@ export default function RecruitsPage() {
         title={BANNER_CONTENTS.TITLE}
         subTitle={BANNER_CONTENTS.SUB_TITLE}
         btnTitle="모집하기"
-        btnLink="/post/recruit"
+        btnLink="/recruits/post"
       />
       <RecruitContents />
     </Wrapper>
