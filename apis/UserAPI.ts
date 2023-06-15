@@ -57,7 +57,7 @@ export const deleteAccount = async () => {
 };
 
 export const handleLogout = () => {
-  axios.delete("/token/logout");
+  axios.delete("/token/at-issue");
   store.dispatch(removeAuthentication());
   store.dispatch(handleModalView({ modalView: "startLogin" }));
 };
