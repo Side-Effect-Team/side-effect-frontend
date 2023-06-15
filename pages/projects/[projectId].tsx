@@ -42,7 +42,9 @@ export default function ProjectDetailPage({
       userId,
       views,
       writer,
+      subTitle,
     } = data.data;
+
     return (
       <Wrapper>
         <Contents>
@@ -60,6 +62,7 @@ export default function ProjectDetailPage({
             content={content}
             projectUrl={projectUrl}
             imgSrc={imgUrl}
+            subTitle={subTitle}
           />
           <CommentBox boardId={id} comments={comments} />
         </Contents>

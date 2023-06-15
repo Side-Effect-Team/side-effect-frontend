@@ -3,7 +3,6 @@ import FormTitle from "@/postFormComps/FormTitle";
 import { Wrapper, Contents } from "@/postFormComps/common/PageLayout.styled";
 import PageHead from "components/PageHead";
 import PostTitleInput from "@/postFormComps/PostTitleInput";
-import ProjectUrlInput from "@/postFormComps/ProjectUrlInput";
 import DescriptionInput from "@/postFormComps/DescriptionInput";
 import ProjectImageInput from "@/postFormComps/ProjectImageInput";
 import SubmitBtnBox from "@/postFormComps/SubmitBtnBox";
@@ -71,10 +70,10 @@ export default function PostProjectPage() {
             handleChange={handleChange}
             handleBlur={handleBlur}
           />
-          <ProjectUrlInput
+          <PostTitleInput
             idName="projectUrl"
             label="프로젝트 URL"
-            guideText="배포된 링크가 있다면 추가해보세요"
+            guideText="배포된 링크 혹은 팀 페이지를 추가해보세요"
             placeHolder="https:// 부터의 전체 주소를 입력해주세요"
             touched={touched.projectUrl as boolean}
             // @ts-ignore
