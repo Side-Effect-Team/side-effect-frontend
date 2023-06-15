@@ -21,6 +21,7 @@ import { createAuthentication } from "store/authSlice";
 interface FormData {
   githubUrl: string;
   blogUrl: string;
+  portfolioUrl: string;
 }
 
 export default function RegisterUserInfo() {
@@ -43,6 +44,7 @@ export default function RegisterUserInfo() {
         career,
         password: "",
       };
+      console.log(data);
       await axios
         .post(`/user/join`, mergedUserInfo)
         .then((res) => {
@@ -96,9 +98,23 @@ export default function RegisterUserInfo() {
             깃허브나 블로그 주소를 등록하면 팀에 합류할 확률이 더 높아집니다!
           </h4>
           <Label htmlFor="Github">Github</Label>
-          <Input id="Github" {...register("githubUrl")} />
+          <Input
+            id="Github"
+            {...register("githubUrl")}
+            placeholder="ex: https://github.com/nickname"
+          />
           <Label htmlFor="Blog">Blog</Label>
-          <Input id="Blog" {...register("blogUrl")} />
+          <Input
+            id="Blog"
+            {...register("blogUrl")}
+            placeholder="ex: https://nickname.tistory.com/"
+          />
+          <Label htmlFor="Portfolio">Portfolio</Label>
+          <Input
+            id="Portfolio"
+            {...register("portfolioUrl")}
+            placeholder="ex: https://side-effect-frontend-dev.vercel.app/"
+          />
         </InputSection>
         <ButtonWrapper>
           <Button type="submit" size="large">
