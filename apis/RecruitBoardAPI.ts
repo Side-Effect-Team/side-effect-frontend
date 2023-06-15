@@ -33,7 +33,6 @@ export const submitRecruitPost = async (
   positions: typeof RECRUIT_POSITION_FORM,
   tags: string[],
   router: NextRouter,
-  validatePosition: () => boolean,
 ) => {
   const newPositions = positions.map(({ positionType, targetNumber }) => ({
     positionType,

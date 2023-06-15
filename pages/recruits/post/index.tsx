@@ -11,9 +11,11 @@ import { usePosition } from "hooks/common/usePosition";
 import formValidator from "utils/formValidator";
 import { RECRUIT_POST_FORM } from "enum";
 import { submitRecruitPost } from "apis/RecruitBoardAPI";
+import useToast from "hooks/common/useToast";
 
 export default function PostRecruitPage() {
   const router = useRouter();
+  const { addToast } = useToast();
   const {
     positions,
     addPosition,
@@ -25,14 +27,10 @@ export default function PostRecruitPage() {
     useForm({
       initialVals: { ...RECRUIT_POST_FORM },
       validate: (form: typeof RECRUIT_POST_FORM) => formValidator(form),
-      onSubmit: () =>
-        submitRecruitPost(
-          postForm,
-          positions,
-          ["react"],
-          router,
-          validatePosition,
-        ),
+      onSubmit: () => {
+        if (validatePosition())
+          submitRecruitPost(postForm, positions, ["react"], router);
+      },
     });
 
   return (
