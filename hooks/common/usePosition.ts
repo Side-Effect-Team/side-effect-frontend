@@ -52,13 +52,14 @@ export const usePosition = () => {
     // 중복 포지션 검사
     if (isValidate && positions.length > 1) {
       const positionTypes = positions.map((position) => position.positionType);
-      isValidate = !isDuplicatePosition(positionTypes);
-      addToast({
-        type: "error",
-        title: "error",
-        content: "포지션은 중복될 수 없습니다",
-      });
-      return;
+      if (isDuplicatePosition(positionTypes)) {
+        isValidate = false;
+        addToast({
+          type: "error",
+          title: "error",
+          content: "포지션은 중복될 수 없습니다",
+        });
+      }
     }
 
     return isValidate;

@@ -17,6 +17,7 @@ interface RecruitPositionInputProps {
     id: number,
     updateVal: (typeof RECRUIT_POSITION_FORM)[0],
   ) => void;
+  isEdit?: boolean;
 }
 
 export default function RecruitPositionInput({
@@ -26,6 +27,7 @@ export default function RecruitPositionInput({
   addPosition,
   deletePosition,
   editPosition,
+  isEdit,
 }: RecruitPositionInputProps) {
   return (
     <InputBox>
@@ -33,21 +35,25 @@ export default function RecruitPositionInput({
         <InputLabel idName="position" label={label} />
         <InputGuideText guideText={guideText} />
       </InputHeader>
-      <PositionBoxWrapper>
-        {positions.map((position) => (
-          <PositionBox
-            key={position.id}
-            data={position}
-            onDelete={deletePosition}
-            editPosition={editPosition}
-          />
-        ))}
-        <div>
-          <Button type="button" onClick={addPosition}>
-            <GoPlus />
-          </Button>
-        </div>
-      </PositionBoxWrapper>
+      {isEdit ? (
+        <p>포지션 수정은 현재 지원되지 않는 기능입니다</p>
+      ) : (
+        <PositionBoxWrapper>
+          {positions.map((position) => (
+            <PositionBox
+              key={position.id}
+              data={position}
+              onDelete={deletePosition}
+              editPosition={editPosition}
+            />
+          ))}
+          <div>
+            <Button type="button" onClick={addPosition}>
+              <GoPlus />
+            </Button>
+          </div>
+        </PositionBoxWrapper>
+      )}
     </InputBox>
   );
 }

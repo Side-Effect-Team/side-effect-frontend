@@ -80,7 +80,7 @@ export default function PositionBox({
               </option>
             );
           })}
-          <option value="direct">직접 입력</option>
+          {/*<option value="direct">직접 입력</option>*/}
         </SelectStyled>
         {isDirect && (
           <DirectBox>

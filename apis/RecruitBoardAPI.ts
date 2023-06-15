@@ -28,6 +28,7 @@ export const getRecruits = async (
   return response.data;
 };
 
+// 모집 게시글 등록
 export const submitRecruitPost = async (
   form: typeof RECRUIT_POST_FORM,
   positions: typeof RECRUIT_POSITION_FORM,
@@ -55,5 +56,32 @@ export const submitRecruitPost = async (
   } catch (err) {
     console.log(err);
     window.alert("게시글 등록에 실패했습니다");
+  }
+};
+
+// 모집 게시글 수정
+export const updateRecruitPost = async (
+  recruit: RecruitType,
+  updatedForm: typeof RECRUIT_POST_FORM,
+  tags: string[],
+  router: NextRouter,
+) => {
+  const data = {
+    ...recruit,
+    ...updatedForm,
+    tags,
+  };
+
+  console.log("tq", data);
+
+  // request
+  const url = `/recruit-board/${recruit.id}`;
+  try {
+    const res = await customAxios.patch(url, data);
+    window.alert("게시글 수정이 완료되었습니다");
+    router.push(`/recruits/${recruit.id}`);
+  } catch (err) {
+    console.log(err);
+    window.alert("게시글 수정에 실패했습니다");
   }
 };

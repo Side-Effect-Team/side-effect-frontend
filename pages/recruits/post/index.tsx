@@ -9,13 +9,11 @@ import SubmitBtnBox from "@/postFormComps/SubmitBtnBox";
 import { useForm } from "hooks/common/useForm";
 import { usePosition } from "hooks/common/usePosition";
 import formValidator from "utils/formValidator";
-import { RECRUIT_POST_FORM } from "enum";
+import { RECRUIT_POST_FORM, RECRUIT_POSITION_FORM } from "enum";
 import { submitRecruitPost } from "apis/RecruitBoardAPI";
-import useToast from "hooks/common/useToast";
 
 export default function PostRecruitPage() {
   const router = useRouter();
-  const { addToast } = useToast();
   const {
     positions,
     addPosition,
@@ -68,6 +66,7 @@ export default function PostRecruitPage() {
             addPosition={addPosition}
             deletePosition={deletePosition}
             editPosition={editPosition}
+            isEdit={false}
           />
           <h2>기술 스택</h2>
           <p>추가 예정</p>
