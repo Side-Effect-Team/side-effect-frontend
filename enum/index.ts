@@ -162,3 +162,12 @@ export const RECRUIT_POST_FORM = {
   projectName: "",
   content: "",
 };
+
+// 포지션 기본값
+export const RECRUIT_POSITION_FORM = [
+  {
+    id: 1,
+    positionType: "frontend",
+    targetNumber: 0,
+  },
+];
