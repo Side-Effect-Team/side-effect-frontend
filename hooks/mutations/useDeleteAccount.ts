@@ -6,7 +6,7 @@ import { removeAuthentication } from "store/authSlice";
 import { handleModalView } from "store/loginViewTransitionSlice";
 
 export const useDeleteAccount = () => {
-  const { addToast, deleteToast } = useToast();
+  const { addToast } = useToast();
   const dispatch = useAppDispatch();
 
   const { mutate } = useMutation({
@@ -17,7 +17,7 @@ export const useDeleteAccount = () => {
         title: "삭제 성공!",
         content: "계정이 삭제되었습니다.",
       });
-      deleteToast("unique-id");
+      ("unique-id");
       dispatch(removeAuthentication());
       dispatch(handleModalView({ modalView: "startLogin" }));
     },

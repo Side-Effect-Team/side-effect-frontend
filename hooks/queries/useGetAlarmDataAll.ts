@@ -3,7 +3,7 @@ import { getAlarmDataAll } from "apis/NotificationAPI";
 import useToast from "hooks/common/useToast";
 
 export const useGetAlarmDataAll = () => {
-  const { addToast, deleteToast } = useToast();
+  const { addToast } = useToast();
   const { data, isLoading, isSuccess } = useQuery(
     ["noticeAll"],
     getAlarmDataAll,
@@ -14,7 +14,6 @@ export const useGetAlarmDataAll = () => {
           title: "에러 발생!",
           content: "알람을 가져오지 못했습니다.",
         });
-        deleteToast("unique-id");
       },
       retry: false,
     },

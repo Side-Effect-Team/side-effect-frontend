@@ -1,8 +1,9 @@
-import { Dispatch, MouseEvent, SetStateAction } from "react";
+import { Dispatch, MouseEvent, SetStateAction, useRef } from "react";
 import { AlarmButton, AlarmDiv, AlarmIconDiv, AlarmCount } from "./styled";
 import AlarmList from "./AlarmList";
 import { useGetAlarmData } from "hooks/queries/useGetAlarmData";
 import { useGetAlarmNum } from "hooks/queries/useGetAlarmNum";
+import useOutsideClick from "hooks/common/useOutsideClick";
 
 interface FromHeaderProps {
   openAlarm: boolean;
@@ -17,9 +18,12 @@ export default function Alarm({ openAlarm, setOpenAlarm }: FromHeaderProps) {
     e.stopPropagation();
     setOpenAlarm((prev) => !prev);
   };
+  const AlarmListRef = useRef(null);
+  useOutsideClick(AlarmListRef, () => setOpenAlarm(false));
+
   return (
     <>
-      <AlarmDiv openAlarm={openAlarm}>
+      <AlarmDiv openAlarm={openAlarm} ref={AlarmListRef}>
         <AlarmIconDiv openAlarm={openAlarm} onClick={onClickOpenAlarm}>
           <AlarmButton />
           {alarmNum?.data !== 0 && <AlarmCount>{alarmNum?.data}</AlarmCount>}
