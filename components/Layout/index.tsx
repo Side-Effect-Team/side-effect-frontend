@@ -10,9 +10,9 @@ import Footer from "../Footer";
 import Toast from "../Toast";
 import ScrollToTop from "../ScrollToTop";
 import Head from "next/head";
-import { useAppDispatch, useAppSelector } from "store/hooks";
-import { removeAuthentication } from "store/authSlice";
+import { useAppSelector } from "store/hooks";
 import MobileHeader from "../Header/MobileHeader";
+import { handleLogout } from "../../apis/UserAPI";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -22,7 +22,6 @@ export default function Layout({ children }: LayoutProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const [isMounted, setIsMounted] = useState<boolean>(false);
   const { isDark } = useAppSelector((state) => state.darkMode);
-  const dispatch = useAppDispatch();
   const router = useRouter();
 
   //다크모드일경우 새로고침시 화면 반짝임을 제어합니다.
@@ -34,10 +33,10 @@ export default function Layout({ children }: LayoutProps) {
     setMobileMenuOpen((prev) => !prev);
   };
 
-  const logout = () => {
+  const logout = async () => {
     if (window.confirm("정말 로그아웃하시겠습니까?")) {
-      dispatch(removeAuthentication());
-      if (router.pathname === "/mypage") router.replace("/");
+      await handleLogout();
+      if (router.pathname === "/mypage") await router.replace("/");
     }
   };
 
