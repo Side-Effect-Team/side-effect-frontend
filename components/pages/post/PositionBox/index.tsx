@@ -1,7 +1,7 @@
 import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 import { GoTrashcan } from "react-icons/go";
 import { InputForm } from "@/postComps/common/PostForm.styled";
-import { POSITION_LIST } from "../../../../enum";
+import { POSITION_LIST, RECRUIT_POSITION_FORM } from "enum";
 import {
   InputWrapper,
   PositionBoxWapper,
@@ -15,13 +15,16 @@ import { POSITIONS } from "pages/post/recruit";
 interface PositionBoxProps {
   data: (typeof POSITIONS)[0];
   onDelete: (id: number) => void;
-  handlePosition: Function;
+  editPosition: (
+    id: number,
+    updateVal: (typeof RECRUIT_POSITION_FORM)[0],
+  ) => void;
 }
 
 export default function PositionBox({
   data,
   onDelete,
-  handlePosition,
+  editPosition,
 }: PositionBoxProps) {
   const { id } = data;
   const [isDirect, setIsDirect] = useState(false);
@@ -57,7 +60,7 @@ export default function PositionBox({
   };
 
   useEffect(() => {
-    handlePosition(id, positionForm);
+    editPosition(id, positionForm);
   }, [positionForm]);
 
   return (

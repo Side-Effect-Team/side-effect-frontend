@@ -12,7 +12,7 @@ import {
   AiFillCheckCircle,
   AiFillCloseCircle,
 } from "react-icons/ai";
-import useToast from "../../hooks/common/useToast";
+import useToast from "hooks/common/useToast";
 
 type IconType = "success" | "error" | "info";
 

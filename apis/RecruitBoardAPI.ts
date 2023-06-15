@@ -1,4 +1,6 @@
 import customAxios from "./customAxios";
+import { NextRouter } from "next/router";
+import { RECRUIT_POST_FORM, RECRUIT_POSITION_FORM } from "enum";
 
 export const addLikeRecruit = async (id: number) => {
   const response = await customAxios.post(`/recruit-board/likes/${id}`, null);
@@ -24,4 +26,35 @@ export const getRecruits = async (
   if (lastId && lastId > 1) url += `&lastId=${lastId}`;
   const response = await customAxios.get(url);
   return response.data;
+};
+
+export const submitRecruitPost = async (
+  form: typeof RECRUIT_POST_FORM,
+  positions: typeof RECRUIT_POSITION_FORM,
+  tags: string[],
+  router: NextRouter,
+  validatePosition: () => boolean,
+) => {
+  const newPositions = positions.map(({ positionType, targetNumber }) => ({
+    positionType,
+    targetNumber: +targetNumber,
+  }));
+
+  const data = {
+    ...form,
+    tags,
+    positions: newPositions,
+  };
+
+  // request
+  const url = `/recruit-board`;
+  try {
+    const res = await customAxios.post(url, data);
+    const recruitId = await res.data.id;
+    await window.alert("게시글 등록이 완료되었습니다");
+    await router.push(`/recruits/${recruitId}`);
+  } catch (err) {
+    console.log(err);
+    window.alert("게시글 등록에 실패했습니다");
+  }
 };
