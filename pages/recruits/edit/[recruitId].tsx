@@ -33,8 +33,6 @@ export default function EditRecruitPage({ recruit }: EditRecruitPageProps) {
       onSubmit: () => updateRecruitPost(recruit, postForm, ["react"], router),
     });
 
-  console.log(recruit);
-
   return (
     <Wrapper>
       <PageHead pageTitle="모집 게시글 수정하기 | 사이드 이펙트" />

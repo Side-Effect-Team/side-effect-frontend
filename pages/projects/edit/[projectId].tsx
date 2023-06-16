@@ -42,8 +42,6 @@ export default function EditProjectPage({ project }: EditProjectPageProps) {
         ),
     });
 
-  console.log(project);
-
   return (
     <Wrapper>
       <PageHead pageTitle="자랑 게시글 수정하기 | 사이드 이펙트" />
