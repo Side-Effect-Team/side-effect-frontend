@@ -24,36 +24,8 @@ export const Container = styled.div`
   cursor: pointer;
 `;
 
-export const KeywordWrapper = styled.span`
-  display: inline-block;
-  transform: translateY(-3%);
-
-  svg {
-    transform: translateY(13.5%);
-  }
-`;
-
 export const TagsContainer = styled.div`
   margin-bottom: 0.75rem;
-`;
-
-export const GuideWrapper = styled.div`
-  display: flex;
-  align-items: center;
-
-  p {
-    color: ${(p) => p.theme.textColor};
-    margin-left: 1rem;
-    font-size: 0.85rem;
-    transform: translateY(50%);
-  }
-`;
-
-export const LabelForm = styled.label`
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-top: 1.5rem;
-  margin-bottom: 1rem;
 `;
 
 export const InputForm = styled.input`
@@ -63,11 +35,4 @@ export const InputForm = styled.input`
   padding: 0.25rem;
   border-radius: 3px;
   background: ${(p) => p.theme.colors.lightGray};
-`;
-
-export const InputBox = styled.div`
-  margin: 1rem 0;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
 `;
