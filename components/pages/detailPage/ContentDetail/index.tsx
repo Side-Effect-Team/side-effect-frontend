@@ -5,7 +5,6 @@ import { Column } from "../PostData/styled";
 import {
   Wrapper,
   StyledHeader,
-  Keyword,
   Description,
   TagContainer,
   ProjectTitle,
@@ -13,8 +12,8 @@ import {
   ImageContainer,
   DescriptionText,
 } from "@/detailComps/ContentDetail/styled";
-import { TagWrapper } from "@/postFormComps/TagBox/styled";
 import resizeElementHeight from "utils/resizeElementHeight";
+import TagChip from "components/PostForm/TagChip";
 
 interface ContentDetailProps {
   projectName: string;
@@ -47,9 +46,7 @@ export default function ContentDetail({
         <TagContainer>
           <div>
             {tags.map((tag) => (
-              <TagWrapper key={tag.stackType}>
-                <Keyword>{tag.stackType}</Keyword>
-              </TagWrapper>
+              <TagChip key={tag.stackType} keyword={tag.stackType} />
             ))}
           </div>
         </TagContainer>
