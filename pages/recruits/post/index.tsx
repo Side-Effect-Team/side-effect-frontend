@@ -30,7 +30,7 @@ export default function PostRecruitPage() {
       validate: (form: typeof RECRUIT_POST_FORM) => formValidator(form),
       onSubmit: () => {
         if (validatePosition())
-          submitRecruitPost(postForm, positions, ["react"], router);
+          submitRecruitPost(postForm, positions, tags, router);
       },
     });
 

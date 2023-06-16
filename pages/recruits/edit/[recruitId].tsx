@@ -7,12 +7,15 @@ import PageHead from "components/PageHead";
 import PostTitleInput from "@/postFormComps/PostTitleInput";
 import DescriptionInput from "@/postFormComps/DescriptionInput";
 import RecruitPositionInput from "@/postFormComps/RecruitPositionInput";
+import TagBox from "@/postFormComps/TagBox";
 import SubmitBtnBox from "@/postFormComps/SubmitBtnBox";
 import { useForm } from "hooks/common/useForm";
 import { usePosition } from "hooks/common/usePosition";
 import formValidator from "utils/formValidator";
 import { RECRUIT_POST_FORM } from "enum";
 import { updateRecruitPost } from "apis/RecruitBoardAPI";
+import { useTag } from "hooks/common/useTag";
+import convertTagData from "utils/convertTagData";
 
 interface EditRecruitPageProps {
   recruit: RecruitType;
@@ -22,6 +25,7 @@ export default function EditRecruitPage({ recruit }: EditRecruitPageProps) {
   const router = useRouter();
   const { positions, addPosition, deletePosition, editPosition } =
     usePosition();
+  const { tags, deleteTag, addTag } = useTag(convertTagData(recruit.tags));
   const { postForm, errMsgs, touched, handleChange, handleBlur, handleSubmit } =
     useForm({
       initialVals: {
@@ -30,7 +34,7 @@ export default function EditRecruitPage({ recruit }: EditRecruitPageProps) {
         content: recruit.content,
       },
       validate: (form: typeof RECRUIT_POST_FORM) => formValidator(form),
-      onSubmit: () => updateRecruitPost(recruit, postForm, ["react"], router),
+      onSubmit: () => updateRecruitPost(recruit, postForm, tags, router),
     });
 
   return (
@@ -70,8 +74,7 @@ export default function EditRecruitPage({ recruit }: EditRecruitPageProps) {
             editPosition={editPosition}
             isEdit
           />
-          <h2>기술 스택</h2>
-          <p>추가 예정</p>
+          <TagBox tags={tags} deleteTag={deleteTag} addTag={addTag} />
           <DescriptionInput
             idName="content"
             label="상세 내용"
