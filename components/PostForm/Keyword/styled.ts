@@ -8,7 +8,7 @@ export const Wrapper = styled.li<WrapperProps>`
   //background: ${(p) => p.isActive && p.theme.footerBgColor};
 
   :hover {
-    background: ${(p) => !p.isActive && p.theme.footerBgColor};
+    background: ${(p) => p.theme.footerBgColor};
   }
 `;
 

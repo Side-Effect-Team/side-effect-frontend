@@ -15,7 +15,7 @@ import formValidator from "utils/formValidator";
 import { RECRUIT_POST_FORM } from "enum";
 import { updateRecruitPost } from "apis/RecruitBoardAPI";
 import { useTag } from "hooks/common/useTag";
-import convertTagData from "utils/convertTagData";
+import { CapitalizeTags } from "utils/convertTagData";
 
 interface EditRecruitPageProps {
   recruit: RecruitType;
@@ -25,7 +25,7 @@ export default function EditRecruitPage({ recruit }: EditRecruitPageProps) {
   const router = useRouter();
   const { positions, addPosition, deletePosition, editPosition } =
     usePosition();
-  const { tags, deleteTag, addTag } = useTag(convertTagData(recruit.tags));
+  const { tags, deleteTag, addTag } = useTag(CapitalizeTags(recruit.tags));
   const { postForm, errMsgs, touched, handleChange, handleBlur, handleSubmit } =
     useForm({
       initialVals: {
