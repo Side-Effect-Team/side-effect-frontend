@@ -28,7 +28,6 @@ export const useInputImage = (defaultImgSrc: string) => {
   const uploadImg = async (url: string) => {
     try {
       const res = await customAxios.post(url, imgFile);
-      console.log(res);
       return res.data;
     } catch (err) {
       console.log(err);

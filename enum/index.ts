@@ -89,7 +89,6 @@ export const SELECT_CAREER = [
   { name: "미들(4~6년차)", value: "middle" },
   { name: "시니어(7년이상)", value: "senior" },
 ];
-export const DEFAULT_RECRUIT_CARD_IMAGE = "/images/BoardDefaultBackground.png";
 export const DEFAULT_PROJECT_CARD_IMAGE = "/images/ProjectBackground.png";
 
 export const ANIMATION_DIRECTION = {
