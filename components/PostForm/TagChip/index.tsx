@@ -1,5 +1,6 @@
 import { TiTimes } from "react-icons/ti";
 import { Wrapper, Container, SpanStyled } from "./styled";
+import { capitalizeTag } from "utils/convertTagData";
 
 interface TagChipProps {
   keyword: string;
@@ -20,7 +21,7 @@ export default function TagChip({ keyword, deleteTag }: TagChipProps) {
             <TiTimes size={15} />
           </SpanStyled>
         ) : (
-          <SpanStyled>{keyword}</SpanStyled>
+          <SpanStyled>{capitalizeTag(keyword)}</SpanStyled>
         )}
       </Container>
     </Wrapper>

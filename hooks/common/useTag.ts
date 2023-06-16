@@ -1,7 +1,7 @@
 import { useState } from "react";
 import useToast from "./useToast";
 
-export const useTag = (initialVals: string[]) => {
+export const useTag = (initialVals: any[]) => {
   const [tags, setTags] = useState<string[]>([...initialVals]);
   const { addToast } = useToast();
 

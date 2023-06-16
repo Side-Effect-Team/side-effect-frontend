@@ -48,7 +48,6 @@ export default function RecruitDetailPage({
       imgSrc,
       comments,
     } = data;
-    console.log(tags);
     return (
       <Wrapper>
         <Contents>
