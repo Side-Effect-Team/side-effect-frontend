@@ -62,6 +62,70 @@
 
 ## 💻 주요 기능 및 페이지 소개
 
+<table>
+	<tbody>
+		<tr>
+			<th>랜딩 페이지</th>
+			<th>다크모드 기능</th>
+		</tr>
+		<tr>
+			<td><img width="400px" src="public/readme-images/landing-page.jpg" alt="랜딩 페이지"/></td>
+			<td><img width="400px" src="public/readme-images/darkmode.gif" alt="랜딩 페이지"/></td>
+		</tr>		
+		<tr>
+			<td>- 모든 페이지에서 반응형 UI 지원</td>
+			<td>- 다크모드 전환 가능</td>
+		</tr>	
+		<tr>
+			<th>로그인 페이지</th>
+			<th>회원가입 하기</th>
+		</tr>
+		<tr>
+			<td>이미지</td>
+			<td>이미지</td>
+		</tr>
+		<tr>
+			<td>- 로그인 기능<br>- 소셜 로그인 기능</td>
+			<td>- 회원가입 기능<br>-  기능</td>
+		</tr>
+		<tr>
+			<th>마이 페이지</th>
+			<th>프로필 변경하기</th>
+		</tr>
+		<tr>
+			<td>이미지</td>
+			<td>이미지</td>
+		</tr>
+		<tr>
+			<td>- 기능<br>- 기능</td>
+			<td>- 기능<br>-  기능</td>
+		</tr>
+		<tr>
+			<th>프로젝트 자랑 게시판 페이지</th>
+			<th>프로젝트 자랑 게시글 작성하기</th>
+		</tr>
+		<tr>
+			<td>이미지</td>
+			<td>이미지</td>
+		</tr>
+		<tr>
+			<td>- 기능<br>- 기능</td>
+			<td>- 기능<br>-  기능</td>
+		</tr>
+		<tr>
+			<th>팀원 모집 게시판 페이지</th>
+			<th>팀원 모집 게시글 작성하기</th>
+		</tr>
+		<tr>
+			<td>이미지</td>
+			<td>이미지</td>
+		</tr>
+		<tr>
+			<td>- 기능<br>- 기능</td>
+			<td>- 기능<br>-  기능</td>
+		</tr>
+	</tbody>
+</table>
 
 <br>
 
