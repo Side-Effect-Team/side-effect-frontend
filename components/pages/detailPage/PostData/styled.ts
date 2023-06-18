@@ -58,3 +58,11 @@ export const OptionBox = styled.button`
     color: ${(p) => p.theme.textColor};
   }
 `;
+
+export const UserNickname = styled.div`
+  :hover {
+    background: ${(p) => p.theme.grayToDark};
+    border-radius: 5px;
+    padding: 0.35rem 0;
+  }
+`;

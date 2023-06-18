@@ -10,6 +10,7 @@ import {
   SpanStyled,
   OptionBox,
   Container,
+  UserNickname,
 } from "@/detailComps/PostData/styled";
 import { useAppSelector } from "store/hooks";
 import Popup from "@/detailComps/Popup";
@@ -46,9 +47,9 @@ export default function PostData({
               <UserProfile>
                 <BiUserCircle size={25} />
               </UserProfile>
-              <p>
+              <UserNickname>
                 <Link href={`/mypage/${writerId}`}>{writer}</Link>
-              </p>
+              </UserNickname>
             </UserBox>
             <Column />
             <div>
