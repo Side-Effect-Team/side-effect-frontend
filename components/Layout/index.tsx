@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import { ThemeProvider } from "styled-components";
 import { Wrapper } from "./styled";
@@ -12,7 +12,8 @@ import ScrollToTop from "../ScrollToTop";
 import Head from "next/head";
 import { useAppSelector } from "store/hooks";
 import MobileHeader from "../Header/MobileHeader";
-import { handleLogout } from "../../apis/UserAPI";
+import { handleLogout } from "apis/UserAPI";
+import useOutsideClick from "hooks/common/useOutsideClick";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -23,6 +24,8 @@ export default function Layout({ children }: LayoutProps) {
   const [isMounted, setIsMounted] = useState<boolean>(false);
   const { isDark } = useAppSelector((state) => state.darkMode);
   const router = useRouter();
+  const mobileMenuEl = useRef<HTMLDivElement>(null);
+  useOutsideClick(mobileMenuEl, () => setMobileMenuOpen(false));
 
   //다크모드일경우 새로고침시 화면 반짝임을 제어합니다.
   useEffect(() => {
@@ -71,11 +74,14 @@ export default function Layout({ children }: LayoutProps) {
       <GlobalNavBar logout={logout} handleMobileMenu={handleMobileMenu} />
       <ScrollToTop />
       <Toast />
-      <MobileHeader
-        hide={!mobileMenuOpen}
-        logout={mobileLogout}
-        handleClick={handleMobileMenu}
-      />
+      <div ref={mobileMenuEl}>
+        <MobileHeader
+          hide={!mobileMenuOpen}
+          logout={mobileLogout}
+          handleClick={handleMobileMenu}
+        />
+      </div>
+
       <Wrapper mobileMenuOpen={mobileMenuOpen}>{children}</Wrapper>
       <Footer />
     </ThemeProvider>
