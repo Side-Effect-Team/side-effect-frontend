@@ -20,7 +20,7 @@ import { getBoardDate } from "utils/getDate";
 export interface BoardCardProps {
   category: string;
   closed: boolean;
-  commentNum: number;
+  commentsNum: number;
   createdAt: string;
   id: number;
   imgUrl: string;
