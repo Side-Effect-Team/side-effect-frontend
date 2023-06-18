@@ -20,7 +20,7 @@ import { getBoardDate } from "utils/getDate";
 export interface RecruitDataProps {
   id: number;
   closed: boolean;
-  commentNum: number;
+  commentsNum: number;
   title: string;
   createdAt: string;
   like: boolean;
@@ -90,7 +90,7 @@ export default function RecruitCard({ data }: RecruitCardProps) {
           <ViewIcon />
           <Num>{data?.views}</Num>
           <CommentIcon />
-          <Num>{data?.commentNum}</Num>
+          <Num>{data?.commentsNum}</Num>
           <HeartNotFillIcon />
           <Num>{data?.likeNum}</Num>
         </IconWrapper>
