@@ -20,7 +20,8 @@ export const OptionBtn = styled.button`
   width: 100%;
   height: 30px;
   appearance: none;
-  background: transparent;
+  background: ${(p) => p.theme.mainBackGround};
+  color: ${(p) => p.theme.textColor};
   border: none;
   cursor: pointer;
 
