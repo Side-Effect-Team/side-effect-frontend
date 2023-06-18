@@ -58,6 +58,7 @@ export const BtnText = styled.span`
 `;
 
 export const OptionBtn = styled.button<OptionBtnProps>`
+  cursor: pointer;
   color: ${(p) => p.theme.colors.white};
   font-weight: 600;
   width: 3.5rem;

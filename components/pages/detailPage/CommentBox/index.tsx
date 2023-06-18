@@ -14,11 +14,16 @@ import resizeElementHeight from "utils/resizeElementHeight";
 import { useAppSelector } from "store/hooks";
 
 interface CommentBoxProps {
+  type: "recruits" | "projects";
   comments: CommentType[];
   boardId: number;
 }
 
-export default function CommentBox({ boardId, comments }: CommentBoxProps) {
+export default function CommentBox({
+  type,
+  boardId,
+  comments,
+}: CommentBoxProps) {
   const [commentArr, setCommentArr] = useState(comments);
   const textareaEl = useRef<HTMLTextAreaElement>(null);
   const { addToast } = useToast();
@@ -38,7 +43,7 @@ export default function CommentBox({ boardId, comments }: CommentBoxProps) {
       return;
     }
 
-    const url = "/comments";
+    const url = type === "projects" ? "/comments" : "/recruit-comments";
     const data = { boardId, content: textareaEl.current?.value };
     try {
       const res = await customAxios.post(url, data, {
@@ -65,7 +70,8 @@ export default function CommentBox({ boardId, comments }: CommentBoxProps) {
   };
 
   const editComment = async (commentId: number, content: string) => {
-    const url = `/comments/${commentId}`;
+    const url =
+      type === "projects" ? "/comments" : "/recruit-comments" + `/${commentId}`;
 
     try {
       const res = await customAxios.patch(
@@ -99,7 +105,10 @@ export default function CommentBox({ boardId, comments }: CommentBoxProps) {
 
   const deleteComment = useCallback(
     async (commentId: number) => {
-      const url = `/comments/${commentId}`;
+      const url =
+        type === "projects"
+          ? "/comments"
+          : "/recruit-comments" + `/${commentId}`;
       try {
         const res = await customAxios.delete(url, {
           headers: {
