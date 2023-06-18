@@ -8,6 +8,7 @@ export const PostTitle = styled.h1`
 export const Row = styled.div`
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 `;
 
 export const UserProfile = styled.div`
@@ -18,6 +19,12 @@ export const UserProfile = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 10px;
+`;
+
+export const Container = styled.div`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 `;
 
 export const UserBox = styled.div`
