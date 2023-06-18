@@ -33,7 +33,6 @@ export default function RecruitDetailPage({
   }
 
   if (data) {
-    console.log("포지션 정보", data);
     const {
       id,
       title,

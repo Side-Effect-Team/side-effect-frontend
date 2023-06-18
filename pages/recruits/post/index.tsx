@@ -5,11 +5,13 @@ import PageHead from "components/PageHead";
 import PostTitleInput from "@/postFormComps/PostTitleInput";
 import DescriptionInput from "@/postFormComps/DescriptionInput";
 import RecruitPositionInput from "@/postFormComps/RecruitPositionInput";
+import TagBox from "@/postFormComps/TagBox";
 import SubmitBtnBox from "@/postFormComps/SubmitBtnBox";
 import { useForm } from "hooks/common/useForm";
 import { usePosition } from "hooks/common/usePosition";
+import { useTag } from "hooks/common/useTag";
 import formValidator from "utils/formValidator";
-import { RECRUIT_POST_FORM, RECRUIT_POSITION_FORM } from "enum";
+import { RECRUIT_POST_FORM } from "enum";
 import { submitRecruitPost } from "apis/RecruitBoardAPI";
 
 export default function PostRecruitPage() {
@@ -21,13 +23,14 @@ export default function PostRecruitPage() {
     validatePosition,
     editPosition,
   } = usePosition();
+  const { tags, deleteTag, addTag } = useTag([]);
   const { postForm, errMsgs, touched, handleChange, handleBlur, handleSubmit } =
     useForm({
       initialVals: { ...RECRUIT_POST_FORM },
       validate: (form: typeof RECRUIT_POST_FORM) => formValidator(form),
       onSubmit: () => {
         if (validatePosition())
-          submitRecruitPost(postForm, positions, ["react"], router);
+          submitRecruitPost(postForm, positions, tags, router);
       },
     });
 
@@ -68,8 +71,7 @@ export default function PostRecruitPage() {
             editPosition={editPosition}
             isEdit={false}
           />
-          <h2>기술 스택</h2>
-          <p>추가 예정</p>
+          <TagBox tags={tags} deleteTag={deleteTag} addTag={addTag} />
           <DescriptionInput
             idName="content"
             label="상세 내용"

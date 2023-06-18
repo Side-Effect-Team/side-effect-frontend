@@ -8,13 +8,6 @@ export const StyledHeader = styled.h2`
   margin-bottom: 0.75rem;
 `;
 
-export const Keyword = styled.span`
-  padding: 0.5rem 0.25rem;
-  display: inline-block;
-  font-size: 1.25rem;
-  transform: translateY(-45%);
-`;
-
 export const TagContainer = styled.div`
   margin-bottom: 1rem;
 `;

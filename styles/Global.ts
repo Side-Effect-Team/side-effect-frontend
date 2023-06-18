@@ -32,6 +32,10 @@ const global = createGlobalStyle<{ isMounted: boolean; theme: typeof theme }>`
     list-style-type: none;
   }
   
+  ul {
+    list-style: none;
+  }
+  
   h1,
   h2,
   h3 {

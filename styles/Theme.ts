@@ -24,6 +24,7 @@ export const theme = {
     mainCarousel: "500px",
     banner: "300px",
     batchCarousel: "550px",
+    keywordBox: "200px",
   },
   width: {
     positionInput: "250px",
