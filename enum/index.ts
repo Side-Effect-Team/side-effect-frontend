@@ -36,9 +36,16 @@ export const CAROUSEL_CONTENTS_LIST = [
 ];
 
 export const BANNER_CONTENTS = {
-  TITLE: "열정을 나눌 팀원을 모집하세요",
-  SUB_TITLE:
-    "프로젝트 팀원을 모집하거나 관심있는 프로젝트에 지원할 수 있습니다",
+  recruits: {
+    title: "열정을 나눌 팀원을 모집하세요",
+    subTitle:
+      "프로젝트 팀원을 모집하거나 관심있는 프로젝트에 지원할 수 있습니다",
+  },
+  projects: {
+    title: "멋진 프로젝트를 자랑해보세요",
+    subTitle:
+      "프로젝트 팀원을 모집하거나 관심있는 프로젝트에 지원할 수 있습니다",
+  },
 };
 
 export const POSITION_LIST = [
@@ -67,13 +74,7 @@ export const POSITION_LIST = [
     value: "pm",
   },
 ];
-export const CAREER_LIST = [
-  { name: "취업준비생", value: "empty" },
-  { name: "신입(0년차)", value: "new" },
-  { name: "주니어(1~3년차)", value: "junior" },
-  { name: "미들(4~6년차)", value: "middle" },
-  { name: "시니어(7년이상)", value: "sinior" },
-];
+
 export const SELECT_POSITIONS = [
   { name: "프론트엔드", value: "FRONTEND" },
   { name: "백엔드", value: "BACKEND" },

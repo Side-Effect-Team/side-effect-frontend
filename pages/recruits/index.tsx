@@ -11,8 +11,9 @@ export default function RecruitsPage() {
     <Wrapper>
       <PageHead pageTitle="팀원 모집 | 사이드 이펙트" />
       <Banner
-        title={BANNER_CONTENTS.TITLE}
-        subTitle={BANNER_CONTENTS.SUB_TITLE}
+        type="recruits"
+        title={BANNER_CONTENTS.recruits.title}
+        subTitle={BANNER_CONTENTS.recruits.subTitle}
         btnTitle="모집하기"
         btnLink="/recruits/post"
       />
