@@ -1,4 +1,8 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+
+interface ProjectTitleProps {
+  url?: string;
+}
 
 export const Wrapper = styled.div`
   margin: 1rem 0;
@@ -28,9 +32,27 @@ export const Description = styled.div`
   }
 `;
 
-export const ProjectTitle = styled.span`
+export const ProjectTitle = styled.span<ProjectTitleProps>`
   font-weight: 600;
   letter-spacing: 0.15rem;
+
+  :hover {
+    ::after {
+      ${(p) =>
+        p.url &&
+        css`
+          content: "🌐링크 이동: ${p.url}";
+        `}
+      width: 100%;
+      max-width: 250px;
+      height: 100%;
+      max-height: 100px;
+      position: absolute;
+      background: transparent;
+      border-radius: 5px;
+      padding: 0.5rem;
+    }
+  }
 `;
 
 export const ProjectTitleBox = styled.div`

@@ -47,7 +47,7 @@ export default function PostData({
                 <BiUserCircle size={25} />
               </UserProfile>
               <p>
-                <Link href="#">{writer}</Link>
+                <Link href={`/mypage/${writerId}`}>{writer}</Link>
               </p>
             </UserBox>
             <Column />
