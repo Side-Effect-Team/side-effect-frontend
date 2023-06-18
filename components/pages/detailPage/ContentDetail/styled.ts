@@ -15,7 +15,7 @@ export const TagContainer = styled.div`
 export const Description = styled.div`
   width: 100%;
   min-height: 100px;
-  background: ${(p) => p.theme.colors.white};
+  background: ${(p) => p.theme.mainBackGround};
   border-radius: 5px;
   margin-bottom: 1rem;
 
@@ -50,4 +50,6 @@ export const ImageContainer = styled.div`
 
 export const DescriptionText = styled.textarea`
   width: 100%;
+  background: ${(p) => p.theme.mainBackGround};
+  color: ${(p) => p.theme.textColor};
 `;
