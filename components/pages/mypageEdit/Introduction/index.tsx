@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction, useEffect } from "react";
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { ProfileContentsWrapper, ProfileWrapper } from "./styled";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 import Avatar from "./avatar";

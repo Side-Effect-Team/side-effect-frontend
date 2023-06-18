@@ -1,4 +1,3 @@
-import axios from "axios";
 import customAxios from "./customAxios";
 
 export const getAlarmNum = async () => {
