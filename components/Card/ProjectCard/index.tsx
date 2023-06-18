@@ -20,6 +20,7 @@ import { getBoardDate } from "utils/getDate";
 export interface BoardCardProps {
   category: string;
   closed: boolean;
+  commentsNum: number;
   commentNum: number;
   createdAt: string;
   id: number;

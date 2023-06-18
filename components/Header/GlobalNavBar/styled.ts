@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
   background: ${(p) => p.theme.mainBackGround};
   height: ${(p) => p.theme.height.header};
   transition: all 0.3s;
-  box-shadow: 0 8px 8px -12px black;
+  box-shadow: 0 -3px 6px 0 black;
 `;
 
 export const HeaderStyled = styled.header`

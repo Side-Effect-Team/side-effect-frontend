@@ -67,7 +67,7 @@ export default function ProjectDetailPage({
             imgSrc={imgUrl}
             subTitle={subTitle}
           />
-          <CommentBox boardId={id} comments={comments} />
+          <CommentBox type="projects" boardId={id} comments={comments} />
         </Contents>
       </Wrapper>
     );

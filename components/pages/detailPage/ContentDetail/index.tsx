@@ -60,7 +60,7 @@ export default function ContentDetail({
             <ProjectTitle>{projectName}</ProjectTitle>
           ) : (
             <Link href={projectUrl!} target="_blank">
-              <ProjectTitle>{projectName}</ProjectTitle>
+              <ProjectTitle url={projectUrl}>{projectName}</ProjectTitle>
             </Link>
           )}
         </div>

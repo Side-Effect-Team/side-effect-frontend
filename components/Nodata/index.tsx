@@ -1,5 +1,4 @@
 import { NoDataWrapper, NoDataContent } from "./styled";
-import Image from "next/image";
 import NoDataSvg from "../../public/images/Nodata.svg";
 
 export default function NoData() {

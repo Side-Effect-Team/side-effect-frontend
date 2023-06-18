@@ -5,6 +5,7 @@ import { useAppSelector } from "store/hooks";
 import useToast from "hooks/common/useToast";
 
 interface BannerProps {
+  type: "projects" | "recruits";
   title: string;
   subTitle: string;
   btnTitle: string;
@@ -12,6 +13,7 @@ interface BannerProps {
 }
 
 export default function Banner({
+  type,
   title,
   subTitle,
   btnTitle,
@@ -23,7 +25,7 @@ export default function Banner({
 
   return (
     <Wrapper>
-      <ImageContainer>
+      <ImageContainer type={type}>
         <Contents>
           <h2>{title}</h2>
           <h3>{subTitle}</h3>

@@ -1,16 +1,23 @@
 import styled from "styled-components";
 
+interface ImageContainerProps {
+  type: "recruits" | "projects";
+}
+
 export const Wrapper = styled.div`
   width: 100%;
   height: ${(p) => p.theme.height.banner};
 `;
 
-export const ImageContainer = styled.div`
+export const ImageContainer = styled.div<ImageContainerProps>`
   color: ${(p) => p.theme.colors.white};
   width: 100%;
   height: 100%;
-  background: #333 url("/images/recruits-banner-sample.jpg") no-repeat center
-    center;
+  background: #333 no-repeat center center;
+  background-image: url(${(p) =>
+    p.type === "recruits"
+      ? "/images/recruits-banner-sample.jpg"
+      : "/images/projects-banner-sample.jpg"});
   position: relative;
   display: flex;
   align-items: center;

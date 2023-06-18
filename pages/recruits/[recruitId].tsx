@@ -67,7 +67,7 @@ export default function RecruitDetailPage({
             content={content}
             imgSrc={imgSrc}
           />
-          <CommentBox boardId={id} comments={comments} />
+          <CommentBox type="recruits" boardId={id} comments={comments} />
         </Contents>
       </Wrapper>
     );

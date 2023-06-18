@@ -15,7 +15,7 @@ interface RankingCardType {
 }
 
 export default function RankingCard(card: RankingCardType) {
-  const { id, title, likeNum, imgUrl } = card;
+  const { id, title, likeNum } = card;
   return (
     <StyledLink href={`/projects/${id}`}>
       <StyledImage

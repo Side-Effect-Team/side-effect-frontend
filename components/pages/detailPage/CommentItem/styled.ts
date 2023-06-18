@@ -12,6 +12,11 @@ export const CommentWrapper = styled.div`
 
   :hover {
     background: ${(p) => p.theme.colors.lightGray};
+    color: #000;
+
+    textarea {
+      color: #000;
+    }
   }
 `;
 
@@ -20,6 +25,7 @@ export const CommentColumn = styled.div`
 `;
 
 export const CommentContents = styled.textarea`
+  color: ${(p) => p.theme.textColor};
   background: inherit;
   border-radius: 5px;
   outline: ${(p) => (p.readOnly ? "none" : "")};
@@ -52,6 +58,7 @@ export const BtnText = styled.span`
 `;
 
 export const OptionBtn = styled.button<OptionBtnProps>`
+  cursor: pointer;
   color: ${(p) => p.theme.colors.white};
   font-weight: 600;
   width: 3.5rem;

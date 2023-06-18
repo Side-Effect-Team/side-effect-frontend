@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { media } from "styles/media";
 export const SectionContainer = styled.section`
   height: calc(100vh - 75px);
   display: flex;
