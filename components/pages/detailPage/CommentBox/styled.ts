@@ -41,7 +41,7 @@ export const CommentInput = styled.textarea`
   resize: none;
   width: 100%;
   height: 100%;
-  background: ${(p) => p.theme.colors.lightGray};
+  background: ${(p) => p.theme.grayToDark};
 `;
 
 export const CommentList = styled.div`
