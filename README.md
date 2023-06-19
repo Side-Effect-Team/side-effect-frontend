@@ -83,11 +83,11 @@
 			<th>회원가입 하기</th>
 		</tr>
 		<tr>
-			<td>이미지</td>
-			<td>이미지</td>
+		<td><img width="400px" src="public/readme-images/login.gif" alt="로그인 기능"/></td>
+			<td><img width="400px" src="public/readme-images/register.gif" alt="회원가입 기능"/></td>
 		</tr>
 		<tr>
-			<td>- 로그인 기능<br>- 소셜 로그인 기능</td>
+			<td>- 로그인 반응형 모달<br>- 소셜 로그인 기능</td>
 			<td>- 회원가입 기능<br>-  기능</td>
 		</tr>
 		<tr>
@@ -138,7 +138,20 @@
 			<td>- 댓글 발생 알람 기능<br>- 모집 게시판 참여자 발생 알람 기능</td>
 			<td>- 마이페이지 관심 목록 추가 기능</td>
 		</tr>
-	</tbody>
+		<tr>
+			<th>팀 관리 모달</th>
+			<th>스켈레톤 컴포넌트</th>
+		</tr>
+		<tr>
+			<td><img width="400px" src="public/readme-images/teamManage.gif" alt="팀관리 모달"/></td>
+			<td><img width="400px" src="public/readme-images/skeleton.gif" alt="스켈레톤 기능"/></td>
+    	<tr>
+    	<tr>
+    		<td>- 지원자 관리 및 팀원 관리 반응형 모달</td>
+			<td>- 레이아웃 시프트 방지를 위한 스켈레톤 컴포넌트</td>
+    	</tr>
+    </tbody>
+
 </table>
 
 <br>
