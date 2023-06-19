@@ -55,7 +55,6 @@ export const updateProjectPost = async (
   const data = {
     ...project,
     ...updatedForm,
-    imgSrc: null,
   };
   const url = `/free-boards/${project.id}`;
   try {

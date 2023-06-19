@@ -20,9 +20,10 @@ interface EditProjectPageProps {
 
 export default function EditProjectPage({ project }: EditProjectPageProps) {
   const router = useRouter();
-  const { imgSrc, handleImgChange, uploadImg } = useInputImage(
-    DEFAULT_PROJECT_CARD_IMAGE,
-  );
+  const defaultImgSrc = project.imgUrl
+    ? `${process.env.NEXT_PUBLIC_API_URL}/free-boards/image/${project.imgUrl}`
+    : DEFAULT_PROJECT_CARD_IMAGE;
+  const { imgSrc, handleImgChange, uploadImg } = useInputImage(defaultImgSrc);
   const { postForm, errMsgs, touched, handleChange, handleBlur, handleSubmit } =
     useForm({
       initialVals: {
