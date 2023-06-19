@@ -26,6 +26,8 @@
 </div>
 <br>
 
+![사이드 이펙트 앱 흐름](public/readme-images/side-effect-app-flow.png)
+
 ## 🌳 폴더 구조
 
 ```
