@@ -71,7 +71,9 @@ export default function CommentBox({
 
   const editComment = async (commentId: number, content: string) => {
     const url =
-      type === "projects" ? "/comments" : "/recruit-comments" + `/${commentId}`;
+      type === "projects"
+        ? `/comments/${commentId}`
+        : `/recruit-comments/${commentId}`;
 
     try {
       const res = await customAxios.patch(
@@ -107,8 +109,8 @@ export default function CommentBox({
     async (commentId: number) => {
       const url =
         type === "projects"
-          ? "/comments"
-          : "/recruit-comments" + `/${commentId}`;
+          ? `/comments/${commentId}`
+          : `/recruit-comments/${commentId}`;
       try {
         const res = await customAxios.delete(url, {
           headers: {
