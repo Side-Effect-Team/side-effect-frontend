@@ -150,7 +150,13 @@ export const RowWrapper = styled.div`
 export const Title = styled.div`
   width: 100%;
   font-size: 16px;
-  font-weight: 700;
+`;
+export const Nickname = styled.span`
+  font-size: 16px;
+  font-weight: 800;
+  :hover {
+    text-decoration: underline;
+  }
 `;
 
 export const Contents = styled.div`

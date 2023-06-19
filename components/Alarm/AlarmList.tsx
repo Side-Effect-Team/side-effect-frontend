@@ -8,6 +8,7 @@ import {
   EmptyMessage,
   Header,
   HeaderTitle,
+  Nickname,
   RowWrapper,
   Title,
   Wrapper,
@@ -23,6 +24,9 @@ export interface AlarmProps {
   contents: string;
   createdAt: string;
   link: string;
+  userId: number;
+  nickname: string;
+  category: string;
 }
 interface ResponseProps {
   lastId: number;
@@ -63,7 +67,11 @@ export default function AlarmList({
       e.stopPropagation();
       deleteMutate(id);
     };
-
+  const onClickNickname = (id: number) => (e: MouseEvent<HTMLSpanElement>) => {
+    router.push(`/mypage/${id}`);
+    e.stopPropagation();
+    setOpenAlarm(false);
+  };
   return (
     <Container>
       <Header>
@@ -81,7 +89,14 @@ export default function AlarmList({
               onClick={onClickReadAlarm(alarm.link, alarm.id)}
             >
               <RowWrapper>
-                <Title>{alarm.contents}</Title>
+                <Title>
+                  {alarm.category !== null && (
+                    <Nickname onClick={onClickNickname(alarm.userId)}>
+                      {alarm.nickname}
+                    </Nickname>
+                  )}
+                  {alarm.contents}
+                </Title>
                 <DeleteButton onClick={onClickDeleteAlarm(alarm.id)} />
               </RowWrapper>
               <RowWrapper>
