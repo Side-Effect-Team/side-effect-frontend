@@ -54,7 +54,7 @@ export default function SkillEdit({ stacks, setStacks }: SkillEditProps) {
         ))}
       <TagInput
         type="text"
-        placeholder="태그를 입력해주세요"
+        placeholder="태그 입력 후 엔터"
         onChange={onChangeTag}
         onKeyPress={onKeyPress}
         value={tag}
