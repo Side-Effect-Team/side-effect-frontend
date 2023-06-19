@@ -140,7 +140,7 @@
 		</tr>
 		<tr>
 			<th>팀 관리 모달</th>
-			<th?>스켈레톤 컴포넌트</th>
+			<th>스켈레톤 컴포넌트</th>
 		</tr>
 		<tr>
 			<td><img width="400px" src="public/readme-images/teamManage.gif" alt="팀관리 모달"/></td>
