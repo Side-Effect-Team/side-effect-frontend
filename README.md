@@ -144,7 +144,7 @@
 		</tr>
 		<tr>
 			<td><img width="400px" src="public/readme-images/teamManage.gif" alt="팀관리 모달"/></td>
-			<td><img width="400px" src="public/readme-images/skeleton.gif" alt="팀관리 모달"/></td>
+			<td><img width="400px" src="public/readme-images/skeleton.gif" alt="스켈레톤 기능"/></td>
     	<tr>
     	<tr>
     		<td>- 지원자 관리 및 팀원 관리 반응형 모달</td>
