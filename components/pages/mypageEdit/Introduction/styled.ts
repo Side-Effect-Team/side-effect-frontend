@@ -88,3 +88,8 @@ export const ErrorMessage = styled.div`
   padding: 10px;
   color: ${(p) => p.theme.colors.danger};
 `;
+export const ButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;

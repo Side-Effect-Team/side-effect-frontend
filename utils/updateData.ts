@@ -1,4 +1,5 @@
 import { UseMutateFunction } from "@tanstack/react-query";
+import customAxios from "apis/customAxios";
 import { AxiosResponse } from "axios";
 export interface ChangeProps {
   nickname?: string;
@@ -18,6 +19,7 @@ type EditMutateProps = UseMutateFunction<
 >;
 export const updateData = async (
   changes: ChangeProps,
+  avatarBasic: boolean,
   imgSrc: string,
   uploadImg: (url: string) => Promise<any>,
   mutate: EditMutateProps,
@@ -38,9 +40,13 @@ export const updateData = async (
     Object.keys(changes).length === 0 &&
     !(imgSrc === null || imgSrc.startsWith("http"))
   ) {
-    await uploadImg(`${process.env.NEXT_PUBLIC_API_URL}/${url}`);
+    avatarBasic
+      ? await customAxios.post(`/user/image/basic`)
+      : await uploadImg(`${process.env.NEXT_PUBLIC_API_URL}/${url}`);
   } else {
-    await uploadImg(`${process.env.NEXT_PUBLIC_API_URL}/${url}`);
+    avatarBasic
+      ? await customAxios.post(`/user/image/basic`)
+      : await uploadImg(`${process.env.NEXT_PUBLIC_API_URL}/${url}`);
     mutate(changes);
   }
 };
