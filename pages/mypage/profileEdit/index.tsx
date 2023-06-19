@@ -31,6 +31,7 @@ function MyPageEdit() {
   queryClient.invalidateQueries({ queryKey: ["editProfile"] });
   const data = useGetProfileData();
   const router = useRouter();
+  const [avatarBasic, setAvatarBasic] = useState(false);
   const [introduction, setIntroduction] = useState<string>(data?.introduction);
   const [tags, setTags] = useState<string[]>(data?.tags);
   const [career, setCareer] = useState<string>(data?.career);
@@ -50,7 +51,7 @@ function MyPageEdit() {
 
   const editMutate = useEditProfile();
 
-  const { imgSrc, handleImgChange, uploadImg } = useInputImage(
+  const { imgSrc, setImgSrc, handleImgChange, uploadImg } = useInputImage(
     data?.imgUrl
       ? `${process.env.NEXT_PUBLIC_API_URL}/user/image/${data?.imgUrl}`
       : data?.imgUrl,
@@ -71,7 +72,14 @@ function MyPageEdit() {
       };
       const changes: ChangeProps = compareData(data, changedData);
       console.log(changes);
-      updateData(changes, imgSrc, uploadImg, editMutate, `user/image`);
+      updateData(
+        changes,
+        avatarBasic,
+        imgSrc,
+        uploadImg,
+        editMutate,
+        `user/image`,
+      );
       if (
         Object.keys(changes).length !== 0 ||
         !(imgSrc === null || imgSrc.startsWith("http"))
@@ -113,10 +121,12 @@ function MyPageEdit() {
       <ContentsEditWrapper>
         <form onSubmit={handleSubmit(onClickEdit)}>
           <IntroductionEdit
+            setAvatarBasic={setAvatarBasic}
             nickname={data?.nickname}
             introduction={introduction}
             setIntroduction={setIntroduction}
             imgSrc={imgSrc}
+            setImgSrc={setImgSrc}
             handleImgChange={handleImgChange}
             register={register}
             errors={errors}
