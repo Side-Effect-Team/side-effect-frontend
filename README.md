@@ -103,28 +103,28 @@
 			<td>- 아바타 이미지 변경 기능<br>- 본인을 나타내는 해시태그<br>- 포지션, 경력 등의 정보 추가 및 수정 기능</td>
 		</tr>
 		<tr>
-			<th>프로젝트 자랑 게시판 페이지</th>
 			<th>프로젝트 자랑 게시글 작성하기</th>
+			<th>팀원 모집 게시글 상세 페이지</th>
 		</tr>
 		<tr>
-			<td>이미지</td>
-			<td>이미지</td>
+			<td><img width="400px" src="public/readme-images/post-project.gif" alt="프로젝트 자랑 게시글 작성"/></td>
+			<td><img width="400px" src="public/readme-images/detail-recruit.gif" alt="모집 게시글 상세 페이지"/></td>
 		</tr>
 		<tr>
-			<td>- 기능<br>- 기능</td>
-			<td>- 기능<br>-  기능</td>
+			<td>- 잘못된 데이터 입력을 에러 메시지로 경고<br>- 프로젝트 대표이미지 등록 가능</td>
+			<td>- 모집중인 포지션에 지원 가능<br>- 게시글 작성자인 경우 수정/삭제 가능<br>- 댓글 등록 및 수정, 삭제 가능</td>
 		</tr>
 		<tr>
 			<th>팀원 모집 게시판 페이지</th>
 			<th>팀원 모집 게시글 작성하기</th>
 		</tr>
 		<tr>
-			<td>이미지</td>
-			<td>이미지</td>
+			<td><img width="400px" src="public/readme-images/recruits-page.gif" alt="팀원 모집 게시판"/></td>
+			<td><img width="400px" src="public/readme-images/post-recruit.gif" alt="팀원 모집 게시글 작성"/></td>
 		</tr>
 		<tr>
-			<td>- 기능<br>- 기능</td>
-			<td>- 기능<br>-  기능</td>
+			<td>- 게시글을 무한 스크롤 형태로 빠르게 로딩<br>- 원하는 기술 태그 또는 내용의 게시글 검색</td>
+			<td>- 팀원 모집 게시글 작성 기능<br>- 모집할 포지션 설정 및 기술 태그 검색 후 추가</td>
 		</tr>
 				<tr>
 			<th>알람 이벤트</th>
