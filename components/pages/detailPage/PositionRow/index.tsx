@@ -11,6 +11,7 @@ interface PositionRowProps {
   targetNumber: number;
   supported: boolean;
   positionId: number;
+  isOwnPost: boolean;
 }
 
 export default function PositionRow({
@@ -19,6 +20,7 @@ export default function PositionRow({
   targetNumber,
   supported,
   positionId,
+  isOwnPost,
 }: PositionRowProps) {
   const [isApplied, setIsApplied] = useState(supported);
   const isPossible = targetNumber > 0 && targetNumber > currentNumber;
@@ -79,7 +81,9 @@ export default function PositionRow({
           지원 취소
         </Button>
       ) : (
-        <Button onClick={() => applyMutation.mutate(positionId)}>지원</Button>
+        !isOwnPost && (
+          <Button onClick={() => applyMutation.mutate(positionId)}>지원</Button>
+        )
       )}
     </Row>
   );
