@@ -90,7 +90,8 @@ export default function AlarmList({
             >
               <RowWrapper>
                 <Title>
-                  {alarm.category !== null && (
+                  {(alarm.category === "COMMENT" ||
+                    alarm.category === "REGISTER") && (
                     <Nickname onClick={onClickNickname(alarm.userId)}>
                       {alarm.nickname}
                     </Nickname>
