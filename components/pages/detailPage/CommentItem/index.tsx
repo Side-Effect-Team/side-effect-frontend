@@ -34,6 +34,11 @@ export default function CommentItem({
     if (textareaEl.current) textareaEl.current.focus();
   };
 
+  const completeEdit = () => {
+    onEdit(comment.commentId, commentValue);
+    setIsEdit((prev) => !prev);
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setCommentValue(e.target.value);
     resizeElementHeight(textareaEl);
@@ -43,7 +48,6 @@ export default function CommentItem({
   const resetEdit = () => {
     setCommentValue(comment.content);
     setIsEdit((prev) => !prev);
-    if (textareaEl.current) textareaEl.current.style.height = "auto";
   };
 
   // 렌더링 시 댓글 크기 조절
@@ -72,10 +76,7 @@ export default function CommentItem({
         <CommentEditBtnBox>
           {isEdit ? (
             <>
-              <OptionBtn
-                option="edit"
-                onClick={() => onEdit(comment.commentId, commentValue)}
-              >
+              <OptionBtn option="edit" onClick={completeEdit}>
                 <BiCheck size={17} />
                 <BtnText>완료</BtnText>
               </OptionBtn>

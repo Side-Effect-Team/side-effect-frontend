@@ -24,8 +24,11 @@ export const useInputImage = (defaultImgSrc: string) => {
   useEffect(() => {
     setImgSrc(defaultImgSrc);
   }, [defaultImgSrc]);
+
   // 서버에 이미지 업로드하는 API
   const uploadImg = async (url: string) => {
+    // 입력된 이미지가 없으면 전송 X
+    if (!imgFile) return;
     try {
       const res = await customAxios.post(url, imgFile);
       return res.data;

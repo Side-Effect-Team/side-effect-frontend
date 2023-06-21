@@ -30,10 +30,10 @@ const formValidator = (
 
     // 프로젝트 URL
     if (postForm.projectUrl.trim().length === 0)
-      newErrorMsgs.content = "프로젝트 URL을 입력해주세요";
+      newErrorMsgs.projectUrl = "프로젝트 URL을 입력해주세요";
 
     if (!urlChecker(postForm.projectUrl))
-      newErrorMsgs.content = "올바른 URL 형태가 아닙니다";
+      newErrorMsgs.projectUrl = "올바른 URL 형태가 아닙니다";
   }
 
   // 상세 내용
@@ -49,7 +49,7 @@ const formValidator = (
 const isProjectPostForm = (
   postForm: any,
 ): postForm is typeof PROJECT_POST_FORM => {
-  return postForm.projectSubTitle !== undefined;
+  return postForm.subTitle !== undefined;
 };
 
 export default formValidator;

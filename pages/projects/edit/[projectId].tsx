@@ -20,9 +20,10 @@ interface EditProjectPageProps {
 
 export default function EditProjectPage({ project }: EditProjectPageProps) {
   const router = useRouter();
-  const { imgSrc, handleImgChange, uploadImg } = useInputImage(
-    DEFAULT_PROJECT_CARD_IMAGE,
-  );
+  const defaultImgSrc = project.imgUrl
+    ? `${process.env.NEXT_PUBLIC_API_URL}/free-boards/image/${project.imgUrl}`
+    : DEFAULT_PROJECT_CARD_IMAGE;
+  const { imgSrc, handleImgChange, uploadImg } = useInputImage(defaultImgSrc);
   const { postForm, errMsgs, touched, handleChange, handleBlur, handleSubmit } =
     useForm({
       initialVals: {
@@ -71,7 +72,7 @@ export default function EditProjectPage({ project }: EditProjectPageProps) {
             handleBlur={handleBlur}
           />
           <PostTitleInput
-            idName="projectSubTitle"
+            idName="subTitle"
             label="한 줄 소개"
             guideText="어떤 프로젝트인지 한 줄로 알려주세요"
             placeHolder="3~30자 이내로 입력해주세요"

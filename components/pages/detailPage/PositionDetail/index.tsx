@@ -51,6 +51,7 @@ export default function PositionDetail({
             targetNumber={position.targetNumber}
             supported={position.supported}
             positionId={position.id}
+            isOwnPost={userId === writerId}
           />
         );
       })}

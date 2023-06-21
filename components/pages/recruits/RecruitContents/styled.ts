@@ -13,6 +13,7 @@ export const ContentsHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
+  padding: 0 0.75rem;
 `;
 
 export const HeaderStyled = styled.h2`
