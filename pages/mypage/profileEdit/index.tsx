@@ -8,7 +8,7 @@ import {
 import useToast from "hooks/common/useToast";
 import MypageEdit from "@/pageComponents/mypageEdit";
 import { getProfileData } from "apis/UserAPI";
-import { withAuth } from "components/hocs/withAuth";
+import { withAuth } from "hooks/common/withAuth";
 export interface FormData {
   nickname: string;
 }
