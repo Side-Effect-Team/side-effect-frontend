@@ -1,14 +1,6 @@
 import Button from "components/Button";
 import { ButtonWrapper, ProfileImage, ProfileImageWrapper } from "./styled";
-import {
-  ChangeEvent,
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import customAxios from "apis/customAxios";
+import { ChangeEvent, Dispatch, SetStateAction, useRef } from "react";
 
 interface ProfileImageProps {
   setAvatarBasic: Dispatch<SetStateAction<boolean>>;
