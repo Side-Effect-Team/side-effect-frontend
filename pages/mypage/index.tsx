@@ -12,7 +12,7 @@ import Account from "components/pages/mypage/Account";
 import { useGetMypageData } from "hooks/queries/useGetMypageData";
 import TabApplyBoards from "components/pages/mypage/TabApplyBoards";
 import { ApplyBoardCardProps } from "components/Card/ApplyCard";
-import { withAuth } from "components/hocs/withAuth";
+import { withAuth } from "hooks/common/withAuth";
 
 export interface MypageProps {
   applyBoards: ApplyBoardCardProps[];

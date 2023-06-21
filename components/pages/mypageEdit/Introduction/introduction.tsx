@@ -16,7 +16,6 @@ export default function Introduction({
   introduction,
   setIntroduction,
 }: IntroductionProps) {
-  // 자기소개
   const onChangeIntroduction = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setIntroduction(e.target.value);
   };

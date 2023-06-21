@@ -74,7 +74,7 @@
 		</tr>
 		<tr>
 			<td><img width="400px" src="public/readme-images/landing-page.gif" alt="랜딩 페이지"/></td>
-			<td><img width="400px" src="public/readme-images/darkmode.gif" alt="랜딩 페이지"/></td>
+			<td><img width="400px" src="public/readme-images/darkmode.gif" alt="다크모드 기능"/></td>
 		</tr>		
 		<tr>
 			<td>- 모든 페이지에서 반응형 UI 지원<br>- 해당 서비스의 특징 및 사용법 안내<br>- 실시간 인기게시글 확인</td>
@@ -97,8 +97,8 @@
 			<th>프로필 변경하기</th>
 		</tr>
 		<tr>
-			<td><img width="400px" src="public/readme-images/mypage.gif" alt="랜딩 페이지"/></td>
-			<td><img width="400px" src="public/readme-images/mypage-edit.gif" alt="랜딩 페이지"/></td>
+			<td><img width="400px" src="public/readme-images/mypage.gif" alt="마이 페이지"/></td>
+			<td><img width="400px" src="public/readme-images/mypage-edit.gif" alt="프로필 변경하기"/></td>
 		</tr>
 		<tr>
 			<td>- 개인 프로필 관리<br>- 관심 게시글 및 작성 게시물 모아보기<br>- 지원 현황 및 상태 확인<br>- 계정 탈퇴 기능</td>
@@ -133,8 +133,8 @@
 			<th>게시물 관심목록 추가</th>
 		</tr>
 		<tr>
-			<td><img width="400px" src="public/readme-images/alarm.gif" alt="랜딩 페이지"/></td>
-			<td><img width="400px" src="public/readme-images/like-board.gif" alt="랜딩 페이지"/></td>
+			<td><img width="400px" src="public/readme-images/alarm.gif" alt="알람 이벤트"/></td>
+			<td><img width="400px" src="public/readme-images/like-board.gif" alt="게시물 관심목록 추가"/></td>
 		</tr>
 		<tr>
 			<td>- 댓글 발생 알람 기능<br>- 모집 게시판 참여자 발생 알람 기능</td>

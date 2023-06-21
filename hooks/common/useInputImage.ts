@@ -38,5 +38,5 @@ export const useInputImage = (defaultImgSrc: string) => {
     }
   };
 
-  return { imgSrc, handleImgChange, uploadImg };
+  return { imgSrc, setImgSrc, handleImgChange, uploadImg };
 };

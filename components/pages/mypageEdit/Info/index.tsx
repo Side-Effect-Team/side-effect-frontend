@@ -53,7 +53,6 @@ export default function InfoEdit({
   const onChangeUrl = (key: string) => (e: ChangeEvent<HTMLInputElement>) => {
     setUrl({ ...url, [key]: e.currentTarget.value });
   };
-  console.log(url);
   return (
     <>
       <InfoWrapper>
