@@ -108,7 +108,7 @@ export default function AlarmList({
           ));
         })
       )}
-      {alarmData[0].notificationResponses.length > 10 && Observer()}
+      {alarmData[0].notificationResponses.length >= 10 && Observer()}
     </Container>
   );
 }

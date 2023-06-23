@@ -1,4 +1,4 @@
-<div style="display: flex;justify-content: center"><img src="./public/images/mainLogo.svg" width="300px" alt="사이드 이펙트 로고"></div>
+<div style="display: flex;justify-content: center"><img src="./public/readme-images/logo.png" width="300px" alt="사이드 이펙트 로고"></div>
 
 <h3>열정을 함께할 동료가 필요할 때, 사이드 이펙트</h3>
 <p>개발자, 디자이너 등 누구나 쉽게 프로젝트를 시작하고, 네트워킹할 수 있는 커뮤니티 플랫폼입니다</p>
